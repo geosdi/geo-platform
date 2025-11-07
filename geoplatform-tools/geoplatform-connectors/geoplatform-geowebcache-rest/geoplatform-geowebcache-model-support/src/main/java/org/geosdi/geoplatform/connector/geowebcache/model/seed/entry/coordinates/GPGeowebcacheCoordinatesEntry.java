@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.coordinates;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
 import java.util.List;

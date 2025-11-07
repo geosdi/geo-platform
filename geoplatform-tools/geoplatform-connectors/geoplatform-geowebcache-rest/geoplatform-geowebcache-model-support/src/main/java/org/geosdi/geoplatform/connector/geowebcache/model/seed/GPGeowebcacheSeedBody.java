@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geowebcache.model.seed;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.bounds.GPGeowebcacheBoundsBean;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.entry.GPGeowebcacheEntryValue;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.operation.GPGeowebcacheSeedOperationType;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.srs.GPGeowebcacheSrsBean;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;

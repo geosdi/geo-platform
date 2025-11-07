@@ -35,19 +35,22 @@
  */
 package org.geosdi.geoplatform.support.cxf.rs.provider.factory;
 
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jackson.CXFJacksonProvider;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.datatype.joda.JodaModule;
 
-import java.util.Locale;
+import javax.annotation.Nullable;
 
+import static java.lang.Boolean.FALSE;
+import static java.util.Locale.getDefault;
+import static org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType.JACKSON;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,51 +58,68 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public final class GPRestProviderFactory {
 
-    static final GPRestProviderType DEFAULT_TYPE = GPRestProviderType.JACKSON;
+    static final GPRestProviderType DEFAULT_TYPE = JACKSON;
 
     private static final Logger logger = LoggerFactory.getLogger(GPRestProviderFactory.class);
 
     private GPRestProviderFactory() {
     }
 
-    public static Object createProvider(GPRestProviderType type) {
-        switch ((type != null) ? type : DEFAULT_TYPE) {
-            case JACKSON:
-                logger.debug("############################### RestProviderFactory is building an instance of {}\n\n", CXFJacksonProvider.class);
-                return new CXFJacksonProvider();
-            case JACKSON_WITHOUT_ROOT:
-                logger.debug("\n\n############################### RestProviderFactory is building an instance of {}\n\n", CXFJacksonProvider.class);
-                return new CXFJacksonProvider(new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
-                        FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-                        ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-                        WRAP_ROOT_VALUE_DISABLE,
-                        INDENT_OUTPUT_ENABLE)
-                        .configure(GPJsonIncludeFeature.NON_NULL)
-                        .setLocale(Locale.getDefault()));
-            case JACKSON_JODA_TIME:
+    /**
+     * @param theType
+     * @return {@link Object}
+     */
+    public static Object createProvider(@Nullable GPRestProviderType theType) {
+        return switch ((theType != null) ? theType : DEFAULT_TYPE) {
+            case JACKSON -> {
+                logger.debug("############################### RestProviderFactory is building an instance of {}\n\n",
+                        CXFJacksonProvider.class);
+                yield new CXFJacksonProvider();
+            }
+            case JACKSON_WITHOUT_ROOT -> {
+                logger.debug("\n\n############################### RestProviderFactory is building an instance of {}\n\n",
+                        CXFJacksonProvider.class);
+                yield new CXFJacksonProvider(builder(FALSE)
+                        .withIntespectorBuilder(JAKARTA)
+                        .configure(UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+                                ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
+                                INDENT_OUTPUT_ENABLE, NON_NULL, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE)
+                        .withLocale(getDefault())
+                        .build());
+            }
+            case JACKSON_JODA_TIME -> {
                 logger.debug("############################### RestProviderFactory is building an instance of {} with JODA_TIME SUPPORT\n\n",
                         CXFJacksonProvider.class);
-                return new CXFJacksonProvider(new GPJacksonSupport(JAKARTA).registerModule(new JodaModule())
-                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-                        .configure(GPJsonIncludeFeature.NON_NULL)
-                        .setLocale(Locale.getDefault()));
-            case JACKSON_JODA_TIME_WITHOUT_ROOT:
-                logger.debug("############################### RestProviderFactory is building an instance of {} with JODA_TIME_WITHOUT_ROOT SUPPORT\n\n", CXFJacksonProvider.class);
-                return new CXFJacksonProvider(new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
-                        FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-                        ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-                        WRAP_ROOT_VALUE_DISABLE,
-                        INDENT_OUTPUT_ENABLE)
+                yield new CXFJacksonProvider(builder(FALSE)
+                        .withIntespectorBuilder(JAKARTA)
+                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE, NON_NULL, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE)
                         .registerModule(new JodaModule())
-                        .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-                        .configure(GPJsonIncludeFeature.NON_NULL)
-                        .setLocale(Locale.getDefault()));
-            case JETTYSON:
-                logger.debug("###############################RestProviderFactory is building an instance of {}\n\n", GPJSONProvider.class);
-                return new GPJSONProvider<>();
-            default:
-                logger.debug("###############################RestProviderFactory DEFAULT Provider instance of {}\n\n", GPJSONProvider.class);
-                return new GPJSONProvider<>();
-        }
+                        .withLocale(getDefault())
+                        .build());
+            }
+            case JACKSON_JODA_TIME_WITHOUT_ROOT -> {
+                logger.debug("############################### RestProviderFactory is building an instance of {} with JODA_TIME_WITHOUT_ROOT SUPPORT\n\n",
+                        CXFJacksonProvider.class);
+                yield new CXFJacksonProvider(builder(FALSE)
+                        .withIntespectorBuilder(JAKARTA)
+                        .configure(UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+                                ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
+                                INDENT_OUTPUT_ENABLE, WRITE_DATES_AS_TIMESTAMPS_DISABLE,
+                                FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, NON_NULL)
+                        .registerModule(new JodaModule())
+                        .withLocale(getDefault())
+                        .build());
+            }
+            case JETTYSON -> {
+                logger.debug("###############################RestProviderFactory is building an instance of {}\n\n",
+                        GPJSONProvider.class);
+                yield new GPJSONProvider<>();
+            }
+            default -> {
+                logger.debug("###############################RestProviderFactory DEFAULT Provider instance of {}\n\n",
+                        GPJSONProvider.class);
+                yield new GPJSONProvider<>();
+            }
+        };
     }
 }

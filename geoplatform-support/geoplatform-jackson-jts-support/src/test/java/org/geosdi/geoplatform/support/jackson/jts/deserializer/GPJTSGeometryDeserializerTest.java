@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.deserializer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
 import org.junit.Test;
 import org.locationtech.jts.geom.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

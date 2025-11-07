@@ -35,18 +35,16 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.store;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypesStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.store.GPGeoserverCoverageStoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
+import tools.jackson.databind.jsontype.TypeDeserializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -111,7 +109,7 @@ class GPGeoserverStoreInfoDeserializer extends StdDeserializer<GPGeoserverStoreI
      * @return Deserialized value
      */
     @Override
-    public GPGeoserverStoreInfo deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public GPGeoserverStoreInfo deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         String _class = null;
         String name = null;
         String href = null;
@@ -119,22 +117,22 @@ class GPGeoserverStoreInfoDeserializer extends StdDeserializer<GPGeoserverStoreI
             jsonParser.nextToken();
         }
         do {
-            if (jsonParser.currentToken() == JsonToken.FIELD_NAME) {
+            if (jsonParser.currentToken() == JsonToken.PROPERTY_NAME) {
                 continue;
             }
             String propertyName = jsonParser.currentName();
             logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
             switch (propertyName) {
                 case "@class": {
-                    _class = jsonParser.getText();
+                    _class = jsonParser.getString();
                     break;
                 }
                 case "name": {
-                    name = jsonParser.getText();
+                    name = jsonParser.getString();
                     break;
                 }
                 case "href": {
-                    href = jsonParser.getText();
+                    href = jsonParser.getString();
                     break;
                 }
             }
@@ -153,7 +151,7 @@ class GPGeoserverStoreInfoDeserializer extends StdDeserializer<GPGeoserverStoreI
      * @param typeDeserializer
      */
     @Override
-    public Object deserializeWithType(JsonParser jsonParser, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+    public Object deserializeWithType(JsonParser jsonParser, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws JacksonException {
         return deserialize(jsonParser, ctxt);
     }
 

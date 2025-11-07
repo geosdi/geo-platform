@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.gml.GMLEntryContainer;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

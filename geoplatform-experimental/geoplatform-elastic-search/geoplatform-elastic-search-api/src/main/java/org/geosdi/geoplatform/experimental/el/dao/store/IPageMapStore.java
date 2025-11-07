@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao.store;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import tools.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;

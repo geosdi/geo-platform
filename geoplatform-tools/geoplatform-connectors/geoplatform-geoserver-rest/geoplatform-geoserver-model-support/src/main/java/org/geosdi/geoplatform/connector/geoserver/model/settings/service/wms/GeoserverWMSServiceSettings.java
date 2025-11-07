@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceSettings;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Map;
 

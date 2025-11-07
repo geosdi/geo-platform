@@ -35,17 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.security.rule.deserializer;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRule;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -110,7 +108,7 @@ public class GeoserverRuleDeserializer extends StdDeserializer<GeoserverRule> {
      * @return Deserialized value
      */
     @Override
-    public GeoserverRule deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public GeoserverRule deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
@@ -119,12 +117,15 @@ public class GeoserverRuleDeserializer extends StdDeserializer<GeoserverRule> {
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@@PROPERTY_NAME IS NULL so I will return an Empty GPGeoserverRule.");
             return new GPGeoserverRule();
         }
-        logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
         jsonParser.nextToken();
+        String value = jsonParser.getValueAsString(propertyName);
+        logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
+        while (jsonParser.currentToken() != JsonToken.END_OBJECT)
+            jsonParser.nextToken();
         return new GPGeoserverRule() {
             {
                 super.setResource(propertyName);
-                super.setValue(jsonParser.getText());
+                super.setValue(value);
             }
         };
     }

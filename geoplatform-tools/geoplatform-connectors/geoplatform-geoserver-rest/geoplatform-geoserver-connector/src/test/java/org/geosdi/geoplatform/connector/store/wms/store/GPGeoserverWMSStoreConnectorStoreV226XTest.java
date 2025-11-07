@@ -61,6 +61,7 @@ public class GPGeoserverWMSStoreConnectorStoreV226XTest extends GPBaseGeoserverC
         GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_26_x.loadWorkspaceWMSStoresRequest()
                 .withWorkspace("sf")
                 .getResponse();
+        assertNotNull(wmsStores);
         assertTrue(wmsStores.isEmpty());
     }
 
@@ -77,6 +78,7 @@ public class GPGeoserverWMSStoreConnectorStoreV226XTest extends GPBaseGeoserverC
         GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_26_x.loadWorkspaceWMSStoresRequest()
                 .withWorkspace("sf")
                 .getResponse();
+        assertNotNull(wmsStores);
         assertTrue(wmsStores.getStores().size() == 1);
         assertTrue(wmsStores.getStores().get(0).getName().equals("remote"));
     }
@@ -86,6 +88,7 @@ public class GPGeoserverWMSStoreConnectorStoreV226XTest extends GPBaseGeoserverC
         GPGeoserverWMSStore wmsStore = geoserverConnectorStoreV2_26_x.loadWorkspaceWMSStoreRequest()
                 .withWorkspace("sf")
                 .withStore("remote").getResponse();
+        assertNotNull(wmsStore);
         logger.info("@@@@@@@@@@@@@@@@@@@WMS_STORE : {}\n", wmsStore);
     }
 

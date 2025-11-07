@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverWorkspaceServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

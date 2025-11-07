@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.module;
 
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.geosdi.geoplatform.support.jackson.jts.deserializer.*;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.GeoJsonLocationtechSerializer;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.GeoJsonVividisolutionsSerializer;
 import org.locationtech.jts.geom.*;
+import tools.jackson.core.Version;
+import tools.jackson.databind.module.SimpleModule;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

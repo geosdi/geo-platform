@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.fonts;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -107,18 +106,20 @@ class GPGeoserverFontStoreDeserializer extends StdDeserializer<GPGeoserverFontSt
      * @return Deserialized value
      */
     @Override
-    public GPGeoserverFontStore deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public GPGeoserverFontStore deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         List<String> fonts = newArrayList();
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
         do {
-            if (jsonParser.currentToken() == JsonToken.FIELD_NAME || jsonParser.currentToken() == JsonToken.START_OBJECT
+            if (jsonParser.currentToken() == JsonToken.PROPERTY_NAME || jsonParser.currentToken() == JsonToken.START_OBJECT
                     || jsonParser.currentToken() == JsonToken.START_ARRAY || jsonParser.currentToken() == JsonToken.END_OBJECT) {
                 continue;
             }
-            fonts.add(jsonParser.getText());
+            fonts.add(jsonParser.getString());
         } while (jsonParser.nextToken() != JsonToken.END_ARRAY);
+        if (jsonParser.currentToken() == JsonToken.END_ARRAY)
+            jsonParser.nextToken();
         return new GPGeoserverFontStore() {
             {
                 super.setFonts(fonts);

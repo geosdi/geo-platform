@@ -78,7 +78,7 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
     @Override
     public T read(@Nonnull(when = NEVER) URL url) throws Exception {
         checkArgument(url != null, "The Parameter URL must not be null.");
-        return this.jacksonSupport.getDefaultMapper().readValue(url, entityClass);
+        return this.jacksonSupport.getDefaultMapper().readValue(url.openStream(), entityClass);
     }
 
     /**

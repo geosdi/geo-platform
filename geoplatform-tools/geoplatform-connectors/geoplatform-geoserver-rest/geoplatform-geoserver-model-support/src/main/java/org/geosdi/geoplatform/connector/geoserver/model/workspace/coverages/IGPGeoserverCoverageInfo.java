@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.IGPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
@@ -44,6 +43,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSR
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.IGPCoverageDimensions;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid.IGPCoverageGrid;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.interpolation.IGPCoverageInterpolationMethod;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

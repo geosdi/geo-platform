@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.structured;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttribute;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.range.IGPCoverageDimensionRange;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;

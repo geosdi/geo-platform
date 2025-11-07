@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
 import java.util.List;

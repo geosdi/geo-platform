@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.connector.geoserver;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.logging.GPGeoserverLoggingConnector;
-import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
@@ -48,8 +47,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
 
-import static com.fasterxml.jackson.databind.cfg.CoercionAction.AsNull;
-import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.EmptyString;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
 
 /**
@@ -107,7 +104,6 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
      */
     public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
-        this.jacksonSupport.getDefaultMapper().coercionConfigFor(GPGeoserverMetadataLinks.class).setCoercion(EmptyString, AsNull);
     }
 
     /**

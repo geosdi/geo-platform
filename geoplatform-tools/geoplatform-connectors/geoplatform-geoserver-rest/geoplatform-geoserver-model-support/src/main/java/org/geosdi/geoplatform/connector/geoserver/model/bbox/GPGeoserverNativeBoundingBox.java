@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.bbox;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRSDeserializer;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;

@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.deserializer.GPGeoserverLayerPublishedDeserializer;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.xml.bind.annotation.*;
 

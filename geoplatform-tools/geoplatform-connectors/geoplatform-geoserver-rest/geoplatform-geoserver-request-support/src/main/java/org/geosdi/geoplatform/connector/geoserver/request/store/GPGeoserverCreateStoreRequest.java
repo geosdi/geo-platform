@@ -121,9 +121,8 @@ public abstract class GPGeoserverCreateStoreRequest<Body extends GPGeoserverServ
     protected void checkHttpResponseStatus(int statusCode) throws Exception {
         super.checkHttpResponseStatus(statusCode);
         switch (statusCode) {
-            case 500:
-                throw new IllegalStateException("Store '".concat(this.body.get().getName()
-                        .concat("' already exist in workspace '".concat(this.workspace.get()).concat("'."))));
+            case 500 -> throw new IllegalStateException("Store '".concat(this.body.get().getName()
+                    .concat("' already exist in workspace '".concat(this.workspace.get()).concat("'."))));
         }
     }
 

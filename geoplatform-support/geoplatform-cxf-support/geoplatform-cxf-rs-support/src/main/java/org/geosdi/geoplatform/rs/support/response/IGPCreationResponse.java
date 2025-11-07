@@ -37,12 +37,12 @@ package org.geosdi.geoplatform.rs.support.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.ToString;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;

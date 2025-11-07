@@ -109,12 +109,9 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      */
     protected void checkHttpResponseStatus(int statusCode) throws Exception {
         switch (statusCode) {
-            case 401:
-                throw new UnauthorizedException();
-            case 404:
-                throw new ResourceNotFoundException();
-            case 405:
-                throw new IllegalStateException("Method not allowed");
+            case 401 -> throw new UnauthorizedException();
+            case 404 -> throw new ResourceNotFoundException();
+            case 405 -> throw new IllegalStateException("Method not allowed");
         }
     }
 

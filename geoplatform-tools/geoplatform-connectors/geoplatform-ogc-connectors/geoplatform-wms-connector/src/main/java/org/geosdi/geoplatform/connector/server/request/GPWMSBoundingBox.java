@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

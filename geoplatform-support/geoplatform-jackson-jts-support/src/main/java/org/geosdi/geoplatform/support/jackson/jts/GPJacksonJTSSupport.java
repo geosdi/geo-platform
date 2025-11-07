@@ -45,14 +45,15 @@ import org.locationtech.jts.geom.GeometryCollection;
 
 import javax.annotation.Nonnull;
 import java.io.StringReader;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Arrays.asList;
+import static java.util.List.of;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonParserFeature.USE_FAST_BIG_NUMBER_PARSER_ENABLE;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonParserFeature.USE_FAST_DOUBLE_PARSER_ENABLE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,21 +62,20 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJsonParserFeatur
 public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJTSSupport {
 
     public GPJacksonJTSSupport() {
-        this(UNWRAP_ROOT_VALUE_DISABLE,
+        this(asList(UNWRAP_ROOT_VALUE_DISABLE,
                 FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                 ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
                 WRAP_ROOT_VALUE_DISABLE,
                 INDENT_OUTPUT_ENABLE, NON_NULL,
                 USE_FAST_DOUBLE_PARSER_ENABLE,
-                USE_FAST_BIG_NUMBER_PARSER_ENABLE);
+                USE_FAST_BIG_NUMBER_PARSER_ENABLE));
     }
 
     /**
      * @param features
      */
-    protected GPJacksonJTSSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature<?>... features) {
-        super(JAKARTA, features);
-        super.registerModule(new GPJTSModule());
+    protected GPJacksonJTSSupport(@Nonnull(when = NEVER) List<JacksonSupportConfigFeature> features) {
+        super(JAKARTA, features, of(new GPJTSModule()));
     }
 
     /**

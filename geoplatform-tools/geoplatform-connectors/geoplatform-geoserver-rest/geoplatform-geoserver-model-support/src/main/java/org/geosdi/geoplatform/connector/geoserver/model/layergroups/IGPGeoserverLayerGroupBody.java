@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.base.GeoserverBaseLayerGroup;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.keywords.IGPGeoserverLayerGroupKeywords;
@@ -43,6 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.style.IGPGeoserverLayerGroupStyles;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLink;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 

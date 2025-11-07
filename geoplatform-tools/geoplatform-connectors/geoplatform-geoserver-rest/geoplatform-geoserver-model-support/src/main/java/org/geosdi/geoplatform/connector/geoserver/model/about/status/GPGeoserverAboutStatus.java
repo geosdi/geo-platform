@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.about.status;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.ToString;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;

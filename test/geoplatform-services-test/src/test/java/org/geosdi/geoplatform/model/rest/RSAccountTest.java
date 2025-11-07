@@ -330,6 +330,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         assertEquals(TRUE, tmpUser.isAccountTemporary());
         gpWSClient.forceExpiredTemporaryAccount(user.getId());
         tmpUser = gpWSClient.getUserDetail(user.getId());
-        assertEquals(Boolean.FALSE, tmpUser.isAccountNonExpired());
+        assertEquals(FALSE, tmpUser.isAccountNonExpired());
     }
 }

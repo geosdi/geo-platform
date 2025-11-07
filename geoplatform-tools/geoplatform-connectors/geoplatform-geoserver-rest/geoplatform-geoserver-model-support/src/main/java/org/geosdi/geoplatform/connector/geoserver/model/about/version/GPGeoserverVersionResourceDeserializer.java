@@ -35,15 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.about.version;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -108,34 +106,22 @@ class GPGeoserverVersionResourceDeserializer extends StdDeserializer<GPGeoserver
      * @return Deserialized value
      */
     @Override
-    public GPGeoserverVersionResource deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public GPGeoserverVersionResource deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         GPGeoserverVersionResource versionResource = new GPGeoserverVersionResource();
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
         do {
-            if (jsonParser.currentToken() == JsonToken.FIELD_NAME) {
+            if (jsonParser.currentToken() == JsonToken.PROPERTY_NAME) {
                 continue;
             }
             String propertyName = jsonParser.currentName();
             logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
             switch (propertyName) {
-                case "@name": {
-                    versionResource.setName(jsonParser.getText());
-                    break;
-                }
-                case "Build-Timestamp": {
-                    versionResource.setBuildTimestamp(jsonParser.getText());
-                    break;
-                }
-                case "Version": {
-                    versionResource.setVersion(jsonParser.getText());
-                    break;
-                }
-                case "Git-Revision": {
-                    versionResource.setGitRevision(jsonParser.getText());
-                    break;
-                }
+                case "@name" -> versionResource.setName(jsonParser.getString());
+                case "Build-Timestamp" ->  versionResource.setBuildTimestamp(jsonParser.getString());
+                case "Version" -> versionResource.setVersion(jsonParser.getString());
+                case "Git-Revision" -> versionResource.setGitRevision(jsonParser.getString());
             }
         } while (jsonParser.nextToken() != JsonToken.END_OBJECT);
         return versionResource;

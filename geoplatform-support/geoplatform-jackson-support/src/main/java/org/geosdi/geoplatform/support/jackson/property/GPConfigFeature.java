@@ -35,17 +35,22 @@
  */
 package org.geosdi.geoplatform.support.jackson.property;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.cfg.MapperBuilder;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FunctionalInterface
-public interface GPConfigFeature {
+public interface GPConfigFeature<Builder extends MapperBuilder<? extends ObjectMapper, ? extends Builder>> {
 
     /**
-     * @param mapper
+     * @param builder
      */
-    void configureMapper(ObjectMapper mapper);
+    void configureMapper(@Nonnull(when = NEVER) Builder builder);
 }

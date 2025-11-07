@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.experimental.openam.support.config.connector.secure;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -55,21 +54,25 @@ import org.geosdi.geoplatform.experimental.openam.support.connector.request.auth
 import org.geosdi.geoplatform.experimental.openam.support.connector.request.mediator.IOpenAMRequestMediator;
 import org.geosdi.geoplatform.experimental.rs.security.connector.settings.GPConnectorSettings;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum;
-import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.slf4j.Logger;
+import tools.jackson.databind.ObjectMapper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Resource;
 import java.net.URI;
 import java.net.URLDecoder;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.FALSE;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter.RequestParameterType.ACTION_LOGOUT;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.AUTHENTICATE;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.LOGOUT;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,12 +90,16 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
     @Resource(name = "requestParameterMediator")
     protected IRequestParameterMediator requestParameterMediator;
     protected IOpenAMCookieInfo openAMCookieInfo;
-    protected final ObjectMapper openAMReader = new GPJacksonSupport(JAXB,
-            GPJacksonSupportEnum.UNWRAP_ROOT_VALUE_DISABLE, GPJacksonSupportEnum.FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            GPJacksonSupportEnum.ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, GPJacksonSupportEnum.WRAP_ROOT_VALUE_DISABLE,
-            GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE).configure(GPJsonIncludeFeature.NON_NULL).getDefaultMapper();
+    protected final ObjectMapper openAMReader = builder(FALSE)
+            .withIntespectorBuilder(JAXB)
+            .configure(UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+                    ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE, NON_NULL)
+            .build().getDefaultMapper();
 
-    protected OpenAMAuthorizedConnector(GPConnectorSettings theOpenAMConnectorSettings) {
+    /**
+     * @param theOpenAMConnectorSettings
+     */
+    protected OpenAMAuthorizedConnector(@Nonnull(when = NEVER) GPConnectorSettings theOpenAMConnectorSettings) {
         checkNotNull(theOpenAMConnectorSettings, "The OpenAMConnectorSettings must not be null.");
         this.openAMConnectorSettings = theOpenAMConnectorSettings;
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();

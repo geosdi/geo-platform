@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
+import tools.jackson.core.JsonGenerator;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

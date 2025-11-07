@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.server.request.GPWMSRequestKey;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

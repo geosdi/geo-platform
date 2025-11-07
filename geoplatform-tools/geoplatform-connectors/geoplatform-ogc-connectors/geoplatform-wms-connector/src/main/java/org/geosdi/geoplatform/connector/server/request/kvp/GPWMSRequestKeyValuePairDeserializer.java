@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 import static org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader.WMS_REQUEST_KEY_VALUE_PAIR;
 import static org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader.WMS_SERVICE_KEY_VALUE_PAIR;
@@ -80,7 +79,7 @@ public class GPWMSRequestKeyValuePairDeserializer extends StdDeserializer<WMSGet
      *          ...
      *      }
      *  </pre>
-     * Jackson consumes the two tokens (the <tt>@class</tt> field name
+     * Jackson consumes the two tokens (the {@code @class} field name
      * and its value) in order to learn the class and select the deserializer.
      * Thus, the stream is pointing to the FIELD_NAME for the first field
      * after the @class. Thus, if you want your method to work correctly
@@ -98,51 +97,47 @@ public class GPWMSRequestKeyValuePairDeserializer extends StdDeserializer<WMSGet
      * fails, event that was not recognized or usable, which may be
      * the same event as the one it pointed to upon call).
      * <p>
-     * Note that this method is never called for JSON null literal,
-     * and thus deserializers need (and should) not check for it.
+     * <strong>Handling null values (JsonToken.VALUE_NULL)</strong>
+     * <br>
+     * : Note that this method is never called for the JSON {@code null} literal to avoid
+     * every deserializer from having to handle null values. Instead, the
+     * {@link ValueDeserializer#getNullValue(DeserializationContext)} method
+     * is called to produce a null value. To influence null handling,
+     * custom deserializers should override
+     * {@link ValueDeserializer#getNullValue(DeserializationContext)}
+     * and usually also {@link ValueDeserializer#getNullAccessPattern()}.
      *
-     * @param jp Parsed used for reading JSON content
+     * @param p Parser used for reading JSON content
      * @param ctxt Context that can be used to access information about
      * this deserialization activity.
      * @return Deserialized value
      */
     @Override
-    public WMSGetMapBaseRequestKeyValuePair deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        JsonNode node = jp.getCodec().readTree(jp);
+    public WMSGetMapBaseRequestKeyValuePair deserialize(JsonParser p, DeserializationContext ctxt) throws JacksonException {
+        JsonNode node = p.readValueAsTree();
         String key = node.get("key").asText();
         String value = node.get("value").asText();
-        switch ((key != null) ? key : "") {
-            case "SERVICE" :
-                return WMS_SERVICE_KEY_VALUE_PAIR;
-            case "VERSION" :
-                return new WMSVersionKeyValuePair(value);
-            case "REQUEST" :
-                return WMS_REQUEST_KEY_VALUE_PAIR;
-            case "LAYERS" :
-                return new WMSLayersKeyValuePair(value);
-            case "SRS" :
-                return new WMSSrsKeyValuePair(value);
-            case "CRS" :
-                return new WMSCrsKeyValuePair(value);
-            case "WIDTH":
-                return new WMSWidthKeyValuePair(value);
-            case "HEIGHT" :
-                return new WMSHeightKeyValuePair(value);
-            case "BBOX" :
-                return new WMSBoundingBoxKeyValuePair(value);
-            case "STYLES" :
-                return new WMSStylesKeyValuePair(value);
-            default:
-                return new WMSGetMapBaseRequestKeyValuePair<String>(key) {
+        return switch ((key != null) ? key : "") {
+            case "SERVICE" -> WMS_SERVICE_KEY_VALUE_PAIR;
+            case "VERSION" -> new WMSVersionKeyValuePair(value);
+            case "REQUEST" -> WMS_REQUEST_KEY_VALUE_PAIR;
+            case "LAYERS" -> new WMSLayersKeyValuePair(value);
+            case "SRS" -> new WMSSrsKeyValuePair(value);
+            case "CRS" -> new WMSCrsKeyValuePair(value);
+            case "WIDTH" -> new WMSWidthKeyValuePair(value);
+            case "HEIGHT" -> new WMSHeightKeyValuePair(value);
+            case "BBOX" -> new WMSBoundingBoxKeyValuePair(value);
+            case "STYLES" -> new WMSStylesKeyValuePair(value);
+            default -> new WMSGetMapBaseRequestKeyValuePair<String>(key) {
 
-                    /**
-                     * @return {@link String}
-                     */
-                    @Override
-                    public String toValue() {
-                        return value;
-                    }
-                };
-        }
+                /**
+                 * @return {@link String}
+                 */
+                @Override
+                public String toValue() {
+                    return value;
+                }
+            };
+        };
     }
 }

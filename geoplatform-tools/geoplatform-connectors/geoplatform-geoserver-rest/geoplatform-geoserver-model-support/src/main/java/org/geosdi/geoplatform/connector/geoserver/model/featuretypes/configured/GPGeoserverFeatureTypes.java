@@ -37,15 +37,16 @@ package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.configured
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -65,8 +66,8 @@ public class GPGeoserverFeatureTypes implements IGPGeoserverFeatureTypes {
      * @param theFeatureTypes
      */
     @JsonCreator
-    public GPGeoserverFeatureTypes(@Nonnull(when = When.NEVER) @JsonProperty(value = "featureType") List<IGPGeoserverFeatureType> theFeatureTypes) {
-        Preconditions.checkArgument(theFeatureTypes != null, "The Parameter featureTypes must not be null.");
+    public GPGeoserverFeatureTypes(@Nonnull(when = NEVER) @JsonProperty(value = "featureType") List<IGPGeoserverFeatureType> theFeatureTypes) {
+        checkArgument(theFeatureTypes != null, "The Parameter featureTypes must not be null.");
         this.featureTypes = theFeatureTypes;
     }
 }

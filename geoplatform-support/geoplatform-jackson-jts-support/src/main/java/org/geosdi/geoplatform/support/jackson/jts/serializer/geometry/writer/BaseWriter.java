@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import org.geojson.Crs;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JsonGenerator;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -71,7 +71,7 @@ public abstract class BaseWriter<JTS extends GPJTSGeometryAdapter, GEOJSON exten
         checkArgument(jsonGenerator != null, "The Parameter jsonGenerator must not be null.");
         GEOJSON geoJsonGeometry = buildGeoJsonGeometry(geometry);
         geoJsonGeometry.setCrs(writeGeometryCrs(geometry));
-        jsonGenerator.writeObject(geoJsonGeometry);
+        jsonGenerator.writePOJO(geoJsonGeometry);
     }
 
     /**

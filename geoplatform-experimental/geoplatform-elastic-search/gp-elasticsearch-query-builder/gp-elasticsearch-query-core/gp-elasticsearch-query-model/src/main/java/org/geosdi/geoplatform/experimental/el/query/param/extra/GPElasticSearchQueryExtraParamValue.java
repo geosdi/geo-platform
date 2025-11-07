@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.param.extra;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.experimental.el.query.param.key.GPElasticSearchQueryParamKey;
 import org.geosdi.geoplatform.experimental.el.query.param.key.IGPElasticSearchQueryParamKey;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

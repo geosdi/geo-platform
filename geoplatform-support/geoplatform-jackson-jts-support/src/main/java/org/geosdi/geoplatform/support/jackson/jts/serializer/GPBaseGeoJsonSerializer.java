@@ -35,40 +35,41 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.JTSPointAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.GeoJsonPointHandler;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.IGPGeoJsonGeometryHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ValueSerializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class GPBaseGeoJsonSerializer<Geometry> extends JsonSerializer<Geometry> {
+abstract class GPBaseGeoJsonSerializer<Geometry> extends ValueSerializer<Geometry> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPBaseGeoJsonSerializer.class);
     //
     private static final IGPGeoJsonGeometryHandler<JTSPointAdapter> geoJsonPointHandler = new GeoJsonPointHandler();
 
     /**
-     * @param geometry
-     * @param jsonGenerator
-     * @param serializerProvider
-     * @throws IOException
+     * Method that can be called to ask implementation to serialize
+     * values of type this serializer handles.
+     *
+     * @param geometry Value to serialize; can <b>not</b> be null.
+     * @param jsonGenerator Generator used to output resulting Json content
+     * @param ctxt Context that can be used to get serializers for
+     * serializing Objects value contains, if any.
      */
     @Override
-    public void serialize(Geometry geometry, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
-            throws IOException {
+    public void serialize(Geometry geometry, JsonGenerator jsonGenerator, SerializationContext ctxt) throws JacksonException {
         logger.trace("##############################Called {}\n", this.getClass().getSimpleName());
         try {
-           geoJsonPointHandler.parseGeometry(adapt(geometry), jsonGenerator);
+            geoJsonPointHandler.parseGeometry(adapt(geometry), jsonGenerator);
         } catch (Exception ex) {
             logger.error("::::::::::::::::::::::::ERROR : {}\n", ex.getMessage());
             ex.printStackTrace(System.err);

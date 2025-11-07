@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.geosdi.geoplatform.connector.geoserver.model.jackson.serializer.rx.GPGeoserverRXConsumerSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.util.Objects;
 
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -66,13 +66,13 @@ class GPCoverageDimensionsSerializer extends StdSerializer<GPCoverageDimensions>
      * @param value
      * @param gen
      * @param provider
-     * @throws IOException
+     * @throws JacksonException
      */
     @Override
-    public void serialize(GPCoverageDimensions value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GPCoverageDimensions value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         Consumer<IGPCoverageDimension> coverageDimensionConsumer = new GPCoverageDimensionsConsumer(gen);
         gen.writeStartObject();
-        gen.writeFieldName("coverageDimension");
+        gen.writeName("coverageDimension");
         gen.writeStartArray();
         if ((value.getCoverageDimension()) != null && !(value.getCoverageDimension().isEmpty())) {
             fromIterable(value.getCoverageDimension())
@@ -96,16 +96,18 @@ class GPCoverageDimensionsSerializer extends StdSerializer<GPCoverageDimensions>
         @Override
         public void accept(IGPCoverageDimension coverageDimension) throws Throwable {
             jsonGenerator.writeStartObject();
-            jsonGenerator.writeStringField("description", coverageDimension.getDescription());
-            jsonGenerator.writeStringField("name", coverageDimension.getName());
-            jsonGenerator.writeFieldName("range");
+            jsonGenerator.writeStringProperty("description", coverageDimension.getDescription());
+            jsonGenerator.writeStringProperty("name", coverageDimension.getName());
+            jsonGenerator.writeName("range");
+            jsonGenerator.writeStartArray();
             if (coverageDimension.isSetRange()) {
                 jsonGenerator.writeStartObject();
-                jsonGenerator.writeNumberField("max", coverageDimension.getRange().getMax());
-                jsonGenerator.writeNumberField("min", coverageDimension.getRange().getMin());
+                jsonGenerator.writeNumberProperty("max", coverageDimension.getRange().getMax());
+                jsonGenerator.writeNumberProperty("min", coverageDimension.getRange().getMin());
                 jsonGenerator.writeEndObject();
             } else
-                jsonGenerator.writeObject(null);
+                jsonGenerator.writePOJO(null);
+            jsonGenerator.writeEndArray();
             jsonGenerator.writeEndObject();
         }
     }

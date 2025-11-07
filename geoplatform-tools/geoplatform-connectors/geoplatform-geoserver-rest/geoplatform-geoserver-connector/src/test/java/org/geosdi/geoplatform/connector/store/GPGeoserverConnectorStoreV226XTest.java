@@ -73,13 +73,13 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
     @Test
     public void a_aboutVersionGeoserverConnectorTest() throws Exception {
         GeoserverAboutVersionRequest aboutRequest = geoserverConnectorStoreV2_26_x.createAboutVersionRequest();
-        logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
+        logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponse());
     }
 
     @Test
     public void b_aboutStatusGeoserverConnectorTest() throws Exception {
         GeoserverAboutStatusRequest aboutStatusRequest = geoserverConnectorStoreV2_26_x.createAboutStatusRequest();
-        logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponseAsString());
+        logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponse());
     }
 
     @Test
@@ -91,13 +91,13 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
     @Test
     public void d_namespacesGeoserverConnectorTest() throws Exception {
         GeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_26_x.createNamespacesRequest();
-        logger.info("###################NAMESPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespacesRequest.getResponseAsString());
+        logger.info("###################NAMESPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespacesRequest.getResponse());
     }
 
     @Test
     public void e_namespaceGeoserverConnectorTest() throws Exception {
         GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_26_x.createNamespaceRequest();
-        logger.info("###################NAMESPACE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespaceRequest.withPrefix("tiger").getResponseAsString());
+        logger.info("###################NAMESPACE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespaceRequest.withPrefix("tiger").getResponse());
     }
 
     @Test
@@ -115,20 +115,20 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
     @Test
     public void g_layersGeoserverConnectorTest() throws Exception {
         GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_26_x.loadLayersRequest();
-        logger.info("##################LAYERS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layersRequest.getResponseAsString());
+        logger.info("##################LAYERS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layersRequest.getResponse());
     }
 
     @Test
     public void h_stylesGeoserverConnectorTest() throws Exception {
         GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_26_x.loadStylesRequest();
-        logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponseAsString());
+        logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponse());
     }
 
     @Test
     public void i_styleGeoserverConnectorTest() throws Exception {
         GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_26_x.loadStyleRequest();
         styleRequest.withStyleName("Frank");
-        logger.info("################STYLE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", styleRequest.getResponseAsString());
+        logger.info("################STYLE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", styleRequest.getResponse());
     }
 
     @Test
@@ -145,14 +145,14 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
     public void m_layerVectorGeoserverConnectorTest() throws Exception {
         GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_26_x.loadLayerRequest();
         layerRequest.withName("giant_polygon");
-        logger.info("##############VECTOR_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
+        logger.info("##############VECTOR_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponse());
     }
 
     @Test
     public void n_layerRasterGeoserverConnectorTest() throws Exception {
         GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_26_x.loadLayerRequest();
         layerRequest.withName("Arc_Sample");
-        logger.info("############RASTER_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
+        logger.info("############RASTER_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponse());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
         GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStoreV2_26_x.createWorkspaceRequest();
         logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest
                 .withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test"))
-                .getResponseAsString());
+                .getResponse());
     }
 
     @Test
@@ -187,7 +187,7 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
         GeoserverUpdateWorkspaceRequest updateWorkspaceRequest = geoserverConnectorStoreV2_26_x.updateWorkspaceRequest();
         updateWorkspaceRequest.withWorkspaceName("workspace_test");
         updateWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_1"));
-        logger.info("##########################UPDATE_WORKSPACE_RESPONSE : {}\n", updateWorkspaceRequest.getResponseAsString());
+        logger.info("##########################UPDATE_WORKSPACE_RESPONSE : {}\n", updateWorkspaceRequest.getResponse());
     }
 
     @Test
@@ -206,6 +206,6 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
     @Test
     public void u_aboutSystemStatusGeoserverConnectorTest() throws Exception {
         GeoserverAboutSystemStatusRequest aboutSystemStatusRequest = geoserverConnectorStoreV2_26_x.createAboutSystemStatusRequest();
-        logger.info("#####################ABOUT_SYSTEM_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutSystemStatusRequest.getResponseAsString());
+        logger.info("#####################ABOUT_SYSTEM_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutSystemStatusRequest.getResponse());
     }
 }

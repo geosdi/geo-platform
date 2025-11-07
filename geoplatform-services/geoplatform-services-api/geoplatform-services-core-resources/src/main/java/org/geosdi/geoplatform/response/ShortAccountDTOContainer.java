@@ -36,10 +36,7 @@
 package org.geosdi.geoplatform.response;
 
 import com.google.common.collect.Lists;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElementRef;
-import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;

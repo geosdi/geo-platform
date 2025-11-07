@@ -35,19 +35,18 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.security.rule.deserializer;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRule;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRule;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRules;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -115,7 +114,7 @@ public class GeoserverRulesDeserializer extends StdDeserializer<GeoserverRules> 
      * @return Deserialized value
      */
     @Override
-    public GeoserverRules deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public GeoserverRules deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         List<GeoserverRule> rules = newArrayList();
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
@@ -135,7 +134,7 @@ public class GeoserverRulesDeserializer extends StdDeserializer<GeoserverRules> 
             rules.add(new GPGeoserverRule() {
                 {
                     super.setResource(propertyName);
-                    super.setValue(jsonParser.getText());
+                    super.setValue(jsonParser.getString());
                 }
             });
         } while (jsonParser.nextToken() != JsonToken.END_OBJECT);

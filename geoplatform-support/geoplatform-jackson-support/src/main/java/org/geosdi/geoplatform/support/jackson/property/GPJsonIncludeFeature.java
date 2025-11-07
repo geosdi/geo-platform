@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.support.jackson.property;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.cfg.MapperBuilder;
 
 import javax.annotation.Nonnull;
 
@@ -48,7 +48,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonInclude.Include> {
+public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonInclude.Include, MapperBuilder<?, ?>> {
 
     ALWAYS(TRUE) {
         /**
@@ -60,11 +60,12 @@ public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonIncl
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.setSerializationInclusion(getFeature());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(this.getFeature()));
         }
     }, NON_NULL(TRUE) {
         /**
@@ -76,11 +77,12 @@ public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonIncl
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.setSerializationInclusion(getFeature());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(this.getFeature()));
         }
     }, NON_ABSENT(TRUE) {
         /**
@@ -92,11 +94,12 @@ public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonIncl
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.setSerializationInclusion(getFeature());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(this.getFeature()));
         }
     }, NON_EMPTY(TRUE) {
         /**
@@ -108,11 +111,12 @@ public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonIncl
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.setSerializationInclusion(getFeature());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(this.getFeature()));
         }
     }, NON_DEFAULT(TRUE) {
         /**
@@ -124,11 +128,12 @@ public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonIncl
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.setSerializationInclusion(getFeature());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(this.getFeature()));
         }
     }, USE_DEFAULTS(TRUE) {
         /**
@@ -140,11 +145,12 @@ public enum GPJsonIncludeFeature implements JacksonSupportConfigFeature<JsonIncl
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.setSerializationInclusion(getFeature());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(this.getFeature()));
         }
     };
 

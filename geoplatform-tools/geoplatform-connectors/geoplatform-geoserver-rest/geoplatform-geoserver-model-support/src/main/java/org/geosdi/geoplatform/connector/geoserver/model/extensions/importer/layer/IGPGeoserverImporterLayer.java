@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.layer;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.IGPGeoserverImporterAttribute;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.layer.style.IGPGeoserverImporterLayerStyle;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
 import java.util.List;

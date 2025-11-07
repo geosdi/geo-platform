@@ -35,11 +35,14 @@
  */
 package org.geosdi.geoplatform.support.jackson.property;
 
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.cfg.MapperBuilder;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface JacksonSupportConfigFeature<F> extends GPConfigFeature {
+public interface JacksonSupportConfigFeature<F, Builder extends MapperBuilder<? extends ObjectMapper, ? extends Builder>> extends GPConfigFeature<Builder> {
 
     /**
      * @return {@link Boolean}

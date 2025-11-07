@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 
@@ -104,7 +104,7 @@ public class GPGeoserverMetadataLinkSettingsDeserializer extends StdDeserializer
      * @return Deserialized value
      */
     @Override
-    public GPGeoserverMetadataLinkSettings deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public GPGeoserverMetadataLinkSettings deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         String nodeValue = jsonParser.getText();
         return (nodeValue.trim().isEmpty() ? null : toModel(jsonParser));
     }
@@ -115,27 +115,27 @@ public class GPGeoserverMetadataLinkSettingsDeserializer extends StdDeserializer
      * @throws IOException
      * @throws JacksonException
      */
-    GPGeoserverMetadataLinkSettings toModel(JsonParser jsonParser) throws IOException, JacksonException {
+    GPGeoserverMetadataLinkSettings toModel(JsonParser jsonParser) throws JacksonException {
         GPGeoserverMetadataLinkSettings metadataLinkSettings = new GPGeoserverMetadataLinkSettings();
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
         do {
-            if (jsonParser.currentToken() == JsonToken.FIELD_NAME) {
+            if (jsonParser.currentToken() == JsonToken.PROPERTY_NAME) {
                 continue;
             }
             String propertyName = jsonParser.currentName();
             switch (propertyName) {
                 case "metadataType": {
-                    metadataLinkSettings.setMetadataType(jsonParser.getText());
+                    metadataLinkSettings.setMetadataType(jsonParser.getString());
                     break;
                 }
                 case "type": {
-                    metadataLinkSettings.setType(jsonParser.getText());
+                    metadataLinkSettings.setType(jsonParser.getString());
                     break;
                 }
                 case "about": {
-                    metadataLinkSettings.setContent(jsonParser.getText());
+                    metadataLinkSettings.setContent(jsonParser.getString());
                     break;
                 }
             }

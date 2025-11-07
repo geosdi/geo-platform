@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.datastores.body;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.GPGeoserverConnectionParametersBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.IGPGeoserverConnectionParam;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;

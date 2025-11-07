@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverBaseSto
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
 import org.joda.time.LocalDateTime;
 
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

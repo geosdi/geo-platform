@@ -35,19 +35,19 @@
  */
 package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jakarta.rs.cfg.Annotations;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.AnnotationIntrospector;
+import tools.jackson.databind.json.JsonMapper;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.text.SimpleDateFormat;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static javax.annotation.meta.When.NEVER;
+import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.USE_FAST_BIG_NUMBER_PARSER_ENABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,51 +55,47 @@ import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnota
  */
 public class CXFJacksonProvider extends CXFBaseJacksonProvider {
 
-    private static final GPJacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"), JAKARTA)
-                .configure(GPJsonIncludeFeature.NON_NULL);
+    private static final JacksonSupport<JsonMapper> JACKSON_SUPPORT = builder(FALSE)
+            .withIntespectorBuilder(JAKARTA)
+            .configure(UNWRAP_ROOT_VALUE_ENABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE, NON_NULL,
+                    ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE, INDENT_OUTPUT_ENABLE,
+                    FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, USE_FAST_DOUBLE_PARSER_ENABLE, USE_FAST_BIG_NUMBER_PARSER_ENABLE)
+            .withDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"))
+            .build();
 
     public CXFJacksonProvider() {
-        this(JACKSON_SUPPORT.getDefaultMapper(), DEFAULT_ANNOTATIONS);
+        this(JACKSON_SUPPORT.getDefaultMapper(), JAKARTA.build());
     }
 
     /**
      * @param theJacksonSupport
      */
-    public CXFJacksonProvider(@Nullable GPJacksonSupport theJacksonSupport) {
-        super(((theJacksonSupport != null) ? theJacksonSupport.getDefaultMapper() : JACKSON_SUPPORT.getDefaultMapper()), DEFAULT_ANNOTATIONS);
+    public CXFJacksonProvider(@Nullable JacksonSupport<JsonMapper> theJacksonSupport) {
+        super(((theJacksonSupport != null) ? theJacksonSupport.getDefaultMapper() : JACKSON_SUPPORT.getDefaultMapper()), JAKARTA.build());
     }
 
     /**
      *
      * @param theMapper
-     * @param theAnnotationsToUse
+     * @param theAnnotationIntrospector
      */
-    public CXFJacksonProvider(ObjectMapper theMapper, Annotations[] theAnnotationsToUse) {
-        super(((theMapper != null) ? theMapper : JACKSON_SUPPORT.getDefaultMapper()), theAnnotationsToUse);
+    public CXFJacksonProvider(JsonMapper theMapper, AnnotationIntrospector theAnnotationIntrospector) {
+        super(((theMapper != null) ? theMapper : JACKSON_SUPPORT.getDefaultMapper()), theAnnotationIntrospector);
     }
 
     /**
-     * @param theModule
+     * @return {@link JsonMapper}
      */
     @Override
-    public final void registerModule(@Nonnull(when = NEVER) Module theModule) {
-        checkArgument(theModule != null, "The Parameter Module must not be null.");
-        _mapperConfig.getConfiguredMapper().registerModule(theModule);
-    }
-
-    /**
-     * @return {@link ObjectMapper}
-     */
-    @Override
-    public final ObjectMapper getDefaultMapper() {
+    public final JsonMapper getDefaultMapper() {
         return _mapperConfig.getDefaultMapper();
     }
 
     /**
-     * @return {@link ObjectMapper}
+     * @return {@link JsonMapper}
      */
     @Override
-    public ObjectMapper getConfiguredMapper() {
+    public JsonMapper getConfiguredMapper() {
         return _mapperConfig.getConfiguredMapper();
     }
 }

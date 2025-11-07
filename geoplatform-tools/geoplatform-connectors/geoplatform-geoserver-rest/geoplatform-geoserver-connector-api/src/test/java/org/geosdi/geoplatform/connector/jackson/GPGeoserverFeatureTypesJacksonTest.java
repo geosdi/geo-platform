@@ -42,6 +42,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.StringReader;
 
 import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
@@ -117,5 +118,11 @@ public class GPGeoserverFeatureTypesJacksonTest {
                         "   }\n" +
                         "}"), GPGeoserverFeatureTypesList.class);
         logger.info("######################GEOSERVER_FEATURE_TYPES_AVAIALABLE_FROM_STRING : {}\n", featureTypesList);
+    }
+
+    @Test
+    public void d_unmarshallGeoserverFeatureTypesListTest() throws Exception {
+        logger.info("{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new BufferedReader(new StringReader("{\"featureTypes\":{\"featureType\":[{\"name\":\"archsites\",\"href\":\"http://150.145.141.180/geoserver/rest/workspaces/sf/featuretypes/archsites.json\"},{\"name\":\"bugsites\",\"href\":\"http://150.145.141.180/geoserver/rest/workspaces/sf/featuretypes/bugsites.json\"},{\"name\":\"comuni2001\",\"href\":\"http://150.145.141.180/geoserver/rest/workspaces/sf/featuretypes/comuni2001.json\"},{\"name\":\"marocco\",\"href\":\"http://150.145.141.180/geoserver/rest/workspaces/sf/featuretypes/marocco.json\"},{\"name\":\"restricted\",\"href\":\"http://150.145.141.180/geoserver/rest/workspaces/sf/featuretypes/restricted.json\"},{\"name\":\"roads\",\"href\":\"http://150.145.141.180/geoserver/rest/workspaces/sf/featuretypes/roads.json\"},{\"name\":\"streams\",\"href\":\"http://150.145.141.180/geoserver/rest/workspaces/sf/featuretypes/streams.json\"}]}}")), GPGeoserverFeatureTypes.class));
     }
 }

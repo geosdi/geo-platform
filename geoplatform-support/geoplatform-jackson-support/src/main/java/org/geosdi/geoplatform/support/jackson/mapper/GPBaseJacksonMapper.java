@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.support.jackson.mapper;
 
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.reader.GPBaseJacksonReaderSupport;
+import tools.jackson.databind.introspect.JacksonAnnotationIntrospector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

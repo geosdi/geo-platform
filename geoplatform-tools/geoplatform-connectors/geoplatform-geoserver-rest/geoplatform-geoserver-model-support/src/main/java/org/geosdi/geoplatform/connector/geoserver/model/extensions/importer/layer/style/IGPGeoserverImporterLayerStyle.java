@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.layer.style;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPStyleVersion;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

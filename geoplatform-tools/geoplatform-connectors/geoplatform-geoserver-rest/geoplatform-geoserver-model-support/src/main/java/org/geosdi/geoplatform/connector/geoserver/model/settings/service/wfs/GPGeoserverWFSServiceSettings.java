@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -43,6 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GPGeose
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettingsDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.gml.GMLEntryContainer;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

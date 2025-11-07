@@ -35,41 +35,47 @@
  */
 package org.geosdi.geoplatform.support.jackson;
 
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.annotation.GPJacksonXmlAnnotationIntrospectorBuilder;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.AnnotationIntrospector;
+import tools.jackson.databind.JacksonModule;
+import tools.jackson.databind.introspect.AnnotationIntrospectorPair;
+import tools.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.text.DateFormat;
-import java.util.Locale;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
-import java.util.TimeZone;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.rxjava3.core.Observable.fromArray;
+import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonAnnotationIntrospectorBuilder.JACKSON;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.DEFAULT;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonParserFeature.USE_FAST_BIG_NUMBER_PARSER_ENABLE;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonParserFeature.USE_FAST_DOUBLE_PARSER_ENABLE;
+import static tools.jackson.databind.json.JsonMapper.builder;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPJacksonSupport implements JacksonSupport {
+public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJacksonSupport.class);
     //
-    private final ObjectMapper mapper;
+    private final JsonMapper mapper;
+
+    /**
+     * @param theMapper
+     */
+    GPJacksonSupport(@Nonnull(when = NEVER) JsonMapper theMapper) {
+        checkArgument(theMapper != null, "The Parameter mapper must not be null.");
+        this.mapper = theMapper;
+    }
 
     /**
      * <p>In this case will be used only {@link JacksonAnnotationIntrospector}</p>
@@ -88,16 +94,8 @@ public class GPJacksonSupport implements JacksonSupport {
     }
 
     /**
-     * @param format
-     * @param theBuilder
-     */
-    public GPJacksonSupport(@Nonnull(when = NEVER) DateFormat format, @Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder) {
-        this(theBuilder, defaultProp());
-        this.mapper.setDateFormat(format);
-    }
-
-    /**
      * <p>In this case will be used only {@link JacksonAnnotationIntrospector}</p>
+     *
      * @param features
      */
     public GPJacksonSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
@@ -110,43 +108,39 @@ public class GPJacksonSupport implements JacksonSupport {
      */
     public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
-        this.mapper = new ObjectMapper();
+        this(theBuilder, Arrays.asList(features), null);
+    }
+
+    /**
+     * @param theBuilder
+     * @param theFeatures
+     * @param theJacksonModules
+     */
+    public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) List<JacksonSupportConfigFeature> theFeatures, @Nullable List<JacksonModule> theJacksonModules) {
+        checkArgument(theFeatures != null, "The Parameter features must not be null.");
+        JsonMapper.Builder jsonBuilder = builder();
         AnnotationIntrospector primary = JACKSON.build();
         AnnotationIntrospector secondary = ((theBuilder != null) ? theBuilder.build() : null);
-        this.mapper.setAnnotationIntrospector((secondary != null) ? new AnnotationIntrospectorPair(primary, secondary) : primary);
-        fromArray(features)
+        jsonBuilder.annotationIntrospector((secondary != null) ? new AnnotationIntrospectorPair(primary, secondary) : primary);
+        fromIterable(theFeatures)
                 .filter(Objects::nonNull)
                 .doOnComplete(() -> logger.trace("##############{} configure all Features.", this.getProviderName()))
-                .subscribe(this::configure, Throwable::printStackTrace);
+                .subscribe(f -> f.configureMapper(jsonBuilder), Throwable::printStackTrace);
+        if (theJacksonModules != null) {
+            fromIterable(theJacksonModules)
+                    .filter(Objects::nonNull)
+                    .doOnComplete(() -> logger.trace("##############{} configure all Jackson Modules.", this.getProviderName()))
+                    .subscribe(jsonBuilder::addModule, Throwable::printStackTrace);
+        }
+        this.mapper = jsonBuilder.build();
     }
 
     /**
-     * @param format
-     * @return {@link JacksonSupport}
+     * @return {@link JsonMapper}
      */
     @Override
-    public JacksonSupport setDateFormat(@Nonnull(when = NEVER) DateFormat format) {
-        checkArgument(format != null, "The Parameter format must not be null.");
-        this.mapper.setDateFormat(format);
-        return this;
-    }
-
-    /**
-     * @return {@link ObjectMapper}
-     */
-    @Override
-    public final ObjectMapper getDefaultMapper() {
+    public final JsonMapper getDefaultMapper() {
         return this.mapper;
-    }
-
-    /**
-     * @param module
-     * @return {@link GPJacksonSupport}
-     */
-    @Override
-    public final GPJacksonSupport registerModule(Module module) {
-        this.mapper.registerModule(module);
-        return this;
     }
 
     /**
@@ -158,59 +152,11 @@ public class GPJacksonSupport implements JacksonSupport {
     }
 
     /**
-     * @param feature
-     * @return {@link GPJacksonSupport}
-     */
-    @Override
-    public GPJacksonSupport configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature feature) {
-        checkArgument(feature != null, "The Parameter feature must not be null.");
-        feature.configureMapper(mapper);
-        return this;
-    }
-
-    /**
-     * @param features
-     * @return {@link GPJacksonSupport}
-     */
-    @Override
-    public GPJacksonSupport configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
-        checkArgument(features != null, "The Parameter features must not be null.");
-        fromArray(features)
-                .filter(Objects::nonNull)
-                .doOnComplete(() -> logger.trace("##############{} configure all Features.", this.getProviderName()))
-                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), Throwable::printStackTrace);
-        return this;
-    }
-
-    /**
-     * @param locale
-     * @return {@link GPJacksonSupport}
-     */
-    @Override
-    public GPJacksonSupport setLocale(@Nonnull(when = NEVER) Locale locale) {
-        checkArgument(locale != null, "The Parameter locale must not be null.");
-        this.mapper.setLocale(locale);
-        return this;
-    }
-
-    /**
-     * @param timeZone
-     * @return {@link GPJacksonSupport}
-     */
-    @Override
-    public GPJacksonSupport setTimeZone(@Nonnull(when = NEVER) TimeZone timeZone) {
-        checkArgument(timeZone != null, "The Parameter timeZone must not be null.");
-        this.mapper.setTimeZone(timeZone);
-        return this;
-    }
-
-    /**
      * @return {@link JacksonSupportConfigFeature[]}
      */
     public static JacksonSupportConfigFeature[] defaultProp() {
-        return new JacksonSupportConfigFeature[]{UNWRAP_ROOT_VALUE_ENABLE,
-                FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-                WRAP_ROOT_VALUE_ENABLE, INDENT_OUTPUT_ENABLE,
-                USE_FAST_DOUBLE_PARSER_ENABLE, USE_FAST_BIG_NUMBER_PARSER_ENABLE};
+        return new JacksonSupportConfigFeature[]{UNWRAP_ROOT_VALUE_ENABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+                ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE, INDENT_OUTPUT_ENABLE,
+                FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, USE_FAST_DOUBLE_PARSER_ENABLE, USE_FAST_BIG_NUMBER_PARSER_ENABLE};
     }
 }

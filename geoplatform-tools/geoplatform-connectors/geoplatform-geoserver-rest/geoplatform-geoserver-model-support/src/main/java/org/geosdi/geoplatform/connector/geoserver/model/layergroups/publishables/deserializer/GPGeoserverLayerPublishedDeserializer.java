@@ -35,15 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.deserializer;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerPublished;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerTypePublished;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -106,7 +104,7 @@ public class GPGeoserverLayerPublishedDeserializer extends StdDeserializer<GPGeo
      * @return Deserialized value
      */
     @Override
-    public GPGeoserverLayerPublished deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public GPGeoserverLayerPublished deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws JacksonException {
         String layerName = null;
         String link = null;
         String type = null;

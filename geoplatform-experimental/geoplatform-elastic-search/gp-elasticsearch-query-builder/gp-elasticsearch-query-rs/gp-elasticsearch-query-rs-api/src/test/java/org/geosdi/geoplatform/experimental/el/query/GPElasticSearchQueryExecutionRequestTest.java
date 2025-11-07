@@ -35,27 +35,28 @@
  */
 package org.geosdi.geoplatform.experimental.el.query;
 
-
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.geosdi.geoplatform.experimental.el.query.mapper.GPElasticSearchQueryMapperTest;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
 import org.geosdi.geoplatform.experimental.el.query.rest.request.IGPElasticSearchQueryExecutionRequest;
 import org.geosdi.geoplatform.experimental.el.query.rest.response.GPElasticSearchQueryExecutorStore;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.datatype.joda.JodaModule;
 
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRITE_DATES_AS_TIMESTAMPS_DISABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -65,10 +66,11 @@ public class GPElasticSearchQueryExecutionRequestTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPElasticSearchQueryExecutionRequestTest.class);
     //
-    private static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA)
-            .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
+    private static final JacksonSupport<JsonMapper> jacksonSupport = builder(FALSE)
+            .withIntespectorBuilder(JAKARTA)
             .registerModule(new JodaModule())
-            .configure(GPJsonIncludeFeature.NON_NULL);
+            .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE, NON_NULL)
+            .build();
 
     @Test
     public void writeGPElasticSearchQueryExecutionRequestAsStringTest() throws Exception {

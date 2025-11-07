@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.store.coverage;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
 

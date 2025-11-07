@@ -40,6 +40,7 @@ import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.locationtech.jts.geom.GeometryCollection;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 
@@ -49,7 +50,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPJacksonJTSSupport extends JacksonSupport {
+public interface IGPJacksonJTSSupport extends JacksonSupport<JsonMapper> {
 
     /**
      * @param theGeom

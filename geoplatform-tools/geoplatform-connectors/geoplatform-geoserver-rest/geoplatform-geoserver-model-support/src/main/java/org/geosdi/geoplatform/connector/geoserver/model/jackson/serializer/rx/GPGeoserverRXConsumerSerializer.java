@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.jackson.serializer.rx;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import io.reactivex.rxjava3.functions.Consumer;
+import tools.jackson.core.JsonGenerator;
 
 import javax.annotation.Nonnull;
 

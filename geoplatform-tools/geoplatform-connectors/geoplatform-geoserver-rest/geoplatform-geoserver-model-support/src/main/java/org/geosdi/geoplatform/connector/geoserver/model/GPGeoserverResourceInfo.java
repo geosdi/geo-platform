@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -52,6 +51,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNa
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverResponseSRS;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.store.GPGeoserverCoverageStoreInfo;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;

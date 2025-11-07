@@ -35,377 +35,337 @@
  */
 package org.geosdi.geoplatform.support.jackson.property;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.json.JsonWriteFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.StreamWriteFeature;
+import tools.jackson.core.json.JsonWriteFeature;
+import tools.jackson.databind.json.JsonMapper;
 
-import static com.fasterxml.jackson.core.json.JsonWriteFeature.*;
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
+import static tools.jackson.core.json.JsonWriteFeature.WRITE_NAN_AS_STRINGS;
+import static tools.jackson.core.json.JsonWriteFeature.WRITE_NUMBERS_AS_STRINGS;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPJsonGeneratorFeature implements JacksonSupportConfigFeature<JsonGenerator.Feature> {
+public enum GPJsonGeneratorFeature implements JacksonSupportConfigFeature<Object, JsonMapper.Builder> {
 
     AUTO_CLOSE_TARGET_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.AUTO_CLOSE_TARGET;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    AUTO_CLOSE_TARGET_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.AUTO_CLOSE_TARGET;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    AUTO_CLOSE_JSON_CONTENT_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.AUTO_CLOSE_JSON_CONTENT;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    AUTO_CLOSE_JSON_CONTENT_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.AUTO_CLOSE_JSON_CONTENT;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    QUOTE_FIELD_NAMES_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return QUOTE_FIELD_NAMES.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-            },
-    QUOTE_FIELD_NAMES_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonWriteFeature.QUOTE_FIELD_NAMES.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-            },
-    QUOTE_NON_NUMERIC_NUMBERS_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return WRITE_NAN_AS_STRINGS.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    QUOTE_NON_NUMERIC_NUMBERS_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return WRITE_NAN_AS_STRINGS.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    WRITE_NUMBERS_AS_STRINGS_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return WRITE_NUMBERS_AS_STRINGS.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    WRITE_NUMBERS_AS_STRINGS_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return WRITE_NUMBERS_AS_STRINGS.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    WRITE_BIGDECIMAL_AS_PLAIN_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    WRITE_BIGDECIMAL_AS_PLAIN_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    FLUSH_PASSED_TO_STREAM_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.FLUSH_PASSED_TO_STREAM;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    FLUSH_PASSED_TO_STREAM_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.FLUSH_PASSED_TO_STREAM;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    ESCAPE_NON_ASCII_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return ESCAPE_NON_ASCII.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    ESCAPE_NON_ASCII_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return ESCAPE_NON_ASCII.mappedFeature();
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    STRICT_DUPLICATE_DETECTION_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.STRICT_DUPLICATE_DETECTION;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    STRICT_DUPLICATE_DETECTION_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.STRICT_DUPLICATE_DETECTION;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    IGNORE_UNKNOWN_ENABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return TRUE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.IGNORE_UNKNOWN;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            },
-    IGNORE_UNKNOWN_DISABLE() {
-
-                @Override
-                public Boolean getValue() {
-                    return FALSE;
-                }
-
-                @Override
-                public JsonGenerator.Feature getFeature() {
-                    return JsonGenerator.Feature.IGNORE_UNKNOWN;
-                }
-
-                @Override
-                public void configureMapper(ObjectMapper mapper) {
-                    mapper.configure(getFeature(), getValue());
-                }
-
-            }
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.AUTO_CLOSE_TARGET;
+        }
+
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+    }, AUTO_CLOSE_TARGET_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.AUTO_CLOSE_TARGET;
+        }
+
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+    }, AUTO_CLOSE_JSON_CONTENT_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.AUTO_CLOSE_CONTENT;
+        }
+
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+    }, AUTO_CLOSE_JSON_CONTENT_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.AUTO_CLOSE_CONTENT;
+        }
+
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+    }, QUOTE_NON_NUMERIC_NUMBERS_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public JsonWriteFeature getFeature() {
+            return WRITE_NAN_AS_STRINGS;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, QUOTE_NON_NUMERIC_NUMBERS_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public JsonWriteFeature getFeature() {
+            return WRITE_NAN_AS_STRINGS;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, WRITE_NUMBERS_AS_STRINGS_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public JsonWriteFeature getFeature() {
+            return WRITE_NUMBERS_AS_STRINGS;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, WRITE_NUMBERS_AS_STRINGS_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public JsonWriteFeature getFeature() {
+            return WRITE_NUMBERS_AS_STRINGS;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, WRITE_BIGDECIMAL_AS_PLAIN_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.WRITE_BIGDECIMAL_AS_PLAIN;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, WRITE_BIGDECIMAL_AS_PLAIN_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.WRITE_BIGDECIMAL_AS_PLAIN;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, FLUSH_PASSED_TO_STREAM_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.FLUSH_PASSED_TO_STREAM;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, FLUSH_PASSED_TO_STREAM_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.FLUSH_PASSED_TO_STREAM;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, ESCAPE_NON_ASCII_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public JsonWriteFeature getFeature() {
+            return JsonWriteFeature.ESCAPE_NON_ASCII;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, ESCAPE_NON_ASCII_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public JsonWriteFeature getFeature() {
+            return JsonWriteFeature.ESCAPE_NON_ASCII;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, STRICT_DUPLICATE_DETECTION_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.STRICT_DUPLICATE_DETECTION;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, STRICT_DUPLICATE_DETECTION_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.STRICT_DUPLICATE_DETECTION;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, IGNORE_UNKNOWN_ENABLE() {
+        @Override
+        public Boolean getValue() {
+            return TRUE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.IGNORE_UNKNOWN;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, IGNORE_UNKNOWN_DISABLE() {
+        @Override
+        public Boolean getValue() {
+            return FALSE;
+        }
+
+        @Override
+        public StreamWriteFeature getFeature() {
+            return StreamWriteFeature.IGNORE_UNKNOWN;
+        }
+
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+    };
 }

@@ -54,7 +54,7 @@ public class GPJacksonServerSupportTest extends GPBaseJacksonSupportTest {
     @Test
     public void a_serverDataMappingTest() throws Exception {
         GeoPlatformServer server = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(SERVER_DATA_JSON), GeoPlatformServer.class);
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SERVER_DATA_MAPPING" + " : {}\n\n", server);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SERVER_DATA_MAPPING : {}\n\n", server);
         super.marshall(server);
     }
 

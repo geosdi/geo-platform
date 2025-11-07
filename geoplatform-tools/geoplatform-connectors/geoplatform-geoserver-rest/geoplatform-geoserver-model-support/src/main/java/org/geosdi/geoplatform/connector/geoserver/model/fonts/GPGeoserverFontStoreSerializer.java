@@ -35,16 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.fonts;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.geosdi.geoplatform.connector.geoserver.model.jackson.serializer.rx.GPGeoserverRXConsumerSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
+
 import java.util.Objects;
 
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -63,17 +64,16 @@ class GPGeoserverFontStoreSerializer extends StdSerializer<GPGeoserverFontStore>
     }
 
     /**
-     * @param value Value to serialize; can <b>not</b> be null.
-     * @param gen Generator used to output resulting Json content
-     * @param provider Provider that can be used to get serializers for
-     * serializing Objects value contains, if any.
-     * @throws IOException
+     * @param value
+     * @param gen
+     * @param provider
+     * @throws JacksonException
      */
     @Override
-    public void serialize(GPGeoserverFontStore value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GPGeoserverFontStore value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         Consumer<String> fontsConsumer = new GPGeoserverFontStoreConsumer(gen);
         gen.writeStartObject();
-        gen.writeFieldName("fonts");
+        gen.writeName("fonts");
         gen.writeStartArray();
         if ((value.getFonts()) != null && !(value.getFonts().isEmpty())) {
             fromIterable(value.getFonts())

@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.store;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.jsontype.TypeSerializer;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,14 +55,14 @@ class GPGeoserverStoreInfoSerializer extends StdSerializer<GPGeoserverStoreInfo>
      * @param value
      * @param gen
      * @param provider
-     * @throws IOException
+     * @throws JacksonException
      */
     @Override
-    public void serialize(GPGeoserverStoreInfo value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GPGeoserverStoreInfo value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         gen.writeStartObject();
-        gen.writeStringField("@class", value.getStoreType().getType());
-        gen.writeStringField("name", value.getName());
-        gen.writeStringField("href", value.getHref());
+        gen.writeStringProperty("@class", value.getStoreType().getType());
+        gen.writeStringProperty("name", value.getName());
+        gen.writeStringProperty("href", value.getHref());
         gen.writeEndObject();
     }
 
@@ -90,17 +89,16 @@ class GPGeoserverStoreInfoSerializer extends StdSerializer<GPGeoserverStoreInfo>
      *
      * @param value Value to serialize; can <b>not</b> be null.
      * @param gen Generator used to output resulting Json content
-     * @param serializers Provider that can be used to get serializers for
+     * @param ctxt Context that can be used to get serializers for
      * serializing Objects value contains, if any.
      * @param typeSer Type serializer to use for including type information
      */
     @Override
-    public void serializeWithType(GPGeoserverStoreInfo value, JsonGenerator gen, SerializerProvider serializers,
-            TypeSerializer typeSer) throws IOException {
+    public void serializeWithType(GPGeoserverStoreInfo value, JsonGenerator gen, SerializationContext ctxt, TypeSerializer typeSer) throws JacksonException {
         gen.writeStartObject();
-        gen.writeStringField("@class", value.getStoreType().getType());
-        gen.writeStringField("name", value.getName());
-        gen.writeStringField("href", value.getHref());
+        gen.writeStringProperty("@class", value.getStoreType().getType());
+        gen.writeStringProperty("name", value.getName());
+        gen.writeStringProperty("href", value.getHref());
         gen.writeEndObject();
     }
 }

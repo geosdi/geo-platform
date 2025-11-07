@@ -35,15 +35,10 @@
  */
 package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jakarta.rs.cfg.Annotations;
-import com.fasterxml.jackson.jakarta.rs.json.JacksonXmlBindJsonProvider;
 import jakarta.ws.rs.ext.Provider;
-
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
+import tools.jackson.databind.AnnotationIntrospector;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.jakarta.rs.json.JacksonXmlBindJsonProvider;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,24 +49,19 @@ abstract class CXFBaseJacksonProvider extends JacksonXmlBindJsonProvider {
 
     /**
      * @param mapper
-     * @param annotationsToUse
+     * @param theAnnotationIntrospector
      */
-    protected CXFBaseJacksonProvider(ObjectMapper mapper, Annotations[] annotationsToUse) {
-        super(mapper, annotationsToUse);
+    protected CXFBaseJacksonProvider(JsonMapper mapper, AnnotationIntrospector theAnnotationIntrospector) {
+        super(mapper, theAnnotationIntrospector);
     }
 
     /**
-     * @param module
+     * @return {@link JsonMapper}
      */
-    abstract void registerModule(@Nonnull(when = NEVER) Module module);
+    abstract JsonMapper getDefaultMapper();
 
     /**
-     * @return {@link ObjectMapper}
+     * @return {@link JsonMapper}
      */
-    abstract ObjectMapper getDefaultMapper();
-
-    /**
-     * @return {@link ObjectMapper}
-     */
-    abstract ObjectMapper getConfiguredMapper();
+    abstract JsonMapper getConfiguredMapper();
 }

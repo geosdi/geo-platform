@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.jackson.deserializer;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.geosdi.geoplatform.response.collection.GPGenericEntryType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
@@ -113,14 +113,14 @@ public abstract class GPGenericEntryTypeDeserializer<V extends GPGenericEntryTyp
      * @return Deserialized value
      */
     @Override
-    public V deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public V deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         AtomicReference<String> key = new AtomicReference<>(null);
         AtomicReference<String> value = new AtomicReference<>(null);
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
         do {
-            if (jsonParser.currentToken() == JsonToken.FIELD_NAME) {
+            if (jsonParser.currentToken() == JsonToken.PROPERTY_NAME) {
                 continue;
             }
             this.internalSwitch(jsonParser, key, value);
@@ -134,7 +134,7 @@ public abstract class GPGenericEntryTypeDeserializer<V extends GPGenericEntryTyp
      * @param value
      * @throws IOException
      */
-    protected void internalSwitch(JsonParser jsonParser, AtomicReference<String> key, AtomicReference<String> value) throws IOException {
+    protected void internalSwitch(JsonParser jsonParser, AtomicReference<String> key, AtomicReference<String> value) throws JacksonException {
         String propertyName = jsonParser.currentName();
         logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
         switch (propertyName) {

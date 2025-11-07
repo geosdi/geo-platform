@@ -45,9 +45,8 @@ import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import java.util.Locale;
-
 import static java.lang.Thread.currentThread;
+import static java.util.Locale.getDefault;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -123,7 +122,7 @@ public class GPJacksonAccountSupportTest extends GPBaseJacksonSupportTest {
                 WRAP_ROOT_VALUE_DISABLE,
                 INDENT_OUTPUT_ENABLE)
                 .configure(GPJsonIncludeFeature.NON_NULL)
-                .setLocale(Locale.getDefault());
+                .setLocale(getDefault());
         InsertAccountRequest insertAccountRequest = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream("InsertAccountRequestWithoutRoot.json"), InsertAccountRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@INSERT_ACCOUNT_REQUEST : {}\n\n", insertAccountRequest);

@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,35 +52,35 @@ class GPCoverageGridSerializer extends StdSerializer<GPCoverageGrid> {
 
     /**
      * @param value
-     * @param jsonGenerator
-     * @param serializerProvider
-     * @throws IOException
+     * @param gen
+     * @param provider
+     * @throws JacksonException
      */
     @Override
-    public void serialize(GPCoverageGrid value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("@dimension", value.getDimension());
-        jsonGenerator.writeStringField("crs", value.getCrs());
-        jsonGenerator.writeFieldName("range");
+    public void serialize(GPCoverageGrid value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
+        gen.writeStartObject();
+        gen.writeStringProperty("@dimension", value.getDimension());
+        gen.writeStringProperty("crs", value.getCrs());
+        gen.writeName("range");
         if (value.isSetRange()) {
-            jsonGenerator.writeStartObject();
-            jsonGenerator.writeStringField("high", value.getRange().getHigh());
-            jsonGenerator.writeStringField("low", value.getRange().getLow());
-            jsonGenerator.writeEndObject();
+            gen.writeStartObject();
+            gen.writeStringProperty("high", value.getRange().getHigh());
+            gen.writeStringProperty("low", value.getRange().getLow());
+            gen.writeEndObject();
         } else
-            jsonGenerator.writeObject(null);
-        jsonGenerator.writeFieldName("transform");
+            gen.writePOJO(null);
+        gen.writeName("transform");
         if (value.isSetTransform()) {
-            jsonGenerator.writeStartObject();
-            jsonGenerator.writeNumberField("scaleX", value.getTransform().getScaleX());
-            jsonGenerator.writeNumberField("scaleY", value.getTransform().getScaleY());
-            jsonGenerator.writeNumberField("shearX", value.getTransform().getShearX());
-            jsonGenerator.writeNumberField("shearY", value.getTransform().getShearY());
-            jsonGenerator.writeNumberField("translateX", value.getTransform().getTranslateX());
-            jsonGenerator.writeNumberField("translateY", value.getTransform().getTranslateY());
-            jsonGenerator.writeEndObject();
+            gen.writeStartObject();
+            gen.writeNumberProperty("scaleX", value.getTransform().getScaleX());
+            gen.writeNumberProperty("scaleY", value.getTransform().getScaleY());
+            gen.writeNumberProperty("shearX", value.getTransform().getShearX());
+            gen.writeNumberProperty("shearY", value.getTransform().getShearY());
+            gen.writeNumberProperty("translateX", value.getTransform().getTranslateX());
+            gen.writeNumberProperty("translateY", value.getTransform().getTranslateY());
+            gen.writeEndObject();
         } else
-            jsonGenerator.writeObject(null);
-        jsonGenerator.writeEndObject();
+            gen.writePOJO(null);
+        gen.writeEndObject();
     }
 }

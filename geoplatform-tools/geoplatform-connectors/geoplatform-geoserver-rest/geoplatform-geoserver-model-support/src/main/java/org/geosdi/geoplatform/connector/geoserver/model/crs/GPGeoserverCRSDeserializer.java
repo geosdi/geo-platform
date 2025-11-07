@@ -35,16 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.crs;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
+import tools.jackson.databind.jsontype.TypeDeserializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -109,9 +107,9 @@ public class GPGeoserverCRSDeserializer extends StdDeserializer<Object> {
      * @return Deserialized value
      */
     @Override
-    public Object deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        String nodeValue = jsonParser.getText();
-        return (!nodeValue.equals(JsonToken.START_OBJECT.asString()) ? jsonParser.getText() : loadGPGeoserverCRS(jsonParser));
+    public Object deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
+        String nodeValue = jsonParser.getString();
+        return (!nodeValue.equals(JsonToken.START_OBJECT.asString()) ? jsonParser.getString() : loadGPGeoserverCRS(jsonParser));
     }
 
     /**
@@ -124,16 +122,16 @@ public class GPGeoserverCRSDeserializer extends StdDeserializer<Object> {
      * @param typeDeserializer
      */
     @Override
-    public Object deserializeWithType(JsonParser jsonParser, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+    public Object deserializeWithType(JsonParser jsonParser, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws JacksonException {
         return deserialize(jsonParser, ctxt);
     }
 
     /**
      * @param jsonParser
      * @return {@link IGPGeoserverCRS}
-     * @throws IOException
+     * @throws JacksonException
      */
-    private IGPGeoserverCRS loadGPGeoserverCRS(JsonParser jsonParser) throws IOException {
+    private IGPGeoserverCRS loadGPGeoserverCRS(JsonParser jsonParser) throws JacksonException {
         String crsType = null;
         String crsValue = null;
         do {
@@ -141,11 +139,11 @@ public class GPGeoserverCRSDeserializer extends StdDeserializer<Object> {
             logger.debug("######################PROPERTY_NAME_FOUND : {}\n", propertyName);
             switch (propertyName) {
                 case "$": {
-                    crsValue = jsonParser.getText();
+                    crsValue = jsonParser.getString();
                     break;
                 }
                 case "@class": {
-                    crsType = jsonParser.getText();
+                    crsType = jsonParser.getString();
                     break;
                 }
             }

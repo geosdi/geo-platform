@@ -35,20 +35,22 @@
  */
 package org.geosdi.geoplatform.connector.pool.builder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
-import org.geosdi.geoplatform.connector.GeowebcacheVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
 import org.geosdi.geoplatform.connector.pool.factory.GPGeowebcacheConnectorFactory;
 import org.geosdi.geoplatform.connector.pool.key.IGPPoolGeowebcacheConnectorKey;
 import org.geosdi.geoplatform.connector.store.GPGeowebcacheConnectorStore;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.ObjectMapper;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.connector.GeowebcacheVersion.fromString;
 import static org.geosdi.geoplatform.connector.pool.key.IGPPoolGeowebcacheConnectorKey.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -90,16 +92,18 @@ public class GPGeowebcacheConnectorBuilderPool extends AbstractConnectorBuilder<
     @Override
     public GPGeowebcacheConnectorStore build() throws Exception {
         checkNotNull(serverUrl, "Geowebcache Connector Server URL must not be null.");
-        GeowebcacheVersion v = fromString(this.version);
-        IGPPoolGeowebcacheConnectorKey key = of(serverUrl, pooledConnectorConfig, securityConnector, v.getVersion(), this::toJacksonSupport);
-        GPGeowebcacheConnectorStore geoserverConnectorStore = geowebcacheConnectorPool.borrowObject(key);
-        return geoserverConnectorStore;
+        var v = fromString(this.version);
+        var key = of(serverUrl, pooledConnectorConfig, securityConnector, v.getVersion(), this::toJacksonSupport);
+        return geowebcacheConnectorPool.borrowObject(key);
     }
 
     /**
      * @return {@link JacksonSupport}
      */
     ObjectMapper toJacksonSupport() {
-        return ((this.jacksonSupport != null) ? this.jacksonSupport.getDefaultMapper() : new GPJacksonSupport().getDefaultMapper());
+        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : builder(FALSE)
+                .withIntespectorBuilder(JAXB)
+                .configure(NON_NULL).build());
+        return this.jacksonSupport.getDefaultMapper();
     }
 }

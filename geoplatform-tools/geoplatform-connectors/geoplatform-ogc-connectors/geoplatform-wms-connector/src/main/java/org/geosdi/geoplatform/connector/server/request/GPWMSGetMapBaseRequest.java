@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Collection;
 

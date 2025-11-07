@@ -41,7 +41,7 @@ import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static org.geosdi.geoplatform.connector.GeoserverVersion.V26x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
@@ -64,7 +64,7 @@ public abstract class GPBaseGeoserverConnectorStoreV226xTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         geoserverConnectorStoreV2_26_x = geoserverConnectorBuilder()
-                .withServerUrl(new URL(geoserverURLV2_26_X))
+                .withServerUrl(new URI(geoserverURLV2_26_X).toURL())
                 .withVersion(V26x.getVersion())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(80)

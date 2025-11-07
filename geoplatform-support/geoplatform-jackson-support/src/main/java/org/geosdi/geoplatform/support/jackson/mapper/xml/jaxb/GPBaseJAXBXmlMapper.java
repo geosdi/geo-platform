@@ -35,17 +35,20 @@
  */
 package org.geosdi.geoplatform.support.jackson.mapper.xml.jaxb;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.geosdi.geoplatform.jaxb.IGPJAXBContextBuilder;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.TokenStreamFactory;
+import tools.jackson.core.exc.JacksonIOException;
+import tools.jackson.core.exc.StreamReadException;
+import tools.jackson.databind.DatabindException;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.dataformat.xml.XmlMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
 import java.io.*;
-import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -69,19 +72,31 @@ public abstract class GPBaseJAXBXmlMapper extends XmlMapper {
     /**
      * Method to deserialize JSON content from given file into given Java type.
      *
-     * @param src
-     * @param valueType
-     * @throws IOException          if a low-level I/O problem (unexpected end-of-input,
-     *                              network error) occurs (passed through as-is without additional wrapping -- note
-     *                              that this is one case where {@link com.fasterxml.jackson.databind.DeserializationFeature#WRAP_EXCEPTIONS}
-     *                              does NOT result in wrapping of exception even if enabled)
-     * @throws JsonParseException   if underlying input contains invalid content
-     *                              of type {@link com.fasterxml.jackson.core.JsonParser} supports (JSON for default case)
-     * @throws JsonMappingException if the input JSON structure does not match structure
-     *                              expected for result type (or has other mismatch issues)
+     * @throws JacksonIOException if a low-level I/O problem (unexpected end-of-input,
+     *   network error) occurs (passed through as-is without additional wrapping -- note
+     *   that this is one case where {@link DeserializationFeature#WRAP_EXCEPTIONS}
+     *   does NOT result in wrapping of exception even if enabled)
+     * @throws StreamReadException if underlying input contains invalid content
+     *    of type {@link JsonParser} supports (JSON for default case)
+     * @throws DatabindException if the input JSON structure does not match structure
+     *   expected for result type (or has other mismatch issues)
      */
     @Override
-    public <T> T readValue(@Nonnull(when = NEVER) File src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) File src, @Nonnull(when = NEVER) Class<T> valueType) throws JacksonException {
+        checkArgument(src != null, "The Parameter src must not be null.");
+        checkArgument(valueType != null, "The Parameter valueType must not be null.");
+        return jaxbContextBuilder.unmarshal(src, valueType);
+    }
+
+    /**
+     * @param src
+     * @param valueType
+     * @return {@link <></>}
+     * @param <T>
+     * @throws JacksonException
+     */
+    @Override
+    public <T> T readValue(@Nonnull(when = NEVER) Reader src, @Nonnull(when = NEVER) Class<T> valueType) throws JacksonException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return jaxbContextBuilder.unmarshal(src, valueType);
@@ -92,27 +107,10 @@ public abstract class GPBaseJAXBXmlMapper extends XmlMapper {
      * @param valueType
      * @param <T>
      * @return {@link T}
-     * @throws IOException
-     * @throws JsonParseException
-     * @throws JsonMappingException
+     * @throws JacksonException
      */
     @Override
-    public <T> T readValue(@Nonnull(when = NEVER) Reader src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
-        checkArgument(src != null, "The Parameter src must not be null.");
-        checkArgument(valueType != null, "The Parameter valueType must not be null.");
-        return jaxbContextBuilder.unmarshal(src, valueType);
-    }
-
-    /**
-     * @param src
-     * @param valueType
-     * @param <T>
-     * @return {@link T}
-     * @throws JsonParseException
-     * @throws JsonMappingException
-     */
-    @Override
-    public <T> T readValue(@Nonnull(when = NEVER) String src, @Nonnull(when = NEVER) Class<T> valueType) throws JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) String src, @Nonnull(when = NEVER) Class<T> valueType) throws JacksonException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return jaxbContextBuilder.unmarshal(new StringReader(src), valueType);
@@ -123,28 +121,10 @@ public abstract class GPBaseJAXBXmlMapper extends XmlMapper {
      * @param valueType
      * @param <T>
      * @return {@link T}
-     * @throws IOException
-     * @throws JsonParseException
-     * @throws JsonMappingException
+     * @throws JacksonException
      */
     @Override
-    public <T> T readValue(@Nonnull(when = NEVER) InputStream src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
-        checkArgument(src != null, "The Parameter src must not be null.");
-        checkArgument(valueType != null, "The Parameter valueType must not be null.");
-        return jaxbContextBuilder.unmarshal(src, valueType);
-    }
-
-    /**
-     * @param src
-     * @param valueType
-     * @param <T>
-     * @return {@link T}
-     * @throws IOException
-     * @throws JsonParseException
-     * @throws JsonMappingException
-     */
-    @Override
-    public <T> T readValue(@Nonnull(when = NEVER) URL src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) InputStream src, @Nonnull(when = NEVER) Class<T> valueType) throws JacksonException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return jaxbContextBuilder.unmarshal(src, valueType);
@@ -153,26 +133,22 @@ public abstract class GPBaseJAXBXmlMapper extends XmlMapper {
     /**
      * Method that can be used to serialize any Java value as
      * JSON output, using Writer provided.
-     * <p>
+     *<p>
      * Note: method does not close the underlying stream explicitly
-     * here; however, {@link com.fasterxml.jackson.core.JsonFactory} this mapper uses may choose
+     * here; however, {@link TokenStreamFactory} this mapper uses may choose
      * to close the stream depending on its settings (by default,
-     * it will try to close it when {@link com.fasterxml.jackson.core.JsonGenerator} we construct
+     * it will try to close it when {@link JsonGenerator} we construct
      * is closed).
-     *
-     * @param w
-     * @param value
      */
     @Override
-    public void writeValue(@Nonnull(when = NEVER) Writer w, @Nonnull(when = NEVER) Object value) throws IOException,
-            JsonGenerationException, JsonMappingException {
+    public void writeValue(@Nonnull(when = NEVER) Writer w, @Nonnull(when = NEVER) Object value) throws JacksonException {
         checkArgument(w != null, "The Parameter w must not be null.");
         checkArgument(value != null, "The Parameter value must not be null.");
         try {
             jaxbContextBuilder.marshal(value, w);
         } catch (Exception exception) {
             exception.printStackTrace();
-            throw new IOException(exception);
+            throw new RuntimeException(exception);
         }
     }
 
@@ -184,14 +160,14 @@ public abstract class GPBaseJAXBXmlMapper extends XmlMapper {
      * @param value
      */
     @Override
-    public void writeValue(@Nonnull(when = NEVER) File resultFile, @Nonnull(when = NEVER) Object value) throws IOException, JsonGenerationException, JsonMappingException {
+    public void writeValue(@Nonnull(when = NEVER) File resultFile, @Nonnull(when = NEVER) Object value) throws JacksonException {
         checkArgument(resultFile != null, "The Parameter resultFile must not be null.");
         checkArgument(value != null, "The Parameter value must not be null.");
         try {
             jaxbContextBuilder.marshal(value, resultFile);
         } catch (Exception exception) {
             exception.printStackTrace();
-            throw new IOException(exception);
+            throw new RuntimeException(exception);
         }
     }
 
@@ -206,7 +182,7 @@ public abstract class GPBaseJAXBXmlMapper extends XmlMapper {
      * @param value
      */
     @Override
-    public String writeValueAsString(@Nonnull(when = NEVER) Object value) throws JsonProcessingException {
+    public String writeValueAsString(@Nonnull(when = NEVER) Object value) throws JacksonException {
         checkArgument(value != null, "The Parameter value must not be null.");
         Writer writer = new StringWriter();
         try {

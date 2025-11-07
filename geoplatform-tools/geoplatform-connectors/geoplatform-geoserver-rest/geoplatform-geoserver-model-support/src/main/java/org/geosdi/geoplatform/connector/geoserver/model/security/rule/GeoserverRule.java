@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.security.rule;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.deserializer.GeoserverRuleDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.serializer.GeoserverRuleSerializer;
+import tools.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 

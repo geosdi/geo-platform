@@ -81,7 +81,7 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
     public T getResponse() throws Exception {
         String responseAsString = super.getResponseAsString();
         try {
-            return readInternal(new BufferedReader(new StringReader(responseAsString)));
+            return this.readInternal(new BufferedReader(new StringReader(responseAsString)));
         } catch (Exception ex) {
             return internalResponse(new ByteArrayInputStream(responseAsString.getBytes()));
         }

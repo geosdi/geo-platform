@@ -43,7 +43,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.net.URL;
+import java.net.URI;
 import java.util.stream.Stream;
 
 import static java.io.File.separator;
@@ -72,7 +72,7 @@ public class SimpleBeanJacksonReaderTest {
 
     @Test
     public void a_readJsonFromURLTest() throws Exception {
-        SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new URL("https://httpbin.org/get?color=red&shape=square"));
+        SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new URI("https://httpbin.org/get?color=red&shape=square").toURL());
         logger.info("#######################HEADERS_SIZE : {}", simpleBean.getHeaders().size());
         assertNotNull(simpleBean);
         assertTrue(simpleBean.getArguments().size() == 2);

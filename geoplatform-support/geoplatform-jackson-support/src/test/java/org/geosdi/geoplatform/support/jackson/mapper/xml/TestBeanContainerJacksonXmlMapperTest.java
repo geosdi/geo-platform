@@ -120,7 +120,8 @@ public class TestBeanContainerJacksonXmlMapperTest {
     @Order(value = 1)
     public void unmarshallTestBeanContainerFromFileTest() throws Exception {
         logger.info("#######################TEST_BEAN_CONTAINER_FROM_FILE : {}\n", GP_JACKSON_XML_MAPPER
-                .read(new File(of("src", "test", "resources", "tests.xml").collect(joining(separator)))));
+                .read(new File(of("src", "test", "resources", "tests.xml")
+                        .collect(joining(separator)))));
     }
 
     @Test

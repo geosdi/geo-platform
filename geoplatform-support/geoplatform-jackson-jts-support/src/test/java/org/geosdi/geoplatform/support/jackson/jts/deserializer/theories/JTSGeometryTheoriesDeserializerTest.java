@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.deserializer.theories;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
@@ -47,6 +46,7 @@ import org.junit.runner.RunWith;
 import org.locationtech.jts.geom.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.ObjectMapper;
 
 import javax.annotation.Nonnull;
 import java.io.File;

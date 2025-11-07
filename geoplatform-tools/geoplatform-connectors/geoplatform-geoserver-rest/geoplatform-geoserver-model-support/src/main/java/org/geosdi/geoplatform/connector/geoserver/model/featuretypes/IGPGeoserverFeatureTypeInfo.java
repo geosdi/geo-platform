@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.IGPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttributes;
 import org.geosdi.geoplatform.connector.geoserver.model.link.IGPGeoserverDataLinks;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

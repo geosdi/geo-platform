@@ -35,14 +35,15 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.mapper;
 
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
+import tools.jackson.datatype.joda.JodaModule;
 
+import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRITE_DATES_AS_TIMESTAMPS_DISABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,11 +51,15 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public class GPElasticSearchQueryMapper<Q extends GPElasticSearchQuery> extends GPBaseMapper<Q> {
 
+    /**
+     * @param theQueryClass
+     */
     public GPElasticSearchQueryMapper(Class<Q> theQueryClass) {
-        super(theQueryClass, new GPJacksonSupport(JAKARTA)
+        super(theQueryClass, builder(FALSE)
+                .withIntespectorBuilder(JAKARTA)
                 .registerModule(new JodaModule())
-                .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-                .configure(GPJsonIncludeFeature.NON_NULL));
+                .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE, NON_NULL)
+                .build());
     }
 
     /**

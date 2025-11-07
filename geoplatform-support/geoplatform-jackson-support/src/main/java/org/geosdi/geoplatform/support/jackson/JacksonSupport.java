@@ -35,16 +35,21 @@
  */
 package org.geosdi.geoplatform.support.jackson;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
+import tools.jackson.databind.JacksonModule;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.cfg.CoercionConfigs;
+import tools.jackson.databind.cfg.MapperBuilder;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.json.JsonMapper.Builder;
 
 import javax.annotation.Nonnull;
 import java.text.DateFormat;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
+import java.util.function.Consumer;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
@@ -55,18 +60,19 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FunctionalInterface
-public interface JacksonSupport {
+public interface JacksonSupport<M extends ObjectMapper> {
 
     /**
      * @param feature
      * @param <J>
      * @return {@link J}
      */
-    default <J extends JacksonSupport> J configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature feature) {
+    default <J extends JacksonSupport<M>> J configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature feature) {
         checkArgument(feature != null, "The Parameter feature must not be null.");
         checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
-        feature.configureMapper(this.getDefaultMapper());
-        return (J) this;
+        MapperBuilder<JsonMapper, Builder> builder = this.getDefaultMapper().rebuild();
+        feature.configureMapper(builder);
+        return (J) new GPJacksonSupport(builder.build());
     }
 
     /**
@@ -74,29 +80,32 @@ public interface JacksonSupport {
      * @param <J>
      * @return {@link J}
      */
-    default <J extends JacksonSupport> J configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+    default <J extends JacksonSupport<M>> J configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
+        checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
+        MapperBuilder<JsonMapper, Builder> builder = this.getDefaultMapper().rebuild();
         fromArray(features)
                 .filter(Objects::nonNull)
-                .subscribe(this::configure, Throwable::printStackTrace);
-        return (J) this;
+                .subscribe(f -> f.configureMapper(builder), Throwable::printStackTrace);
+        return (J) new GPJacksonSupport(builder.build());
     }
 
     /**
-     * @return {@link ObjectMapper}
+     * @return {@link M}
      */
-    ObjectMapper getDefaultMapper();
+    M getDefaultMapper();
 
     /**
      * @param module
      * @param <J>
      * @return {@link J}
      */
-    default <J extends JacksonSupport> J registerModule(@Nonnull(when = NEVER) Module module) {
+    default <J extends JacksonSupport<M>> J registerModule(@Nonnull(when = NEVER) JacksonModule module) {
         checkArgument(module != null, "The Parameter module must not be null.");
         checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
-        this.getDefaultMapper().registerModule(module);
-        return (J) this;
+        MapperBuilder<JsonMapper, Builder> builder = this.getDefaultMapper().rebuild();
+        builder.addModule(module);
+        return (J) new GPJacksonSupport(builder.build());
     }
 
     /**
@@ -104,11 +113,12 @@ public interface JacksonSupport {
      * @param <J>
      * @return {@link J}
      */
-    default <J extends JacksonSupport> J setDateFormat(@Nonnull(when = NEVER) DateFormat format) {
+    default <J extends JacksonSupport<M>> J setDateFormat(@Nonnull(when = NEVER) DateFormat format) {
         checkArgument(format != null, "The Parameter format must not be null.");
         checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
-        this.getDefaultMapper().setDateFormat(format);
-        return (J) this;
+        MapperBuilder<JsonMapper, Builder> builder = this.getDefaultMapper().rebuild();
+        builder.defaultDateFormat(format);
+        return (J) new GPJacksonSupport(builder.build());
     }
 
     /**
@@ -116,11 +126,12 @@ public interface JacksonSupport {
      * @param <J>
      * @return {@link J}
      */
-    default <J extends JacksonSupport> J setLocale(@Nonnull(when = NEVER) Locale locale) {
+    default <J extends JacksonSupport<M>> J setLocale(@Nonnull(when = NEVER) Locale locale) {
         checkArgument(locale != null, "The Parameter locale must not be null.");
         checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
-        this.getDefaultMapper().setLocale(locale);
-        return (J) this;
+        MapperBuilder<JsonMapper, Builder> builder = this.getDefaultMapper().rebuild();
+        builder.defaultLocale(locale);
+        return (J) new GPJacksonSupport(builder.build());
     }
 
     /**
@@ -128,11 +139,12 @@ public interface JacksonSupport {
      * @param <J>
      * @return {@link J}
      */
-    default <J extends JacksonSupport> J setTimeZone(@Nonnull(when = NEVER) TimeZone timeZone) {
+    default <J extends JacksonSupport<M>> J setTimeZone(@Nonnull(when = NEVER) TimeZone timeZone) {
         checkArgument(timeZone != null, "The Parameter timeZone must not be null.");
         checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
-        this.getDefaultMapper().setTimeZone(timeZone);
-        return (J) this;
+        MapperBuilder<JsonMapper, Builder> builder = this.getDefaultMapper().rebuild();
+        builder.defaultTimeZone(timeZone);
+        return (J) new GPJacksonSupport(builder.build());
     }
 
     /**
@@ -150,5 +162,26 @@ public interface JacksonSupport {
     default String writeAsString(@Nonnull(when = NEVER) GPJacksonCheck<Object> theCheck) throws Exception {
         checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
         return getDefaultMapper().writeValueAsString(theCheck.apply());
+    }
+
+    /**
+     * @param theCoercionConfig
+     * @return {@link J}
+     * @param <J>
+     */
+    default <J extends JacksonSupport<M>> J withAllCoercionConfigFeature(@Nonnull(when = NEVER) Consumer<CoercionConfigs> theCoercionConfig) {
+        checkArgument(theCoercionConfig != null, "The Parameter Consumer<CoercionConfigs> must not be null.");
+        checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
+        MapperBuilder<JsonMapper, Builder> builder = this.getDefaultMapper().rebuild();
+        builder.withAllCoercionConfigs(theCoercionConfig);
+        return (J) new GPJacksonSupport(builder.build());
+    }
+
+    /**
+     * @param theJsonMapper
+     * @return {@link JacksonSupport<JsonMapper>}
+     */
+    static JacksonSupport<JsonMapper> of(@Nonnull(when = NEVER) JsonMapper theJsonMapper) {
+        return new GPJacksonSupport(theJsonMapper);
     }
 }

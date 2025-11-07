@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
+import tools.jackson.core.JsonGenerator;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

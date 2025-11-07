@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.geosdi.geoplatform.connector.GeowebcacheVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.ObjectMapper;
 
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.connector.GeowebcacheVersion.fromString;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
@@ -91,16 +91,17 @@ public final class GPGeowebcacheConnectorStoreBuilder extends AbstractConnectorB
     @Override
     public GPGeowebcacheConnectorStore build() throws Exception {
         checkArgument(this.serverUrl != null, "Server URL must not be null");
-        GeowebcacheVersion v = fromString(this.version);
-        return new GPGeowebcacheConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector,
-                this::toJacksonSupport, v);
+        var v = fromString(this.version);
+        return new GPGeowebcacheConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector, this::toJacksonSupport, v);
     }
 
     /**
      * @return {@link ObjectMapper}
      */
     ObjectMapper toJacksonSupport() {
-        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport(JAXB).configure(NON_NULL));
+        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : builder(FALSE)
+                .withIntespectorBuilder(JAXB)
+                .configure(NON_NULL).build());
         return this.jacksonSupport.getDefaultMapper();
     }
 }

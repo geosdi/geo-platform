@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
+import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
@@ -45,8 +46,11 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRe
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
@@ -56,7 +60,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
+class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody = withInitial(() -> null);
@@ -95,8 +99,7 @@ class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String
     protected void checkHttpResponseStatus(int statusCode) throws Exception {
         super.checkHttpResponseStatus(statusCode);
         switch (statusCode) {
-            case 405:
-                throw new IllegalStateException("Forbidden to change the name of the workspace");
+            case 405 -> throw new IllegalStateException("Forbidden to change the name of the workspace");
         }
     }
 
@@ -125,10 +128,21 @@ class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String
     }
 
     /**
-     * @return {@link Class<String>}
+     * @param reader
+     * @return {@link Boolean}
+     * @throws Exception
      */
     @Override
-    protected Class<String> forClass() {
-        return String.class;
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
     }
 }

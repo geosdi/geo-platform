@@ -35,87 +35,134 @@
  */
 package org.geosdi.geoplatform.support.jackson.property;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.cfg.ConfigFeature;
-import com.google.common.base.Preconditions;
+import tools.jackson.core.StreamReadFeature;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.MapperFeature;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.cfg.ConfigFeature;
+import tools.jackson.databind.cfg.DateTimeFeature;
+import tools.jackson.databind.cfg.MapperBuilder;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static tools.jackson.core.StreamReadFeature.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFeature> {
+public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<Object, MapperBuilder<?, ?>> {
 
-    UNWRAP_ROOT_VALUE_ENABLE(TRUE) {
+    AUTO_CLOSE_SOURCE_ENABLE(TRUE) {
+        @Override
+        public StreamReadFeature getFeature() {
+            return StreamReadFeature.AUTO_CLOSE_SOURCE;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, AUTO_CLOSE_SOURCE_DISABLE(FALSE) {
+        @Override
+        public StreamReadFeature getFeature() {
+            return StreamReadFeature.AUTO_CLOSE_SOURCE;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, UNWRAP_ROOT_VALUE_ENABLE(TRUE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.UNWRAP_ROOT_VALUE;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, UNWRAP_ROOT_VALUE_DISABLE(FALSE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.UNWRAP_ROOT_VALUE;
         }
 
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
-        }
+        /**
+         * @param builder
+         */
 
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
+        }
     }, FAIL_ON_IGNORED_PROPERTIES_ENABLE(TRUE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, FAIL_ON_IGNORED_PROPERTIES_DISABLE(FALSE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, FAIL_ON_UNKNOW_PROPERTIES_ENABLE(TRUE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
         }
 
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
-        }
-
-    }, ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE(TRUE) {
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
+        }
+    }, ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE(TRUE) {
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
 
         /**
@@ -127,11 +174,12 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
         }
     }, ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_DISABLE(FALSE) {
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
 
         /**
@@ -147,86 +195,103 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
             return DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, FAIL_ON_NULL_FOR_PRIMITIVES_ENABLE(TRUE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE(FALSE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE(TRUE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, ACCEPT_SINGLE_VALUE_AS_ARRAY_DISABLE(FALSE) {
         @Override
         public DeserializationFeature getFeature() {
             return DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, READ_DATE_AS_TIMESTAMP_AS_NANOSECONDS_ENABLE(TRUE) {
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
 
         /**
-         * @return {@link DeserializationFeature}
+         * @return {@link DateTimeFeature}
          */
         @Override
-        public DeserializationFeature getFeature() {
-            return DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS;
         }
     }, READ_DATE_AS_TIMESTAMP_AS_NANOSECONDS_DISABLE(FALSE) {
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
 
         /**
-         * @return {@link DeserializationFeature}
+         * @return {@link DateTimeFeature}
          */
         @Override
-        public DeserializationFeature getFeature() {
-            return DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS;
         }
     }, WRAP_ROOT_VALUE_ENABLE(TRUE) {
         @Override
@@ -234,161 +299,185 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
             return SerializationFeature.WRAP_ROOT_VALUE;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, WRAP_ROOT_VALUE_DISABLE(FALSE) {
         @Override
         public SerializationFeature getFeature() {
             return SerializationFeature.WRAP_ROOT_VALUE;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, INDENT_OUTPUT_ENABLE(TRUE) {
         @Override
         public SerializationFeature getFeature() {
             return SerializationFeature.INDENT_OUTPUT;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, INDENT_OUTPUT_DISABLE(FALSE) {
         @Override
         public SerializationFeature getFeature() {
             return SerializationFeature.INDENT_OUTPUT;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, WRITE_DATES_AS_TIMESTAMPS_ENABLE(TRUE) {
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, WRITE_DATES_AS_TIMESTAMPS_DISABLE(FALSE) {
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, WRITE_DATE_KEYS_AS_TIMESTAMPS_ENABLED(TRUE) {
         /**
          * @return {@link ConfigFeature}
          */
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS;
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
     }, WRITE_DATE_KEYS_AS_TIMESTAMPS_DISABLED(FALSE) {
         /**
          * @return {@link ConfigFeature}
          */
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS;
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
     }, WRITE_DATES_WITH_ZONE_ID_ENABLE(TRUE) {
         /**
-         * @return {@link SerializationFeature}
+         * @return {@link DateTimeFeature}
          */
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DATES_WITH_ZONE_ID;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DATES_WITH_ZONE_ID;
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
     }, WRITE_DATES_WITH_ZONE_ID_DISABLE(FALSE) {
         /**
-         * @return {@link SerializationFeature}
+         * @return {@link DateTimeFeature}
          */
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DATES_WITH_ZONE_ID;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DATES_WITH_ZONE_ID;
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
     }, WRITE_DURATIONS_AS_TIMESTAMPS_ENABLE(TRUE) {
         /**
-         * @return {@link SerializationFeature}
+         * @return {@link DateTimeFeature}
          */
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DURATIONS_AS_TIMESTAMPS;
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
     }, WRITE_DURATIONS_AS_TIMESTAMPS_DISABLE(FALSE) {
         /**
-         * @return {@link SerializationFeature}
+         * @return {@link DateTimeFeature}
          */
         @Override
-        public SerializationFeature getFeature() {
-            return SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS;
+        public DateTimeFeature getFeature() {
+            return DateTimeFeature.WRITE_DURATIONS_AS_TIMESTAMPS;
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
     }, USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE(TRUE) {
         @Override
@@ -396,22 +485,28 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
             return MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, USE_WRAPPER_NAME_AS_PROPERTY_NAME_DISABLE(FALSE) {
         @Override
         public MapperFeature getFeature() {
             return MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;
         }
 
+        /**
+         * @param builder
+         */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
-
     }, FAIL_ON_EMPTY_BEANS_ENABLE(TRUE) {
         /**
          * @return {@link SerializationFeature}
@@ -422,19 +517,21 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
         }
 
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
     }, FAIL_ON_EMPTY_BEANS_DISABLE(FALSE) {
         /**
-         * @param mapper
+         * @param builder
          */
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(this.getFeature(), this.getValue());
         }
 
         /**
@@ -444,6 +541,97 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
         public SerializationFeature getFeature() {
             return SerializationFeature.FAIL_ON_EMPTY_BEANS;
         }
+    },  STRICT_DUPLICATE_DETECTION_ENABLE(TRUE) {
+        @Override
+        public StreamReadFeature getFeature() {
+            return STRICT_DUPLICATE_DETECTION;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+    }, STRICT_DUPLICATE_DETECTION_DISABLE(FALSE) {
+        @Override
+        public StreamReadFeature getFeature() {
+            return STRICT_DUPLICATE_DETECTION;
+        }
+
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+    }, USE_FAST_DOUBLE_PARSER_ENABLE(TRUE) {
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+        /**
+         * @return {@link StreamReadFeature}
+         */
+        @Override
+        public StreamReadFeature getFeature() {
+            return USE_FAST_DOUBLE_PARSER;
+        }
+    }, USE_FAST_DOUBLE_PARSER_DISABLE(FALSE) {
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+        /**
+         * @return {@link StreamReadFeature}
+         */
+        @Override
+        public StreamReadFeature getFeature() {
+            return USE_FAST_DOUBLE_PARSER;
+        }
+    }, USE_FAST_BIG_NUMBER_PARSER_ENABLE(TRUE) {
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+        /**
+         * @return {@link StreamReadFeature}
+         */
+        @Override
+        public StreamReadFeature getFeature() {
+            return USE_FAST_BIG_NUMBER_PARSER;
+        }
+    }, USE_FAST_BIG_NUMBER_PARSER_DISABLE(FALSE) {
+        /**
+         * @param builder
+         */
+        @Override
+        public void configureMapper(@Nonnull(when = NEVER) MapperBuilder<?, ?> builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
+        }
+
+        /**
+         * @return {@link StreamReadFeature}
+         */
+        @Override
+        public StreamReadFeature getFeature() {
+            return USE_FAST_BIG_NUMBER_PARSER;
+        }
     };
 
     private final Boolean state;
@@ -452,7 +640,7 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
      * @param theState
      */
     GPJacksonSupportEnum(@Nonnull(when = NEVER) Boolean theState) {
-        Preconditions.checkArgument(theState != null, "The Parameter state must not be null.");
+        checkArgument(theState != null, "The Parameter state must not be null.");
         this.state = theState;
     }
 

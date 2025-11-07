@@ -35,15 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -111,18 +110,21 @@ class GPFeatureTypeAttributesDeserializer extends StdDeserializer<GPFeatureTypeA
      * @return Deserialized value
      */
     @Override
-    public GPFeatureTypeAttributes deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
+    public GPFeatureTypeAttributes deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
         List<IGPFeatureTypeAttribute> featureTypeAttributes = newArrayList();
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
         do {
-            if (jsonParser.currentToken() == JsonToken.FIELD_NAME || jsonParser.currentToken() == JsonToken.START_OBJECT
+            if (jsonParser.currentToken() == JsonToken.PROPERTY_NAME || jsonParser.currentToken() == JsonToken.START_OBJECT
                     || jsonParser.currentToken() == JsonToken.START_ARRAY || jsonParser.currentToken() == JsonToken.END_OBJECT) {
                 continue;
             }
             featureTypeAttributes.add(toModel(jsonParser));
         } while (jsonParser.nextToken() != JsonToken.END_ARRAY);
+        if (jsonParser.currentToken() == JsonToken.END_ARRAY) {
+            jsonParser.nextToken(); // consume END_OBJECT
+        }
         return new GPFeatureTypeAttributes() {
             {
                 super.setValues(featureTypeAttributes);
@@ -133,37 +135,22 @@ class GPFeatureTypeAttributesDeserializer extends StdDeserializer<GPFeatureTypeA
     /**
      * @param jsonParser
      * @return {@link IGPFeatureTypeAttribute}
-     * @throws IOException
+     * @throws JacksonException
      */
-    IGPFeatureTypeAttribute toModel(JsonParser jsonParser) throws IOException {
+    IGPFeatureTypeAttribute toModel(JsonParser jsonParser) throws JacksonException {
         IGPFeatureTypeAttribute featureTypeAttribute = new GPFeatureTypeAttribute();
         do {
-            if (jsonParser.currentToken() == JsonToken.FIELD_NAME || jsonParser.currentToken() == JsonToken.START_OBJECT) {
+            if (jsonParser.currentToken() == JsonToken.PROPERTY_NAME || jsonParser.currentToken() == JsonToken.START_OBJECT) {
                 continue;
             }
             String propertyName = jsonParser.currentName();
             logger.trace("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
             switch (propertyName) {
-                case "name": {
-                    featureTypeAttribute.setName(jsonParser.getText());
-                    break;
-                }
-                case "minOccurs": {
-                    featureTypeAttribute.setMinOccurs(jsonParser.getIntValue());
-                    break;
-                }
-                case "maxOccurs": {
-                    featureTypeAttribute.setMaxOccurs(jsonParser.getIntValue());
-                    break;
-                }
-                case "nillable": {
-                    featureTypeAttribute.setNillable(jsonParser.getBooleanValue());
-                    break;
-                }
-                case "binding": {
-                    featureTypeAttribute.setBinding(jsonParser.getText());
-                    break;
-                }
+                case "name" -> featureTypeAttribute.setName(jsonParser.getString());
+                case "minOccurs" -> featureTypeAttribute.setMinOccurs(jsonParser.getIntValue());
+                case "maxOccurs" -> featureTypeAttribute.setMaxOccurs(jsonParser.getIntValue());
+                case "nillable" -> featureTypeAttribute.setNillable(jsonParser.getBooleanValue());
+                case "binding" -> featureTypeAttribute.setBinding(jsonParser.getString());
             }
         } while (jsonParser.nextToken() != JsonToken.END_OBJECT);
         return featureTypeAttribute;

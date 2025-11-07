@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.GeometryWriter;
 import org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JsonGenerator;
 
 import static org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer.bridge.implementor.GeometryWriterImplementor.GeometryWriterImplementorKey.forClass;
 

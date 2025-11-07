@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.about.version;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.geosdi.geoplatform.connector.geoserver.model.jackson.serializer.rx.GPGeoserverRXConsumerSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.util.Objects;
 
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -62,17 +62,11 @@ class GPGeoserverAboutVersionSerializer extends StdSerializer<GPGeoserverAboutVe
         super(GPGeoserverAboutVersion.class);
     }
 
-    /**
-     * @param value
-     * @param gen
-     * @param provider
-     * @throws IOException
-     */
     @Override
-    public void serialize(GPGeoserverAboutVersion value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GPGeoserverAboutVersion value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         Consumer<IGPGeoserverVersionResource> versionResourceConsumer = new GPGeoserverVersionResourceConsumer(gen);
         gen.writeStartObject();
-        gen.writeFieldName("resource");
+        gen.writeName("resource");
         gen.writeStartArray();
         if ((value.getResources()) != null && !(value.getResources().isEmpty())) {
             fromIterable(value.getResources())
@@ -100,10 +94,10 @@ class GPGeoserverAboutVersionSerializer extends StdSerializer<GPGeoserverAboutVe
         @Override
         public void accept(IGPGeoserverVersionResource value) throws Throwable{
             jsonGenerator.writeStartObject();
-            jsonGenerator.writeStringField("@name", value.getName());
-            jsonGenerator.writeStringField("Build-Timestamp", value.getBuildTimestamp());
-            jsonGenerator.writeStringField("Version", value.getVersion());
-            jsonGenerator.writeStringField("Git-Revision", value.getGitRevision());
+            jsonGenerator.writeStringProperty("@name", value.getName());
+            jsonGenerator.writeStringProperty("Build-Timestamp", value.getBuildTimestamp());
+            jsonGenerator.writeStringProperty("Version", value.getVersion());
+            jsonGenerator.writeStringProperty("Git-Revision", value.getGitRevision());
             jsonGenerator.writeEndObject();
         }
     }

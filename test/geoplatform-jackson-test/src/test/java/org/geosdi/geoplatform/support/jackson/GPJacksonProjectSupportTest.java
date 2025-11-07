@@ -36,10 +36,13 @@
 package org.geosdi.geoplatform.support.jackson;
 
 import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.response.FolderDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 import static java.lang.Thread.currentThread;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -73,5 +76,18 @@ public class GPJacksonProjectSupportTest extends GPBaseJacksonSupportTest {
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(PROJECT_DATA_JSON), GPProject.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECT_DATA_MAPPING : {}\n\n", project);
         super.marshall(project);
+    }
+
+    @Test
+    public void d_projectsDataMapperTest() throws Exception {
+        ProjectDTO projectDTO = new ProjectDTO();
+        projectDTO.setId(4300L);
+        projectDTO.setName("project_test_rs");
+        FolderDTO folderDTO = new FolderDTO();
+        folderDTO.setName("rootFolderB");
+        FolderDTO folderDTO1 = new FolderDTO();
+        folderDTO1.setName("rootFolderC");
+        projectDTO.setRootFolders(Arrays.asList(folderDTO, folderDTO1));
+        super.marshall(projectDTO);
     }
 }

@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.wrapper;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,7 +51,7 @@ public class GPGeoserverEmptyFeatureTypeWrapper implements IGPGeoserverEmptyFeat
     /**
      * @param theEmptyFeatureType
      */
-    GPGeoserverEmptyFeatureTypeWrapper(@Nonnull(when = When.NEVER) GPGeoserverFeatureTypeWrapper theEmptyFeatureType) {
+    GPGeoserverEmptyFeatureTypeWrapper(@Nonnull(when = NEVER) GPGeoserverFeatureTypeWrapper theEmptyFeatureType) {
         checkArgument(theEmptyFeatureType != null, "The Parameter emptyFeatureType must not be null.");
         this.emptyFeatureType = theEmptyFeatureType;
     }

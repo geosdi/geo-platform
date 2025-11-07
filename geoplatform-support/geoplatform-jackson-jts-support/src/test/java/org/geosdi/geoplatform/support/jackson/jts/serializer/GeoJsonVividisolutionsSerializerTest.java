@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.serializer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.io.WKTReader;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
@@ -43,12 +42,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.File;
 
 import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
+import static java.lang.String.join;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -72,8 +71,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String geoJsonPoint = mapper.writeValueAsString(point);
         logger.info(":::::::::::::::::::::::GEO_JSON_POINT : \n{}\n", geoJsonPoint);
         org.geojson.Point p = mapper.readValue(geoJsonPoint, org.geojson.Point.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Point.json")
-                .collect(joining(separator))), p);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "Point.json")), p);
     }
 
     @Test
@@ -92,8 +90,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String lineStringGeoJsonString = mapper.writeValueAsString(lineString);
         logger.info(":::::::::::::::::::::::GEO_JSON_LINE_STRING : \n{}\n", lineStringGeoJsonString);
         org.geojson.LineString l = mapper.readValue(lineStringGeoJsonString, org.geojson.LineString.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "LineString.json")
-                .collect(joining(separator))), l);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "LineString.json")), l);
     }
 
     @Test
@@ -114,8 +111,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String linearRingGeoJsonString = mapper.writeValueAsString(linearRing);
         logger.info(":::::::::::::::::::::::GEO_JSON_LINE_STRING : \n{}\n", linearRingGeoJsonString);
         org.geojson.LineString l = mapper.readValue(linearRingGeoJsonString, org.geojson.LineString.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "LinearRing.json")
-                .collect(joining(separator))), l);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "LinearRing.json")), l);
     }
 
     @Test
@@ -126,8 +122,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String polygonGeoJsonString = mapper.writeValueAsString(polygon);
         logger.info(":::::::::::::::::::::::GEO_JSON_POLYGON : \n{}\n", polygonGeoJsonString);
         org.geojson.Polygon p = mapper.readValue(polygonGeoJsonString, org.geojson.Polygon.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Polygon.json")
-                .collect(joining(separator))), p);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "Polygon.json")), p);
     }
 
     @Test
@@ -138,8 +133,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String polygonGeoJsonString = mapper.writeValueAsString(polygon);
         logger.info(":::::::::::::::::::::::GEO_JSON_POLYGON : \n{}\n", polygonGeoJsonString);
         org.geojson.Polygon p = mapper.readValue(polygonGeoJsonString, org.geojson.Polygon.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "PolygonWithoutHoles.json")
-                .collect(joining(separator))), p);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "PolygonWithoutHoles.json")), p);
     }
 
     @Test
@@ -150,8 +144,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String multiPointGeoJsonString = mapper.writeValueAsString(multiPoint);
         logger.info(":::::::::::::::::::::::GEO_JSON_MULTI_POINT : \n{}\n", multiPointGeoJsonString);
         org.geojson.MultiPoint multiPointGeoJson = mapper.readValue(multiPointGeoJsonString, org.geojson.MultiPoint.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "MultiPoint.json")
-                .collect(joining(separator))), multiPointGeoJson);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "MultiPoint.json")), multiPointGeoJson);
     }
 
     @Test
@@ -162,8 +155,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String multiLineStringGeoJsonString = mapper.writeValueAsString(multiLineString);
         logger.info(":::::::::::::::::::::::GEO_JSON_MULTI_LINE_STRING : \n{}\n", multiLineStringGeoJsonString);
         org.geojson.MultiLineString multiLineStringGeoJson = mapper.readValue(multiLineStringGeoJsonString, org.geojson.MultiLineString.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "MultiLineString.json")
-                .collect(joining(separator))), multiLineStringGeoJson);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "MultiLineString.json")), multiLineStringGeoJson);
     }
 
     @Test
@@ -175,8 +167,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String multiPolygonGeoJsonString = mapper.writeValueAsString(multiPolygon);
         logger.info(":::::::::::::::::::::::GEO_JSON_MULTI_POLYGON : \n{}\n", multiPolygonGeoJsonString);
         org.geojson.MultiPolygon p = mapper.readValue(multiPolygonGeoJsonString, org.geojson.MultiPolygon.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "MultiPolygon.json")
-                .collect(joining(separator))), p);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "MultiPolygon.json")), p);
     }
 
     @Test
@@ -190,8 +181,7 @@ public class GeoJsonVividisolutionsSerializerTest {
         String geometryCollectionGeoJsonString = mapper.writeValueAsString(geometryCollection);
         logger.info(":::::::::::::::::::::::GEO_JSON_GEOMETRY_COLLECTION : \n{}\n", geometryCollectionGeoJsonString);
         org.geojson.GeometryCollection p = mapper.readValue(geometryCollectionGeoJsonString, org.geojson.GeometryCollection.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "GeometryCollection.json")
-                .collect(joining(separator))), p);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "GeometryCollection.json")), p);
     }
 
     @Test
@@ -245,7 +235,6 @@ public class GeoJsonVividisolutionsSerializerTest {
         String geometryCollectionGeoJsonString = mapper.writeValueAsString(geometryCollectionComplex);
         logger.info(":::::::::::::::::::::::GEO_JSON_GEOMETRY_COLLECTION : \n{}\n", geometryCollectionGeoJsonString);
         org.geojson.GeometryCollection p = mapper.readValue(geometryCollectionGeoJsonString, org.geojson.GeometryCollection.class);
-        mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "GeometryCollectionComplex.json")
-                .collect(joining(separator))), p);
+        mapper.writeValue(new File(join(separator, new File(".").getCanonicalPath(), "target", "GeometryCollectionComplex.json")), p);
     }
 }

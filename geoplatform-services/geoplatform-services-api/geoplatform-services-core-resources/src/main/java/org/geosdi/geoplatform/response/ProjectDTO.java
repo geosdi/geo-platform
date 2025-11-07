@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.response;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -47,7 +44,6 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 
 import javax.annotation.Nonnull;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,8 +78,9 @@ public class ProjectDTO implements GPProjectDTO {
     private boolean defaultProject;
     private ShortAccountDTO owner;
     //
-    @XmlElementWrapper(name = "rootFolders")
-    @XmlElement(name = "folder")
+//    @XmlElementRef(name = "rootFolders", type = FolderDTO.class)
+//    @XmlElementWrapper(name = "rootFolders")
+    @XmlElement(name = "rootFolders")
     private List<FolderDTO> rootFolders = new ArrayList<>();
 
     /**

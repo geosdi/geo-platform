@@ -120,7 +120,7 @@ public class WMSGetMapBaseRequestUnmarshallerTest {
                         + "    \"key\" : \"SERVICENAME\",\n"
                         + "    \"value\" : \"myservice\"\n"
                         + "  }, {\n"
-                        + "    \"key\" : \"\\nTRANSPARENT\",\n"
+                        + "    \"key\" : \"TRANSPARENT\",\n"
                         + "    \"value\" : \"TRUE\"\n"
                         + "  }, {\n"
                         + "    \"key\" : \"BGCOLOR\",\n"

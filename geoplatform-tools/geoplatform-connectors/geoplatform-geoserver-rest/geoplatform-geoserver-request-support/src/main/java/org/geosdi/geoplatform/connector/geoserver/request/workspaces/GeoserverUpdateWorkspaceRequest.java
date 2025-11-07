@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorReque
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverUpdateWorkspaceRequest extends GPJsonConnectorRequest<String, GeoserverUpdateWorkspaceRequest> {
+public interface GeoserverUpdateWorkspaceRequest extends GPJsonConnectorRequest<Boolean, GeoserverUpdateWorkspaceRequest> {
 
     /**
      * @param theWorkspaceName

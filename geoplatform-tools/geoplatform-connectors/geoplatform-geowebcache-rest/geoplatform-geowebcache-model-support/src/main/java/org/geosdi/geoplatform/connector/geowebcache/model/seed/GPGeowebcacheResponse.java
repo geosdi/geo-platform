@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geowebcache.model.seed;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;

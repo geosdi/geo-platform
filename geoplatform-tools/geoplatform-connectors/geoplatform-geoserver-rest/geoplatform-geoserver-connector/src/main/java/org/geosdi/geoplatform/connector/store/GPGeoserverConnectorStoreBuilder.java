@@ -35,18 +35,25 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.ObjectMapper;
 
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static tools.jackson.databind.cfg.CoercionAction.AsNull;
+import static tools.jackson.databind.cfg.CoercionAction.Fail;
+import static tools.jackson.databind.cfg.CoercionInputShape.EmptyString;
+import static tools.jackson.databind.type.LogicalType.POJO;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -99,7 +106,15 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
      * @return {@link ObjectMapper}
      */
     ObjectMapper toJacksonSupport() {
-        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport(JAXB).configure(NON_NULL));
+        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : builder(FALSE)
+                .withIntespectorBuilder(JAXB)
+                .configure(UNWRAP_ROOT_VALUE_ENABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE, NON_NULL,
+                        ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE,
+                        ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE, INDENT_OUTPUT_ENABLE)
+                .withAllCoercionConfigFeature(coercionConfigs -> {
+                    coercionConfigs.findOrCreateCoercion(GPGeoserverMetadataLinks.class).setCoercion(EmptyString, AsNull);
+                    coercionConfigs.findOrCreateCoercion(POJO).setCoercion(EmptyString, Fail);
+                }).build());
         return this.jacksonSupport.getDefaultMapper();
     }
 }

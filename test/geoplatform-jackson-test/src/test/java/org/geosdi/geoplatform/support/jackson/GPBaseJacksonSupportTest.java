@@ -38,11 +38,15 @@ package org.geosdi.geoplatform.support.jackson;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.text.SimpleDateFormat;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.System.out;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,7 +56,7 @@ public class GPBaseJacksonSupportTest {
     
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseJacksonSupportTest.class);
     //
-    protected static GPJacksonSupport jacksonSupport;
+    protected static JacksonSupport<JsonMapper> jacksonSupport;
     
     static final String ACCOUNTS_DATA_JSON = "accounts-data.json";
     static final String PROJECTS_DATA_JSON = "projects-data.json";
@@ -95,8 +99,13 @@ public class GPBaseJacksonSupportTest {
     
     @BeforeClass
     public static void beforeClass() {
-        jacksonSupport = new GPJacksonSupport(JAKARTA);
-        jacksonSupport.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
+        jacksonSupport = builder(FALSE)
+                .withIntespectorBuilder(JAKARTA)
+                .configure(UNWRAP_ROOT_VALUE_ENABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+                        ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE, INDENT_OUTPUT_ENABLE,
+                        FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, USE_FAST_DOUBLE_PARSER_ENABLE, USE_FAST_BIG_NUMBER_PARSER_ENABLE)
+                .withDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"))
+                .build();
     }
 
     /**

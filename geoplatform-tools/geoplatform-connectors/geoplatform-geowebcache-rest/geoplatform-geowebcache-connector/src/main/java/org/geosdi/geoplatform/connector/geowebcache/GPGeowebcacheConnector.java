@@ -110,12 +110,9 @@ public class GPGeowebcacheConnector extends GPGeowebcacheSeedConnector implement
      */
     @Override
     public GeowebcacheRestRunningRequest createGeowebcacheRestRunningRequest() {
-        switch (version) {
-            case V120x:
-            case V121x:
-                return new GPGeowebcacheRestRunningRequest(this, this.jacksonSupport);
-            default:
-                throw new GeowebcacheVersionException(toVersionExceptionMessage());
-        }
+        return switch (version) {
+            case V120x, V121x -> new GPGeowebcacheRestRunningRequest(this, this.jacksonSupport);
+            default -> throw new GeowebcacheVersionException(toVersionExceptionMessage());
+        };
     }
 }

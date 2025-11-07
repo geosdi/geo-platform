@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups.style;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.deser.std.JsonNodeDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
+import tools.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.deser.jackson.JsonNodeDeserializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

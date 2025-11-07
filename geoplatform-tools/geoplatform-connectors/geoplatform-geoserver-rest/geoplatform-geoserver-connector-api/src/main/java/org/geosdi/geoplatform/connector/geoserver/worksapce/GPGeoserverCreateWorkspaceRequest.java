@@ -143,7 +143,7 @@ class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<IGPGe
     }
 
     /**
-     * @return {@link Class< IGPGeoserverCreateWorkspaceResponse >}
+     * @return {@link Class<IGPGeoserverCreateWorkspaceResponse>}
      */
     @Override
     protected Class<IGPGeoserverCreateWorkspaceResponse> forClass() {

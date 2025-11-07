@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.geosdi.geoplatform.connector.geoserver.model.jackson.serializer.rx.GPGeoserverRXConsumerSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.util.Objects;
 
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -62,17 +62,11 @@ class GPFeatureTypeAttributesSerializer extends StdSerializer<GPFeatureTypeAttri
         super(GPFeatureTypeAttributes.class);
     }
 
-    /**
-     * @param value
-     * @param gen
-     * @param provider
-     * @throws IOException
-     */
     @Override
-    public void serialize(GPFeatureTypeAttributes value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GPFeatureTypeAttributes value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         Consumer<IGPFeatureTypeAttribute> featureTypeAttributeConsumer = new GPFeatureAttributeConsumer(gen);
         gen.writeStartObject();
-        gen.writeFieldName("attribute");
+        gen.writeName("attribute");
         gen.writeStartArray();
         if ((value.getValues()) != null && !(value.getValues().isEmpty())) {
             fromIterable(value.getValues())
@@ -102,11 +96,11 @@ class GPFeatureTypeAttributesSerializer extends StdSerializer<GPFeatureTypeAttri
         @Override
         public void accept(IGPFeatureTypeAttribute featureTypeAttribute) throws Throwable {
             jsonGenerator.writeStartObject();
-            jsonGenerator.writeStringField("name", featureTypeAttribute.getName());
-            jsonGenerator.writeNumberField("minOccurs", featureTypeAttribute.getMinOccurs());
-            jsonGenerator.writeNumberField("maxOccurs", featureTypeAttribute.getMaxOccurs());
-            jsonGenerator.writeBooleanField("nillable", featureTypeAttribute.isNillable());
-            jsonGenerator.writeStringField("binding", featureTypeAttribute.getBinding());
+            jsonGenerator.writeStringProperty("name", featureTypeAttribute.getName());
+            jsonGenerator.writeNumberProperty("minOccurs", featureTypeAttribute.getMinOccurs());
+            jsonGenerator.writeNumberProperty("maxOccurs", featureTypeAttribute.getMaxOccurs());
+            jsonGenerator.writeBooleanProperty("nillable", featureTypeAttribute.isNillable());
+            jsonGenerator.writeStringProperty("binding", featureTypeAttribute.getBinding());
             jsonGenerator.writeEndObject();
         }
     }

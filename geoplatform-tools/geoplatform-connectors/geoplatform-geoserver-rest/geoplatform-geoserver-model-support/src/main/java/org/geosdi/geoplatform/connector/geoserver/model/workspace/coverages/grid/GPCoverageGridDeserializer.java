@@ -35,22 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 class GPCoverageGridDeserializer extends StdDeserializer<GPCoverageGrid> {
-
-    private static final ObjectMapper mapper = new ObjectMapper();
 
     GPCoverageGridDeserializer() {
         super(GPCoverageGrid.class);
@@ -107,8 +102,8 @@ class GPCoverageGridDeserializer extends StdDeserializer<GPCoverageGrid> {
      * @return Deserialized value
      */
     @Override
-    public GPCoverageGrid deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
-        JsonNode node = mapper.readTree(jsonParser);
+    public GPCoverageGrid deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
+        JsonNode node = ctxt.readTree(jsonParser);
         GPCoverageGrid coverageGrid = new GPCoverageGrid();
         coverageGrid.setDimension(node.get("@dimension").asText());
         coverageGrid.setCrs(node.get("crs").asText());

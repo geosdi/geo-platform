@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.security.rule.serializer;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRule;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,16 +52,15 @@ public class GeoserverRuleSerializer extends StdSerializer<GeoserverRule> {
     }
 
     /**
-     *
      * @param value
      * @param gen
      * @param provider
-     * @throws IOException
+     * @throws JacksonException
      */
     @Override
-    public void serialize(GeoserverRule value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GeoserverRule value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         gen.writeStartObject();
-        gen.writeStringField(value.getResource(), value.getValue());
+        gen.writeStringProperty(value.getResource(), value.getValue());
         gen.writeEndObject();
     }
 }

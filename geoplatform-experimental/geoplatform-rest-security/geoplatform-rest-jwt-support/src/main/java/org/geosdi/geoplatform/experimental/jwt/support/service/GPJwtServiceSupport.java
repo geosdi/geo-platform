@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.experimental.jwt.support.service;
 
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -47,7 +46,6 @@ import lombok.ToString;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim;
 import org.geosdi.geoplatform.experimental.jwt.support.spring.configuration.IGPJwtConfiguration;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -61,9 +59,6 @@ import static io.jsonwebtoken.Jwts.parser;
 import static java.lang.Boolean.TRUE;
 import static java.util.Map.of;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.joda.time.DateTime.now;
 
 /**
@@ -76,14 +71,14 @@ class GPJwtServiceSupport implements IGPJwtServiceSupport {
 
     private static final long serialVersionUID = 6730444116638398822L;
     //
-    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE, NON_NULL)
-            .registerModule(new JodaModule())
-            .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE);
-    private static final JacksonSerializer jacksonSerializer = new JacksonSerializer<>(jacksonSupport.getDefaultMapper());
+//    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
+//            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+//            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+//            WRAP_ROOT_VALUE_DISABLE,
+//            INDENT_OUTPUT_ENABLE, NON_NULL)
+//            .registerModule(new JodaModule())
+//            .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE);
+    private static final JacksonSerializer jacksonSerializer = new JacksonSerializer<>();
     //
     @Getter
     private final IGPJwtConfiguration jwtConfiguration;

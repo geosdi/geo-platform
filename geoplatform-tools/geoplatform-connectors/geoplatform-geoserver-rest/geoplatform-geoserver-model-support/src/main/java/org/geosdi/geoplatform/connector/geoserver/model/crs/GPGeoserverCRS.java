@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.connector.geoserver.model.crs;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;

@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.support.jackson.annotation;
 
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import tools.jackson.databind.AnnotationIntrospector;
+import tools.jackson.databind.introspect.JacksonAnnotationIntrospector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

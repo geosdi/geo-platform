@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.serializer;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerTypePublished;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,14 +62,14 @@ public class GPGeoserverLayerTypePublishedSerializer extends StdSerializer<GPGeo
      * @param value
      * @param gen
      * @param provider
-     * @throws IOException
+     * @throws JacksonException
      */
     @Override
-    public void serialize(GPGeoserverLayerTypePublished value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GPGeoserverLayerTypePublished value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         gen.writeStartObject();
-        gen.writeStringField("@type", value.getType());
-        gen.writeStringField("name", value.getLayerName());
-        gen.writeStringField("link", value.getLink());
+        gen.writeStringProperty("@type", value.getType());
+        gen.writeStringProperty("name", value.getLayerName());
+        gen.writeStringProperty("link", value.getLink());
         gen.writeEndObject();
     }
 }

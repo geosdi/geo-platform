@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.support.jackson.xml;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.dataformat.xml.XmlMapper;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FunctionalInterface
-public interface JacksonXmlSupport extends JacksonSupport {
+public interface JacksonXmlSupport extends JacksonSupport<XmlMapper> {
 
     /**
      * @return {@link XmlMapper}

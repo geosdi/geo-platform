@@ -35,11 +35,9 @@
  */
 package org.geosdi.geoplatform.support.jackson.annotation;
 
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
-import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationIntrospector;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-
-import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
+import tools.jackson.databind.AnnotationIntrospector;
+import tools.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationIntrospector;
+import tools.jackson.module.jaxb.JaxbAnnotationIntrospector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,7 +51,7 @@ public enum JacksonXmlAnnotationIntrospectorBuilder implements GPJacksonXmlAnnot
          */
         @Override
         public AnnotationIntrospector build() {
-            return new JaxbAnnotationIntrospector(defaultInstance());
+            return new JaxbAnnotationIntrospector();
         }
     },
     JAKARTA {
@@ -62,7 +60,7 @@ public enum JacksonXmlAnnotationIntrospectorBuilder implements GPJacksonXmlAnnot
          */
         @Override
         public AnnotationIntrospector build() {
-            return new JakartaXmlBindAnnotationIntrospector(defaultInstance());
+            return new JakartaXmlBindAnnotationIntrospector();
         }
     },
     DEFAULT {

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.pool.builder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
@@ -45,6 +44,7 @@ import org.geosdi.geoplatform.connector.pool.key.IGPPoolGeoserverConnectorKey;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.ObjectMapper;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
@@ -54,7 +54,7 @@ import static org.geosdi.geoplatform.connector.pool.key.IGPPoolGeoserverConnecto
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverConnectorBuilderPool extends AbstractConnectorBuilder<GPGeoserverConnectorBuilderPool, GPGeoserverConnectorStore> {
+public class GPGeoserverConnectorBuilderPool extends AbstractConnectorBuilder<GeoserverConnectorBuilderPool, GPGeoserverConnectorStore> implements GeoserverConnectorBuilderPool {
 
     static {
         geoserverConnectorPool = new GenericKeyedObjectPool<>(new GPGeoserverConnectorFactory(), new GPPoolConnectorConfig());
@@ -68,19 +68,28 @@ public class GPGeoserverConnectorBuilderPool extends AbstractConnectorBuilder<GP
     }
 
     /**
-     * @return {@link GPGeoserverConnectorBuilderPool}
+     * @return {@link GeoserverConnectorBuilderPool}
      */
-    public static GPGeoserverConnectorBuilderPool geoserverConnectorBuilderPool() {
+    public static GeoserverConnectorBuilderPool geoserverConnectorBuilderPool() {
         return new GPGeoserverConnectorBuilderPool();
     }
 
     /**
      * @param theJacksonSupport
-     * @return {@link GPGeoserverConnectorBuilderPool}
+     * @return {@link GeoserverConnectorBuilderPool}
      */
-    public GPGeoserverConnectorBuilderPool withJacksonSupport(JacksonSupport theJacksonSupport) {
+    public GeoserverConnectorBuilderPool withJacksonSupport(JacksonSupport theJacksonSupport) {
         this.jacksonSupport = theJacksonSupport;
         return self();
+    }
+
+    /**
+     * @param theVersion
+     * @return {@link GeoserverConnectorBuilderPool}
+     */
+    @Override
+    public GeoserverConnectorBuilderPool withVersion(String theVersion) {
+        return super.withVersion(theVersion);
     }
 
     /**

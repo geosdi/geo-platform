@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.about.version;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,19 +50,13 @@ class GPGeoserverVersionResourceSerializer extends StdSerializer<GPGeoserverVers
         super(GPGeoserverVersionResource.class);
     }
 
-    /**
-     * @param value
-     * @param gen
-     * @param provider
-     * @throws IOException
-     */
     @Override
-    public void serialize(GPGeoserverVersionResource value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(GPGeoserverVersionResource value, JsonGenerator gen, SerializationContext provider) throws JacksonException {
         gen.writeStartObject();
-        gen.writeStringField("@name", value.getName());
-        gen.writeStringField("Build-Timestamp", value.getBuildTimestamp());
-        gen.writeStringField("Version", value.getVersion());
-        gen.writeStringField("Git-Revision", value.getGitRevision());
+        gen.writeStringProperty("@name", value.getName());
+        gen.writeStringProperty("Build-Timestamp", value.getBuildTimestamp());
+        gen.writeStringProperty("Version", value.getVersion());
+        gen.writeStringProperty("Git-Revision", value.getGitRevision());
         gen.writeEndObject();
     }
 }

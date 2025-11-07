@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.task;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GPTaskUpdateMode;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.IGPGeoserverImporterData;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.layer.IGPGeoserverImporterLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.targetstore.IGPGeoserverTargetStoreImporter;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
 

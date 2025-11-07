@@ -35,306 +35,216 @@
  */
 package org.geosdi.geoplatform.support.jackson.property;
 
-import com.fasterxml.jackson.core.JsonParser.Feature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.json.JsonReadFeature;
+import tools.jackson.core.util.JacksonFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 
-import static com.fasterxml.jackson.core.json.JsonReadFeature.*;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static tools.jackson.core.json.JsonReadFeature.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPJsonParserFeature implements JacksonSupportConfigFeature<Feature> {
+public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JacksonFeature, JsonMapper.Builder> {
 
-    AUTO_CLOSE_SOURCE_ENABLE(TRUE) {
+    ALLOW_COMMENTS_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return Feature.AUTO_CLOSE_SOURCE;
+        public JsonReadFeature getFeature() {
+            return JsonReadFeature.ALLOW_JAVA_COMMENTS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
-        }
-
-    }, AUTO_CLOSE_SOURCE_DISABLE(FALSE) {
-        @Override
-        public Feature getFeature() {
-            return Feature.AUTO_CLOSE_SOURCE;
-        }
-
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
-        }
-
-    }, ALLOW_COMMENTS_ENABLE(TRUE) {
-        @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_COMMENTS;
-        }
-
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_COMMENTS_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_COMMENTS;
+        public JsonReadFeature getFeature() {
+            return JsonReadFeature.ALLOW_JAVA_COMMENTS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_YAML_COMMENTS_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_YAML_COMMENTS;
+        public JsonReadFeature getFeature() {
+            return JsonReadFeature.ALLOW_YAML_COMMENTS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_YAML_COMMENTS_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_YAML_COMMENTS;
+        public JsonReadFeature getFeature() {
+            return JsonReadFeature.ALLOW_YAML_COMMENTS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_UNQUOTED_FIELD_NAMES_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_UNQUOTED_FIELD_NAMES;
+        public JsonReadFeature getFeature() {
+            return JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_UNQUOTED_FIELD_NAMES_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_UNQUOTED_FIELD_NAMES;
+        public JsonReadFeature getFeature() {
+            return JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_SINGLE_QUOTES_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_SINGLE_QUOTES;
+        public JsonReadFeature getFeature() {
+            return ALLOW_SINGLE_QUOTES;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_SINGLE_QUOTES_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return Feature.ALLOW_SINGLE_QUOTES;
+        public JsonReadFeature getFeature() {
+            return ALLOW_SINGLE_QUOTES;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_UNQUOTED_CONTROL_CHARS_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_UNESCAPED_CONTROL_CHARS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_UNQUOTED_CONTROL_CHARS_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_UNESCAPED_CONTROL_CHARS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_NUMERIC_LEADING_ZEROS_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_LEADING_ZEROS_FOR_NUMBERS.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_LEADING_ZEROS_FOR_NUMBERS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_NUMERIC_LEADING_ZEROS_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_LEADING_ZEROS_FOR_NUMBERS.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_LEADING_ZEROS_FOR_NUMBERS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_NON_NUMERIC_NUMBERS_ENABLE(TRUE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_NON_NUMERIC_NUMBERS.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_NON_NUMERIC_NUMBERS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
     }, ALLOW_NON_NUMERIC_NUMBERS_DISABLE(FALSE) {
         @Override
-        public Feature getFeature() {
-            return ALLOW_NON_NUMERIC_NUMBERS.mappedFeature();
+        public JsonReadFeature getFeature() {
+            return ALLOW_NON_NUMERIC_NUMBERS;
         }
 
         @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
+        public void configureMapper(@Nonnull(when = NEVER) JsonMapper.Builder builder) {
+            checkArgument(builder != null, "The Parameter builder must not be null.");
+            builder.configure(getFeature(), getValue());
         }
 
-    }, STRICT_DUPLICATE_DETECTION_ENABLE(TRUE) {
-        @Override
-        public Feature getFeature() {
-            return Feature.STRICT_DUPLICATE_DETECTION;
-        }
-
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
-        }
-
-    }, STRICT_DUPLICATE_DETECTION_DISABLE(FALSE) {
-        @Override
-        public Feature getFeature() {
-            return Feature.STRICT_DUPLICATE_DETECTION;
-        }
-
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
-        }
-    }, USE_FAST_DOUBLE_PARSER_ENABLE(TRUE) {
-        /**
-         * @param mapper
-         */
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(getFeature(), getValue());
-        }
-
-        /**
-         * @return {@link Feature}
-         */
-        @Override
-        public Feature getFeature() {
-            return Feature.USE_FAST_DOUBLE_PARSER;
-        }
-    }, USE_FAST_DOUBLE_PARSER_DISABLE(FALSE) {
-        /**
-         * @param mapper
-         */
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
-        }
-
-        /**
-         * @return {@link Feature}
-         */
-        @Override
-        public Feature getFeature() {
-            return Feature.USE_FAST_DOUBLE_PARSER;
-        }
-    }, USE_FAST_BIG_NUMBER_PARSER_ENABLE(TRUE) {
-        /**
-         * @param mapper
-         */
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
-        }
-
-        /**
-         * @return {@link Feature}
-         */
-        @Override
-        public Feature getFeature() {
-            return Feature.USE_FAST_BIG_NUMBER_PARSER;
-        }
-    }, USE_FAST_BIG_NUMBER_PARSER_DISABLE(FALSE) {
-        /**
-         * @param mapper
-         */
-        @Override
-        public void configureMapper(ObjectMapper mapper) {
-            mapper.configure(this.getFeature(), this.getValue());
-        }
-
-        /**
-         * @return {@link Feature}
-         */
-        @Override
-        public Feature getFeature() {
-            return Feature.USE_FAST_BIG_NUMBER_PARSER;
-        }
     };
 
     private final Boolean state;

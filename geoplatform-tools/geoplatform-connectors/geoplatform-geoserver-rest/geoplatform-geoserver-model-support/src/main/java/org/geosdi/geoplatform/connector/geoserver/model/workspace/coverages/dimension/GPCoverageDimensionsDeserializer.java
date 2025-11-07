@@ -35,18 +35,16 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.range.GPCoverageDimensionRange;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.range.IGPCoverageDimensionRange;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.deser.std.StdDeserializer;
+import tools.jackson.databind.node.ArrayNode;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,8 +59,6 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 class GPCoverageDimensionsDeserializer extends StdDeserializer<GPCoverageDimensions> {
-
-    private static final ObjectMapper mapper = new ObjectMapper();
 
     GPCoverageDimensionsDeserializer() {
         super(GPCoverageDimensions.class);
@@ -119,8 +115,8 @@ class GPCoverageDimensionsDeserializer extends StdDeserializer<GPCoverageDimensi
      * @return Deserialized value
      */
     @Override
-    public GPCoverageDimensions deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
-        JsonNode node = mapper.readTree(jsonParser);
+    public GPCoverageDimensions deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws JacksonException {
+        JsonNode node = ctxt.readTree(jsonParser);
         JsonNode coverageDimensionNode = node.get("coverageDimension");
         return new GPCoverageDimensions() {
             {

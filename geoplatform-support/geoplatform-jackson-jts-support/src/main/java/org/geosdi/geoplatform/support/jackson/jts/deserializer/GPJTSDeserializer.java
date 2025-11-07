@@ -35,18 +35,15 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts.deserializer;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor;
 import org.locationtech.jts.geom.Geometry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.ValueDeserializer;
 
 import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
 
@@ -54,7 +51,7 @@ import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.w
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class GPJTSDeserializer<JTS extends Geometry, GEOJSON extends GeoJsonObject> extends JsonDeserializer<JTS> implements IGPJTSDeserializer<JTS> {
+abstract class GPJTSDeserializer<JTS extends Geometry, GEOJSON extends GeoJsonObject> extends ValueDeserializer<JTS> implements IGPJTSDeserializer<JTS> {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -109,10 +106,9 @@ abstract class GPJTSDeserializer<JTS extends Geometry, GEOJSON extends GeoJsonOb
      * @return Deserialized value
      */
     @Override
-    public JTS deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        ObjectCodec objectCodec = p.getCodec();
+    public JTS deserialize(JsonParser p, DeserializationContext ctxt) throws JacksonException {
         logger.debug(":::::::::::::::::::::::::::::Called {}\n", this.getDeserializerName());
-        GeoJsonObject geoJsonObject = objectCodec.readValue(p, GeoJsonObject.class);
+        GeoJsonObject geoJsonObject = ctxt.readValue(p, GeoJsonObject.class);
         if (!canParseGeometry(geoJsonObject))
             throw new IllegalStateException(this.getDeserializerName() + " can't parse GeoJson Geometry " + geoJsonObject);
         return parseGeometry(geoJsonObject);

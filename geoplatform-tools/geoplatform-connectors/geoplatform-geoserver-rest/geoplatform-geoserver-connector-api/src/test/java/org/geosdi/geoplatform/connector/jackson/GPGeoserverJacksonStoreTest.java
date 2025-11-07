@@ -65,8 +65,8 @@ public class GPGeoserverJacksonStoreTest {
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverJacksonStoreTest.class);
     //
     private static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_ENABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE,
-            INDENT_OUTPUT_ENABLE);
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_ENABLE, INDENT_OUTPUT_ENABLE);
 
     @Test
     public void a_unmarshallCoverageStoresTest() throws Exception {

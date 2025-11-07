@@ -65,7 +65,6 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
     public static void beforeClass() throws Exception {
         geoserverConnectorStoreV2_27_x = geoserverConnectorBuilder()
                 .withServerUrl(new URI(geoserverURLV2_27_x).toURL())
-                .withVersion(V27x.getVersion())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)

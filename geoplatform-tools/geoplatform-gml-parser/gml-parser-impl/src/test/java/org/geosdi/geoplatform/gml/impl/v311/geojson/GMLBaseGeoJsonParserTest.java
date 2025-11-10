@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.geojson;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;

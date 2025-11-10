@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.geojson.theories;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
@@ -49,6 +48,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.ObjectMapper;
 
 import javax.xml.bind.JAXBElement;
 import java.io.File;

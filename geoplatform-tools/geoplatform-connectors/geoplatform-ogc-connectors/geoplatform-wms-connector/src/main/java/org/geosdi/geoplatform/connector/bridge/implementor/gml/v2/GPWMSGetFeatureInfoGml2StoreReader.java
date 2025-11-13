@@ -41,8 +41,8 @@ import javax.annotation.Nonnull;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2_AS_STORE;
 

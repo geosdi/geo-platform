@@ -173,15 +173,17 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected void readFeatureID(Map<String, IGPFeatureType> featureTypes, Feature feature) throws Exception {
         String prefix = xmlStreamReader().getPrefix();
         String name = xmlStreamReader().getLocalName();
-        logger.trace("##############################PREFIX : {} - NAME : {}\n", prefix, name);
-        IGPFeatureType featureType = featureTypes.computeIfAbsent(name, _ -> new GPFeatureType(prefix, name));
-        logger.trace("########################################FEATURE_TYPE : {}\n\n", featureType);
-        if ((featureType != null) && (super.isTagName(prefix, name))) {
-            String featureID = xmlStreamReader().getAttributeValue(this.fidNameSpaceURI, this.fidLocalName);
-            logger.trace("\n\n##########################FEATURE_ID_STRING : {}\n\n", featureID);
-            feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : join(":", prefix, name));
-            logger.trace("#####################FEATURE_ID : {}", feature.getId());
-            readInternal(featureType, feature);
+        if(((prefix != null) && !(prefix.trim().isEmpty())) && ((name != null) && !(name.trim().isEmpty()))) {
+            logger.trace("##############################PREFIX : {} - NAME : {}\n", prefix, name);
+            IGPFeatureType featureType = featureTypes.computeIfAbsent(name, _ -> new GPFeatureType(prefix, name));
+            logger.trace("########################################FEATURE_TYPE : {}\n\n", featureType);
+            if ((featureType != null) && (super.isTagName(prefix, name))) {
+                String featureID = xmlStreamReader().getAttributeValue(this.fidNameSpaceURI, this.fidLocalName);
+                logger.trace("\n\n##########################FEATURE_ID_STRING : {}\n\n", featureID);
+                feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : join(":", prefix, name));
+                logger.trace("#####################FEATURE_ID : {}", feature.getId());
+                readInternal(featureType, feature);
+            }
         }
     }
 

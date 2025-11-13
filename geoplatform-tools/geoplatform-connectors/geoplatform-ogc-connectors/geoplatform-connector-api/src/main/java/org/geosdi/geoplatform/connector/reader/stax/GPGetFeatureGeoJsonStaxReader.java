@@ -56,13 +56,12 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.String.join;
 import static java.lang.ThreadLocal.withInitial;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.function.Function.identity;
 import static java.util.regex.Pattern.compile;
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -112,8 +111,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
      * @param theXmlStreamBuilder
      * @param theFidLocalName
      */
-    protected GPGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder, @Nonnull(when = NEVER) String theFidLocalName,
-            @Nullable String theFidNameSpaceURI) {
+    protected GPGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder, @Nonnull(when = NEVER) String theFidLocalName, @Nullable String theFidNameSpaceURI) {
         super(theXmlStreamBuilder);
         checkArgument((theFidLocalName != null) && !(theFidLocalName.trim().isEmpty()), "The Parameter fidLocalName must not be null or an empty string.");
         this.fidLocalName = theFidLocalName;
@@ -126,7 +124,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected void loadTypeNames() throws Exception {
         String schemaLocation = xmlStreamReader().getAttributeValue(SCHEMA_LOCATION_NAMESPACE_URI, SCHEMA_LOCATION_KEY);
         if ((schemaLocation != null) && !(schemaLocation.trim().isEmpty())) {
-            schemaLocation = URLDecoder.decode(schemaLocation, UTF_8.name());
+            schemaLocation = URLDecoder.decode(schemaLocation, UTF_8);
             int index = schemaLocation.indexOf(TYPE_NAME_KEY);
             if (index != -1) {
                 String typeName = schemaLocation.substring(index + TYPE_NAME_KEY.length());
@@ -176,12 +174,12 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
         String prefix = xmlStreamReader().getPrefix();
         String name = xmlStreamReader().getLocalName();
         logger.trace("##############################PREFIX : {} - NAME : {}\n", prefix, name);
-        IGPFeatureType featureType = featureTypes.computeIfAbsent(name, value -> new GPFeatureType(prefix, name));
+        IGPFeatureType featureType = featureTypes.computeIfAbsent(name, _ -> new GPFeatureType(prefix, name));
         logger.trace("########################################FEATURE_TYPE : {}\n\n", featureType);
         if ((featureType != null) && (super.isTagName(prefix, name))) {
             String featureID = xmlStreamReader().getAttributeValue(this.fidNameSpaceURI, this.fidLocalName);
             logger.trace("\n\n##########################FEATURE_ID_STRING : {}\n\n", featureID);
-            feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : of(prefix, name).collect(joining(":")));
+            feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : join(":", prefix, name));
             logger.trace("#####################FEATURE_ID : {}", feature.getId());
             readInternal(featureType, feature);
         }

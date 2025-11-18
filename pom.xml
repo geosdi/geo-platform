@@ -50,12 +50,12 @@
         <repository>
             <id>geosdi-realese</id>
             <name>repo.geosdi.org-releases</name>
-            <url>https://repo.geosdi.org/artifactory/libs-release-local</url>
+            <url>https://repo.geosdi.org/repository/geosdi-releases/</url>
         </repository>
         <snapshotRepository>
             <id>geosdi-snapshots</id>
             <name>repo.geosdi.org-snapshots</name>
-            <url>https://repo.geosdi.org/artifactory/libs-snapshot-local</url>
+            <url>https://repo.geosdi.org/repository/geosdi-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 

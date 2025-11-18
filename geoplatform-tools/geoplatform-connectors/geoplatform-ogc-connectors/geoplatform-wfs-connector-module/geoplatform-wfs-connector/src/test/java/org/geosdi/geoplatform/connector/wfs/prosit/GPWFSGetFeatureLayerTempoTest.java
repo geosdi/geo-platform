@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.wfs.prosit;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
@@ -53,6 +52,7 @@ import org.junit.runners.MethodSorters;
 import org.locationtech.jts.geom.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.ObjectMapper;
 
 import javax.xml.namespace.QName;
 import java.io.File;

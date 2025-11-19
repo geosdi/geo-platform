@@ -81,7 +81,7 @@
         </repository>
 
         <!-- Spring -->
-        <repository>
+        <!--repository>
             <id>repository.spring.release</id>
             <name>Spring GA Repository</name>
             <url>https://repo.spring.io/release</url>
@@ -96,7 +96,7 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
-        </repository>
+        </repository-->
 
         <repository>
             <id>sonatype-oss-public</id>

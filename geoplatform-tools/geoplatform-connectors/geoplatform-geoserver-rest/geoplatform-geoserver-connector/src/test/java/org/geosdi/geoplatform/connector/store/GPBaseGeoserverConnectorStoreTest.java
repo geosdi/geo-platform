@@ -67,7 +67,7 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
                 .withServerUrl(new URI(geoserverURLV2_28_x).toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(º80)
+                        .withDefaultMaxPerRoute(80)
                         .withMaxRedirect(20)
                         .build())
                 .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoserver"))

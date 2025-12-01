@@ -50,7 +50,7 @@ public class GPGoeserverClassifyConnectorV220XStoreTest extends GPBaseGeoserverC
 
     @Test
     public void classifyTest() throws Exception {
-        GeoserverClassifyRequest request = geoserverConnectorStoreV2_26_x.classifyData();
+        GeoserverClassifyRequest request = geoserverConnectorStoreV2_27_x.classifyData();
         logger.info("#################RESPONSE : \n{}\n", request.withVectorName("topp:states")
                 .withAttribute("FEMALE")
                 .withGeoserverRamp(random)

@@ -58,7 +58,7 @@ public class GPGeoserverWMSStoreConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void a_loadGeoserverWMSStoresRequestTest() throws Exception {
-        GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_27_x.loadWorkspaceWMSStoresRequest()
+        GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_28_x.loadWorkspaceWMSStoresRequest()
                 .withWorkspace("sf")
                 .getResponse();
         assertNotNull(wmsStores);
@@ -67,7 +67,7 @@ public class GPGeoserverWMSStoreConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void b_createGeoserverWMSStoreRequestTest() throws Exception {
-        GeoserverCreateWMSStoreRequest request = geoserverConnectorStoreV2_27_x.createWMSStoreRequest()
+        GeoserverCreateWMSStoreRequest request = geoserverConnectorStoreV2_28_x.createWMSStoreRequest()
                 .withWorkspace("sf")
                 .withBody(toWMSStore("http://150.145.141.180/geoserver/ows?service=wms&version=1.1.1&request=GetCapabilities"));
         logger.info("######################{}\n", request.getResponse());
@@ -75,7 +75,7 @@ public class GPGeoserverWMSStoreConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void c_loadGeoserverWMSStoresRequestTest() throws Exception {
-        GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_27_x.loadWorkspaceWMSStoresRequest()
+        GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_28_x.loadWorkspaceWMSStoresRequest()
                 .withWorkspace("sf")
                 .getResponse();
         assertNotNull(wmsStores);
@@ -85,7 +85,7 @@ public class GPGeoserverWMSStoreConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void d_loadGeoserverWMSStoreRequestTest() throws Exception {
-        GPGeoserverWMSStore wmsStore = geoserverConnectorStoreV2_27_x.loadWorkspaceWMSStoreRequest()
+        GPGeoserverWMSStore wmsStore = geoserverConnectorStoreV2_28_x.loadWorkspaceWMSStoreRequest()
                 .withWorkspace("sf")
                 .withStore("remote").getResponse();
         logger.info("@@@@@@@@@@@@@@@@@@@WMS_STORE : {}\n", wmsStore);
@@ -93,14 +93,14 @@ public class GPGeoserverWMSStoreConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void e_updateGeoserverWMSStoreRequestTest() throws Exception {
-        GPGeoserverWMSStore wmsStore = geoserverConnectorStoreV2_27_x.loadWorkspaceWMSStoreRequest()
+        GPGeoserverWMSStore wmsStore = geoserverConnectorStoreV2_28_x.loadWorkspaceWMSStoreRequest()
                 .withWorkspace("sf")
                 .withStore("remote").getResponse();
         assertNotNull(wmsStore);
         GPGeoserverWMSStoreBody wmsStoreBody = toWMSStore("http://150.145.141.180/geoserver/ows?service=wms&version=1.1.1&request=GetCapabilities");
         wmsStoreBody.setDescription("the_remote_description_test");
         wmsStoreBody.getMetadata().put("useConnectionPooling", FALSE.toString());
-        logger.info("{}\n", geoserverConnectorStoreV2_27_x.updateWMSStoreRequest()
+        logger.info("{}\n", geoserverConnectorStoreV2_28_x.updateWMSStoreRequest()
                 .withWorkspace("sf")
                 .withStore("remote")
                 .withBody(wmsStoreBody).getResponse());
@@ -108,7 +108,7 @@ public class GPGeoserverWMSStoreConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void f_deleteGeoserverWMSStoreRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_DELETE_WMS_STORE_RESPONSE : {}\n", geoserverConnectorStoreV2_27_x
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_DELETE_WMS_STORE_RESPONSE : {}\n", geoserverConnectorStoreV2_28_x
                 .deleteWMSStoreRequest().withWorkspace("sf").withStore("remote").getResponse());
     }
 }

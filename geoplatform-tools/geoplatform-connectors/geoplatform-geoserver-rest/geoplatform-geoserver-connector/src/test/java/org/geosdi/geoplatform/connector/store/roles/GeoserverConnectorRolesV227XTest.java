@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.roles;
 
 import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUserBody;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -50,9 +50,9 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email vito.salvia@gmail.com
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GeoserverConnectorRolesV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public class GeoserverConnectorRolesV227XTest extends GPBaseGeoserverConnectorStoreV227xTest {
 
-    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorRolesV226XTest.class);
+    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorRolesV227XTest.class);
 
     @Test
     public void a_loadRoles() throws Exception {

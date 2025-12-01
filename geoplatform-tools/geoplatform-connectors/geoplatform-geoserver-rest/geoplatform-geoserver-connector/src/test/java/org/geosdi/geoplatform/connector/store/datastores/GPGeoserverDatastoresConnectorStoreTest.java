@@ -62,14 +62,14 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
 
     @Test
     public void a_loadGeoserverDatastoresConnectorTest() throws Exception {
-        GeoserverLoadDatastoresRequest loadDatastoresRequest = geoserverConnectorStoreV2_27_x.loadDatastoresRequest();
+        GeoserverLoadDatastoresRequest loadDatastoresRequest = geoserverConnectorStoreV2_28_x.loadDatastoresRequest();
         loadDatastoresRequest.withWorkspaceName("topp");
         logger.info("############################LOAD_DATASTORES_RESPONSE : {}\n", loadDatastoresRequest.getResponse());
     }
 
     @Test
     public void b_loadGeoserverDatastoreConnectorTest() throws Exception {
-        GeoserverLoadDatastoreRequest loadDatastoreRequest = geoserverConnectorStoreV2_27_x.loadDatastoreRequest();
+        GeoserverLoadDatastoreRequest loadDatastoreRequest = geoserverConnectorStoreV2_28_x.loadDatastoreRequest();
         loadDatastoreRequest.withWorkspaceName("topp");
         loadDatastoreRequest.withStoreName("taz_shapes");
         logger.info("############################LOAD_DATASTORE_RESPONSE : {}\n", loadDatastoreRequest.getResponse());
@@ -77,10 +77,10 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
 
     @Test
     public void c_loadAllGeoserverDatastoresConnectorTest() throws Exception {
-        GeoserverLoadWorkspacesRequest loadWorkspacesRequest = geoserverConnectorStoreV2_27_x.loadWorkspacesRequest();
+        GeoserverLoadWorkspacesRequest loadWorkspacesRequest = geoserverConnectorStoreV2_28_x.loadWorkspacesRequest();
         GPGeoserverWorkspaces geoserverWorkspaces = loadWorkspacesRequest.getResponse();
         for (IGPGeoserverWorkspace geoserverWorkspace : geoserverWorkspaces.getWorkspaces()) {
-            GeoserverLoadDatastoresRequest loadDatastoresRequest = geoserverConnectorStoreV2_27_x.loadDatastoresRequest();
+            GeoserverLoadDatastoresRequest loadDatastoresRequest = geoserverConnectorStoreV2_28_x.loadDatastoresRequest();
             loadDatastoresRequest.withWorkspaceName(geoserverWorkspace.getWorkspaceName());
             logger.info("############################LOAD_DATASTORES_RESPONSE : {}\n", loadDatastoresRequest.getResponse());
         }
@@ -88,10 +88,10 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
 
     @Test
     public void d_createGeoserverDatastoreConnectorTest() throws Exception {
-        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStoreV2_27_x.createWorkspaceRequest();
+        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStoreV2_28_x.createWorkspaceRequest();
         createWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_5"));
         logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest.getResponseAsString());
-        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStoreV2_27_x.createDatastoreRequest();
+        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStoreV2_28_x.createDatastoreRequest();
         createDatastoreRequest.withWorkspaceName("workspace_test_5")
                 .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test")
                         .withHost("localhost")
@@ -109,17 +109,17 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
                         .withUser("postgres")
                         .withPassword("0x,postgres,0x")
                         .build()).getResponse());
-        assertTrue(geoserverConnectorStoreV2_27_x.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test").getResponse());
-        assertTrue(geoserverConnectorStoreV2_27_x.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test_1").getResponse());
-        assertTrue(geoserverConnectorStoreV2_27_x.deleteWorkspaceRequest().withWorkspaceName("workspace_test_5").getResponse());
+        assertTrue(geoserverConnectorStoreV2_28_x.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test").getResponse());
+        assertTrue(geoserverConnectorStoreV2_28_x.deleteDatastoreRequest().withWorkspaceName("workspace_test_5").withDatastoreName("datastore_test_1").getResponse());
+        assertTrue(geoserverConnectorStoreV2_28_x.deleteWorkspaceRequest().withWorkspaceName("workspace_test_5").getResponse());
     }
 
     @Test
     public void e_updateGeoserverDatastoreConnectorTest() throws Exception {
-        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStoreV2_27_x.createWorkspaceRequest();
+        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStoreV2_28_x.createWorkspaceRequest();
         createWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_6"));
         logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest.getResponseAsString());
-        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStoreV2_27_x.createDatastoreRequest();
+        GeoserverCreateDatastoreRequest createDatastoreRequest = geoserverConnectorStoreV2_28_x.createDatastoreRequest();
         createDatastoreRequest.withWorkspaceName("workspace_test_6")
                 .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test_2")
                         .withHost("localhost")
@@ -128,7 +128,7 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
                         .withUser("postgres")
                         .withPassword("0x,postgres,0x").build());
         logger.info("####################CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreRequest.getResponse());
-        GeoserverUpdateDatastoreRequest updateDatastoreRequest = geoserverConnectorStoreV2_27_x.updateDatastoreRequest();
+        GeoserverUpdateDatastoreRequest updateDatastoreRequest = geoserverConnectorStoreV2_28_x.updateDatastoreRequest();
         updateDatastoreRequest.withWorkspaceName("workspace_test_6").withStoreName("datastore_test_2")
                 .withDatastoreBody(postgisDatastoreBodyBuilder().withName("datastore_test_2")
                         .withDescription("DESCRIPTION_TEST").withEnabled(Boolean.FALSE)
@@ -139,9 +139,9 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
                         .withPassword("admin")
                         .build());
         logger.info("############################UPDATE_DATASTORE_RESPONSE : {}\n", updateDatastoreRequest.getResponse());
-        GeoserverLoadDatastoreRequest loadDatastoreRequest = geoserverConnectorStoreV2_27_x.loadDatastoreRequest();
+        GeoserverLoadDatastoreRequest loadDatastoreRequest = geoserverConnectorStoreV2_28_x.loadDatastoreRequest();
         logger.info("################################DATASTORE_UPDATED : {}\n", loadDatastoreRequest
                 .withWorkspaceName("workspace_test_6").withStoreName("datastore_test_2").getResponse());
-        assertTrue(geoserverConnectorStoreV2_27_x.deleteWorkspaceRequest().withWorkspaceName("workspace_test_6").withRecurse(TRUE).getResponse());
+        assertTrue(geoserverConnectorStoreV2_28_x.deleteWorkspaceRequest().withWorkspaceName("workspace_test_6").withRecurse(TRUE).getResponse());
     }
 }

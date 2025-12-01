@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.Geoserver
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverFeatureTypesConnectorV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public class GPGeoserverFeatureTypesConnectorV227XTest extends GPBaseGeoserverConnectorStoreV227xTest {
 
     @Test(expected = IllegalStateException.class)
     public void a_loadWorkspaceDatastoreFeatureTypesTest() throws Exception {

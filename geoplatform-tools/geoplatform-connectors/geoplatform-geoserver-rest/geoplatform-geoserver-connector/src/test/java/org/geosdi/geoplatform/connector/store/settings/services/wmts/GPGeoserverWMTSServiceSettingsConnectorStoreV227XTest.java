@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts.GP
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts.GPGeoserverWMTSWorkspaceServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts.GeoserverWMTSServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.*;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverWMTSServiceSettingsConnectorStoreV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public class GPGeoserverWMTSServiceSettingsConnectorStoreV227XTest extends GPBaseGeoserverConnectorStoreV227xTest {
 
     @Test
     public void a_loadWMTSServiceSettingsRequestTest() throws Exception {

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.store.settings.services.wcs;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wcs.GPGeoserverWCSServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wcs.GPGeoserverWCSWorkspaceServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.*;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -61,7 +61,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverWCSServiceSettingsConnectorStoreV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public class GPGeoserverWCSServiceSettingsConnectorStoreV227XTest extends GPBaseGeoserverConnectorStoreV227xTest {
 
     @Test
     public void a_loadWCSServiceSettingsRequestTest() throws Exception {

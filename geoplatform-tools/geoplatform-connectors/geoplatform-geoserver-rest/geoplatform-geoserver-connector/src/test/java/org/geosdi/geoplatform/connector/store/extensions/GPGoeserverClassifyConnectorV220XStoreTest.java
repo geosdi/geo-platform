@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.extensions;
 
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.classify.GeoserverClassifyRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
 import org.junit.Test;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.extensions.classify.GeoserverMethod.uniqueInterval;
@@ -46,7 +46,7 @@ import static org.geosdi.geoplatform.connector.geoserver.model.extensions.raster
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGoeserverClassifyConnectorV220XStoreTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public class GPGoeserverClassifyConnectorV220XStoreTest extends GPBaseGeoserverConnectorStoreV227xTest {
 
     @Test
     public void classifyTest() throws Exception {

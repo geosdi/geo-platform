@@ -109,7 +109,7 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
         this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : builder(FALSE)
                 .withIntespectorBuilder(JAXB)
                 .configure(UNWRAP_ROOT_VALUE_ENABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE, NON_NULL,
-                        ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE,
+                        ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE,
                         ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE, INDENT_OUTPUT_ENABLE)
                 .withAllCoercionConfigFeature(coercionConfigs -> {
                     coercionConfigs.findOrCreateCoercion(GPGeoserverMetadataLinks.class).setCoercion(EmptyString, AsNull);

@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWo
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
 import org.geosdi.geoplatform.connector.store.task.GeoserverWorkspaceLayersTask;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -53,7 +53,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverLayersConnectorStoreV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public class GPGeoserverLayersConnectorStoreV227XTest extends GPBaseGeoserverConnectorStoreV227xTest {
 
     @Test
     public void a_loadGeoserverWorkspaceToppLayersTest() throws Exception {

@@ -51,7 +51,7 @@ public class GPGeoserverFontsConnectorStoreTest extends GPBaseGeoserverConnector
 
     @Test
     public void a_createGeoserverFontsRequestTest() throws Exception {
-        GeoserverFontsRequest fontsRequest = geoserverConnectorStoreV2_27_x.createGeoserverFontsRequest();
+        GeoserverFontsRequest fontsRequest = geoserverConnectorStoreV2_28_x.createGeoserverFontsRequest();
         logger.info("#####################GEOSERVER_FONTS_RESPONSE : {}\n", fontsRequest.getResponse());
     }
 }

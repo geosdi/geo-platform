@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.GPG
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.GPGeoserverWFSWorkspaceServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.GeoserverWFSServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.*;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverWFSServiceSettingsConnectorStoreV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public class GPGeoserverWFSServiceSettingsConnectorStoreV227XTest extends GPBaseGeoserverConnectorStoreV227xTest {
 
     @Test
     public void a_loadWFSServiceSettingsRequestTest() throws Exception {

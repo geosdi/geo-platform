@@ -54,13 +54,13 @@ public class GPGeoserverLoggingConnectorStoreTest extends GPBaseGeoserverConnect
 
     @Test
     public void a_loadGeoserverLoggingRequestTest() throws Exception {
-        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_27_x.loadLoggingRequest();
+        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_28_x.loadLoggingRequest();
         logger.info("####################GEOSERVER_LOAD_LOGGING_RESPONSE : {}\n", loadLoggingRequest.getResponse());
     }
 
     @Test
     public void b_updateGeoserverLoggingRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_27_x
+        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_28_x
                 .updateLoggingRequest()
                 .withBody(toGeoserverLogging())
                 .getResponse());
@@ -68,13 +68,13 @@ public class GPGeoserverLoggingConnectorStoreTest extends GPBaseGeoserverConnect
 
     @Test
     public void c_loadGeoserverLoggingRequestTest() throws Exception {
-        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_27_x.loadLoggingRequest();
+        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_28_x.loadLoggingRequest();
         assertFalse(loadLoggingRequest.getResponse().isStdOutLogging());
     }
 
     @Test
     public void c_updateGeoserverLoggingRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_27_x
+        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_28_x
                 .updateLoggingRequest()
                 .withBody(toGeoserverLogging(TRUE))
                 .getResponse());

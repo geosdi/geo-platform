@@ -54,35 +54,35 @@ public class GPGeoserverCoveragesConnectorStoreTest extends GPBaseGeoserverConne
 
     @Test
     public void a_loadWorkspaceCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_27_x.loadWorkspaceCoveragesRequest();
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_28_x.loadWorkspaceCoveragesRequest();
         loadCoveragesRequest.withWorkspace("topp");
         logger.info("########################WORKSPACE_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
     @Test
     public void b_loadAllCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_27_x.loadWorkspaceCoveragesRequest();
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_28_x.loadWorkspaceCoveragesRequest();
         loadCoveragesRequest.withWorkspace("topp").withQueryList("ALL");
         logger.info("########################ALL_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
     @Test
     public void c_loadCoverageTest() throws Exception {
-        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_27_x.loadWorkspaceCoverageRequest();
+        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_28_x.loadWorkspaceCoverageRequest();
         loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem");
         logger.info("#######################LOAD_WORKSPACE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
     }
 
     @Test
     public void d_loadWorkspaceStoreCoverageTest() throws Exception {
-        GeoserverLoadStoreCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_27_x.loadWorkspaceStoreCoverageRequest();
+        GeoserverLoadStoreCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_28_x.loadWorkspaceStoreCoverageRequest();
         loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem").withStore("sfdem");
         logger.info("#######################LOAD_WORKSPACE_STORE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
     }
 
     @Test
     public void e_resetCoverageCacheTest() throws Exception {
-        GeoserverResetCoverageCacheRequest resetCoverageCacheRequest = geoserverConnectorStoreV2_27_x.resetCoverageCacheRequest();
+        GeoserverResetCoverageCacheRequest resetCoverageCacheRequest = geoserverConnectorStoreV2_28_x.resetCoverageCacheRequest();
         logger.info("#######################RESET_COVERAGE_CACHE_RESPONSE : {}\n", resetCoverageCacheRequest.withWorkspace("sf")
                 .withCoverage("sfdem").withStore("sfdem").getResponse());
     }

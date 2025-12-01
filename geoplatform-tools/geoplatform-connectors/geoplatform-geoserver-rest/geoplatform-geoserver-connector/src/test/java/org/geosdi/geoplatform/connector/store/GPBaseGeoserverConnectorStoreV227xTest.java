@@ -33,25 +33,53 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.fonts;
+package org.geosdi.geoplatform.connector.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.fonts.GeoserverFontsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.geosdi.geoplatform.connector.server.security.DigestPreemptiveSecurityConnector;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static org.junit.runners.MethodSorters.NAME_ASCENDING;
+import java.net.URI;
+
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V27x;
+import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverFontsConnectorStoreV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
+public abstract class GPBaseGeoserverConnectorStoreV227xTest {
 
-    @Test
-    public void a_createGeoserverFontsRequestTest() throws Exception {
-        GeoserverFontsRequest fontsRequest = geoserverConnectorStoreV2_26_x.createGeoserverFontsRequest();
-        logger.info("#####################GEOSERVER_FONTS_RESPONSE : {}\n", fontsRequest.getResponse());
+    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV227xTest.class);
+    //
+    private static final String geoserverURLV2_27_X = "http://150.145.141.180/geoserver/rest";
+    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_26_x;
+
+    /**
+     * @throws Exception
+     */
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        geoserverConnectorStoreV2_26_x = geoserverConnectorBuilder()
+                .withServerUrl(new URI(geoserverURLV2_27_X).toURL())
+                .withVersion(V27x.getVersion())
+                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                        .withMaxTotalConnections(80)
+                        .withDefaultMaxPerRoute(40)
+                        .withMaxRedirect(10)
+                        .build())
+                .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoservertest"))
+                .build();
+    }
+
+    /**
+     * @throws Exception
+     */
+    @AfterClass
+    public static void afterClass() throws Exception {
+        geoserverConnectorStoreV2_26_x.dispose();
     }
 }

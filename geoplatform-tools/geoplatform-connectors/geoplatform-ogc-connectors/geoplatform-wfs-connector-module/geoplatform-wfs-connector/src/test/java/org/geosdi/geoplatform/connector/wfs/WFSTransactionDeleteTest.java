@@ -48,7 +48,7 @@ public class WFSTransactionDeleteTest extends WFSTestConfigurator {
 
     @Test
     public void deleteState() throws Exception {
-        WFSTransactionRequest<TransactionResponseType> request = super.serverConnector.createTransactionRequest();
+        WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
         request.setOperation(TransactionOperation.DELETE);
         request.setTypeName(statesName);
         request.setFID("states.15");
@@ -58,7 +58,7 @@ public class WFSTransactionDeleteTest extends WFSTestConfigurator {
 
     @Test
     public void deteteSF_Roads() throws Exception {
-        WFSTransactionRequest<TransactionResponseType> request = super.serverConnector.createTransactionRequest();
+        WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
         request.setOperation(TransactionOperation.DELETE);
         request.setTypeName(sfRoads);
         request.setFID("roads.23");

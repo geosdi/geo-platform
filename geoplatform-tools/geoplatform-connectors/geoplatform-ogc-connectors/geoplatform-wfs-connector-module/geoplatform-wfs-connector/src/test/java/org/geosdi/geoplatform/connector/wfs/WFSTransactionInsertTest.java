@@ -55,7 +55,7 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
 
     @Test
     public void tasmaniaRoads() throws Exception {
-        WFSTransactionRequest<TransactionResponseType> request = super.serverConnector.createTransactionRequest();
+        WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
         request.setOperation(TransactionOperation.INSERT);
         request.setTypeName(TASMANIA_ROADS);
         AttributeDTO att = new AttributeDTO();

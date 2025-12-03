@@ -81,7 +81,7 @@ public class FeatureStreamWriterMultiThreadTest {
                 .limit(tasks)
                 .boxed()
                 .map(v -> new FeatureStreamWriterTask(startSignal, doneSignal, counter))
-                .map(runnable -> new Thread(runnable))
+                .map(Thread::new)
                 .forEach(Thread::start);
         //Do whatever you want
         startSignal.countDown();

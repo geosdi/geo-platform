@@ -41,7 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.namespace.QName;
-import java.net.URL;
+import java.net.URI;
 
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
@@ -61,14 +61,14 @@ public class WFSTestConfigurator {
     static {
         try {
             serverConnector = newConnector()
-                    .withServerUrl(new URL(wfsURL))
+                    .withServerUrl(new URI(wfsURL).toURL())
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(150)
                             .withDefaultMaxPerRoute(80)
                             .withMaxRedirect(20)
                             .build()).build();
             secureServerConnector = newConnector()
-                    .withServerUrl(new URL(wfsSecureURL))
+                    .withServerUrl(new URI(wfsSecureURL).toURL())
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(150)
                             .withDefaultMaxPerRoute(80)
@@ -77,7 +77,7 @@ public class WFSTestConfigurator {
                     .withClientSecurity(new BasicPreemptiveSecurityConnector("admin", "geoservertest"))
                     .build();
             httpsServerConnector = newConnector()
-                    .withServerUrl(new URL(wfsHttpsURL))
+                    .withServerUrl(new URI(wfsHttpsURL).toURL())
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(30)
                             .withDefaultMaxPerRoute(10)

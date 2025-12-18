@@ -1568,7 +1568,7 @@
         <geonetwork-version>1.1</geonetwork-version>
 
         <geoserver-manager-version>1.7</geoserver-manager-version>
-        <geojson-jackson-version>1.15</geojson-jackson-version>
+        <geojson-jackson-version>3.0</geojson-jackson-version>
         <hsqldb-version>2.7.4</hsqldb-version>
         <geodb-version>0.9</geodb-version>
         <junit.version>4.13.2</junit.version>

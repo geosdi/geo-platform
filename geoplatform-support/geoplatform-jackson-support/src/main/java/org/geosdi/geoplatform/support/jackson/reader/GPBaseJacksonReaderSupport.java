@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.support.jackson.reader;
 
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import java.io.*;
@@ -56,14 +57,14 @@ import static javax.annotation.meta.When.NEVER;
  */
 public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonReaderSupport<T> {
 
-    protected final JacksonSupport jacksonSupport;
+    protected final JacksonSupport<JsonMapper> jacksonSupport;
     protected final Class<T> entityClass;
 
     /**
      * @param theJacksonSupport
      * @param theEntityClass
      */
-    public GPBaseJacksonReaderSupport(@Nonnull(when = NEVER) JacksonSupport theJacksonSupport, @Nonnull(when = NEVER) Class<T> theEntityClass) {
+    public GPBaseJacksonReaderSupport(@Nonnull(when = NEVER) JacksonSupport<JsonMapper> theJacksonSupport, @Nonnull(when = NEVER) Class<T> theEntityClass) {
         checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport must not be null.");
         checkArgument(theEntityClass != null, "The Parameter EntityClass must not be null.");
         this.jacksonSupport = theJacksonSupport;

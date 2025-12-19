@@ -42,10 +42,12 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.support.ElasticSearchRestSupportDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -71,7 +73,7 @@ public abstract class ElasticSearchRestBaseDAO<D extends Document> extends Elast
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected ElasticSearchRestBaseDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
+    protected ElasticSearchRestBaseDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable JacksonSupport<JsonMapper> theJacksonSupport) {
        super(theEntityClass, theJacksonSupport);
     }
 

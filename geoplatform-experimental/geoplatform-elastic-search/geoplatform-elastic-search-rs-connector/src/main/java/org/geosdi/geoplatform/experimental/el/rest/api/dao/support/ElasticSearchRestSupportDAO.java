@@ -41,9 +41,10 @@ import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.index.settings.GPElasticSearchRestIndexSettings;
 import org.geosdi.geoplatform.experimental.el.rest.api.mapper.GPElasticSearchRestMapper;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -69,7 +70,7 @@ public abstract class ElasticSearchRestSupportDAO<D extends Document> implements
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected ElasticSearchRestSupportDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
+    protected ElasticSearchRestSupportDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable JacksonSupport<JsonMapper> theJacksonSupport) {
         this.elasticSearchRestMapper = new GPElasticSearchRestMapper<D>(theEntityClass, theJacksonSupport) {
 
             private String mapperName;

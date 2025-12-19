@@ -54,6 +54,8 @@ import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.api.response.IGPUpdateResponse;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.async.ElasticSearchRestAsyncDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -81,7 +83,7 @@ public abstract class ElasticSearchRestDAO<D extends Document> extends ElasticSe
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected ElasticSearchRestDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
+    protected ElasticSearchRestDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable JacksonSupport<JsonMapper> theJacksonSupport) {
         super(theEntityClass, theJacksonSupport);
     }
 

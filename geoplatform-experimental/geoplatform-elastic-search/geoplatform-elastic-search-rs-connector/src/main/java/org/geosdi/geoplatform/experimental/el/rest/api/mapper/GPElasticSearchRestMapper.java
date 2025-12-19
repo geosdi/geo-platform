@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.mapper.GPBaseMapper;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -56,7 +57,7 @@ public abstract class GPElasticSearchRestMapper<D extends Document> extends GPBa
      * @param theDocumentClass
      * @param theReader
      */
-    public GPElasticSearchRestMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport theReader) {
+    public GPElasticSearchRestMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport<JsonMapper> theReader) {
         super(theDocumentClass, theReader);
     }
 

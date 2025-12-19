@@ -40,6 +40,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.mapper.GPBaseJacksonMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -60,7 +61,7 @@ public abstract class GPBaseMapper<D extends Document> extends GPBaseJacksonMapp
      * @param theDocumentClass
      * @param theReader
      */
-    protected GPBaseMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport theReader) {
+    protected GPBaseMapper(@Nonnull(when = NEVER) Class<D> theDocumentClass, @Nullable JacksonSupport<JsonMapper> theReader) {
         super(theDocumentClass, theReader);
         this.jsonRootName = findJsonRootName();
     }

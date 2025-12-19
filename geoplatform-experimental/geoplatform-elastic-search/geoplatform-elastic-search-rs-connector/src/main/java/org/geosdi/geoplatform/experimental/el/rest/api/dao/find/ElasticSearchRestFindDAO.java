@@ -51,6 +51,8 @@ import org.geosdi.geoplatform.experimental.el.search.bool.BooleanExactSearch;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -79,7 +81,7 @@ public abstract class ElasticSearchRestFindDAO<D extends Document> extends Pagea
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected ElasticSearchRestFindDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
+    protected ElasticSearchRestFindDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable JacksonSupport<JsonMapper> theJacksonSupport) {
         super(theEntityClass, theJacksonSupport);
     }
 

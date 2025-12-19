@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.reader.GPBaseJacksonReaderSupport;
 import tools.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -62,7 +63,7 @@ public class GPBaseJacksonMapper<T extends Object> extends GPBaseJacksonReaderSu
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    public GPBaseJacksonMapper(@Nonnull(when = NEVER) Class<T> theEntityClass, @Nullable JacksonSupport theJacksonSupport) {
+    public GPBaseJacksonMapper(@Nonnull(when = NEVER) Class<T> theEntityClass, @Nullable JacksonSupport<JsonMapper> theJacksonSupport) {
         super(((theJacksonSupport != null) ? theJacksonSupport : DEFAULT_MAPPER), theEntityClass);
     }
 

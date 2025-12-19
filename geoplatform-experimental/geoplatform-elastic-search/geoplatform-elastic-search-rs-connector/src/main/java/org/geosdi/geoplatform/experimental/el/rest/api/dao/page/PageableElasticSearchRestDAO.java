@@ -47,6 +47,8 @@ import org.geosdi.geoplatform.experimental.el.dao.PageResult;
 import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.ElasticSearchRestIndexDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -70,7 +72,7 @@ public abstract class PageableElasticSearchRestDAO<D extends Document> extends E
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    protected PageableElasticSearchRestDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable GPJacksonSupport theJacksonSupport) {
+    protected PageableElasticSearchRestDAO(@Nonnull(when = NEVER) Class<D> theEntityClass, @Nullable JacksonSupport<JsonMapper> theJacksonSupport) {
         super(theEntityClass, theJacksonSupport);
     }
 

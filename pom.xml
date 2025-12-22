@@ -1538,7 +1538,7 @@
         <jibx-version>1.4.2</jibx-version>
 
 
-        <aspectj-version>1.9.25</aspectj-version>
+        <aspectj-version>1.9.25.1</aspectj-version>
         <jetty-version>12.1.5</jetty-version>
 
         <postgresql-version>42.7.8</postgresql-version>

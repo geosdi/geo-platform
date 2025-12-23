@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPBaseJacksonMapper<T extends Object> extends GPBaseJacksonReaderSupport<T> implements GPJacksonMapper<T> {
+public class GPBaseJacksonMapper<T extends Object> extends GPBaseJacksonReaderSupport<T, JsonMapper> implements GPJacksonMapper<T> {
 
     /**
      * <p>{@link JacksonSupport} can be null, in this case will be used {@link GPJacksonMapper#DEFAULT_MAPPER} with only

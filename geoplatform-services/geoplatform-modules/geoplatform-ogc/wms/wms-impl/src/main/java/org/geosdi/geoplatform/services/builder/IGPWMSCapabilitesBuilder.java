@@ -61,8 +61,7 @@ public interface IGPWMSCapabilitesBuilder extends Serializable {
      * @return {@link List<RasterLayerDTO>}
      * @throws ResourceNotFoundFault
      */
-    List<RasterLayerDTO> loadWMSCapabilities(@Nonnull(when = NEVER) String serverUrl, @Nullable String token,
-            @Nullable String authkey, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault;
+    List<RasterLayerDTO> loadWMSCapabilities(@Nonnull(when = NEVER) String serverUrl, @Nullable String token, @Nullable String authkey, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault;
 
     /**
      * @param serverUrl
@@ -74,7 +73,5 @@ public interface IGPWMSCapabilitesBuilder extends Serializable {
      * @return {@link List<RasterLayerDTO>}
      * @throws ResourceNotFoundFault
      */
-    List<RasterLayerDTO> loadWMSCapabilitiesAuth(@Nonnull(when = NEVER) String serverUrl, @Nullable String token,
-            @Nullable String authkey, @Nullable List<WMSHeaderParam> headers, @Nullable String userName,
-            @Nullable String password) throws ResourceNotFoundFault;
+    List<RasterLayerDTO> loadWMSCapabilitiesAuth(@Nonnull(when = NEVER) String serverUrl, @Nullable String token, @Nullable String authkey, @Nullable List<WMSHeaderParam> headers, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault;
 }

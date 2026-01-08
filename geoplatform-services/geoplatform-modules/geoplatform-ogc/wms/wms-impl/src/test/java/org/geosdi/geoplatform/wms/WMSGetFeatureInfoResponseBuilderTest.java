@@ -77,6 +77,7 @@ public class WMSGetFeatureInfoResponseBuilderTest {
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
+
     @Test
     public void a_loadWMSGetFeatureInfoResponseBuilderTest() throws Exception {
         GPWMSGetFeatureInfoRequest request = new GPWMSGetFeatureInfoRequest();

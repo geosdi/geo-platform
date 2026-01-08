@@ -77,8 +77,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.zip.GZIPInputStream;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Long.valueOf;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -378,10 +378,11 @@ public class GeoSDIHttpClient5 implements HTTPClient {
         private InputStream responseBodyAsStream;
 
         /**
-         * @param response
+         * @param theResponse
          */
-        HttpMethodResponse(CloseableHttpResponse response) {
-            this.response = response;
+        HttpMethodResponse(CloseableHttpResponse theResponse) {
+            checkArgument(theResponse != null, "The Parameter response must not be null");
+            this.response = theResponse;
         }
 
         public void dispose() {
@@ -401,10 +402,17 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             }
         }
 
+        /**
+         * @return {@link String}
+         */
         public String getContentType() {
             return this.getResponseHeader("Content-Type");
         }
 
+        /**
+         * @param headerName
+         * @return {@link String}
+         */
         public String getResponseHeader(String headerName) {
             try {
                 Header responseHeader = this.response.getHeader(headerName);
@@ -414,20 +422,12 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             }
         }
 
+        /**
+         * @return {@link InputStream}
+         * @throws IOException
+         */
         public InputStream getResponseStream() throws IOException {
-            if (this.responseBodyAsStream == null) {
-                this.responseBodyAsStream = this.response.getEntity().getContent();
-                try {
-                    Header header = this.response.getHeader("Content-Encoding");
-                    if (header != null && "gzip".equals(header.getValue())) {
-                        this.responseBodyAsStream = new GZIPInputStream(this.responseBodyAsStream);
-                    }
-                } catch (Exception ex) {
-
-                }
-            }
-
-            return this.responseBodyAsStream;
+            return this.responseBodyAsStream = ((this.responseBodyAsStream == null) ? this.response.getEntity().getContent() : this.responseBodyAsStream);
         }
 
         /**

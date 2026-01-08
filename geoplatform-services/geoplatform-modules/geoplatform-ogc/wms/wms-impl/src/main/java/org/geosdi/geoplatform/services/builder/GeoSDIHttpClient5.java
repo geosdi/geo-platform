@@ -36,6 +36,16 @@
 package org.geosdi.geoplatform.services.builder;
 
 import com.google.common.collect.Lists;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
@@ -68,18 +78,8 @@ import org.geotools.http.HTTPResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.zip.GZIPInputStream;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Long.valueOf;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -370,17 +370,11 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             return port;
         }
         String scheme = uri.getScheme();
-        switch (scheme) {
-            case "https":
-                port = 443;
-                break;
-            case "http":
-                port = 80;
-                break;
-            default:
-                throw new IllegalStateException("Scheme doesn't recognize");
-        }
-        return port;
+        return switch (scheme) {
+            case "https" -> 443;
+            case "http" -> 80;
+            default -> throw new IllegalStateException("Scheme doesn't recognize");
+        };
     }
 
     private static class HttpMethodResponse implements HTTPResponse {
@@ -389,10 +383,11 @@ public class GeoSDIHttpClient5 implements HTTPClient {
         private InputStream responseBodyAsStream;
 
         /**
-         * @param response
+         * @param theResponse
          */
-        HttpMethodResponse(CloseableHttpResponse response) {
-            this.response = response;
+        HttpMethodResponse(CloseableHttpResponse theResponse) {
+            checkArgument(theResponse != null, "The Parameter response must not be null");
+            this.response = theResponse;
         }
 
         public void dispose() {
@@ -412,10 +407,17 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             }
         }
 
+        /**
+         * @return {@link String}
+         */
         public String getContentType() {
             return this.getResponseHeader("Content-Type");
         }
 
+        /**
+         * @param headerName
+         * @return {@link String}
+         */
         public String getResponseHeader(String headerName) {
             try {
                 Header responseHeader = this.response.getHeader(headerName);
@@ -425,20 +427,12 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             }
         }
 
+        /**
+         * @return {@link InputStream}
+         * @throws IOException
+         */
         public InputStream getResponseStream() throws IOException {
-            if (this.responseBodyAsStream == null) {
-                this.responseBodyAsStream = this.response.getEntity().getContent();
-                try {
-                    Header header = this.response.getHeader("Content-Encoding");
-                    if (header != null && "gzip".equals(header.getValue())) {
-                        this.responseBodyAsStream = new GZIPInputStream(this.responseBodyAsStream);
-                    }
-                } catch (Exception ex) {
-
-                }
-            }
-
-            return this.responseBodyAsStream;
+            return this.responseBodyAsStream = ((this.responseBodyAsStream == null) ? this.response.getEntity().getContent() : this.responseBodyAsStream);
         }
 
         /**

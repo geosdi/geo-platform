@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.services.builder;
 
+import java.net.URI;
+import javax.annotation.Nonnull;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
@@ -47,8 +49,6 @@ import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
-import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.concurrent.TimeUnit.MINUTES;
@@ -105,7 +105,7 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
         for (GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement : request.getWmsFeatureInfoElements()) {
             try {
                 IGPWMSConnectorStoreV111 wmsServerConnector = wmsConnectorBuilderPoolV111()
-                        .withServerUrl(new URL(wmsGetFeatureInfoElement.getWmsServerURL()))
+                        .withServerUrl(new URI(wmsGetFeatureInfoElement.getWmsServerURL()).toURL())
                         .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                                 .withMaxTotalConnections(60)
                                 .withDefaultMaxPerRoute(30)

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.wms;
 
+import java.util.List;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder;
 import org.geosdi.geoplatform.services.builder.IGPWMSCapabilitesBuilder;
@@ -45,7 +46,6 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

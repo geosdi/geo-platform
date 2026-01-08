@@ -35,6 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.wms;
 
+import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import javax.xml.parsers.SAXParserFactory;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -43,10 +47,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;

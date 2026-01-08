@@ -35,23 +35,24 @@
  */
 package org.geosdi.geoplatform.wms;
 
+import java.io.InputStream;
+import java.util.Arrays;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.json.JsonMapper;
 
-import java.io.InputStream;
-import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.io.File.separator;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Thread.currentThread;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
@@ -59,6 +60,7 @@ import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.services.builder.WMSGetFeatureInfoResponseBuilder.wmsGetFeatureInfoResponseBuilder;
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -72,9 +74,12 @@ public class WMSGetFeatureInfoResponseBuilderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoResponseBuilderTest.class);
     //
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE, NON_NULL);
+    private static final JacksonSupport<JsonMapper> JACKSON_SUPPORT = builder(FALSE)
+            .withIntespectorBuilder(JAKARTA)
+            .configure(UNWRAP_ROOT_VALUE_DISABLE,
+                    FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
+                    INDENT_OUTPUT_ENABLE, NON_NULL)
+            .build();
 
     @Test
     public void a_loadWMSGetFeatureInfoResponseBuilderTest() throws Exception {

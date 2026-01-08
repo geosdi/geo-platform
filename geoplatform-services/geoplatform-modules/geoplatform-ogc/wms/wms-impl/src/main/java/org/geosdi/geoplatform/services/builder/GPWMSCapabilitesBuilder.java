@@ -94,6 +94,7 @@ public class GPWMSCapabilitesBuilder implements IGPWMSCapabilitesBuilder {
             logger.error("MalformedURLException: {}", e.getMessage());
             throw new ResourceNotFoundFault("Malformed URL");
         } catch (ServiceException e) {
+            e.printStackTrace();
             logger.error("ServiceException: {}", e.getMessage());
             throw new ResourceNotFoundFault("Invalid URL");
         } catch (IOException e) {

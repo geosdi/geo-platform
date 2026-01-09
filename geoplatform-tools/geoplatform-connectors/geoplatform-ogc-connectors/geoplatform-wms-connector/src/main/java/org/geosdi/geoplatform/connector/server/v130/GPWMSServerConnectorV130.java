@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.v130;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.GPBaseWMSServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -58,8 +59,7 @@ public class GPWMSServerConnectorV130 extends GPBaseWMSServerConnector<GPWMSGetC
      * @param pooledConnectorConfig
      * @param securityConnector
      */
-    protected GPWMSServerConnectorV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector) {
+    protected GPWMSServerConnectorV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector) {
         super(server, pooledConnectorConfig, securityConnector, V130);
     }
 
@@ -68,8 +68,18 @@ public class GPWMSServerConnectorV130 extends GPBaseWMSServerConnector<GPWMSGetC
      * @param pooledConnectorConfig
      * @param securityConnector
      */
-    protected GPWMSServerConnectorV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory) {
+    protected GPWMSServerConnectorV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable DefaultClientTlsStrategy theDefaultClientTlsStrategy) {
+        super(server, pooledConnectorConfig, securityConnector, theDefaultClientTlsStrategy, V130);
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param theSslConnectionSocketFactory
+     */
+    @Deprecated
+    protected GPWMSServerConnectorV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory) {
         super(server, pooledConnectorConfig, securityConnector, theSslConnectionSocketFactory, V130);
     }
 

@@ -42,14 +42,11 @@ import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
 import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
-import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
-import org.apache.hc.client5.http.socket.PlainConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.hc.core5.http.HttpHost;
-import org.apache.hc.core5.http.config.RegistryBuilder;
 import org.apache.hc.core5.http.impl.DefaultConnectionReuseStrategy;
 import org.apache.hc.core5.http.impl.io.HttpRequestExecutor;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
@@ -69,6 +66,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder.create;
+import static org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy.createSystemDefault;
+import static org.apache.hc.client5.http.ssl.NoopHostnameVerifier.INSTANCE;
 import static org.apache.hc.core5.util.TimeValue.of;
 
 /**
@@ -86,6 +86,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     private final GPPooledConnectorConfig pooledConnectorConfig;
     private final HttpClientProxyConfiguration proxyConfiguration;
     private final SSLConnectionSocketFactory sslConnectionSocketFactory;
+    private final DefaultClientTlsStrategy defaultClientTlsStrategy;
     private volatile CloseableHttpClient httpClient;
 
     /**
@@ -102,7 +103,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param theProxyConfiguration
      */
     protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, HttpClientProxyConfiguration theProxyConfiguration) {
-        this(theUrl, theSecurityConnector, DEFAULT_POOLED, theProxyConfiguration, null);
+        this(theUrl, theSecurityConnector, DEFAULT_POOLED, theProxyConfiguration, null, null);
     }
 
     /**
@@ -126,10 +127,20 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param theUrl
      * @param theSecurityConnector
      * @param thePooledConnectorConfig
-     * @param theSSLConnectionSocketFactory
+     * @param theDefaultClientTlsStrategy
      */
-    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, SSLConnectionSocketFactory theSSLConnectionSocketFactory) {
-        this(theUrl, theSecurityConnector, thePooledConnectorConfig, null, theSSLConnectionSocketFactory);
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, DefaultClientTlsStrategy theDefaultClientTlsStrategy) {
+        this(theUrl, theSecurityConnector, thePooledConnectorConfig, null, theDefaultClientTlsStrategy);
+    }
+
+    /**
+     * @param theUrl
+     * @param theSecurityConnector
+     * @param thePooledConnectorConfig
+     * @param theSslConnectionSocketFactory
+     */
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, SSLConnectionSocketFactory theSslConnectionSocketFactory) {
+        this(theUrl, theSecurityConnector, thePooledConnectorConfig, null, null);
     }
 
     /**
@@ -138,12 +149,29 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param thePooledConnectorConfig
      * @param theProxyConfiguration
      */
-    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, HttpClientProxyConfiguration theProxyConfiguration, SSLConnectionSocketFactory theSSLConnectionSocketFactory) {
+    @Deprecated
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, HttpClientProxyConfiguration theProxyConfiguration, SSLConnectionSocketFactory theSslConnectionSocketFactory, DefaultClientTlsStrategy theDefaultClientTlsStrategy) {
         this.url = theUrl;
         this.securityConnector = theSecurityConnector;
         this.pooledConnectorConfig = ((thePooledConnectorConfig != null) ? thePooledConnectorConfig : DEFAULT_POOLED);
         this.proxyConfiguration = theProxyConfiguration;
-        this.sslConnectionSocketFactory = (theSSLConnectionSocketFactory != null) ? theSSLConnectionSocketFactory : this.createDefaultSSLConnectionSocketFactory();
+        this.sslConnectionSocketFactory = theSslConnectionSocketFactory != null ? theSslConnectionSocketFactory : this.createDefaultSSLConnectionSocketFactory();
+        this.defaultClientTlsStrategy = (theDefaultClientTlsStrategy != null) ? theDefaultClientTlsStrategy : this.createDefaultClientTlsStrategy();
+    }
+
+    /**
+     * @param theUrl
+     * @param theSecurityConnector
+     * @param thePooledConnectorConfig
+     * @param theProxyConfiguration
+     */
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, HttpClientProxyConfiguration theProxyConfiguration, DefaultClientTlsStrategy theDefaultClientTlsStrategy) {
+        this.url = theUrl;
+        this.securityConnector = theSecurityConnector;
+        this.pooledConnectorConfig = ((thePooledConnectorConfig != null) ? thePooledConnectorConfig : DEFAULT_POOLED);
+        this.proxyConfiguration = theProxyConfiguration;
+        this.sslConnectionSocketFactory = null;
+        this.defaultClientTlsStrategy = (theDefaultClientTlsStrategy != null) ? theDefaultClientTlsStrategy : this.createDefaultClientTlsStrategy();
     }
 
     /**
@@ -285,20 +313,36 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @return {@link HttpClientConnectionManager}
      */
     protected HttpClientConnectionManager createClientConnectionManager() {
-        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(RegistryBuilder.<ConnectionSocketFactory>create()
-                .register("http", PlainConnectionSocketFactory.getSocketFactory())
-                .register("https", this.sslConnectionSocketFactory).build());
-        cm.setMaxTotal(this.pooledConnectorConfig.getMaxTotalConnections());
-        cm.setDefaultMaxPerRoute(this.pooledConnectorConfig.getDefaultMaxPerRoute());
-        cm.setDefaultConnectionConfig(ConnectionConfig.custom()
+        return create()
+                .setTlsSocketStrategy(this.defaultClientTlsStrategy)
+                .setMaxConnTotal(this.pooledConnectorConfig.getMaxTotalConnections())
+                .setMaxConnPerRoute(this.pooledConnectorConfig.getDefaultMaxPerRoute())
+                .setDefaultConnectionConfig(ConnectionConfig.custom()
                         .setConnectTimeout(this.pooledConnectorConfig.getConnectionTimeout())
-                .build());
-        return cm;
+                        .build())
+                .build();
     }
 
     /**
+     * @return {@link DefaultClientTlsStrategy}
+     */
+    protected DefaultClientTlsStrategy createDefaultClientTlsStrategy()  {
+        try {
+            SSLContextBuilder builder = new SSLContextBuilder();
+            builder.loadTrustMaterial(null, (chain, authType) -> true);
+            return  new DefaultClientTlsStrategy(builder.build(), INSTANCE);
+        } catch (Exception ex) {
+            logger.warn("#####################Error to createDefaultSSLConnectionSocketFactory cause : {}\n", ex.getMessage());
+            ex.printStackTrace();
+        }
+        return createSystemDefault();
+    }
+
+    /**
+     * Deprecated use {@link GPAbstractServerConnector#createDefaultHttpClient()}
      * @return {@link SSLConnectionSocketFactory}
      */
+    @Deprecated
     protected SSLConnectionSocketFactory createDefaultSSLConnectionSocketFactory()  {
         try {
             SSLContextBuilder builder = new SSLContextBuilder();

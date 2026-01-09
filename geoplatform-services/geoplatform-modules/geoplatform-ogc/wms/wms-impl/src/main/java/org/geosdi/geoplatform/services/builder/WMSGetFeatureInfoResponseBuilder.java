@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.services.builder;
 
-import java.net.URI;
-import javax.annotation.Nonnull;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
@@ -49,6 +47,8 @@ import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
+import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.concurrent.TimeUnit.MINUTES;
@@ -110,10 +110,10 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
                                 .withMaxTotalConnections(60)
                                 .withDefaultMaxPerRoute(30)
                                 .withMaxRedirect(15)
-                                .withConnectionTimeout(of(15l, SECONDS))
-                                .withRequestConnectionTimeout(of(5l, SECONDS))
-                                .withResponseConnectionTimeout(of(3l, SECONDS))
-                                .withConnectionKeepAlive(of(3l, MINUTES))
+                                .withConnectionTimeout(of(15L, SECONDS))
+                                .withRequestConnectionTimeout(of(5L, SECONDS))
+                                .withResponseConnectionTimeout(of(3L, SECONDS))
+                                .withConnectionKeepAlive(of(3L, MINUTES))
                                 .build()).build();
                 GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoV111Request = wmsServerConnector.createGetFeatureInfoRequest();
                 GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(request.getBoundingBox().toWMSBoundingBox(),
@@ -125,7 +125,7 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
                         .withX(request.getPoint().getX())
                         .withY(request.getPoint().getY())
                         .withInfoFormat((format != null) ? format.toWMSFeatureInfoFormat() : GML2).getResponse();
-                logger.trace("########################FOUND : {}\n", response);
+                logger.debug("########################FOUND : {}\n", response);
                 wmsGetFeatureInfoResponse.addFeature(response);
             } catch (Exception ex) {
                 wmsErrorStrategy.buildError(wmsGetFeatureInfoElement, ex);

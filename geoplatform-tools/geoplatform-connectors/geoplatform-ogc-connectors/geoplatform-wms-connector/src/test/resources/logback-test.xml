@@ -25,7 +25,7 @@
     <logger name="org.geosdi.geoplatform.connector.bridge.store.GPWMSGetFeatureInfoReaderStore" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.bridge.finder.GPWMSGetFeatureInfoReaderFinder" level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader" level="info"/>
-    <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml3Reader" level="info"/>
+    <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml3Reader" level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.parser.WMSGml2GeoJsonParser" level="info"/>
     <logger name="org.geosdi.geoplatform.stax.reader.factory.XMLInputFactoryJDKBuilder" level="debug"/>
     <logger name="org.geosdi.geoplatform.stax.reader.factory.XMLInputFactoryStax2Builder" level="debug"/>

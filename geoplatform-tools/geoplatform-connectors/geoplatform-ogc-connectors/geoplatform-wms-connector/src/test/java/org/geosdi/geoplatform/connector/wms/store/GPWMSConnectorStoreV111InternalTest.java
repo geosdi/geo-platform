@@ -140,16 +140,16 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("ws_vito:layer_importer148")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(12)
-                .withInfoFormat(GML2).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2).withX(50).withY(50).getResponseAsString());
     }
 
     @Test
     public void g_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
-        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(14.245262672702665, 40.858065563297714, 14.249597122470732, 40.86240001306578);
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("ws_vito:layer_importer148").collect(toSet()),
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(15.585370771586895, 40.51713790744543, 15.72407316416502, 40.655840300023556);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("ws_vito:fluids_rete_zk").collect(toSet()),
                 "EPSG:4326", "101", "101");
-        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("ws_vito:layer_importer148")
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("ws_vito:fluids_rete_zk")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(12)
                 .withInfoFormat(GML3).withX(50).withY(50).getResponse());

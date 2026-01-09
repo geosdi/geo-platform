@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:ws_vito="http://www.geosdi.org/ws_vito"
+        xmlns:wfs="http://www.opengis.net/wfs"
+        xmlns:gml="http://www.opengis.net/gml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://150.145.141.180/geoserver/schemas/wfs/1.1.0/wfs.xsd http://www.geosdi.org/ws_vito http://150.145.141.180/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=ws_vito%3Alayer_importer148">
+    <gml:featureMembers>
+        <ws_vito:layer_importer148 gml:id="layer_importer148.4">
+            <ws_vito:description>&lt;img src="https://lh5.googleusercontent.com/OABTa2XGPsrebAV9CqsWZMClZFFYU-vDSmQ4Z51wRS9-LVzeVq0JK2ZAj3Ux0EDwLid5qxZkH8M9JumFUQA7nSVb-ojMrxZqQN3GVZc9DvWg0T6ihYNQEG9Yeax0v_w" height="200" width="auto" /&gt;&lt;br&gt;&lt;br&gt;N.1 Dome e N.2 RT per la Rampa San Gennaro dei Poveri su palo preesistente. &lt;br&gt;N. 2 RT per Via S.Gennaro dei Poveri direzione ospedale su un secondo palo preesistente.&lt;br&gt;&lt;br&gt;&lt;img src="https://lh4.googleusercontent.com/OdaeT-IjqgcoGlFOiUboCE5KmoXgCjb0mJqCevD4ybXjVxr_lf2TnMPdC_aoJRHGY7FuKtufgkPHOfft3SNvZImy9ssuvsEkZpheOVTC0Jozd-oqWkMYSn-Z31Hr0ws" height="200" width="auto" /&gt;&lt;br&gt;&lt;br&gt;&lt;img src="https://lh3.googleusercontent.com/QLUNMmOkDmchN75Eqks4wPlq5hc1N4XoQm_7tBd-MWToHoTYj-FiLNKKHVxGlRFBuXoFkgfidbNNRvVE52fd4m80rzIksRs6nERfz3kL6aAcmnHxP-LB0-oYmHOjKyo" height="200" width="auto" /&gt;&lt;br&gt;&lt;br&gt;&lt;img src="https://lh3.googleusercontent.com/_Egc2wPikTeNFOcbWihgduDaNaGo8LzD1RvvHMT1QTU-TQFpcbf9djPRxXR7IvdQY9P45V8MVY3VYg6tdRV5Jo9KkqknwlCITKwSpHH63ElbN9xexyuVd3pln1kTy9w" height="200" width="auto" /&gt;</ws_vito:description>
+            <ws_vito:name>5 - Via San Vincenzo, 20</ws_vito:name>
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.2475697 40.8602991</gml:pos>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>https://lh5.googleusercontent.com/OABTa2XGPsrebAV9CqsWZMClZFFYU-vDSmQ4Z51wRS9-LVzeVq0JK2ZAj3Ux0EDwLid5qxZkH8M9JumFUQA7nSVb-ojMrxZqQN3GVZc9DvWg0T6ihYNQEG9Yeax0v_w https://lh4.googleusercontent.com/OdaeT-IjqgcoGlFOiUboCE5KmoXgCjb0mJqCevD4ybXjVxr_lf2TnMPdC_aoJRHGY7FuKtufgkPHOfft3SNvZImy9ssuvsEkZpheOVTC0Jozd-oqWkMYSn-Z31Hr0ws https://lh3.googleusercontent.com/QLUNMmOkDmchN75Eqks4wPlq5hc1N4XoQm_7tBd-MWToHoTYj-FiLNKKHVxGlRFBuXoFkgfidbNNRvVE52fd4m80rzIksRs6nERfz3kL6aAcmnHxP-LB0-oYmHOjKyo https://lh3.googleusercontent.com/_Egc2wPikTeNFOcbWihgduDaNaGo8LzD1RvvHMT1QTU-TQFpcbf9djPRxXR7IvdQY9P45V8MVY3VYg6tdRV5Jo9KkqknwlCITKwSpHH63ElbN9xexyuVd3pln1kTy9w</ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+        <ws_vito:layer_importer148 gml:id="layer_importer148.5">
+            <ws_vito:description>&lt;img src="https://lh3.googleusercontent.com/OB8K9S0EOj2_mx1xxSakmrsH_3iW3JJnQowgfHgdiXAkMWN4Fs_CSi_1k3uboZhgBqDolthTSw83j-DIfRfawv3kn_BIw_eCteIkNoofsDRqVP_1iNtOO6Xo_t5jMapu" height="200" width="auto" /&gt;&lt;br&gt;&lt;br&gt;N.1 RT nel senso di marcia in salita. Rimuovere n.1 dissuasore.</ws_vito:description>
+            <ws_vito:name>5Bis - Salita Principi</ws_vito:name>
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.2473681 40.8600678</gml:pos>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>https://lh3.googleusercontent.com/OB8K9S0EOj2_mx1xxSakmrsH_3iW3JJnQowgfHgdiXAkMWN4Fs_CSi_1k3uboZhgBqDolthTSw83j-DIfRfawv3kn_BIw_eCteIkNoofsDRqVP_1iNtOO6Xo_t5jMapu</ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

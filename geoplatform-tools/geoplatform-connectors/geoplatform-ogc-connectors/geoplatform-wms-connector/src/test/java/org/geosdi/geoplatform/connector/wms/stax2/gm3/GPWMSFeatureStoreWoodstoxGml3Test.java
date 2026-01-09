@@ -169,4 +169,10 @@ public class GPWMSFeatureStoreWoodstoxGml3Test extends WMSGetFeatureInfoWoodstox
         logger.info("#######################FEATURE_STORE_CARABINIERI_SICILIA : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CarabinieriSiciliaWoodstox.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void a_p_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_WS_VITO_LAYER_IMPORTER148 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("WS_Vito_Layer_Importer148.xml"))));
+    }
 }

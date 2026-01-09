@@ -80,7 +80,8 @@ public class WMSGetFeatureInfoReaderGml3FileLoaderTest extends WMSGetFeatureInfo
                 "EventiIngv.xml", "Pluviometri.xml", "ArcoFerroviarioSicilia.xml", "EsitiAgibilitaFabbricati.xml",
                 "CarabinieriSicilia.xml", "SalineStoriche.xml", "CBLN_COMPRENSORIO.xml", "ETPI_AMBITO_TERRITORIALE.xml",
                 "ETPI_RIPOPOLAMENTO.xml", "PPR06_Ambiti_di_paesaggio_Limiti_d'ambito.xml", "CinemaTeatri.xml",
-                "AcquePubbliche.xml", "cen_abi_a_polygon.xml", "Ac0104021_province.xml", "SpecchiAcqua.xml");
+                "AcquePubbliche.xml", "cen_abi_a_polygon.xml", "Ac0104021_province.xml", "SpecchiAcqua.xml",
+                "IDT_FV04G_QUADRO_UNIONE.xml", "WS_Vito_Layer_Importer148.xml");
     }
 
     /**

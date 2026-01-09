@@ -370,11 +370,17 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             return port;
         }
         String scheme = uri.getScheme();
-        return switch (scheme) {
-            case "https" -> 443;
-            case "http" -> 80;
-            default -> throw new IllegalStateException("Scheme doesn't recognize");
-        };
+        switch (scheme) {
+            case "https":
+                port = 443;
+                break;
+            case "http":
+                port = 80;
+                break;
+            default:
+                throw new IllegalStateException("Scheme doesn't recognize");
+        }
+        return port;
     }
 
     private static class HttpMethodResponse implements HTTPResponse {

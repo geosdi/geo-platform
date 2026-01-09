@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.v111;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -65,7 +66,20 @@ public class GPWMSConnectorStoreV111 extends GPWMSConnectorStore<WMSGetCapabilit
      * @param server
      * @param pooledConnectorConfig
      * @param securityConnector
+     * @param theDefaultClientTlsStrategy
      */
+    protected GPWMSConnectorStoreV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable DefaultClientTlsStrategy theDefaultClientTlsStrategy ) {
+        super(new GPWMSServerConnectorV111(server, pooledConnectorConfig, securityConnector, theDefaultClientTlsStrategy));
+    }
+
+    /**
+     * Deprecated use {@link GPWMSConnectorStoreV111#GPWMSConnectorStoreV111(URL, GPPooledConnectorConfig, GPSecurityConnector, DefaultClientTlsStrategy)}
+     * 
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     */
+    @Deprecated
     protected GPWMSConnectorStoreV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory ) {
         super(new GPWMSServerConnectorV111(server, pooledConnectorConfig, securityConnector, theSslConnectionSocketFactory));
     }

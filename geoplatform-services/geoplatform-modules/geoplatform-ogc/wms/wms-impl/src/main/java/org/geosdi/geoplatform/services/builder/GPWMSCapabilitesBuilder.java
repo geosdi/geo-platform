@@ -77,8 +77,7 @@ public class GPWMSCapabilitesBuilder implements IGPWMSCapabilitesBuilder {
      * @throws ResourceNotFoundFault
      */
     @Override
-    public List<RasterLayerDTO> loadWMSCapabilities(@Nonnull(when = NEVER) String serverUrl, @Nullable String token,
-            @Nullable String authkey, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault {
+    public List<RasterLayerDTO> loadWMSCapabilities(@Nonnull(when = NEVER) String serverUrl, @Nullable String token, @Nullable String authkey, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault {
         checkArgument((serverUrl != null) && !(serverUrl.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
         String urlServerEdited = this.editServerUrl(serverUrl, token, authkey);
         logger.debug("####################URL Server edited: {}\n", urlServerEdited);
@@ -116,8 +115,7 @@ public class GPWMSCapabilitesBuilder implements IGPWMSCapabilitesBuilder {
      * @throws ResourceNotFoundFault
      */
     @Override
-    public List<RasterLayerDTO> loadWMSCapabilitiesAuth(@Nonnull(when = NEVER) String serverUrl, @Nullable String token,
-            @Nullable String authkey, @Nullable List<WMSHeaderParam> headers, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault {
+    public List<RasterLayerDTO> loadWMSCapabilitiesAuth(@Nonnull(when = NEVER) String serverUrl, @Nullable String token, @Nullable String authkey, @Nullable List<WMSHeaderParam> headers, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault {
         checkArgument((serverUrl != null) && !(serverUrl.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
         String urlServerEdited = this.editServerUrl(serverUrl, token, authkey);
         logger.debug("####################URL Server edited: {}\n", urlServerEdited);

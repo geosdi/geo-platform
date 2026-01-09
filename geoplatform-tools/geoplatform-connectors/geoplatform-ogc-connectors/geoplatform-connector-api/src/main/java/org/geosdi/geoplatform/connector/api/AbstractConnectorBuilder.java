@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.api;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -53,6 +54,7 @@ public abstract class AbstractConnectorBuilder<B extends GPConnectorBuilder, C e
     protected GPSecurityConnector securityConnector;
     protected HttpClientProxyConfiguration proxyConfiguration;
     protected SSLConnectionSocketFactory sslConnectionSocketFactory;
+    protected DefaultClientTlsStrategy defaultClientTlsStrategy;
     protected String version;
 
     protected AbstractConnectorBuilder() {
@@ -99,12 +101,24 @@ public abstract class AbstractConnectorBuilder<B extends GPConnectorBuilder, C e
     }
 
     /**
+     * Deprecated use {@link GPConnectorBuilder#withDefaultClientTlsStrategy(DefaultClientTlsStrategy)}
+     *
      * @param theSslConnectionSocketFactory
      * @return {@link B}
      */
     @Override
     public B withSslConnectionSocketFactory(SSLConnectionSocketFactory theSslConnectionSocketFactory) {
         this.sslConnectionSocketFactory = theSslConnectionSocketFactory;
+        return self();
+    }
+
+    /**
+     * @param theDefaultClientTlsStrategy
+     * @return {@link B}
+     */
+    @Override
+    public B withDefaultClientTlsStrategy(DefaultClientTlsStrategy theDefaultClientTlsStrategy) {
+        this.defaultClientTlsStrategy = theDefaultClientTlsStrategy;
         return self();
     }
 

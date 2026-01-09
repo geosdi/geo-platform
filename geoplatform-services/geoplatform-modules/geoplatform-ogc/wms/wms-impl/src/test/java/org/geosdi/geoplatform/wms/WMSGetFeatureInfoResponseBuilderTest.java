@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.wms;
 
-import java.io.InputStream;
-import java.util.Arrays;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
@@ -48,6 +46,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tools.jackson.databind.json.JsonMapper;
 
+import java.io.InputStream;
+import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromIterable;

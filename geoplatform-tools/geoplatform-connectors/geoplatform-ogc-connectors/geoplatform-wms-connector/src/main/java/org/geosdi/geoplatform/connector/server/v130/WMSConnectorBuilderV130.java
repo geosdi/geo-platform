@@ -57,6 +57,6 @@ class WMSConnectorBuilderV130 extends AbstractConnectorBuilder<GPWMSConnectorBui
     @Override
     public IGPWMSConnectorStoreV130 build() throws Exception {
         checkArgument(this.serverUrl != null, "The Parameter serverURL for WMSConnectorBuilderV130 must not be null.");
-        return new GPWMSConnectorStoreV130(this.serverUrl, this.pooledConnectorConfig, this.securityConnector, this.sslConnectionSocketFactory);
+        return new GPWMSConnectorStoreV130(this.serverUrl, this.pooledConnectorConfig, this.securityConnector, this.defaultClientTlsStrategy);
     }
 }

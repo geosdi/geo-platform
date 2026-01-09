@@ -172,9 +172,8 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector implemen
      * @param proxyConfiguration
      * @param theVersion
      */
-    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, GPPooledConnectorConfig pooledConnectorConfig, HttpClientProxyConfiguration proxyConfiguration,
-            SSLConnectionSocketFactory theSslConnectionSocketFactory, GPCatalogVersion theVersion) {
-        super(server, securityConnector, pooledConnectorConfig, proxyConfiguration, theSslConnectionSocketFactory);
+    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, GPPooledConnectorConfig pooledConnectorConfig, HttpClientProxyConfiguration proxyConfiguration, SSLConnectionSocketFactory theSslConnectionSocketFactory, GPCatalogVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, proxyConfiguration, theSslConnectionSocketFactory, null);
         this.version = theVersion;
     }
 

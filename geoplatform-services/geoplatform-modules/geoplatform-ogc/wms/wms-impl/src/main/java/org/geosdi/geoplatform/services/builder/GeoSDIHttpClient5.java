@@ -36,37 +36,24 @@
 package org.geosdi.geoplatform.services.builder;
 
 import com.google.common.collect.Lists;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.client5.http.impl.auth.BasicScheme;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
 import org.apache.hc.client5.http.protocol.HttpClientContext;
-import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
-import org.apache.hc.client5.http.socket.PlainConnectionSocketFactory;
-import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
-import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.HttpHost;
-import org.apache.hc.core5.http.config.RegistryBuilder;
 import org.apache.hc.core5.http.impl.DefaultConnectionReuseStrategy;
 import org.apache.hc.core5.http.impl.io.HttpRequestExecutor;
 import org.apache.hc.core5.http.io.entity.InputStreamEntity;
@@ -78,15 +65,25 @@ import org.geotools.http.HTTPResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Long.valueOf;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 import static org.apache.hc.client5.http.protocol.HttpClientContext.create;
+import static org.apache.hc.client5.http.ssl.NoopHostnameVerifier.INSTANCE;
 import static org.apache.hc.core5.util.Timeout.of;
 
 /**
@@ -113,9 +110,9 @@ public class GeoSDIHttpClient5 implements HTTPClient {
                 .setRequestExecutor(new HttpRequestExecutor())
                 .setConnectionManager(createClientConnectionManager())
                 .setDefaultRequestConfig(RequestConfig.custom()
-                        .setConnectTimeout(of(3l, MINUTES))
-                        .setConnectionRequestTimeout(of(3l, MINUTES))
-                        .setConnectionKeepAlive(TimeValue.of(1l, MINUTES))
+//                        .setResponseTimeout(of(10L, SECONDS))
+                        .setConnectionRequestTimeout(of(10L, SECONDS))
+                        .setConnectionKeepAlive(TimeValue.of(10L, SECONDS))
                         .setMaxRedirects(3)
                         .build())
                 .setDefaultCredentialsProvider(new BasicCredentialsProvider())
@@ -272,8 +269,7 @@ public class GeoSDIHttpClient5 implements HTTPClient {
      */
     @Override
     public int getConnectTimeout() {
-        TimeUnit timeUnit = MINUTES;
-        return valueOf(timeUnit.convert(3l, SECONDS)).intValue();
+        return 10;
     }
 
     /**
@@ -299,8 +295,8 @@ public class GeoSDIHttpClient5 implements HTTPClient {
      */
     @Override
     public int getReadTimeout() {
-        TimeUnit timeUnit = MINUTES;
-        return valueOf(timeUnit.convert(3l, SECONDS)).intValue();
+        TimeUnit timeUnit = SECONDS;
+        return valueOf(timeUnit.convert(10L, SECONDS)).intValue();
     }
 
     /**
@@ -347,13 +343,15 @@ public class GeoSDIHttpClient5 implements HTTPClient {
         try {
             SSLContextBuilder builder = new SSLContextBuilder();
             builder.loadTrustMaterial(null, (chain, authType) -> true);
-            SSLConnectionSocketFactory sslSF = new SSLConnectionSocketFactory(builder.build(), NoopHostnameVerifier.INSTANCE);
-            PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(RegistryBuilder.<ConnectionSocketFactory>create()
-                    .register("http", PlainConnectionSocketFactory.getSocketFactory())
-                    .register("https", sslSF).build());
-            cm.setMaxTotal(10);
-            cm.setDefaultMaxPerRoute(3);
-            return cm;
+            DefaultClientTlsStrategy tlsStrategy = new DefaultClientTlsStrategy(builder.build(), INSTANCE);
+            return PoolingHttpClientConnectionManagerBuilder.create()
+                    .setTlsSocketStrategy(tlsStrategy)
+                    .setMaxConnTotal(10)
+                    .setMaxConnPerRoute(3)
+                    .setDefaultConnectionConfig(ConnectionConfig.custom()
+                            .setConnectTimeout(of(10L, SECONDS))
+                            .build())
+                    .build();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IllegalStateException(ex);

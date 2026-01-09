@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.api;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -73,10 +74,19 @@ public interface GPConnectorBuilder<B extends GPConnectorBuilder> {
     B withProxyConfiguration(HttpClientProxyConfiguration theProxyConfiguration);
 
     /**
+     * Deprecated use {@link GPConnectorBuilder#withDefaultClientTlsStrategy(DefaultClientTlsStrategy)}
+     * 
      * @param theSslConnectionSocketFactory
      * @return {@link B}
      */
+    @Deprecated
     B withSslConnectionSocketFactory(SSLConnectionSocketFactory theSslConnectionSocketFactory);
+
+    /**
+     * @param theDefaultClientTlsStrategy
+     * @return {@link B}
+     */
+    B withDefaultClientTlsStrategy(DefaultClientTlsStrategy theDefaultClientTlsStrategy);
 
     /**
      * @param <C>

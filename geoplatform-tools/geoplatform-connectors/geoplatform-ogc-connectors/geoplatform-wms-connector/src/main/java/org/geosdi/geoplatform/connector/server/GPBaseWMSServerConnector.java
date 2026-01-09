@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.WMSVersion;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -111,8 +112,22 @@ public abstract class GPBaseWMSServerConnector<WMSGetCapabilities extends GPWMSG
      * @param securityConnector
      * @param theVersion
      */
-    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSSLConnectionSocketFactory, @Nonnull(when = NEVER) WMSVersion theVersion) {
-        super(server, securityConnector, pooledConnectorConfig, theSSLConnectionSocketFactory);
+    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable DefaultClientTlsStrategy theDefaultClientTlsStrategy, @Nonnull(when = NEVER) WMSVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, theDefaultClientTlsStrategy);
+        checkArgument(theVersion != null, "The Parameter version must not be null.");
+        this.version = theVersion;
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param theSslConnectionSocketFactory
+     * @param theVersion
+     */
+    @Deprecated
+    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory, @Nonnull(when = NEVER) WMSVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, theSslConnectionSocketFactory);
         checkArgument(theVersion != null, "The Parameter version must not be null.");
         this.version = theVersion;
     }

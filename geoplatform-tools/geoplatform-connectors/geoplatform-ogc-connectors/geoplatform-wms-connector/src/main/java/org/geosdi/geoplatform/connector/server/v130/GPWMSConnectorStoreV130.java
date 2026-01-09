@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.v130;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -57,8 +58,7 @@ public class GPWMSConnectorStoreV130 extends GPWMSConnectorStore<GPWMSGetCapabil
      * @param pooledConnectorConfig
      * @param securityConnector
      */
-    protected GPWMSConnectorStoreV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector) {
+    protected GPWMSConnectorStoreV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector) {
         super(new GPWMSServerConnectorV130(server, pooledConnectorConfig, securityConnector));
     }
 
@@ -66,10 +66,22 @@ public class GPWMSConnectorStoreV130 extends GPWMSConnectorStore<GPWMSGetCapabil
      * @param server
      * @param pooledConnectorConfig
      * @param securityConnector
+     * @param theDefaultClientTlsStrategy
+     */
+    protected GPWMSConnectorStoreV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable DefaultClientTlsStrategy theDefaultClientTlsStrategy ) {
+        super(new GPWMSServerConnectorV130(server, pooledConnectorConfig, securityConnector, theDefaultClientTlsStrategy));
+    }
+
+    /**
+     * Deprecated use {@link GPWMSConnectorStoreV130#GPWMSConnectorStoreV130(URL, GPPooledConnectorConfig, GPSecurityConnector, DefaultClientTlsStrategy)}
+     * 
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
      * @param theSslConnectionSocketFactory
      */
-    protected GPWMSConnectorStoreV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory ) {
+    @Deprecated
+    protected GPWMSConnectorStoreV130(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory ) {
         super(new GPWMSServerConnectorV130(server, pooledConnectorConfig, securityConnector, theSslConnectionSocketFactory));
     }
 

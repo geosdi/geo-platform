@@ -45,6 +45,7 @@ import javax.xml.namespace.QName;
 import java.util.List;
 
 import static java.util.Collections.EMPTY_MAP;
+import static org.junit.Assert.*;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -62,21 +63,21 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
                 TOPP_STATES.getLocalPart(), EMPTY_MAP);
         logger.info("\n\n\n@@@ {}", layerSchema);
 
-        Assert.assertNotNull(layerSchema);
-        Assert.assertEquals(TOPP_STATES.getLocalPart(),
+        assertNotNull(layerSchema);
+        assertEquals(TOPP_STATES.getLocalPart(),
                 layerSchema.getTypeName());
-        Assert.assertEquals(TOPP_STATES.getNamespaceURI(),
+        assertEquals(TOPP_STATES.getNamespaceURI(),
                 layerSchema.getTargetNamespace());
-        Assert.assertEquals(addressDatastore, layerSchema.getScope());
+        assertEquals(addressDatastore, layerSchema.getScope());
 
         AttributeDTO geometry = layerSchema.getGeometry();
-        Assert.assertNotNull(geometry);
-        Assert.assertEquals("the_geom", geometry.getName());
-        Assert.assertEquals("MultiPolygon", geometry.getType());
+        assertNotNull(geometry);
+        assertEquals("the_geom", geometry.getName());
+        assertEquals("MultiPolygon", geometry.getType());
 
         List<AttributeDTO> attributes = layerSchema.getAttributes();
-        Assert.assertNotNull(attributes);
-        Assert.assertEquals(22, attributes.size());
+        assertNotNull(attributes);
+        assertEquals(22, attributes.size());
         for (AttributeDTO attribute : attributes) {
             assertNotNull(attribute);
             assertNotNull(attribute.getName());
@@ -92,24 +93,24 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, SF_COMUNI.getLocalPart(), EMPTY_MAP);
         logger.info("\n\n\n@@@ {}", layerSchema);
 
-        Assert.assertNotNull(layerSchema);
-        Assert.assertEquals(SF_COMUNI.getLocalPart(), layerSchema.getTypeName());
-        Assert.assertEquals(SF_COMUNI.getNamespaceURI(),
+        assertNotNull(layerSchema);
+        assertEquals(SF_COMUNI.getLocalPart(), layerSchema.getTypeName());
+        assertEquals(SF_COMUNI.getNamespaceURI(),
                 layerSchema.getTargetNamespace());
-        Assert.assertEquals(addressDatastore, layerSchema.getScope());
+        assertEquals(addressDatastore, layerSchema.getScope());
 
         AttributeDTO geometry = layerSchema.getGeometry();
-        Assert.assertNotNull(geometry);
-        Assert.assertEquals("the_geom", geometry.getName());
-        Assert.assertEquals("MultiPolygon", geometry.getType());
+        assertNotNull(geometry);
+        assertEquals("the_geom", geometry.getName());
+        assertEquals("MultiPolygon", geometry.getType());
 
         List<AttributeDTO> attributes = layerSchema.getAttributes();
-        Assert.assertNotNull(attributes);
-        Assert.assertEquals(10, attributes.size());
+        assertNotNull(attributes);
+        assertEquals(10, attributes.size());
         for (AttributeDTO attribute : attributes) {
-            Assert.assertNotNull(attribute);
-            Assert.assertNotNull(attribute.getName());
-            Assert.assertNotNull(attribute.getType());
+            assertNotNull(attribute);
+            assertNotNull(attribute.getName());
+            assertNotNull(attribute.getType());
         }
     }
 

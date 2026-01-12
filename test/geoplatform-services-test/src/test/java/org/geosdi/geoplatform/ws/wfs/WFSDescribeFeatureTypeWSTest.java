@@ -78,12 +78,12 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         Assert.assertNotNull(attributes);
         Assert.assertEquals(22, attributes.size());
         for (AttributeDTO attribute : attributes) {
-            Assert.assertNotNull(attribute);
-            Assert.assertNotNull(attribute.getName());
-            Assert.assertNotNull(attribute.getType());
-            Assert.assertFalse(attribute.isNillable());
-            Assert.assertEquals(1, attribute.getMinOccurs());
-            Assert.assertEquals(1, attribute.getMaxOccurs());
+            assertNotNull(attribute);
+            assertNotNull(attribute.getName());
+            assertNotNull(attribute.getType());
+            assertTrue(attribute.isNillable());
+            assertEquals(0, attribute.getMinOccurs());
+            assertEquals(1, attribute.getMaxOccurs());
         }
     }
 

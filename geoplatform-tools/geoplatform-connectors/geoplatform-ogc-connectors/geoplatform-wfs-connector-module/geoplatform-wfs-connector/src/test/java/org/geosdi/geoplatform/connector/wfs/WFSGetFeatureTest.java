@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.csv.support.model.IGPCSVBaseSchema;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.BeforeClass;
@@ -49,9 +48,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.StringReader;
-import java.math.BigInteger;
 import java.util.Arrays;
 
+import static java.math.BigInteger.ONE;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.CSV;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
@@ -138,45 +137,40 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     @Test
     public void e_statesResults() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
-        request.setMaxFeatures(BigInteger.ONE);
-        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
-        FeatureCollectionType response = request.getResponse();
-        logger.info("xxxxxxxxxxx {}", response.getNumberOfFeatures());
-        logger.info("xxxxxxxxxxx {}", response.getTimeStamp());
-        FeatureArrayPropertyType featureMembers = response.getFeatureMembers();
-        logger.info("----------- {}", featureMembers.isSetFeature());
-        logger.info("----------- {}", featureMembers.getFeature());
-        logger.info("----------- {}", featureMembers.getFeature().size());
-        logger.info("+++++++++++ {}", response.getFeatureMember());
-        logger.info("+++++++++++ {}\n\n", response.getFeatureMember().size());
+        request.setOutputFormat(GEOJSON);
+        request.setMaxFeatures(ONE);
+        FeatureCollection response = request.getResponse();
+        logger.info("xxxxxxxxxxx {}", response.getFeatures().size());
     }
 
     @Test
     public void f_statesFeatureIDs() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setOutputFormat(GEOJSON);
         request.setFeatureIDs(Arrays.asList("states.1", "states.49"));
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
-        FeatureCollectionType response = request.getResponse();
-        logger.info("#############################statesFeatureIDs#Features : {}\n", response.getNumberOfFeatures().intValue());
+        FeatureCollection response = request.getResponse();
+        logger.info("#############################statesFeatureIDs#Features : {}\n", response.getFeatures().size());
     }
 
     @Test
     public void g_statesBBox() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setOutputFormat(GEOJSON);
         request.setPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", request.getResponseAsString());
-        FeatureCollectionType response = request.getResponse();
-        logger.info("##################################statesBBox#Features : {}\n", response.getNumberOfFeatures().intValue());
+        FeatureCollection response = request.getResponse();
+        logger.info("##################################statesBBox#Features : {}\n", response.getFeatures().size());
     }
 
     @Test
@@ -209,7 +203,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("##############################statesContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
-    @Ignore(value = "Server Problem")
+//    @Ignore(value = "Server Problem")
     @Test
     public void i_statesSecureContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();

@@ -41,16 +41,15 @@ import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.csv.support.model.IGPCSVBaseSchema;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
-import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.io.StringReader;
-import java.math.BigInteger;
 import java.util.Arrays;
 
+import static java.math.BigInteger.ONE;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.CSV;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.HITS;
@@ -195,7 +194,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     public void h_statesContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
-        request.setResultType(HITS.value());
+        request.setResultType(RESULTS.value());
         request.setOutputFormat(GEOJSON);
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
                 .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +

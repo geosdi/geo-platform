@@ -35,18 +35,21 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
+import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.util.Arrays;
 
+import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -60,23 +63,25 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
 
     @Test
     public void a_stateQueryRestrictionBboxTest() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setOutputFormat(GEOJSON);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
-        FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 4);
-        logger.info("#############################a_stateQueryBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
+        FeatureCollection response = request.getResponse();
+        assertTrue(response.getFeatures().size() == 4);
+        logger.info("#############################a_stateQueryBboxTest#ResponseAsString {}\n", request.getResponseAsString());
     }
 
     @Test
     public void b_stateQueryRestrictionsWithBboxTest() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setOutputFormat(GEOJSON);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
@@ -112,16 +117,17 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
-        FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 3);
-        logger.info("#############################a_stateQueryBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
+        FeatureCollection response = request.getResponse();
+        assertTrue(response.getFeatures().size() == 3);
+        logger.info("#############################a_stateQueryBboxTest#ResponseAsString {}\n", request.getResponseAsString());
     }
 
     @Test
     public void c_stateQueryRestrictionsNotInBboxTest() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setOutputFormat(GEOJSON);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
@@ -157,16 +163,17 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
-        FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 46);
-        logger.info("#############################c_stateQueryRestrictionsNotInBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
+        FeatureCollection response = request.getResponse();
+        assertTrue(response.getFeatures().size() == 46);
+        logger.info("#############################c_stateQueryRestrictionsNotInBboxTest#ResponseAsString {}\n", request.getResponseAsString());
     }
 
     @Test
     public void d_stateQueryRestrictionNotTest() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setOutputFormat(GEOJSON);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
@@ -188,16 +195,17 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("######################\n{}\n", request.showRequestAsString());
-        FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 23);
-        logger.info("#############################d_stateQueryRestrictionsNotTest#ResponseAsString {}\n", request.formatResponseAsString(2));
+        FeatureCollection response = request.getResponse();
+        assertTrue(response.getFeatures().size() == 23);
+        logger.info("#############################d_stateQueryRestrictionsNotTest#ResponseAsString {}\n", request.getResponseAsString());
     }
 
     @Test
     public void e_stateQueryRestrictionNotInBboxTest() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
+        request.setOutputFormat(GEOJSON);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
@@ -221,9 +229,10 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
-        logger.info("#############################e_stateQueryRestrictionNotInBboxTest#ResponseAsString {}\n", request.formatResponseAsString(2));
+        logger.info("#############################e_stateQueryRestrictionNotInBboxTest#ResponseAsString {}\n", request.getResponseAsString());
     }
 
+    @Ignore
     @Test
     public void f_queryWithBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();

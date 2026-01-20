@@ -305,8 +305,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
             return featureReaderStAX.read(is);
         } catch (IOException ex) {
             ex.printStackTrace();
-            throw new IllegalStateException(
-                    "Error to execute the WFS GetFeature for the layer " + layerSchema.getTypeName());
+            throw new IllegalStateException("Error to execute the WFS GetFeature for the layer " + layerSchema.getTypeName());
         }
     }
 }

@@ -121,7 +121,6 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     protected RequestConfig createRequestConfig() {
         return custom()
                 .setCookieSpec(this.serverConnector.getPooledConnectorConfig().getCookieSpec().toCookieSpec())
-                .setConnectTimeout(this.serverConnector.getPooledConnectorConfig().getConnectionTimeout())
                 .setConnectionRequestTimeout(this.serverConnector.getPooledConnectorConfig().getRequestConnectionTimeout())
                 .setResponseTimeout(this.serverConnector.getPooledConnectorConfig().getResponseConnectionTimeout())
                 .setRedirectsEnabled(this.serverConnector.getPooledConnectorConfig().isRedirectsEnabled())

@@ -140,7 +140,7 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("ws_vito:layer_importer148")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(12)
-                .withInfoFormat(GML2).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML3).withX(50).withY(50).getResponse());
     }
 
     @Test

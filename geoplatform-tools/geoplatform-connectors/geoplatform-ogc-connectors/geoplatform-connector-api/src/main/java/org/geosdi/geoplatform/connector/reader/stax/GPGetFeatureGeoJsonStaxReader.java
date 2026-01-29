@@ -48,7 +48,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.XMLEvent;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
@@ -63,6 +62,7 @@ import static java.util.function.Function.identity;
 import static java.util.regex.Pattern.compile;
 import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
+import static javax.xml.stream.XMLStreamConstants.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,6 +81,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected static final String FEATURE_NAME_KEY = "FEATURE_NAME";
     protected static final String BOUNDING_BY_PREFIX = "boundedBy";
     private static final String GML_NAME_PREFIX = "name";
+    private static final String GML_DESCRIPTION_PREFIX = "description";
     private static final GPFeatureTypeReader featureTypeReader = new GPFeatureTypeReader() {
 
         /**
@@ -159,7 +160,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected void readFeatures(@Nonnull(when = NEVER) Feature feature) throws Exception {
         checkArgument(feature != null, "The Parameter feature must not be null.");
         int eventType = xmlStreamReader().nextTag();
-        if (eventType == XMLEvent.START_ELEMENT) {
+        if (eventType == START_ELEMENT) {
             logger.debug("################TRYING TO READ XML.");
             Map<String, IGPFeatureType> featureTypes = this.typeNames.get();
             checkArgument((featureTypes != null), "Impossible Read XML featureTypes is null.");
@@ -196,42 +197,40 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
         Map<String, Object> featureProperties = new LinkedHashMap<>();
         featureProperties.put(FEATURE_NAME_KEY, featureType.getName());
         int eventType = xmlStreamReader().nextTag();
+        outer:
         while (xmlStreamReader().hasNext()) {
-            if (eventType == XMLEvent.END_ELEMENT) {
-                String localName = xmlStreamReader().getLocalName();
-                if (localName.equals(featureType.getName())) {
-                    break;
+            switch (eventType) {
+                case END_ELEMENT -> {
+                    String localName = xmlStreamReader().getLocalName();
+                    if (localName.equals(featureType.getName())) {
+                        break outer;
+                    }
                 }
-            } else if (eventType == XMLEvent.START_ELEMENT) {
-                String localName = xmlStreamReader().getLocalName();
-                if ((featureType != null) && (super.isTagPrefix(featureType.getPrefix()))) {
-                    eventType = xmlStreamReader().next();
-                    if (eventType == XMLEvent.CHARACTERS) {
-                        String attributeValue = xmlStreamReader().getText();
-                        featureProperties.put(localName, attributeValue);
-                        if ((attributeValue != null) && (attributeValue.trim().isEmpty()))
-                            this.previousGeometry.set(localName);
-                        logger.trace("##########################ATTRIBUTE_NAME : {} - ATTRIBUTE_VALUE : {}\n", localName, attributeValue);
-                    } else if (eventType == XMLEvent.END_ELEMENT) {
-                        featureProperties.put(localName, null);
-                    } else if (super.isTagPrefix(GML_PREFIX)) {
-                        if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX)) {
-                            super.goToEndTag(BOUNDING_BY_PREFIX);
-                        } else if(super.isTagName(GML_PREFIX, GML_NAME_PREFIX)){
-                            super.goToEndTag(GML_NAME_PREFIX);
-                        } else {
-                            this.readGeometry(feature, featureProperties);
+                case START_ELEMENT -> {
+                    String localName = xmlStreamReader().getLocalName();
+                    if (featureType != null && super.isTagPrefix(featureType.getPrefix())) {
+                        eventType = xmlStreamReader().next();
+                        switch (eventType) {
+                            case CHARACTERS -> {
+                                String attributeValue = xmlStreamReader().getText();
+                                featureProperties.put(localName, attributeValue);
+                                if (attributeValue != null && attributeValue.trim().isEmpty()) {
+                                    this.previousGeometry.set(localName);
+                                }
+                                logger.trace("##########################ATTRIBUTE_NAME : {} - ATTRIBUTE_VALUE : {}", localName, attributeValue);
+                            }
+                            case END_ELEMENT -> featureProperties.put(localName, null);
+                            default -> {
+                                if (super.isTagPrefix(GML_PREFIX)) {
+                                    handleGmlTag(localName, feature, featureProperties);
+                                }
+                            }
                         }
-                    }
-                } else if (super.isTagPrefix(GML_PREFIX)) {
-                    if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX)) {
-                        super.goToEndTag(BOUNDING_BY_PREFIX);
-                    } else if(super.isTagName(GML_PREFIX, GML_NAME_PREFIX)){
-                        super.goToEndTag(GML_NAME_PREFIX);
-                    } else {
-                        this.readGeometry(feature, featureProperties);
+                    } else if (super.isTagPrefix(GML_PREFIX)) {
+                        handleGmlTag(localName, feature, featureProperties);
                     }
                 }
+                default -> {}
             }
             eventType = xmlStreamReader().next();
         }
@@ -264,4 +263,25 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
      * @throws Exception
      */
     protected abstract GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception;
+
+    /**
+     * @param localName
+     * @param feature
+     * @param featureProperties
+     * @throws Exception
+     */
+    void handleGmlTag(String localName, Feature feature, Map<String, Object> featureProperties) throws Exception {
+        logger.trace("####################Called {}#handleGmlTag , localName : {}\n", this.getClass().getSimpleName(), localName);
+        switch (localName) {
+            case BOUNDING_BY_PREFIX -> super.goToEndTag(BOUNDING_BY_PREFIX);
+            case GML_NAME_PREFIX, GML_DESCRIPTION_PREFIX -> {
+                int eventType = xmlStreamReader().next();
+                if (eventType == CHARACTERS) {
+                    featureProperties.put(localName, xmlStreamReader().getText());
+                }
+                super.goToEndTag(localName);
+            }
+            default -> this.readGeometry(feature, featureProperties);
+        }
+    }
 }

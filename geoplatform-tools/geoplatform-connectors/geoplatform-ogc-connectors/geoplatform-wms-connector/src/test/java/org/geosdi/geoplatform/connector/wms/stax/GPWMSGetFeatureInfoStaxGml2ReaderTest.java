@@ -580,4 +580,10 @@ public class GPWMSGetFeatureInfoStaxGml2ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_AIDT_OP08V_POI_EXPORT : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AIDT_OP08V_POI_EXPORT.xml"))));
     }
+
+    @Test
+    public void d_z_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_WS_VITO_LAYER_IMPORTER_148 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("WS_Vito_Layer_Importer148.xml"))));
+    }
 }

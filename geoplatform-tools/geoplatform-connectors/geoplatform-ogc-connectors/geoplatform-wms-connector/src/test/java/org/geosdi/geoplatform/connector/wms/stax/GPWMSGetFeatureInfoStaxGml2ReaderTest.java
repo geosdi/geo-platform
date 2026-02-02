@@ -586,4 +586,10 @@ public class GPWMSGetFeatureInfoStaxGml2ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_WS_VITO_LAYER_IMPORTER_148 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("WS_Vito_Layer_Importer148.xml"))));
     }
+
+    @Test
+    public void e_a_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_SHP_PERCORSI_NAVETTE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("shp_cf_percorsinavette.xml"))));
+    }
 }

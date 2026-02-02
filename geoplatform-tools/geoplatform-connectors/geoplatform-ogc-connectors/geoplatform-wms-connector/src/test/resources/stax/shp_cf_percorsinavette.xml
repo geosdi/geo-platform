@@ -1,0 +1,1358 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs" 
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/admin" 
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                       xsi:schemaLocation="http://www.geosdi.org/admin https://prosit.geosdi.org/geoserver/admin/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Aadmin_shp_lcavarra_shp_cf_percorsinavette http://www.opengis.net/wfs https://prosit.geosdi.org/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.1">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05126285,40.8085642 14.05140999,40.80842714 14.05156591,40.80826739 14.05184542,40.80806734 14.05255655,40.80756649 14.0527486,40.80742833 14.05297107,40.80730168 14.05391989,40.80678068 14.0546006,40.80642519 14.0549923,40.80622657 14.05564259,40.80594448 14.05616548,40.80572139 14.05636894,40.80557171 14.05654197,40.8054393 14.05683669,40.80520038 14.05717515,40.80492116 14.05776649,40.80441742 14.05796424,40.80424182 14.05812967,40.80406623 14.05838066,40.80377405 14.05864116,40.80344301 14.05876095,40.8033034 14.05902334,40.80307167 14.05932187,40.80281116 14.05947208,40.80266291 14.05982955,40.8023333</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>8</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>1011.74468999</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>3</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Mercato di Sabato</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA CAPPELLA A-B-C</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.2">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05490536,40.79418567 14.0548304,40.79418407 14.05439188,40.79456464 14.05417797,40.79474278 14.05402467,40.79480216 14.05372875,40.79489932 14.05214581,40.7952421</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>2</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>269.83725035</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>1</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Panoramica</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA PANORAMICA 047 D</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.3">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05126285,40.8085642 14.05129996,40.80868498 14.05129402,40.80897732 14.05129105,40.80945629 14.05127916,40.80993751 14.05132373,40.81044572 14.05137087,40.81132734 14.05136136,40.81263694 14.05139939,40.81414079 14.05142791,40.81437823 14.05155626,40.81462737 14.05177017,40.81484323 14.05202686,40.81506988 14.05236912,40.8153397 14.05305364,40.81580649 14.05313921,40.81585236 14.05343155,40.81598997 14.05359912,40.81605473 14.05392355,40.81615186 14.05476612,40.81640459 14.05519395,40.816535 14.05593075,40.81675535 14.05650713,40.81693073 14.05746379,40.81723202 14.05792132,40.81737143 14.05848581,40.8175558 14.05889581,40.81768621 14.05930581,40.81780762 14.05965638,40.81794253 14.06015551,40.81811791 14.06046449,40.81822133 14.06065464,40.81825281 14.06080913,40.81825731 14.06102304,40.81825281 14.0613855,40.81816287 14.0623689,40.81783685 14.06280861,40.81764124 14.06333329,40.81742044 14.06365416,40.81731252 14.06390372,40.8173395 14.06426024,40.81742044 14.06465241,40.81753736 14.06579327,40.81787013 14.0665895,40.81810397 14.06707674,40.81824786 14.06733819,40.81822988</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>4</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2161.8886144</admin:lungh_a>
+            <admin:lungh_r>2161.88861451</admin:lungh_r>
+            <admin:tempo_a>4</admin:tempo_a>
+            <admin:tempo_r>4</admin:tempo_r>
+            <admin:n_tip_stra>Urbana, Extraurbana - V.Cesare, V.Augusto</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>30</admin:velocita>
+            <admin:id_strade>063VIA FUSARO A; 063VIA TORRE DI CAPPELLA</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.4">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05544371,40.79456084 14.05565405,40.79449337 14.05562553,40.79444478 14.05557206,40.794407 14.05545797,40.794407 14.05533675,40.7943962 14.05524406,40.79436921 14.05517632,40.79435302 14.05515849,40.79431523 14.05516206,40.79427474 14.05516206,40.79423156 14.05508006,40.79422076 14.05495884,40.79419107 14.05490536,40.79418567</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>1</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>101.69056294</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>1</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - Arteria V.Panoramica</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA PANORAMICA 047 C</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.5">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05214581,40.7952421 14.05180402,40.79557606 14.0516935,40.79569751 14.05121933,40.79603219 14.05020087,40.7971206 14.05017829,40.79722068 14.05025831,40.79731905 14.05045519,40.79740091 14.050864,40.79753406 14.05132034,40.7976924 14.05154376,40.79782195 14.05167686,40.79791551 14.05180521,40.7981962 14.0519288,40.79824658 14.05204764,40.79829336 14.05230909,40.79834734 14.05258955,40.7984337 14.0526466,40.79850927 14.05271196,40.79917077 14.05252182,40.7993462 14.05225443,40.7995846 14.0522183,40.80058437 14.05237041,40.80130405 14.05234189,40.80150556 14.05220879,40.8016351 14.05173343,40.80191577 14.05133413,40.80236916 14.05077321,40.80317518 14.05057355,40.80359977 14.05044045,40.80420427 14.05005779,40.80492931 14.04952301,40.80563995 14.04907142,40.80619766 14.04872678,40.80653048 14.04815635,40.80698924 14.04786282,40.80727618 14.0474754,40.80777811 14.04732685,40.80800748 14.04698221,40.80832231 14.04685268,40.8085175 14.04652943,40.80925149 14.04614915,40.80970482 14.04593999,40.80994948 14.04564526,40.81014377 14.04548364,40.81061149 14.04549315,40.81075541 14.04561674,40.81088493 14.04579738,40.81096409 14.0460826,40.81091372 14.04640584,40.81075541 14.04697627,40.81049636 14.0472805,40.81023012 14.04749917,40.80989192 14.04772734,40.80956091 14.0479365,40.80930186 14.04827876,40.80902122 14.04876362,40.80864703 14.04897278,40.80855348 14.04915342,40.80858946 14.0493911,40.80876216 14.04961927,40.80902122 14.04978089,40.80912916 14.04996153,40.80915074 14.05027527,40.80903561 14.05091225,40.80870999 14.05101376,40.80867626 14.05107746,40.80864516 14.05126285,40.8085642</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>3</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>2755.86718571</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Garibaldi, V.Torregaveta</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>30</admin:velocita>
+            <admin:id_strade>063STRADA1008A; 063VIA SALITE TORREGAVETA B-C</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.6">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05988941,40.90486301 14.06040636,40.90497753 14.06253629,40.90546431 14.06431413,40.90584514 14.06537893,40.90608226 14.06674797,40.90637686 14.06860187,40.90678642 14.06929589,40.9069445 14.0697047,40.90704509 14.0713019,40.9074331 14.07246178,40.90769176 14.073422,40.90790732 14.07478438,40.90820838 14.07540235,40.90835927 14.07649092,40.90861075 14.07838285,40.90905622 14.07916366,40.90924879 14.07895157,40.90954812</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>7</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2022.71548161</admin:lungh_a>
+            <admin:lungh_r>2022.71548055</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA MADONNA DEL PANTANO B; 063VIA RIPUARIA B</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.7">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06733819,40.81822988 14.06761675,40.81811194 14.06779501,40.81805348 14.06787582,40.8180265 14.06794,40.8180238 14.06801843,40.8180265 14.06807904,40.81805618 14.06811113,40.81810475 14.06813252,40.81814791 14.06810756,40.81818569 14.06803982,40.81825314 14.06791504,40.8183044 14.06775104,40.81835837 14.06762626,40.81841233 14.06748722,40.81853644 14.06734104,40.81868214 14.06713426,40.81888989 14.06691679,40.81913271 14.06675279,40.81931348 14.06666366,40.81941061 14.06661018,40.81945648 14.06652461,40.81948886 14.06642122,40.81951853 14.06637488,40.81951853 14.06628931,40.81949695 14.06620375,40.81946997 14.06606827,40.81940791 14.06596488,40.81935126 14.06555488,40.81909764 14.06545862,40.81908954 14.06536593,40.81908954 14.06525897,40.81910573 14.06500941,40.81913811 14.06467428,40.8191543 14.06416445,40.81919477 14.06367602,40.81922984 14.06327672,40.81926492 14.06284533,40.81929999 14.06249238,40.81933237 14.06193621,40.81939442 14.06128734,40.81946188 14.06106986,40.81948886 14.060913,40.81951044 14.06085595,40.81954821 14.06083813,40.81959408 14.06083456,40.81966423 14.06083456,40.81974247 14.06084882,40.81985579 14.06085595,40.81990975 14.06091656,40.82003925 14.06119108,40.82051141 14.0616807,40.82134328 14.06203128,40.82195032 14.06205366,40.82200518 14.06205366,40.82203756 14.06198473,40.82212929 14.0616496,40.82254477 14.06137865,40.82287661 14.06107561,40.82324892 14.0608403,40.82352411 14.06060999,40.82378688 14.06046382,40.82397303 14.06036281,40.82410523 14.06023208,40.82427159 14.05996469,40.82460433 14.05989339,40.82474102 14.05976148,40.8251403 14.05965809,40.82526979 14.0593693,40.82568795 14.059298,40.82584712 14.05920174,40.82612499 14.05911974,40.82642174 14.05903774,40.82670501 14.05893435,40.82716632 14.05886661,40.82741721 14.05872044,40.82786773 14.05864914,40.82798913 14.05856001,40.82812401 14.05833896,40.82837759 14.05821775,40.82849899 14.05747619,40.82900615 14.0560608,40.82990176 14.05577915,40.83029562 14.05569715,40.83044129 14.05564367,40.83056268 14.05520159,40.8315338 14.05510533,40.83182784 14.05503046,40.83204904 14.05485933,40.83272611 14.05466681,40.83356233 14.05457768,40.83397505 14.05451351,40.83433381 14.05453133,40.83471954 14.05457412,40.83509987 14.05460977,40.83529409 14.05481298,40.83615995 14.05493836,40.83669942 14.05502749,40.83727934 14.05513742,40.83785477 14.05513445,40.83798289 14.05487597,40.83875836 14.05490865,40.83898987 14.05499184,40.83937423 14.05516118,40.84019688 14.0552622,40.84073182 14.05528002,40.84092512 14.05523546,40.84126451 14.05517604,40.84162189 14.05514633,40.84190958 14.05519089,40.84204444 14.05527408,40.84215457 14.05536618,40.84226245 14.05554147,40.84240855 14.05566031,40.84248946 14.0558148,40.84255914 14.05605248,40.84266028 14.05643871,40.8428221 14.05667936,40.84297719 14.05692893,40.84318621 14.05714403,40.84339299 14.05731516,40.8437436 14.05748391,40.8441122 14.05770257,40.8445689 14.05779289,40.84474331 14.05785469,40.84482422 14.05801393,40.84495187 14.05815892,40.84507594 14.05825874,40.84516404 14.05832767,40.8452863 14.05844889,40.84565489 14.0585606,40.84603426 14.0586975,40.84675273 14.05870257,40.84683538 14.05872111,40.84686019 14.05892076,40.84692923 14.05911304,40.84712038 14.05950522,40.84768673 14.05965139,40.84784315 14.05988313,40.84803463 14.06004356,40.84816678 14.06018617,40.84838253 14.0604393,40.849437 14.06077799,40.85009502 14.06098834,40.85053459 14.06107034,40.8510308 14.06151955,40.85222006 14.06154807,40.85242771 14.06155877,40.85349559 14.06154094,40.85369784 14.06151242,40.85392166 14.0613912,40.85498144 14.06134129,40.85546412 14.06121294,40.85586861 14.06092694,40.85672431 14.06081701,40.85716475 14.06062092,40.85795122 14.06054071,40.85828603 14.06057042,40.85879387 14.06083186,40.85925451 14.0612894,40.86007017 14.0616578,40.86076674 14.06202918,40.86146779 14.06268279,40.86226769 14.06336018,40.86303838 14.06408808,40.86386523 14.06446539,40.86430787 14.06492887,40.86495495 14.06545473,40.86567843 14.06591524,40.86636595 14.06617074,40.86676587 14.06619526,40.86683876 14.06616817,40.86691209 14.06608831,40.86697464 14.06586679,40.86710434 14.06492899,40.86749021 14.06415653,40.86780296</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>5</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>6749.53314833</admin:lungh_a>
+            <admin:lungh_r>6749.53314616</admin:lungh_r>
+            <admin:tempo_a>14</admin:tempo_a>
+            <admin:tempo_r>14</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V. Vanvitelli, V.Fusaro, V.Cuma</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>30</admin:velocita>
+            <admin:id_strade>063(VIA VIRGILIO B;FUSARO C;CUMA A; SPCUMA-LICOLA</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.8">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.14549054,40.87642133 14.14610653,40.87649565 14.14671309,40.87657041 14.14677774,40.87662216 14.14680436,40.8766883 14.14675492,40.87698159 14.14666936,40.87754086 14.14655337,40.87819645 14.14626502,40.87791906</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>79</admin:id>
+            <admin:da___a>31. Quarto / I-10 Stazione RFI Aversa</admin:da___a>
+            <admin:n_percorso>9</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>327.91891287</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>1</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Crispi; V.Pietrabianca</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>31</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-10</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.9">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06705527,40.79424214 14.06642477,40.79424814 14.06576224,40.79426163 14.06564637,40.79424814 14.06551862,40.79422565 14.06543543,40.79418291 14.06532847,40.79414018 14.0652334,40.79404796 14.06517398,40.79398048 14.06516507,40.79383878 14.06520369,40.79370607 14.06526311,40.79359361 14.06540275,40.79333045 14.06557804,40.79302455 14.06567014,40.79284461 14.06569094,40.79276588 14.06569094,40.79259269 14.06564043,40.79243974 14.06556912,40.79239475 14.06550376,40.79234527 14.06533442,40.79232052 14.06520072,40.79234752 14.06511753,40.79241724 14.0648234,40.79275464 14.0643837,40.79321799 14.06389348,40.79334394 14.06355182,40.79354188 14.06336762,40.79364534 14.06285066,40.79409519 14.06219704,40.79462151 14.06116908,40.79489366 14.06086604,40.7950556 14.06014408,40.79547171 14.05946076,40.79588555 14.05930329,40.79598677 14.05893192,40.79613296 14.05880417,40.79619144 14.05875663,40.79624542 14.05869424,40.79632414 14.05869127,40.79649508 14.0586467,40.79665252 14.0585754,40.79674698 14.05849221,40.79680996 14.05842388,40.79683695 14.05832881,40.79684144 14.05826047,40.79684144 14.05819511,40.7968302 14.05813866,40.79680321 14.05809113,40.79675823 14.05804656,40.7967065 14.05802873,40.79665926 14.05799011,40.79653331 14.05797526,40.79636462 14.05799308,40.79623192 14.05802703,40.79612633 14.0582445,40.79586722 14.05860459,40.79555684 14.05872581,40.79546507 14.05912154,40.79525725 14.05924276,40.79515738 14.05931406,40.79504402 14.05958145,40.79456359 14.05963136,40.79429908 14.05966702,40.79409665 14.05972049,40.7939455 14.05976684,40.79383754 14.05997719,40.7936594 14.06057614,40.79332741 14.06122144,40.79299812 14.06146388,40.79283887 14.06156727,40.79272281 14.06191309,40.79234763 14.06210205,40.79208851 14.06219118,40.79192926 14.06221613,40.79184828 14.0621377,40.79163775 14.06208065,40.79157027 14.06137118,40.79117619 14.06061179,40.79083069 14.06052979,40.7907848 14.06046206,40.79070923 14.06019823,40.79017748 14.06011267,40.78964843 14.06001997,40.78923004 14.0598738,40.78904379 14.05965276,40.78895202 14.05879354,40.78905999 14.05829085,40.78907888 14.0576919,40.78910317 14.05748155,40.78923544 14.05721773,40.7897591 14.05699669,40.79029625 14.05686121,40.79073622 14.05678634,40.79128955 14.05673286,40.79159456 14.05659738,40.79216139 14.05649043,40.79248259 14.05634782,40.79288476 14.05568113,40.79346776 14.05502513,40.79402648 14.0550691,40.7940669 14.05516206,40.79423156</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>10</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>3192.84236011</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Panoramica</admin:n_tip_stra>
+            <admin:bus_necess>4</admin:bus_necess>
+            <admin:velocita>30</admin:velocita>
+            <admin:id_strade>063VIA PANORAMICA 047 B</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.10">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05982955,40.8023333 14.06020585,40.80201408 14.06069072,40.80159127 14.06130631,40.80106591 14.06192903,40.80052795 14.06256126,40.79999358 14.06337412,40.79930267 14.06410618,40.79866214 14.06517811,40.79772832 14.06568009,40.79728713 14.06639503,40.79666529 14.06676391,40.79634429 14.0672773,40.79589518 14.06781921,40.79544031 14.06829837,40.79503869 14.06841004,40.79492365 14.06840707,40.79475271 14.06835953,40.79466274 14.06828823,40.79453004 14.06818722,40.79439284 14.06810106,40.79432761 14.06791983,40.79428263 14.06755737,40.79425339 14.06705527,40.79424214</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>9</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>1258.41054522</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>4</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - Vle Olimpico, V. Pontano</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063STRADA1000; 063VIA PANORAMICA 047 A</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.11">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.2405344,40.83154022 14.24134211,40.83147961 14.24246395,40.83137531 14.24295832,40.83130338 14.24346696,40.83119188 14.24374266,40.83109297 14.243852,40.83103003 14.24397084,40.83093112 14.24415147,40.8307261 14.24466961,40.83010026 14.24482648,40.82991862 14.24488828,40.82987726 14.24499048,40.82985748 14.24557755,40.82984849 14.24686101,40.82980893 14.24809884,40.82977377 14.24844051,40.82976028 14.24914919,40.82974005 14.24953839,40.82973331 14.24968396,40.82974905 14.24979686,40.8297985 14.24987708,40.82991315 14.25022171,40.83055833 14.2506525,40.83134737 14.25081588,40.8316417 14.25117905,40.83227185 14.25156313,40.83294083 14.25163919,40.83308038 14.25169243,40.8331854 14.25177799,40.83339832 14.25180461,40.83347601 14.25180081,40.83351485 14.25172856,40.8335652 14.25098319,40.83414785 14.25043748,40.83475351 14.25008352,40.83514482 14.25007686,40.83518798 14.25008732,40.83526494 14.25013866,40.83537212</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>337</admin:id>
+            <admin:da___a>12. Bagnoli / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>25</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>1564.79300353</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>5</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Partenope; V.Sauro; V.Acton</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA NAZARIO SAURO C</admin:id_strade>
+            <admin:da_ID_AA>12</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.12">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06408679,40.86785006 14.06386452,40.86797017 14.06351156,40.86816429 14.06329765,40.86823978 14.06292687,40.86837458 14.06286388,40.86845007 14.06280209,40.86850758 14.06250499,40.8686316 14.06183711,40.86891379 14.06178957,40.86894254 14.06185612,40.86959318 14.06190365,40.87010902 14.06194881,40.87070033 14.06202012,40.8715846 14.06205434,40.87207418 14.06215567,40.87346448 14.06225668,40.87450686 14.06226975,40.87474454 14.06228758,40.87526573 14.06231135,40.87609018 14.06227718,40.87614718 14.06218092,40.87624153 14.0620704,40.87630623 14.06179944,40.87644102 14.06031276,40.8768292 14.0585765,40.87728477 14.05683312,40.87775382 14.05653008,40.87784008 14.05644855,40.87786434 14.0562432,40.87801818 14.05605115,40.87815763 14.0558477,40.87860619 14.05591995,40.87903461 14.05602453,40.87956942 14.05609679,40.87998059 14.05616357,40.88036372 14.05622062,40.88115621 14.05628122,40.88208617 14.0563454,40.88267648 14.05663101,40.88509502 14.05670706,40.88583535 14.05682115,40.88697098 14.05688175,40.88776519 14.05693503,40.88829331 14.05700871,40.88903899 14.05707574,40.8895942 14.05717675,40.89049708 14.05721537,40.89093504 14.057254,40.89143589 14.05730153,40.89205127 14.05736392,40.89286316 14.05737581,40.89303834 14.05748573,40.89357735 14.05758377,40.89407143 14.05771307,40.89441855 14.05787588,40.89488029 14.05802562,40.89527106 14.05825379,40.89586934 14.0583964,40.89627897 14.05859605,40.89687724 14.05883848,40.8975806 14.05902387,40.89814383 14.05925561,40.89882023 14.0593697,40.8991993 14.05951468,40.89972388 14.05968105,40.90031494 14.06009889,40.90187572 14.06016212,40.90212453</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>17</admin:id>
+            <admin:da___a>1. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>3</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4306.09419598</admin:lungh_a>
+            <admin:lungh_r>4306.09419652</admin:lungh_r>
+            <admin:tempo_a>7</admin:tempo_a>
+            <admin:tempo_r>7</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana, V. Madonna del P.</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>40</admin:velocita>
+            <admin:id_strade>063VIA ORSA MINORE A; 063VIA MADONNA DEL PANTANO A</admin:id_strade>
+            <admin:da_ID_AA>1</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.13">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06408679,40.86785006 14.06386451,40.86797016 14.06351156,40.86816428 14.06329764,40.86823977 14.06292686,40.86837457 14.06286388,40.86845006 14.06280208,40.86850758 14.06250498,40.8686316 14.0618371,40.86891378 14.06178956,40.86894254 14.06185611,40.86959318 14.06190365,40.87010902 14.0619488,40.87070033 14.06202011,40.8715846 14.06205433,40.87207418 14.06215566,40.87346448 14.06225667,40.87450686 14.06226975,40.87474454 14.06228757,40.87526573 14.06231134,40.87609018 14.06227717,40.87614718 14.06218091,40.87624153 14.06207039,40.87630623 14.06179944,40.87644101 14.06031275,40.87682919 14.0585765,40.87728477 14.05683312,40.87775381 14.05653008,40.87784008 14.05644855,40.87786434 14.05624319,40.87801817 14.05605115,40.87815763 14.05584769,40.87860619 14.05591994,40.87903461 14.05602452,40.87956942 14.05609678,40.87998059 14.05616356,40.88036372 14.05622061,40.88115621 14.05628121,40.88208617 14.05634539,40.88267648 14.056631,40.88509502 14.05670705,40.88583535 14.05682114,40.88697098 14.05688175,40.88776519 14.05693502,40.88829331 14.0570087,40.88903899 14.05707573,40.8895942 14.05717674,40.89049708 14.05721537,40.89093504 14.05725399,40.89143589 14.05730152,40.89205127 14.05736391,40.89286316 14.0573758,40.89303834 14.05748572,40.89357735 14.05758377,40.89407143 14.05771306,40.89441855 14.05787587,40.89488029 14.05802561,40.89527106 14.05825378,40.89586934 14.05839639,40.89627897 14.05859604,40.89687724 14.05883847,40.8975806 14.05902386,40.89814383 14.0592556,40.89882023 14.05936969,40.8991993 14.05951467,40.89972389 14.05968105,40.90031494 14.06009889,40.90187572 14.06016211,40.90212453</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>29</admin:id>
+            <admin:da___a>3. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>5</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4306.0951281</admin:lungh_a>
+            <admin:lungh_r>4306.0951281</admin:lungh_r>
+            <admin:tempo_a>7</admin:tempo_a>
+            <admin:tempo_r>7</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana, V. Madonna del P.</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>40</admin:velocita>
+            <admin:id_strade>063VIA ORSA MINORE A; 063VIA MADONNA DEL PANTANO A</admin:id_strade>
+            <admin:da_ID_AA>3</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.14">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06408678,40.86785005 14.06386451,40.86797016 14.06351155,40.86816427 14.06329764,40.86823976 14.06292686,40.86837457 14.06286387,40.86845006 14.06280207,40.86850757 14.06250498,40.86863159 14.0618371,40.86891378 14.06178955,40.86894254 14.0618561,40.86959318 14.06190364,40.87010902 14.06194879,40.87070033 14.0620201,40.8715846 14.06205432,40.87207418 14.06215565,40.87346448 14.06225666,40.87450686 14.06226974,40.87474454 14.06228756,40.87526573 14.06231133,40.87609018 14.06227717,40.87614718 14.06218091,40.87624152 14.06207039,40.87630622 14.06179944,40.87644101 14.06031275,40.87682919 14.0585765,40.87728476 14.05683311,40.87775381 14.05653007,40.87784007 14.05644854,40.87786433 14.05624319,40.87801817 14.05605114,40.87815762 14.05584768,40.87860619 14.05591994,40.87903461 14.05602451,40.87956942 14.05609677,40.87998059 14.05616356,40.88036372 14.0562206,40.88115621 14.05628121,40.88208617 14.05634538,40.88267648 14.05663099,40.88509502 14.05670704,40.88583535 14.05682113,40.88697098 14.05688174,40.88776519 14.05693502,40.88829331 14.0570087,40.88903899 14.05707572,40.8895942 14.05717673,40.89049708 14.05721536,40.89093504 14.05725398,40.89143589 14.05730151,40.89205127 14.0573639,40.89286316 14.05737579,40.89303834 14.05748571,40.89357735 14.05758376,40.89407144 14.05771305,40.89441855 14.05787586,40.89488029 14.0580256,40.89527106 14.05825377,40.89586934 14.05839638,40.89627897 14.05859603,40.89687724 14.05883847,40.89758061 14.05902385,40.89814383 14.05925559,40.89882023 14.05936968,40.8991993 14.05951466,40.89972389 14.05968104,40.90031494 14.06009888,40.90187572 14.0601621,40.90212453</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>37</admin:id>
+            <admin:da___a>4. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>6</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4306.0960664</admin:lungh_a>
+            <admin:lungh_r>4306.0960664</admin:lungh_r>
+            <admin:tempo_a>7</admin:tempo_a>
+            <admin:tempo_r>7</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana, V. Madonna del P.</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>40</admin:velocita>
+            <admin:id_strade>063VIA ORSA MINORE A; 063VIA MADONNA DEL PANTANO A</admin:id_strade>
+            <admin:da_ID_AA>4</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.15">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.34512529,40.93324755 14.34463141,40.93357472 14.34395877,40.9340739 14.34319107,40.93457666 14.3420811,40.93523383 14.3410876,40.93569349 14.34012975,40.93607235 14.33913625,40.93634527 14.33713973,40.93677171 14.33502438,40.93710387 14.33175628,40.93763354 14.32407328,40.93884548</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>158</admin:id>
+            <admin:da___a>26. Vomero / I- 03 Stazione AV Afragola</admin:da___a>
+            <admin:n_percorso>14</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>1914.70331093</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>2</admin:tempo_r>
+            <admin:n_tip_stra>SS162 NC</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>60</admin:velocita>
+            <admin:id_strade>063ASSE MEDIANO D-E</admin:id_strade>
+            <admin:da_ID_AA>26</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-03</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.16">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.28099291,40.9290179 14.28133807,40.92938651 14.28168984,40.92977438 14.28226027,40.93025563 14.28263105,40.93051421 14.28372437,40.93095954 14.28470362,40.93121812 14.2867952,40.93179991 14.28711844,40.93196511 14.28751774,40.93218059 14.28792655,40.93242479 14.28859206,40.93289884 14.29014173,40.93431377 14.29147273,40.93551321 14.29181499,40.93570713 14.29215725,40.93591541 14.29273719,40.93608778 14.29338368,40.93623861 14.29388756,40.93626015 14.29451504,40.93622424 14.2951235,40.93608778 14.29566541,40.93587232 14.29769044,40.93473035 14.29836545,40.93444306 14.29904046,40.93432096 14.29981055,40.93424195 14.30127465,40.9342635 14.3025201,40.93433533 14.3030525,40.93439997 14.3035849,40.93455798 14.30401273,40.93478063 14.30448809,40.93506074 14.3049064,40.93536239 14.30514408,40.93563531 14.30554338,40.93630325 14.30627544,40.93771093 14.30653213,40.93807721 14.3068934,40.93840758 14.30740679,40.93873794 14.30785363,40.93897494 14.30846209,40.93918322 14.30902301,40.93929812 14.30963147,40.93934121 14.31261673,40.93935558 14.31622947,40.93931249 14.31962639,40.93929274 14.32036795,40.93923888 14.32115229,40.93917963 14.32224324,40.93906652 14.32342689,40.93889416 14.32448219,40.93872718 14.32771226,40.9382047 14.3294806,40.93792461 14.33132024,40.93763374 14.33395136,40.93722976 14.33731215,40.93668213 14.33851006,40.93643794 14.33960101,40.93618477 14.34029266,40.93596931 14.34110553,40.93563534 14.3418043,40.9353283 14.34258152,40.93490814 14.34341578,40.93436947 14.34373664,40.93416477</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>172</admin:id>
+            <admin:da___a>7. Marano di Napoli / I- 03 Stazione AV Afragola</admin:da___a>
+            <admin:n_percorso>15</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>6032.88457403</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>SS162NC</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>60</admin:velocita>
+            <admin:id_strade>063ASSE MEDIANO C-D-E</admin:id_strade>
+            <admin:da_ID_AA>7</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-03</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.17">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06408679,40.86785006 14.06386452,40.86797017 14.06351156,40.86816429 14.06329765,40.86823978 14.06292687,40.86837458 14.06286388,40.86845007 14.06280209,40.86850758 14.06250499,40.8686316 14.06183711,40.86891379 14.06178957,40.86894254 14.06185612,40.86959318 14.06190365,40.87010902 14.06194881,40.87070033 14.06202012,40.8715846 14.06205434,40.87207418 14.06215567,40.87346448 14.06225668,40.87450686 14.06226975,40.87474454 14.06228758,40.87526573 14.06231135,40.87609018 14.06227718,40.87614718 14.06218092,40.87624153 14.0620704,40.87630623 14.06179944,40.87644102 14.06031276,40.8768292 14.0585765,40.87728477 14.05683312,40.87775382 14.05653008,40.87784008 14.05644855,40.87786434 14.0562432,40.87801818 14.05605115,40.87815763 14.0558477,40.87860619 14.05591995,40.87903461 14.05602453,40.87956942 14.05609679,40.87998059 14.05616357,40.88036372 14.05622062,40.88115621 14.05628122,40.88208617 14.0563454,40.88267648 14.05663101,40.88509502 14.05670706,40.88583535 14.05682115,40.88697098 14.05688175,40.88776519 14.05693503,40.88829331 14.05700871,40.88903899 14.05707574,40.8895942 14.05717675,40.89049708 14.05721537,40.89093504 14.057254,40.89143589 14.05730153,40.89205127 14.05736392,40.89286316 14.05737581,40.89303834 14.05748573,40.89357735 14.05758377,40.89407143 14.05771307,40.89441855 14.05787588,40.89488029 14.05802562,40.89527106 14.05825379,40.89586934 14.0583964,40.89627897 14.05859605,40.89687724 14.05883848,40.8975806 14.05902387,40.89814383 14.05925561,40.89882023 14.0593697,40.8991993 14.05951468,40.89972388 14.05968105,40.90031494 14.06009889,40.90187572 14.06016212,40.90212453</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>22</admin:id>
+            <admin:da___a>2. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>4</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4306.09419598</admin:lungh_a>
+            <admin:lungh_r>4306.09419652</admin:lungh_r>
+            <admin:tempo_a>7</admin:tempo_a>
+            <admin:tempo_r>7</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana, V. Madonna del P.</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>40</admin:velocita>
+            <admin:id_strade>063VIA ORSA MINORE A; 063VIA MADONNA DEL PANTANO A</admin:id_strade>
+            <admin:da_ID_AA>2</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.18">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06408679,40.86785006 14.06386452,40.86797017 14.06351156,40.86816429 14.06329765,40.86823978 14.06292687,40.86837458 14.06286388,40.86845007 14.06280209,40.86850758 14.06250499,40.8686316 14.06183711,40.86891379 14.06178957,40.86894254 14.06185612,40.86959318 14.06190365,40.87010902 14.06194881,40.87070033 14.06202012,40.8715846 14.06205434,40.87207418 14.06215567,40.87346448 14.06225668,40.87450686 14.06226975,40.87474454 14.06228758,40.87526573 14.06231135,40.87609018 14.06227718,40.87614718 14.06218092,40.87624153 14.0620704,40.87630623 14.06179944,40.87644102 14.06031276,40.8768292 14.0585765,40.87728477 14.05683312,40.87775382 14.05653008,40.87784008 14.05644855,40.87786434 14.0562432,40.87801818 14.05605115,40.87815763 14.0558477,40.87860619 14.05591995,40.87903461 14.05602453,40.87956942 14.05609679,40.87998059 14.05616357,40.88036372 14.05622062,40.88115621 14.05628122,40.88208617 14.0563454,40.88267648 14.05663101,40.88509502 14.05670706,40.88583535 14.05682115,40.88697098 14.05688175,40.88776519 14.05693503,40.88829331 14.05700871,40.88903899 14.05707574,40.8895942 14.05717675,40.89049708 14.05721537,40.89093504 14.057254,40.89143589 14.05730153,40.89205127 14.05736392,40.89286316 14.05737581,40.89303834 14.05748573,40.89357735 14.05758377,40.89407143 14.05771307,40.89441855 14.05787588,40.89488029 14.05802562,40.89527106 14.05825379,40.89586934 14.0583964,40.89627897 14.05859605,40.89687724 14.05883848,40.8975806 14.05902387,40.89814383 14.05925561,40.89882023 14.0593697,40.8991993 14.05951468,40.89972388 14.05968105,40.90031494 14.06009889,40.90187572 14.06016212,40.90212453</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>14</admin:id>
+            <admin:da___a>8. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>2</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4306.09419598</admin:lungh_a>
+            <admin:lungh_r>4306.09419652</admin:lungh_r>
+            <admin:tempo_a>7</admin:tempo_a>
+            <admin:tempo_r>7</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana, V. Madonna del P.</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>40</admin:velocita>
+            <admin:id_strade>063VIA ORSA MINORE A; 063VIA MADONNA DEL PANTANO A</admin:id_strade>
+            <admin:da_ID_AA>8</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.19">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06408678,40.86785005 14.0638645,40.86797015 14.06351155,40.86816427 14.06329764,40.86823976 14.06292685,40.86837456 14.06286386,40.86845006 14.06280207,40.86850757 14.06250497,40.86863158 14.06183709,40.86891377 14.06178954,40.86894254 14.06185609,40.86959319 14.06190363,40.87010902 14.06194879,40.87070034 14.06202009,40.8715846 14.06205431,40.87207418 14.06215564,40.87346448 14.06225666,40.87450686 14.06226973,40.87474454 14.06228755,40.87526573 14.06231132,40.87609018 14.06227716,40.87614717 14.0621809,40.87624152 14.06207038,40.87630622 14.06179943,40.876441 14.06031275,40.87682918 14.05857649,40.87728475 14.05683311,40.8777538 14.05653007,40.87784006 14.05644854,40.87786433 14.05624318,40.87801816 14.05605113,40.87815762 14.05584767,40.87860618 14.05591993,40.87903462 14.05602451,40.87956942 14.05609676,40.87998059 14.05616355,40.88036372 14.05622059,40.88115621 14.0562812,40.88208617 14.05634537,40.88267648 14.05663098,40.88509502 14.05670704,40.88583535 14.05682112,40.88697098 14.05688173,40.88776519 14.05693501,40.88829331 14.05700869,40.88903899 14.05707571,40.8895942 14.05717672,40.89049708 14.05721535,40.89093504 14.05725397,40.89143589 14.0573015,40.89205127 14.05736389,40.89286316 14.05737578,40.89303834 14.05748571,40.89357735 14.05758375,40.89407144 14.05771305,40.89441855 14.05787586,40.8948803 14.05802559,40.89527107 14.05825377,40.89586935 14.05839637,40.89627897 14.05859602,40.89687724 14.05883846,40.89758061 14.05902385,40.89814383 14.05925558,40.89882023 14.05936967,40.8991993 14.05951465,40.89972389 14.05968103,40.90031494 14.06009887,40.90187572 14.06016209,40.90212453</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>41</admin:id>
+            <admin:da___a>5. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>7</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4306.09700445</admin:lungh_a>
+            <admin:lungh_r>4306.09700445</admin:lungh_r>
+            <admin:tempo_a>7</admin:tempo_a>
+            <admin:tempo_r>7</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana, V. Madonna del P.</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>40</admin:velocita>
+            <admin:id_strade>063VIA ORSA MINORE A; 063VIA MADONNA DEL PANTANO A</admin:id_strade>
+            <admin:da_ID_AA>5</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.20">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.1799927,40.96299694 14.18075542,40.96281971 14.18318689,40.96225434 14.18736886,40.96130398 14.18971477,40.96077091 14.1911658,40.96059322 14.1924671,40.96049899 14.19401796,40.96039399 14.19577917,40.96045323 14.1973942,40.96047207 14.19852081,40.96042631 14.19966167,40.96033746 14.20055653,40.96032131 14.20237479,40.96036708 14.20431782,40.96043439 14.2065444,40.96046975 14.20769002,40.96049488 14.20795622,40.96051282 14.20866451,40.96064206 14.20916839,40.95966564 14.20954345,40.95890999 14.2097839,40.95844941 14.20989324,40.95846377</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>71</admin:id>
+            <admin:da___a>31. Quarto / I-10 Stazione RFI Aversa</admin:da___a>
+            <admin:n_percorso>9</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2725.31968392</admin:lungh_a>
+            <admin:lungh_r>2725.31968392</admin:lungh_r>
+            <admin:tempo_a>8</admin:tempo_a>
+            <admin:tempo_r>8</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - Vle della Libert�, Vle Olimpico</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>061c891 C; 061c877 B</admin:id_strade>
+            <admin:da_ID_AA>31</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-10</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.21">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05981963,40.90491011 14.06033658,40.90502463 14.06246651,40.90551141 14.06424435,40.90589224 14.06530916,40.90612936 14.06667819,40.90642396 14.06853209,40.90683353 14.06922611,40.9069916 14.06963492,40.9070922 14.07123213,40.9074802 14.07239201,40.90773887 14.07335223,40.90795443 14.07471461,40.90825549 14.07533258,40.90840638 14.07642115,40.90865786 14.07831308,40.90910333 14.07909389,40.9092959 14.0788818,40.90959523</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>15</admin:id>
+            <admin:da___a>8. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>2</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2022.71548161</admin:lungh_a>
+            <admin:lungh_r>2022.71548055</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>2</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA MADONNA DEL PANTANO B; 063VIA RIPUARIA B</admin:id_strade>
+            <admin:da_ID_AA>8</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.22">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.04052965,40.90069527 14.04136681,40.90088598 14.04211838,40.90104714 14.04379369,40.9014126 14.04643185,40.90199455 14.04839688,40.90242193 14.05288269,40.90341223 14.05599089,40.9040872 14.05902063,40.90476144 14.05981781,40.90492797</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>499</admin:id>
+            <admin:da___a>2. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>1691.2761133</admin:lungh_a>
+            <admin:lungh_r>1691.2761133</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>2</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.23">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05981963,40.90491011 14.06033658,40.90502463 14.06246651,40.90551141 14.06424435,40.90589224 14.06530916,40.90612936 14.06667819,40.90642396 14.06853209,40.90683353 14.06922611,40.9069916 14.06963492,40.9070922 14.07123213,40.9074802 14.07239201,40.90773887 14.07335223,40.90795443 14.07471461,40.90825549 14.07533258,40.90840638 14.07642115,40.90865786 14.07831308,40.90910333 14.07909389,40.9092959 14.0788818,40.90959523</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>15</admin:id>
+            <admin:da___a>8. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>2</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2022.71548161</admin:lungh_a>
+            <admin:lungh_r>2022.71548055</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>2</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA MADONNA DEL PANTANO B; 063VIA RIPUARIA B</admin:id_strade>
+            <admin:da_ID_AA>8</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.24">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.21814194,40.89346076 14.22243598,40.89081921 14.22391005,40.89238526</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>167</admin:id>
+            <admin:da___a>7. Marano di Napoli / I- 03 Stazione AV Afragola</admin:da___a>
+            <admin:n_percorso>15</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>679.32083777</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>2</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.S. Maria a Cubito; V. dei Ciliegi</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA SANTA MARIA A CUBITO B, 063STRADA0526 B</admin:id_strade>
+            <admin:da_ID_AA>7</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-03</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.25">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.0641998,40.86776572 14.06355659,40.86809717 14.06289698,40.86833969 14.06171951,40.86879013 14.06030883,40.86930061 14.05888985,40.86978659 14.05844998,40.86991885 14.05703663,40.8702827 14.05584692,40.87059473 14.05447952,40.87092675 14.05376114,40.871102 14.05322526,40.87125014 14.05173738,40.87166217 14.05116989,40.87182434 14.05082858,40.87197884 14.05056903,40.87212448 14.05016872,40.87245188 14.05000147,40.87262033 14.04987354,40.87278313 14.0497045,40.87307669 14.04958899,40.87346901 14.0494473,40.87404582 14.04911142,40.87530032 14.04888478,40.87632631 14.04862482,40.87748609 14.04843298,40.87854812 14.04828607,40.87915826 14.04815087,40.87971844 14.04787426,40.88094243 14.04759303,40.88215924 14.04743209,40.8828267 14.04728054,40.88340892 14.04721121,40.88368864 14.04711752,40.88409018 14.04700225,40.88459452 14.04692208,40.88492945 14.04680167,40.88544137 14.04667586,40.88597994 14.04655051,40.88648609 14.04647784,40.88682299 14.04634934,40.88737297 14.04618876,40.88805808 14.04608437,40.88850339 14.04597671,40.88900207 14.04586399,40.88950261 14.04573284,40.89006211 14.04563104,40.89050172 14.04552367,40.89097943 14.04540549,40.89151043 14.04528246,40.89202805 14.04515122,40.89259326 14.04507577,40.89294729 14.04497885,40.89339648 14.04485028,40.89395028 14.0446877,40.89459723 14.04454576,40.89520621 14.04438278,40.89587985 14.04424056,40.89650789 14.04405481,40.897265 14.04374534,40.89781539 14.04338631,40.8983177 14.04160754,40.89968532 14.04076831,40.9003743 14.04052965,40.90069527</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>490</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4586.97063312</admin:lungh_a>
+            <admin:lungh_r>4586.97063312</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.26">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.04052965,40.90069527 14.04136681,40.90088598 14.04211838,40.90104714 14.04379369,40.9014126 14.04643185,40.90199455 14.04839688,40.90242193 14.05288269,40.90341223 14.05599089,40.9040872 14.05902063,40.90476144 14.05981781,40.90492797</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>501</admin:id>
+            <admin:da___a>4. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>1691.2761133</admin:lungh_a>
+            <admin:lungh_r>1691.2761133</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>4</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.27">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.04052965,40.90069527 14.04136681,40.90088598 14.04211838,40.90104714 14.04379369,40.9014126 14.04643185,40.90199455 14.04839688,40.90242193 14.05288269,40.90341223 14.05599089,40.9040872 14.05902063,40.90476144 14.05981781,40.90492797</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>495</admin:id>
+            <admin:da___a>8. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>1691.2761133</admin:lungh_a>
+            <admin:lungh_r>1691.2761133</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>8</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.28">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05981963,40.90491011 14.06033658,40.90502463 14.06246651,40.90551141 14.06424435,40.90589224 14.06530916,40.90612936 14.06667819,40.90642396 14.06853209,40.90683353 14.06922611,40.9069916 14.06963492,40.9070922 14.07123213,40.9074802 14.07239201,40.90773887 14.07335223,40.90795443 14.07471461,40.90825549 14.07533258,40.90840638 14.07642115,40.90865786 14.07831308,40.90910333 14.07909389,40.9092959 14.0788818,40.90959523</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>23</admin:id>
+            <admin:da___a>2. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>4</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2052.01107231</admin:lungh_a>
+            <admin:lungh_r>2052.01107232</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA MADONNA DEL PANTANO B; 063VIA RIPUARIA B</admin:id_strade>
+            <admin:da_ID_AA>2</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.29">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06399849,40.86791057 14.06355659,40.86809717 14.06289698,40.86833969 14.06171951,40.86879013 14.06030883,40.86930061 14.05888985,40.86978659 14.05844998,40.86991885 14.05703663,40.8702827 14.05584692,40.87059473 14.05447952,40.87092675 14.05376114,40.871102 14.05322526,40.87125014 14.05173738,40.87166217 14.05116989,40.87182434 14.05082858,40.87197884 14.05056903,40.87212448 14.05016872,40.87245188 14.05000147,40.87262033 14.04981573,40.8727859 14.04962737,40.87311327 14.0494886,40.87359477 14.04930843,40.87433692 14.04905454,40.87529297 14.0488139,40.8763099 14.04857121,40.87746983 14.04836751,40.87853712 14.04822709,40.87913301 14.04809649,40.87970038 14.04781041,40.88092787 14.04753404,40.88213399 14.04736898,40.88280476 14.04722388,40.88339703 14.04714405,40.88370741 14.04701887,40.88422478 14.04692276,40.88468518 14.04682767,40.88507408 14.04673233,40.88548086 14.04660222,40.88601248 14.04648691,40.88649775 14.04638076,40.88700097 14.04627071,40.88744695 14.04612067,40.88805349 14.04602005,40.88849955 14.04591399,40.88899562 14.04579856,40.88948803 14.04566808,40.89004468 14.0455675,40.89048716 14.04546645,40.89096182 14.04534574,40.89149352 14.04522053,40.89201088 14.04508511,40.89258178 14.04501402,40.89293871 14.04491804,40.89338838 14.04477817,40.89394137 14.04462293,40.89458003 14.04448689,40.89519383 14.04433594,40.89586113 14.04417613,40.89648904 14.04398564,40.89728471 14.04369065,40.89781139 14.04332544,40.8983053 14.04160754,40.89968532 14.04076831,40.9003743 14.04052965,40.90069527</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>502</admin:id>
+            <admin:da___a>5. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4586.97063312</admin:lungh_a>
+            <admin:lungh_r>4586.97063312</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>5</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.30">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06399849,40.86791057 14.06355659,40.86809717 14.06289698,40.86833969 14.06171951,40.86879013 14.06030883,40.86930061 14.05888985,40.86978659 14.05844998,40.86991885 14.05703663,40.8702827 14.05584692,40.87059473 14.05447952,40.87092675 14.05376114,40.871102 14.05322526,40.87125014 14.05173738,40.87166217 14.05116989,40.87182434 14.05082858,40.87197884 14.05056903,40.87212448 14.05016872,40.87245188 14.05000147,40.87262033 14.04981573,40.8727859 14.04962737,40.87311327 14.0494886,40.87359477 14.04930843,40.87433692 14.04905454,40.87529297 14.0488139,40.8763099 14.04857121,40.87746983 14.04836751,40.87853712 14.04822709,40.87913301 14.04809649,40.87970038 14.04781041,40.88092787 14.04753404,40.88213399 14.04736898,40.88280476 14.04722388,40.88339703 14.04714405,40.88370741 14.04701887,40.88422478 14.04692276,40.88468518 14.04682767,40.88507408 14.04673233,40.88548086 14.04660222,40.88601248 14.04648691,40.88649775 14.04638076,40.88700097 14.04627071,40.88744695 14.04612067,40.88805349 14.04602005,40.88849955 14.04591399,40.88899562 14.04579856,40.88948803 14.04566808,40.89004468 14.0455675,40.89048716 14.04546645,40.89096182 14.04534574,40.89149352 14.04522053,40.89201088 14.04508511,40.89258178 14.04501402,40.89293871 14.04491804,40.89338838 14.04477817,40.89394137 14.04462293,40.89458003 14.04448689,40.89519383 14.04433594,40.89586113 14.04417613,40.89648904 14.04398564,40.89728471 14.04369065,40.89781139 14.04332544,40.8983053 14.04160754,40.89968532 14.04076831,40.9003743 14.04052965,40.90069527</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>498</admin:id>
+            <admin:da___a>2. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4586.97063312</admin:lungh_a>
+            <admin:lungh_r>4586.97063312</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>2</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.31">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.0641998,40.86776572 14.06355659,40.86809717 14.06289698,40.86833969 14.06171951,40.86879013 14.06030883,40.86930061 14.05888985,40.86978659 14.05844998,40.86991885 14.05703663,40.8702827 14.05584692,40.87059473 14.05447952,40.87092675 14.05376114,40.871102 14.05322526,40.87125014 14.05173738,40.87166217 14.05116989,40.87182434 14.05082858,40.87197884 14.05056903,40.87212448 14.05016872,40.87245188 14.05000147,40.87262033 14.04987354,40.87278313 14.0497045,40.87307669 14.04958899,40.87346901 14.0494473,40.87404582 14.04911142,40.87530032 14.04888478,40.87632631 14.04862482,40.87748609 14.04843298,40.87854812 14.04828607,40.87915826 14.04815087,40.87971844 14.04787426,40.88094243 14.04759303,40.88215924 14.04743209,40.8828267 14.04728054,40.88340892 14.04721121,40.88368864 14.04711752,40.88409018 14.04700225,40.88459452 14.04692208,40.88492945 14.04680167,40.88544137 14.04667586,40.88597994 14.04655051,40.88648609 14.04647784,40.88682299 14.04634934,40.88737297 14.04618876,40.88805808 14.04608437,40.88850339 14.04597671,40.88900207 14.04586399,40.88950261 14.04573284,40.89006211 14.04563104,40.89050172 14.04552367,40.89097943 14.04540549,40.89151043 14.04528246,40.89202805 14.04515122,40.89259326 14.04507577,40.89294729 14.04497885,40.89339648 14.04485028,40.89395028 14.0446877,40.89459723 14.04454576,40.89520621 14.04438278,40.89587985 14.04424056,40.89650789 14.04405481,40.897265 14.04374534,40.89781539 14.04338631,40.8983177 14.04160754,40.89968532 14.04076831,40.9003743 14.04052965,40.90069527</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>494</admin:id>
+            <admin:da___a>8. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4586.97063312</admin:lungh_a>
+            <admin:lungh_r>4586.97063312</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>8</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.32">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.04052965,40.90069527 14.04136681,40.90088598 14.04211838,40.90104714 14.04379369,40.9014126 14.04643185,40.90199455 14.04839688,40.90242193 14.05288269,40.90341223 14.05599089,40.9040872 14.05902063,40.90476144 14.05981781,40.90492797</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>497</admin:id>
+            <admin:da___a>1. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>1691.2761133</admin:lungh_a>
+            <admin:lungh_r>1691.2761133</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>1</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.33">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05981961,40.90491012 14.06033658,40.90502465 14.0624665,40.90551143 14.06424435,40.90589225 14.06530915,40.90612937 14.06667819,40.90642397 14.06853209,40.90683354 14.06922611,40.90699162 14.06963492,40.90709221 14.07123212,40.90748022 14.072392,40.90773889 14.07335223,40.90795444 14.0747146,40.9082555 14.07533257,40.90840639 14.07642114,40.90865787 14.07831307,40.90910335 14.07909386,40.90929591 14.07888179,40.90959522</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>38</admin:id>
+            <admin:da___a>4. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>6</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2052.0098795</admin:lungh_a>
+            <admin:lungh_r>2052.0098795</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA MADONNA DEL PANTANO B; 063VIA RIPUARIA B</admin:id_strade>
+            <admin:da_ID_AA>4</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.34">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.04052965,40.90069527 14.04136681,40.90088598 14.04211838,40.90104714 14.04379369,40.9014126 14.04643185,40.90199455 14.04839688,40.90242193 14.05288269,40.90341223 14.05599089,40.9040872 14.05902063,40.90476144 14.05981781,40.90492797</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>503</admin:id>
+            <admin:da___a>5. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>1691.2761133</admin:lungh_a>
+            <admin:lungh_r>1691.2761133</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>5</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.35">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.0598196,40.90491013 14.06033658,40.90502465 14.0624665,40.90551143 14.06424434,40.90589226 14.06530915,40.90612938 14.06667818,40.90642398 14.06853208,40.90683355 14.06922611,40.90699162 14.06963492,40.90709222 14.07123212,40.90748022 14.072392,40.90773889 14.07335222,40.90795445 14.0747146,40.90825551 14.07533257,40.9084064 14.07642114,40.90865788 14.07831307,40.90910335 14.07909385,40.90929591 14.07888178,40.90959522</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>42</admin:id>
+            <admin:da___a>5. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>7</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2052.00928307</admin:lungh_a>
+            <admin:lungh_r>2052.00928307</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA MADONNA DEL PANTANO B; 063VIA RIPUARIA B</admin:id_strade>
+            <admin:da_ID_AA>5</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.36">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06399849,40.86791057 14.06355659,40.86809717 14.06289698,40.86833969 14.06171951,40.86879013 14.06030883,40.86930061 14.05888985,40.86978659 14.05844998,40.86991885 14.05703663,40.8702827 14.05584692,40.87059473 14.05447952,40.87092675 14.05376114,40.871102 14.05322526,40.87125014 14.05173738,40.87166217 14.05116989,40.87182434 14.05082858,40.87197884 14.05056903,40.87212448 14.05016872,40.87245188 14.05000147,40.87262033 14.04981573,40.8727859 14.04962737,40.87311327 14.0494886,40.87359477 14.04930843,40.87433692 14.04905454,40.87529297 14.0488139,40.8763099 14.04857121,40.87746983 14.04836751,40.87853712 14.04822709,40.87913301 14.04809649,40.87970038 14.04781041,40.88092787 14.04753404,40.88213399 14.04736898,40.88280476 14.04722388,40.88339703 14.04714405,40.88370741 14.04701887,40.88422478 14.04692276,40.88468518 14.04682767,40.88507408 14.04673233,40.88548086 14.04660222,40.88601248 14.04648691,40.88649775 14.04638076,40.88700097 14.04627071,40.88744695 14.04612067,40.88805349 14.04602005,40.88849955 14.04591399,40.88899562 14.04579856,40.88948803 14.04566808,40.89004468 14.0455675,40.89048716 14.04546645,40.89096182 14.04534574,40.89149352 14.04522053,40.89201088 14.04508511,40.89258178 14.04501402,40.89293871 14.04491804,40.89338838 14.04477817,40.89394137 14.04462293,40.89458003 14.04448689,40.89519383 14.04433594,40.89586113 14.04417613,40.89648904 14.04398564,40.89728471 14.04369065,40.89781139 14.04332544,40.8983053 14.04160754,40.89968532 14.04076831,40.9003743 14.04052965,40.90069527</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>500</admin:id>
+            <admin:da___a>4. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4586.97063312</admin:lungh_a>
+            <admin:lungh_r>4586.97063312</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>4</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.37">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.05981963,40.90491011 14.06033658,40.90502463 14.06246651,40.90551141 14.06424435,40.90589224 14.06530916,40.90612936 14.06667819,40.90642396 14.06853209,40.90683353 14.06922611,40.9069916 14.06963492,40.9070922 14.07123213,40.9074802 14.07239201,40.90773887 14.07335223,40.90795443 14.07471461,40.90825549 14.07533258,40.90840638 14.07642115,40.90865786 14.07831308,40.90910333 14.07909389,40.9092959 14.0788818,40.90959523</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>18</admin:id>
+            <admin:da___a>1. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>3</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>2022.71548161</admin:lungh_a>
+            <admin:lungh_r>2022.71548055</admin:lungh_r>
+            <admin:tempo_a>6</admin:tempo_a>
+            <admin:tempo_r>6</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA MADONNA DEL PANTANO B; 063VIA RIPUARIA B</admin:id_strade>
+            <admin:da_ID_AA>1</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.38">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06399849,40.86791057 14.06355659,40.86809717 14.06289698,40.86833969 14.06171951,40.86879013 14.06030883,40.86930061 14.05888985,40.86978659 14.05844998,40.86991885 14.05703663,40.8702827 14.05584692,40.87059473 14.05447952,40.87092675 14.05376114,40.871102 14.05322526,40.87125014 14.05173738,40.87166217 14.05116989,40.87182434 14.05082858,40.87197884 14.05056903,40.87212448 14.05016872,40.87245188 14.05000147,40.87262033 14.04981573,40.8727859 14.04962737,40.87311327 14.0494886,40.87359477 14.04930843,40.87433692 14.04905454,40.87529297 14.0488139,40.8763099 14.04857121,40.87746983 14.04836751,40.87853712 14.04822709,40.87913301 14.04809649,40.87970038 14.04781041,40.88092787 14.04753404,40.88213399 14.04736898,40.88280476 14.04722388,40.88339703 14.04714405,40.88370741 14.04701887,40.88422478 14.04692276,40.88468518 14.04682767,40.88507408 14.04673233,40.88548086 14.04660222,40.88601248 14.04648691,40.88649775 14.04638076,40.88700097 14.04627071,40.88744695 14.04612067,40.88805349 14.04602005,40.88849955 14.04591399,40.88899562 14.04579856,40.88948803 14.04566808,40.89004468 14.0455675,40.89048716 14.04546645,40.89096182 14.04534574,40.89149352 14.04522053,40.89201088 14.04508511,40.89258178 14.04501402,40.89293871 14.04491804,40.89338838 14.04477817,40.89394137 14.04462293,40.89458003 14.04448689,40.89519383 14.04433594,40.89586113 14.04417613,40.89648904 14.04398564,40.89728471 14.04369065,40.89781139 14.04332544,40.8983053 14.04160754,40.89968532 14.04076831,40.9003743 14.04052965,40.90069527</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>492</admin:id>
+            <admin:da___a>3. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4586.97063312</admin:lungh_a>
+            <admin:lungh_r>4586.97063312</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>3</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.39">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.04052965,40.90069527 14.04136681,40.90088598 14.04211838,40.90104714 14.04379369,40.9014126 14.04643185,40.90199455 14.04839688,40.90242193 14.05288269,40.90341223 14.05599089,40.9040872 14.05902063,40.90476144 14.05981781,40.90492797</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>493</admin:id>
+            <admin:da___a>3. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>1691.2761133</admin:lungh_a>
+            <admin:lungh_r>1691.2761133</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>3</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.40">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06399849,40.86791057 14.06355659,40.86809717 14.06289698,40.86833969 14.06171951,40.86879013 14.06030883,40.86930061 14.05888985,40.86978659 14.05844998,40.86991885 14.05703663,40.8702827 14.05584692,40.87059473 14.05447952,40.87092675 14.05376114,40.871102 14.05322526,40.87125014 14.05173738,40.87166217 14.05116989,40.87182434 14.05082858,40.87197884 14.05056903,40.87212448 14.05016872,40.87245188 14.05000147,40.87262033 14.04981573,40.8727859 14.04962737,40.87311327 14.0494886,40.87359477 14.04930843,40.87433692 14.04905454,40.87529297 14.0488139,40.8763099 14.04857121,40.87746983 14.04836751,40.87853712 14.04822709,40.87913301 14.04809649,40.87970038 14.04781041,40.88092787 14.04753404,40.88213399 14.04736898,40.88280476 14.04722388,40.88339703 14.04714405,40.88370741 14.04701887,40.88422478 14.04692276,40.88468518 14.04682767,40.88507408 14.04673233,40.88548086 14.04660222,40.88601248 14.04648691,40.88649775 14.04638076,40.88700097 14.04627071,40.88744695 14.04612067,40.88805349 14.04602005,40.88849955 14.04591399,40.88899562 14.04579856,40.88948803 14.04566808,40.89004468 14.0455675,40.89048716 14.04546645,40.89096182 14.04534574,40.89149352 14.04522053,40.89201088 14.04508511,40.89258178 14.04501402,40.89293871 14.04491804,40.89338838 14.04477817,40.89394137 14.04462293,40.89458003 14.04448689,40.89519383 14.04433594,40.89586113 14.04417613,40.89648904 14.04398564,40.89728471 14.04369065,40.89781139 14.04332544,40.8983053 14.04160754,40.89968532 14.04076831,40.9003743 14.04052965,40.90069527</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>496</admin:id>
+            <admin:da___a>1. Bacoli / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4586.97063312</admin:lungh_a>
+            <admin:lungh_r>4586.97063312</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>1</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.41">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.04052965,40.90069527 14.04136681,40.90088598 14.04211838,40.90104714 14.04379369,40.9014126 14.04643185,40.90199455 14.04839688,40.90242193 14.05288269,40.90341223 14.05599089,40.9040872 14.05902063,40.90476144 14.05981781,40.90492797</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>491</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>0</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>1691.2761133</admin:lungh_a>
+            <admin:lungh_r>1691.2761133</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Ripuaria</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>0</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.42">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.24058623,40.83161879 14.24139394,40.83155818 14.24251579,40.83145388 14.24301016,40.83138194 14.24351879,40.83127045 14.2437945,40.83117154 14.24390383,40.83110859 14.24402267,40.83100968 14.24420331,40.83080467 14.24472145,40.83017883 14.24487832,40.82999719 14.24494012,40.82995583 14.24504232,40.82993605 14.24562939,40.82992705 14.24691285,40.82988749 14.24815069,40.82985234 14.24849235,40.82983885 14.24920103,40.82981862 14.24959023,40.82981187 14.24973581,40.82982761 14.24984871,40.82987707 14.24992892,40.82999172 14.25027355,40.83063689 14.25070434,40.83142593 14.25086772,40.83172027 14.2512309,40.83235041 14.25161498,40.83301939 14.25169104,40.83315894 14.25174428,40.83326396 14.25182984,40.83347688 14.25185646,40.83355457 14.25185266,40.83359341 14.25178041,40.83364377 14.25103504,40.83422641 14.25048933,40.83483207 14.25013537,40.83522338 14.25012871,40.83526654 14.25013917,40.83534351 14.25019051,40.83545068</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>280</admin:id>
+            <admin:da___a>19. Pianura / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>21</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>1564.79300909</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>5</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Partenope; V.Sauro; V.Acton</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA NAZARIO SAURO C</admin:id_strade>
+            <admin:da_ID_AA>19</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.43">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.06408679,40.86785006 14.06386452,40.86797017 14.06351156,40.86816429 14.06329765,40.86823978 14.06292687,40.86837458 14.06286388,40.86845007 14.06280209,40.86850758 14.06250499,40.8686316 14.06183711,40.86891379 14.06178957,40.86894254 14.06185612,40.86959318 14.06190365,40.87010902 14.06194881,40.87070033 14.06202012,40.8715846 14.06205434,40.87207418 14.06215567,40.87346448 14.06225668,40.87450686 14.06226975,40.87474454 14.06228758,40.87526573 14.06231135,40.87609018 14.06227718,40.87614718 14.06218092,40.87624153 14.0620704,40.87630623 14.06179944,40.87644102 14.06031276,40.8768292 14.0585765,40.87728477 14.05683312,40.87775382 14.05653008,40.87784008 14.05644855,40.87786434 14.0562432,40.87801818 14.05605115,40.87815763 14.0558477,40.87860619 14.05591995,40.87903461 14.05602453,40.87956942 14.05609679,40.87998059 14.05616357,40.88036372 14.05622062,40.88115621 14.05628122,40.88208617 14.0563454,40.88267648 14.05663101,40.88509502 14.05670706,40.88583535 14.05682115,40.88697098 14.05688175,40.88776519 14.05693503,40.88829331 14.05700871,40.88903899 14.05707574,40.8895942 14.05717675,40.89049708 14.05721537,40.89093504 14.057254,40.89143589 14.05730153,40.89205127 14.05736392,40.89286316 14.05737581,40.89303834 14.05748573,40.89357735 14.05758377,40.89407143 14.05771307,40.89441855 14.05787588,40.89488029 14.05802562,40.89527106 14.05825379,40.89586934 14.0583964,40.89627897 14.05859605,40.89687724 14.05883848,40.8975806 14.05902387,40.89814383 14.05925561,40.89882023 14.0593697,40.8991993 14.05951468,40.89972388 14.05968105,40.90031494 14.06017768,40.9017917 14.06024867,40.90205803 14.05996075,40.90380686 14.05995399,40.90493988</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>6</admin:id>
+            <admin:da___a>9. Monte di Procida / I-11 Circolo didattico</admin:da___a>
+            <admin:n_percorso>1</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4306.09419598</admin:lungh_a>
+            <admin:lungh_r>4306.09419652</admin:lungh_r>
+            <admin:tempo_a>7</admin:tempo_a>
+            <admin:tempo_r>7</admin:tempo_r>
+            <admin:n_tip_stra>Extraurbana - V.Domitiana, V. Madonna del P.</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>40</admin:velocita>
+            <admin:id_strade>063VIA ORSA MINORE A; 063VIA MADONNA DEL PANTANO A</admin:id_strade>
+            <admin:da_ID_AA>9</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-11</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.44">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.19035443,40.83359179 14.19066044,40.83378323 14.19117739,40.83399004 14.19172446,40.8342197 14.19202946,40.8343248 14.19231961,40.83441264 14.19274516,40.83451477 14.1933213,40.83461986 14.19380993,40.83469573 14.19399548,40.83471419 14.19415828,40.83474584 14.19433826,40.83481002 14.19443526,40.83488506 14.19453173,40.83500395 14.19455724,40.83517765 14.19452297,40.83531279 14.19437044,40.83546999 14.19416592,40.8355658 14.19344004,40.83580098 14.19304241,40.83588019 14.19282733,40.83581195 14.19266225,40.83576122 14.1924521,40.83570064 14.19204472,40.83554906 14.19158847,40.83549438 14.19134861,40.83539927 14.19122185,40.83531899 14.19112244,40.83521082 14.19099783,40.83492965 14.19101467,40.83457701 14.19105596,40.83427794 14.19116268,40.83334627 14.19113441,40.83315439</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>386</admin:id>
+            <admin:da___a>29. Pozzuoli / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>28</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>958.50993757</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>3</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Svincolo uscita A56</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade/>
+            <admin:da_ID_AA>29</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.45">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.32411726,40.93361017 14.32393623,40.93224315 14.32368667,40.93055164 14.32350128,40.92905941 14.32331589,40.92772877 14.32300928,40.92574012 14.32260999,40.92305353 14.32205857,40.91938982 14.32146913,40.91563969 14.32087969,40.91227733 14.32038532,40.9087711 14.31970081,40.90420122 14.31850766,40.89674755 14.31830801,40.89572887</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>227</admin:id>
+            <admin:da___a>18. Fuorigrotta / I- 03 Stazione AV Afragola</admin:da___a>
+            <admin:n_percorso>18</admin:n_percorso>
+            <admin:percorrenz>Andata / Ritorno</admin:percorrenz>
+            <admin:lungh_a>4233.86268865</admin:lungh_a>
+            <admin:lungh_r>4233.86268865</admin:lungh_r>
+            <admin:tempo_a>4</admin:tempo_a>
+            <admin:tempo_r>4</admin:tempo_r>
+            <admin:n_tip_stra>A1</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>60</admin:velocita>
+            <admin:id_strade>A1 B</admin:id_strade>
+            <admin:da_ID_AA>18</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-03</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.46">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.27199192,40.85293387 14.27200537,40.85277796 14.27201108,40.85271971 14.27199682,40.85269382 14.27194691,40.85266254 14.27173727,40.85254928 14.27168451,40.85252662 14.27162604,40.85251692 14.27154886,40.85251684 14.27151418,40.85292847 14.27160331,40.85325207 14.27155188,40.8538782 14.27102705,40.85700852 14.2710114,40.85708173 14.27272566,40.85790416 14.27308218,40.85774912 14.27317131,40.85773788 14.27420225,40.85783675 14.27431218,40.85788394 14.27441319,40.85796034 14.274535,40.85811314 14.27454391,40.85817606 14.27445775,40.85865872 14.27606447,40.85944069 14.27641185,40.85960341 14.27580096,40.86312114 14.27573917,40.86333684</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>394</admin:id>
+            <admin:da___a>29. Pozzuoli / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>28</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>1599.40380739</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>5</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - Corso Novara;V.N.Poggioreale;Corso Malta</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>SS162 C, 063CORSO MALTA B</admin:id_strade>
+            <admin:da_ID_AA>29</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.47">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.24061818,40.83164803 14.24162731,40.83155635 14.24272678,40.83145334 14.2432652,40.83136153 14.24385897,40.83123135 14.24408778,40.83111666 14.24420663,40.83101316 14.24430201,40.83090355 14.24450079,40.83066948 14.24496654,40.83006773 14.24508133,40.82997612 14.24519524,40.82996197 14.24543855,40.82995164 14.2457916,40.82994799 14.24696482,40.82991097 14.24825566,40.82987767 14.24876972,40.82985719 14.24933085,40.82983701 14.24968776,40.82983933 14.24981719,40.82984017 14.24992818,40.82985152 14.25002457,40.82989951 14.2503701,40.83054987 14.25079285,40.83132426 14.25103526,40.83174295 14.25135044,40.83231703 14.25171995,40.83294508 14.25183544,40.83313949 14.25194674,40.8333577 14.25200775,40.83351303 14.25201899,40.83356077 14.25197484,40.83364986 14.25185616,40.83373847 14.25123885,40.83421712 14.25066698,40.83483907 14.25032546,40.83520927 14.25029328,40.83528056 14.25030045,40.8353402 14.25030791,40.83550841</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>391</admin:id>
+            <admin:da___a>29. Pozzuoli / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>28</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>1564.79300324</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>5</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Partenope; V.Sauro; V.Acton</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA NAZARIO SAURO C</admin:id_strade>
+            <admin:da_ID_AA>29</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.48">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.11584781,40.84179438 14.11601871,40.84201851 14.11632914,40.84227592 14.11661306,40.84240204 14.11678576,40.84239621 14.11694466,40.84234929 14.11711849,40.84215564 14.11699941,40.84143254 14.11645432,40.84153382</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>400</admin:id>
+            <admin:da___a>29. Pozzuoli / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>28</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>337.03579622</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>1</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - V.Artiaco; V.Fascione</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>063VIA CAMPANA 060 B, 063VIA FASCIONE C</admin:id_strade>
+            <admin:da_ID_AA>29</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.49">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.2775525,40.84649073 14.27780508,40.84650869 14.27787044,40.84656937 14.277915,40.84665926 14.27775754,40.84677388 14.27705638,40.847329 14.27586502,40.84821673 14.2746172,40.8491831 14.27368133,40.84993371 14.27328322,40.85023935 14.27325945,40.85036969 14.27318815,40.85047756 14.2730396,40.85052251 14.27268308,40.85077421 14.27266228,40.85083713 14.27263554,40.85085736 14.27255533,40.85087758 14.27241866,40.85093826 14.27224337,40.85108209 14.27210968,40.85123715 14.2719641,40.85146862 14.27176504,40.85191358 14.27155755,40.85239405 14.27151263,40.85292727 14.27160176,40.85325087 14.27172297,40.85324548 14.27182993,40.8532266 14.27191193,40.85319155 14.27195827,40.85311334 14.27197967,40.85302166 14.27199036,40.85293266</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>393</admin:id>
+            <admin:da___a>29. Pozzuoli / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>28</admin:n_percorso>
+            <admin:percorrenz>Andata</admin:percorrenz>
+            <admin:lungh_a>1036.03745796</admin:lungh_a>
+            <admin:lungh_r>0.0</admin:lungh_r>
+            <admin:tempo_a>3</admin:tempo_a>
+            <admin:tempo_r>0</admin:tempo_r>
+            <admin:n_tip_stra>Urbana - Corso Lucci; Piazza Garibaldi</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>20</admin:velocita>
+            <admin:id_strade>SS18 B-C</admin:id_strade>
+            <admin:da_ID_AA>29</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_lcavarra_shp_cf_percorsinavette fid="admin_shp_lcavarra_shp_cf_percorsinavette.50">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.19826251,40.83650135 14.19653121,40.83596575 14.19515861,40.83552518 14.19370876,40.83511607 14.19275805,40.83480587 14.19173008,40.83442373 14.19044661,40.83378084 14.18958503,40.83337172 14.1893414,40.8332863 14.18915126,40.83323235 14.18900271,40.83320538 14.18866996,40.83316042 14.18815301,40.83311996 14.18682951,40.83314751 14.1858683,40.83322653 14.18537151,40.83330645 14.18495325,40.83346478 14.18414067,40.83383443 14.18131554,40.83517895 14.17892699,40.83635692 14.17761718,40.83711221 14.17653771,40.83791679 14.17574402,40.8385518 14.17541246,40.8387668 14.17494986,40.83902091 14.17468984,40.83913536 14.17425591,40.83930387 14.1738047,40.83944937 14.17335914,40.83954342 14.17294447,40.83955718 14.17245723,40.83960663 14.17161941,40.8396381 14.16954209,40.83962641 14.16711062,40.83964259 14.16663645,40.83965607</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:id>398</admin:id>
+            <admin:da___a>29. Pozzuoli / I- 02 Stazione RFI Napoli Centrale</admin:da___a>
+            <admin:n_percorso>28</admin:n_percorso>
+            <admin:percorrenz>Ritorno</admin:percorrenz>
+            <admin:lungh_a>0.0</admin:lungh_a>
+            <admin:lungh_r>2977.66438561</admin:lungh_r>
+            <admin:tempo_a>0</admin:tempo_a>
+            <admin:tempo_r>3</admin:tempo_r>
+            <admin:n_tip_stra>A56 "Tangenziale di Napoli"</admin:n_tip_stra>
+            <admin:bus_necess>0</admin:bus_necess>
+            <admin:velocita>60</admin:velocita>
+            <admin:id_strade>063TANGENZIALE EST B</admin:id_strade>
+            <admin:da_ID_AA>29</admin:da_ID_AA>
+            <admin:a_Cod_AI>I-02</admin:a_Cod_AI>
+        </admin:admin_shp_lcavarra_shp_cf_percorsinavette>
+    </gml:featureMember>
+</wfs:FeatureCollection>

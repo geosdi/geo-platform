@@ -222,12 +222,12 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
                             case END_ELEMENT -> featureProperties.put(localName, null);
                             default -> {
                                 if (super.isTagPrefix(GML_PREFIX)) {
-                                    handleGmlTag(localName, feature, featureProperties);
+                                    this.handleGmlTag(localName, feature, featureProperties);
                                 }
                             }
                         }
                     } else if (super.isTagPrefix(GML_PREFIX)) {
-                        handleGmlTag(localName, feature, featureProperties);
+                        this.handleGmlTag(localName, feature, featureProperties);
                     }
                 }
                 default -> {}
@@ -270,7 +270,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
      * @param featureProperties
      * @throws Exception
      */
-    void handleGmlTag(String localName, Feature feature, Map<String, Object> featureProperties) throws Exception {
+    protected void handleGmlTag(String localName, Feature feature, Map<String, Object> featureProperties) throws Exception {
         logger.trace("####################Called {}#handleGmlTag , localName : {}\n", this.getClass().getSimpleName(), localName);
         switch (localName) {
             case BOUNDING_BY_PREFIX -> super.goToEndTag(BOUNDING_BY_PREFIX);

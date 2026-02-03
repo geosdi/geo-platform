@@ -716,4 +716,28 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "WaterTemp.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void d_q_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("AIDT_OP08V_POI_EXPORT.xml"));
+        logger.info("#######################FEATURE_STORE_AIDT_OP08V_POI_EXPORT : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "AIDT_OP08V_POI_EXPORT.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void d_r_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("WS_Vito_Layer_Importer148.xml"));
+        logger.info("#######################FEATURE_STORE_WS_Vito_Layer_Importer148 : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "WS_Vito_Layer_Importer148.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void d_s_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("shp_cf_percorsinavette.xml"));
+        logger.info("#######################FEATURE_STORE_shp_cf_percorsinavette : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "shp_cf_percorsinavette.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

@@ -736,7 +736,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.19.0</version>
+                <version>3.20.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -761,7 +761,7 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.18.0</version>
+                <version>1.21.0</version>
             </dependency>
 
             <!-- =========================================================== -->

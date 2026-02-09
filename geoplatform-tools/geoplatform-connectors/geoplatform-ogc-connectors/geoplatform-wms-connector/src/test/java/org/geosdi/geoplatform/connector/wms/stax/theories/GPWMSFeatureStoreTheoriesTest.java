@@ -42,9 +42,11 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.wms.stax.WMSGetFeatureInfoStaxReaderTest.wmsGetFeatureInfoStaxReader;
 
 /**
@@ -61,7 +63,7 @@ public class GPWMSFeatureStoreTheoriesTest extends WMSGetFeatureInfoTheoriesTest
      * @throws Exception
      */
     @Theory
-    public void wmsGetFeatureInfoStaxFeatureReaderTest(String fileName) throws Exception {
+    public void wmsGetFeatureInfoStaxFeatureReaderTest(@Nonnull(when = NEVER) String fileName) throws Exception {
         checkArgument((fileName != null) && !(fileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
         File file = new File(dirFiles.concat(fileName));
         logger.info("#######################FEATURE_STORE : \n{}\n for File : {}\n", wmsGetFeatureInfoStaxReader.readAsStore(file), fileName);

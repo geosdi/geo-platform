@@ -592,4 +592,10 @@ public class GPWMSGetFeatureInfoStaxGml2ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_SHP_PERCORSI_NAVETTE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("shp_cf_percorsinavette.xml"))));
     }
+
+    @Test
+    public void e_b_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_EXTRA_RT_WEBGIS_STRADE_COMUNALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("extra_rt_webgis:strade_comunali.xml"))));
+    }
 }

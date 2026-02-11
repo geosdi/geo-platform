@@ -258,13 +258,6 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     }
 
     /**
-     * @param streamReader
-     * @return {@link GeoJsonObject}
-     * @throws Exception
-     */
-    protected abstract GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception;
-
-    /**
      * @param localName
      * @param feature
      * @param featureProperties
@@ -284,4 +277,11 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
             default -> this.readGeometry(feature, featureProperties);
         }
     }
+
+    /**
+     * @param streamReader
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    protected abstract GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception;
 }

@@ -116,7 +116,7 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "AlberiMonumentali.xml", "AcqueSecondarie.xml", "AdminGeo.xml", "IDT_SU20G_ZONIZZAZIONE.xml",
                 "CBLN_COMPRENSORIO.xml", "Biodiversit_ittica_acque_correnti.xml", "RegimeSperimentale.xml",
                 "EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.xml", "WaterTemp.xml", "AIDT_OP08V_POI_EXPORT.xml",
-                "WS_Vito_Layer_Importer148.xml", "shp_cf_percorsinavette.xml");
+                "WS_Vito_Layer_Importer148.xml", "shp_cf_percorsinavette.xml", "extra_rt_webgis:strade_comunali.xml");
     }
 
     /**

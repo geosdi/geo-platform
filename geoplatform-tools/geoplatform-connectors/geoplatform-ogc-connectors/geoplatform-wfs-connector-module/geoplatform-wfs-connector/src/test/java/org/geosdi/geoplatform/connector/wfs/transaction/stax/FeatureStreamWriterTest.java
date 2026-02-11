@@ -82,13 +82,13 @@ public class FeatureStreamWriterTest {
         att.setValue("VALUE");
         GeometryAttributeDTO geometry = new GeometryAttributeDTO();
         geometry.setName("the_geom");
-        geometry.setSrid(valueOf(4326));
+        geometry.setSrid(4326);
         geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))");
         List values = Arrays.asList(att, geometry);
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -102,13 +102,13 @@ public class FeatureStreamWriterTest {
         att.setValue("VALUE");
         GeometryAttributeDTO geometry = new GeometryAttributeDTO();
         geometry.setName("the_geom");
-        geometry.setSrid(valueOf(4326));
+        geometry.setSrid(4326);
         geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))");
         List values = Arrays.asList(att, geometry);
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -121,7 +121,7 @@ public class FeatureStreamWriterTest {
         att.setValue("VALUE");
         GeometryAttributeDTO geometry = new GeometryAttributeDTO();
         geometry.setName("the_geom");
-        geometry.setSrid(valueOf(4326));
+        geometry.setSrid(4326);
         geometry.setValue("MULTIPOLYGON (((37.51099000000001 -88.071564, 37.476273000000006 -88.087883, 37.442852 -88.311707," +
                 " 37.40930899999999 -88.359177, 37.420292 -88.419853, 37.400757 -88.467644, 37.296852 -88.511322, 37.257782000000006" +
                 " -88.501427, 37.205669 -88.450699, 37.156909999999996 -88.422516, 37.098670999999996 -88.45047, " +
@@ -208,7 +208,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -230,7 +230,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -251,7 +251,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -272,7 +272,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -293,7 +293,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -317,7 +317,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -333,7 +333,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -349,7 +349,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     @Test
@@ -372,7 +372,7 @@ public class FeatureStreamWriterTest {
         when(request.getAttributes()).thenReturn(values);
         Writer writer = new StringWriter();
         featureStreamWriter.write(request, writer);
-        logger.info("#######################\n{}\n", writer.toString());
+        logger.info("#######################\n{}\n", writer);
     }
 
     /**

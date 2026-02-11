@@ -69,7 +69,8 @@ public class JTSCoordinateWriter implements IJTSCoordinateWriter {
      */
     @Override
     public Coordinate[] buildJTSCoordinates(List<LngLatAlt> lngLatAlts) {
-        return lngLatAlts.stream().filter(lngLatAlt -> lngLatAlt != null)
+        return lngLatAlts.stream()
+                .filter(Objects::nonNull)
                 .map(this::buildJTSCoordinate)
                 .toArray(Coordinate[]::new);
     }

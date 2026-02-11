@@ -1,0 +1,311 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:extra_rt_webgis="https://mappe.regione.toscana.it/extra_rt_webgis"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="https://mappe.regione.toscana.it/extra_rt_webgis http://mappe.regione.toscana.it/geoserver/extra_rt_webgis/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=extra_rt_webgis%3Astrade_comunali http://www.opengis.net/wfs http://mappe.regione.toscana.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1670391.1995,4875282.8762 1674368.909,4883705.682</gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_40f9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1670391.1995,4877124.3447 1671107.62,4877903.92</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446103</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1670391.1995,4877124.3447 1670395.81,4877125.2 1670403.59,4877130.54 1670411.22,4877136.89 1670418.9,4877143.28 1670426.65,4877149.58 1670433.72,4877156.17 1670439.43,4877163.76 1670443.95,4877172.47 1670447.48,4877181.54 1670451.19,4877190.8 1670453.78,4877200.31 1670456.88,4877209.92 1670460.55,4877219.33 1670464.21,4877228.74 1670468.29,4877238.03 1670473.17,4877246.91 1670477.94,4877255.86 1670482.87,4877265.13 1670490.59,4877272.91 1670498.81,4877278.61 1670507.08,4877284.49 1670516.32,4877289.55 1670527.15,4877290.29 1670536.56,4877292.16 1670544.6,4877296.22 1670548.93,4877304 1670553.41,4877312.68 1670556.39,4877322.02 1670558.54,4877331.77 1670561.37,4877341.55 1670564.24,4877351.47 1670568.94,4877360.6 1670574,4877369.46 1670579.68,4877377.8 1670585.64,4877385.88 1670591.07,4877394.55 1670599.11,4877401.99 1670607.66,4877407.8 1670616.16,4877413.08 1670625.6,4877417.1 1670634.89,4877421.06 1670644.08,4877425.02 1670653.21,4877429 1670662.25,4877433.13 1670671.07,4877437.69 1670679.75,4877442.45 1670688.38,4877447.38 1670696.87,4877452.48 1670704.74,4877458.23 1670712.37,4877464.59 1670719.74,4877471.17 1670727.03,4877478.15 1670734.96,4877484.26 1670742.25,4877490.97 1670750.01,4877498.03 1670755.2785,4877500.3477</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1670755.2785,4877500.3477 1670759.08,4877502.02 1670767.64,4877508.1 1670777.4,4877511.82 1670786.8,4877514.42 1670793.93,4877518.91 1670797.9,4877527.64 1670802.58,4877537.36 1670811.32,4877544.38 1670822.74,4877546.22 1670832.64,4877544.15 1670842.06,4877543.93 1670849.41,4877547.98 1670856.13,4877555.22 1670862.94,4877562.44 1670869.68,4877569.7 1670875.39,4877577.81 1670881.74,4877585.71 1670888.31,4877593.3 1670894.96,4877600.8 1670901.62,4877608.28 1670908.34,4877615.68 1670915,4877623.02 1670921.47,4877630.43 1670926.71,4877638.74 1670931.85,4877647.32 1670935.93,4877655.92 1670939.77,4877665.3 1670944.5,4877674.21 1670948.53,4877682.98 1670950.86,4877692.07 1670950.96,4877701.9 1670950.1,4877711.08 1670947.02,4877720.38 1670942.78,4877729.29 1670938.38,4877738.01 1670933.08,4877746.43 1670927.78,4877754.91 1670922.5,4877763.49 1670920.93,4877766.32 1670920.06,4877770.6 1670920.19,4877775.51 1670923.65,4877779.42 1670929.63,4877782.51 1670938.81,4877786.74 1670948.22,4877790.19 1670957.2,4877794.2 1670965.11,4877799.65 1670973.23,4877805.54 1670981.6,4877811.09 1670990.05,4877816.61 1670999.61,4877821.02 1671008.8,4877824.52 1671017.41,4877829.08 1671025.06,4877834.56 1671030.97,4877841.85 1671035.86,4877850.19 1671040.29,4877859.16 1671045.21,4877868.22 1671052.83,4877875.91 1671061.03,4877881.91 1671068.93,4877888.01 1671077.08,4877894.48 1671086.96,4877898.41 1671096.83,4877900.9 1671106.42,4877903.56 1671107.62,4877903.92</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>LOCALITA' I TOPONI</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>NF</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_40fa">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671928.2931,4876906.5533 1671972.5803,4877056.9417</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446104</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671928.2931,4877056.9417 1671954.1089,4877046.0442 1671972.5803,4877008.146 1671968.1216,4876974.7064 1671929.268,4876906.5533</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>VIA DARIO GUALTIERI</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>NF</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_40fb">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671447.1481,4876564.262 1671591.1014,4876733.7208</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446105</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671500.1737,4876566.4117 1671539.5847,4876701.1255</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671508.735,4876720.1413 1671477.9603,4876660.998 1671467.2118,4876615.138 1671447.1481,4876564.262</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671539.5847,4876701.1255 1671591.1014,4876675.4128</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671539.5847,4876701.1255 1671508.735,4876720.1413</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671508.735,4876720.1413 1671486.7045,4876733.7208</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>LOCALITA' LE CONFINA</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>NF</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_40fc">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1673327.5797,4875282.8762 1674368.909,4876086.5535</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446106</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1674368.909,4875289.932 1674362.6922,4875286.4485 1674355.9446,4875284.4639 1674345.2278,4875283.6701 1674335.7017,4875282.8762 1674328.5572,4875284.067 1674316.6496,4875285.2577 1674306.7267,4875291.2115 1674299.979,4875294.3869 1674294.8191,4875297.5622 1674287.2776,4875299.1499 1674272.5916,4875300.7376 1674260.2872,4875303.1191 1674238.4566,4875308.6759 1674222.5799,4875311.8513 1674208.2908,4875315.4236 1674189.6356,4875322.1712 1674183.2849,4875330.5065 1674174.1558,4875336.0634 1674163.8359,4875343.6048 1674153.516,4875349.1617 1674134.8608,4875359.8785 1674122.5563,4875363.0538 1674111.4426,4875365.0384 1674103.9011,4875369.4045 1674086.4367,4875375.7552 1674065.4,4875390.0443 1674050.714,4875404.7303 1674044.3633,4875418.2256 1674029.2803,4875437.6746 1674016.9759,4875448.7883 1674008.2436,4875462.6805 1673997.5268,4875472.2065 1673980.4593,4875482.5264 1673964.5826,4875488.0833 1673949.1027,4875488.8771 1673936.7982,4875489.2741 1673921.3184,4875490.0679 1673904.6478,4875490.0679 1673882.4204,4875490.0679 1673863.7652,4875495.6248 1673841.5377,4875511.1046 1673818.9133,4875530.1567 1673813.7534,4875543.255 1673809.3873,4875557.1472 1673789.461,4875581.9753 1673766.4289,4875584.3579 1673734.6605,4875593.0942 1673715.5995,4875598.6537 1673680.6542,4875608.9784 1673663.9758,4875620.8915 1673628.2364,4875650.2773 1673602.8217,4875677.2804 1673559.1401,4875728.1099 1673543.2559,4875764.6435 1673540.0791,4875781.3219 1673531.3428,4875838.505 1673524.9891,4875870.2734 1673515.4586,4875893.3055 1673500.3686,4875922.6913 1673476.5423,4875945.7234 1673459.0697,4875963.9902 1673431.2723,4875977.4918 1673396.3271,4875997.347 1673371.7066,4876008.4659 1673353.4398,4876033.0864 1673341.5266,4876050.5591 1673327.5797,4876086.5535</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>STRADA SENZA NOME</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>\N</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_40fd">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671699.648,4876545.5389 1671898.8127,4876832.7718</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446107</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671898.8127,4876832.7718 1671889.8301,4876826.9377 1671884.0883,4876824.5229 1671878.1345,4876822.1413 1671876.15,4876821.7444 1671867.8147,4876817.7752 1671864.2424,4876814.203 1671855.5102,4876806.2646 1671847.5718,4876796.3416 1671839.2365,4876780.4649 1671826.932,4876763.0004 1671822.169,4876751.8867 1671810.6583,4876731.6438 1671800.7354,4876716.164 1671796.3693,4876705.8441 1671791.6062,4876699.8903 1671787.2401,4876689.1735 1671778.9048,4876676.4721 1671768.9818,4876655.0385 1671761.0435,4876639.9556 1671751.1205,4876620.1096 1671750.3267,4876613.362 1671743.579,4876607.4082 1671738.0222,4876601.0575 1671729.6869,4876590.3407 1671719.367,4876577.2424 1671711.0317,4876564.541 1671699.648,4876545.5389</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>STRADA SENZA NOME</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>\N</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_40fe">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672932.1574,4883426.1201 1673341.1754,4883705.682</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446108</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672983.119,4883558.687 1672986.1636,4883541.2805 1672970.2794,4883522.2195 1672953.601,4883506.3353 1672943.2763,4883495.2164 1672935.3342,4883482.509 1672932.1574,4883465.0364 1672932.1574,4883443.5927 1672940.8937,4883426.1201 1672952.8068,4883426.1201 1672959.1605,4883444.3869 1672968.691,4883459.4769 1672979.81,4883472.9785 1672998.871,4883484.8916 1673018.7262,4883496.8048 1673036.1989,4883503.1585 1673056.0541,4883509.5121 1673075.9093,4883517.4542 1673094.1762,4883528.5732 1673114.0314,4883541.2805 1673122.7677,4883562.7242 1673130.7098,4883578.6084 1673138.6519,4883609.5826 1673140.2403,4883628.6436 1673144.2114,4883646.9104 1673159.3014,4883660.412 1673169.6261,4883675.502 1673170.4203,4883690.592 1673183.9219,4883695.3572 1673202.9829,4883696.9457 1673225.2208,4883696.9457 1673241.8992,4883700.1225 1673255.4008,4883705.682 1673273.6676,4883705.682 1673285.5807,4883699.3283 1673299.0823,4883688.2094 1673310.9955,4883681.0615 1673322.9086,4883673.9136 1673341.1754,4883663.5888</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>STRADA SENZA NOME</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>\N</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_40ff">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671455.9647,4876981.0614 1671600.999,4877064.8113</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446109</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1671600.999,4877020.802 1671591.7109,4877035.0424 1671581.391,4877051.7129 1671574.2465,4877060.8421 1671569.4835,4877064.8113 1671561.942,4877058.4606 1671557.9728,4877053.3006 1671553.2098,4877047.7438 1671546.8591,4877044.1715 1671535.7454,4877043.3776 1671528.2039,4877043.3776 1671518.6778,4877043.3776 1671513.5179,4877044.1715 1671507.961,4877044.5684 1671505.1826,4877037.0269 1671502.0072,4877025.9132 1671497.6411,4877012.8149 1671492.8781,4877001.7012 1671488.1151,4876990.5874 1671484.5428,4876981.4583 1671478.986,4876981.0614 1671469.4599,4876989.3967 1671455.9647,4877002.495</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>STRADA SENZA NOME</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>\N</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_4100">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672337.0942,4879382.8042 1672364.8785,4879413.015</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446110</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672344.61,4879413.015 1672349.3987,4879406.2224 1672344.6356,4879401.0624 1672338.6818,4879393.521 1672337.0942,4879387.1703 1672342.2541,4879382.8042 1672350.5894,4879384.3918 1672358.5278,4879395.9025 1672364.8785,4879403.8409</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>STRADA SENZA NOME</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>\N</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_4101">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672100.994,4879105.104 1672172.2865,4879111.011</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446111</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672100.994,4879105.104 1672112.7487,4879105.851 1672125.4501,4879106.248 1672138.1515,4879108.6295 1672152.8375,4879111.011 1672172.2865,4879108.0738</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>STRADA SENZA NOME</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>\N</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_4102">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672343.474,4878470.6597 1672355.0352,4878529.34</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446112</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1672343.474,4878529.34 1672346.2989,4878500.0454 1672355.0352,4878470.6597</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>VIA DEL DEPOSITO</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>NF</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+    <gml:featureMember>
+        <extra_rt_webgis:strade_comunali fid="strade_comunali.fid--1a0abe0c_19c47e67ae4_4103">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1674073.091,4876036.4902 1674220.747,4876130.311</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <extra_rt_webgis:id>446113</extra_rt_webgis:id>
+            <extra_rt_webgis:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1674220.747,4876130.311 1674203.4636,4876096.9068 1674190.7443,4876052.3893 1674165.3058,4876041.2599 1674139.8672,4876036.4902 1674108.069,4876047.6196 1674073.091,4876053.9792 1674077.8607,4876092.137</gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:cod_ele/>
+            <extra_rt_webgis:den_uff>STRADA SENZA NOME</extra_rt_webgis:den_uff>
+            <extra_rt_webgis:tip_prp/>
+            <extra_rt_webgis:cod_prp/>
+            <extra_rt_webgis:cls_amm>400</extra_rt_webgis:cls_amm>
+            <extra_rt_webgis:den_breve>\N</extra_rt_webgis:den_breve>
+        </extra_rt_webgis:strade_comunali>
+    </gml:featureMember>
+</wfs:FeatureCollection>

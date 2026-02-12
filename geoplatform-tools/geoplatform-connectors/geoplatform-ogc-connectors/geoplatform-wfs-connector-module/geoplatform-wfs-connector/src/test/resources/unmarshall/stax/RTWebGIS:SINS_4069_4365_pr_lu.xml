@@ -1,0 +1,119 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ogc="http://www.opengis.net/ogc"
+                       xmlns:extra_rt_webgis="https://mappe.regione.toscana.it/extra_rt_webgis"
+                       xmlns:wfs="http://www.opengis.net/wfs" xmlns:ows="http://www.opengis.net/ows"
+                       xmlns:xlink="http://www.w3.org/1999/xlink"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:RTWebGIS="http://mappe.regione.toscana.it"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2026-02-12T06:41:39.374Z"
+                       xsi:schemaLocation="http://mappe.regione.toscana.it http://mappe.regione.toscana.it/geoserver/RTWebGIS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=RTWebGIS%3ASINS_4069_4365_pr_lu http://www.opengis.net/wfs http://mappe.regione.toscana.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:lowerCorner>1600581.0 4855849.0</gml:lowerCorner>
+            <gml:upperCorner>1623309.0 4862118.0</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <RTWebGIS:SINS_4069_4365_pr_lu gml:id="SINS_4069_4365_pr_lu.LU170301">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1621634 4855849</gml:lowerCorner>
+                    <gml:upperCorner>1621634 4855849</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>LU170301</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>GENIO CIVILE</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4855849.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1621634.0</RTWebGIS:sins_x>
+            <RTWebGIS:identificativo>504</RTWebGIS:identificativo>
+            <RTWebGIS:indirizzo>VIA DELLA QUARQUONIA-VIA SANTA CHIARA</RTWebGIS:indirizzo>
+            <RTWebGIS:localita/>
+            <RTWebGIS:comune>LUCCA</RTWebGIS:comune>
+            <RTWebGIS:provincia>LU</RTWebGIS:provincia>
+            <RTWebGIS:scheda>504</RTWebGIS:scheda>
+            <RTWebGIS:proprieta>T</RTWebGIS:proprieta>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1621634 4855849</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4069_4365_pr_lu>
+        <RTWebGIS:SINS_4069_4365_pr_lu gml:id="SINS_4069_4365_pr_lu.LU177702">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1623309 4862118</gml:lowerCorner>
+                    <gml:upperCorner>1623309 4862118</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>LU177702</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>CASELLO IDRAULICO SALTOCCHIO II - VECCHIO</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4862118.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1623309.0</RTWebGIS:sins_x>
+            <RTWebGIS:identificativo>172</RTWebGIS:identificativo>
+            <RTWebGIS:indirizzo>VIA ABETONE E BRENNERO N.6171</RTWebGIS:indirizzo>
+            <RTWebGIS:localita>SALTOCCHIO</RTWebGIS:localita>
+            <RTWebGIS:comune>LUCCA</RTWebGIS:comune>
+            <RTWebGIS:provincia>LU</RTWebGIS:provincia>
+            <RTWebGIS:scheda>172</RTWebGIS:scheda>
+            <RTWebGIS:descp/>
+            <RTWebGIS:percp>0.000</RTWebGIS:percp>
+            <RTWebGIS:proprieta>T</RTWebGIS:proprieta>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1623309 4862118</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4069_4365_pr_lu>
+        <RTWebGIS:SINS_4069_4365_pr_lu gml:id="SINS_4069_4365_pr_lu.LU330201">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1600581 4857701</gml:lowerCorner>
+                    <gml:upperCorner>1600581 4857701</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>LU330201</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>GENIO CIVILE OPERE MARITTIME </RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4857701.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1600581.0</RTWebGIS:sins_x>
+            <RTWebGIS:identificativo>317</RTWebGIS:identificativo>
+            <RTWebGIS:indirizzo>VIA LUNGO CANALE EST N.11</RTWebGIS:indirizzo>
+            <RTWebGIS:localita/>
+            <RTWebGIS:comune>VIAREGGIO</RTWebGIS:comune>
+            <RTWebGIS:provincia>LU</RTWebGIS:provincia>
+            <RTWebGIS:scheda>317</RTWebGIS:scheda>
+            <RTWebGIS:descp/>
+            <RTWebGIS:percp>0.000</RTWebGIS:percp>
+            <RTWebGIS:proprieta>P</RTWebGIS:proprieta>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1600581 4857701</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4069_4365_pr_lu>
+        <RTWebGIS:SINS_4069_4365_pr_lu gml:id="SINS_4069_4365_pr_lu.LU337501">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1601225 4858122</gml:lowerCorner>
+                    <gml:upperCorner>1601225 4858122</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>LU337501</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>ZONA PORTUALE 3</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4858122.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1601225.0</RTWebGIS:sins_x>
+            <RTWebGIS:identificativo>179</RTWebGIS:identificativo>
+            <RTWebGIS:indirizzo>LARGO RISORGIMENTO N.20</RTWebGIS:indirizzo>
+            <RTWebGIS:localita>VARIGNANO</RTWebGIS:localita>
+            <RTWebGIS:comune>VIAREGGIO</RTWebGIS:comune>
+            <RTWebGIS:provincia>LU</RTWebGIS:provincia>
+            <RTWebGIS:scheda>179</RTWebGIS:scheda>
+            <RTWebGIS:descp/>
+            <RTWebGIS:percp>0.000</RTWebGIS:percp>
+            <RTWebGIS:proprieta>T</RTWebGIS:proprieta>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1601225 4858122</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4069_4365_pr_lu>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

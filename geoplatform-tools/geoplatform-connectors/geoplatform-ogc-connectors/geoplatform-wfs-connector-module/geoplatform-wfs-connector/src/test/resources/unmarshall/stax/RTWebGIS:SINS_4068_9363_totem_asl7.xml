@@ -1,0 +1,386 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ogc="http://www.opengis.net/ogc"
+                       xmlns:extra_rt_webgis="https://mappe.regione.toscana.it/extra_rt_webgis"
+                       xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ows="http://www.opengis.net/ows"
+                       xmlns:xlink="http://www.w3.org/1999/xlink"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:RTWebGIS="http://mappe.regione.toscana.it"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2026-02-12T08:53:34.131Z"
+                       xsi:schemaLocation="http://mappe.regione.toscana.it http://mappe.regione.toscana.it/geoserver/RTWebGIS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=RTWebGIS%3ASINS_4068_9363_totem_asl7 http://www.opengis.net/wfs http://mappe.regione.toscana.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:lowerCorner>1672231.8588883 4747623.77590742</gml:lowerCorner>
+            <gml:upperCorner>1740431.40519822 4815604.11042702</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.92">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1708118.8478 4790114.9852</gml:lowerCorner>
+                    <gml:upperCorner>1708118.8478 4790114.9852</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>92</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Distretto di Asciano</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.2349991</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.562702100000024</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via dei Molini</RTWebGIS:via>
+            <RTWebGIS:numerocivico>2</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Asciano</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53041</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1708118.8478 4790114.9852</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.87">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1718200.963 4751367.7926</gml:lowerCorner>
+                    <gml:upperCorner>1718200.963 4751367.7926</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>87</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Abbadia S.Salvatore</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>42.883622</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.67155200000002</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via Trento</RTWebGIS:via>
+            <RTWebGIS:numerocivico>30</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Abbadia San Salvatore</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53021</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1718200.963 4751367.7926</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.88">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1718517.0454 4751256.6605</gml:lowerCorner>
+                    <gml:upperCorner>1718517.0454 4751256.6605</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>88</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Abbadia SS Casa della salute ex Montalcino1</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>42.882532</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.675375099999997</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Piazza Michelangelo</RTWebGIS:via>
+            <RTWebGIS:numerocivico>26</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Abbadia San Salvatore</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53021</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1718517.0454 4751256.6605</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.89">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1740431.4052 4766818.2352</gml:lowerCorner>
+                    <gml:upperCorner>1740431.4052 4766818.2352</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>89</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Chiusi 2</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.0158976</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.950062399999979</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Piazza del Teatro</RTWebGIS:via>
+            <RTWebGIS:numerocivico>9</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Chiusi</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53043</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1740431.4052 4766818.2352</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.90">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1672231.8589 4809665.6046</gml:lowerCorner>
+                    <gml:upperCorner>1672231.8589 4809665.6046</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>90</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Colle Val d'Elsa 1</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.4199639</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.127206399999977</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via nello Salvi</RTWebGIS:via>
+            <RTWebGIS:numerocivico>72</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Colle di Val d'Elsa</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53034</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1672231.8589 4809665.6046</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.91">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1672231.8589 4809665.6046</gml:lowerCorner>
+                    <gml:upperCorner>1672231.8589 4809665.6046</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>91</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Colle Val d'Elsa 2</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.4199639</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.127206399999977</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via nello Salvi</RTWebGIS:via>
+            <RTWebGIS:numerocivico>72</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Colle di Val d'Elsa</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53034</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1672231.8589 4809665.6046</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.93">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1696933.6649 4815604.1104</gml:lowerCorner>
+                    <gml:upperCorner>1696933.6649 4815604.1104</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>93</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Distretto di Gaiole in Chianti</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.4673074</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.434230299999967</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Strada Provinciale 408 di Montevarchi</RTWebGIS:via>
+            <RTWebGIS:numerocivico/>
+            <RTWebGIS:comune>Gaiole In Chianti</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53013</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1696933.6649 4815604.1104</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.94">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1680450.0801 4790780.0008</gml:lowerCorner>
+                    <gml:upperCorner>1680450.0801 4790780.0008</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>94</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Distretto di Rosia</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.2481064</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.222443099999964</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via delle Scuole</RTWebGIS:via>
+            <RTWebGIS:numerocivico>42-44</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Rosia</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53018</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1680450.0801 4790780.0008</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.95">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1722274.6444 4788064.7634</gml:lowerCorner>
+                    <gml:upperCorner>1722274.6444 4788064.7634</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>95</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Distretto di Sinalunga</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.2125229</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.736019899999974</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via Guerrazzi</RTWebGIS:via>
+            <RTWebGIS:numerocivico>1</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Sinalunga</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53048</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1722274.6444 4788064.7634</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.96">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1729825.9248 4778083.7403</gml:lowerCorner>
+                    <gml:upperCorner>1729825.9248 4778083.7403</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>96</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Ospedale di Nottola</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.120497</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.824730000000045</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Località Nottola</RTWebGIS:via>
+            <RTWebGIS:numerocivico>13</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Ospedali Riuniti Valdichiana Se</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53045</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1729825.9248 4778083.7403</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.97">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689047.3864 4799400.0048</gml:lowerCorner>
+                    <gml:upperCorner>1689047.3864 4799400.0048</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>97</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Pian D'Ovile</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.3235552</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.331221099999993</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via Pian D'Ovile</RTWebGIS:via>
+            <RTWebGIS:numerocivico/>
+            <RTWebGIS:comune>Siena</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53100</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1689047.3864 4799400.0048</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.98">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1719322.4395 4747623.7759</gml:lowerCorner>
+                    <gml:upperCorner>1719322.4395 4747623.7759</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>98</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Piancastagnaio</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>42.8496226</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.683809600000018</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via Antonio Gramsci</RTWebGIS:via>
+            <RTWebGIS:numerocivico>724</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Piancastagnaio</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53025</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1719322.4395 4747623.7759</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.99">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1673972.1934 4813242.6504</gml:lowerCorner>
+                    <gml:upperCorner>1673972.1934 4813242.6504</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>99</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Poggibonsi</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.45174799999999</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.149828999999954</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Località Campostaggia</RTWebGIS:via>
+            <RTWebGIS:numerocivico>8</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>poggibonsi</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53036</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1673972.1934 4813242.6504</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.100">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1673948.0729 4815350.3778</gml:lowerCorner>
+                    <gml:upperCorner>1673948.0729 4815350.3778</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>100</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Poggibonsi via Della Costituzione</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.4707186</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.15020329999993</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via della Costituzione</RTWebGIS:via>
+            <RTWebGIS:numerocivico>30</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Poggibonsi</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53036</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1673948.0729 4815350.3778</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.101">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1702728.0642 4769954.7109</gml:lowerCorner>
+                    <gml:upperCorner>1702728.0642 4769954.7109</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>101</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Presidio Polifunzionale Montalcino 2</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.0551015</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.48900320000007</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via Osticcio</RTWebGIS:via>
+            <RTWebGIS:numerocivico/>
+            <RTWebGIS:comune>Montalcino</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53024</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1702728.0642 4769954.7109</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+        <RTWebGIS:SINS_4068_9363_totem_asl7 gml:id="SINS_4068_9363_totem_asl7.102">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1725288.9193 4783006.1067</gml:lowerCorner>
+                    <gml:upperCorner>1725288.9193 4783006.1067</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>102</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>Presidio polifunzionale Torrita</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>43.166132</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>11.771025000000009</RTWebGIS:sins_x>
+            <RTWebGIS:azienda>ASL 7 SIENA</RTWebGIS:azienda>
+            <RTWebGIS:via>Via Ottavio Maestri</RTWebGIS:via>
+            <RTWebGIS:numerocivico>1</RTWebGIS:numerocivico>
+            <RTWebGIS:comune>Torrita di Siena</RTWebGIS:comune>
+            <RTWebGIS:provincia>SI</RTWebGIS:provincia>
+            <RTWebGIS:cap>53049</RTWebGIS:cap>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1725288.9193 4783006.1067</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_9363_totem_asl7>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

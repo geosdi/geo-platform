@@ -1,0 +1,2617 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ogc="http://www.opengis.net/ogc"
+                       xmlns:extra_rt_webgis="https://mappe.regione.toscana.it/extra_rt_webgis"
+                       xmlns:wfs="http://www.opengis.net/wfs" xmlns:ows="http://www.opengis.net/ows"
+                       xmlns:xlink="http://www.w3.org/1999/xlink"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:RTWebGIS="http://mappe.regione.toscana.it"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2026-02-12T06:30:04.065Z"
+                       xsi:schemaLocation="https://mappe.regione.toscana.it/extra_rt_webgis http://mappe.regione.toscana.it/geoserver/extra_rt_webgis/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=extra_rt_webgis%3ACippi_SR_SP_ettometriche_v1 http://www.opengis.net/wfs http://mappe.regione.toscana.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:lowerCorner>1587237.36 4711671.25</gml:lowerCorner>
+            <gml:upperCorner>1744566.36 4897146.71</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f67">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1616990.64 4896640.65</gml:lowerCorner>
+                    <gml:upperCorner>1616990.64 4896640.65</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>1</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1616990.64 4896640.65</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>81.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_81,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1616990.64</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4896640.65</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f68">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1615848.72 4896599.37</gml:lowerCorner>
+                    <gml:upperCorner>1615848.72 4896599.37</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>2</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1615848.72 4896599.37</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>84.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_84,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1615848.72</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4896599.37</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f69">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1744462.91 4789316.98</gml:lowerCorner>
+                    <gml:upperCorner>1744462.91 4789316.98</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>3</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1744462.91 4789316.98</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>114.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_114,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1744462.91</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4789316.98</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f6a">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1696231.29 4890789.82</gml:lowerCorner>
+                    <gml:upperCorner>1696231.29 4890789.82</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>4</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1696231.29 4890789.82</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>FI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP610</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>68.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>FI_SP610_68,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1696231.29</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4890789.82</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f6b">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1690744.45 4727662.61</gml:lowerCorner>
+                    <gml:upperCorner>1690744.45 4727662.61</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>5</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1690744.45 4727662.61</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>80.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_80,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1690744.45</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4727662.61</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f6c">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689830.71 4722516.51</gml:lowerCorner>
+                    <gml:upperCorner>1689830.71 4722516.51</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>6</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1689830.71 4722516.51</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>90.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_90,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1689830.71</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4722516.51</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f6d">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1614389.75 4838746.25</gml:lowerCorner>
+                    <gml:upperCorner>1614389.75 4838746.25</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>7</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1614389.75 4838746.25</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_PI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>73.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SGC_FIPILI_PI_73*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1614389.75</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4838746.25</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f6e">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1616706.03 4897133.82</gml:lowerCorner>
+                    <gml:upperCorner>1616706.03 4897133.82</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>8</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1616706.03 4897133.82</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>82.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_82,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1616706.03</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4897133.82</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f6f">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1700454.25 4723886.61</gml:lowerCorner>
+                    <gml:upperCorner>1700454.25 4723886.61</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>9</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1700454.25 4723886.61</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>91.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_91,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1700454.25</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4723886.61</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f70">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1741250.56 4795371.97</gml:lowerCorner>
+                    <gml:upperCorner>1741250.56 4795371.97</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>10</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1741250.56 4795371.97</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>121.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_121,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1741250.56</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4795371.97</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f71">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1693775.97 4887618.17</gml:lowerCorner>
+                    <gml:upperCorner>1693775.97 4887618.17</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>11</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1693775.97 4887618.17</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>FI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP610</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>74.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>FI_SP610_74,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1693775.97</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4887618.17</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f72">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1690869.51 4728813.22</gml:lowerCorner>
+                    <gml:upperCorner>1690869.51 4728813.22</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>12</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1690869.51 4728813.22</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>74.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_74,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1690869.51</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4728813.22</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f73">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689544.3 4725200.29</gml:lowerCorner>
+                    <gml:upperCorner>1689544.3 4725200.29</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>13</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1689544.3 4725200.29</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>85.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_85,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1689544.3</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4725200.29</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f74">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689522.68 4727115.15</gml:lowerCorner>
+                    <gml:upperCorner>1689522.68 4727115.15</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>14</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1689522.68 4727115.15</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>83.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_83,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1689522.68</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4727115.15</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f75">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689867.33 4727564.22</gml:lowerCorner>
+                    <gml:upperCorner>1689867.33 4727564.22</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>15</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1689867.33 4727564.22</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>82.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_82,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1689867.33</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4727564.22</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f76">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1706228.04 4720101.13</gml:lowerCorner>
+                    <gml:upperCorner>1706228.04 4720101.13</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>16</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1706228.04 4720101.13</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>100.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_100,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1706228.04</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4720101.13</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f77">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1690377.64 4727062.03</gml:lowerCorner>
+                    <gml:upperCorner>1690377.64 4727062.03</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>17</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1690377.64 4727062.03</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>81.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_81,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1690377.64</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4727062.03</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f78">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1690414.61 4724207.24</gml:lowerCorner>
+                    <gml:upperCorner>1690414.61 4724207.24</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>18</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1690414.61 4724207.24</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>87.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_87,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1690414.61</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4724207.24</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f79">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689645.05 4726171.65</gml:lowerCorner>
+                    <gml:upperCorner>1689645.05 4726171.65</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>19</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1689645.05 4726171.65</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>84.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_84,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1689645.05</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4726171.65</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f7a">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1692166.58 4729818.07</gml:lowerCorner>
+                    <gml:upperCorner>1692166.58 4729818.07</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>20</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1692166.58 4729818.07</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>73.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_73,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1692166.58</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4729818.07</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f7b">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1690206.42 4721963.77</gml:lowerCorner>
+                    <gml:upperCorner>1690206.42 4721963.77</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>21</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1690206.42 4721963.77</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>91.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_91,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1690206.42</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4721963.77</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f7c">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1653507.81 4787422.04</gml:lowerCorner>
+                    <gml:upperCorner>1653507.81 4787422.04</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>22</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1653507.81 4787422.04</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR439</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>128.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SR439_128,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1653507.81</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4787422.04</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f7d">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1616205.01 4897146.71</gml:lowerCorner>
+                    <gml:upperCorner>1616205.01 4897146.71</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>23</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1616205.01 4897146.71</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>83.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_83,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1616205.01</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4897146.71</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f7e">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1694509.62 4887622.83</gml:lowerCorner>
+                    <gml:upperCorner>1694509.62 4887622.83</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>24</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1694509.62 4887622.83</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>FI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP610</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>73.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>FI_SP610_73,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1694509.62</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4887622.83</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f7f">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689547.67 4723379.78</gml:lowerCorner>
+                    <gml:upperCorner>1689547.67 4723379.78</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>25</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1689547.67 4723379.78</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>89.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_89,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1689547.67</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4723379.78</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f80">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1704663.63 4721321.47</gml:lowerCorner>
+                    <gml:upperCorner>1704663.63 4721321.47</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>26</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1704663.63 4721321.47</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>97.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_97,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1704663.63</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4721321.47</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f81">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1612911.4 4891248.42</gml:lowerCorner>
+                    <gml:upperCorner>1612911.4 4891248.42</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>27</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1612911.4 4891248.42</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>97.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_97,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1612911.4</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4891248.42</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f82">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1588445.25 4894454.2</gml:lowerCorner>
+                    <gml:upperCorner>1588445.25 4894454.2</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>28</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1588445.25 4894454.2</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>MS</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR445</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>68.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>MS_SR445_68,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1588445.25</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4894454.2</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f83">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1738729.4 4797802.54</gml:lowerCorner>
+                    <gml:upperCorner>1738729.4 4797802.54</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>29</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1738729.4 4797802.54</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>125.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_125,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1738729.4</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4797802.54</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f84">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1686898.7 4734767.98</gml:lowerCorner>
+                    <gml:upperCorner>1686898.7 4734767.98</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>30</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1686898.7 4734767.98</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>64.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_64,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1686898.7</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4734767.98</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f85">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1731891.37 4829134</gml:lowerCorner>
+                    <gml:upperCorner>1731891.37 4829134</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>31</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1731891.37 4829134</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>162.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_162,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1731891.37</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4829134.0</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f86">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1730977.56 4852236.54</gml:lowerCorner>
+                    <gml:upperCorner>1730977.56 4852236.54</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>32</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1730977.56 4852236.54</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>193.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_193,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1730977.56</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4852236.54</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f87">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1729069.15 4838335.79</gml:lowerCorner>
+                    <gml:upperCorner>1729069.15 4838335.79</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>33</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1729069.15 4838335.79</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>174.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_174,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1729069.15</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4838335.79</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f88">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1698362.37 4723734.56</gml:lowerCorner>
+                    <gml:upperCorner>1698362.37 4723734.56</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>34</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1698362.37 4723734.56</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>88.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_88,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1698362.37</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4723734.56</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f89">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1731488.27 4852836.08</gml:lowerCorner>
+                    <gml:upperCorner>1731488.27 4852836.08</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>35</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1731488.27 4852836.08</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>194.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_194,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1731488.27</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4852836.08</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f8a">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1706402.48 4719377.4</gml:lowerCorner>
+                    <gml:upperCorner>1706402.48 4719377.4</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>36</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1706402.48 4719377.4</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>101.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_101,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1706402.48</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4719377.4</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f8b">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1687606.42 4716625.31</gml:lowerCorner>
+                    <gml:upperCorner>1687606.42 4716625.31</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>37</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1687606.42 4716625.31</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>98.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_98,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1687606.42</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4716625.31</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f8c">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1729026.93 4835529.62</gml:lowerCorner>
+                    <gml:upperCorner>1729026.93 4835529.62</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>38</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1729026.93 4835529.62</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>171.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_171,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1729026.93</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4835529.62</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f8d">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1612640.6 4839525.13</gml:lowerCorner>
+                    <gml:upperCorner>1612640.6 4839525.13</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>39</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1612640.6 4839525.13</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_PI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>75.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SGC_FIPILI_PI_75*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1612640.6</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4839525.13</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f8e">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1694928.86 4888415.91</gml:lowerCorner>
+                    <gml:upperCorner>1694928.86 4888415.91</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>40</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1694928.86 4888415.91</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>FI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP610</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>72.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>FI_SP610_72,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1694928.86</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4888415.91</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f8f">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1688823.17 4730950.91</gml:lowerCorner>
+                    <gml:upperCorner>1688823.17 4730950.91</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>41</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1688823.17 4730950.91</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>70.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_70,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1688823.17</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4730950.91</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f90">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1728696.76 4836382.55</gml:lowerCorner>
+                    <gml:upperCorner>1728696.76 4836382.55</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>42</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1728696.76 4836382.55</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>172.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_172,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1728696.76</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4836382.55</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f91">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1653832.46 4787046.7</gml:lowerCorner>
+                    <gml:upperCorner>1653832.46 4787046.7</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>43</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1653832.46 4787046.7</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR439</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>129.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SR439_129,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1653832.46</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4787046.7</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f92">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1687364.24 4734464.11</gml:lowerCorner>
+                    <gml:upperCorner>1687364.24 4734464.11</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>44</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1687364.24 4734464.11</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>65.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_65,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1687364.24</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4734464.11</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f93">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1738021.67 4798473.28</gml:lowerCorner>
+                    <gml:upperCorner>1738021.67 4798473.28</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>45</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1738021.67 4798473.28</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>126.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_126,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1738021.67</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4798473.28</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f94">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1687755.92 4732346.08</gml:lowerCorner>
+                    <gml:upperCorner>1687755.92 4732346.08</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>46</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1687755.92 4732346.08</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>68.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_68,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1687755.92</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4732346.08</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f95">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1620774.57 4836439.6</gml:lowerCorner>
+                    <gml:upperCorner>1620774.57 4836439.6</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>47</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1620774.57 4836439.6</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_PI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>66.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SGC_FIPILI_PI_66*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1620774.57</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4836439.6</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f96">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1732166.49 4821173.09</gml:lowerCorner>
+                    <gml:upperCorner>1732166.49 4821173.09</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>48</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1732166.49 4821173.09</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>153.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_153,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1732166.49</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4821173.09</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f97">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1612927.15 4889597.86</gml:lowerCorner>
+                    <gml:upperCorner>1612927.15 4889597.86</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>49</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1612927.15 4889597.86</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>101.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_101,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1612927.15</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4889597.86</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f98">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1695185.78 4731719.43</gml:lowerCorner>
+                    <gml:upperCorner>1695185.78 4731719.43</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>50</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1695185.78 4731719.43</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>67.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_67,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1695185.78</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4731719.43</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f99">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1744566.36 4788340.51</gml:lowerCorner>
+                    <gml:upperCorner>1744566.36 4788340.51</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>51</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1744566.36 4788340.51</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>113.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_113,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1744566.36</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4788340.51</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f9a">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1587237.36 4895925.37</gml:lowerCorner>
+                    <gml:upperCorner>1587237.36 4895925.37</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>103</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1587237.36 4895925.37</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>MS</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR445</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>71.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>MS_SR445_71,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1587237.36</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4895925.37</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f9b">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1616230.39 4838046.93</gml:lowerCorner>
+                    <gml:upperCorner>1616230.39 4838046.93</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>52</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1616230.39 4838046.93</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_PI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>71.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SGC_FIPILI_PI_71*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1616230.39</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4838046.93</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f9c">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1692874.07 4730024.64</gml:lowerCorner>
+                    <gml:upperCorner>1692874.07 4730024.64</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>53</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1692874.07 4730024.64</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>72.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_72,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1692874.07</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4730024.64</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f9d">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1704369.68 4722118.89</gml:lowerCorner>
+                    <gml:upperCorner>1704369.68 4722118.89</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>54</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1704369.68 4722118.89</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>96.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_96,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1704369.68</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4722118.89</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f9e">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1692206.01 4729407.86</gml:lowerCorner>
+                    <gml:upperCorner>1692206.01 4729407.86</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>55</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1692206.01 4729407.86</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>74.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_74,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1692206.01</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4729407.86</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5f9f">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1731514.43 4831490.97</gml:lowerCorner>
+                    <gml:upperCorner>1731514.43 4831490.97</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>56</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1731514.43 4831490.97</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>165.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_165,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1731514.43</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4831490.97</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa0">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1731289.68 4825033.99</gml:lowerCorner>
+                    <gml:upperCorner>1731289.68 4825033.99</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>57</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1731289.68 4825033.99</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>157.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_157,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1731289.68</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4825033.99</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa1">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1687621.4 4717621.16</gml:lowerCorner>
+                    <gml:upperCorner>1687621.4 4717621.16</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>58</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1687621.4 4717621.16</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>97.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_97,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1687621.4</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4717621.16</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa2">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1701273.29 4723597.25</gml:lowerCorner>
+                    <gml:upperCorner>1701273.29 4723597.25</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>59</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1701273.29 4723597.25</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>92.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_92,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1701273.29</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4723597.25</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa3">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1653705.8 4793352.64</gml:lowerCorner>
+                    <gml:upperCorner>1653705.8 4793352.64</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>60</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1653705.8 4793352.64</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR439</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>118.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SR439_118,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1653705.8</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4793352.64</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa4">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1695503.95 4889421.4</gml:lowerCorner>
+                    <gml:upperCorner>1695503.95 4889421.4</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>61</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1695503.95 4889421.4</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>FI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP610</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>70.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>FI_SP610_70,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1695503.95</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4889421.4</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa5">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1693037.23 4887900</gml:lowerCorner>
+                    <gml:upperCorner>1693037.23 4887900</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>62</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1693037.23 4887900</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>FI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP610</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>75.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>FI_SP610_75,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1693037.23</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4887900.0</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa6">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1729805.53 4850521.08</gml:lowerCorner>
+                    <gml:upperCorner>1729805.53 4850521.08</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>63</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1729805.53 4850521.08</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>190.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_190,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1729805.53</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4850521.08</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa7">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1691448.21 4729256.73</gml:lowerCorner>
+                    <gml:upperCorner>1691448.21 4729256.73</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>64</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1691448.21 4729256.73</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>75.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_75,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1691448.21</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4729256.73</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa8">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1614649.57 4829641.41</gml:lowerCorner>
+                    <gml:upperCorner>1614649.57 4829641.41</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>65</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1614649.57 4829641.41</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_LI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>71.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LI_SGC_FIPILI_LI_71*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1614649.57</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4829641.41</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fa9">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1697779.3 4723549.96</gml:lowerCorner>
+                    <gml:upperCorner>1697779.3 4723549.96</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>66</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1697779.3 4723549.96</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>87.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_87,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1697779.3</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4723549.96</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5faa">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1696940.28 4723898</gml:lowerCorner>
+                    <gml:upperCorner>1696940.28 4723898</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>67</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1696940.28 4723898</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>86.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_86,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1696940.28</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4723898.0</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fab">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1649873.43 4797000.7</gml:lowerCorner>
+                    <gml:upperCorner>1649873.43 4797000.7</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>68</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1649873.43 4797000.7</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR439</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>111.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SR439_111,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1649873.43</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4797000.7</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fac">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1622752.83 4836152.91</gml:lowerCorner>
+                    <gml:upperCorner>1622752.83 4836152.91</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>69</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1622752.83 4836152.91</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_PI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>64.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SGC_FIPILI_PI_64*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1622752.83</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4836152.91</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fad">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1684806.67 4711671.25</gml:lowerCorner>
+                    <gml:upperCorner>1684806.67 4711671.25</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>70</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1684806.67 4711671.25</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>104.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_104,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1684806.67</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4711671.25</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fae">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1742021.18 4793603.29</gml:lowerCorner>
+                    <gml:upperCorner>1742021.18 4793603.29</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>71</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1742021.18 4793603.29</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>119.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_119,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1742021.18</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4793603.29</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5faf">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1617103.53 4837560.92</gml:lowerCorner>
+                    <gml:upperCorner>1617103.53 4837560.92</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>72</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1617103.53 4837560.92</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_PI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>70.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SGC_FIPILI_PI_70*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1617103.53</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4837560.92</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb0">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1737056.9 4800203.1</gml:lowerCorner>
+                    <gml:upperCorner>1737056.9 4800203.1</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>73</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1737056.9 4800203.1</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>128.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_128,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1737056.9</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4800203.1</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb1">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1693277.8 4727998.29</gml:lowerCorner>
+                    <gml:upperCorner>1693277.8 4727998.29</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>74</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1693277.8 4727998.29</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>79.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_79,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1693277.8</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4727998.29</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb2">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1730928.81 4851319.38</gml:lowerCorner>
+                    <gml:upperCorner>1730928.81 4851319.38</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>75</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1730928.81 4851319.38</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>192.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_192,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1730928.81</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4851319.38</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb3">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1695144.45 4888904.59</gml:lowerCorner>
+                    <gml:upperCorner>1695144.45 4888904.59</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>76</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1695144.45 4888904.59</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>FI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP610</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>71.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>FI_SP610_71,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1695144.45</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4888904.59</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb4">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689840.23 4723769.53</gml:lowerCorner>
+                    <gml:upperCorner>1689840.23 4723769.53</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>77</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1689840.23 4723769.53</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>88.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_88,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1689840.23</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4723769.53</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb5">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1617719.27 4896895.43</gml:lowerCorner>
+                    <gml:upperCorner>1617719.27 4896895.43</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>78</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1617719.27 4896895.43</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>80.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_80,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1617719.27</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4896895.43</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb6">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1670733.27 4867161.07</gml:lowerCorner>
+                    <gml:upperCorner>1670733.27 4867161.07</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>79</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1670733.27 4867161.07</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PO</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR325</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>70.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PO_SR325_70,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1670733.27</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4867161.07</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb7">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1692113.04 4729051</gml:lowerCorner>
+                    <gml:upperCorner>1692113.04 4729051</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>80</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1692113.04 4729051</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>77.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_77,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1692113.04</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4729051.0</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb8">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1670930.74 4872643.32</gml:lowerCorner>
+                    <gml:upperCorner>1670930.74 4872643.32</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>81</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1670930.74 4872643.32</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PO</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR325</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>64.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PO_SR325_64,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1670930.74</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4872643.32</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fb9">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1730189.17 4812414.55</gml:lowerCorner>
+                    <gml:upperCorner>1730189.17 4812414.55</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>82</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1730189.17 4812414.55</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>143.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_143,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1730189.17</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4812414.55</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fba">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1731477.61 4827992.64</gml:lowerCorner>
+                    <gml:upperCorner>1731477.61 4827992.64</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>83</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1731477.61 4827992.64</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>161.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_161,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1731477.61</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4827992.64</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fbb">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1732407.77 4831037.29</gml:lowerCorner>
+                    <gml:upperCorner>1732407.77 4831037.29</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>84</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1732407.77 4831037.29</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>164.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_164,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1732407.77</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4831037.29</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fbc">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1726443.17 4845587.87</gml:lowerCorner>
+                    <gml:upperCorner>1726443.17 4845587.87</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>85</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1726443.17 4845587.87</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>183.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_183,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1726443.17</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4845587.87</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fbd">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1730397.65 4833684.72</gml:lowerCorner>
+                    <gml:upperCorner>1730397.65 4833684.72</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>86</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1730397.65 4833684.72</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>168.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_168,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1730397.65</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4833684.72</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fbe">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1726569.59 4846586.35</gml:lowerCorner>
+                    <gml:upperCorner>1726569.59 4846586.35</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>87</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1726569.59 4846586.35</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>184.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_184,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1726569.59</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4846586.35</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fbf">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1655092.69 4784006.03</gml:lowerCorner>
+                    <gml:upperCorner>1655092.69 4784006.03</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>88</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1655092.69 4784006.03</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR439</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>133.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PI_SR439_133,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1655092.69</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4784006.03</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc0">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1613007.35 4888705.11</gml:lowerCorner>
+                    <gml:upperCorner>1613007.35 4888705.11</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>89</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1613007.35 4888705.11</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LU</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP072</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>103.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LU_SP072_103,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1613007.35</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4888705.11</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc1">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1690550.08 4728140.93</gml:lowerCorner>
+                    <gml:upperCorner>1690550.08 4728140.93</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>90</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1690550.08 4728140.93</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP160</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>79.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP160_79,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1690550.08</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4728140.93</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc2">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1612696.45 4829294.88</gml:lowerCorner>
+                    <gml:upperCorner>1612696.45 4829294.88</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>91</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1612696.45 4829294.88</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_LI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>73.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LI_SGC_FIPILI_LI_73*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1612696.45</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4829294.88</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc3">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1735891.47 4803707.33</gml:lowerCorner>
+                    <gml:upperCorner>1735891.47 4803707.33</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>92</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1735891.47 4803707.33</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>132.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_132,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1735891.47</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4803707.33</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc4">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1688927.7 4729998.39</gml:lowerCorner>
+                    <gml:upperCorner>1688927.7 4729998.39</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>93</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1688927.7 4729998.39</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>GR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SP159</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>71.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>GR_SP159_71,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1688927.7</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4729998.39</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc5">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1730239.49 4834481.51</gml:lowerCorner>
+                    <gml:upperCorner>1730239.49 4834481.51</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>94</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1730239.49 4834481.51</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>169.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_169,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1730239.49</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4834481.51</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc6">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1730665.29 4850512.99</gml:lowerCorner>
+                    <gml:upperCorner>1730665.29 4850512.99</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>95</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1730665.29 4850512.99</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>191.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_191,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1730665.29</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4850512.99</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc7">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1618288.75 4831073.08</gml:lowerCorner>
+                    <gml:upperCorner>1618288.75 4831073.08</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>96</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1618288.75 4831073.08</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_LI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>67.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LI_SGC_FIPILI_LI_67*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1618288.75</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4831073.08</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc8">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1610841.13 4828581.71</gml:lowerCorner>
+                    <gml:upperCorner>1610841.13 4828581.71</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>97</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1610841.13 4828581.71</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>LI</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SGC_FIPILI_LI</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>75.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>LI_SGC_FIPILI_LI_75*</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1610841.13</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4828581.71</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fc9">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1733108.49 4853223.3</gml:lowerCorner>
+                    <gml:upperCorner>1733108.49 4853223.3</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>98</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1733108.49 4853223.3</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>AR</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR071</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>198.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>AR_SR071_198,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1733108.49</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4853223.3</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+        <extra_rt_webgis:Cippi_SR_SP_ettometriche_v1 gml:id="Cippi_SR_SP_ettometriche_v1.fid--1a0abe0c_19c5083ee5f_5fca">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1670722.87 4865521.73</gml:lowerCorner>
+                    <gml:upperCorner>1670722.87 4865521.73</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <extra_rt_webgis:id_0>99</extra_rt_webgis:id_0>
+            <extra_rt_webgis:geom>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1670722.87 4865521.73</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </extra_rt_webgis:geom>
+            <extra_rt_webgis:prov>PO</extra_rt_webgis:prov>
+            <extra_rt_webgis:den_breve>SR325</extra_rt_webgis:den_breve>
+            <extra_rt_webgis:prog>72.1</extra_rt_webgis:prog>
+            <extra_rt_webgis:id>PO_SR325_72,1</extra_rt_webgis:id>
+            <extra_rt_webgis:coordx>1670722.87</extra_rt_webgis:coordx>
+            <extra_rt_webgis:coordy>4865521.73</extra_rt_webgis:coordy>
+            <extra_rt_webgis:origine>Catasto Strad</extra_rt_webgis:origine>
+            <extra_rt_webgis:versione>01/08/2013</extra_rt_webgis:versione>
+        </extra_rt_webgis:Cippi_SR_SP_ettometriche_v1>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

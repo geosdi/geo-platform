@@ -1,0 +1,410 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ogc="http://www.opengis.net/ogc"
+                       xmlns:extra_rt_webgis="https://mappe.regione.toscana.it/extra_rt_webgis"
+                       xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ows="http://www.opengis.net/ows"
+                       xmlns:xlink="http://www.w3.org/1999/xlink"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:RTWebGIS="http://mappe.regione.toscana.it"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2026-02-12T06:44:56.735Z"
+                       xsi:schemaLocation="http://mappe.regione.toscana.it http://mappe.regione.toscana.it/geoserver/RTWebGIS/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=RTWebGIS%3ASINS_4068_1454677_punti_tappa_francigena http://www.opengis.net/wfs http://mappe.regione.toscana.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:lowerCorner>1570374.0 4770818.0</gml:lowerCorner>
+            <gml:upperCorner>1712008.0 4914167.0</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.23">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1570374 4914167</gml:lowerCorner>
+                    <gml:upperCorner>1570374 4914167</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>23</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>PONTREMOLI - AULLA</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4914167.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1570374.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Piazza della Repubblica in Pontremoli</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Abbazia di S. Caprasio in Aulla</RTWebGIS:arrivo>
+            <RTWebGIS:km>32,10</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 23 PONTREMOLI - AULLA.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>56 m – 259 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>203</RTWebGIS:escalt>
+            <RTWebGIS:totsal>488</RTWebGIS:totsal>
+            <RTWebGIS:totdis>674</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>pontremoli</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-23-da-pontremoli-ad-aulla</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=100000&amp;x=1572880&amp;y=4903917</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1570374 4914167</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.24">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1577343 4895386</gml:lowerCorner>
+                    <gml:upperCorner>1577343 4895386</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>24</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>AULLA - SARZANA</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4895386.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1577343.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Abbazia di S. Caprasio in Aulla</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>S.M. Assunta in Sarzana </RTWebGIS:arrivo>
+            <RTWebGIS:km>17,43</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 24 AULLA - SARZANA.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>25 m – 540 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>515</RTWebGIS:escalt>
+            <RTWebGIS:totsal>642</RTWebGIS:totsal>
+            <RTWebGIS:totdis>613</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>aulla</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-24-da-aulla-a-sarzana</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1577312&amp;y=4889699</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1577343 4895386</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.25">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1577011 4884773</gml:lowerCorner>
+                    <gml:upperCorner>1577011 4884773</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>25</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>SARZANA - MASSA</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4884773.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1577011.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>S.M. Assunta in Sarzana </RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Duomo Cattedrale dei Santi Pietro e Francesco in Massa</RTWebGIS:arrivo>
+            <RTWebGIS:km>28,49</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 25 SARZANA - MASSA.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>1 m – 205 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>204</RTWebGIS:escalt>
+            <RTWebGIS:totsal>380</RTWebGIS:totsal>
+            <RTWebGIS:totdis>426</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>sarzana</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-25-da-sarzana-a-massa</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1582716&amp;y=4880627</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1577011 4884773</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.26">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1591661 4876728</gml:lowerCorner>
+                    <gml:upperCorner>1591661 4876728</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>26</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>MASSA - CAMAIORE</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4876728.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1591661.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Duomo Cattedrale dei Santi Pietro e Francesco in Massa</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Piazza Diaz in Camaiore</RTWebGIS:arrivo>
+            <RTWebGIS:km>24,76</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 26 MASSA - CAMAIORE.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>12 m – 291 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>279</RTWebGIS:escalt>
+            <RTWebGIS:totsal>424</RTWebGIS:totsal>
+            <RTWebGIS:totdis>435</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>massa</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-26-da-massa-a-camaiore</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1597486&amp;y=4871093</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1591661 4876728</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.27">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1604781 4865765</gml:lowerCorner>
+                    <gml:upperCorner>1604781 4865765</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>27</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>CAMAIORE - LUCCA</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4865765.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1604781.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Piazza Diaz in Camaiore</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Piazza San Michele in Lucca</RTWebGIS:arrivo>
+            <RTWebGIS:km>26,22</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 27 CAMAIORE - LUCCA.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>13 m – 333 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>320</RTWebGIS:escalt>
+            <RTWebGIS:totsal>558</RTWebGIS:totsal>
+            <RTWebGIS:totdis>570</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>camaiore</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-27-da-camaiore-a-lucca</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1611360&amp;y=4860467</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1604781 4865765</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.28">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1620786 4855533</gml:lowerCorner>
+                    <gml:upperCorner>1620786 4855533</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>28</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>LUCCA - ALTOPASCIO</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4855533.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1620786.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Piazza San Michele in Lucca</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Chiesa di San Jacopo in Altopascio</RTWebGIS:arrivo>
+            <RTWebGIS:km>18,60</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 28 LUCCA - ALTOPASCIO.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>12 m – 31 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>19</RTWebGIS:escalt>
+            <RTWebGIS:totsal>89</RTWebGIS:totsal>
+            <RTWebGIS:totdis>94</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>lucca</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-28-da-lucca-ad-altopascio</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1626410&amp;y=4853439</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1620786 4855533</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.29">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1634722 4852693</gml:lowerCorner>
+                    <gml:upperCorner>1634722 4852693</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>29</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>ALTOPASCIO - SAN MINIATO</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4852693.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1634722.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Chiesa di San Jacopo in Altopascio</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Piazza Bonaparte in San Miniato</RTWebGIS:arrivo>
+            <RTWebGIS:km>29,50</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 29 ALTOPASCIO - SAN MINIATO.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>11 m – 153 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>142</RTWebGIS:escalt>
+            <RTWebGIS:totsal>361</RTWebGIS:totsal>
+            <RTWebGIS:totdis>260</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>altopascio</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-29-da-altopascio-a-san-miniato</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=100000&amp;x=1641935&amp;y=4845773</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1634722 4852693</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.30">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1649586 4838045</gml:lowerCorner>
+                    <gml:upperCorner>1649586 4838045</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>30</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>SAN MINIATO - GAMBASSI TERME</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4838045.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1649586.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Piazza Bonaparte in San Miniato</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Chiesa del Cristo Re in Gambassi Terme</RTWebGIS:arrivo>
+            <RTWebGIS:km>23,67</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 30 SAN MINIATO - GAMBASSI TERME.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>78 m – 316 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>238</RTWebGIS:escalt>
+            <RTWebGIS:totsal>594</RTWebGIS:totsal>
+            <RTWebGIS:totdis>402</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>sanminiato</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/via-francigena/le-tappe/tappa-30-da-san-miniato-a-gambassi-terme</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=100000&amp;x=1654646&amp;y=4829931</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1649586 4838045</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.31">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1657950 4822728</gml:lowerCorner>
+                    <gml:upperCorner>1657950 4822728</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>31</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>GAMBASSI TERME - SAN GIMIGNANO</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4822728.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1657950.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Chiesa del Cristo Re in Gambassi Terme</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Piazza Duomo in San Gimignano</RTWebGIS:arrivo>
+            <RTWebGIS:km>13,32</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 31 GAMBASSI TERME - SAN GIMIGNANO.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>112 m - 396 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>284</RTWebGIS:escalt>
+            <RTWebGIS:totsal>431</RTWebGIS:totsal>
+            <RTWebGIS:totdis>412</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>gambassiterme</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-31-da-gambassi-terme-a-san-gimignano1</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1661261&amp;y=4818898</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1657950 4822728</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.32">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1665316 4814814</gml:lowerCorner>
+                    <gml:upperCorner>1665316 4814814</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>32</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>SAN GIMIGNANO - MONTERIGGIONI</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4814814.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1665316.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Piazza Duomo in San Gimignano</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Piazza Roma in Monteriggioni</RTWebGIS:arrivo>
+            <RTWebGIS:km>30,95</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 32 SAN GIMIGNANO - MONTERIGGIONI.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>130 m – 335 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>205</RTWebGIS:escalt>
+            <RTWebGIS:totsal>572</RTWebGIS:totsal>
+            <RTWebGIS:totdis>632</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>sangimignano</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-32-da-san-gimignano-a-monteriggioni</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1671761&amp;y=4809588</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1665316 4814814</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.33">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1680123 4806546</gml:lowerCorner>
+                    <gml:upperCorner>1680123 4806546</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>33</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>MONTERIGGIONI - SIENA</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4806546.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1680123.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Piazza Roma in Monteriggioni</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Piazza del Campo in Siena</RTWebGIS:arrivo>
+            <RTWebGIS:km>18,90</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 33 MONTERIGGIONI - SIENA.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>241 m – 360 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>119</RTWebGIS:escalt>
+            <RTWebGIS:totsal>373</RTWebGIS:totsal>
+            <RTWebGIS:totdis>318</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>monteriggioni</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-33-da-monteriggioni-a-siena</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1684389&amp;y=4802699</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1680123 4806546</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.34">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1689134 4798826</gml:lowerCorner>
+                    <gml:upperCorner>1689134 4798826</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>34</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>SIENA - PONTE D’ARBIA</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4798826.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1689134.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Piazza del Campo in Siena</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Centro Cresti accoglienza Pellegrini in Ponte d’Arbia</RTWebGIS:arrivo>
+            <RTWebGIS:km>25,80</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 34 SIENA - PONTE D’ARBIA.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>144 m -339 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>195</RTWebGIS:escalt>
+            <RTWebGIS:totsal>230</RTWebGIS:totsal>
+            <RTWebGIS:totdis>411</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>siena</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-34-da-siena-a-ponte-d-arbia</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=100000&amp;x=1694587&amp;y=4790259</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1689134 4798826</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.35">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1700578 4782149</gml:lowerCorner>
+                    <gml:upperCorner>1700578 4782149</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>35</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>PONTE D’ARBIA - SAN QUIRICO D’ORCIA</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4782149.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1700578.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Centro Cresti accoglienza Pellegrini in Ponte d’Arbia</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>Collegiata dei Santi Quirico e Giulitta in San Quirico d’Orcia</RTWebGIS:arrivo>
+            <RTWebGIS:km>26,25</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 35 PONTE D’ARBIA - SAN QUIRICO D’ORCIA.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>139 m – 417 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>278</RTWebGIS:escalt>
+            <RTWebGIS:totsal>677</RTWebGIS:totsal>
+            <RTWebGIS:totdis>409</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>monteronidarbia</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-35-da-ponte-d-arbia-a-san-quirico-d-orcia</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=50000&amp;x=1705777&amp;y=4776582</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1700578 4782149</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+        <RTWebGIS:SINS_4068_1454677_punti_tappa_francigena gml:id="SINS_4068_1454677_punti_tappa_francigena.36">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1712008 4770818</gml:lowerCorner>
+                    <gml:upperCorner>1712008 4770818</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <RTWebGIS:sins_id>36</RTWebGIS:sins_id>
+            <RTWebGIS:sins_description>SAN QUIRICO D’ORCIA - RADICOFANI</RTWebGIS:sins_description>
+            <RTWebGIS:sins_y>4770818.0</RTWebGIS:sins_y>
+            <RTWebGIS:sins_x>1712008.0</RTWebGIS:sins_x>
+            <RTWebGIS:partenza>Collegiata dei Santi Quirico e Giulitta in San Quirico d’Orcia</RTWebGIS:partenza>
+            <RTWebGIS:arrivo>San Pietro in Radicofani</RTWebGIS:arrivo>
+            <RTWebGIS:km>33,02</RTWebGIS:km>
+            <RTWebGIS:file_mappa>TAPPA 36 SAN QUIRICO D’ORCIA - RADICOFANI.png</RTWebGIS:file_mappa>
+            <RTWebGIS:profalt>257 m – 805 m</RTWebGIS:profalt>
+            <RTWebGIS:escalt>548</RTWebGIS:escalt>
+            <RTWebGIS:totsal>1029</RTWebGIS:totsal>
+            <RTWebGIS:totdis>652</RTWebGIS:totdis>
+            <RTWebGIS:comunexlamma>sanquiricodorcia</RTWebGIS:comunexlamma>
+            <RTWebGIS:scheda>http://www.regione.toscana.it/via-francigena/le-tappe/tappa-36-da-san-quirico-d-orcia-a-radicofani</RTWebGIS:scheda>
+            <RTWebGIS:mappaxtappa>http://mappe.regione.toscana.it/tolomeo.html?preset=1446317&amp;zoom=100000&amp;x=1719126&amp;y=4760908</RTWebGIS:mappaxtappa>
+            <RTWebGIS:latlon>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1712008 4770818</gml:pos>
+                </gml:Point>
+            </RTWebGIS:latlon>
+        </RTWebGIS:SINS_4068_1454677_punti_tappa_francigena>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

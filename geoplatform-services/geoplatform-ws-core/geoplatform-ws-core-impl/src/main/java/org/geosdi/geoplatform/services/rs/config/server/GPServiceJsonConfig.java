@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.services.rs.config.server;
 
 import jakarta.ws.rs.core.Application;
 import jakarta.ws.rs.ext.RuntimeDelegate;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.ext.logging.LoggingInInterceptor;
+import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;

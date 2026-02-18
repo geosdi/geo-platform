@@ -39,16 +39,20 @@ import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface SecurityInterceptorFactory {
 
-    WSS4JInInterceptor getSecurityInInterceptor() throws
-            IllegalArgumentException;
+    /**
+     * @return {@link WSS4JInInterceptor}
+     * @throws IllegalArgumentException
+     */
+    WSS4JInInterceptor getSecurityInInterceptor() throws IllegalArgumentException;
 
-    WSS4JOutInterceptor getSecurityOutInterceptor() throws
-            IllegalArgumentException;
-
+    /**
+     * @return {@link WSS4JOutInterceptor}
+     * @throws IllegalArgumentException
+     */
+    WSS4JOutInterceptor getSecurityOutInterceptor() throws IllegalArgumentException;
 }

@@ -89,6 +89,15 @@
             <groupId>org.apache.wss4j</groupId>
             <artifactId>wss4j-ws-security-dom</artifactId>
         </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================= LOGGING FEATURE ===================  -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-features-logging</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -96,21 +105,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-
-                    <classifier>sources</classifier>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-<phase>verify</phase>
-<goals>
-    <goal>jar-no-fork</goal>
-</goals>
-
-                    </execution>
-                </executions>
-
             </plugin>
 
             <plugin>

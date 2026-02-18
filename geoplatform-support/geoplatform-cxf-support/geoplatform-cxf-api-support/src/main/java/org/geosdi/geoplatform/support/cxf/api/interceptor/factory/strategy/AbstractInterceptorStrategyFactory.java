@@ -35,19 +35,22 @@
  */
 package org.geosdi.geoplatform.support.cxf.api.interceptor.factory.strategy;
 
-import com.google.common.base.Preconditions;
-import java.util.Map;
+import org.apache.cxf.ext.logging.LoggingInInterceptor;
+import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.interceptor.Fault;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.apache.wss4j.dom.handler.WSHandlerConstants;
 import org.geosdi.geoplatform.support.cxf.api.InterceptorStrategyBean;
 import org.geosdi.geoplatform.support.cxf.api.LoggingWebServiceType;
 import org.geosdi.geoplatform.support.cxf.api.SecurityWebServiceType;
 import org.geosdi.geoplatform.support.cxf.api.interceptor.factory.logging.LoggingInterceptorFactory;
+
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.apache.wss4j.common.ConfigurationConstants.ACTION;
+import static org.apache.wss4j.dom.handler.WSHandlerConstants.NO_SECURITY;
 
 /**
  *
@@ -56,23 +59,21 @@ import org.geosdi.geoplatform.support.cxf.api.interceptor.factory.logging.Loggin
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractInterceptorStrategyFactory<S extends InterceptorStrategyBean>
-        implements LoggingInterceptorFactory, SecurityInterceptorFactory {
+public abstract class AbstractInterceptorStrategyFactory<S extends InterceptorStrategyBean> implements LoggingInterceptorFactory, SecurityInterceptorFactory {
 
     protected final S strategyBean;
 
+    /**
+     * @param theStrategyBean
+     */
     protected AbstractInterceptorStrategyFactory(S theStrategyBean) {
-        Preconditions.checkNotNull(theStrategyBean, "The StrategyBean "
-                + "must not be null");
-
+        checkNotNull(theStrategyBean, "The StrategyBean must not be null");
         this.strategyBean = theStrategyBean;
     }
 
     @Override
-    public LoggingInInterceptor getLoggingInInterceptor() throws
-            IllegalArgumentException {
-        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(
-                strategyBean.getLoggingStrategy());
+    public LoggingInInterceptor getLoggingInInterceptor() throws IllegalArgumentException {
+        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(strategyBean.getLoggingStrategy());
         if (loggingType == LoggingWebServiceType.LOGGING_IN
                 || loggingType == LoggingWebServiceType.LOGGING_IN_OUT) {
             return new LoggingInInterceptor();
@@ -89,10 +90,8 @@ public abstract class AbstractInterceptorStrategyFactory<S extends InterceptorSt
     }
 
     @Override
-    public LoggingOutInterceptor getLoggingOutInterceptor() throws
-            IllegalArgumentException {
-        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(
-                strategyBean.getLoggingStrategy());
+    public LoggingOutInterceptor getLoggingOutInterceptor() throws IllegalArgumentException {
+        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(strategyBean.getLoggingStrategy());
         if (loggingType == LoggingWebServiceType.LOGGING_OUT
                 || loggingType == LoggingWebServiceType.LOGGING_IN_OUT) {
             return new LoggingOutInterceptor();
@@ -109,27 +108,19 @@ public abstract class AbstractInterceptorStrategyFactory<S extends InterceptorSt
     }
 
     @Override
-    public WSS4JInInterceptor getSecurityInInterceptor() throws
-            IllegalArgumentException {
-        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(
-                strategyBean.getSecurityStrategy());
-        switch (securityType) {
-            case USERNAME_TOKEN:
-                return createUsernameTokenInInterceptor();
-            case ENCRYPTION:
-                return createEncryptionInInterceptor();
-            case SIGNATURE:
-                return createSignatureInInterceptor();
-            case TIMESTAMP_SIGNATURE_ENCRYPTION:
-                return createTimestampSignatureEncryptionInInterceptor();
-            case NONE:
+    public WSS4JInInterceptor getSecurityInInterceptor() throws IllegalArgumentException {
+        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(strategyBean.getSecurityStrategy());
+        return switch (securityType) {
+            case USERNAME_TOKEN ->  createUsernameTokenInInterceptor();
+            case ENCRYPTION -> createEncryptionInInterceptor();
+            case SIGNATURE ->  createSignatureInInterceptor();
+            case TIMESTAMP_SIGNATURE_ENCRYPTION -> createTimestampSignatureEncryptionInInterceptor();
+            case NONE -> {
                 WSS4JInInterceptor in = new WSS4JInInterceptor();
-                in.setProperty(WSHandlerConstants.ACTION,
-                        WSHandlerConstants.NO_SECURITY);
-                return in;
-            default:
-                return null;
-        }
+                in.setProperty(ACTION, NO_SECURITY);
+                yield  in;
+            }
+        };
     }
 
     protected final WSS4JInInterceptor createUsernameTokenInInterceptor() {
@@ -145,25 +136,18 @@ public abstract class AbstractInterceptorStrategyFactory<S extends InterceptorSt
     @Override
     public WSS4JOutInterceptor getSecurityOutInterceptor() throws
             IllegalArgumentException {
-        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(
-                strategyBean.getSecurityStrategy());
-        switch (securityType) {
-            case USERNAME_TOKEN:
-                return createUsernameTokenOutInterceptor();
-            case ENCRYPTION:
-                return createEncryptionOutInterceptor();
-            case SIGNATURE:
-                return createSignatureOutInterceptor();
-            case TIMESTAMP_SIGNATURE_ENCRYPTION:
-                return createTimestampSignatureEncryptionOutInterceptor();
-            case NONE:
+        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(strategyBean.getSecurityStrategy());
+        return switch (securityType) {
+            case USERNAME_TOKEN -> createUsernameTokenOutInterceptor();
+            case ENCRYPTION -> createEncryptionOutInterceptor();
+            case SIGNATURE -> createSignatureOutInterceptor();
+            case TIMESTAMP_SIGNATURE_ENCRYPTION -> createTimestampSignatureEncryptionOutInterceptor();
+            case NONE -> {
                 WSS4JOutInterceptor out = new WSS4JOutInterceptor();
-                out.setProperty(WSHandlerConstants.ACTION,
-                        WSHandlerConstants.NO_SECURITY);
-                return out;
-            default:
-                return null;
-        }
+                out.setProperty(ACTION, NO_SECURITY);
+                yield  out;
+            }
+        };
     }
 
     protected abstract WSS4JOutInterceptor createEncryptionOutInterceptor();

@@ -35,20 +35,24 @@
  */
 package org.geosdi.geoplatform.support.cxf.api.interceptor.factory.logging;
 
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.ext.logging.LoggingInInterceptor;
+import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface LoggingInterceptorFactory {
 
-    LoggingInInterceptor getLoggingInInterceptor() throws
-            IllegalArgumentException;
+    /**
+     * @return {@link LoggingInInterceptor}
+     * @throws IllegalArgumentException
+     */
+    LoggingInInterceptor getLoggingInInterceptor() throws IllegalArgumentException;
 
-    LoggingOutInterceptor getLoggingOutInterceptor() throws
-            IllegalArgumentException;
-
+    /**
+     * @return {@link LoggingInInterceptor}
+     * @throws IllegalArgumentException
+     */
+    LoggingOutInterceptor getLoggingOutInterceptor() throws IllegalArgumentException;
 }

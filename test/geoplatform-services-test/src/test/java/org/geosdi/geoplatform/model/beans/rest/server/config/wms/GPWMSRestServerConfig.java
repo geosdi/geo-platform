@@ -36,7 +36,11 @@
 package org.geosdi.geoplatform.model.beans.rest.server.config.wms;
 
 import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.interceptor.*;
+import org.apache.cxf.ext.logging.LoggingInInterceptor;
+import org.apache.cxf.ext.logging.LoggingOutInterceptor;
+import org.apache.cxf.interceptor.FIStaxInInterceptor;
+import org.apache.cxf.interceptor.FIStaxOutInterceptor;
+import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;

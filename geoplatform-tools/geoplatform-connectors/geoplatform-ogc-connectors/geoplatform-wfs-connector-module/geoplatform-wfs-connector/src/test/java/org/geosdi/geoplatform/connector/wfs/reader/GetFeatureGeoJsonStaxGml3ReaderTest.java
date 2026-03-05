@@ -5,7 +5,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2025 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2026 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -35,78 +35,78 @@
  */
 package org.geosdi.geoplatform.connector.wfs.reader;
 
-import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Reader;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.junit.BeforeClass;
-import org.junit.experimental.theories.DataPoints;
-import org.junit.experimental.theories.Theories;
-import org.junit.experimental.theories.Theory;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import tools.jackson.databind.json.JsonMapper;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.FileInputStream;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.io.File.separator;
-import static java.lang.Boolean.FALSE;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
-import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(Theories.class)
-public class GetFeatureGeoJsonStaxGml3ReaderTest {
+@FixMethodOrder(value = NAME_ASCENDING)
+public class GetFeatureGeoJsonStaxGml3ReaderTest extends BaseGetFeatureGeoJsonStaxGml3ReaderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GetFeatureGeoJsonStaxGml3ReaderTest.class);
-    //
-    private static final JacksonSupport<JsonMapper> JACKSON_SUPPORT =  builder(FALSE)
-            .configure(UNWRAP_ROOT_VALUE_DISABLE,
-                    FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-                    ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-                    WRAP_ROOT_VALUE_DISABLE,
-                    INDENT_OUTPUT_ENABLE, NON_NULL)
-            .build();
-    private static final GetFeatureGeoJsonStaxGml3Reader getFeatureGeoJsonStaxGml3Reader = new GetFeatureGeoJsonStaxGml3Reader();
-    private static String dirFiles;
-
-    /**
-     * @throws Exception
-     */
-    @BeforeClass
-    public static void loadFile() throws Exception {
-        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall", "stax")
-                .collect(joining(separator, "", separator));
+    @Test
+    public void a_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("extra_rt_webgis_strade_comunali.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
     }
 
-    /**
-     * @return {@link String[]}
-     */
-    @DataPoints
-    public static String[] data() {
-        return new String[] {"extra_rt_webgis_strade_comunali.xml", "extra_rt_webgis:Cippi_SR_SP_ettometriche_v1.xml",
-                "RTWebGIS:SINS_4069_4365_pr_lu.xml", "RTWebGIS:SINS_4068_1454677_punti_tappa_francigena.xml",
-                "RTWebGIS:SINS_4068_9363_totem_asl7.xml", "extra_rt_webgis:Cippi_km_v2_4.xml",
-                "extra_rt_webgis:strade_private.xml"};
+    @Test
+    public void b_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("extra_rt_webgis:Cippi_SR_SP_ettometriche_v1.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
     }
 
-    /**
-     * @param fileName
-     * @throws Exception
-     */
-    @Theory
-    public void readFeatureCollectionWithStaxTest(@Nonnull(when = NEVER) String fileName) throws Exception {
-        checkArgument((fileName != null) && !(fileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
-        File file = new File(dirFiles.concat(fileName));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n, for file : {}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))), fileName);
+    @Test
+    public void c_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("RTWebGIS:SINS_4069_4365_pr_lu.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+    }
+
+    @Test
+    public void d_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("RTWebGIS:SINS_4068_1454677_punti_tappa_francigena.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+    }
+
+    @Test
+    public void e_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("RTWebGIS:SINS_4068_9363_totem_asl7.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+    }
+
+    @Test
+    public void f_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("extra_rt_webgis:Cippi_km_v2_4.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+    }
+
+    @Test
+    public void g_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("extra_rt_webgis:strade_private.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+    }
+
+    @Test
+    public void h_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("aggregati_strutturali_edificato.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+    }
+
+    @Test
+    public void i_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("mappa_vulnerabilita_edificato.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+    }
+
+    @Test
+    public void l_readFeatureCollectionWithStaxTest() throws Exception {
+        File file = new File(dirFiles.concat("pai_frane_II_agg_2015.xml"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
     }
 }

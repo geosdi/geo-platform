@@ -1,0 +1,1609 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                       xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:piano_pc_tito="http://piano_pc_tito"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2026-03-05T08:14:46.811Z"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd http://piano_pc_tito http://rsdi.regione.basilicata.it/rbgeoserver2016/piano_pc_tito/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=piano_pc_tito%3Amappa_vulnerabilita_edificato">
+    <gml:featureMembers>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.1">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557164.17585093 4492326.09361631 557162.33237512 4492315.6014236 557148.87121431 4492318.40563898 557150.96470025 4492328.63221817 557164.17585093 4492326.09361631</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.2">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557103.07101873 4492419.1691663 557099.28228222 4492406.05973377 557089.95395385 4492409.72346053 557093.71146189 4492422.04383342 557096.35190953 4492429.38763357 557095.38313988 4492429.71572349 557096.89868415 4492433.17669439 557107.03952964 4492429.2161214 557103.07101873 4492419.1691663</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.3">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557132.39769383 4492482.13857025 557136.36671822 4492473.88874987 557133.14797688 4492472.34177372 557134.49963277 4492469.52152288 557129.14832423 4492464.18510731 557124.55410387 4492473.41960136 557122.62428204 4492477.44295232 557132.39769383 4492482.13857025</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.4">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557385.21894734 4492545.88898688 557383.84430094 4492532.74057325 557379.07860864 4492533.31072136 557378.47718159 4492528.2638536 557374.55524503 4492528.94340361 557374.93015464 4492532.3183984 557368.16443129 4492533.21660211 557368.10203984 4492529.325996 557367.82867351 4492526.66193806 557362.2192207 4492527.27893232 557362.89089118 4492534.82578922 557362.20338072 4492534.93514043 557363.82020779 4492548.43512216 557385.21894734 4492545.88898688</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.5">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557033.47990325 4492576.97064167 557033.32351367 4492581.89248453 557029.96410438 4492581.82205843 557030.09700492 4492578.75176796 557030.09700496 4492578.75176715 557032.59702568 4492578.96278765 557032.96432524 4492575.09563419 557033.72214644 4492575.10355334 557033.72226588 4492570.83786998 557004.40172364 4492567.72751749 557001.69834203 4492575.83675696 557001.05750076 4492583.29763319 557011.04196518 4492583.95421772 557012.15238264 4492583.97461538 557017.40921723 4492584.11068283 557029.82339086 4492584.91578686 557033.74529372 4492585.43935489 557065.99554261 4492588.97167928 557066.51932328 4492576.96394898 557061.86301993 4492577.07316565 557062.20699863 4492569.04197056 557048.87090258 4492569.54932839 557048.65980806 4492575.08054147 557046.39415314 4492575.28358872 557046.56617961 4492569.93987354 557034.72227511 4492570.88477835 557034.6127273 4492577.00192969 557033.47990325 4492576.97064167</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.6">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557075.31596872 4492588.52668472 557073.50372271 4492578.76886418 557067.65208105 4492579.33116266 557068.4096286 4492589.08113581 557075.31596872 4492588.52668472</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.7">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557086.94917339 4492579.00369362 557085.91794262 4492569.89234248 557085.44159748 4492570.01150303 557084.78533844 4492570.08179384 557084.42605104 4492566.82398621 557079.72285926 4492567.37851114 557068.11333175 4492568.35467442 557068.07404327 4492576.37806776 557074.12099413 4492576.00327512 557074.34799649 4492577.40162849 557083.44922576 4492575.8004674 557084.6522539 4492579.70673711 557086.94917339 4492579.00369362</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.8">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557088.14429892 4492586.14432055 557087.62877695 4492582.26932413 557086.94917339 4492579.00369362 557084.6522539 4492579.70673711 557083.44922576 4492575.8004674 557074.34799649 4492577.40162849 557074.4646883 4492578.12046197 557077.23005519 4492588.39393821 557088.14429892 4492586.14432055</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.9">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557095.85538266 4492583.88678109 557091.43410004 4492568.51244102 557085.91794262 4492569.89234248 557086.94917339 4492579.00369362 557087.62877695 4492582.26932412 557088.51942049 4492581.95685618 557089.85526779 4492585.66000601 557095.85538266 4492583.88678109</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.10">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557113.6212841 4492580.86396303 557112.87149549 4492573.04366697 557111.98102831 4492567.07491874 557097.03555046 4492567.2228491 557095.4027115 4492567.51966729 557091.43410004 4492568.51244102 557095.85538266 4492583.88678109 557101.46486103 4492582.3557298 557108.19933685 4492581.35596364 557113.6212841 4492580.86396303</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.11">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557137.62156024 4492580.26321723 557137.24675793 4492573.06793155 557137.1452416 4492571.39606158 557131.49674153 4492571.434932 557125.08260164 4492571.74721279 557123.52789292 4492571.87997237 557114.9511425 4492573.05134544 557116.13692807 4492581.15310863 557134.37934445 4492580.02873342 557137.62156024 4492580.26321723</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.12">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557141.05952397 4492565.05247898 557140.46586429 4492561.59935244 557113.37956533 4492564.07498253 557114.9340209 4492572.93436231 557114.9511425 4492573.05134544 557123.52789292 4492571.87997237 557125.08260165 4492571.74721279 557124.98889554 4492570.14565623 557131.37178548 4492569.81774982 557131.49674153 4492571.434932 557137.1452416 4492571.39606158 557137.61416948 4492565.23986083 557140.89544847 4492565.46653317 557141.05952397 4492565.05247898</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.13">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557143.55936922 4492571.52909043 557143.76268409 4492564.84163377 557141.05952397 4492565.05247898 557140.89544847 4492565.46653317 557137.61416948 4492565.23986083 557137.1452416 4492571.39606158 557137.24675793 4492573.06793155 557147.46558542 4492574.23233338 557147.55940531 4492571.7792252 557143.55936922 4492571.52909043</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.14">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557148.04394745 4492566.00583547 557148.48939905 4492561.24025141 557143.76278192 4492561.34946536 557143.76268409 4492564.84163377 557141.05952397 4492565.05247898 557140.46586429 4492561.59935244 557113.37956533 4492564.07498253 557114.9340209 4492572.93436231 557116.13692807 4492581.15310863 557134.37934445 4492580.02873342 557137.62156024 4492580.26321723 557145.98878946 4492582.00567964 557150.24662664 4492582.74800696 557150.18409172 4492583.96674824 557157.70754479 4492586.3263654 557170.09810193 4492593.51424678 557178.79384713 4492581.42085687 557182.63001835 4492574.57727414 557184.27855455 4492571.67890843 557181.65356385 4492570.33507657 557175.54419148 4492567.89738309 557169.93479523 4492566.4909502 557167.85640124 4492575.27208225 557159.91883696 4492574.52181715 557160.52835537 4492569.6312391 557158.75490371 4492569.4827421 557160.1535476 4492562.63907651 557152.70818728 4492561.49820512 557149.45815032 4492561.56059464 557149.09851398 4492570.74022071 557151.55947522 4492570.8184287 557151.51256149 4492572.19341989 557147.55940531 4492571.7792252 557148.04394745 4492566.00583547</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.15">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557178.79384713 4492581.42085687 557182.63001835 4492574.57727414 557184.27855455 4492571.67890843 557181.65356385 4492570.33507657 557175.54419148 4492567.89738309 557169.93479523 4492566.4909502 557167.85640124 4492575.27208225 557159.91883696 4492574.52181715 557159.55936484 4492577.84209916 557177.55826099 4492583.1392175 557178.79384713 4492581.42085687</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.16">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557170.09810193 4492593.51424678 557177.55826099 4492583.1392175 557159.55936484 4492577.84209916 557156.82340298 4492586.04906778 557157.70754479 4492586.3263654 557170.09810193 4492593.51424678</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.17">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557158.75490371 4492569.4827421 557160.1535476 4492562.63907651 557152.70818728 4492561.49820512 557149.45815032 4492561.56059464 557149.09851398 4492570.74022071 557151.55947522 4492570.8184287 557158.26265582 4492571.42021457 557158.75490371 4492569.4827421</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.18">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557147.55940531 4492571.7792252 557148.04394745 4492566.00583547 557148.48939905 4492561.24025141 557143.76278192 4492561.34946536 557143.76268409 4492564.84163377 557143.55936922 4492571.52909043 557147.55940531 4492571.7792252</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.19">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557194.87988993 4492583.86670206 557184.12216802 4492576.48356404 557178.87098878 4492584.20920022 557182.79372616 4492587.27252413 557180.93424801 4492590.23338194 557175.67614843 4492598.46753435 557180.61360626 4492601.86612086 557183.66814603 4492608.28806513 557184.10553471 4492612.42868245 557195.27730754 4492620.37433054 557196.87894735 4492618.24939637 557196.26194208 4492611.4994119 557187.04324535 4492606.04600334 557188.96523541 4492602.68671191 557191.72321084 4492597.9602688 557195.77088769 4492600.29680593 557195.73883138 4492599.66352079 557194.87988993 4492583.86670206</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.20">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557196.10581865 4492606.91349398 557195.77088769 4492600.29680593 557191.72321084 4492597.9602688 557188.96523541 4492602.68671191 557196.10581865 4492606.91349398</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.21">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557182.79372616 4492587.27252413 557178.87098878 4492584.20920022 557176.76240978 4492587.3113813 557180.93424801 4492590.23338194 557182.79372616 4492587.27252413</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.22">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557210.73077803 4492613.99988902 557206.49626882 4492608.18693156 557200.56671102 4492610.27300234 557201.11333194 4492619.53859569 557204.28940029 4492622.20662031 557207.01964219 4492619.66379566 557206.23841493 4492618.5465867 557210.73077803 4492613.99988902</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.23">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557207.76949554 4492625.17941624 557218.55898571 4492614.06265399 557212.80133892 4492605.96875267 557206.49626882 4492608.18693156 557210.73077803 4492613.99988902 557206.23841493 4492618.5465867 557207.01964219 4492619.66379566 557204.28492702 4492622.21078626 557205.02734019 4492622.96058503 557207.76949554 4492625.17941624</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.24">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557228.03564738 4492614.19578779 557233.45776502 4492607.633507 557228.8640634 4492604.1333701 557222.96536271 4492611.23469349 557228.03564738 4492614.19578779</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.25">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557265.51320549 4492593.10342222 557264.42746074 4492585.83779992 557257.88046973 4492587.4469441 557254.83354458 4492588.07183745 557250.39596201 4492589.30605519 557245.81773437 4492591.19651489 557241.23168526 4492593.38384732 557233.86428715 4492598.07888428 557230.66104807 4492600.91469815 557232.94104589 4492603.54088669 557235.94236046 4492600.73519067 557240.95812619 4492597.64162724 557242.61406884 4492600.1178506 557242.80964278 4492599.97761558 557245.083139 4492598.77457376 557249.50512695 4492596.44661132 557255.44274473 4492594.53276 557258.66154486 4492593.98599733 557265.51320549 4492593.10342222</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.26">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557299.32623472 4492587.2452257 557303.55285708 4492586.76099641 557302.86554374 4492579.83913579 557301.95928377 4492579.84691676 557300.87348997 4492574.29222327 557294.01026597 4492575.26126413 557294.67006466 4492582.60446751 557278.87299407 4492583.50236405 557280.38063868 4492590.34616052 557282.12284698 4492589.99462745 557293.17770186 4492588.29969837 557299.32623472 4492587.2452257</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.27">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557312.45137408 4492584.98748682 557310.55327174 4492573.96431174 557304.2484901 4492575.58920566 557306.27946842 4492586.05015499 557312.45137408 4492584.98748682</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.28">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557353.98263371 4492602.97355618 557347.4361968 4492584.84062005 557340.28761417 4492587.28567656 557341.48276752 4492593.38724673 557344.40469828 4492592.52797576 557346.15458622 4492597.19988486 557344.22485606 4492597.99669023 557346.56839554 4492606.39516088 557353.98263371 4492602.97355618</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.29">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557342.29512597 4492598.75443224 557341.48276752 4492593.38724673 557340.28761417 4492587.28567656 557329.24055677 4492589.5352897 557317.81069534 4492591.3161422 557308.78711383 4492592.98770257 557308.7957037 4492604.58130542 557313.99779298 4492604.18313158 557314.16174512 4492608.20655228 557318.77117223 4492608.12077184 557318.24009413 4492601.7926633 557322.990162 4492601.19907769 557326.95115179 4492600.84765081 557330.11524622 4492600.93369531 557330.56038446 4492607.30086351 557335.87294374 4492607.2307319 557338.36517019 4492606.81675567 557338.48232243 4492608.11362777 557343.78710413 4492606.80912777 557342.29512597 4492598.75443224</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.30">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557327.25577417 4492603.29296085 557326.95115179 4492600.84765081 557322.990162 4492601.19907769 557323.41977877 4492603.87095261 557327.25577417 4492603.29296085</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.31">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557314.16174512 4492608.20655231 557313.99779298 4492604.18313158 557308.7957037 4492604.58130542 557308.80216888 4492613.30790596 557307.89590854 4492613.34693726 557307.46599518 4492621.20625501 557311.73946002 4492621.89389615 557311.17712587 4492615.7610985 557311.37252012 4492612.90174545 557314.28662209 4492612.63622038 557314.67716809 4492615.60496774 557315.25529633 4492615.71436203 557314.98164682 4492623.14399958 557315.46602624 4492623.18307859 557315.45819656 4492623.8002617 557316.9035037 4492624.53468178 557317.80195204 4492624.51127548 557318.20063663 4492615.83946105 557317.46625491 4492615.80037328 557318.24765327 4492610.80823969 557314.18510298 4492611.03466282 557314.16174512 4492608.20655231</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.32">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557305.77111709 4492605.08128486 557305.52135195 4492596.60475993 557305.83395121 4492593.19072617 557296.05255433 4492594.67476167 557294.42707616 4492611.09649276 557296.33333906 4492611.36999384 557302.39588015 4492612.23738162 557305.0130848 4492612.61246836 557305.77111709 4492605.08128486</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.33">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557302.0286099 4492615.01860399 557302.39588015 4492612.23738162 557296.33333906 4492611.36999384 557295.9738724 4492614.48715177 557302.0286099 4492615.01860399</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.34">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557304.05195805 4492619.01083908 557303.97391744 4492615.96397792 557299.25512692 4492615.59663177 557298.75523979 4492615.58018417 557297.66896382 4492623.00278799 557297.58296946 4492625.02621242 557301.49705118 4492625.82321547 557303.89554388 4492624.79986484 557304.34098818 4492620.25302945 557303.94254863 4492620.19051579 557304.05195805 4492619.01083908</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.35">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556906.2543136 4492493.33396667 556901.37936551 4492489.6072596 556900.4965704 4492488.63067193 556894.02791682 4492482.70079738 556890.37170054 4492480.10693773 556885.2390121 4492473.71617302 556881.68437731 4492470.45044521 556876.06723142 4492466.81746136 556871.37172278 4492471.98914912 556869.07486873 4492470.35626809 556866.30132084 4492473.24678319 556862.71518906 4492478.77006906 556870.49636547 4492484.38749024 556881.9649763 4492493.76282878 556882.00403887 4492493.80189173 556886.37897408 4492497.80201852 556890.91017352 4492501.34121579 556896.22263224 4492504.85700213 556901.19125515 4492508.24007263 556904.58993509 4492503.94322795 556902.79308574 4492502.34161353 556906.2932835 4492496.6386379 556909.18389503 4492498.22466437 556910.71521711 4492496.24035195 556906.97305812 4492493.80273847 556906.2543136 4492493.33396667</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.36">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556916.636855 4492506.97486999 556924.91831826 4492502.56892436 556916.64492525 4492497.81085788 556914.54325178 4492500.94358175 556911.80111225 4492498.19350351 556910.5198118 4492499.49814072 556909.18389503 4492498.22466437 556906.2932835 4492496.6386379 556902.79308574 4492502.34161353 556904.58993509 4492503.94322795 556901.19125515 4492508.24007263 556903.93350504 4492510.10723507 556906.74596625 4492512.57606711 556908.3006259 4492514.19329808 556910.16790034 4492511.78712451 556913.62895597 4492508.92007018 556916.636855 4492506.97486999</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.37">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556951.19194471 4492505.95261026 556955.22352416 4492495.76530204 556945.73128897 4492493.80405284 556940.89532746 4492492.80389406 556941.40324327 4492489.29611841 556933.16882226 4492487.77240904 556930.87934875 4492501.56913198 556935.01215423 4492503.38176247 556935.66845994 4492501.64741893 556937.91846126 4492502.47561597 556945.53566645 4492504.78836139 556951.19194471 4492505.95261026</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.38">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556953.57445918 4492517.48387837 556943.76991057 4492508.77265527 556940.4261873 4492506.53036668 556932.91819899 4492509.89728149 556936.1445755 4492517.78016082 556943.04317964 4492514.48353761 556948.54301206 4492522.57743078 556953.57445918 4492517.48387837</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.39">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556948.90233696 4492524.49930745 556948.54301206 4492522.57743078 556943.04317964 4492514.48353761 556936.14457551 4492517.78016081 556933.76951011 4492519.20975984 556934.70685646 4492525.04569782 556939.33173982 4492530.9911347 556945.94129709 4492527.02263041 556948.90233696 4492524.49930745</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.40">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556884.30861867 4492498.51288256 556880.01178779 4492495.2783792 556879.5586416 4492495.87211078 556876.93367099 4492493.80171998 556874.07432848 4492491.55163494 556874.8712492 4492490.23135743 556867.79318352 4492485.38739349 556861.55885178 4492481.44970318 556857.08977326 4492491.42605954 556863.68351165 4492494.38720565 556869.37881368 4492496.96550927 556875.61315191 4492500.67663773 556880.83187045 4492503.8096109 556886.19121016 4492507.13008697 556889.30606561 4492502.21229622 556884.30861867 4492498.51288256</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.41">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556894.06614685 4492512.41938838 556896.88625597 4492507.81072677 556889.90231264 4492502.65367467 556889.30606561 4492502.21229622 556886.19121019 4492507.13008692 556883.72232046 4492511.15341919 556887.1285412 4492513.52070884 556888.57392092 4492511.65358084 556888.5740003 4492511.65363303 556889.88648289 4492509.95832164 556894.06614685 4492512.41938838</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.42">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556905.6521642 4492514.01352224 556906.74596624 4492512.57606711 556903.93350504 4492510.10723507 556902.79282405 4492511.67749998 556897.12880397 4492507.98982786 556896.88625597 4492507.81072677 556894.06614685 4492512.41938838 556901.57387717 4492518.22429859 556902.21449863 4492518.59150613 556903.97231335 4492519.20093749 556906.94901211 4492515.47449532 556905.6521642 4492514.01352224</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.43">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556921.94702613 4492522.10246519 556916.51934257 4492518.53730349 556910.87094542 4492514.91213173 556906.83169578 4492520.04477974 556912.80820947 4492524.06839782 556917.76907474 4492527.42015172 556921.94702613 4492522.10246519</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.44">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556926.37061269 4492532.74068563 556930.42546482 4492528.44397116 556922.5974214 4492522.52967582 556921.94702613 4492522.10246519 556917.76907474 4492527.42015172 556918.63628695 4492528.00607426 556926.37061269 4492532.74068563</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.45">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556971.06575451 4492554.24232771 556972.79261827 4492545.9375012 556972.94112685 4492543.48439498 556956.93314262 4492542.0918724 556957.03464053 4492545.78852992 556958.63622006 4492545.78858414 556958.94072255 4492552.91382042 556970.09705233 4492553.96861673 556971.06575451 4492554.24232771</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.46">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556976.04238123 4492555.64849608 556977.95669429 4492547.468918 556972.79261827 4492545.9375012 556971.06575451 4492554.24232771 556976.04238123 4492555.64849608</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.47">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557000.14404664 4492561.27428281 557001.73022438 4492553.29781799 556986.25359466 4492549.75824949 556984.35491855 4492557.51595565 556992.95650778 4492559.88342162 557000.14404664 4492561.27428281</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.48">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557073.55107979 4492561.60489515 557089.88723908 4492559.9648333 557089.29364277 4492554.25390706 557078.371631 4492554.93322022 557062.55891537 4492556.52642509 557043.05085786 4492557.7679448 557043.56658609 4492563.89613013 557054.51176514 4492563.25267872 557073.55107979 4492561.60489515</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.49">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557043.56658609 4492563.89613013 557043.05085786 4492557.7679448 557035.60545188 4492558.22081495 557036.18341199 4492564.33017647 557043.56658609 4492563.89613013</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.50">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557111.99691854 4492557.61403347 557111.35653119 4492548.89530901 557094.15317447 4492550.54315364 557094.77026593 4492554.21502992 557098.18436167 4492554.3323332 557098.832684 4492558.70733129 557111.99691854 4492557.61403347</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.51">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557274.39542747 4492617.58796608 557276.16123136 4492611.89274402 557276.69255005 4492609.6505868 557267.41904752 4492608.39246636 557267.42670682 4492613.86118689 557268.48921499 4492613.98622232 557268.43448623 4492615.41590101 557268.1375695 4492616.78307048 557274.39542747 4492617.58796608</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.52">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557273.58280643 4492621.60354223 557274.39542747 4492617.58796608 557268.13756949 4492616.78307048 557265.14535011 4492616.79078178 557255.86395212 4492618.50139499 557256.29358218 4492620.69671052 557256.05131952 4492623.3060635 557264.46539879 4492625.92352138 557264.37160935 4492627.29069893 557266.27786424 4492627.85326048 557272.94975504 4492629.85347591 557274.69999158 4492622.09576432 557273.58280643 4492621.60354223</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.53">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557265.14535011 4492616.79078178 557265.41893334 4492611.6892559 557259.78603474 4492612.6031226 557259.18454947 4492609.60311841 557254.64544129 4492609.50140219 557254.59831049 4492618.60291461 557255.86395212 4492618.50139499 557265.14535011 4492616.79078178</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.54">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557265.41893334 4492611.6892559 557265.42685504 4492607.81427693 557259.16895314 4492608.57968551 557259.18454947 4492609.60311842 557259.78603474 4492612.6031226 557265.41893334 4492611.6892559</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.55">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557247.77003077 4492621.49329231 557243.50458543 4492613.4385031 557242.699865 4492614.29784622 557241.24677588 4492612.46187001 557236.63723974 4492616.41481713 557245.44181026 4492624.00101194 557247.77003077 4492621.49329231</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.56">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557295.02765056 4492635.37992035 557296.1687948 4492627.03425885 557290.90317061 4492626.40097824 557289.68419481 4492633.98683285 557295.02765056 4492635.37992035</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.57">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557300.29360662 4492636.75280249 557301.55949984 4492627.68258301 557296.1687948 4492627.03425885 557295.02765056 4492635.37992035 557300.29360662 4492636.75280249</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.58">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557314.94998205 4492637.92516844 557315.91018834 4492634.62808474 557304.12658018 4492630.97073061 557302.72328964 4492637.86225388 557307.52016403 4492639.73740674 557307.21544628 4492640.67489096 557310.99669727 4492642.0968865 557311.20765302 4492641.54221014 557313.152971 4492642.08133501 557313.3873743 4492641.1594728 557315.00457023 4492641.49546373 557315.75466482 4492638.42519314 557314.94998205 4492637.92516844</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.59">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557316.82730954 4492629.5512138 557316.89557106 4492628.83934668 557312.39556566 4492627.30013946 557305.11426994 4492626.12021175 557304.12658018 4492630.97073061 557315.91018834 4492634.62808474 557316.55171644 4492632.42525228 557316.82523712 4492629.55027753 557316.82730954 4492629.5512138</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.60">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557328.15320193 4492639.62873216 557329.05172374 4492636.97252656 557324.46579199 4492634.99582013 557320.87984868 4492633.8316415 557316.55171644 4492632.42525229 557314.94998205 4492637.92516844 557315.75466482 4492638.42519314 557315.00457024 4492641.49546373 557314.80921792 4492642.82357505 557321.70766748 4492645.07379702 557321.9498693 4492644.64411936 557333.26238429 4492648.46479544 557335.08290435 4492641.77739303 557328.15320193 4492639.62873216</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.61">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557320.87998359 4492633.83111497 557321.44241654 4492631.63636086 557316.82730954 4492629.5512138 557316.55171644 4492632.42525229 557320.87998359 4492633.83111497</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.62">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557359.30067106 4492686.1607866 557345.69932833 4492673.06664611 557350.22299552 4492666.63714748 557342.72308708 4492660.48067616 557335.31690653 4492655.16014096 557327.81695652 4492650.4880366 557326.8559521 4492652.48799348 557324.49639923 4492657.92538409 557318.89483264 4492655.92520483 557316.39467971 4492660.42509582 557315.22271266 4492663.245354 557313.5351964 4492663.18279725 557313.25387975 4492665.44840032 557312.2538697 4492665.41711653 557310.98026366 4492670.91704339 557309.54252825 4492678.76070235 557317.15195382 4492679.89376644 557324.89418181 4492681.44089536 557325.51143754 4492679.22999152 557327.50362937 4492679.85505513 557327.12075167 4492682.01128095 557328.50356582 4492682.51132476 557329.40988235 4492680.48011664 557334.97232978 4492684.50372085 557336.98803554 4492682.39442527 557338.66771769 4492683.22260272 557340.05841361 4492681.23047391 557347.18331944 4492687.3244322 557351.20672298 4492690.09799056 557354.18341506 4492686.60592339 557356.65212603 4492688.95755685 557359.30067106 4492686.1607866</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.63">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557330.05084901 4492668.54270277 557327.0664925 4492666.74573648 557326.72272408 4492667.26915889 557323.5274162 4492665.85499655 557322.6601738 4492667.49558302 557320.53517583 4492666.60489101 557319.37092232 4492672.94856702 557324.96469705 4492674.22999971 557325.91008639 4492671.8550444 557328.06633761 4492672.65198868 557330.05084901 4492668.54270277</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.64">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557326.8559521 4492652.48799348 557315.87159457 4492647.63608494 557311.80875767 4492658.08120313 557316.39467971 4492660.42509583 557318.89483264 4492655.92520483 557324.49639923 4492657.92538409 557326.8559521 4492652.48799348</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.65">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557311.77772861 4492650.19843237 557313.23098739 4492645.97975474 557306.06691241 4492643.6826488 557302.55866791 4492657.72932902 557307.47274601 4492659.08105033 557310.51210129 4492649.79214185 557311.77772861 4492650.19843237</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.66">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557303.6761195 4492648.76066536 557304.80129341 4492642.98729709 557298.93408796 4492641.36210692 557299.0200518 4492640.46367748 557287.33247738 4492638.61954129 557284.18402226 4492638.02568764 557283.48074631 4492643.12719791 557280.48072257 4492642.82241132 557279.03509207 4492653.6269906 557285.90229361 4492655.74440024 557285.89446495 4492656.3381466 557287.26166537 4492656.39287978 557287.18347996 4492658.50224047 557291.00384088 4492658.26799619 557291.99604872 4492658.36950446 557293.41038617 4492648.6665678 557303.50715358 4492649.37023529 557303.6761195 4492648.76066536</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.67">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557300.78517058 4492659.19019831 557303.50715358 4492649.37023529 557293.41038617 4492648.6665678 557291.99604872 4492658.36950446 557295.12887358 4492658.69000892 557300.78517058 4492659.19019831</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.68">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557292.44100242 4492670.88516477 557293.91022945 4492661.96991787 557288.98030203 4492661.08041271 557287.18314294 4492670.52561356 557288.02689627 4492670.73657829 557287.9018612 4492671.92406742 557291.56594289 4492672.68200086 557292.44100242 4492670.88516477</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.69">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557298.12071794 4492672.06503854 557299.85537694 4492662.59639795 557294.48033385 4492662.07278177 557293.91022945 4492661.96991787 557292.44100242 4492670.88516477 557298.12071794 4492672.06503854</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.70">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557307.55823497 4492675.08096697 557309.44141466 4492662.73734738 557299.91791812 4492661.1510963 557299.85537694 4492662.59639795 557298.12071795 4492672.06503848 557297.86286002 4492673.58845925 557307.55823497 4492675.08096697</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.71">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557282.808061 4492661.87669066 557279.13656619 4492656.79885196 557278.48031401 4492656.6191436 557277.51159337 4492655.18943058 557275.45684245 4492656.68154096 557276.13650533 4492657.806558 557273.44892587 4492659.61114403 557274.64419248 4492661.7127361 557274.30042712 4492662.14240926 557276.49566737 4492665.53308996 557276.70661085 4492665.42372324 557282.808061 4492661.87669066</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.72">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557283.87093361 4492658.88493954 557282.84752722 4492657.4005373 557281.88661141 4492656.24426116 557281.1444344 4492655.60361441 557279.13656619 4492656.79885196 557282.808061 4492661.87669066 557283.08959594 4492661.71302234 557284.91777291 4492660.56465254 557283.87093361 4492658.88493954</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.73">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557284.06608318 4492664.783351 557283.08959594 4492661.71302234 557276.70661085 4492665.42372324 557277.87064669 4492666.79875482 557280.15963865 4492670.21287716 557284.6831955 4492667.68179392 557284.06608318 4492664.783351</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.74">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557276.73762599 4492673.80649181 557275.46423002 4492671.81427115 557272.67520524 4492669.41575237 557270.72937125 4492664.57230266 557261.72464904 4492669.38269633 557264.66714958 4492674.99357593 557267.47173677 4492679.66552089 557269.35459767 4492678.64996534 557273.45601747 4492685.32975497 557276.78422723 4492683.58769043 557276.44054125 4492681.16581694 557273.47972425 4492675.72043312 557276.73762599 4492673.80649181</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.75">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557284.92707447 4492677.22700585 557281.6205237 4492672.63478891 557279.40962175 4492670.52534991 557275.46423002 4492671.81427115 557276.73762599 4492673.80649181 557273.47972425 4492675.72043312 557276.44054125 4492681.16581694 557280.2765769 4492679.12689492 557280.19846884 4492678.49408348 557282.34695853 4492677.48634912 557284.27658509 4492680.38483695 557278.35453129 4492684.47055075 557285.05747811 4492693.40041783 557291.65141281 4492689.36160039 557292.59670435 4492690.49443918 557294.05769094 4492689.29137054 557289.34687217 4492683.25999342 557284.92675402 4492677.22727126 557284.92707447 4492677.22700585</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.76">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557287.97209699 4492674.7053047 557284.8471861 4492670.33022253 557281.6205237 4492672.63478892 557284.92707447 4492677.22700585 557287.97209699 4492674.7053047</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.77">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557297.29218661 4492686.2289966 557294.16731474 4492680.44767184 557289.52475366 4492683.48773938 557294.05769094 4492689.29137054 557297.29218661 4492686.2289966</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.78">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557299.6435532 4492694.12747027 557301.5030843 4492689.28381006 557299.20622074 4492687.99467681 557297.29218661 4492686.2289966 557294.05769094 4492689.29137054 557292.72085266 4492690.39220768 557295.72948649 4492692.76015827 557296.44045041 4492692.11174762 557299.60937289 4492694.21146716 557299.6435532 4492694.12747027</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.79">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557297.15116656 4492700.25235286 557299.60937289 4492694.21146716 557296.44045041 4492692.11174762 557295.72948649 4492692.76015827 557292.72085266 4492690.39220768 557292.59670435 4492690.49443918 557289.59660706 4492692.80682482 557286.25274605 4492695.47857244 557292.61982744 4492701.68187938 557292.01823785 4492702.4474802 557294.44008609 4492704.33817701 557297.15116656 4492700.25235286</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.80">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557302.84632813 4492707.84625522 557306.79972935 4492699.51830882 557309.15146579 4492694.2059178 557321.94837127 4492698.04226893 557325.1362567 4492685.53463128 557315.97215983 4492683.24527118 557303.32369979 4492679.16673931 557301.08914417 4492684.73694543 557300.42502241 4492686.61972569 557304.15939753 4492688.05734444 557302.81553076 4492691.70571638 557300.72941072 4492697.38530259 557297.38542297 4492704.57265062 557302.84632813 4492707.84625522</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.81">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557301.08914416 4492684.73694545 557303.32369979 4492679.16673931 557299.2924468 4492677.72129729 557297.17508633 4492683.08057154 557301.08914416 4492684.73694545</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.82">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557334.44032725 4492711.12855843 557336.92496356 4492702.76931317 557340.75309557 4492703.98037413 557348.81560736 4492706.67594506 557350.92518071 4492700.41042551 557358.0736352 4492702.5434695 557360.07388195 4492694.50451744 557345.13634301 4492690.14465953 557344.97225388 4492691.05871213 557343.26111127 4492697.68361808 557331.49545775 4492694.18323814 557333.24575513 4492687.88609017 557326.96438218 4492686.21437787 557323.83117815 4492698.98763959 557322.09654546 4492707.51097249 557334.44032725 4492711.12855843</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.83">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557343.26111127 4492697.68361808 557344.97225388 4492691.05871213 557338.12066942 4492689.18349028 557333.24575513 4492687.88609017 557331.49545775 4492694.18323814 557343.26111127 4492697.68361808</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.84">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557289.52655459 4492683.48655998 557294.16731474 4492680.44767184 557294.8314058 4492679.72113544 557296.55810319 4492675.54934161 557292.47996102 4492674.5882715 557289.37835248 4492675.05691342 557288.64399694 4492674.08033119 557287.97209699 4492674.7053047 557284.95636758 4492677.2676886 557289.52655459 4492683.48655998</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.85">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557307.43903711 4492746.72120061 557309.51738509 4492739.58068486 557298.43144508 4492735.38501946 557295.09529623 4492741.65049744 557307.43903711 4492746.72120061</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.86">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557321.82185113 4492752.19040896 557324.64238907 4492745.25304203 557322.79864373 4492744.37798407 557312.8064584 4492740.4401663 557310.81404474 4492747.75255941 557321.82185113 4492752.19040896</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.87">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557351.18905137 4492763.05853374 557353.25953832 4492757.62113349 557348.35432725 4492755.29052873 557345.9472605 4492760.74498762 557351.18905137 4492763.05853374</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.88">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557359.48590985 4492766.84004492 557363.4783324 4492759.98084196 557357.12679659 4492756.60564497 557354.11874455 4492763.9726902 557359.48590985 4492766.84004492</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.89">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557391.52520114 4492789.38719051 557397.00400074 4492782.01757713 557396.27495921 4492781.45058828 557392.97813467 4492778.3801797 557393.93912028 4492777.05990791 557391.08760509 4492774.24732597 557385.13419298 4492782.20801841 557388.15757419 4492785.38779163 557390.59500889 4492788.65348148 557391.52520114 4492789.38719051</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.90">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557339.95401572 4492782.29242401 557343.63409861 4492769.58949247 557334.82942583 4492765.69858986 557335.45428825 4492776.00562745 557337.99321151 4492776.76113743 557336.37588966 4492780.94855976 557339.95401572 4492782.29242401</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.91">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557326.37594534 4492775.11231397 557326.62629968 4492762.57332847 557317.18877704 4492759.75271067 557313.46942118 4492779.92435048 557322.27416789 4492781.19026755 557322.79772127 4492777.2684313 557319.75082544 4492776.84645532 557319.93058979 4492774.15116386 557326.37594534 4492775.11231397</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.92">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557276.50849521 4492754.92381602 557280.84556807 4492746.21137696 557270.85286242 4492741.08717849 557266.04039099 4492738.21203077 557264.60277896 4492741.65727529 557260.83682307 4492752.00084157 557271.06332547 4492758.10271862 557273.07911262 4492753.1028142 557276.50849521 4492754.92381602</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.93">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557287.24315483 4492759.25951092 557291.36841992 4492751.39250553 557280.84467014 4492746.2131809 557276.50849521 4492754.92381602 557283.42282014 4492758.59532188 557284.1416021 4492757.72816434 557287.24315483 4492759.25951092</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.94">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557402.31133349 4492879.63776218 557400.90531263 4492870.92682367 557390.60826788 4492873.00458824 557378.99871894 4492874.74637294 557379.09243865 4492875.86355739 557375.83456114 4492876.91031614 557377.31093348 4492884.27751424 557383.24852196 4492883.41053225 557383.74068741 4492884.36366892 557393.04551753 4492882.87961744 557393.2251812 4492883.77805648 557399.4596414 4492883.13764658 557399.11596159 4492880.49702397 557402.31133349 4492879.63776218</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.95">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>557411.47552642 4492878.48964128 557410.9209068 4492875.87244947 557412.29592906 4492875.60687259 557410.98362745 4492868.03655579 557403.81945498 4492869.1847448 557405.80350906 4492881.38787086 557404.98318541 4492881.48940499 557405.51436777 4492884.1065969 557406.52998305 4492884.84100192 557413.09254383 4492885.19278442 557413.2177244 4492878.8021984 557411.47552642 4492878.48964128</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.96">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556926.00992082 4492579.54510834 556915.91630784 4492570.77137565 556909.72939263 4492577.79533615 556919.48709457 4492586.65502344 556926.00992082 4492579.54510834</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.97">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556912.17341301 4492594.57580781 556919.07213401 4492587.10733231 556919.48709457 4492586.65502344 556909.72939263 4492577.79533615 556909.04882821 4492578.56797573 556902.84543183 4492585.84897596 556912.17341301 4492594.57580781</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.98">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556925.26014654 4492605.87961202 556921.44671927 4492602.80263974 556922.37645023 4492601.63080276 556921.16551025 4492601.23232721 556916.64988674 4492599.44312051 556913.36849358 4492603.28673823 556917.35278479 4492607.80247425 556921.14050236 4492611.24176296 556925.26014654 4492605.87961202</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.99">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556929.89974415 4492609.62320279 556925.26014654 4492605.87961202 556921.14050236 4492611.24176296 556924.3136209 4492614.12298893 556924.3520355 4492614.1547684 556929.89974415 4492609.62320279</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+        <piano_pc_tito:mappa_vulnerabilita_edificato gml:id="mappa_vulnerabilita_edificato.100">
+            <piano_pc_tito:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>556936.30608163 4492608.97498528 556931.72801176 4492605.24047545 556923.54057497 4492599.84178992 556922.37645023 4492601.63080277 556921.44671927 4492602.80263974 556929.89974415 4492609.62320279 556924.3520355 4492614.1547684 556928.79012736 4492617.82624571 556928.90117182 4492617.91053074 556933.14185256 4492613.70922786 556932.39967423 4492613.07639382 556936.30608163 4492608.97498528</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>fabbricati adeguati sismicamente con fondi 219</piano_pc_tito:layer>
+        </piano_pc_tito:mappa_vulnerabilita_edificato>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

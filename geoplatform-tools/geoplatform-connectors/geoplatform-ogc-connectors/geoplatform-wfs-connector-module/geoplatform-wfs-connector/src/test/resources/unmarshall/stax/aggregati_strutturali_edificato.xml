@@ -1,0 +1,1209 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                       xmlns:wfs="http://www.opengis.net/wfs" 
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:piano_pc_tito="http://piano_pc_tito" 
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2026-03-05T07:18:48.258Z"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd http://piano_pc_tito http://rsdi.regione.basilicata.it/rbgeoserver2016/piano_pc_tito/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=piano_pc_tito%3Aaggregati_strutturali_edificato">
+    <gml:featureMembers>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.1">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558285.88197829 4485921.28231306 558286.89763716 4485919.07137365 558288.92106942 4485920.00111596 558287.90541083 4485922.21205647 558285.88197829 4485921.28231306</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.2">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558156.94333718 4485387.3125203 558161.71684325 4485383.65633484 558167.36520364 4485391.0237292 558162.59951054 4485394.67991522 558156.94333718 4485387.3125203</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.3">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559766.43498321 4486483.21978883 559764.513174 4486477.76656005 559768.98196301 4486476.18851627 559770.90377223 4486481.64174506 559766.43498321 4486483.21978883</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.4">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559754.38024628 4486483.38358631 559757.94277937 4486481.96958716 559758.76306716 4486484.01650318 559755.19272184 4486485.43831553 559754.38024628 4486483.38358631</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.5">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559546.19093546 4487137.19884046 559549.18318699 4487133.36292624 559553.09722313 4487136.42554746 559550.11278483 4487140.26146147 559546.19093546 4487137.19884046</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.6">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559499.49245045 4487359.26280635 559503.1877487 4487361.3722871 559505.41437289 4487357.48948042 559501.7268866 4487355.38000023 559499.49245045 4487359.26280635</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.7">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559523.99238951 4487371.02910527 559530.17986099 4487374.96678626 559536.61743366 4487371.46688913 559536.80503345 4487364.09962357 559530.61756019 4487360.28694371 559523.96904489 4487364.07590129 559523.99238951 4487371.02910527</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.8">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558784.92226834 4487515.92724859 558794.95369565 4487512.80247768 558797.71129891 4487521.66978066 558787.6876846 4487524.79455157 558784.92226834 4487515.92724859</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.9">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558791.01541249 4487540.98222164 558807.78151307 4487528.99819257 558816.59376986 4487541.32660105 558799.83548138 4487553.31063056 558791.01541249 4487540.98222164</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.10">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558799.24904425 4487571.99821786 558811.40565022 4487562.88127921 558816.18676207 4487569.81112142 558812.58508955 4487572.66261158 558816.07717718 4487577.68616176 558807.38159008 4487584.95161341 558799.24904425 4487571.99821786</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.11">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558795.09098156 4487638.99848172 558808.71602412 4487642.24102166 558810.02086909 4487636.74102371 558796.40363926 4487633.50629702 558795.09098156 4487638.99848172</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.12">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558204.8329719 4487731.28138309 558213.48141724 4487734.05504812 558211.55936565 4487740.03159575 558202.91092058 4487737.25793148 558204.8329719 4487731.28138309</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>vasca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.13">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558283.9875234 4487823.65101635 558287.0814057 4487819.75263307 558293.37820832 4487824.73718968 558290.28432576 4487828.63557322 558283.9875234 4487823.65101635</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>vasca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.14">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558277.48643737 4487862.36200535 558284.02564262 4487859.29183707 558288.48637042 4487868.81543538 558281.93935245 4487871.8777914 558277.48643737 4487862.36200535</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.15">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558300.01763406 4487872.40948778 558307.86154516 4487869.11278702 558313.84560096 4487883.31613656 558306.00168949 4487886.61283714 558300.01763406 4487872.40948778</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.16">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558300.98538311 4487910.55815769 558322.07960738 4487900.16799367 558327.06376156 4487910.27754599 558305.96953765 4487920.66771019 558300.98538311 4487910.55815769</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.17">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>557802.22966507 4486647.33448079 557806.78441132 4486644.26423396 557812.7374377 4486653.34259256 557808.03425229 4486656.4518984 557802.22966507 4486647.33448079</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.18">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>557794.58900559 4486647.63119044 557800.15938742 4486644.08439868 557808.03425229 4486656.4518984 557802.4794957 4486659.99087882 557800.2607838 4486656.50641545 557796.6357381 4486658.81886129 557793.08111093 4486653.25622019 557796.69834449 4486650.94377431 557794.58900559 4486647.63119044</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.19">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>557503.98341251 4486280.7612668 557511.24918804 4486271.72226242 557519.04600943 4486278.00375538 557511.76460893 4486287.0427592 557503.98341251 4486280.7612668</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.20">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>557678.51735021 4487956.81657986 557681.85327403 4487958.53542074 557683.16585392 4487955.99637743 557679.82993 4487954.26972311 557678.51735021 4487956.81657986</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.21">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>557678.29105519 4487946.65245667 557682.66617595 4487943.64473485 557686.36919366 4487949.01204266 557681.99407269 4487952.02757695 557678.29105519 4487946.65245667</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.22">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>557655.02479684 4487962.28478342 557664.18860554 4487975.11320316 557672.79041286 4487968.95713071 557663.63441616 4487956.12871098 557655.02479684 4487962.28478342</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.23">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559541.78223809 4487317.8101496 559547.88392151 4487310.66176714 559550.04015531 4487312.50558557 559551.31361733 4487311.01340884 559555.67295948 4487314.73229698 559554.54012517 4487316.0604119 559557.07135624 4487318.21674205 559550.96967287 4487325.37293781 559548.20406842 4487323.01347516 559546.87591737 4487324.56815125 559542.67282383 4487320.98208011 559543.96972455 4487319.46646662 559541.78223809 4487317.8101496</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.24">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>558807.78151307 4487528.99819257 558816.68019821 4487522.79525205 558819.82854771 4487527.24847831 558810.9533004 4487533.43579463 558807.78151307 4487528.99819257</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.25">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561670.62001471 4491993.93652887 561666.38561716 4491993.27235934 561666.28403633 4491993.93642246</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.26">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561682.22267299 4491956.67879812 561676.01974547 4491947.01453017 561681.60582985 4491943.4365227 561686.76972936 4491951.45231822 561684.55092062 4491952.87414631 561685.60557437 4491954.51480611 561682.22267299 4491956.67879812</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.27">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561678.33436762 4491867.6625918 561677.36566992 4491865.34224242 561682.24076996 4491863.3032888 561683.17040384 4491865.63926139 561678.33436762 4491867.6625918</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.28">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561678.33436762 4491867.6625918 561688.84942586 4491892.82704899 561693.68546208 4491890.79590659 561683.17040384 4491865.63926139 561678.33436762 4491867.6625918</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.29">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561622.89066314 4491787.14516731 561631.8362342 4491780.58285128 561636.50798456 4491786.95018741 561633.15632492 4491789.41105663 561631.07044348 4491786.56724013 561625.48434417 4491790.66868737 561622.89066314 4491787.14516731</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.30">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561639.32780072 4491806.68473929 561641.91363505 4491811.52857916 561646.11685933 4491809.27866976 561643.523213 4491804.43482989 561639.32780072 4491806.68473929</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.31">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561580.44440133 4491807.90205168 561593.17090249 4491814.73833913 561594.67099108 4491811.92586059 561598.50691074 4491813.98065304 561600.74141745 4491809.80099803 561584.18680837 4491800.92554337 561580.44440133 4491807.90205168</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.32">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561499.92762484 4491822.72047071 561511.65411384 4491829.65048335 561513.90423603 4491825.83801758 561502.17774676 4491818.90800519 561499.92762484 4491822.72047071</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.33">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561508.28761887 4491802.30650122 561510.98305965 4491798.40810907 561513.05335385 4491799.84566786 561510.3579127 4491803.73624794 561508.28761887 4491802.30650122</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.34">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561536.87364953 4491808.96348874 561538.47540739 4491802.15880388 561542.29573186 4491803.04952754 561540.70178637 4491809.86983748 561536.87364953 4491808.96348874</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.35">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559026.84307648 4491479.34543855 559029.17907721 4491477.79861243 559031.0462078 4491480.60336067 559028.71801984 4491482.15018726 559026.84307648 4491479.34543855</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.36">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559512.29530033 4488734.87361691 559517.16239758 4488740.03001427 559521.21722387 4488736.20977996 559520.61567359 4488735.56132458 559522.23291585 4488734.04573103 559518.56110897 4488730.15499467 559517.10012195 4488731.5377784 559516.51419518 4488730.90494875 559512.29530033 4488734.87361691</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.37">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559636.45443018 4490146.07967615 559637.08732336 4490143.23592613 559639.81389599 4490143.83755929 559639.20444027 4490146.67349693 559636.45443018 4490146.07967615</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.38">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560104.67171837 4490958.42371871 560103.26592928 4490940.50171144 560096.87523085 4490941.00155742 560098.28883204 4490958.92356513 560104.67171837 4490958.42371871</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.39">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560099.75704576 4490979.70496461 560098.81990326 4490965.86111585 560104.89028452 4490965.45501266 560105.8196136 4490979.29886102 560099.75704576 4490979.70496461</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.40">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560080.12457061 4490959.98562539 560078.93752102 4490942.54800108 560085.41415568 4490942.11065743 560086.60120527 4490959.54828174 560080.12457061 4490959.98562539</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.41">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560081.51465579 4490980.86858651 560080.59314118 4490966.93098763 560086.93696216 4490966.50926583 560087.85847677 4490980.44686471 560081.51465579 4490980.86858651</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.42">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560053.484586 4490926.30510102 560052.82862651 4490915.08627361 560059.36776035 4490914.71143207 560060.0237198 4490925.91463426 560053.484586 4490926.30510102</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.43">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560054.20289158 4490943.34427366 560053.60161817 4490932.19576093 560060.32044072 4490931.836549 560060.91390135 4490942.98506125 560054.20289158 4490943.34427366</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.44">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560061.70249624 4490960.95392873 560061.0465584 4490948.93040997 560054.73398941 4490949.28181899 560055.39773961 4490961.29752592 560061.70249624 4490960.95392873</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.45">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560056.31133733 4490979.20389597 560055.58508369 4490967.25850121 560062.03046789 4490966.86021884 560062.75672064 4490978.81342704 560056.31133733 4490979.20389597</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.46">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560057.62314506 4491005.82126181 560056.6313903 4490989.10239601 560062.58458098 4490988.743165 560063.58414774 4491005.4620308 560057.62314506 4491005.82126181</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.47">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560011.21116849 4490910.46022775 560009.93806952 4490897.24137437 560015.67251297 4490896.694637 560016.94561199 4490909.9134906 560011.21116849 4490910.46022775</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.48">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560012.41380606 4490929.29629704 560011.4141466 4490916.07745052 560017.19546288 4490915.64008996 560018.19512229 4490928.85893627 560012.41380606 4490929.29629704</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.49">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560016.92796346 4490986.35921913 560016.01424065 4490973.22631322 560021.20179914 4490972.85143817 560022.13114741 4490985.98434469 560016.92796346 4490986.35921913</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.148">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>556667.22979724 4491882.71978726 556677.28471857 4491878.26702714</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>impianti sportivi</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.50">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560015.43626258 4490967.46064261 560014.28816298 4490954.27304232 560019.51478724 4490953.82004306 560020.65507379 4490967.00764314 560015.43626258 4490967.46064261</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.51">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560013.6476892 4490948.3198692 560012.71053004 4490935.11664898 560018.3199685 4490934.71834651 560019.25712761 4490947.92937951 560013.6476892 4490948.3198692</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.52">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559982.47380141 4491013.2569587 559983.32555012 4491006.54600514 559990.38809277 4491007.44462138 559989.52853269 4491014.14776186 559982.47380141 4491013.2569587</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.53">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560003.44213439 4491036.4841619 560011.85623879 4491037.92187628 560013.01267932 4491031.14061775 560004.59857492 4491029.70290337 560003.44213439 4491036.4841619</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.54">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560004.77000425 4491046.60143785 560005.91857731 4491041.90612715 560009.14514873 4491042.70308576 560007.9965763 4491047.39839628 560004.77000425 4491046.60143785</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.55">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559944.40086505 4491098.84242924 559937.3304828 4491098.9360064 559937.48640539 4491111.35795289 559951.58810607 4491111.18642279 559951.51014756 4491104.86607449 559944.47882887 4491104.95965269 559944.40086505 4491098.84242924</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.56">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559951.45410877 4491155.88197649 559951.64947053 4491154.11634682 559953.32916765 4491154.31951399 559953.11818185 4491156.08514344 559951.45410877 4491155.88197649</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.57">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559963.0665028 4491341.13327241 559960.14455895 4491342.68789627 559961.31637877 4491345.18012659 559964.33207411 4491343.61769201 559963.0665028 4491341.13327241</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.58">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559962.5040268 4491340.02387757 559969.4338725 4491336.49277818 559971.76971193 4491341.05536052 559964.8320525 4491344.60208455 559962.5040268 4491340.02387757</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.59">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560115.30156825 4491369.29340986 560122.53626197 4491359.82478567 560130.28617778 4491365.76250825 560123.05148433 4491375.21550718 560115.30156825 4491369.29340986</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.60">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560129.64474636 4491395.99703238 560137.11382696 4491386.17684914 560145.75435893 4491392.77084714 560138.28527869 4491402.57540555 560129.64474636 4491395.99703238</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.61">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560156.94949964 4491403.22430363 560160.13715686 4491398.42748061 560166.14491227 4491402.74015175 560162.76975613 4491407.4354075 560156.94949964 4491403.22430363</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.62">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560140.24600019 4491411.41925155 560146.19939928 4491403.19278991 560153.26964305 4491408.31799127 560156.94949964 4491403.22430363 560162.76975613 4491407.4354075 560150.8942095 4491423.85708092 560141.6755492 4491417.18494312 560143.93346462 4491414.07560658 560140.24600019 4491411.41925155</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.63">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560126.20686084 4491409.33295791 560130.64448486 4491406.23929993 560133.05847977 4491409.63781575 560128.8239849 4491412.65335349 560126.20686084 4491409.33295791</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.64">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560124.53478286 4491416.41108062 560128.8239849 4491412.65335349 560130.05833414 4491414.05964142 560129.51143587 4491414.74713144 560135.58161717 4491421.88794464 560132.15962501 4491425.09100307 560124.53478286 4491416.41108062</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.65">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560122.52671949 4491425.16107904 560125.22995076 4491422.1064418 560129.43301742 4491425.80968996 560128.22203213 4491427.20029297 560127.50329195 4491426.57527191 560126.02667048 4491428.25493187 560122.52671949 4491425.16107904</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.66">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560114.87022162 4491431.78592739 560109.0812414 4491426.6451324 560111.1516347 4491424.30923337 560116.94061629 4491429.45002854 560114.87022162 4491431.78592739</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.67">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560095.51815148 4491444.09802005 560094.0726853 4491449.37145141 560085.77578757 4491447.27748661 560087.09625638 4491441.85561413 560095.51815148 4491444.09802005</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.68">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560085.90094031 4491441.5352702 560090.37798996 4491424.76185145 560099.99519977 4491427.31678812 560095.51815148 4491444.09802005 560085.90094031 4491441.5352702</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.69">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560129.2976673 4491521.64614704 560144.89908154 4491532.78721541 560152.05566496 4491522.74046112 560136.45425035 4491511.61501755 560129.2976673 4491521.64614704</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.70">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559774.04434698 4490930.21233034 559782.45841541 4490932.95473978 559784.09918883 4490927.94693956 559775.68511977 4490925.2045312 559774.04434698 4490930.21233034</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.71">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559282.83249353 4491380.06211272 559286.77812138 4491369.58559025 559283.66875005 4491368.33550733 559279.55124712 4491378.76515011 559282.83249353 4491380.06211272</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.72">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559282.57466182 4491380.71835992 559285.15278568 4491381.68717824 559283.90267689 4491385.35123068 559281.09798687 4491384.42928191 559282.57466182 4491380.71835992</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.73">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559275.13702337 4491383.29631648 559277.27781266 4491377.86665246 559282.83249353 4491380.06211272 559280.67607977 4491385.48396424 559275.13702337 4491383.29631648</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.74">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559272.23033526 4491398.81195503 559272.76949025 4491395.49163803 559278.44920776 4491396.40584429 559277.91786513 4491399.71834947 559272.23033526 4491398.81195503</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.75">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559241.50327723 4491406.57686846 559259.53452656 4491413.01484602 559258.23754311 4491416.65545908 559261.479731 4491417.81179494 559260.42495543 4491420.7492852 559261.07339369 4491420.97586517 559259.620147 4491425.05397689 559238.82327238 4491417.62373803 559240.22963887 4491413.71750127 559239.09682625 4491413.31122127 559241.50327723 4491406.57686846</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.76">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559226.62042488 4491402.79523317 559227.87842699 4491396.06085215 559239.67535511 4491398.24865322 559238.42516536 4491404.98303441 559226.62042488 4491402.79523317</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.77">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>559196.36252211 4491395.40382537 559204.10473951 4491397.06027451 559204.7454491 4491394.08371187 559196.99541988 4491392.42726281 559196.36252211 4491395.40382537</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.78">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561657.95383183 4491774.38033296 561659.70373414 4491778.6850861 561661.70377705 4491777.77888018 561659.96168747 4491773.4741273 561657.95383183 4491774.38033296</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.79">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561655.51642056 4491770.1615 561657.52413524 4491774.57563537 561659.96168747 4491773.4741273 561657.96178574 4491769.05217872 561655.51642056 4491770.1615</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.80">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561619.76646889 4491755.58241877 561622.5165711 4491752.70747058 561620.67285474 4491750.7777265 561619.93845208 4491751.56677579 561614.26667375 4491745.88691783 561612.13377915 4491748.24625345 561619.76646889 4491755.58241877</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.81">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561598.32881323 4491753.83188309 561610.35987113 4491765.37911643 561619.76646889 4491755.58241877 561605.391699 4491741.76949066 561599.62586103 4491747.76938203 561601.98519812 4491750.03507725 561598.32881323 4491753.83188309</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.82">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561591.02083444 4490694.98998717 561590.56013981 4490685.63054953 561597.32583734 4490685.30258894 561597.79434392 4490694.66202636 561591.02083444 4490694.98998717</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.83">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561588.23116914 4490716.74785019 561598.69222354 4490716.07622828 561598.0830927 4490706.63866196 561591.71583415 4490707.04475783 561591.93449394 4490710.5291574 561588.91883478 4490710.73220955 561589.05940651 4490712.80253637 561587.98126977 4490712.86501004 561588.23116914 4490716.74785019</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.84">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561572.79337213 4490722.47406497 561575.87154467 4490721.77101189 561576.22307098 4490723.28665353 561573.13708517 4490723.98970686 561572.79337213 4490722.47406497</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.85">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561701.69656219 4490883.99373325 561703.78254053 4490883.22034332 561704.42312646 4490884.93130508 561702.32152312 4490885.704696 561701.69656219 4490883.99373325</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.86">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561655.71129513 4490901.31301296 561657.81293496 4490899.16461458 561660.37539176 4490901.71156646 561658.27375246 4490903.84433934 561655.71129513 4490901.31301296</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.87">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561678.86654826 4490947.2278934 561670.45260875 4490939.60264549 561675.82000305 4490933.68086973 561680.46837348 4490937.89194451 561681.41372178 4490936.8528991 561685.17929219 4490940.2592602 561678.86654826 4490947.2278934</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.88">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561643.58581318 4490915.20341619 561650.50795535 4490907.57073131 561662.48434383 4490918.43827242 561655.54657657 4490926.06314387 561643.58581318 4490915.20341619</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.89">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>561622.00315161 4490488.60680866 561627.44857777 4490486.27099135 561628.93287528 4490489.7319846 561623.50307385 4490492.07561416 561622.00315161 4490488.60680866</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.90">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560624.69014003 4490447.76181124 560630.72144443 4490447.8557097 560630.6431756 4490453.26198751 560624.61187085 4490453.16808887 560624.69014003 4490447.76181124</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>vasca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.91">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560558.38463759 4490454.90084898 560566.29053387 4490471.08081949 560572.91568218 4490467.84658918 560565.00978564 4490451.66661892 560558.38463759 4490454.90084898</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.92">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560520.65744809 4490465.17341767 560521.07156591 4490463.19685408 560523.32938778 4490463.67347526 560522.89964323 4490465.65785049 560520.65744809 4490465.17341767</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.93">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560522.23439879 4490510.09557644 560527.33606589 4490507.93944005 560528.49225478 4490510.65823329 560523.39839941 4490512.82218194 560522.23439879 4490510.09557644</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.94">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560520.92976959 4490507.40803012 560526.03144064 4490505.13470448 560526.78140352 4490506.80660713 560521.67973237 4490509.07993235 560520.92976959 4490507.40803012</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.95">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560493.54703704 4490494.6416636 560493.27355146 4490496.35260334 560495.17980792 4490496.7823402 560495.03915931 4490497.62609166 560497.27354578 4490497.99333542 560497.80486244 4490495.65739856 560493.54703704 4490494.6416636</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>baracca</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.96">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560506.21104032 4490501.37638602 560509.91437275 4490494.86081621 560515.79715273 4490498.19691562 560512.08600729 4490504.72029843 560506.21104032 4490501.37638602</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.97">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560490.50796481 4490493.91502211 560502.70331566 4490496.82940029 560504.70355609 4490488.46221572 560492.50820524 4490485.54002555 560490.50796481 4490493.91502211</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.98">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560472.99187296 4490505.30527959 560492.28899402 4490502.88386471 560493.53874217 4490512.85270004 560474.24162137 4490515.25848966 560472.99187296 4490505.30527959</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+        <piano_pc_tito:aggregati_strutturali_edificato gml:id="aggregati_strutturali_edificato.99">
+            <piano_pc_tito:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>560487.95828661 4490598.89990775 560500.26311721 4490597.900204 560499.5992668 4490589.64233056 560487.28662411 4490590.64203387 560487.95828661 4490598.89990775</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </piano_pc_tito:the_geom>
+            <piano_pc_tito:layer>edificio</piano_pc_tito:layer>
+        </piano_pc_tito:aggregati_strutturali_edificato>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

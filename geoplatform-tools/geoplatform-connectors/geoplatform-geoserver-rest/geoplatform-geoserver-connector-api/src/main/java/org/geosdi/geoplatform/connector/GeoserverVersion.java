@@ -58,7 +58,7 @@ public enum GeoserverVersion implements GPServerConnectorVersion {
     /**
      * <p>Stable Version.</p>
      */
-    V28x("2.28.2"),
+    V28x("2.28.3"),
     /**
      * <p>Maintenance Version.</p>
      */

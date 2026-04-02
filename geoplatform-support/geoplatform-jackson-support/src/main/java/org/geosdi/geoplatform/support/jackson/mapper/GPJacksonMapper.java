@@ -43,6 +43,8 @@ import org.geosdi.geoplatform.support.jackson.reader.GPJacksonReaderSupport;
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.Writer;
+import tools.jackson.databind.json.JsonMapper;
+
 
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
@@ -53,7 +55,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeatu
  */
 public interface GPJacksonMapper<T extends Object> extends GPJacksonReaderSupport<T> {
 
-    JacksonSupport DEFAULT_MAPPER = new GPJacksonSupport().configure(NON_NULL);
+    JacksonSupport<JsonMapper> DEFAULT_MAPPER = new GPJacksonSupport().configure(NON_NULL);
 
     /**
      * @param entity
@@ -69,6 +71,11 @@ public interface GPJacksonMapper<T extends Object> extends GPJacksonReaderSuppor
      */
     String writeAsString(@Nonnull(when = NEVER) GPJacksonCheck<T> theCheck) throws Exception;
 
+    /**
+     * @param theFile
+     * @param theCheck
+     * @throws Exception
+     */
     void write(@Nonnull(when = NEVER) File theFile, @Nonnull(when = NEVER) GPJacksonCheck<T> theCheck) throws Exception;
 
     /**

@@ -1080,7 +1080,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>5.22.0</version>
+                <version>5.23.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -1539,7 +1539,7 @@
 
 
         <aspectj-version>1.9.25.1</aspectj-version>
-        <jetty-version>12.1.6</jetty-version>
+        <jetty-version>12.1.8</jetty-version>
 
         <postgresql-version>42.7.10</postgresql-version>
         <postgis-jdbc-version>2025.1.0</postgis-jdbc-version>

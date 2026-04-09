@@ -49,8 +49,7 @@ import org.springframework.util.StopWatch;
 import java.io.File;
 
 import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
+import static java.lang.String.join;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -70,8 +69,8 @@ public class GoogleStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        pathFile = of(new File(".").getCanonicalPath(), "src", "test", "resources", "googleGeocodeExample.xml")
-                .collect(joining(separator));
+        pathFile = join(separator, new File(".").getCanonicalPath(), "src", "test", "resources",
+                "googleGeocodeExample.xml");
     }
 
     @AfterClass

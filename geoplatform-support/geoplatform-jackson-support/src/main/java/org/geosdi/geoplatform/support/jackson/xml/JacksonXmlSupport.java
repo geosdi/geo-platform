@@ -38,6 +38,10 @@ package org.geosdi.geoplatform.support.jackson.xml;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import tools.jackson.dataformat.xml.XmlMapper;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -50,4 +54,12 @@ public interface JacksonXmlSupport extends JacksonSupport<XmlMapper> {
      */
     @Override
     XmlMapper getDefaultMapper();
+
+    /**
+     * @param xmlMapper
+     * @return {@link JacksonSupport<XmlMapper>}
+     */
+    static JacksonSupport<XmlMapper> of(@Nonnull(when = NEVER) XmlMapper xmlMapper) {
+        return new GPJacksonXmlSupport(xmlMapper);
+    }
 }

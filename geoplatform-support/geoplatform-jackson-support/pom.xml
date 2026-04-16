@@ -78,6 +78,12 @@
             <artifactId>jackson-module-jakarta-xmlbind-annotations</artifactId>
         </dependency>
 
+        <!-- Support for JTOON -->
+        <dependency>
+            <groupId>dev.toonformat</groupId>
+            <artifactId>jtoon</artifactId>
+        </dependency>
+
         <!-- =========================================================== -->
         <!-- ======================== LOMBOK =========================== -->
         <!-- =========================================================== -->

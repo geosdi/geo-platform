@@ -57,7 +57,15 @@ public class JToonTest {
     @Test
     public void a_printJToonTest() throws Exception {
         User user = new User(123, "Ada", List.of("reading", "gaming"), true, List.of());
-        Data data = new Data(user);
+        Data data = new Data(List.of(user));
+        logger.info("\n{}\n", JToon.encode(data));
+    }
+
+    @Test
+    public void b_printJToonTest() throws Exception {
+        User user = new User(123, "Ada", List.of("reading", "gaming"), true, List.of());
+        User user1 = new User(124, "John", List.of("reading", "gaming"), false, List.of());
+        Data data = new Data(List.of(user, user1));
         logger.info("\n{}\n", JToon.encode(data));
     }
 }

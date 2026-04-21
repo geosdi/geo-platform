@@ -1,5 +1,7 @@
 package org.geosdi.geoplatform.support.jackson.toon;
 
+import java.util.List;
+
 /**
  *
  * geo-platform
@@ -35,5 +37,5 @@ package org.geosdi.geoplatform.support.jackson.toon;
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-record Data(User user) {
+record Data(List<User> users) {
 }

@@ -201,7 +201,7 @@ public class GPBaseJacksonReaderSupport<T extends Object, M extends ObjectMapper
              return theStream
                      .filter(p -> !(p.toFile().isDirectory()) && (p.toFile().getName().endsWith(".json")))
                      .map(this::read)
-                    .filter(Objects::nonNull)
+                     .filter(Objects::nonNull)
                      .collect(toList());
         }
     }

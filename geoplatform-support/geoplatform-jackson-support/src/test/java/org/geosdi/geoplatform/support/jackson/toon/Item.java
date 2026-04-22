@@ -35,11 +35,9 @@
  */
 package org.geosdi.geoplatform.support.jackson.toon;
 
-import java.util.List;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public record Data(List<User> users) {
+public record Item(String category, String name, int quantity, double price) {
 }

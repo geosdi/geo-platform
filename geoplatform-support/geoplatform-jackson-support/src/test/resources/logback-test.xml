@@ -16,5 +16,6 @@
 
     <logger name="org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder" level="trace"/>
     <logger name="org.geosdi.geoplatform.support.jackson.builder.JacksonSupportThreadSafeBuilder" level="trace"/>
+    <logger name="org.geosdi.geoplatform.support.jackson.reader.toon.GPBaseJacksonToonReaderSupport" level="trace"/>
 
 </configuration>

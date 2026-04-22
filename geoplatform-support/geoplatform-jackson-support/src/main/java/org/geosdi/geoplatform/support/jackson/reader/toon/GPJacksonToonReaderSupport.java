@@ -33,13 +33,44 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.jackson.toon;
+package org.geosdi.geoplatform.support.jackson.reader.toon;
 
-import java.util.List;
+import dev.toonformat.jtoon.DecodeOptions;
+import org.geosdi.geoplatform.support.jackson.reader.GPJacksonReaderSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public record Data(List<User> users) {
+public interface GPJacksonToonReaderSupport<T extends Object> extends GPJacksonReaderSupport<T> {
+
+    /**
+     * @param entityAsToonString
+     * @param theDecodeOptions
+     * @return {@link T}
+     * @throws Exception
+     */
+    T read(@Nonnull(when = NEVER) String entityAsToonString, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception;
+
+    /**
+     * @param entityAsToonString
+     * @param classe
+     * @param theDecodeOptions
+     * @return {@link V}
+     * @param <V>
+     * @throws Exception
+     */
+    <V extends Object> V read(@Nonnull(when = NEVER) String entityAsToonString, @Nonnull(when = NEVER) Class<V> classe, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception;
+
+    /**
+     * @param entityAsToonString
+     * @param theDecodeOptions
+     * @return {@link Object}
+     * @throws Exception
+     */
+    Object readAsToon(@Nonnull(when = NEVER) String entityAsToonString, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception;
 }

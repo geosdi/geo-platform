@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.toon;
 
+import dev.toonformat.jtoon.EncodeOptions;
 import dev.toonformat.jtoon.JToon;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -43,6 +44,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static dev.toonformat.jtoon.Delimiter.COMMA;
+import static dev.toonformat.jtoon.KeyFolding.OFF;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -67,5 +70,14 @@ public class JToonTest {
         User user1 = new User(124, "John", List.of("reading", "gaming"), false, List.of());
         Data data = new Data(List.of(user, user1));
         logger.info("\n{}\n", JToon.encode(data));
+    }
+
+    @Test
+    public void c_printJToonTest() throws Exception {
+        Item item1 = new Item("A1", "Widget", 2, 9.99);
+        Item item2 = new Item("B2", "Gadget", 1, 14.5);
+        ItemData data = new ItemData(List.of(item1, item2));
+        EncodeOptions options = new EncodeOptions(2, COMMA, false, OFF, 3);
+        logger.info("\n{}\n", JToon.encode(data, options));
     }
 }

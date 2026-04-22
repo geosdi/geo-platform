@@ -51,8 +51,8 @@ import static java.util.stream.Collectors.joining;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -75,7 +75,7 @@ public class SimpleBeanJacksonReaderTest {
         SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new URI("https://httpbin.org/get?color=red&shape=square").toURL());
         logger.info("#######################HEADERS_SIZE : {}", simpleBean.getHeaders().size());
         assertNotNull(simpleBean);
-        assertTrue(simpleBean.getArguments().size() == 2);
+        assertEquals(simpleBean.getArguments().size(), 2);
         assertNotNull(simpleBean.getOrigin());
         assertNotNull(simpleBean.getUrl());
     }

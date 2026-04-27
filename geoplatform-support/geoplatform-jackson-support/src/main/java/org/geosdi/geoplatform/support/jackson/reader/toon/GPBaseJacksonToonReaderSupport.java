@@ -55,7 +55,7 @@ import static javax.annotation.meta.When.NEVER;
  */
 public class GPBaseJacksonToonReaderSupport<T extends Object> extends GPBaseJacksonReaderSupport<T, JsonMapper> implements GPJacksonToonReaderSupport<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPBaseJacksonToonReaderSupport.class);
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * @param theJacksonSupport

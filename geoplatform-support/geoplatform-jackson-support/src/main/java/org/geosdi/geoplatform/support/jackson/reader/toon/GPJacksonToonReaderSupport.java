@@ -40,6 +40,10 @@ import org.geosdi.geoplatform.support.jackson.reader.GPJacksonReaderSupport;
 
 import javax.annotation.Nonnull;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.Reader;
+
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -73,4 +77,28 @@ public interface GPJacksonToonReaderSupport<T extends Object> extends GPJacksonR
      * @throws Exception
      */
     Object readAsToon(@Nonnull(when = NEVER) String entityAsToonString, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception;
+
+    /**
+     * @param fileAsToon
+     * @param theDecodeOptions
+     * @return {@link T}
+     * @throws Exception
+     */
+    T read(@Nonnull(when = NEVER) File fileAsToon, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception;
+
+    /**
+     * @param inputStreamAsToon
+     * @param theDecodeOptions
+     * @return {@link T}
+     * @throws Exception
+     */
+    T read(@Nonnull(when = NEVER) InputStream inputStreamAsToon, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception;
+
+    /**
+     * @param readerAsToon
+     * @param theDecodeOptions
+     * @return {@link T}
+     * @throws Exception
+     */
+    T read(@Nonnull(when = NEVER) Reader readerAsToon, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception;
 }

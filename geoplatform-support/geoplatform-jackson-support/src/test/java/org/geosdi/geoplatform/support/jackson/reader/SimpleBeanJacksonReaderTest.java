@@ -44,10 +44,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URI;
-import java.util.stream.Stream;
 
 import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
+import static java.lang.String.join;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
@@ -104,9 +103,7 @@ public class SimpleBeanJacksonReaderTest {
 
     @Test
     public void c_readJsonFromFileTest() throws Exception {
-        SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new File(Stream
-                .of(new File(".").getAbsolutePath(), "src", "test", "resources", "simple_bean.json")
-                .collect(joining(separator))));
+        SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new File(join(separator, new File(".").getAbsolutePath(), "src", "test", "resources", "simple_bean.json")));
         assertNotNull(simpleBean);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@SIMPLE_BEAN from File : {}\n", simpleBean);
     }

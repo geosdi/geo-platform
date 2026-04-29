@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.support.jackson.reader.toon;
 
 import dev.toonformat.jtoon.DecodeOptions;
 import dev.toonformat.jtoon.JToon;
+import org.apache.commons.io.IOUtils;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.reader.GPBaseJacksonReaderSupport;
 import org.jspecify.annotations.NonNull;
@@ -45,8 +46,10 @@ import org.slf4j.LoggerFactory;
 import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
+import java.io.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -108,5 +111,44 @@ public class GPBaseJacksonToonReaderSupport<T extends Object> extends GPBaseJack
         checkArgument((entityAsToonString != null) && !(entityAsToonString.trim().isEmpty()), "The Parameter EntityAsToonString must not be null or Empty.");
         checkArgument(theDecodeOptions != null, "The Parameter theDecodeOptions must not be null.");
         return JToon.decode(entityAsToonString, theDecodeOptions);
+    }
+
+    /**
+     * @param fileAsToon
+     * @param theDecodeOptions
+     * @return {@link T}
+     * @throws Exception
+     */
+    @Override
+    public T read(@Nonnull(when = NEVER) File fileAsToon, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception {
+        checkArgument(fileAsToon != null, "The Parameter File must not be null.");
+        checkArgument(theDecodeOptions != null, "The Parameter DecodeOptions must not be null.");
+        return this.read(IOUtils.toString(new FileInputStream(fileAsToon), UTF_8), theDecodeOptions);
+    }
+
+    /**
+     * @param inputStreamAsToon
+     * @param theDecodeOptions
+     * @return {@link T}
+     * @throws Exception
+     */
+    @Override
+    public T read(@Nonnull(when = NEVER) InputStream inputStreamAsToon, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception {
+        checkArgument(inputStreamAsToon != null, "The Parameter InputStream must not be null.");
+        checkArgument(theDecodeOptions != null, "The Parameter DecodeOptions must not be null.");
+        return this.read(IOUtils.toString(inputStreamAsToon, UTF_8), theDecodeOptions);
+    }
+
+    /**
+     * @param readerAsToon
+     * @param theDecodeOptions
+     * @return {@link T}
+     * @throws Exception
+     */
+    @Override
+    public T read(@Nonnull(when = NEVER) Reader readerAsToon, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception {
+        checkArgument(readerAsToon != null, "The Parameter Reader must not be null.");
+        checkArgument(theDecodeOptions != null, "The Parameter DecodeOptions must not be null.");
+        return this.read(IOUtils.toString(readerAsToon), theDecodeOptions);
     }
 }

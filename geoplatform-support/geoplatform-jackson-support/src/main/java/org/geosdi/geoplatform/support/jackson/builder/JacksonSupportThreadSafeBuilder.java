@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.support.jackson.builder;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.annotation.GPJacksonXmlAnnotationIntrospectorBuilder;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import tools.jackson.databind.JacksonModule;
 import tools.jackson.databind.introspect.AnnotationIntrospectorPair;
 import tools.jackson.databind.json.JsonMapper;
@@ -48,10 +46,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.function.Consumer;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -132,8 +127,6 @@ public interface JacksonSupportThreadSafeBuilder<M extends JsonMapper> extends J
 
     class GPJacksonSupportThreadSafeBuilder extends GPJacksonSupportBuilder implements JacksonSupportThreadSafeBuilder<JsonMapper> {
 
-        private static final Logger logger = LoggerFactory.getLogger(GPJacksonSupportThreadSafeBuilder.class);
-        //
         private static final ScopedValue<GPJacksonSupportBuilder> JACKSON_SUPPORT_BUILDER_SCOPED_VALUE = ScopedValue.newInstance();
 
         GPJacksonSupportThreadSafeBuilder() {
@@ -147,8 +140,8 @@ public interface JacksonSupportThreadSafeBuilder<M extends JsonMapper> extends J
             this.locale = other.locale;
             this.dateFormat = other.dateFormat;
             this.timeZone = other.timeZone;
-            this.jacksonModules = new ArrayList<>(other.jacksonModules);
-            this.jacksonSupportConfigFeatures = new ArrayList<>(other.jacksonSupportConfigFeatures);
+            this.jacksonModules = new HashMap<>(other.jacksonModules);
+            this.jacksonSupportConfigFeatures = new HashSet<>(other.jacksonSupportConfigFeatures);
             this.introspectorBuilder = other.introspectorBuilder;
         }
 
@@ -213,10 +206,10 @@ public interface JacksonSupportThreadSafeBuilder<M extends JsonMapper> extends J
                 jsonMapperbuilder.defaultTimeZone(builder.timeZone);
             }
 
-            logger.trace("##############LOCALE : {} - JACKSON_SUPPORT_CONFIG_FEATURES : {} - INTROSPECTOR : {} - DATE_FORMAT : {}\n", builder.locale,
-                    builder.jacksonSupportConfigFeatures, builder.introspectorBuilder, builder.dateFormat);
+            logger.trace("##############LOCALE : {} - JACKSON_SUPPORT_CONFIG_FEATURES : {} - JACKSON_MODULES : {} " + "- INTROSPECTOR : {} - DATE_FORMAT : {}\n",
+                    builder.locale, builder.jacksonSupportConfigFeatures, builder.jacksonModules.values(), builder.introspectorBuilder, builder.dateFormat);
 
-            fromIterable(builder.jacksonModules)
+            fromIterable(builder.jacksonModules.values())
                     .filter(Objects::nonNull)
                     .subscribe(jsonMapperbuilder::addModule, Throwable::printStackTrace);
 

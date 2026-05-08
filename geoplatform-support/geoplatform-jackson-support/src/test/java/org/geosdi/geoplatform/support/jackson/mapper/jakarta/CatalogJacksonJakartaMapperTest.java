@@ -49,8 +49,7 @@ import java.io.File;
 import java.io.StringReader;
 
 import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
+import static java.lang.String.join;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.CatalogJacksonXmlMapperTest.catalogBean;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
@@ -154,17 +153,18 @@ public class CatalogJacksonJakartaMapperTest {
                 + "    \"YEAR\" : 2011\n"
                 + "  } ]\n"
                 + "}"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@CATALOG_FROM_XML_STRING : {}\n", catalog);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@CATALOG_FROM_JSON_STRING : {}\n", catalog);
     }
 
     @Test
     public void d_writeCatalogAsJsonFileTest() throws Exception {
-        GP_JACKSON_JAKARTA_MAPPER.write(new File(of(".", "target", "Catalog.json").collect(joining(separator))), CatalogJacksonXmlMapperTest::catalogBean);
+        GP_JACKSON_JAKARTA_MAPPER.write(new File(join(separator, ".", "target", "Catalog.json")),
+                CatalogJacksonXmlMapperTest::catalogBean);
     }
 
     @Test
     public void e_readCatalogFromJsonFileTest() throws Exception {
-        logger.info("#####################CATALOG_FROM_FILE : {}\n", GP_JACKSON_JAKARTA_MAPPER.read(new File(of(".", "target", "Catalog.json")
-                .collect(joining(separator)))));
+        logger.info("#####################CATALOG_FROM_FILE : {}\n",
+                GP_JACKSON_JAKARTA_MAPPER.read(new File(join(separator, ".", "target", "Catalog.json"))));
     }
 }

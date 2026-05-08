@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -61,20 +62,26 @@ public class Cd implements Serializable {
     //
     @XmlElement(name = "TITLE")
     @jakarta.xml.bind.annotation.XmlElement(name = "TITLE")
+    @JsonProperty(value = "TITLE")
     private String title;
     @XmlElement(name = "ARTIST")
     @jakarta.xml.bind.annotation.XmlElement(name = "ARTIST")
+    @JsonProperty(value = "ARTIST")
     private String artist;
     @XmlElement(name = "COUNTRY")
     @jakarta.xml.bind.annotation.XmlElement(name = "COUNTRY")
+    @JsonProperty(value = "COUNTRY")
     private String country;
     @XmlElement(name = "COMPANY")
     @jakarta.xml.bind.annotation.XmlElement(name = "COMPANY")
+    @JsonProperty(value = "COMPANY")
     private String company;
     @XmlElement(name = "PRICE")
     @jakarta.xml.bind.annotation.XmlElement(name = "PRICE")
+    @JsonProperty(value = "PRICE")
     private Double price;
     @XmlElement(name = "YEAR")
     @jakarta.xml.bind.annotation.XmlElement(name = "YEAR")
+    @JsonProperty(value = "YEAR")
     private Integer year;
 }

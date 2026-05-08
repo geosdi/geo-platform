@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -60,5 +61,6 @@ public class Catalog implements Serializable {
     //
     @XmlElement(name = "CD")
     @jakarta.xml.bind.annotation.XmlElement(name = "CD")
+    @JsonProperty(value = "CD")
     private List<Cd> cd = new ArrayList<>();
 }

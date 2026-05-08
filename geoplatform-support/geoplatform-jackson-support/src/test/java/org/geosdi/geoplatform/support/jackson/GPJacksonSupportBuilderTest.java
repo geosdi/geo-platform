@@ -45,13 +45,13 @@ import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
-import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 import static java.lang.Boolean.TRUE;
+import static java.util.Locale.*;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.DEFAULT;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
@@ -74,19 +74,19 @@ public class GPJacksonSupportBuilderTest {
     @Test
     public void a_threadLocalScopedValueIsolationTest() throws Exception {
         Callable<JacksonSupport> task1 = () -> sharedBuilder
-                .withLocale(Locale.ITALY)
+                .withLocale(ITALY)
                 .withDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
                 .withTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Rome")))
                 .withIntespectorBuilder(DEFAULT)
-                .configure(ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_DISABLE, UNWRAP_ROOT_VALUE_ENABLE)
+                .configure(ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_DISABLE, UNWRAP_ROOT_VALUE_ENABLE, UNWRAP_ROOT_VALUE_ENABLE)
                 .build();
 
         Callable<JacksonSupport> task2 = () -> sharedBuilder
-                .withLocale(Locale.FRANCE)
+                .withLocale(FRANCE)
                 .withTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Paris")))
-                .withDateFormat(new SimpleDateFormat("yyyy/MM/dd"))
+                .withDateFormat(new SimpleDateFormat("yyyy/MM/dd", FRANCE))
                 .withIntespectorBuilder(JAXB)
-                .configure(ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE, UNWRAP_ROOT_VALUE_DISABLE)
+                .configure(ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE, UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE)
                 .build();
 
         try (ExecutorService executor = newFixedThreadPool(2)) {
@@ -96,8 +96,8 @@ public class GPJacksonSupportBuilderTest {
             JacksonSupport jacksonSupport1 = future1.get();
             JacksonSupport jacksonSupport2 = future2.get();
 
-            assertEquals(Locale.ITALY, jacksonSupport1.getDefaultMapper().serializationConfig().getLocale());
-            assertEquals(Locale.FRANCE, jacksonSupport2.getDefaultMapper().serializationConfig().getLocale());
+            assertEquals(ITALY, jacksonSupport1.getDefaultMapper().serializationConfig().getLocale());
+            assertEquals(FRANCE, jacksonSupport2.getDefaultMapper().serializationConfig().getLocale());
         }
     }
 
@@ -105,16 +105,16 @@ public class GPJacksonSupportBuilderTest {
     @Test
     public void b_threadLocalScopedValueIsolationTest() throws Exception {
         Callable<JacksonSupportBuilder> task1 = () -> sharedBuilder
-                .withLocale(Locale.CANADA)
-                .withDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+                .withLocale(CANADA)
+                .withDateFormat(new SimpleDateFormat("dd/MM/yyyy", CANADA))
                 .withTimeZone(TimeZone.getTimeZone(ZoneId.of("America/Vancouver")))
                 .withIntespectorBuilder(DEFAULT)
                 .configure(FAIL_ON_NULL_FOR_PRIMITIVES_ENABLE, UNWRAP_ROOT_VALUE_ENABLE);
 
         Callable<JacksonSupportBuilder> task2 = () -> sharedBuilder
-                .withLocale(Locale.CHINA)
+                .withLocale(CHINA)
                 .withTimeZone(TimeZone.getTimeZone(ZoneId.of("Asia/Shanghai")))
-                .withDateFormat(new SimpleDateFormat("yyyy/MM/dd"))
+                .withDateFormat(new SimpleDateFormat("yyyy/MM/dd", CHINA))
                 .withIntespectorBuilder(JAXB)
                 .configure(FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, UNWRAP_ROOT_VALUE_DISABLE);
 
@@ -125,11 +125,11 @@ public class GPJacksonSupportBuilderTest {
             JacksonSupportBuilder builder1 = future1.get();
             JacksonSupportBuilder builder2 = future2.get();
 
-            JacksonSupport jacksonSupport1 = builder1.withLocale(Locale.UK).configure(AUTO_CLOSE_SOURCE_ENABLE).build();
-            JacksonSupport jacksonSupport2 = builder2.withLocale(Locale.GERMANY).build();
+            JacksonSupport jacksonSupport1 = builder1.withLocale(UK).configure(AUTO_CLOSE_SOURCE_ENABLE).build();
+            JacksonSupport jacksonSupport2 = builder2.withLocale(GERMANY).build();
 
-            assertEquals(Locale.UK, jacksonSupport1.getDefaultMapper().serializationConfig().getLocale());
-            assertEquals(Locale.GERMANY, jacksonSupport2.getDefaultMapper().serializationConfig().getLocale());
+            assertEquals(UK, jacksonSupport1.getDefaultMapper().serializationConfig().getLocale());
+            assertEquals(GERMANY, jacksonSupport2.getDefaultMapper().serializationConfig().getLocale());
         }
     }
 }

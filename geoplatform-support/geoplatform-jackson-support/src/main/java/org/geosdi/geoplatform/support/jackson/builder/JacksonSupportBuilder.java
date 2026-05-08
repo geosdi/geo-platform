@@ -46,6 +46,7 @@ import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.cfg.CoercionConfigs;
 import tools.jackson.databind.introspect.AnnotationIntrospectorPair;
 import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.module.blackbird.BlackbirdModule;
 
 import javax.annotation.Nullable;
 import java.text.DateFormat;
@@ -125,17 +126,19 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
 
     class GPJacksonSupportBuilder implements JacksonSupportBuilder<JsonMapper> {
 
-        private static final Logger logger = LoggerFactory.getLogger(GPJacksonSupportBuilder.class);
+        final Logger logger = LoggerFactory.getLogger(this.getClass());
         //
         Locale locale = Locale.getDefault();
         DateFormat dateFormat;
         TimeZone timeZone = getDefault();
-        List<JacksonModule> jacksonModules = new ArrayList<>();
-        List<JacksonSupportConfigFeature> jacksonSupportConfigFeatures = new ArrayList<>();
+        Map<Object, JacksonModule> jacksonModules = new LinkedHashMap<>();
+        Set<JacksonSupportConfigFeature> jacksonSupportConfigFeatures = new LinkedHashSet<>();
         GPJacksonXmlAnnotationIntrospectorBuilder introspectorBuilder = null;
         Consumer<CoercionConfigs> coercionConfigs;
 
         GPJacksonSupportBuilder() {
+            JacksonModule blackBirdModule = new BlackbirdModule();
+            this.jacksonModules.put(blackBirdModule.getRegistrationId(), blackBirdModule);
         }
 
         /**
@@ -188,8 +191,8 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> registerModule(@Nullable JacksonModule theJacksonModule) {
-            if (theJacksonModule != null) {
-                this.jacksonModules.add(theJacksonModule);
+            if ((theJacksonModule != null) && !(this.jacksonModules.containsKey(theJacksonModule.getRegistrationId()))) {
+                this.jacksonModules.put(theJacksonModule.getRegistrationId(), theJacksonModule);
             }
             return self();
         }
@@ -203,7 +206,8 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
             if (theJacksonModules != null) {
                 fromArray(theJacksonModules)
                         .filter(Objects::nonNull)
-                        .subscribe(this.jacksonModules::add, Throwable::printStackTrace);
+                        .filter(m -> !this.jacksonModules.containsKey(m.getRegistrationId()))
+                        .subscribe(m -> this.jacksonModules.put(m.getRegistrationId(), m), Throwable::printStackTrace);
             }
             return self();
         }
@@ -264,10 +268,10 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
                 jsonMapperbuilder.defaultTimeZone(this.timeZone);
             }
 
-            logger.trace("#####################LOCALE : {} - JACKSON_SUPPORT_CONFIG_FEATURES : {} - INTROSPECTOR : {} - DATE_FORMAT : {}\n", this.locale,
-                    this.jacksonSupportConfigFeatures, this.introspectorBuilder, this.dateFormat);
+            logger.trace("#####################LOCALE : {} - JACKSON_SUPPORT_CONFIG_FEATURES : {} - JACKSON_MODULES : {} - INTROSPECTOR : {} - DATE_FORMAT : {}\n",
+                    this.locale, this.jacksonSupportConfigFeatures, this.jacksonModules.values(), this.introspectorBuilder, this.dateFormat);
 
-            fromIterable(this.jacksonModules)
+            fromIterable(this.jacksonModules.values())
                     .filter(Objects::nonNull)
                     .subscribe(jsonMapperbuilder::addModule, Throwable::printStackTrace);
 

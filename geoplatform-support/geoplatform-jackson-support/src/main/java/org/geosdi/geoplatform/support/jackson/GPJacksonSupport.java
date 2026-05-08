@@ -44,6 +44,7 @@ import tools.jackson.databind.JacksonModule;
 import tools.jackson.databind.introspect.AnnotationIntrospectorPair;
 import tools.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.module.blackbird.BlackbirdModule;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -108,7 +109,7 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
      */
     public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
-        this(theBuilder, Arrays.asList(features), null);
+        this(theBuilder, Arrays.asList(features), List.of(new BlackbirdModule()));
     }
 
     /**
@@ -127,10 +128,15 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
                 .doOnComplete(() -> logger.trace("##############{} configure all Features.", this.getProviderName()))
                 .subscribe(f -> f.configureMapper(jsonBuilder), Throwable::printStackTrace);
         if (theJacksonModules != null) {
+            if (theJacksonModules.stream().noneMatch(m -> m instanceof BlackbirdModule)) {
+                theJacksonModules.add(new BlackbirdModule());
+            }
             fromIterable(theJacksonModules)
                     .filter(Objects::nonNull)
                     .doOnComplete(() -> logger.trace("##############{} configure all Jackson Modules.", this.getProviderName()))
                     .subscribe(jsonBuilder::addModule, Throwable::printStackTrace);
+        } else {
+            jsonBuilder.addModule(new BlackbirdModule());
         }
         this.mapper = jsonBuilder.build();
     }

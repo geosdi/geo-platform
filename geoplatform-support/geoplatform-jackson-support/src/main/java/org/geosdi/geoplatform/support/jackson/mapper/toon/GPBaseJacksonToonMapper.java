@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.support.jackson.mapper.toon;
 
 import dev.toonformat.jtoon.EncodeOptions;
 import dev.toonformat.jtoon.JToon;
-import org.apache.commons.io.IOUtils;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.reader.toon.GPBaseJacksonToonReaderSupport;
@@ -167,7 +166,9 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     @Override
     public void writeAsToon(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) T entity) throws Exception {
         checkArgument(file != null, "The Parameter File must not be null.");
-        IOUtils.write(this.writeAsToonString(entity), new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8)));
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
+            writer.write(this.writeAsToonString(entity));
+        }
     }
 
     /**
@@ -179,7 +180,9 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     @Override
     public void writeAsToon(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) T entity, @Nullable EncodeOptions theEncodeOptions) throws Exception {
         checkArgument(file != null, "The Parameter File must not be null.");
-        IOUtils.write(this.writeAsToonString(entity, theEncodeOptions), new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8)));
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
+            writer.write(this.writeValueAsToon(entity, theEncodeOptions));
+        }
     }
 
     /**
@@ -190,7 +193,7 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     @Override
     public void writeAsToon(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) T entity) throws Exception {
         checkArgument(writer != null, "The Parameter writer must not be null.");
-        IOUtils.write(writeAsToonString(entity), writer);
+        writer.write(writeAsToonString(entity));
     }
 
     /**
@@ -202,7 +205,7 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     @Override
     public void writeAsToon(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) T entity, @Nullable EncodeOptions theEncodeOptions) throws Exception {
         checkArgument(writer != null, "The Parameter writer must not be null.");
-        IOUtils.write(writeAsToonString(entity, theEncodeOptions), writer);
+        writer.write(writeAsToonString(entity, theEncodeOptions));
     }
 
     /**
@@ -214,7 +217,9 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     public <V> void writeAsToonValue(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) V theValue) throws Exception {
         checkArgument(file != null, "The Parameter File must not be null.");
         checkArgument(theValue != null, "The Parameter value must not be null.");
-        IOUtils.write(this.writeValueAsToon(entityClass), new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8)));
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
+            writer.write(this.writeValueAsToon(entityClass));
+        }
     }
 
     /**
@@ -227,7 +232,9 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     public <V> void writeAsToonValue(@Nonnull(when = NEVER) File file, @Nonnull(when = NEVER) V theValue, @Nullable EncodeOptions theEncodeOptions) throws Exception {
         checkArgument(file != null, "The Parameter File must not be null.");
         checkArgument(theValue != null, "The Parameter value must not be null.");
-        IOUtils.write(this.writeValueAsToon(entityClass, theEncodeOptions), new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8)));
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
+            writer.write(this.writeValueAsToon(entityClass, theEncodeOptions));
+        }
     }
 
     /**
@@ -238,7 +245,7 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     @Override
     public <V> void writeAsToonValue(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) V theValue) throws Exception {
         checkArgument(writer != null, "The Parameter writer must not be null.");
-        IOUtils.write(this.writeValueAsToon(theValue), writer);
+        writer.write(this.writeValueAsToon(theValue));
     }
 
     /**
@@ -250,7 +257,7 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
     @Override
     public <V> void writeAsToonValue(@Nonnull(when = NEVER) Writer writer, @Nonnull(when = NEVER) V theValue, @Nullable EncodeOptions theEncodeOptions) throws Exception {
         checkArgument(writer != null, "The Parameter writer must not be null.");
-        IOUtils.write(this.writeValueAsToon(theValue, theEncodeOptions), writer);
+        writer.write(this.writeValueAsToon(theValue, theEncodeOptions));
     }
 
     /**

@@ -120,7 +120,6 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
      */
     public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) List<JacksonSupportConfigFeature> theFeatures, @Nullable List<JacksonModule> theJacksonModules) {
         checkArgument(theFeatures != null, "The Parameter features must not be null.");
-        List<JacksonModule> jacksonModules = new ArrayList<>(theJacksonModules);
         JsonMapper.Builder jsonBuilder = builder();
         AnnotationIntrospector primary = JACKSON.build();
         AnnotationIntrospector secondary = ((theBuilder != null) ? theBuilder.build() : null);
@@ -130,6 +129,7 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
                 .doOnComplete(() -> logger.trace("##############{} configure all Features.", this.getProviderName()))
                 .subscribe(f -> f.configureMapper(jsonBuilder), Throwable::printStackTrace);
         if (theJacksonModules != null) {
+            List<JacksonModule> jacksonModules = new ArrayList<>(theJacksonModules);
             if (theJacksonModules.stream().noneMatch(m -> m instanceof BlackbirdModule)) {
                 jacksonModules.add(new BlackbirdModule());
             }

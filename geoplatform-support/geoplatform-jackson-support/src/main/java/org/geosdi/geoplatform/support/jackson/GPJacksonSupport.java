@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson;
 
+import java.util.ArrayList;
 import org.geosdi.geoplatform.support.jackson.annotation.GPJacksonXmlAnnotationIntrospectorBuilder;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 import org.slf4j.Logger;
@@ -119,6 +120,7 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
      */
     public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) List<JacksonSupportConfigFeature> theFeatures, @Nullable List<JacksonModule> theJacksonModules) {
         checkArgument(theFeatures != null, "The Parameter features must not be null.");
+        List<JacksonModule> jacksonModules = new ArrayList<>(theJacksonModules);
         JsonMapper.Builder jsonBuilder = builder();
         AnnotationIntrospector primary = JACKSON.build();
         AnnotationIntrospector secondary = ((theBuilder != null) ? theBuilder.build() : null);
@@ -129,9 +131,9 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
                 .subscribe(f -> f.configureMapper(jsonBuilder), Throwable::printStackTrace);
         if (theJacksonModules != null) {
             if (theJacksonModules.stream().noneMatch(m -> m instanceof BlackbirdModule)) {
-                theJacksonModules.add(new BlackbirdModule());
+                jacksonModules.add(new BlackbirdModule());
             }
-            fromIterable(theJacksonModules)
+            fromIterable(jacksonModules)
                     .filter(Objects::nonNull)
                     .doOnComplete(() -> logger.trace("##############{} configure all Jackson Modules.", this.getProviderName()))
                     .subscribe(jsonBuilder::addModule, Throwable::printStackTrace);

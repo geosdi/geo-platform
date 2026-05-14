@@ -46,7 +46,6 @@ import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.cfg.CoercionConfigs;
 import tools.jackson.databind.introspect.AnnotationIntrospectorPair;
 import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.module.blackbird.BlackbirdModule;
 
 import javax.annotation.Nullable;
 import java.text.DateFormat;
@@ -137,8 +136,8 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
         Consumer<CoercionConfigs> coercionConfigs;
 
         GPJacksonSupportBuilder() {
-            JacksonModule blackBirdModule = new BlackbirdModule();
-            this.jacksonModules.put(blackBirdModule.getRegistrationId(), blackBirdModule);
+//            JacksonModule blackBirdModule = new BlackbirdModule();
+//            this.jacksonModules.put(blackBirdModule.getRegistrationId(), blackBirdModule);
         }
 
         /**

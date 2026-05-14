@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.support.jackson;
 
-import java.util.ArrayList;
 import org.geosdi.geoplatform.support.jackson.annotation.GPJacksonXmlAnnotationIntrospectorBuilder;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 import org.slf4j.Logger;
@@ -45,10 +44,10 @@ import tools.jackson.databind.JacksonModule;
 import tools.jackson.databind.introspect.AnnotationIntrospectorPair;
 import tools.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.module.blackbird.BlackbirdModule;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -110,7 +109,7 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
      */
     public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
-        this(theBuilder, Arrays.asList(features), List.of(new BlackbirdModule()));
+        this(theBuilder, Arrays.asList(features), null);//List.of(new BlackbirdModule()));
     }
 
     /**
@@ -130,16 +129,17 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
                 .subscribe(f -> f.configureMapper(jsonBuilder), Throwable::printStackTrace);
         if (theJacksonModules != null) {
             List<JacksonModule> jacksonModules = new ArrayList<>(theJacksonModules);
-            if (theJacksonModules.stream().noneMatch(m -> m instanceof BlackbirdModule)) {
-                jacksonModules.add(new BlackbirdModule());
-            }
+//            if (theJacksonModules.stream().noneMatch(m -> m instanceof BlackbirdModule)) {
+//                jacksonModules.add(new BlackbirdModule());
+//            }
             fromIterable(jacksonModules)
                     .filter(Objects::nonNull)
                     .doOnComplete(() -> logger.trace("##############{} configure all Jackson Modules.", this.getProviderName()))
                     .subscribe(jsonBuilder::addModule, Throwable::printStackTrace);
-        } else {
-            jsonBuilder.addModule(new BlackbirdModule());
-        }
+
+        } //else {
+//            jsonBuilder.addModule(new BlackbirdModule());
+//        }
         this.mapper = jsonBuilder.build();
     }
 

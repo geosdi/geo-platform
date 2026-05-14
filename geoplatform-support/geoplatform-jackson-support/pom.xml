@@ -78,10 +78,10 @@
             <artifactId>jackson-module-jakarta-xmlbind-annotations</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>tools.jackson.module</groupId>
-            <artifactId>jackson-module-blackbird</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>tools.jackson.module</groupId>-->
+<!--            <artifactId>jackson-module-blackbird</artifactId>-->
+<!--        </dependency>-->
 
         <!-- Support for JTOON -->
         <dependency>

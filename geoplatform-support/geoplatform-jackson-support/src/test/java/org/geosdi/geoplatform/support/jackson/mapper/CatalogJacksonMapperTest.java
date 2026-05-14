@@ -48,8 +48,6 @@ import java.io.StringReader;
 
 import static java.io.File.separator;
 import static java.lang.String.join;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.CatalogJacksonXmlMapperTest.catalogBean;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
@@ -163,7 +161,6 @@ public class CatalogJacksonMapperTest {
 
     @Test
     public void e_readCatalogFromJsonFileTest() throws Exception {
-        logger.info("#####################CATALOG_FROM_FILE : {}\n", GP_JACKSON_MAPPER.read(new File(of(".", "target", "Catalog.json")
-                .collect(joining(separator)))));
+        logger.info("#####################CATALOG_FROM_FILE : {}\n", GP_JACKSON_MAPPER.read(new File(join(separator, ".", "target", "Catalog.json"))));
     }
 }

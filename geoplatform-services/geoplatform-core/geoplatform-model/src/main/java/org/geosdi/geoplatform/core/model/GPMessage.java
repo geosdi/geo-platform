@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.core.model;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
+import jakarta.persistence.Temporal;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.hibernate.annotations.Cache;

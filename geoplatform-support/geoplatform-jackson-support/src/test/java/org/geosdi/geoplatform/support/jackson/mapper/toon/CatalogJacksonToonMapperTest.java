@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.support.jackson.mapper.toon;
 import dev.toonformat.jtoon.DecodeOptions;
 import dev.toonformat.jtoon.EncodeOptions;
 import dev.toonformat.jtoon.KeyFolding;
-import dev.toonformat.jtoon.PathExpansion;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.CatalogJacksonXmlMapperTest;
 import org.geosdi.geoplatform.support.jackson.model.Catalog;
@@ -53,7 +52,6 @@ import java.io.Writer;
 
 import static dev.toonformat.jtoon.Delimiter.COMMA;
 import static java.io.File.separator;
-import static java.lang.Boolean.TRUE;
 import static java.lang.String.join;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.CatalogJacksonXmlMapperTest.catalogBean;
@@ -98,7 +96,7 @@ public class CatalogJacksonToonMapperTest {
                         + "  TITLE#7,ARTIST#7,COUNTRY#7,COMPANY#7,7,2019\n"
                         + "  TITLE#8,ARTIST#8,COUNTRY#8,COMPANY#8,8,2018\n"
                         + "  TITLE#9,ARTIST#9,COUNTRY#9,COMPANY#9,9,2017",
-                new DecodeOptions(2, COMMA, TRUE, PathExpansion.OFF));
+                new DecodeOptions());
         logger.info("#####################CATALOG_FROM_STRING : {}\n", catalog);
     }
 
@@ -119,6 +117,6 @@ public class CatalogJacksonToonMapperTest {
     @Test
     public void f_readCatalogFromToonFileTest() throws Exception {
         logger.info("#####################CATALOG_FROM_FILE : {}\n", GP_JACKSON_TOON_MAPPER.read(new File(join(separator, ".", "target", "Catalog.toon")),
-                new DecodeOptions(2, COMMA, TRUE, PathExpansion.OFF)));
+                new DecodeOptions()));
     }
 }

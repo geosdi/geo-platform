@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-import static dev.toonformat.jtoon.DecodeOptions.DEFAULT;
+import static dev.toonformat.jtoon.DecodeOptions.*;
 import static dev.toonformat.jtoon.Delimiter.COMMA;
 import static dev.toonformat.jtoon.PathExpansion.OFF;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
@@ -108,6 +108,7 @@ public class SimpleBeanJacksonToonReaderTest {
     public void c_readFromStringTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@ITEM_DATA_FROM_TOON_STRING : {}\n", JACKSON_TOON_READER_SUPPORT.read("items[2]{category,name,quantity,price}:\n"
                 + "  A1,Widget,2,9.99\n"
-                + "  B2,Gadget,1,14.5", ItemData.class, new DecodeOptions(2, COMMA, false, OFF)));
+                + "  B2,Gadget,1,14.5", ItemData.class, new DecodeOptions(2, COMMA, false, OFF, MAX_ALLOWED_DEPTH,
+                DEFAULT_MAX_ARRAY_SIZE, DEFAULT_MAX_STRING_LENGTH)));
     }
 }

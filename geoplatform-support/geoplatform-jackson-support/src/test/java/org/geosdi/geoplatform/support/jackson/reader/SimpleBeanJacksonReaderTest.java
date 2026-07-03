@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.model.SimpleBean;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,7 @@ public class SimpleBeanJacksonReaderTest {
             .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
             .configure(GPJsonIncludeFeature.NON_NULL), SimpleBean.class);
 
+    @Ignore
     @Test
     public void a_readJsonFromURLTest() throws Exception {
         SimpleBean simpleBean = JACKSON_READER_SUPPORT.read(new URL("https://httpbin.org/get?color=red&shape=square"));

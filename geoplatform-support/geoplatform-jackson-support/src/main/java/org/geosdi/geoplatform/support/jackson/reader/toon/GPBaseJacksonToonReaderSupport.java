@@ -51,6 +51,7 @@ import java.io.*;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.commons.io.FileUtils.readFileToString;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -123,7 +124,7 @@ public class GPBaseJacksonToonReaderSupport<T extends Object> extends GPBaseJack
     public T read(@Nonnull(when = NEVER) File fileAsToon, @Nonnull(when = NEVER) DecodeOptions theDecodeOptions) throws Exception {
         checkArgument(fileAsToon != null, "The Parameter File must not be null.");
         checkArgument(theDecodeOptions != null, "The Parameter DecodeOptions must not be null.");
-        return this.read(IOUtils.toString(new FileInputStream(fileAsToon), UTF_8), theDecodeOptions);
+        return this.read(readFileToString(fileAsToon, UTF_8), theDecodeOptions);
     }
 
     /**

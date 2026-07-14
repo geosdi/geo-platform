@@ -164,9 +164,7 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> configure(@Nullable JacksonSupportConfigFeature theFeature) {
-            if (theFeature != null) {
-                this.jacksonSupportConfigFeatures.add(theFeature);
-            }
+            applyConfigure(theFeature);
             return self();
         }
 
@@ -176,11 +174,7 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> configure(@Nullable JacksonSupportConfigFeature... theFeatures) {
-            if (theFeatures != null) {
-                fromArray(theFeatures)
-                        .filter(Objects::nonNull)
-                        .subscribe(this.jacksonSupportConfigFeatures::add, Throwable::printStackTrace);
-            }
+            applyConfigure(theFeatures);
             return self();
         }
 
@@ -190,9 +184,7 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> registerModule(@Nullable JacksonModule theJacksonModule) {
-            if ((theJacksonModule != null) && !(this.jacksonModules.containsKey(theJacksonModule.getRegistrationId()))) {
-                this.jacksonModules.put(theJacksonModule.getRegistrationId(), theJacksonModule);
-            }
+            applyRegisterModule(theJacksonModule);
             return self();
         }
 
@@ -202,12 +194,7 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> registerModule(@Nullable JacksonModule... theJacksonModules) {
-            if (theJacksonModules != null) {
-                fromArray(theJacksonModules)
-                        .filter(Objects::nonNull)
-                        .filter(m -> !this.jacksonModules.containsKey(m.getRegistrationId()))
-                        .subscribe(m -> this.jacksonModules.put(m.getRegistrationId(), m), Throwable::printStackTrace);
-            }
+            applyRegisterModule(theJacksonModules);
             return self();
         }
 
@@ -217,7 +204,7 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> withDateFormat(@Nullable DateFormat theDateFormat) {
-           this.dateFormat = theDateFormat;
+           applyDateFormat(theDateFormat);
            return self();
         }
 
@@ -227,7 +214,7 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> withTimeZone(@Nullable TimeZone theTimeZone) {
-           this.timeZone = theTimeZone;
+           applyTimeZone(theTimeZone);
            return self();
         }
 
@@ -237,7 +224,7 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> withIntespectorBuilder(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theIntrospectorBuilder) {
-          this.introspectorBuilder = theIntrospectorBuilder;
+          applyIntrospectorBuilder(theIntrospectorBuilder);
           return self();
         }
 
@@ -247,8 +234,77 @@ public interface JacksonSupportBuilder<M extends ObjectMapper> {
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> withAllCoercionConfigFeature(@Nullable Consumer<CoercionConfigs> theCoercionConfigs) {
-            this.coercionConfigs = theCoercionConfigs;
+            applyCoercionConfigs(theCoercionConfigs);
             return self();
+        }
+
+        /**
+         * @param theFeature
+         */
+        void applyConfigure(@Nullable JacksonSupportConfigFeature theFeature) {
+            if (theFeature != null) {
+                this.jacksonSupportConfigFeatures.add(theFeature);
+            }
+        }
+
+        /**
+         * @param theFeatures
+         */
+        void applyConfigure(@Nullable JacksonSupportConfigFeature... theFeatures) {
+            if (theFeatures != null) {
+                fromArray(theFeatures)
+                        .filter(Objects::nonNull)
+                        .subscribe(this.jacksonSupportConfigFeatures::add, Throwable::printStackTrace);
+            }
+        }
+
+        /**
+         * @param theJacksonModule
+         */
+        void applyRegisterModule(@Nullable JacksonModule theJacksonModule) {
+            if ((theJacksonModule != null) && !(this.jacksonModules.containsKey(theJacksonModule.getRegistrationId()))) {
+                this.jacksonModules.put(theJacksonModule.getRegistrationId(), theJacksonModule);
+            }
+        }
+
+        /**
+         * @param theJacksonModules
+         */
+        void applyRegisterModule(@Nullable JacksonModule... theJacksonModules) {
+            if (theJacksonModules != null) {
+                fromArray(theJacksonModules)
+                        .filter(Objects::nonNull)
+                        .filter(m -> !this.jacksonModules.containsKey(m.getRegistrationId()))
+                        .subscribe(m -> this.jacksonModules.put(m.getRegistrationId(), m), Throwable::printStackTrace);
+            }
+        }
+
+        /**
+         * @param theDateFormat
+         */
+        void applyDateFormat(@Nullable DateFormat theDateFormat) {
+            this.dateFormat = theDateFormat;
+        }
+
+        /**
+         * @param theTimeZone
+         */
+        void applyTimeZone(@Nullable TimeZone theTimeZone) {
+            this.timeZone = theTimeZone;
+        }
+
+        /**
+         * @param theIntrospectorBuilder
+         */
+        void applyIntrospectorBuilder(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theIntrospectorBuilder) {
+            this.introspectorBuilder = theIntrospectorBuilder;
+        }
+
+        /**
+         * @param theCoercionConfigs
+         */
+        void applyCoercionConfigs(@Nullable Consumer<CoercionConfigs> theCoercionConfigs) {
+            this.coercionConfigs = theCoercionConfigs;
         }
 
         /**

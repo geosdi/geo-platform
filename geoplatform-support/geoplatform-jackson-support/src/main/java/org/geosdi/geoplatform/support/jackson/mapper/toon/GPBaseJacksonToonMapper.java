@@ -218,7 +218,7 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
         checkArgument(file != null, "The Parameter File must not be null.");
         checkArgument(theValue != null, "The Parameter value must not be null.");
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
-            writer.write(this.writeValueAsToon(entityClass));
+            writer.write(this.writeValueAsToon(theValue));
         }
     }
 
@@ -233,7 +233,7 @@ public class GPBaseJacksonToonMapper<T extends Object> extends GPBaseJacksonToon
         checkArgument(file != null, "The Parameter File must not be null.");
         checkArgument(theValue != null, "The Parameter value must not be null.");
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
-            writer.write(this.writeValueAsToon(entityClass, theEncodeOptions));
+            writer.write(this.writeValueAsToon(theValue, theEncodeOptions));
         }
     }
 

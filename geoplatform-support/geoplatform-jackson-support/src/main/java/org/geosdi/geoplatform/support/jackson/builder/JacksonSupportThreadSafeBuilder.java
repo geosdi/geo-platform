@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.annotation.GPJacksonXmlAnnotationIntrospectorBuilder;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 import tools.jackson.databind.JacksonModule;
-import tools.jackson.databind.introspect.AnnotationIntrospectorPair;
+import tools.jackson.databind.cfg.CoercionConfigs;
 import tools.jackson.databind.json.JsonMapper;
 
 import javax.annotation.Nonnull;
@@ -50,11 +50,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.rxjava3.core.Flowable.fromIterable;
-import static java.lang.ScopedValue.where;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.JacksonSupport.of;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonAnnotationIntrospectorBuilder.JACKSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -120,16 +116,34 @@ public interface JacksonSupportThreadSafeBuilder<M extends JsonMapper> extends J
     JacksonSupportBuilder<M> withIntespectorBuilder(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theIntrospectorBuilder);
 
     /**
+     * @param theCoercionConfigs
+     * @return {@link JacksonSupportBuilder}
+     */
+    @Override
+    JacksonSupportBuilder<M> withAllCoercionConfigFeature(@Nullable Consumer<CoercionConfigs> theCoercionConfigs);
+
+    /**
      * @return {@link JacksonSupport<M>}
      */
     @Override
     JacksonSupport<M> build();
 
+    /**
+     * Thread-safe builder based on <em>copy-on-first-write</em>.
+     * <p>
+     * The instance returned by {@code builder(true)} is a shared, {@code frozen} root: its state is
+     * never mutated. The first mutating call on a frozen instance forks a single, thread-confined
+     * (unfrozen) copy; every subsequent call in that chain mutates the copy in place. So each chain
+     * pays exactly ONE copy regardless of its length, and concurrent chains starting from the shared
+     * root only ever read it (safe), each deriving its own private copy.
+     */
+    @ThreadSafe
     class GPJacksonSupportThreadSafeBuilder extends GPJacksonSupportBuilder implements JacksonSupportThreadSafeBuilder<JsonMapper> {
 
-        private static final ScopedValue<GPJacksonSupportBuilder> JACKSON_SUPPORT_BUILDER_SCOPED_VALUE = ScopedValue.newInstance();
+        private final boolean frozen;
 
         GPJacksonSupportThreadSafeBuilder() {
+            this.frozen = true;
         }
 
         /**
@@ -143,6 +157,22 @@ public interface JacksonSupportThreadSafeBuilder<M extends JsonMapper> extends J
             this.jacksonModules = new HashMap<>(other.jacksonModules);
             this.jacksonSupportConfigFeatures = new HashSet<>(other.jacksonSupportConfigFeatures);
             this.introspectorBuilder = other.introspectorBuilder;
+            this.coercionConfigs = other.coercionConfigs;
+            this.frozen = false;
+        }
+
+        /**
+         * Applies {@code theConsumer} either to a fresh copy (if this instance is the shared frozen
+         * root) or directly to this instance (if it is already a thread-confined copy).
+         *
+         * @param theConsumer
+         * @return {@link JacksonSupportBuilder}
+         */
+        JacksonSupportBuilder<JsonMapper> mutate(@Nonnull(when = NEVER) Consumer<GPJacksonSupportBuilder> theConsumer) {
+            checkArgument(theConsumer != null, "The Parameter consumer must not be null.");
+            GPJacksonSupportThreadSafeBuilder target = (this.frozen) ? new GPJacksonSupportThreadSafeBuilder(this) : this;
+            theConsumer.accept(target);
+            return target;
         }
 
         /**
@@ -151,78 +181,79 @@ public interface JacksonSupportThreadSafeBuilder<M extends JsonMapper> extends J
          */
         @Override
         public JacksonSupportBuilder<JsonMapper> withLocale(@Nullable Locale theLocale) {
-            return where(JACKSON_SUPPORT_BUILDER_SCOPED_VALUE, copyWith(builder -> builder.locale = theLocale))
-                    .call(JACKSON_SUPPORT_BUILDER_SCOPED_VALUE::get);
+            return mutate(builder -> builder.locale = theLocale);
         }
 
         /**
-         * @return {@link JacksonSupport<JsonMapper>}
-         */
-        @Override
-        public JacksonSupport<JsonMapper> build() {
-            return where(JACKSON_SUPPORT_BUILDER_SCOPED_VALUE, this).call(this::internalBuild);
-        }
-
-        /**
+         * @param theFeature
          * @return {@link JacksonSupportBuilder}
          */
         @Override
-        protected JacksonSupportBuilder<JsonMapper> self() {
-            return copy();
+        public JacksonSupportBuilder<JsonMapper> configure(@Nullable JacksonSupportConfigFeature theFeature) {
+            return mutate(builder -> builder.applyConfigure(theFeature));
         }
 
         /**
-         * @return {@link GPJacksonSupportThreadSafeBuilder}
+         * @param theFeatures
+         * @return {@link JacksonSupportBuilder}
          */
-        GPJacksonSupportThreadSafeBuilder copy() {
-            return new GPJacksonSupportThreadSafeBuilder(this);
+        @Override
+        public JacksonSupportBuilder<JsonMapper> configure(@Nullable JacksonSupportConfigFeature... theFeatures) {
+            return mutate(builder -> builder.applyConfigure(theFeatures));
         }
 
         /**
-         * @param theConsumer
-         * @return {@link GPJacksonSupportBuilder}
+         * @param theJacksonModule
+         * @return {@link JacksonSupportBuilder}
          */
-        GPJacksonSupportBuilder copyWith(@Nonnull(when = NEVER) Consumer<GPJacksonSupportBuilder> theConsumer) {
-            checkArgument(theConsumer != null, "The Parameter consumer must not be null.");
-            GPJacksonSupportThreadSafeBuilder copy = copy();
-            theConsumer.accept(copy);
-            return copy;
+        @Override
+        public JacksonSupportBuilder<JsonMapper> registerModule(@Nullable JacksonModule theJacksonModule) {
+            return mutate(builder -> builder.applyRegisterModule(theJacksonModule));
         }
 
         /**
-         * @return {@link JacksonSupport<JsonMapper>}
+         * @param theJacksonModules
+         * @return {@link JacksonSupportBuilder}
          */
-        JacksonSupport<JsonMapper> internalBuild() {
-            checkArgument((JACKSON_SUPPORT_BUILDER_SCOPED_VALUE.isBound()) && (JACKSON_SUPPORT_BUILDER_SCOPED_VALUE.get() != null), "The Parameter GPJacksonSupportThreadSafeBuilder must not be null.");
-            var jsonMapperbuilder = JsonMapper.builder();
-            var builder = JACKSON_SUPPORT_BUILDER_SCOPED_VALUE.get();
-            if (builder.locale != null) {
-                jsonMapperbuilder.defaultLocale(builder.locale);
-            }
-            if (builder.dateFormat != null) {
-                jsonMapperbuilder.defaultDateFormat(builder.dateFormat);
-            }
-            if (builder.timeZone != null) {
-                jsonMapperbuilder.defaultTimeZone(builder.timeZone);
-            }
+        @Override
+        public JacksonSupportBuilder<JsonMapper> registerModule(@Nullable JacksonModule... theJacksonModules) {
+            return mutate(builder -> builder.applyRegisterModule(theJacksonModules));
+        }
 
-            logger.trace("##############LOCALE : {} - JACKSON_SUPPORT_CONFIG_FEATURES : {} - JACKSON_MODULES : {} " + "- INTROSPECTOR : {} - DATE_FORMAT : {}\n",
-                    builder.locale, builder.jacksonSupportConfigFeatures, builder.jacksonModules.values(), builder.introspectorBuilder, builder.dateFormat);
+        /**
+         * @param theDateFormat
+         * @return {@link JacksonSupportBuilder}
+         */
+        @Override
+        public JacksonSupportBuilder<JsonMapper> withDateFormat(@Nullable DateFormat theDateFormat) {
+            return mutate(builder -> builder.applyDateFormat(theDateFormat));
+        }
 
-            fromIterable(builder.jacksonModules.values())
-                    .filter(Objects::nonNull)
-                    .subscribe(jsonMapperbuilder::addModule, Throwable::printStackTrace);
+        /**
+         * @param theTimeZone
+         * @return {@link JacksonSupportBuilder}
+         */
+        @Override
+        public JacksonSupportBuilder<JsonMapper> withTimeZone(@Nullable TimeZone theTimeZone) {
+            return mutate(builder -> builder.applyTimeZone(theTimeZone));
+        }
 
-            fromIterable(builder.jacksonSupportConfigFeatures)
-                    .filter(Objects::nonNull)
-                    .subscribe(f -> f.configureMapper(jsonMapperbuilder), Throwable::printStackTrace);
-            var primary = JACKSON.build();
-            var secondary = ((builder.introspectorBuilder != null) ? builder.introspectorBuilder.build() : null);
-            jsonMapperbuilder.annotationIntrospector((secondary != null) ? new AnnotationIntrospectorPair(primary, secondary) : primary);
-            if (builder.coercionConfigs != null) {
-                jsonMapperbuilder.withAllCoercionConfigs(builder.coercionConfigs);
-            }
-            return of(jsonMapperbuilder.build());
+        /**
+         * @param theIntrospectorBuilder
+         * @return {@link JacksonSupportBuilder}
+         */
+        @Override
+        public JacksonSupportBuilder<JsonMapper> withIntespectorBuilder(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theIntrospectorBuilder) {
+            return mutate(builder -> builder.applyIntrospectorBuilder(theIntrospectorBuilder));
+        }
+
+        /**
+         * @param theCoercionConfigs
+         * @return {@link JacksonSupportBuilder}
+         */
+        @Override
+        public JacksonSupportBuilder<JsonMapper> withAllCoercionConfigFeature(@Nullable Consumer<CoercionConfigs> theCoercionConfigs) {
+            return mutate(builder -> builder.applyCoercionConfigs(theCoercionConfigs));
         }
     }
 }

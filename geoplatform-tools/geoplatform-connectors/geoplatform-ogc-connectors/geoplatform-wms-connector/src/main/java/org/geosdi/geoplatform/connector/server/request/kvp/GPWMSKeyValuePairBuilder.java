@@ -87,8 +87,12 @@ public interface GPWMSKeyValuePairBuilder<R, KVPBuilder extends GPWMSKeyValuePai
          */
         @Override
         public final R build() throws Exception {
-            checkArgument((this.keyValuePair.get() != null) && !(this.keyValuePair.get().trim().isEmpty()), "The Parameter keyValuePair must not be null or an empty string.");
-            return this.internalBuild();
+            try {
+                checkArgument((this.keyValuePair.get() != null) && !(this.keyValuePair.get().trim().isEmpty()), "The Parameter keyValuePair must not be null or an empty string.");
+                return this.internalBuild();
+            } finally {
+                this.keyValuePair.remove();
+            }
         }
 
         /**

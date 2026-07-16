@@ -45,6 +45,8 @@ import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.ta
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 
 import java.net.URL;
 
@@ -109,6 +111,19 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
     public GPGeoserverImporterConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param proxyConfiguration
+     * @param defaultClientTlsStrategy
+     * @param theJacksonSupport
+     * @param theVersion
+     */
+    protected GPGeoserverImporterConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, HttpClientProxyConfiguration proxyConfiguration, DefaultClientTlsStrategy defaultClientTlsStrategy, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+        super(server, pooledConnectorConfig, securityConnector, proxyConfiguration, defaultClientTlsStrategy, theJacksonSupport, theVersion);
     }
 
     /**

@@ -99,7 +99,8 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
     public GPGeoserverConnectorStore build() throws Exception {
         checkArgument(this.serverUrl != null, "Server URL must not be null");
         GeoserverVersion v = fromString(this.version);
-        return new GPGeoserverConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector, this::toJacksonSupport, v);
+        return new GPGeoserverConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector,
+                this.proxyConfiguration, this.defaultClientTlsStrategy, this::toJacksonSupport, v);
     }
 
     /**

@@ -41,8 +41,10 @@ import org.geosdi.geoplatform.connector.geoserver.logging.GPGeoserverLoggingConn
 import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
@@ -104,6 +106,19 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
      */
     public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param proxyConfiguration
+     * @param defaultClientTlsStrategy
+     * @param theJacksonSupport
+     * @param theVersion
+     */
+    public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, HttpClientProxyConfiguration proxyConfiguration, DefaultClientTlsStrategy defaultClientTlsStrategy, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+        super(server, pooledConnectorConfig, securityConnector, proxyConfiguration, defaultClientTlsStrategy, theJacksonSupport, theVersion);
     }
 
     /**

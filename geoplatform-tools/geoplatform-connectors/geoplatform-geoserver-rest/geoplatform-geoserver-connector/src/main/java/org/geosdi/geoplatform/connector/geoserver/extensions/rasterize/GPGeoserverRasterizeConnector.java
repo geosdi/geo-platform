@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues.GPGeos
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 
 import java.net.URL;
 
@@ -105,6 +107,19 @@ public abstract class GPGeoserverRasterizeConnector extends GPGeoserverUniqueVal
     public GPGeoserverRasterizeConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param proxyConfiguration
+     * @param defaultClientTlsStrategy
+     * @param theJacksonSupport
+     * @param theVersion
+     */
+    protected GPGeoserverRasterizeConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, HttpClientProxyConfiguration proxyConfiguration, DefaultClientTlsStrategy defaultClientTlsStrategy, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+        super(server, pooledConnectorConfig, securityConnector, proxyConfiguration, defaultClientTlsStrategy, theJacksonSupport, theVersion);
     }
 
     /**

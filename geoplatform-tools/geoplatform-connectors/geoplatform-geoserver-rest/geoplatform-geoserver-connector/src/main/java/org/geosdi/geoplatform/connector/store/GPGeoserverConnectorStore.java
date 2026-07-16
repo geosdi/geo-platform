@@ -40,9 +40,11 @@ import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.connector.store.logging.GeoserverLoggingStore;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,6 +84,23 @@ public class GPGeoserverConnectorStore extends GeoserverLoggingStore implements 
      */
     GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
+        this.restRunningRequest = this.server.createGeoserverRestRunningRequest();
+        this.reloadCatalogRequest = this.server.reloadGeoserverCatalogRequest();
+        this.resetRequest = this.server.resetGeoserverRequest();
+        this.importerRunningRequest = this.server.createImportsGeoserverRunningRequest();
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param proxyConfiguration
+     * @param defaultClientTlsStrategy
+     * @param theJacksonSupport
+     * @param theVersion
+     */
+    GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, HttpClientProxyConfiguration proxyConfiguration, DefaultClientTlsStrategy defaultClientTlsStrategy, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+        super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, proxyConfiguration, defaultClientTlsStrategy, theJacksonSupport, theVersion));
         this.restRunningRequest = this.server.createGeoserverRestRunningRequest();
         this.reloadCatalogRequest = this.server.reloadGeoserverCatalogRequest();
         this.resetRequest = this.server.resetGeoserverRequest();

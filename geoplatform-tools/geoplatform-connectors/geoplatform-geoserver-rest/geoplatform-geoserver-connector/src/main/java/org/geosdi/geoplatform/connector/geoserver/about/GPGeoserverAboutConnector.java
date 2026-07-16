@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.about;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
@@ -43,6 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.about.version.Geoserve
 import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -119,6 +121,22 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      */
     protected GPGeoserverAboutConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(analyzesServerURL(server), securityConnector, pooledConnectorConfig);
+        checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport mut not be null.");
+        this.version = theVersion;
+        this.jacksonSupport = theJacksonSupport;
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param proxyConfiguration
+     * @param defaultClientTlsStrategy
+     * @param theJacksonSupport
+     * @param theVersion
+     */
+    protected GPGeoserverAboutConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, HttpClientProxyConfiguration proxyConfiguration, DefaultClientTlsStrategy defaultClientTlsStrategy, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+        super(analyzesServerURL(server), securityConnector, pooledConnectorConfig, proxyConfiguration, defaultClientTlsStrategy);
         checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport mut not be null.");
         this.version = theVersion;
         this.jacksonSupport = theJacksonSupport;

@@ -120,7 +120,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setBBox(bBox);
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
-        return geoJsonStaxReader.read(request.getResponseAsStream());
+        return (FeatureCollection) request.getResponseAsStream(geoJsonStaxReader::read);
     }
 
     /**
@@ -140,7 +140,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setQueryDTO(queryDTO);
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
-        return geoJsonStaxReader.read(request.getResponseAsStream());
+        return (FeatureCollection) request.getResponseAsStream(geoJsonStaxReader::read);
     }
 
     /**
@@ -164,7 +164,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setCqlFilter(cqlFilter);
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
-        return geoJsonStaxReader.read(request.getResponseAsStream());
+        return (FeatureCollection) request.getResponseAsStream(geoJsonStaxReader::read);
     }
 
     /**
@@ -206,7 +206,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setTypeName(qName);
         request.setSRS("EPSG:4326");
         request.setResultType(RESULTS.value());
-        return wfsGetFeatureGeoJsonStaxReader.read(request.getResponseAsStream());
+        return (FeatureCollection) request.getResponseAsStream(wfsGetFeatureGeoJsonStaxReader::read);
     }
 
     /**
@@ -232,7 +232,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         request.setSRS("EPSG:4326");
         request.setResultType(RESULTS.value());
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
-        return wfsGetFeatureGeoJsonStaxReader.read(request.getResponseAsStream());
+        return (FeatureCollection) request.getResponseAsStream(wfsGetFeatureGeoJsonStaxReader::read);
     }
 
     /**
@@ -297,15 +297,14 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
      */
     private FeatureCollectionDTO getFeatureCollection(WFSGetFeatureRequest request, LayerSchemaDTO layerSchema) throws Exception {
         try {
-            InputStream is = request.getResponseAsStream();
-            if (is == null) { // TODO check if the is can be null
+            final WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
+            FeatureCollectionDTO featureCollection = (FeatureCollectionDTO) request.getResponseAsStream(featureReaderStAX::read);
+            if (featureCollection == null) { // TODO check if the response body can be empty
                 logger.error("\n### The layer \"{}\" isn't a feature ###", layerSchema.getTypeName());
             }
-            final WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
-            return featureReaderStAX.read(is);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new IllegalStateException("Error to execute the WFS GetFeature for the layer " + layerSchema.getTypeName());
+            return featureCollection;
+        } catch (Exception ex) {
+            throw new IllegalStateException("Error to execute the WFS GetFeature for the layer " + layerSchema.getTypeName(), ex);
         }
     }
 }

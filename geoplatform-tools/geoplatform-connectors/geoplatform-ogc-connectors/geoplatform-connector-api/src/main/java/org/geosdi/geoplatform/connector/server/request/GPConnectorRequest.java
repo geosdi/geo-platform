@@ -92,10 +92,37 @@ public interface GPConnectorRequest<T> {
      * Method to generate Response AS a {@link InputStream} Stream. Remember to
      * close the Stream</p>
      *
+     * <p>Note: this variant buffers the whole response in memory. For large responses prefer
+     * {@link #getResponseAsStream(GPConnectorStreamConsumer)}, which streams the body without
+     * buffering it entirely.</p>
+     *
      * @return {@link InputStream} stream
      * @throws java.lang.Exception
      */
     InputStream getResponseAsStream() throws Exception;
+
+    /**
+     * <p>Streams the response body to the given consumer <b>without buffering it entirely in
+     * memory</b>. The stream is live only for the duration of the callback: the underlying HTTP
+     * response is closed automatically as soon as the consumer returns, so it must read everything
+     * it needs before returning and must not retain the stream.</p>
+     *
+     * <p>The default implementation falls back to the buffered {@link #getResponseAsStream()}
+     * (closing the stream afterwards); connector request implementations override it to stream
+     * directly from the network.</p>
+     *
+     * @param streamConsumer the callback consuming the live response stream; must not be {@code null}
+     * @param <R>            the type produced from the stream
+     * @return the value produced by the consumer, or {@code null} if there is no response body
+     * @throws Exception if the request fails or the consumer throws
+     */
+    default <R> R getResponseAsStream(GPConnectorStreamConsumer<R> streamConsumer) throws Exception {
+        if (streamConsumer == null)
+            throw new IllegalArgumentException("The Parameter streamConsumer must not be null.");
+        try (InputStream stream = this.getResponseAsStream()) {
+            return ((stream != null) ? streamConsumer.consume(stream) : null);
+        }
+    }
 
     /**
      * Show the XML Object created for the Request to send to Server

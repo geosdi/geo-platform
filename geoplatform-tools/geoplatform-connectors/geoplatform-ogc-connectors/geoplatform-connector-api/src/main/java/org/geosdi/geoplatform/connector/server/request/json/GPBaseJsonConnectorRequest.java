@@ -41,6 +41,7 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.GPAbstractConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorStreamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -112,6 +113,21 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.addHeaderParams(httpMethod);
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         return this.securityConnector.secure(this, httpMethod, this::internalResponseAsStream);
+    }
+
+    /**
+     * @param streamConsumer
+     * @param <R>
+     * @return {@link R}
+     * @throws Exception
+     */
+    @Override
+    public <R> R getResponseAsStream(GPConnectorStreamConsumer<R> streamConsumer) throws Exception {
+        checkArgument(streamConsumer != null, "The Parameter streamConsumer must not be null.");
+        HttpUriRequest httpMethod = this.prepareHttpMethod();
+        this.addHeaderParams(httpMethod);
+        logger.debug("#############################Executing (stream) -------------> {}\n", httpMethod.getUri().toString());
+        return this.securityConnector.secure(this, httpMethod, httpResponse -> this.consumeResponseStream(httpResponse, streamConsumer));
     }
 
     /**

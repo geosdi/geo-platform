@@ -94,6 +94,19 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     }
 
     /**
+     * @param streamConsumer
+     * @param <R>
+     * @return {@link R}
+     * @throws Exception
+     */
+    @Override
+    public <R> R getResponseAsStream(GPConnectorStreamConsumer<R> streamConsumer) throws Exception {
+        checkArgument(streamConsumer != null, "The Parameter streamConsumer must not be null.");
+        HttpUriRequest httpUriRequest = this.prepareHttpMethod();
+        return super.securityConnector.secure(this, httpUriRequest, httpResponse -> this.consumeResponseStream(httpResponse, streamConsumer));
+    }
+
+    /**
      * @param inputStream
      * @return {@link T}
      * @throws Exception

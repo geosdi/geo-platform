@@ -35,57 +35,25 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.StringWriter;
+import java.io.InputStream;
 
 /**
+ * Callback used to consume the response body as a live {@link InputStream} while the underlying HTTP
+ * response is still open. Implementations must read everything they need from the stream before
+ * returning; the connector closes the response (and the stream) as soon as the callback returns, so
+ * the stream must not be retained or used afterwards. This allows streaming the response without
+ * buffering it entirely in memory.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPJAXBConnectorRequest<T> extends GPConnectorRequest<T> {
+@FunctionalInterface
+public interface GPConnectorStreamConsumer<R> {
 
     /**
-     * @param indent
-     * @return {@link String}
-     * @throws Exception
+     * @param stream the live response body stream (never {@code null} when invoked)
+     * @return the value produced from the stream
+     * @throws Exception if reading/processing the stream fails
      */
-    default String formatResponseAsString(int indent) throws Exception {
-        return getResponseAsStream(stream -> {
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document doc = documentBuilder.parse(new InputSource(stream));
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "" + indent);
-            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-            DOMSource source = new DOMSource(doc);
-            StringWriter writer = new StringWriter();
-            StreamResult result = new StreamResult(writer);
-            transformer.transform(source, result);
-            return writer.getBuffer().toString();
-        });
-    }
-
-    /**
-     * @return Marshaller
-     * @throws Exception
-     */
-    Marshaller getMarshaller() throws Exception;
-
-    /**
-     * @return Unmarshaller
-     * @throws Exception
-     */
-    Unmarshaller getUnmarshaller() throws Exception;
+    R consume(InputStream stream) throws Exception;
 }

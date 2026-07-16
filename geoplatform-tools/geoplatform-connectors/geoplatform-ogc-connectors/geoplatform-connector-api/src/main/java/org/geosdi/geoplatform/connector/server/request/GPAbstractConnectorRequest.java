@@ -275,6 +275,27 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     }
 
     /**
+     * Verifies the HTTP status and hands the <b>live</b> response stream to the consumer without
+     * buffering it in memory. Invoked from within the response handler, so the stream is valid only
+     * for the duration of the consumer call (the response is closed right after).
+     *
+     * @param httpResponse
+     * @param streamConsumer
+     * @return the value produced by the consumer, or {@code null} if there is no response body
+     */
+    protected <R> R consumeResponseStream(ClassicHttpResponse httpResponse, GPConnectorStreamConsumer<R> streamConsumer) {
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        this.verifyHttpResponseStatus(httpResponse);
+        try {
+            HttpEntity responseEntity = httpResponse.getEntity();
+            return (((statusCode == 204) || (responseEntity == null)) ? null : streamConsumer.consume(responseEntity.getContent()));
+        } catch (Exception ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
      * @param inputStream
      * @return {@link T}
      * @throws Exception

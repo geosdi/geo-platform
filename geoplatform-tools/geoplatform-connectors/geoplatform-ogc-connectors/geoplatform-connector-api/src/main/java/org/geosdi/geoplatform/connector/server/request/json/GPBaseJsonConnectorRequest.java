@@ -166,12 +166,12 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
     protected T internalResponseAsEntity(ClassicHttpResponse httpResponse) {
         int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        this.verifyHttpResponseStatus(httpResponse);
         try  {
-            this.checkHttpResponseStatus(statusCode);
             HttpEntity responseEntity = httpResponse.getEntity();
             return (((statusCode == 204) || (responseEntity == null)) ? null : this.readInternal(new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("###############################Error reading response (status {}) for Request : {} cause : {}\n", statusCode, this.getClass().getSimpleName(), ex.getMessage(), ex);
             throw new IncorrectResponseException(ex);
         }
     }

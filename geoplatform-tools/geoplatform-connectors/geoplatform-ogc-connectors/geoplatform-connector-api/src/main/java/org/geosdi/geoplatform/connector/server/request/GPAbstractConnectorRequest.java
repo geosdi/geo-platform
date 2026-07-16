@@ -43,6 +43,7 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.GPConnectorHttpStatusException;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -57,6 +58,7 @@ import java.net.URI;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.net.UrlEscapers.urlPathSegmentEscaper;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.client5.http.config.RequestConfig.custom;
 import static org.geosdi.geoplatform.connector.server.security.GPSecurityConnector.MOCK_SECURITY;
@@ -74,7 +76,7 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     protected final GPSecurityConnector securityConnector;
     protected final CloseableHttpClient clientConnection;
     private final CredentialsStore credentialStore;
-    private RequestConfig requestConfig;
+    private final RequestConfig requestConfig;
 
     /**
      * @param theServerConnector
@@ -89,6 +91,7 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
         this.serverURI = this.serverConnector.getURI();
         this.credentialStore = this.serverConnector.getCredentialsStore();
         this.securityConnector = (this.serverConnector.getSecurityConnector() == null ? MOCK_SECURITY : this.serverConnector.getSecurityConnector());
+        this.requestConfig = this.createRequestConfig();
     }
 
     /**
@@ -99,8 +102,7 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      * @return RequestConfig
      */
     protected RequestConfig prepareRequestConfig() {
-        return this.requestConfig = ((requestConfig != null) ? requestConfig : createRequestConfig());
-
+        return this.requestConfig;
     }
 
     /**
@@ -113,6 +115,77 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
             case 404 -> throw new ResourceNotFoundException();
             case 405 -> throw new IllegalStateException("Method not allowed");
         }
+    }
+
+    /**
+     * Validates the HTTP status of the response before its body is consumed. Request-specific status
+     * mappings are applied first via {@link #checkHttpResponseStatus(int)}; any remaining status
+     * outside the {@code 2xx} success family is reported as a {@link GPConnectorHttpStatusException}
+     * carrying the status code and the raw error body, instead of letting the body be parsed as a
+     * valid payload (which would surface as a misleading generic parsing error). Successful ({@code
+     * 2xx}) responses pass through untouched, leaving the entity available for reading.
+     *
+     * @param httpResponse
+     */
+    protected void verifyHttpResponseStatus(ClassicHttpResponse httpResponse) {
+        int statusCode = httpResponse.getCode();
+        try {
+            this.checkHttpResponseStatus(statusCode);
+        } catch (RuntimeException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new IllegalStateException(ex);
+        }
+        if ((statusCode < 200) || (statusCode > 299)) {
+            throw new GPConnectorHttpStatusException(statusCode, this.readErrorBody(httpResponse));
+        }
+    }
+
+    /**
+     * @param httpResponse
+     * @return the response body as a {@link String}, or an empty String if it cannot be read.
+     */
+    protected String readErrorBody(ClassicHttpResponse httpResponse) {
+        try {
+            HttpEntity responseEntity = httpResponse.getEntity();
+            return ((responseEntity != null) ? new String(IOUtils.toByteArray(responseEntity.getContent()), UTF_8) : "");
+        } catch (Exception ex) {
+            logger.warn("###############################Unable to read error response body for Request : {} cause : {}\n", this.getClass().getSimpleName(), ex.getMessage());
+            return "";
+        }
+    }
+
+    /**
+     * Builds a URI by appending the given path segments to the server base URI, joining them with
+     * {@code '/'} and URL-encoding each segment (so that names containing spaces or reserved
+     * characters produce a valid, unambiguous URI). Trailing/leading slashes on the base are
+     * normalized. Query parameters, if any, must be appended by the caller to the returned value.
+     *
+     * @param segments the raw (unencoded) path segments; none may be {@code null}
+     * @return the resolved URI as a {@link String}
+     */
+    protected String resolvePath(@Nonnull(when = NEVER) String... segments) {
+        checkArgument(segments != null, "The Parameter segments must not be null.");
+        String base = this.serverURI.toString();
+        StringBuilder builder = new StringBuilder(base.endsWith("/") ? base.substring(0, base.length() - 1) : base);
+        for (String segment : segments) {
+            checkArgument(segment != null, "A path segment must not be null.");
+            builder.append('/').append(urlPathSegmentEscaper().escape(segment));
+        }
+        return builder.toString();
+    }
+
+    /**
+     * URL-encodes a single path segment (e.g. a user-supplied resource name) so it can be safely
+     * embedded in a URI. Use it when a fixed path fragment cannot be expressed as discrete segments
+     * for {@link #resolvePath(String...)}.
+     *
+     * @param segment the raw (unencoded) path segment
+     * @return the URL-encoded segment
+     */
+    protected String escapePathSegment(@Nonnull(when = NEVER) String segment) {
+        checkArgument(segment != null, "The Parameter segment must not be null.");
+        return urlPathSegmentEscaper().escape(segment);
     }
 
     /**
@@ -160,8 +233,8 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     protected T internalResponseAsEntity(ClassicHttpResponse httpResponse) {
         int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        this.verifyHttpResponseStatus(httpResponse);
         try {
-            this.checkHttpResponseStatus(statusCode);
             HttpEntity responseEntity = httpResponse.getEntity();
             return ((statusCode == 204) || (responseEntity == null)) ? null : this.readInternal(responseEntity.getContent());
         } catch (Exception ex) {
@@ -176,8 +249,8 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     protected String internalResponseAsString(ClassicHttpResponse httpResponse) {
         int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        this.verifyHttpResponseStatus(httpResponse);
         try {
-            this.checkHttpResponseStatus(statusCode);
             HttpEntity responseEntity = httpResponse.getEntity();
             return statusCode == 204 || responseEntity == null ? "" : CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
         } catch (Exception ex) {
@@ -192,8 +265,8 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     protected InputStream internalResponseAsStream(ClassicHttpResponse httpResponse) {
         int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        this.verifyHttpResponseStatus(httpResponse);
         try {
-            this.checkHttpResponseStatus(statusCode);
             HttpEntity responseEntity = httpResponse.getEntity();
             return statusCode == 204 || responseEntity == null ? null : new ByteArrayInputStream(IOUtils.toByteArray(responseEntity.getContent()));
         } catch (Exception ex) {

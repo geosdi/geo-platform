@@ -140,11 +140,9 @@ class GPGeoserverUpdateFeatureTypeRequest extends GPJsonPutConnectorRequest<Bool
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
         String store = this.store.get();
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
         String feature = this.feature.get();
         checkArgument((feature != null) && !(feature.trim().isEmpty()), "The Parameter feature must not be null or an empty string.");
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes/").concat(feature)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes/").concat(feature)));
+        return this.resolvePath("workspaces", workspace, "datastores", store, "featuretypes", feature);
     }
 
     /**

@@ -128,9 +128,7 @@ public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorReq
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
         String store = this.store.get();
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store)));
+        return this.resolvePath("workspaces", workspace, "coveragestores", store);
     }
 
     /**

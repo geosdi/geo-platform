@@ -70,8 +70,7 @@ class GPGeoserverReloadCatalogRequest extends GPJsonPostConnectorRequest<Boolean
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("reload") : baseURI.concat("/reload")));
+        return this.resolvePath("reload");
     }
 
     /**

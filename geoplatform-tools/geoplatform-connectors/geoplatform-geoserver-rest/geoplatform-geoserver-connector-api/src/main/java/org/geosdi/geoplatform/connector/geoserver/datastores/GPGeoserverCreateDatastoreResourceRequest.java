@@ -117,9 +117,7 @@ class GPGeoserverCreateDatastoreResourceRequest extends GPJsonPostConnectorReque
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String dataStore = this.datsStoreName.get();
         checkArgument((dataStore != null) && !(dataStore.trim().isEmpty()), "The Parameter dataStore must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return  ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(dataStore).concat("/featuretypes.json")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(dataStore).concat("/featuretypes.json")));
+        return this.resolvePath("workspaces", workspace, "datastores", dataStore, "featuretypes.json");
     }
 
     /**

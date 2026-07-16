@@ -64,8 +64,7 @@ class GPGeoserverAboutSystemStatusRequest extends GPJsonGetConnectorRequest<GPGe
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("about/system-status.json") : baseURI.concat("/about/system-status.json")));
+        return this.resolvePath("about", "system-status.json");
     }
 
     /**

@@ -86,8 +86,7 @@ class GPGeoserverCreateGroupRequest extends GPJsonPostConnectorRequest<Boolean, 
     protected String createUriPath() throws Exception {
         String group = this.groupName.get();
         checkArgument((group != null) && !(group.trim().isEmpty()), "The Parameter groupName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/usergroup/group/").concat(group) : baseURI.concat("/security/usergroup/group/").concat(group)));
+        return this.resolvePath("security", "usergroup", "group", group);
     }
 
     /**

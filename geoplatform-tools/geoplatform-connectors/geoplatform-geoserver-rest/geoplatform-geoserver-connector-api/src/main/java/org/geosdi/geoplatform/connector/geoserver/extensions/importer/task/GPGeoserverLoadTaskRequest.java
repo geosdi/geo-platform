@@ -111,13 +111,11 @@ class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPGeoserverTa
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
         Integer importId = this.importId.get();
         checkArgument(importId != null && importId >= 0, "The importId must not be null or less than 0");
         Integer taskId = this.taskId.get();
         checkArgument(taskId != null && taskId >= 0, "The taskId must not be null or less than 0");
-        String path = (baseURI.endsWith("/") ? baseURI.concat("imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString())
-                : baseURI.concat("/imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString()));
+        String path = this.resolvePath("imports", importId.toString(), "tasks", taskId.toString());
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.expand)

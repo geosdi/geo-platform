@@ -158,9 +158,7 @@ class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorRequest<Bo
         String coverage = this.coverageName.get();
         checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
         coverage = coverage.concat(".json");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName).concat("/coverages/").concat(coverage)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName).concat("/coverages/").concat(coverage))));
+        URIBuilder uriBuilder = new URIBuilder(this.resolvePath("workspaces", workspaceName, "coveragestores", storeName, "coverages", coverage));
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.calculate)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

@@ -70,8 +70,7 @@ class GPGeoserverResetRequest extends GPJsonPostConnectorRequest<Boolean, Geoser
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("reset") : baseURI.concat("/reset")));
+        return this.resolvePath("reset");
     }
 
     /**

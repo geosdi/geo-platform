@@ -64,8 +64,7 @@ class GPGeoserverLoadRolesRequest extends GPJsonGetConnectorRequest<GPGeoserverR
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles") : baseURI.concat("/security/roles")));
+        return this.resolvePath("security", "roles");
     }
 
     /**

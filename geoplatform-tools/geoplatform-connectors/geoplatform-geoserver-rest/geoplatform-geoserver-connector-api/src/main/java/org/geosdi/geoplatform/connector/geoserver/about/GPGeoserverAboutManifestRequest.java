@@ -64,8 +64,7 @@ class GPGeoserverAboutManifestRequest extends GPJsonGetConnectorRequest<GPGeoser
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("about/manifest.json") : baseURI.concat("/about/manifest.json")));
+        return this.resolvePath("about", "manifest.json");
     }
 
     /**

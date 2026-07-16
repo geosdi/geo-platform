@@ -82,8 +82,7 @@ public class GPGeoserverLoadLayerRequest extends GPGeoserverExsistRequest<Geoser
     protected String createUriPath() throws Exception {
         String layerName = this.name.get();
         checkArgument(((layerName != null) && !(layerName.trim().isEmpty())), "The Parameter Name must not be null or an Empty String.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName) : baseURI.concat("/layers/").concat(layerName)));
+        return this.resolvePath("layers", layerName);
     }
 
     /**

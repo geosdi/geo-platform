@@ -82,9 +82,7 @@ class GPGeoserverLoadGroupRolesRequest extends GPJsonGetConnectorRequest<GPGeose
     protected String createUriPath() throws Exception {
         String group = this.group.get();
         checkArgument(group != null && !group.trim().isEmpty(), "The group must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles/").concat("group/").concat(group) :
-                baseURI.concat("/security/roles/").concat("group/").concat(group)));
+        return this.resolvePath("security", "roles", "group", group);
     }
 
     /**

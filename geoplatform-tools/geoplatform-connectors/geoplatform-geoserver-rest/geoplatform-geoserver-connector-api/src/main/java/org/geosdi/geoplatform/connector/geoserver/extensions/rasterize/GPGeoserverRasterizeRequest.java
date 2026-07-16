@@ -192,10 +192,9 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
         String rasterName = this.rasterName.get();
         checkArgument((rasterName != null) && !(rasterName.trim().isEmpty()), "The Parameter rasterName must not be null or an empty string.");
-        String path =  (baseURI.endsWith("/") ? baseURI.concat("sld/").concat(rasterName).concat("/rasterize.sld") : baseURI.concat("/sld/").concat(rasterName).concat("/rasterize.sld"));
+        String path = this.resolvePath("sld", rasterName, "rasterize.sld");
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.min, this.max, this.classes, this.digits, this.type, this.geoserverRamp, this.startColor, this.endColor, this.midColor)

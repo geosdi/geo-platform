@@ -72,9 +72,7 @@ class GPGeoserverLoadStructuredCoverageSchemaRequest extends GPGeoserverBaseStru
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string");
         String coverage = this.coverage.get();
         checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index.json")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index.json")));
+        return this.resolvePath("workspaces", workspace, "coveragestores", store, "coverages", coverage, "index.json");
     }
 
     /**

@@ -82,11 +82,9 @@ class GPGeoserverLoadDimensionRequest extends GPJsonGetConnectorRequest<GPGeoser
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
         String layerName = this.layerName.get();
         checkArgument(layerName != null && !layerName.trim().isEmpty(), "The parameter Layer Name must not be null");
-        return  (baseURI.endsWith("/") ? baseURI.concat("dimensions/").concat(layerName).concat(".json")
-                : baseURI.concat("/dimensions/").concat(layerName).concat(".json"));
+        return this.resolvePath("dimensions", layerName.concat(".json"));
     }
 
     /**

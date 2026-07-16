@@ -69,8 +69,6 @@ class GPGeoserverDeleteRoleRequest extends GPGeoserverBaseDeleteRoleRequest<Geos
     protected String createUriPath() throws Exception {
         String group = this.role.get();
         checkArgument(group != null && !group.trim().isEmpty(), "The role must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles/role/").concat(group).concat(".json") :
-                baseURI.concat("/security/roles/role/").concat(group).concat(".json")));
+        return this.resolvePath("security", "roles", "role", group.concat(".json"));
     }
 }

@@ -148,10 +148,7 @@ class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace mut not be null or an Empty String.");
         String coverageStore = this.coverageStore.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore mut not be null or an Empty String.");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ?
-                baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore) :
-                baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore))));
+        URIBuilder uriBuilder = new URIBuilder(this.resolvePath("workspaces", workspace, "coveragestores", coverageStore));
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.purge, this.recurse)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

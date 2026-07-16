@@ -66,8 +66,7 @@ class GPGeoserverLoadWFSServiceSettingsRequest extends GPJsonGetConnectorRequest
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("services/wfs/settings") : baseURI.concat("/services/wfs/settings")));
+        return this.resolvePath("services", "wfs", "settings");
     }
 
     /**

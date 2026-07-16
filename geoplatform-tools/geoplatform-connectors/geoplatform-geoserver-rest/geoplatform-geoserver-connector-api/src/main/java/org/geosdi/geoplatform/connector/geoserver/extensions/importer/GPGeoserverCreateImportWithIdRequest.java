@@ -138,10 +138,9 @@ class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorRequest<Ob
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
         Integer id = this.id.get();
         checkArgument(id != null && id >= 0, "Parameter id must not be null");
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("imports/").concat(id.toString()) : baseURI.concat("/imports/").concat(id.toString())));
+        String path = this.resolvePath("imports", id.toString());
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.async, this.exec, this.expand)

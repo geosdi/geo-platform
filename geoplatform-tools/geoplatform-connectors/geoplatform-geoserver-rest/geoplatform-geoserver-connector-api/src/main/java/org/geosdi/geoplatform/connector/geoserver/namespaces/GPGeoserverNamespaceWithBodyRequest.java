@@ -88,8 +88,7 @@ class GPGeoserverNamespaceWithBodyRequest extends GPJsonPostConnectorRequest<IGP
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("namespaces") : baseURI.concat("/namespaces")));
+        return this.resolvePath("namespaces");
     }
 
     /**

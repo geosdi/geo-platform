@@ -107,9 +107,7 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not ne null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coverages.json")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coverages.json"))));
+        URIBuilder uriBuilder = new URIBuilder(this.resolvePath("workspaces", workspace, "coverages.json"));
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.queryList)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

@@ -66,8 +66,7 @@ public class GPGeoserverGetMasterPasswordRequest extends GPJsonGetConnectorReque
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/masterpw.json") : baseURI.concat("/security/masterpw.json")));
+        return this.resolvePath("security", "masterpw.json");
     }
 
     /**

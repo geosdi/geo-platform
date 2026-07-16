@@ -82,9 +82,7 @@ class GPGeoserverLayerStylesRequest extends GPJsonGetConnectorRequest<GPGeoserve
     protected String createUriPath() throws Exception {
         String layerName = this.layer.get();
         checkArgument(((layerName != null) && !(layerName.trim().isEmpty())), "The Parameter Layer Name must not be null or an Empty String.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName).concat("/styles.json") :
-                baseURI.concat("/layers/").concat(layerName).concat("/styles.json")));
+        return this.resolvePath("layers", layerName, "styles.json");
     }
 
     /**

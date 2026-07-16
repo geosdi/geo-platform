@@ -114,12 +114,7 @@ class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest<Boolea
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String coverageStore = this.coverageStoreName.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return new URIBuilder(((baseURI.endsWith("/") ?
-                baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore)
-                        .concat("/coverages") :
-                baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore)
-                        .concat("/coverages")))).build().toString();
+        return new URIBuilder(this.resolvePath("workspaces", workspace, "coveragestores", coverageStore, "coverages")).build().toString();
     }
 
     /**

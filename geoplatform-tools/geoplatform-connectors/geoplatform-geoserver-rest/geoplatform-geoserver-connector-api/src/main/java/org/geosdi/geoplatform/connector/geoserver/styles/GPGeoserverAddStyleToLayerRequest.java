@@ -85,8 +85,7 @@ class GPGeoserverAddStyleToLayerRequest extends GPGeoserverBaseCreateStyleReques
     protected String createUriPath() throws Exception {
         String layerName = this.layer.get();
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layer name must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return (baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName).concat("/styles") : baseURI.concat("/layers/").concat(layerName).concat("/styles"));
+        return this.resolvePath("layers", layerName, "styles");
     }
 
     /**

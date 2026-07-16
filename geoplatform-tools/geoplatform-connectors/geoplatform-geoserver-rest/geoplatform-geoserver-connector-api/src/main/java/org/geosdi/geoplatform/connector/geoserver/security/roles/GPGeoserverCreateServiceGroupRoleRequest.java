@@ -99,11 +99,6 @@ class GPGeoserverCreateServiceGroupRoleRequest extends GPGeoserverBaseCreateRole
         checkArgument(role != null && !role.trim().isEmpty(), "The role must not be null.");
         checkArgument(service != null && !service.trim().isEmpty(), "The service must not be null.");
         checkArgument(group != null && !group.trim().isEmpty(), "The group must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ?
-                baseURI.concat("security/roles/service/").concat(service).concat("/role/").concat(role)
-                        .concat("/group/").concat(group) :
-                baseURI.concat("/security/roles/service/").concat(service).concat("/role/").concat(role)
-                        .concat("/group/").concat(group)));
+        return this.resolvePath("security", "roles", "service", service, "role", role, "group", group);
     }
 }

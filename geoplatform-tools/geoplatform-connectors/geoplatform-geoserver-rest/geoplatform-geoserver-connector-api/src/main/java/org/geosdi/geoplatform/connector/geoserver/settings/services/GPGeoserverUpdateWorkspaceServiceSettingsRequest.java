@@ -82,8 +82,6 @@ public abstract class GPGeoserverUpdateWorkspaceServiceSettingsRequest<Body exte
         checkArgument(serviceType != null, "The Parameter serviceType must not be null.");
         String workspaceName = this.workspace.get();
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("services/").concat(serviceType.toString()).concat("/workspaces/").concat(workspaceName).concat("/settings")
-                : baseURI.concat("/services/").concat(serviceType.toString()).concat("/workspaces/").concat(workspaceName).concat("/settings")));
+        return this.resolvePath("services", serviceType.toString(), "workspaces", workspaceName, "settings");
     }
 }

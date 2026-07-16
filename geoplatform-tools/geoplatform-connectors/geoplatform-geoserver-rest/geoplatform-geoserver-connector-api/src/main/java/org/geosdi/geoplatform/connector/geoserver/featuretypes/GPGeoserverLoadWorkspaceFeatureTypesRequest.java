@@ -66,8 +66,6 @@ class GPGeoserverLoadWorkspaceFeatureTypesRequest extends GPGeoserverLoadFeature
         String workspace = this.workspace.get();
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
         GPGeoserverFeatureTypeCategory featureTypeCategory = this.featureTypeCategory.get();
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())));
+        return this.resolvePath("workspaces", workspace, "featuretypes.json").concat("?list=").concat(featureTypeCategory.toString());
     }
 }

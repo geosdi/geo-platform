@@ -130,9 +130,7 @@ class GPGeoserverUpdateDatastoreRequest extends GPJsonPutConnectorRequest<Boolea
         String storeName = this.storeName.get();
         checkArgument((storeName != null) && !(storeName.trim().isEmpty()),
                 "The Parameter storeName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(storeName)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(storeName)));
+        return this.resolvePath("workspaces", workspaceName, "datastores", storeName);
     }
 
     /**

@@ -129,9 +129,7 @@ class GPGeoserverUpdateLayerRequest extends GPJsonPutConnectorRequest<Boolean, G
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
         String layerName = this.layerName.get();
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)));
+        return this.resolvePath("workspaces", workspaceName, "layers", layerName);
     }
 
     /**

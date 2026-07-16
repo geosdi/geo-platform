@@ -61,8 +61,7 @@ public class GPGeoserverNamespacesRequest extends GPGeoserverGetConnectorRequest
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("namespaces.json") : baseURI.concat("/namespaces.json")));
+        return this.resolvePath("namespaces.json");
     }
 
     /**

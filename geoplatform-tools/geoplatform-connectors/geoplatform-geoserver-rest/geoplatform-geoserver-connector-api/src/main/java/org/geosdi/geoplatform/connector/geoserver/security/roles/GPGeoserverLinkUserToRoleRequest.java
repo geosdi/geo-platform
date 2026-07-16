@@ -87,9 +87,6 @@ class GPGeoserverLinkUserToRoleRequest extends GPGeoserverBaseCreateRoleRequest<
         String user = this.user.get();
         checkArgument(role != null && !role.trim().isEmpty(), "The role must not be null.");
         checkArgument(user != null && !user.trim().isEmpty(), "The user must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ?
-                baseURI.concat("security/roles/role/").concat(role).concat("/user/").concat(user).concat(".json") :
-                baseURI.concat("/security/roles/role/").concat(role).concat("/user/").concat(user).concat(".json")));
+        return this.resolvePath("security", "roles", "role", role, "user", user.concat(".json"));
     }
 }

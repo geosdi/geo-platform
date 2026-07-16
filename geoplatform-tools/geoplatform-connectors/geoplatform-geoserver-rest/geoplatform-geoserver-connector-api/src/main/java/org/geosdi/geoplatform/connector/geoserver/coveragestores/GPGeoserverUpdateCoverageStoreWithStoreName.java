@@ -188,9 +188,7 @@ class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequ
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
         IGPFileExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
+        String path = this.resolvePath("workspaces", workspace, "coveragestores", store, method.toString()).concat(".").concat(format.toString());
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.update, this.configure, this.filename, this.coverageName)

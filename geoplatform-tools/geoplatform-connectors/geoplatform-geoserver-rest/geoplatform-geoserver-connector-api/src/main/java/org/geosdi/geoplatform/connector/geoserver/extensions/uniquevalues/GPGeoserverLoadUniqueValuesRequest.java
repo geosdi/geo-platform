@@ -96,8 +96,7 @@ class GPGeoserverLoadUniqueValuesRequest extends GPJsonGetConnectorRequest<GPGeo
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
         String layerAttribute = this.layerAttribute.get();
         checkArgument((layerAttribute != null) && !(layerAttribute.trim().isEmpty()), "The Parameter layerAttribute must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return (baseURI.endsWith("/") ? baseURI.concat("uniquevalue/").concat(layerName).concat("/").concat(layerAttribute).concat("/classify.json") : baseURI.concat("/uniquevalue/").concat(layerName).concat("/").concat(layerAttribute).concat("/classify.json"));
+        return this.resolvePath("uniquevalue", layerName, layerAttribute, "classify.json");
     }
 
     /**

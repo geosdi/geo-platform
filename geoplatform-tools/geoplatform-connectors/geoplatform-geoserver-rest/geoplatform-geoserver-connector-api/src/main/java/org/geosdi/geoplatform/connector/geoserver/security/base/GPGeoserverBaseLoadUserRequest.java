@@ -80,8 +80,7 @@ public abstract class GPGeoserverBaseLoadUserRequest<R extends GeoserverBaseLoad
     protected String createUriPath() throws Exception {
         String userName = this.user.get();
         checkArgument((userName != null) && !(userName.trim().isEmpty()), "The Parameter userName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/usergroup/users/").concat(userName) : baseURI.concat("/security/usergroup/users/").concat(userName)));
+        return this.resolvePath("security", "usergroup", "users", userName);
     }
 
     /**

@@ -95,8 +95,7 @@ class GPGeoserverLoadWorkspaceLayerGroupRequest extends GPGeoserverExsistRequest
         checkArgument((layerGroupName != null) && !(layerGroupName.trim().isEmpty()), "The Parameter layerGroupName must not be null or an empty string.");
         String workSpanceName = this.workSpace.get();
         checkArgument((workSpanceName != null) && !(workSpanceName.trim().isEmpty()), "The Parameter workSpanceName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workSpanceName).concat("/layergroups/").concat(layerGroupName) : baseURI.concat("/workspaces/").concat(workSpanceName).concat("/layergroups/").concat(layerGroupName)));
+        return this.resolvePath("workspaces", workSpanceName, "layergroups", layerGroupName);
     }
 
 //    /**

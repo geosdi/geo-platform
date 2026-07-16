@@ -101,9 +101,7 @@ public abstract class GPGeoserverCreateStoreRequest<Body extends GPGeoserverServ
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat(this.storeRestPath)
-                : baseURI.concat("/workspaces/").concat(workspace).concat(this.storeRestPath)));
+        return this.resolvePath("workspaces", workspace).concat(this.storeRestPath);
     }
 
     /**

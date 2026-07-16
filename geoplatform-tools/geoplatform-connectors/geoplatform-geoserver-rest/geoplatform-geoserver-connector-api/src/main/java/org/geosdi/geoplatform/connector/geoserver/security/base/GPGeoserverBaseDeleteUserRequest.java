@@ -84,8 +84,7 @@ public abstract class GPGeoserverBaseDeleteUserRequest<R extends GeoserverBaseDe
     protected String createUriPath() throws Exception {
         String userName = this.user.get();
         checkArgument((userName != null) && !(userName.trim().isEmpty()), "The Parameter userName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/usergroup/user/").concat(userName) : baseURI.concat("/security/usergroup/user/").concat(userName)));
+        return this.resolvePath("security", "usergroup", "user", userName);
     }
 
     /**

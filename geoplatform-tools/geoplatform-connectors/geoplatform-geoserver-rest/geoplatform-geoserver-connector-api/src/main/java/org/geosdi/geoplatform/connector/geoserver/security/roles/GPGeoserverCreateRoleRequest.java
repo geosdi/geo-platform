@@ -68,8 +68,6 @@ class GPGeoserverCreateRoleRequest extends GPGeoserverBaseCreateRoleRequest<Geos
     protected String createUriPath() throws Exception {
         String role = this.role.get();
         checkArgument(role != null && !role.trim().isEmpty(), "The role must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles/role/").concat(role).concat(".json") :
-                baseURI.concat("/security/roles/role/").concat(role).concat(".json")));
+        return this.resolvePath("security", "roles", "role", role.concat(".json"));
     }
 }

@@ -115,9 +115,7 @@ class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequest<Boo
         String datastoreName = this.datastoreName.get();
         checkArgument((datastoreName != null) && !(datastoreName.trim().isEmpty()), "The Parameter datastoreName mut not be null or an Empty String.");
         String recurse = this.recurse.get().toString();
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("?recurse=").concat(recurse)));
+        return this.resolvePath("workspaces", workspaceName, "datastores", datastoreName).concat("?recurse=").concat(recurse);
     }
 
     /**

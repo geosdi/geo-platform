@@ -125,10 +125,7 @@ public abstract class GPGeoserverLoadWorkspaceStoreRequest<T extends GPGeoserver
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String wmsStore = this.store.get();
         checkArgument((wmsStore != null) && !(wmsStore.trim().isEmpty()), "The Parameter wmsStore must not be null or an empty string");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace)
-                .concat(this.storeRestPath).concat(wmsStore).concat(".json") : baseURI.concat("/workspaces/").concat(workspace)
-                .concat(this.storeRestPath).concat(wmsStore).concat(".json"))));
+        URIBuilder uriBuilder = new URIBuilder(this.resolvePath("workspaces", workspace).concat(this.storeRestPath).concat(this.escapePathSegment(wmsStore)).concat(".json"));
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.quietOnNotFound)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

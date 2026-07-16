@@ -137,9 +137,7 @@ class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<IGPGe
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces?default=").concat(this.defaultWorkspace.get().toString())
-                : baseURI.concat("/workspaces?default=").concat(this.defaultWorkspace.get().toString())));
+        return this.resolvePath("workspaces").concat("?default=").concat(this.defaultWorkspace.get().toString());
     }
 
     /**

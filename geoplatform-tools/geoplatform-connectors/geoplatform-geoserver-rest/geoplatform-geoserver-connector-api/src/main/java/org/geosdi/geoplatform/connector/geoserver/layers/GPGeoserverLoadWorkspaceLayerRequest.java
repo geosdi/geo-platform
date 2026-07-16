@@ -111,12 +111,8 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPGeoserverExsistReque
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
         String layerName = this.layerName.get();
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
         String quietOnNotFound = this.quietOnNotFound.get().toString();
-
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)
-                .concat("?quietOnNotFound=").concat(quietOnNotFound)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers/").concat(layerName).concat("?quietOnNotFound=").concat(quietOnNotFound)));
+        return this.resolvePath("workspaces", workspaceName, "layers", layerName).concat("?quietOnNotFound=").concat(quietOnNotFound);
     }
 
     /**

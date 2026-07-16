@@ -66,8 +66,7 @@ public class GPGeoserverLoadContactSettingsRequest extends GPJsonGetConnectorReq
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("settings/contact.json") : baseURI.concat("/settings/contact.json")));
+        return this.resolvePath("settings", "contact.json");
     }
 
     /**

@@ -84,9 +84,7 @@ class GPGeoserverWorkspaceStylesRequest extends GPGeoserverGetConnectorRequest<G
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
         checkArgument(((workspaceName != null) && !(workspaceName.trim().isEmpty())), "The Parameter Workspace Name must not be null or an Empty String.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/styles.json") :
-                baseURI.concat("/workspaces/").concat(workspaceName).concat("/styles.json")));
+        return this.resolvePath("workspaces", workspaceName, "styles.json");
     }
 
     /**

@@ -64,8 +64,7 @@ class GPGeoserverFontsRequest extends GPJsonGetConnectorRequest<GeoserverFontSto
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("fonts.json") : baseURI.concat("/fonts.json")));
+        return this.resolvePath("fonts.json");
     }
 
     /**

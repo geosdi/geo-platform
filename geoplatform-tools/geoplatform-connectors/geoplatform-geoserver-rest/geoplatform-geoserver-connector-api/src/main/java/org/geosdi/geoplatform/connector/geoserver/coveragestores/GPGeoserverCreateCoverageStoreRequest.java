@@ -110,9 +110,7 @@ public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRe
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores")));
+        return this.resolvePath("workspaces", workspace, "coveragestores");
     }
 
     /**

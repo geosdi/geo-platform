@@ -91,8 +91,7 @@ class GPGeoserverCreateWorkspaceLayerGroupRequest extends GPGeoserverBaseCreateL
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspace.get();
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return (baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layergroups") : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layergroups"));
+        return this.resolvePath("workspaces", workspaceName, "layergroups");
     }
 
     /**

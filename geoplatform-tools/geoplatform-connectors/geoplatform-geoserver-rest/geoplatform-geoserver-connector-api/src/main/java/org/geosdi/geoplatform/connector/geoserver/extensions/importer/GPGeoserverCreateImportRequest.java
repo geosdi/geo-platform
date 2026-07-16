@@ -127,8 +127,7 @@ class GPGeoserverCreateImportRequest extends GPJsonPostConnectorRequest<GPGeoser
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("imports") : baseURI.concat("/imports")));
+        String path = this.resolvePath("imports");
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.async, this.exec, this.expand)

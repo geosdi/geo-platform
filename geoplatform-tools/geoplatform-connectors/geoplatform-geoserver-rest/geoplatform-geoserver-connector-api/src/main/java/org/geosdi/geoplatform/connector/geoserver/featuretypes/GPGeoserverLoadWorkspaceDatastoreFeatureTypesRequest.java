@@ -85,8 +85,6 @@ class GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest extends GPGeoserverLo
         String store = this.store.get();
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         GPGeoserverFeatureTypeCategory featureTypeCategory = this.featureTypeCategory.get();
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())));
+        return this.resolvePath("workspaces", workspace, "datastores", store, "featuretypes.json").concat("?list=").concat(featureTypeCategory.toString());
     }
 }

@@ -65,8 +65,7 @@ class GPGeoserverLoadGroupsRequest extends GPJsonGetConnectorRequest<GPGeoserver
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/usergroup/groups") : baseURI.concat("/security/usergroup/groups")));
+        return this.resolvePath("security", "usergroup", "groups");
     }
 
     /**

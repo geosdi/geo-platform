@@ -70,8 +70,7 @@ class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorRequest<GP
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces.json") : baseURI.concat("/workspaces.json")));
+        return this.resolvePath("workspaces.json");
     }
 
     /**

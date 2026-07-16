@@ -108,8 +108,7 @@ public abstract class GPGeoserverBaseUpdateStyleRequest<StyleBody, R extends Geo
     protected String createUriPath() throws Exception {
         String styleName = this.style.get();
         checkArgument((styleName != null) && !(styleName.trim().isEmpty()), "The Parameter styleName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return (baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName));
+        return this.resolvePath("styles", styleName);
     }
 
     /**

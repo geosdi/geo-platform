@@ -120,8 +120,7 @@ public abstract class GPGeoserverBaseDeleteStyleRequest<R extends GeoserverBaseD
         //        styleName = REPLACEMENT.replace(styleName);
         String recurse = this.recurse.get().toString();
         String purge = this.purge.get().toString();
-        String baseURI = this.serverURI.toString();
-        return new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
+        return new URIBuilder(this.resolvePath("styles", styleName))
                 .addParameter("recurse", recurse)
                 .addParameter("purge", purge)
                 .build().toString();

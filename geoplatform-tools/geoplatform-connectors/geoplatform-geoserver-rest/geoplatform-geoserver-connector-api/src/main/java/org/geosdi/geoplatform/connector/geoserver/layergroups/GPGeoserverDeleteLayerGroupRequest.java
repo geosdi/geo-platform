@@ -68,7 +68,6 @@ class GPGeoserverDeleteLayerGroupRequest extends GPGeoserverBaseDeleteLayerGroup
     protected String createUriPath() throws Exception {
         String layerGroupName = this.name.get();
         checkArgument((layerGroupName != null) && !(layerGroupName.trim().isEmpty()), "The Parameter layerGroupName must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return (baseURI.endsWith("/") ? baseURI.concat("layergroups/").concat(layerGroupName) : baseURI.concat("/layergroups/").concat(layerGroupName));
+        return this.resolvePath("layergroups", layerGroupName);
     }
 }

@@ -98,9 +98,7 @@ public class GPGeoserverDeleteLayerRequest extends GPJsonDeleteConnectorRequest<
         String layerName = this.layerName.get();
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName mut not be null or an Empty String.");
         String recurse = this.recurse.get().toString();
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/layers/").concat(layerName).concat("?recurse=").concat(recurse)));
+        return this.resolvePath("layers", layerName).concat("?recurse=").concat(recurse);
     }
 
     /**

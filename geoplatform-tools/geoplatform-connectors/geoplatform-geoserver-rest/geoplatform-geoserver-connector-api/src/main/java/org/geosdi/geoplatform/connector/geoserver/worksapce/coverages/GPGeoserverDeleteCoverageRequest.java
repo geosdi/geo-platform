@@ -129,9 +129,7 @@ class GPGeoserverDeleteCoverageRequest extends GPJsonDeleteConnectorRequest<Bool
         String coverageStore = this.coverageStore.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
         String recurse = this.recurse.get().toString();
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/").concat(coverage).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/").concat(coverage).concat("?recurse=").concat(recurse)));
+        return this.resolvePath("workspaces", workspace, "coveragestores", coverageStore, "coverages", coverage).concat("?recurse=").concat(recurse);
     }
 
     /**

@@ -96,10 +96,7 @@ class GPGeoserverLoadServiceGroupRolesRequest extends GPJsonGetConnectorRequest<
         String service = this.service.get();
         checkArgument(group != null && !group.trim().isEmpty(), "The group must not be null.");
         checkArgument(service != null && !service.trim().isEmpty(), "The service must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ?
-                baseURI.concat("security/roles/service/").concat(service).concat("/group/").concat(group) :
-                baseURI.concat("/security/roles/service/").concat(service).concat("/group/").concat(group)));
+        return this.resolvePath("security", "roles", "service", service, "group", group);
     }
 
     /**

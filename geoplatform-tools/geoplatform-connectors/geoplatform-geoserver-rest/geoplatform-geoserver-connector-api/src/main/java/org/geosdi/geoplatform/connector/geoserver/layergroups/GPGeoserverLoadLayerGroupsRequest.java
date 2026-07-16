@@ -66,8 +66,7 @@ class GPGeoserverLoadLayerGroupsRequest extends GPGeoserverExsistRequest<GPGeose
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layergroups.json") : baseURI.concat("/layergroups.json")));
+        return this.resolvePath("layergroups.json");
     }
 
     /**

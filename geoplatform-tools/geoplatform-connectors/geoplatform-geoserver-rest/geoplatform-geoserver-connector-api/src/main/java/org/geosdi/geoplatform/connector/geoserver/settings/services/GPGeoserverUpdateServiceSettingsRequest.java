@@ -88,9 +88,7 @@ public abstract class GPGeoserverUpdateServiceSettingsRequest<Body extends Geose
     protected String createUriPath() throws Exception {
         GeoserverServiceType serviceType = toService();
         checkArgument(serviceType != null, "The Parameter serviceType must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("services/").concat(serviceType.toString()).concat("/settings")
-                : baseURI.concat("/services/").concat(serviceType.toString()).concat("/settings")));
+        return this.resolvePath("services", serviceType.toString(), "settings");
     }
 
     /**

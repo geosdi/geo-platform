@@ -66,8 +66,7 @@ class GPGeoserverLoadLoggingRequest extends GPJsonGetConnectorRequest<GeoserverL
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("logging.json") : baseURI.concat("/logging.json")));
+        return this.resolvePath("logging.json");
     }
 
     /**

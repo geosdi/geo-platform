@@ -116,9 +116,7 @@ public abstract class GPGeoserverUpdateStoreRequest<Body extends GPGeoserverServ
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String wmsStore = this.store.get();
         checkArgument((wmsStore != null) && !(wmsStore.trim().isEmpty()), "The Parameter wmsStore must not be null or an empty string");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat(this.storeRestPath).concat(wmsStore)
-                : baseURI.concat("/workspaces/").concat(workspace).concat(this.storeRestPath).concat(wmsStore)));
+        return this.resolvePath("workspaces", workspace).concat(this.storeRestPath).concat(this.escapePathSegment(wmsStore));
     }
 
     /**

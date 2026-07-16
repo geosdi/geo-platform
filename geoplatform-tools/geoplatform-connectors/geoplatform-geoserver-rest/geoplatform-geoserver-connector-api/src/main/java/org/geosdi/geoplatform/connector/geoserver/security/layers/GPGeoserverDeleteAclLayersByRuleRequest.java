@@ -87,9 +87,7 @@ class GPGeoserverDeleteAclLayersByRuleRequest extends GPJsonDeleteConnectorReque
     protected String createUriPath() throws Exception {
         String resource = this.resource.get();
         checkArgument(resource != null, "The resource must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/layers/").concat(resource) :
-                baseURI.concat("/security/acl/layers/").concat(resource)));
+        return this.resolvePath("security", "acl", "layers", resource);
     }
 
     /**

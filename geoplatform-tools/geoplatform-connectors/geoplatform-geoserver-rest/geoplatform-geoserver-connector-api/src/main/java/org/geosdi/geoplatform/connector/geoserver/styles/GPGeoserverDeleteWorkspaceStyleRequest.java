@@ -88,8 +88,7 @@ class GPGeoserverDeleteWorkspaceStyleRequest extends GPGeoserverBaseDeleteStyleR
         //        styleName = REPLACEMENT.replace(styleName);
         String recurse = this.recurse.get().toString();
         String purge = this.purge.get().toString();
-        String baseURI = this.serverURI.toString();
-        return new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/styles/").concat(styleName) : baseURI.concat("/workspaces/").concat(workspaceName).concat("/styles/").concat(styleName)))
+        return new URIBuilder(this.resolvePath("workspaces", workspaceName, "styles", styleName))
                 .addParameter("recurse", recurse)
                 .addParameter("purge", purge)
                 .build().toString();

@@ -112,12 +112,8 @@ class GPGeoserverLoadDatastoreRequest extends GPGeoserverExsistRequest<GPGeoserv
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an Empty String.");
         String storeName = this.storeName.get();
         checkArgument((storeName != null) && !(storeName.trim().isEmpty()), "The Parameter storeName must not be null or an Empty String.");
-        String baseURI = this.serverURI.toString();
         String quietNotFound = this.quietNotFound.get().toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/")
-                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/")
-                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)));
+        return this.resolvePath("workspaces", workspaceName, "datastores", storeName).concat("?quietOnNotFound=").concat(quietNotFound);
     }
 
     /**

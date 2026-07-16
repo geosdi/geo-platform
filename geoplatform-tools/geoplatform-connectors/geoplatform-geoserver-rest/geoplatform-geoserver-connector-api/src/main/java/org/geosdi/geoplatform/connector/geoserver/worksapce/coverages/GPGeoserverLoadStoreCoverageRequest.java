@@ -124,9 +124,7 @@ class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistRequest<GPGeo
         String store = this.store.get();
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         String quietOnNotFound = this.quietOnNotFound.get().toString();
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("?quietOnNotFound=").concat(quietOnNotFound)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("?quietOnNotFound=").concat(quietOnNotFound)));
+        return this.resolvePath("workspaces", workspace, "coveragestores", store, "coverages", coverage).concat("?quietOnNotFound=").concat(quietOnNotFound);
     }
 
     /**

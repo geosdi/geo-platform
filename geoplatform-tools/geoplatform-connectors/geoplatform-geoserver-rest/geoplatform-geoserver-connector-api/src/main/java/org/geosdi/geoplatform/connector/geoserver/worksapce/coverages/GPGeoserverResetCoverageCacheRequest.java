@@ -114,12 +114,7 @@ class GPGeoserverResetCoverageCacheRequest extends GPJsonPostConnectorRequest<Bo
         checkArgument((storeName != null) && !(storeName.trim().isEmpty()), "The Parameter storeName must not be null or an empty string.");
         String coverage = this.coverageName.get();
         checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        return new URIBuilder(((baseURI.endsWith("/") ?
-                baseURI.concat("workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName)
-                        .concat("/coverages/").concat(coverage).concat("/reset.json") :
-                baseURI.concat("/workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName)
-                        .concat("/coverages/").concat(coverage).concat("/reset.json")))).toString();
+        return new URIBuilder(this.resolvePath("workspaces", workspaceName, "coveragestores", storeName, "coverages", coverage, "reset.json")).toString();
     }
 
     /**

@@ -82,9 +82,7 @@ public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeo
     protected String createUriPath() throws Exception {
         String prefix = this.prefix.get();
         checkArgument(((prefix != null) && !(prefix.isEmpty())), "The Parameter prefix must not be null or an Empty String.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("namespaces/").concat(prefix).concat(".json")
-                : baseURI.concat("/namespaces/").concat(prefix).concat(".json")));
+        return this.resolvePath("namespaces", prefix.concat(".json"));
     }
 
     /**

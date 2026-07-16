@@ -81,9 +81,7 @@ class GPGeoserverLoadUserRolesRequest extends GPJsonGetConnectorRequest<GPGeoser
     protected String createUriPath() throws Exception {
         String user = this.user.get();
         checkArgument(user != null && !user.trim().isEmpty(), "The user must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles/").concat("user/").concat(user) :
-                baseURI.concat("/security/roles/").concat("user/").concat(user)));
+        return this.resolvePath("security", "roles", "user", user);
     }
 
     /**

@@ -77,8 +77,7 @@ public abstract class GPGeoserverBaseCreateLayerGroupRequest<LayerGroupBody, R e
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return (baseURI.endsWith("/") ? baseURI.concat("layergroups") : baseURI.concat("/layergroups"));
+        return this.resolvePath("layergroups");
     }
 
     /**

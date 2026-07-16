@@ -66,9 +66,7 @@ class GPGeoserverLoadAclLayersRequest extends GPJsonGetConnectorRequest<GPGeoser
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/layers.json") :
-                baseURI.concat("/security/acl/layers.json")));
+        return this.resolvePath("security", "acl", "layers.json");
     }
 
     /**

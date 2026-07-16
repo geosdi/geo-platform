@@ -120,9 +120,7 @@ class GPGeoserverLoadStructuredCoverageGranulesRequest extends GPGeoserverBaseSt
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string");
         String coverage = this.coverage.get();
         checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index/granules.json")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index/granules.json"))));
+        URIBuilder uriBuilder = new URIBuilder(this.resolvePath("workspaces", workspace, "coveragestores", store, "coverages", coverage, "index", "granules.json"));
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.filter, this.offset, this.limit)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

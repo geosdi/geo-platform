@@ -95,8 +95,7 @@ class GPGeoserverImporterRunningRequest extends GPJsonGetConnectorRequest<Boolea
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("imports") : baseURI.concat("/imports")));
+        return this.resolvePath("imports");
     }
 
     /**

@@ -87,9 +87,7 @@ class GPGeoserverDeleteAclServicesByRuleRequest extends GPJsonDeleteConnectorReq
     protected String createUriPath() throws Exception {
         String resource = this.resource.get();
         checkArgument(resource != null, "The resource must not be null.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/services/").concat(resource) :
-                baseURI.concat("/security/acl/services/").concat(resource)));
+        return this.resolvePath("security", "acl", "services", resource);
     }
 
     /**

@@ -125,10 +125,7 @@ public abstract class GPGeoserverDeleteStoreRequest<R extends GeoserverDeleteSto
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String storeName = this.store.get();
         checkArgument((storeName != null) && !(storeName.trim().isEmpty()), "The Parameter store must not be null or an empty string");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace)
-                .concat(this.storeRestPath).concat(storeName) : baseURI.concat("/workspaces/").concat(workspace)
-                .concat(this.storeRestPath).concat(storeName))));
+        URIBuilder uriBuilder = new URIBuilder(this.resolvePath("workspaces", workspace).concat(this.storeRestPath).concat(this.escapePathSegment(storeName)));
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.recurse)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

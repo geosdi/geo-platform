@@ -207,9 +207,7 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
         GPGeoserverDataStoreFileExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
+        String path = this.resolvePath("workspaces", workspace, "datastores", store, method.toString().concat(".").concat(format.toString()));
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.update, this.configure, this.filename, this.target, this.charset)

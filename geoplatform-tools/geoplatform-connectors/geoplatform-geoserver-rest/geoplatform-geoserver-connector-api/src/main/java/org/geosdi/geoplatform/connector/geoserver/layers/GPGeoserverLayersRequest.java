@@ -65,8 +65,7 @@ public class GPGeoserverLayersRequest extends GPGeoserverGetConnectorRequest<GPG
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers.json") : baseURI.concat("/layers.json")));
+        return this.resolvePath("layers.json");
     }
 
     /**

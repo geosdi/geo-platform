@@ -82,8 +82,7 @@ public abstract class GPGeoserverBaseCreateStyleRequest<StyleBody, R extends Geo
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return (baseURI.endsWith("/") ? baseURI.concat("styles") : baseURI.concat("/styles"));
+        return this.resolvePath("styles");
     }
 
     /**

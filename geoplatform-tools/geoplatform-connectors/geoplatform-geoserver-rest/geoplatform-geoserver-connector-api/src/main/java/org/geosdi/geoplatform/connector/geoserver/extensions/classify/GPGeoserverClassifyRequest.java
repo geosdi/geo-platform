@@ -226,12 +226,9 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
         String vectorName = this.vectorName.get();
         checkArgument((vectorName != null) && !(vectorName.trim().isEmpty()), "The Parameter vectorName must not be null or an empty string.");
-        String path = (baseURI.endsWith("/") ?
-                baseURI.concat("sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()) :
-                baseURI.concat("/sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()));
+        String path = this.resolvePath("sld", vectorName, "classifier".concat(".").concat(this.format.get()));
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.attribute, this.geoserverRamp, this.intervals, this.method, this.open, this.reverse, this.normalize,

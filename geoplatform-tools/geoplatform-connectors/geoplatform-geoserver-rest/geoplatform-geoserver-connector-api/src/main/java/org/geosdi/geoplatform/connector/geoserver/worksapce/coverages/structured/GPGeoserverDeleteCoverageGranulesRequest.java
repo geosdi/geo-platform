@@ -75,9 +75,7 @@ class GPGeoserverDeleteCoverageGranulesRequest extends GPGeoserverBaseDeleteStru
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string");
         String coverage = this.coverage.get();
         checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index/granules")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index/granules"))));
+        URIBuilder uriBuilder = new URIBuilder(this.resolvePath("workspaces", workspace, "coveragestores", store, "coverages", coverage, "index", "granules"));
         Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.filter, this.purge, this.updateBbox)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

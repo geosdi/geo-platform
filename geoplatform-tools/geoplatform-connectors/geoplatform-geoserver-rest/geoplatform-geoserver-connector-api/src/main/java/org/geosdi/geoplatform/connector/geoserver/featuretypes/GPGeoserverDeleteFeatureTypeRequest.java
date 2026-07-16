@@ -130,9 +130,7 @@ class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRequest<B
         String featureTypeName = this.featureTypeName.get();
         checkArgument((featureTypeName != null) && !(featureTypeName.trim().isEmpty()), "The Parameter featureTypeName mut not be null or an Empty String.");
         String recurse = this.recurse.get().toString();
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)));
+        return this.resolvePath("workspaces", workspaceName, "datastores", datastoreName, "featuretypes", featureTypeName).concat("?recurse=").concat(recurse);
     }
 
     /**

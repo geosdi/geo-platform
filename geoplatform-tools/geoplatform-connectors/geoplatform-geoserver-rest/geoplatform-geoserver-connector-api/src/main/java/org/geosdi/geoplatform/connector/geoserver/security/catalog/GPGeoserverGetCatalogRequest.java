@@ -66,8 +66,7 @@ class GPGeoserverGetCatalogRequest extends GPJsonGetConnectorRequest<GPGeoserver
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/catalog.json") : baseURI.concat("/security/acl/catalog.json")));
+        return this.resolvePath("security", "acl", "catalog.json");
     }
 
     /**

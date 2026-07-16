@@ -67,8 +67,7 @@ class GPGeoserverStylesRequest extends GPGeoserverGetConnectorRequest<GPGeoserve
      */
     @Override
     protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("styles.json") : baseURI.concat("/styles.json")));
+        return this.resolvePath("styles.json");
     }
 
     /**

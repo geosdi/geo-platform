@@ -124,13 +124,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
      */
     @Override
     public GeoserverLoadWorkspaceFeatureTypesRequest loadWorkspaceFeatureTypesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspaceFeatureTypesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspaceFeatureTypesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -138,13 +133,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
      */
     @Override
     public GeoserverLoadWorkspaceDatastoreFeatureTypesRequest loadWorkspaceDatastoreFeatureTypesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -152,13 +142,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
      */
     @Override
     public GeoserverCreateFeatureTypeRequest createFeatureTypeRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateFeatureTypeRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateFeatureTypeRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -166,13 +151,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
      */
     @Override
     public GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteFeatureTypeRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteFeatureTypeRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -180,13 +160,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
      */
     @Override
     public GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadFeatureTypeWithUrlRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadFeatureTypeWithUrlRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -194,12 +169,7 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
      */
     @Override
     public GeoserverUpdateFeatureTypeRequest updateFeatureTypeRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateFeatureTypeRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateFeatureTypeRequest(this, this.jacksonSupport);
     }
 }

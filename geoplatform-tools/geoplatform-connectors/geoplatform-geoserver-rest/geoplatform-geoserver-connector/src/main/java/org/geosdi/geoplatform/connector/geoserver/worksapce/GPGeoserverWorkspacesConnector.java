@@ -124,13 +124,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
      */
     @Override
     public GeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -138,13 +133,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
      */
     @Override
     public GeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspaceRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspaceRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -152,13 +142,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
      */
     @Override
     public GeoserverCreateWorkspaceRequest createWorkspaceRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateWorkspaceRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateWorkspaceRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -166,13 +151,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
      */
     @Override
     public GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteWorkspaceRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteWorkspaceRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -180,12 +160,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
      */
     @Override
     public GeoserverUpdateWorkspaceRequest updateWorkspaceRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateWorkspaceRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateWorkspaceRequest(this, this.jacksonSupport);
     }
 }

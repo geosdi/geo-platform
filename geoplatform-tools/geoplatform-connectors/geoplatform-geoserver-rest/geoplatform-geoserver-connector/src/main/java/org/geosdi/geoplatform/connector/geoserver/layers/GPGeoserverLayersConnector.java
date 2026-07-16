@@ -124,13 +124,8 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
      */
     @Override
     public GPGeoserverLayersRequest loadLayersRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLayersRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLayersRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -138,13 +133,8 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
      */
     @Override
     public GeoserverLoadLayerRequest loadLayerRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadLayerRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadLayerRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -152,13 +142,8 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
      */
     @Override
     public GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspaceLayersRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspaceLayersRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -166,13 +151,8 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
      */
     @Override
     public GeoserverLoadWorkspaceLayerRequest loadWorkspaceLayerRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspaceLayerRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspaceLayerRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -180,13 +160,8 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
      */
     @Override
     public GeoserverDeleteLayerRequest deleteLayerRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteLayerRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteLayerRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -194,13 +169,8 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
      */
     @Override
     public GeoserverUpdateLayerRequest updateLayerRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateLayerRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateLayerRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -208,12 +178,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
      */
     @Override
     public GeoserverDeleteLayerWorkspaceRequest deleteLayerWorkspaceRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteLayerWorkspaceRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteLayerWorkspaceRequest(this, this.jacksonSupport);
     }
 }

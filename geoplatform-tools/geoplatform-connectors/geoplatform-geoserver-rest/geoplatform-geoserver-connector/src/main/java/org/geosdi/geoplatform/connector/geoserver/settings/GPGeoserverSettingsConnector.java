@@ -124,13 +124,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverWMSService
      */
     @Override
     public GPGeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadGlobalSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadGlobalSettingsRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -138,13 +133,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverWMSService
      */
     @Override
     public GeoserverUpdateGlobalSettingsRequest updateGlobalSettingsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateGlobalSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateGlobalSettingsRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -152,12 +142,7 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverWMSService
      */
     @Override
     public GPGeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadContactSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadContactSettingsRequest(this, this.jacksonSupport);
     }
 }

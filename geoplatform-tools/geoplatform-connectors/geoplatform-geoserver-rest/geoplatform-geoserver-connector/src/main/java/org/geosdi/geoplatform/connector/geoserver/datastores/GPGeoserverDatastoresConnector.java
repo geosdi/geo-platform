@@ -125,13 +125,8 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStore
      */
     @Override
     public GeoserverLoadDatastoresRequest loadDatastoresRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadDatastoresRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadDatastoresRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -139,13 +134,8 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStore
      */
     @Override
     public GeoserverLoadDatastoreRequest loadDatastoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadDatastoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadDatastoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -153,13 +143,8 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStore
      */
     @Override
     public GeoserverCreateDatastoreRequest createDatastoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateDatastoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateDatastoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -167,13 +152,8 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStore
      */
     @Override
     public GeoserverUpdateDatastoreRequest updateDatastoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateDatastoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateDatastoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -181,13 +161,8 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStore
      */
     @Override
     public GeoserverDeleteDatastoreRequest deleteDatastoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteDatastoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteDatastoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -195,13 +170,8 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStore
      */
     @Override
     public GeoserverDataStoreUploadFilesRequest dataStoreUploadFiles() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDataStoreUploadFilesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDataStoreUploadFilesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -209,12 +179,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStore
      */
     @Override
     public GeoserverCreateDatastoreResourceRequest createDataStoreResource() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateDatastoreResourceRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateDatastoreResourceRequest(this, this.jacksonSupport);
     }
 }

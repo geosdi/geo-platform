@@ -126,13 +126,8 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
      */
     @Override
     public GPGeoserverLoadAclLayersRequest loadAclLayers() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadAclLayersRequest(this, emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadAclLayersRequest(this, emptyJacksonSupport);
     }
 
     /**
@@ -140,13 +135,8 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
      */
     @Override
     public GPGeoserverCreateAclLayersRequest createAclLayers() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateAclLayersRequest(this, emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateAclLayersRequest(this, emptyJacksonSupport);
     }
 
     /**
@@ -154,13 +144,8 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
      */
     @Override
     public GPGeoserverUpdateAclLayersRequest updateAclLayers() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateAclLayersRequest(this, emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateAclLayersRequest(this, emptyJacksonSupport);
     }
 
     /**
@@ -168,12 +153,7 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
      */
     @Override
     public GPGeoserverDeleteAclLayersByRuleRequest deleteAclLayersByRule() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteAclLayersByRuleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteAclLayersByRuleRequest(this, this.jacksonSupport);
     }
 }

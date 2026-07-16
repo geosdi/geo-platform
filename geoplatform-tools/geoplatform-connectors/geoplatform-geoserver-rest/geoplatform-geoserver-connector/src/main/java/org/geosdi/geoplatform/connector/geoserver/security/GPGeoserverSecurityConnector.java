@@ -123,12 +123,7 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverRolesConne
      */
     @Override
     public GPGeoserverGetMasterPasswordRequest loadMasterPasswordRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverGetMasterPasswordRequest(this, this.emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverGetMasterPasswordRequest(this, this.emptyJacksonSupport);
     }
 }

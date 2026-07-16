@@ -128,13 +128,8 @@ public abstract class GPGeoserverWMTSStoreConnector extends GPGeoserverStylesCon
      */
     @Override
     public GeoserverLoadWorkspaceWMTSStoresRequest loadWorkspaceWMTSStoresRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspaceWMTSStoresRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspaceWMTSStoresRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -142,13 +137,8 @@ public abstract class GPGeoserverWMTSStoreConnector extends GPGeoserverStylesCon
      */
     @Override
     public GeoserverCreateWMTSStoreRequest createWMTSStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateWMTSStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateWMTSStoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -156,13 +146,8 @@ public abstract class GPGeoserverWMTSStoreConnector extends GPGeoserverStylesCon
      */
     @Override
     public GeoserverUpdateWMTSStoreRequest updateWMTSStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateWMTSStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateWMTSStoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -170,13 +155,8 @@ public abstract class GPGeoserverWMTSStoreConnector extends GPGeoserverStylesCon
      */
     @Override
     public GeoserverDeleteWMTSStoreRequest deleteWMTSStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteWMTSStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteWMTSStoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -184,12 +164,7 @@ public abstract class GPGeoserverWMTSStoreConnector extends GPGeoserverStylesCon
      */
     @Override
     public GeoserverLoadWorkspaceWMTSStoreRequest loadWorkspaceWMTSStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWorkspaceWMTSStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWorkspaceWMTSStoreRequest(this, this.jacksonSupport);
     }
 }

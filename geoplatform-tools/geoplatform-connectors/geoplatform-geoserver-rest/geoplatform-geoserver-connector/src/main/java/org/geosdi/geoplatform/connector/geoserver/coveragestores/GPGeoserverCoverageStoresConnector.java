@@ -124,13 +124,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
      */
     @Override
     public GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadCoverageStoresRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadCoverageStoresRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -138,13 +133,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
      */
     @Override
     public GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadCoverageStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadCoverageStoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -152,13 +142,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
      */
     @Override
     public GeoserverCreateCoverageStoreRequest createCoverageStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateCoverageStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateCoverageStoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -166,13 +151,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
      */
     @Override
     public GeoserverDeleteCoverageStoreRequest deleteCoverageStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteCoverageStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteCoverageStoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -180,13 +160,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
      */
     @Override
     public GeoserverUpdateCoverageStoreRequest updateCoverageStoreRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -194,12 +169,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest updateCoverageStoreWithStoreName() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateCoverageStoreWithStoreName(this);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateCoverageStoreWithStoreName(this);
     }
 }

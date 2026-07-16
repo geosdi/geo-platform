@@ -143,17 +143,27 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     }
 
     /**
+     * Ensures the configured GeoServer {@link #version} is supported by this client, throwing a
+     * {@link GeoserverVersionException} otherwise. Invoked by the request factory methods before
+     * creating a request.
+     */
+    protected void checkGeoserverVersion() {
+        switch (this.version) {
+            case V27x:
+            case V28x:
+                return;
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
      * @return {@link GeoserverAboutVersionRequest}
      */
     @Override
     public GeoserverAboutVersionRequest createAboutVersionRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverAboutVersionRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverAboutVersionRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -161,13 +171,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      */
     @Override
     public GeoserverAboutStatusRequest createAboutStatusRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverAboutStatusRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverAboutStatusRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -175,13 +180,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      */
     @Override
     public GPGeoserverAboutManifestRequest createAboutManifestRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverAboutManifestRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverAboutManifestRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -189,13 +189,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      */
     @Override
     public GeoserverAboutSystemStatusRequest createAboutSystemStatusRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverAboutSystemStatusRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverAboutSystemStatusRequest(this, this.jacksonSupport);
     }
 
     /**

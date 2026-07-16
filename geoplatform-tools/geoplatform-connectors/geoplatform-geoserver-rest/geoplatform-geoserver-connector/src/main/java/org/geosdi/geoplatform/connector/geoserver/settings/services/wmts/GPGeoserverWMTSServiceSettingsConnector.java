@@ -124,13 +124,8 @@ public abstract class GPGeoserverWMTSServiceSettingsConnector extends GPGeoserve
      */
     @Override
     public GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWMTSServiceSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWMTSServiceSettingsRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -138,13 +133,8 @@ public abstract class GPGeoserverWMTSServiceSettingsConnector extends GPGeoserve
      */
     @Override
     public GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadWMTSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadWMTSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -152,13 +142,8 @@ public abstract class GPGeoserverWMTSServiceSettingsConnector extends GPGeoserve
      */
     @Override
     public GeoserverUpdateWMTSServiceSettingsRequest updateWMTSServiceSettingsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateWMTSServiceSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateWMTSServiceSettingsRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -166,13 +151,8 @@ public abstract class GPGeoserverWMTSServiceSettingsConnector extends GPGeoserve
      */
     @Override
     public GeoserverUpdateWMTSWorkspaceServiceSettingsRequest updateWMTSWorkspaceServiceSettingsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateWMTSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateWMTSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -180,12 +160,7 @@ public abstract class GPGeoserverWMTSServiceSettingsConnector extends GPGeoserve
      */
     @Override
     public GeoserverDeleteWMTSWorkspaceServiceSettingsRequest deleteWMTSWorkspaceServiceSettingsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteWMTSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteWMTSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
     }
 }

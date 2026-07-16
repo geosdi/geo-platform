@@ -127,13 +127,8 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
      */
     @Override
     public GeoserverLoadUsersRequest loadUsersRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadUsersRequest(this);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadUsersRequest(this);
     }
 
     /**
@@ -141,13 +136,8 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
      */
     @Override
     public GeoserverCreateUserRequest createUserRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateUserRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateUserRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -155,13 +145,8 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
      */
     @Override
     public GeoserverDeleteUserRequest deleteUserRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteUserRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteUserRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -169,12 +154,7 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
      */
     @Override
     public GeoserverLoadUserRequest loadUserRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadUserRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadUserRequest(this, this.jacksonSupport);
     }
 }

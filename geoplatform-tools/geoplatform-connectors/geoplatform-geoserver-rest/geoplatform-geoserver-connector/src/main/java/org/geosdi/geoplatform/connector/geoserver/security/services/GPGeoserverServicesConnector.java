@@ -127,13 +127,8 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
      */
     @Override
     public GPGeoserverLoadAclServicesRequest loadAclServices() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadAclServicesRequest(this, emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadAclServicesRequest(this, emptyJacksonSupport);
     }
 
     /**
@@ -141,13 +136,8 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
      */
     @Override
     public GPGeoserverCreateAclServicesRequest createAclServices() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateAclServicesRequest(this, emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateAclServicesRequest(this, emptyJacksonSupport);
     }
 
     /**
@@ -155,13 +145,8 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
      */
     @Override
     public GPGeoserverUpdateAclServicesRequest updateAclServices() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateAclServicesRequest(this, emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateAclServicesRequest(this, emptyJacksonSupport);
     }
 
     /**
@@ -169,12 +154,7 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
      */
     @Override
     public GPGeoserverDeleteAclServicesByRuleRequest deleteAclServicesByRule() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteAclServicesByRuleRequest(this, emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteAclServicesByRuleRequest(this, emptyJacksonSupport);
     }
 }

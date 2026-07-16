@@ -131,13 +131,8 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      */
     @Override
     public GeoserverCreateImportRequest createImportRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateImportRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateImportRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -145,13 +140,8 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      */
     @Override
     public GeoserverLoadImportRequest loadImportRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadImportRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadImportRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -159,13 +149,8 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      */
     @Override
     public GeoserverLoadTaskRequest loadTaskRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return of(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return of(this, this.jacksonSupport);
     }
 
     /**
@@ -173,12 +158,7 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      */
     @Override
     public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateImportWithIdRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateImportWithIdRequest(this, this.jacksonSupport);
     }
 }

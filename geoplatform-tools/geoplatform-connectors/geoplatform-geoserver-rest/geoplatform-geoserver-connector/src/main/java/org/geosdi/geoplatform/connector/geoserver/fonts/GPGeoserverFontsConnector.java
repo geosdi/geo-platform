@@ -124,12 +124,7 @@ public abstract class GPGeoserverFontsConnector extends GPGeoserverDimensionConn
      */
     @Override
     public GeoserverFontsRequest createGeoserverFontsRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverFontsRequest(this, this.emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverFontsRequest(this, this.emptyJacksonSupport);
     }
 }

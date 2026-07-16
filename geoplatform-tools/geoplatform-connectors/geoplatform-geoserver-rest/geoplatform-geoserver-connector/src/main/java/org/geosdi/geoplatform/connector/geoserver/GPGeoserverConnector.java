@@ -126,13 +126,8 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
      */
     @Override
     public GeoserverRestRunningRequest createGeoserverRestRunningRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -140,13 +135,8 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
      */
     @Override
     public GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverReloadCatalogRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverReloadCatalogRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -154,13 +144,8 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
      */
     @Override
     public GeoserverResetRequest resetGeoserverRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverResetRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverResetRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -168,12 +153,7 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
      */
     @Override
     public GeoserverRestRunningRequest createImportsGeoserverRunningRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverImporterRunningRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverImporterRunningRequest(this, this.jacksonSupport);
     }
 }

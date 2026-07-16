@@ -126,13 +126,8 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
      */
     @Override
     public GeoserverNamespacesRequest createNamespacesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverNamespacesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverNamespacesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -140,13 +135,8 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
      */
     @Override
     public GeoserverNamespaceRequest createNamespaceRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverNamespaceRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverNamespaceRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -154,12 +144,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
      */
     @Override
     public GeoserverNamespaceWithBodyRequest createNamespaceWithBodyRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverNamespaceWithBodyRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverNamespaceWithBodyRequest(this, this.jacksonSupport);
     }
 }

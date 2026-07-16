@@ -126,13 +126,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverStylesRequest loadStylesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverStylesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverStylesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -140,13 +135,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverStyleRequest loadStyleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverStyleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverStyleRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -154,13 +144,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverCreateStyleRequest createStyleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateStyleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateStyleRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -168,13 +153,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverCreateStyleSLDV100Request createStyleSLDV100Request() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return GeoserverCreateStyleSLDV100Request.of(this);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return GeoserverCreateStyleSLDV100Request.of(this);
     }
 
     /**
@@ -182,13 +162,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverCreateWorkspaceStyleRequest createWorkspaceStyleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverCreateWorkspaceStyleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverCreateWorkspaceStyleRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -196,13 +171,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverDeleteStyleRequest deleteStyleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteStyleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteStyleRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -210,13 +180,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverDeleteWorkspaceStyleRequest deleteWorkspaceStyleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteWorkspaceStyleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteWorkspaceStyleRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -224,13 +189,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverStyleSLDV100Request loadStyleSLDV100Request() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return of(this);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return of(this);
     }
 
     /**
@@ -238,13 +198,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverWorkspaceStylesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverWorkspaceStylesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -252,13 +207,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverWorkspaceStyleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverWorkspaceStyleRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -266,13 +216,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverUpdateStyleRequest updateStyleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverUpdateStyleRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverUpdateStyleRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -280,13 +225,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverUpdateStyleSLDV100Request updateStyleSLDV100Request() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return GeoserverUpdateStyleSLDV100Request.of(this);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return GeoserverUpdateStyleSLDV100Request.of(this);
     }
 
     /**
@@ -294,13 +234,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverCreateStyleWithFileSLDRequest createStyleWithFileSLDRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return GeoserverCreateStyleWithFileSLDRequest.of(this);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return GeoserverCreateStyleWithFileSLDRequest.of(this);
     }
 
     /**
@@ -308,13 +243,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverUpdateStyleWithFileSLDRequest updateStyleWithFileSLDRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return GeoserverUpdateStyleWithFileSLDRequest.of(this);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return GeoserverUpdateStyleWithFileSLDRequest.of(this);
     }
 
     /**
@@ -322,13 +252,8 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverLayerStylesRequest loadLayerStylesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLayerStylesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLayerStylesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -336,12 +261,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
      */
     @Override
     public GeoserverAddStyleToLayerRequest addStyleToLayerRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverAddStyleToLayerRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverAddStyleToLayerRequest(this, this.jacksonSupport);
     }
 }

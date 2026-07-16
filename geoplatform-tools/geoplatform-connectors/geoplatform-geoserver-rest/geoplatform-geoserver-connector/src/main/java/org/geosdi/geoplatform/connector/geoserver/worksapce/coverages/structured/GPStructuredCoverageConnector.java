@@ -124,13 +124,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
      */
     @Override
     public GeoserverLoadStructuredCoverageSchemaRequest loadStructuredCoverageRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadStructuredCoverageSchemaRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadStructuredCoverageSchemaRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -138,13 +133,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
      */
     @Override
     public GeoserverLoadStructuredCoverageGranulesRequest loadStructuredCoverageGranulesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadStructuredCoverageGranulesRequest(this, this.emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadStructuredCoverageGranulesRequest(this, this.emptyJacksonSupport);
     }
 
     /**
@@ -152,13 +142,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
      */
     @Override
     public GeoserverDeleteCoverageGranulesRequest deleteCoverageGranulesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteCoverageGranulesRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteCoverageGranulesRequest(this, this.jacksonSupport);
     }
 
     /**
@@ -166,13 +151,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
      */
     @Override
     public GeoserverLoadGranuleAttributesRequest loadGranuleAttributesRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverLoadGranuleAttributesRequest(this, this.emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverLoadGranuleAttributesRequest(this, this.emptyJacksonSupport);
     }
 
     /**
@@ -180,12 +160,7 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
      */
     @Override
     public GeoserverDeleteCoverageGranuleRequest deleteCoverageGranuleRequest() {
-        switch (version) {
-            case V27x:
-            case V28x:
-                return new GPGeoserverDeleteCoverageGranuleRequest(this, this.emptyJacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
+        this.checkGeoserverVersion();
+        return new GPGeoserverDeleteCoverageGranuleRequest(this, this.emptyJacksonSupport);
     }
 }

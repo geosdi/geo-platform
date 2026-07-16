@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.server.security;
 import org.apache.hc.client5.http.auth.AuthScope;
 import org.apache.hc.client5.http.auth.CredentialsStore;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.client5.http.protocol.HttpClientContext;
 import org.apache.hc.core5.http.HttpHost;
 
 import javax.annotation.Nonnull;
@@ -54,7 +55,6 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
 
     private final String username;
     private final String password;
-    private AuthScope authScope;
     protected final UsernamePasswordCredentials usernamePasswordCredentials;
 
     /**
@@ -78,18 +78,18 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
     protected void bindCredentials(@Nonnull(when = NEVER) CredentialsStore credentialsStore, @Nonnull(when = NEVER) URI targetURI) {
         checkArgument(credentialsStore != null, "The Parameter credentialsProvider must not be null.");
         checkArgument(targetURI != null, "The Parameter targetURI must not be null.");
-        if (this.authScope == null) {
-            this.authScope = new AuthScope(targetURI.getHost(), targetURI.getPort());
-        }
+        AuthScope authScope = new AuthScope(targetURI.getHost(), targetURI.getPort());
         credentialsStore.setCredentials(authScope, this.usernamePasswordCredentials);
     }
 
     /**
+     * @param localContext
      * @param targetHost
      * @param targetURI
      * @throws Exception
      */
-    protected void bindCredentials(@Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
+    protected void bindCredentials(@Nonnull(when = NEVER) HttpClientContext localContext, @Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
+        checkArgument(localContext != null, "The Parameter localContext must not be null.");
         checkArgument(targetHost != null, "The Parameter targetHost must not be null.");
         checkArgument(targetURI != null, "The Parameter targetURI must not be null.");
     }

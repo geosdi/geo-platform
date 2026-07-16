@@ -210,9 +210,18 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      */
     @Override
     public CloseableHttpClient getClientConnection() {
-        return httpClient = (httpClient != null) ? httpClient : proxyConfiguration != null ?
-                proxyConfiguration.isUseProxy() ? configureProxy() : createDefaultHttpClient() :
-                createDefaultHttpClient();
+        CloseableHttpClient result = this.httpClient;
+        if (result == null) {
+            synchronized (this) {
+                result = this.httpClient;
+                if (result == null) {
+                    result = this.httpClient = ((this.proxyConfiguration != null)
+                            ? (this.proxyConfiguration.isUseProxy() ? configureProxy() : createDefaultHttpClient())
+                            : createDefaultHttpClient());
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -221,7 +230,9 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     @Override
     public void dispose() throws Exception {
         if (this.dispose.compareAndSet(FALSE, TRUE)) {
-            this.httpClient.close();
+            if (this.httpClient != null) {
+                this.httpClient.close();
+            }
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@Called {}#dispose.\n", this);
         } else {
             logger.debug("#####################{} already disposed.\n", this);
@@ -327,13 +338,17 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @return {@link DefaultClientTlsStrategy}
      */
     protected DefaultClientTlsStrategy createDefaultClientTlsStrategy()  {
+        if (!this.pooledConnectorConfig.isInsecureTls()) {
+            logger.debug("@@@@@@@@@@@@@@@@@@@ Using system-default (secure) TLS strategy for {}.\n", this.url);
+            return createSystemDefault();
+        }
+        logger.warn("@@@@@@@@@@@@@@@@@@@ INSECURE TLS enabled for {}: certificate validation and hostname verification are DISABLED (trust-all). Do NOT use in production.\n", this.url);
         try {
             SSLContextBuilder builder = new SSLContextBuilder();
             builder.loadTrustMaterial(null, (chain, authType) -> true);
             return  new DefaultClientTlsStrategy(builder.build(), INSTANCE);
         } catch (Exception ex) {
-            logger.warn("#####################Error to createDefaultSSLConnectionSocketFactory cause : {}\n", ex.getMessage());
-            ex.printStackTrace();
+            logger.error("Error creating insecure (trust-all) TLS strategy, falling back to system default. Cause : {}", ex.getMessage(), ex);
         }
         return createSystemDefault();
     }

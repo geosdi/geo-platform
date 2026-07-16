@@ -55,9 +55,6 @@ import static org.apache.hc.client5.http.protocol.HttpClientContext.create;
  */
 public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnector {
 
-    private HttpHost httpHost;
-    protected HttpClientContext localContext;
-
     /**
      * @param theUserName
      * @param thePassword
@@ -79,9 +76,9 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
         checkArgument(connectorRequest != null, "The Parameter connectorRequest must not be null.");
         checkArgument(httpRequest != null, "The Parameter httpRequest must not be null.");
         checkArgument(responseHandler != null, "The Parameter responseHandler must not be null.");
-        this.localContext = create();
+        HttpClientContext localContext = create();
         HttpHost targetHost = this.extractHost(connectorRequest.getURI());
-        this.bindCredentials(httpHost, connectorRequest.getURI());
+        this.bindCredentials(localContext, targetHost, connectorRequest.getURI());
         return connectorRequest.getClientConnection().execute(targetHost, httpRequest, localContext, responseHandler);
     }
 
@@ -91,10 +88,7 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
      */
     protected HttpHost extractHost(@Nonnull(when = NEVER) URI uri) {
         checkArgument(uri != null, "The Parameter uri must not be null.");
-        if (this.httpHost == null) {
-            this.httpHost = new HttpHost(uri.getScheme(), uri.getHost(), this.retrieveNoSetPort(uri));
-        }
-        return this.httpHost;
+        return new HttpHost(uri.getScheme(), uri.getHost(), this.retrieveNoSetPort(uri));
     }
 
     /**

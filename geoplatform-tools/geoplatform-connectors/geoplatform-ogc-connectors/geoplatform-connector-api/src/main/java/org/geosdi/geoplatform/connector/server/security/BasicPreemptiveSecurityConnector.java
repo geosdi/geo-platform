@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.server.security;
 
 import org.apache.hc.client5.http.impl.auth.BasicScheme;
+import org.apache.hc.client5.http.protocol.HttpClientContext;
 import org.apache.hc.core5.http.HttpHost;
 
 import javax.annotation.Nonnull;
@@ -68,13 +69,14 @@ public class BasicPreemptiveSecurityConnector extends PreemptiveSecurityConnecto
     }
 
     /**
+     * @param localContext
      * @param targetHost
      * @param targetURI
      * @throws Exception
      */
     @Override
-    protected void bindCredentials(@Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
-        super.bindCredentials(targetHost, targetURI);
+    protected void bindCredentials(@Nonnull(when = NEVER) HttpClientContext localContext, @Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
+        super.bindCredentials(localContext, targetHost, targetURI);
         BasicScheme basicAuth = this.createScheme();
         basicAuth.initPreemptive(this.usernamePasswordCredentials);
         localContext.resetAuthExchange(targetHost, basicAuth);

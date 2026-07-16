@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.server.security;
 import org.apache.hc.client5.http.auth.AuthScope;
 import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.client5.http.impl.auth.DigestScheme;
+import org.apache.hc.client5.http.protocol.HttpClientContext;
 import org.apache.hc.core5.http.HttpHost;
 
 import javax.annotation.Nonnull;
@@ -65,13 +66,14 @@ public class DigestPreemptiveSecurityConnector extends PreemptiveSecurityConnect
     }
 
     /**
+     * @param localContext
      * @param targetHost
      * @param targetURI
      * @throws Exception
      */
     @Override
-    protected void bindCredentials(@Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
-        super.bindCredentials(targetHost, targetURI);
+    protected void bindCredentials(@Nonnull(when = NEVER) HttpClientContext localContext, @Nonnull(when = NEVER) HttpHost targetHost, @Nonnull(when = NEVER) URI targetURI) throws Exception {
+        super.bindCredentials(localContext, targetHost, targetURI);
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(new AuthScope(targetHost), this.usernamePasswordCredentials);
         localContext.setCredentialsProvider(credentialsProvider);

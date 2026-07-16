@@ -83,6 +83,7 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
         try {
             return this.readInternal(new BufferedReader(new StringReader(responseAsString)));
         } catch (Exception ex) {
+            logger.debug("#############################Default mapper failed for {}, falling back to empty-response mapper. Cause : {}\n", this.getClass().getSimpleName(), ex.getMessage());
             return internalResponse(new ByteArrayInputStream(responseAsString.getBytes()));
         }
     }
@@ -98,7 +99,7 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
         try {
             return this.internalReadResponse(inputStream).toModel();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("#############################Error reading response for {} cause : {}\n", this.getClass().getSimpleName(), ex.getMessage(), ex);
             throw new IncorrectResponseException(ex);
         } finally {
             inputStream.close();

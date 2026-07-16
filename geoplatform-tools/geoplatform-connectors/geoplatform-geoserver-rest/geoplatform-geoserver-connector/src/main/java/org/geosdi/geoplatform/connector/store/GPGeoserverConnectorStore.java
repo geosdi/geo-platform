@@ -44,6 +44,8 @@ import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.connector.store.logging.GeoserverLoggingStore;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
@@ -55,6 +57,7 @@ import static java.lang.Boolean.FALSE;
  */
 public class GPGeoserverConnectorStore extends GeoserverLoggingStore implements IGPGeoserverConnectorStore {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPGeoserverConnectorStore.class);
     private final GeoserverRestRunningRequest restRunningRequest;
     private final GeoserverReloadCatalogRequest reloadCatalogRequest;
     private final GeoserverResetRequest resetRequest;
@@ -103,6 +106,7 @@ public class GPGeoserverConnectorStore extends GeoserverLoggingStore implements 
         try {
             return this.reloadCatalogRequest.getResponse();
         } catch (Exception ex) {
+            logger.error("#############################Failed to reload GeoServer catalog : {}\n", ex.getMessage(), ex);
             return FALSE;
         }
     }
@@ -117,6 +121,7 @@ public class GPGeoserverConnectorStore extends GeoserverLoggingStore implements 
         try {
             return this.resetRequest.getResponse();
         } catch (Exception ex) {
+            logger.error("#############################Failed to reset GeoServer caches : {}\n", ex.getMessage(), ex);
             return FALSE;
         }
     }

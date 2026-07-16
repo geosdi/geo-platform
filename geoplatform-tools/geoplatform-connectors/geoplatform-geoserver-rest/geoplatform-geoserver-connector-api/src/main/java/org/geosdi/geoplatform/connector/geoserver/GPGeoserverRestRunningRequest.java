@@ -69,6 +69,7 @@ class GPGeoserverRestRunningRequest extends GPJsonGetConnectorRequest<Boolean, G
         try {
             return this.getResponse();
         } catch (Exception ex) {
+            logger.warn("#############################GeoServer REST not reachable for {} : {}\n", this.serverURI, ex.getMessage(), ex);
             return FALSE;
         }
     }

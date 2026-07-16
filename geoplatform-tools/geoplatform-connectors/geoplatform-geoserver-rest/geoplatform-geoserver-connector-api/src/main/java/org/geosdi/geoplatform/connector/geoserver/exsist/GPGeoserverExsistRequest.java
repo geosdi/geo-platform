@@ -35,15 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.exsist;
 
+import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.BufferedReader;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -85,33 +84,25 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
     }
 
     /**
-     * @param statusCode
-     * @throws Exception
-     */
-    @Override
-    protected void checkHttpResponseStatus(int statusCode) throws Exception {
-        switch (statusCode) {
-            case 401:
-                throw new UnauthorizedException();
-        }
-    }
-
-    /**
-     * @param reader
+     * A {@code 404} status means the resource does not exist: for an "exist" request this is an
+     * expected outcome, so it is mapped to {@code exist = FALSE} without attempting to parse the
+     * error body. Any other failure (unauthorized, unexpected/invalid payload, 5xx, ...) is a real
+     * error and is left to propagate, instead of being silently reported as "resource absent".
+     *
+     * @param httpResponse
      * @return {@link T}
-     * @throws Exception
      */
     @Override
-    protected T readInternal(BufferedReader reader) throws Exception {
-        try {
-            this.response.set(super.readInternal(reader));
-            this.exist.set(TRUE);
-            return this.response.get();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+    protected T internalResponseAsEntity(ClassicHttpResponse httpResponse) {
+        if (httpResponse.getCode() == 404) {
             this.exist.set(FALSE);
+            this.response.set(null);
             return null;
         }
+        T value = super.internalResponseAsEntity(httpResponse);
+        this.response.set(value);
+        this.exist.set((value != null) ? TRUE : FALSE);
+        return value;
     }
 
     /**
@@ -119,12 +110,18 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
      */
     @Override
     protected final ConnectorRequest self() {
-        this.init();
+        this.clearThreadLocals();
         return super.self();
     }
 
-    private void init() {
-        this.exist.set(null);
-        this.response.set(null);
+    /**
+     * Invalidates the cached result on each (re)configuration of the request. Uses {@link
+     * ThreadLocal#remove()} (rather than {@code set(null)}) so the entries are released from the
+     * calling thread's {@code ThreadLocalMap}: this keeps the request safe to reuse/share across
+     * threads without retaining stale state or leaking references in pooled-thread environments.
+     */
+    private void clearThreadLocals() {
+        this.exist.remove();
+        this.response.remove();
     }
 }

@@ -89,4 +89,15 @@ public interface GPPooledConnectorConfig {
      * @return {@link GPConnectorCookieSpec}
      */
     GPConnectorCookieSpec getCookieSpec();
+
+    /**
+     * When {@link Boolean#TRUE} the connector accepts any TLS certificate and skips hostname
+     * verification (trust-all). This is <b>insecure</b> and exposes the client to MITM attacks:
+     * enable it only for trusted environments (e.g. servers with self-signed certificates).
+     * When {@link Boolean#FALSE} the JVM system default trust material and hostname verification
+     * are used.
+     *
+     * @return {@link Boolean}
+     */
+    Boolean isInsecureTls();
 }

@@ -72,6 +72,7 @@ public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
     private final Boolean redirectsEnabled;
     @Getter
     private final GPConnectorCookieSpec cookieSpec;
+    private final Boolean insecureTls;
 
     /**
      * @param theMaxTotalConnections
@@ -86,7 +87,7 @@ public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
      */
     BasePooledConnectorConfig(Integer theMaxTotalConnections, Integer theDefaultMaxPerRoute, Timeout theConnectionTimeout,
             Timeout theRequestConnectionTimeout, Timeout theResponseConnectionTimeout, TimeValue theConnectionKeepAlive,
-            Integer theMaxRedirect, Boolean theRedirectsEnabled, GPConnectorCookieSpec theCookieSpec) {
+            Integer theMaxRedirect, Boolean theRedirectsEnabled, GPConnectorCookieSpec theCookieSpec, Boolean theInsecureTls) {
         this.maxTotalConnections = theMaxTotalConnections;
         this.defaultMaxPerRoute = theDefaultMaxPerRoute;
         this.connectionTimeout = ((theConnectionTimeout == null) ? of(30l, SECONDS) : theConnectionTimeout);
@@ -96,6 +97,7 @@ public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
         this.maxRedirect = ((theMaxRedirect != null) && (theMaxRedirect <= 50) ? theMaxRedirect : 50);
         this.redirectsEnabled = ((theRedirectsEnabled != null) ? theRedirectsEnabled : TRUE);
         this.cookieSpec = ((theCookieSpec != null) ? theCookieSpec : IGNORE);
+        this.insecureTls = ((theInsecureTls != null) ? theInsecureTls : TRUE);
     }
 
     /**
@@ -104,5 +106,13 @@ public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
     @Override
     public Boolean isRedirectsEnabled() {
         return this.redirectsEnabled;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isInsecureTls() {
+        return this.insecureTls;
     }
 }

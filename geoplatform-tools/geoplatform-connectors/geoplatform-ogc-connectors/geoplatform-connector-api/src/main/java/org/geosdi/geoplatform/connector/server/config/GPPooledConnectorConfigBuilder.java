@@ -103,6 +103,16 @@ public interface GPPooledConnectorConfigBuilder {
     GPPooledConnectorConfigBuilder withCookieSpec(GPConnectorCookieSpec theCookieSpec);
 
     /**
+     * When {@code true} (the default, for backward compatibility) TLS certificates and hostnames are
+     * <b>not</b> verified (trust-all). Set to {@code false} to use the JVM default trust material and
+     * hostname verification.
+     *
+     * @param theInsecureTls
+     * @return {@link  GPPooledConnectorConfigBuilder}
+     */
+    GPPooledConnectorConfigBuilder withInsecureTls(boolean theInsecureTls);
+
+    /**
      * @return {@link GPPooledConnectorConfig}
      */
     GPPooledConnectorConfig build();
@@ -118,6 +128,7 @@ public interface GPPooledConnectorConfigBuilder {
         private Integer maxRedirect;
         private boolean redirectsEnabled = TRUE;
         private GPConnectorCookieSpec cookieSpec;
+        private boolean insecureTls = TRUE;
 
         private PooledConnectorConfigBuilder() {
         }
@@ -216,6 +227,16 @@ public interface GPPooledConnectorConfigBuilder {
         }
 
         /**
+         * @param theInsecureTls
+         * @return {@link  GPPooledConnectorConfigBuilder}
+         */
+        @Override
+        public GPPooledConnectorConfigBuilder withInsecureTls(boolean theInsecureTls) {
+            this.insecureTls = theInsecureTls;
+            return self();
+        }
+
+        /**
          * @return {@link GPPooledConnectorConfig}
          */
         @Override
@@ -225,7 +246,7 @@ public interface GPPooledConnectorConfigBuilder {
             checkArgument(maxRedirect > 0, "The Parameter MaxRedirect must be greater than 0.");
             return new BasePooledConnectorConfig(this.maxTotalConnections, this.defaultMaxPerRoute, this.connectionTimeout,
                     this.requestConnectionTimeout, this.responseConnectionTimeout, this.connectionKeepAlive,
-                    this.maxRedirect, this.redirectsEnabled, this.cookieSpec);
+                    this.maxRedirect, this.redirectsEnabled, this.cookieSpec, this.insecureTls);
         }
 
         /**

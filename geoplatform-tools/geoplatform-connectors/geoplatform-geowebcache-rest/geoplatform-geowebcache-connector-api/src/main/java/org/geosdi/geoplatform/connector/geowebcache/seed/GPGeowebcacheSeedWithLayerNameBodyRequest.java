@@ -53,6 +53,7 @@ import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
+import static tools.jackson.databind.SerializationFeature.WRAP_ROOT_VALUE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -81,7 +82,9 @@ public class GPGeowebcacheSeedWithLayerNameBodyRequest extends GPJsonPostConnect
     protected HttpEntity prepareHttpEntity() throws Exception {
         GPGeowebcacheSeedBody body = this.body.get();
         checkArgument(body != null, "The body must not be null.");
-        String bodyString = jacksonSupport.getDefaultMapper().writeValueAsString(body);
+        String bodyString = jacksonSupport.getDefaultMapper().writer()
+                .with(WRAP_ROOT_VALUE)
+                .writeValueAsString(body);
         logger.debug("#############################SEED_BODY : \n{}\n", bodyString);
         return new StringEntity(bodyString, APPLICATION_JSON);
     }

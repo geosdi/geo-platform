@@ -135,7 +135,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
     public void seedWithLayerNameBodyTest() throws Exception {
         GPGeowebcacheSeedBody geowebcacheSeedBody = new GeowebcacheSeedBody();
         geowebcacheSeedBody.setName("topp:states");
-        geowebcacheSeedBody.setGridSetId("EPSG:2163");
+        geowebcacheSeedBody.setGridSetId("EPSG:4326");
         geowebcacheSeedBody.setZoomStart(0);
         geowebcacheSeedBody.setZoomStop(1);
         geowebcacheSeedBody.setType(GeowebcacheSeedOperationType.SEED);

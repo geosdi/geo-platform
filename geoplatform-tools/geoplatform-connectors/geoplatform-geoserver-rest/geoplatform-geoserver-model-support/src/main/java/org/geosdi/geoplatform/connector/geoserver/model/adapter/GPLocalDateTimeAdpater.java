@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.model.adapter;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 
 import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -50,7 +51,21 @@ import static org.joda.time.LocalDateTime.parse;
  */
 public class GPLocalDateTimeAdpater extends XmlAdapter<String, LocalDateTime> {
 
-    private final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS z");
+    private static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss.SSS";
+    /**
+     * Prints only the date/time portion: a Joda {@link LocalDateTime} carries no time zone, so a
+     * mandatory zone token would print an empty, non re-parseable value.
+     */
+    private final DateTimeFormatter printer = DateTimeFormat.forPattern(DATE_TIME_PATTERN);
+    /**
+     * Parses the date/time portion with the trailing time zone as an <b>optional</b> section, so both
+     * GeoServer timestamps such as {@code 2021-03-15 10:30:45.123 UTC} and the zone-less value produced
+     * by {@link #marshal(LocalDateTime)} are accepted (round-trip safe).
+     */
+    private final DateTimeFormatter parser = new DateTimeFormatterBuilder()
+            .appendPattern(DATE_TIME_PATTERN)
+            .appendOptional(DateTimeFormat.forPattern(" z").getParser())
+            .toFormatter();
 
     /**
      * Convert a value type to a bound type.
@@ -61,7 +76,7 @@ public class GPLocalDateTimeAdpater extends XmlAdapter<String, LocalDateTime> {
      */
     @Override
     public LocalDateTime unmarshal(String theLocalDateTime) throws Exception {
-        return ((theLocalDateTime != null) && !(theLocalDateTime.trim().isEmpty()) ? parse(theLocalDateTime, this.dateFormat) : null);
+        return ((theLocalDateTime != null) && !(theLocalDateTime.trim().isEmpty()) ? parse(theLocalDateTime, this.parser) : null);
     }
 
     /**
@@ -73,6 +88,6 @@ public class GPLocalDateTimeAdpater extends XmlAdapter<String, LocalDateTime> {
      */
     @Override
     public String marshal(LocalDateTime theLocalDateTime) throws Exception {
-        return ((theLocalDateTime != null) ? this.dateFormat.print(theLocalDateTime) : null);
+        return ((theLocalDateTime != null) ? this.printer.print(theLocalDateTime) : null);
     }
 }

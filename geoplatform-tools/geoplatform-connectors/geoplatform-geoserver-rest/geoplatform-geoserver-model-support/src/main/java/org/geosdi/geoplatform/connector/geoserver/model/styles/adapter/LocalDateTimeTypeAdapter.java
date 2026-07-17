@@ -40,6 +40,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import static java.time.ZoneOffset.UTC;
@@ -55,6 +56,11 @@ public class LocalDateTimeTypeAdapter extends XmlAdapter<String, LocalDateTime> 
     //
     private static final String PATTERN = "yyyy-MM-dd HH:mm:ss.SSS z";
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(PATTERN);
+    /**
+     * Named UTC zone (id {@code "UTC"}) so the {@code z} token renders as {@code UTC}, matching the
+     * zone name GeoServer emits, rather than {@link java.time.ZoneOffset#UTC} which renders as {@code Z}.
+     */
+    private static final ZoneId UTC_ZONE = ZoneId.of("UTC");
 
     /**
      * @param s
@@ -78,6 +84,6 @@ public class LocalDateTimeTypeAdapter extends XmlAdapter<String, LocalDateTime> 
      */
     @Override
     public String marshal(LocalDateTime localDateTime) throws Exception {
-        return ((localDateTime != null) ? dateTimeFormatter.format(ofInstant(localDateTime.toInstant(UTC), UTC)) : null);
+        return ((localDateTime != null) ? dateTimeFormatter.format(ofInstant(localDateTime.toInstant(UTC), UTC_ZONE)) : null);
     }
 }

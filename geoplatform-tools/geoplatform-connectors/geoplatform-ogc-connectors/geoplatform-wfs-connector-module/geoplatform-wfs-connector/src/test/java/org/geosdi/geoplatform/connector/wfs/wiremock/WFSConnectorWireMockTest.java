@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.geojson.FeatureCollection;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -81,6 +82,7 @@ import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * Fully offline, deterministic tests for the WFS connector's request/response round-trip, decoupled from any
@@ -93,6 +95,7 @@ import static org.junit.Assert.assertNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class WFSConnectorWireMockTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSConnectorWireMockTest.class);
@@ -128,7 +131,7 @@ public class WFSConnectorWireMockTest {
     }
 
     @Test
-    public void getCapabilitiesIsParsedFromMockedServer() throws Exception {
+    public void a_getCapabilitiesIsParsedFromMockedServer() throws Exception {
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("GetCapabilities"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/xml")
                         .withBody(resource("/wfsGetCapabilitiesv110.xml"))));
@@ -143,7 +146,7 @@ public class WFSConnectorWireMockTest {
     }
 
     @Test
-    public void describeFeatureTypeIsParsedFromMockedServer() throws Exception {
+    public void b_describeFeatureTypeIsParsedFromMockedServer() throws Exception {
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("DescribeFeatureType"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/xml")
                         .withBody(resource("/wfsDescribeFeaturev110.xml"))));
@@ -160,7 +163,7 @@ public class WFSConnectorWireMockTest {
     }
 
     @Test
-    public void getFeatureHitsIsParsedFromMockedServer() throws Exception {
+    public void c_getFeatureHitsIsParsedFromMockedServer() throws Exception {
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("GetFeature"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/xml")
                         .withBody(HITS_RESPONSE)));
@@ -177,7 +180,7 @@ public class WFSConnectorWireMockTest {
     }
 
     @Test
-    public void transactionInsertRoundTripIsParsedFromMockedServer() throws Exception {
+    public void d_transactionInsertRoundTripIsParsedFromMockedServer() throws Exception {
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("Transaction"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/xml")
                         .withBody(TRANSACTION_RESPONSE)));
@@ -207,7 +210,7 @@ public class WFSConnectorWireMockTest {
      * and that it parsed exactly the features the fixture declares.
      */
     @Test
-    public void getFeatureContainsRestrictionIsParsedFromMockedServer() throws Exception {
+    public void e_getFeatureContainsRestrictionIsParsedFromMockedServer() throws Exception {
         QueryDTO containsMtn = jakartaContextBuilder().unmarshal(new StringReader(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                         + "<QueryDTO>\n"
@@ -257,7 +260,7 @@ public class WFSConnectorWireMockTest {
      * numeric property names the filter serializes.
      */
     @Test
-    public void getFeatureAndRestrictionsIsParsedFromMockedServer() throws Exception {
+    public void f_getFeatureAndRestrictionsIsParsedFromMockedServer() throws Exception {
         QueryDTO andQuery = queryDTO("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                 + "<QueryDTO><matchOperator>ALL</matchOperator><queryRestrictionList>"
                 + "<queryRestriction><attribute><maxOccurs>1</maxOccurs><minOccurs>0</minOccurs><name>WORKERS</name><nillable>true</nillable><type>double</type><value></value></attribute><operator>GREATER_OR_EQUAL</operator><restriction>0.25</restriction></queryRestriction>"
@@ -278,7 +281,7 @@ public class WFSConnectorWireMockTest {
      * Conversion of {@code l_statesNotContainsRestrictionTest} : a LIKE restriction on SUB_REGION, HITS.
      */
     @Test
-    public void getFeatureLikeRestrictionIsParsedFromMockedServer() throws Exception {
+    public void g_getFeatureLikeRestrictionIsParsedFromMockedServer() throws Exception {
         QueryDTO likeQuery = queryDTO(singleRestriction("SUB_REGION", "string", "LIKE", "Mtn", "ALL"));
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("SUB_REGION")).withRequestBody(containing("Mtn"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/xml").withBody(hits(8))));
@@ -294,7 +297,7 @@ public class WFSConnectorWireMockTest {
      * Conversion of {@code n_statesGreatherThanRestrictionTest} : GREATER on WORKERS, HITS.
      */
     @Test
-    public void getFeatureGreaterThanRestrictionIsParsedFromMockedServer() throws Exception {
+    public void h_getFeatureGreaterThanRestrictionIsParsedFromMockedServer() throws Exception {
         QueryDTO greaterQuery = queryDTO(singleRestriction("WORKERS", "double", "GREATER", "6000000", "ALL"));
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("WORKERS")).withRequestBody(containing("6000000"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/xml").withBody(hits(3))));
@@ -311,7 +314,7 @@ public class WFSConnectorWireMockTest {
      * restriction, HITS. Same property/value as the plain GREATER case but wrapped in a Not.
      */
     @Test
-    public void getFeatureNotGreaterThanRestrictionIsParsedFromMockedServer() throws Exception {
+    public void i_getFeatureNotGreaterThanRestrictionIsParsedFromMockedServer() throws Exception {
         QueryDTO notGreaterQuery = queryDTO(singleRestriction("WORKERS", "double", "GREATER", "6000000", "NONE"));
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("WORKERS")).withRequestBody(containing("6000000"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/xml").withBody(hits(46))));
@@ -328,7 +331,7 @@ public class WFSConnectorWireMockTest {
      * on one of the requested feature ids that the connector serializes into the OGC Id filter.
      */
     @Test
-    public void getFeatureByFeatureIDsIsParsedFromMockedServer() throws Exception {
+    public void l_getFeatureByFeatureIDsIsParsedFromMockedServer() throws Exception {
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("states.1")).withRequestBody(containing("states.49"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "application/json").withBody(geoJson(2))));
 
@@ -345,7 +348,7 @@ public class WFSConnectorWireMockTest {
      * RESULTS/GeoJSON. The stub is keyed on a corner coordinate the envelope serializes.
      */
     @Test
-    public void getFeatureByBBoxIsParsedFromMockedServer() throws Exception {
+    public void m_getFeatureByBBoxIsParsedFromMockedServer() throws Exception {
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("-75.102613"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "application/json").withBody(geoJson(3))));
 
@@ -363,7 +366,7 @@ public class WFSConnectorWireMockTest {
      * {@code maxFeatures} attribute the connector puts on the GetFeature element.
      */
     @Test
-    public void getFeatureWithMaxFeaturesIsParsedFromMockedServer() throws Exception {
+    public void n_getFeatureWithMaxFeaturesIsParsedFromMockedServer() throws Exception {
         stubFor(post(urlPathEqualTo(WFS_PATH)).withRequestBody(containing("maxFeatures=\"1\""))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "application/json").withBody(geoJson(1))));
 

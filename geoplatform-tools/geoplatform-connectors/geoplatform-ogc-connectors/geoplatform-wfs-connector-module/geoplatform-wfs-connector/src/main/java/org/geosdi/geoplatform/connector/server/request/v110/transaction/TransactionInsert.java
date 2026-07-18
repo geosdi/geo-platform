@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequestState;
 import org.geosdi.geoplatform.xml.wfs.v110.InsertElementType;
 
 import javax.annotation.Nonnull;
@@ -62,7 +62,7 @@ public class TransactionInsert implements ITransactionOperationStrategy {
      * @throws Exception
      */
     @Override
-    public Object getOperation(@Nonnull(when = NEVER) WFSTransactionRequest request) throws Exception {
+    public Object getOperation(@Nonnull(when = NEVER) WFSTransactionRequestState request) throws Exception {
         checkArgument(request != null, "The Parameter request must not be null.");
         InsertElementType elementType = new InsertElementType();
         elementType.setIdgen(GENERATE_NEW);

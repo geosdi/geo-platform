@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.param;
 
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequestState;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
@@ -61,7 +61,7 @@ class WFSFeatureIDsParam extends WFSBaseGetFeatureRequestParam {
      * @throws Exception
      */
     @Override
-    protected void internalApply(WFSGetFeatureRequest theRequest, QueryType theQueryType) throws Exception {
+    protected void internalApply(WFSGetFeatureRequestState theRequest, QueryType theQueryType) throws Exception {
         FilterType filter = theQueryType.getFilter();
         if (filter == null) {
             filter = new FilterType();
@@ -80,7 +80,7 @@ class WFSFeatureIDsParam extends WFSBaseGetFeatureRequestParam {
      * @return {@link Boolean}
      */
     @Override
-    protected boolean canBeApplyParam(@Nonnull(when = NEVER) WFSGetFeatureRequest theRequest) {
+    protected boolean canBeApplyParam(@Nonnull(when = NEVER) WFSGetFeatureRequestState theRequest) {
         checkArgument(theRequest != null, "The Parameter WFSGetFeatureRequest must not be null.");
         return theRequest.isSetFeatureIDs();
     }

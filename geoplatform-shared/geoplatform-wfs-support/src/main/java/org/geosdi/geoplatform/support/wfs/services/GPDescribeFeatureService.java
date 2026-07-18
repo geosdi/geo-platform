@@ -80,7 +80,7 @@ public class GPDescribeFeatureService extends AbstractFeatureService implements 
                     super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);
             WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
             QName qName = new QName(typeName);
-            request.setTypeName(Arrays.asList(qName));
+            request.withTypeName(Arrays.asList(qName));
             Schema response = request.getResponse();
             String name = typeName.substring(typeName.indexOf(":") + 1);
             layerSchema = GP_FEATURE_SCHEMA_READER.getFeature(response, name);

@@ -37,10 +37,12 @@ package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -64,10 +66,20 @@ public class WFSDescribeFeatureTypeRequestV110 extends AbstractDescribeFeatureTy
      */
     @Override
     protected DescribeFeatureTypeType createRequest() throws IllegalArgumentException {
-        checkArgument(((this.typeName != null) && !(this.typeName.isEmpty())), "The Parameter typeName must not be null or empty.");
+        List<javax.xml.namespace.QName> theTypeName = this.typeName.get();
+        checkArgument(((theTypeName != null) && !(theTypeName.isEmpty())), "The Parameter typeName must not be null or empty.");
+        String theOutputFormat = this.outputFormat.get();
         DescribeFeatureTypeType request = new DescribeFeatureTypeType();
-        request.setTypeName(typeName);
-        request.setOutputFormat(outputFormat != null ? outputFormat : "text/xml; subtype=gml/3.1.1");
+        request.setTypeName(theTypeName);
+        request.setOutputFormat(theOutputFormat != null ? theOutputFormat : "text/xml; subtype=gml/3.1.1");
         return request;
+    }
+
+    /**
+     * @return {@link WFSDescribeFeatureTypeRequest<Schema>}
+     */
+    @Override
+    protected WFSDescribeFeatureTypeRequest<Schema> self() {
+        return this;
     }
 }

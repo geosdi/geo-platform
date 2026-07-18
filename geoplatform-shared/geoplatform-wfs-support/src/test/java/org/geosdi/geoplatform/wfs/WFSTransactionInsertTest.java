@@ -90,8 +90,8 @@ public class WFSTransactionInsertTest {
     @Ignore(value = "To Enable this test there will be a Geoserver local to run.")
     public void tasmaniaRoads() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
-        request.setOperation(INSERT);
-        request.setTypeName(TASMANIA_ROADS);
+        request.withOperation(INSERT);
+        request.withTypeName(TASMANIA_ROADS);
         AttributeDTO att = new AttributeDTO();
         att.setName("TYPE");
         att.setValue("ecco");
@@ -99,7 +99,7 @@ public class WFSTransactionInsertTest {
         geometry.setName("the_geom");
         geometry.setSrid(valueOf(4326));
         geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))");
-        request.setAttributes(Arrays.asList(att, geometry));
+        request.withAttributes(Arrays.asList(att, geometry));
         logger.info("***************** Request TRANSACTION INSERT ******\n{}\n\n", request.showRequestAsString());
         TransactionResponseType response = request.getResponse();
         logger.info("\n*** {}", response.getTransactionResults());
@@ -120,8 +120,8 @@ public class WFSTransactionInsertTest {
         logger.info("###############################Layer Schema : {}", layerSchema);
         QName name = new QName("topp:tasmania_roads");
         WFSGetFeatureRequest getRequest = serverConnector.createGetFeatureRequest();
-        getRequest.setTypeName(name);
-        getRequest.setResultType(ResultTypeType.RESULTS.value());
+        getRequest.withTypeName(name);
+        getRequest.withResultType(ResultTypeType.RESULTS.value());
         InputStream is = getRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);

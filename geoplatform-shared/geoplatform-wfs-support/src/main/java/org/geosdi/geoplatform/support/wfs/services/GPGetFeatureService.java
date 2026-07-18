@@ -80,7 +80,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
     public FeatureDTO getFeature(LayerSchemaDTO layerSchema, String fid, Map<String, String> headerParams) throws Exception {
         checkArgument((fid != null) && !(fid.trim().isEmpty()), "The Parameter FID must not be null or an Empty String.");
         WFSGetFeatureRequest request = this.createRequest(layerSchema, headerParams);
-        request.setFeatureIDs(Arrays.asList(fid));
+        request.withFeatureIDs(Arrays.asList(fid));
         FeatureCollectionDTO featureCollection = this.getFeatureCollection(request, layerSchema);
         List<FeatureDTO> features = featureCollection.getFeatures();
         checkArgument((features != null) && (features.size() == 1), "The Parameter Features must not be null and must have size == 1.");
@@ -99,7 +99,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
             throws Exception {
         checkArgument(bBox != null, "The Parameter bBox must not be null.");
         WFSGetFeatureRequest request = this.createRequest(layerSchema, headerParams);
-        request.setBBox(bBox);
+        request.withBBox(bBox);
         return this.getFeatureCollection(request, layerSchema);
     }
 
@@ -116,8 +116,8 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         checkArgument(bBox != null, "The Parameter bBox must not be null.");
         maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
         WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
-        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
-        request.setBBox(bBox);
+        request.withMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.withBBox(bBox);
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
         return (FeatureCollection) request.getResponseAsStream(geoJsonStaxReader::read);
@@ -135,9 +135,9 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         checkArgument(layerSchema != null, "The Parameter layerSchema must not be null.");
         maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
         WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
-        request.setBBox(bBox);
-        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
-        request.setQueryDTO(queryDTO);
+        request.withBBox(bBox);
+        request.withMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.withQueryDTO(queryDTO);
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
         return (FeatureCollection) request.getResponseAsStream(geoJsonStaxReader::read);
@@ -158,10 +158,10 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         checkArgument(layerSchema != null, "The Parameter layerSchema must not be null.");
         maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
         WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
-        request.setBBox(bBox);
-        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
-        request.setQueryDTO(queryDTO);
-        request.setCqlFilter(cqlFilter);
+        request.withBBox(bBox);
+        request.withMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.withQueryDTO(queryDTO);
+        request.withCqlFilter(cqlFilter);
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
         return (FeatureCollection) request.getResponseAsStream(geoJsonStaxReader::read);
@@ -179,7 +179,7 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
             Map<String, String> headerParams) throws Exception {
         checkArgument(maxFeatures > 0, "The Parameter maxFeatures must be > 0.");
         WFSGetFeatureRequest request = this.createRequest(layerSchema, headerParams);
-        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.withMaxFeatures(BigInteger.valueOf(maxFeatures));
         return this.getFeatureCollection(request, layerSchema);
     }
 
@@ -201,11 +201,11 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         GPWFSConnectorStore serverConnector = ((headerParams != null) && (headerParams.size() > 0)) ?
                 super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);
         WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
-        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.withMaxFeatures(BigInteger.valueOf(maxFeatures));
         QName qName = new QName(typeName);
-        request.setTypeName(qName);
-        request.setSRS("EPSG:4326");
-        request.setResultType(RESULTS.value());
+        request.withTypeName(qName);
+        request.withSRS("EPSG:4326");
+        request.withResultType(RESULTS.value());
         return (FeatureCollection) request.getResponseAsStream(wfsGetFeatureGeoJsonStaxReader::read);
     }
 
@@ -225,12 +225,12 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
         serverURL = serverURL.replace("ows", "wfs").replace("wms", "wfs");
         GPWFSConnectorStore serverConnector = super.createWFSConnector(serverURL);
         WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
-        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.withMaxFeatures(BigInteger.valueOf(maxFeatures));
         QName qName = new QName(typeName);
-        request.setTypeName(qName);
-        request.setQueryDTO(queryDTO);
-        request.setSRS("EPSG:4326");
-        request.setResultType(RESULTS.value());
+        request.withTypeName(qName);
+        request.withQueryDTO(queryDTO);
+        request.withSRS("EPSG:4326");
+        request.withResultType(RESULTS.value());
         logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
         return (FeatureCollection) request.getResponseAsStream(wfsGetFeatureGeoJsonStaxReader::read);
     }
@@ -248,8 +248,8 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
             Map<String, String> headerParams) throws Exception {
         maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
         WFSGetFeatureRequest request = this.createRequest(layerSchema, headerParams);
-        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
-        request.setQueryDTO(queryDTO);
+        request.withMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.withQueryDTO(queryDTO);
         return this.getFeatureCollection(request, layerSchema);
     }
 
@@ -282,10 +282,10 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
                 super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);
         WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
         QName qName = new QName(typeName);
-        request.setTypeName(qName);
-        request.setGeometryName((layerSchema.getGeometry() != null ? layerSchema.getGeometry().getName() : null));
-        request.setSRS("EPSG:4326");
-        request.setResultType(RESULTS.value());
+        request.withTypeName(qName);
+        request.withGeometryName((layerSchema.getGeometry() != null ? layerSchema.getGeometry().getName() : null));
+        request.withSRS("EPSG:4326");
+        request.withResultType(RESULTS.value());
         return request;
     }
 

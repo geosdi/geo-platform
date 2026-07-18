@@ -101,8 +101,8 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void a_searchStartWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(new QName("admin:tempo"));
+        request.withResultType(RESULTS.value());
+        request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
         AttributeDTO attributeDTO = new AttributeDTO();
@@ -110,7 +110,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         attributeDTO.setType("string");
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.STARTS_WITH, "te");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
-        request.setQueryDTO(queryDTO);
+        request.withQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         assertTrue(response.getNumberOfFeatures().intValue() == 7);
@@ -119,8 +119,8 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void b_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(new QName("admin:tempo"));
+        request.withResultType(RESULTS.value());
+        request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
         AttributeDTO attributeDTO = new AttributeDTO();
@@ -128,7 +128,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         attributeDTO.setType("string");
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.ENDS_WITH, "te");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
-        request.setQueryDTO(queryDTO);
+        request.withQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         assertTrue(response.getNumberOfFeatures().intValue() == 0);
@@ -137,8 +137,8 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void c_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(new QName("admin:tempo"));
+        request.withResultType(RESULTS.value());
+        request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
         AttributeDTO attributeDTO = new AttributeDTO();
@@ -146,7 +146,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         attributeDTO.setType("string");
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.ENDS_WITH, "sto");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
-        request.setQueryDTO(queryDTO);
+        request.withQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         assertTrue(response.getNumberOfFeatures().intValue() == 1);
@@ -155,8 +155,8 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void d_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(new QName("admin:tempo"));
+        request.withResultType(RESULTS.value());
+        request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
         AttributeDTO attributeDTO = new AttributeDTO();
@@ -164,7 +164,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         attributeDTO.setType("string");
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.ENDS_WITH, "sto1");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
-        request.setQueryDTO(queryDTO);
+        request.withQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         assertTrue(response.getNumberOfFeatures().intValue() == 1);
@@ -173,8 +173,8 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void e_searchLikeLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(new QName("admin:tempo"));
+        request.withResultType(RESULTS.value());
+        request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
         AttributeDTO attributeDTO = new AttributeDTO();
@@ -182,7 +182,7 @@ public class GPWFSGetFeatureLayerTempoTest {
         attributeDTO.setType("string");
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, LIKE, "testo");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
-        request.setQueryDTO(queryDTO);
+        request.withQueryDTO(queryDTO);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         assertTrue(response.getNumberOfFeatures().intValue() == 7);
@@ -191,9 +191,9 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void f_adminSHPComCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(new QName("admin:admin_shp_comuni"));
-        request.setResultType(HITS.value());
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.withTypeName(new QName("admin:admin_shp_comuni"));
+        request.withResultType(HITS.value());
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
     }
@@ -201,9 +201,9 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void g_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(new QName("admin:admin_shp_comuni"));
-        request.setResultType(RESULTS.value());
-        request.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+        request.withTypeName(new QName("admin:admin_shp_comuni"));
+        request.withResultType(RESULTS.value());
+        request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
     }
@@ -211,11 +211,11 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void h_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(new QName("admin:admin_shp_comuni"));
-        request.setResultType(RESULTS.value());
-        request.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
-        request.setOutputFormat(GEOJSON);
-        request.setMaxFeatures(valueOf(2));
+        request.withTypeName(new QName("admin:admin_shp_comuni"));
+        request.withResultType(RESULTS.value());
+        request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+        request.withOutputFormat(GEOJSON);
+        request.withMaxFeatures(valueOf(2));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("#########################################RESPONSE : {}\n", request.getResponse().getFeatures().size());
     }
@@ -223,10 +223,10 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void i_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(new QName("admin:admin_shp_comuni"));
-        request.setResultType(RESULTS.value());
-        request.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
-        request.setMaxFeatures(valueOf(2));
+        request.withTypeName(new QName("admin:admin_shp_comuni"));
+        request.withResultType(RESULTS.value());
+        request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+        request.withMaxFeatures(valueOf(2));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("#########################################RESPONSE : {}\n", request.getResponse().getNumberOfFeatures());
     }
@@ -234,11 +234,11 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void l_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<IGPCSVBaseSchema> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(new QName("admin:admin_shp_comuni"));
-        request.setResultType(RESULTS.value());
-        request.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
-        request.setOutputFormat(CSV);
-        request.setMaxFeatures(valueOf(2));
+        request.withTypeName(new QName("admin:admin_shp_comuni"));
+        request.withResultType(RESULTS.value());
+        request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+        request.withOutputFormat(CSV);
+        request.withMaxFeatures(valueOf(2));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("#########################################RESPONSE : {}\n", request.getResponse().getHeaders());
     }

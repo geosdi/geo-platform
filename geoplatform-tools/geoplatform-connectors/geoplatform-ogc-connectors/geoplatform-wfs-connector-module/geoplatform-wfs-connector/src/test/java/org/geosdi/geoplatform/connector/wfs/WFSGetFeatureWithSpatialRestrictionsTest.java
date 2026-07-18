@@ -64,12 +64,12 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void a_stateQueryRestrictionBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollection response = request.getResponse();
         assertTrue(response.getFeatures().size() == 4);
@@ -79,11 +79,11 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void b_stateQueryRestrictionsWithBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                         + "<QueryDTO>\n"
                         + "    <matchOperator>ALL</matchOperator>\n"
@@ -114,8 +114,8 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                         + "        </queryRestriction>\n"
                         + "    </queryRestrictionList>\n"
                         + "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollection response = request.getResponse();
         assertTrue(response.getFeatures().size() == 3);
@@ -125,11 +125,11 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void c_stateQueryRestrictionsNotInBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                         + "<QueryDTO>\n"
                         + "    <matchOperator>NONE</matchOperator>\n"
@@ -160,8 +160,8 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                         "        </queryRestriction>\n" +
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollection response = request.getResponse();
         assertTrue(response.getFeatures().size() == 46);
@@ -171,11 +171,11 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void d_stateQueryRestrictionNotTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -203,11 +203,11 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void e_stateQueryRestrictionNotInBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -226,8 +226,8 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         logger.info("#############################e_stateQueryRestrictionNotInBboxTest#ResponseAsString {}\n", request.getResponseAsString());
     }
@@ -236,10 +236,10 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void f_queryWithBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(new QName("topp:admin_shp_com2016_wgs84_g"));
-        request.setBBox(new BBox(16.13123416900635, 40.83818500873241, 16.138143539428714, 40.84040902994519));
-        request.setSRS("EPSG:4326");
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(new QName("topp:admin_shp_com2016_wgs84_g"));
+        request.withBBox(new BBox(16.13123416900635, 40.83818500873241, 16.138143539428714, 40.84040902994519));
+        request.withSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("########################FEATURES : {}\n", response.getNumberOfFeatures());
@@ -248,10 +248,10 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void g_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -270,19 +270,19 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
 
     @Test
     public void h_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ALL</matchOperator>\n"
@@ -301,19 +301,19 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
 
     @Test
     public void i_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ALL</matchOperator>\n"
@@ -332,17 +332,17 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
 
     @Test
     public void l_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ANY</matchOperator>\n"
@@ -361,19 +361,19 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
 
     @Test
     public void m_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ANY</matchOperator>\n"
@@ -392,19 +392,19 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
 
     @Test
     public void n_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
@@ -412,10 +412,10 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
     @Test
     public void o_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ANY</matchOperator>\n"
@@ -434,19 +434,19 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' OR Intersects(shape,POINT(-45.891523 170.467375)))");
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' OR Intersects(shape,POINT(-45.891523 170.467375)))");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
 
     @Test
     public void p_showRequestAsStringWithCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withResultType(ResultTypeType.RESULTS.value());
+        request.withTypeName(statesName);
+        request.withPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ANY</matchOperator>\n"
@@ -465,9 +465,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' " +
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
+        request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' " +
                 "OR Intersects(shape,POINT(-45.891523 170.467375)) OR Intersects(shape,LINESTRING(-42.45063 171.21188,-42.45859 171.20709)))");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }

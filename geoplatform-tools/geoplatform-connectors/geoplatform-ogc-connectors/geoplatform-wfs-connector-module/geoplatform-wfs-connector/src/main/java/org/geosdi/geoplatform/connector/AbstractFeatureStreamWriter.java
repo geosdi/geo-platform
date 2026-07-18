@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector;
 
 import org.geosdi.geoplatform.connector.server.request.TransactionIdGen;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequestState;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.TransactionParameters;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
@@ -77,11 +77,11 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
     }
 
     /**
-     * @param <T extends WFSTransactionRequest> request
+     * @param <T extends WFSTransactionRequestState> request
      * @throws XMLStreamException
      * @throws Exception
      */
-    protected final <T extends WFSTransactionRequest> void writeDocument(@Nonnull(when = NEVER) T request) throws XMLStreamException, Exception {
+    protected final <T extends WFSTransactionRequestState> void writeDocument(@Nonnull(when = NEVER) T request) throws XMLStreamException, Exception {
         checkArgument(request != null, "The Parameter request must not be null.");
         this.writeStartDocument(request.getTypeName());
         this.writeTransactionRequest(request);
@@ -118,7 +118,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
      * @throws XMLStreamException
      * @throws Exception
      */
-    private <T extends WFSTransactionRequest> void writeTransactionRequest(T request) throws XMLStreamException, Exception {
+    private <T extends WFSTransactionRequestState> void writeTransactionRequest(T request) throws XMLStreamException, Exception {
         writer().writeStartElement(WFS.PREFIX(), TransactionParameters.getParam(TRANSACTION), WFS.NAMESPACE());
         writer().writeAttribute("service", this.getService());
         writer().writeAttribute("version", this.getWfsVersion());
@@ -131,7 +131,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
      * @throws XMLStreamException
      * @throws Exception
      */
-    private void writeTransactionInsert(WFSTransactionRequest request) throws XMLStreamException, Exception {
+    private void writeTransactionInsert(WFSTransactionRequestState request) throws XMLStreamException, Exception {
         writer().writeStartElement(WFS.PREFIX(), TransactionParameters.getParam(TRANSACTION_INSERT), WFS.NAMESPACE());
         TransactionIdGen idGen = request.getTransactionIdGen();
         if (idGen != null) {
@@ -154,10 +154,10 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
      * @throws XMLStreamException
      * @throws Exception
      */
-    private void writeFeature(WFSTransactionRequest request) throws XMLStreamException, Exception {
+    private void writeFeature(WFSTransactionRequestState request) throws XMLStreamException, Exception {
         QName typeName = request.getTypeName();
         writer().writeStartElement(typeName.getLocalPart());
-        List<AttributeDTO> attributes = request.getAttributes();
+        List<? extends AttributeDTO> attributes = request.getAttributes();
         for (AttributeDTO attributeDTO : attributes) {
             if (attributeDTO instanceof GeometryAttributeDTO) {
                 writeGeometryAttribute((GeometryAttributeDTO) attributeDTO, typeName);

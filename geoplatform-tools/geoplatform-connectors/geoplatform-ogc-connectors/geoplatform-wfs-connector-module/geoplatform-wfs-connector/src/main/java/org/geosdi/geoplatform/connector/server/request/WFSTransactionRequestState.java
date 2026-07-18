@@ -33,52 +33,59 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request.v110.param;
+package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequestState;
-import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
+import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
-import javax.annotation.Nonnull;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static javax.annotation.meta.When.NEVER;
+import javax.xml.namespace.QName;
+import java.util.List;
 
 /**
+ * Read-only SPI over the per-thread configuration of a {@link WFSTransactionRequest}. It is consumed
+ * internally by the {@code v110.transaction} strategies and by {@code AbstractFeatureStreamWriter} to
+ * serialize the {@code Transaction} request while the public {@link WFSTransactionRequest} interface only
+ * exposes the fluent {@code withXxx(...)} mutators. A single shared request instance keeps its state
+ * isolated per-thread (see the {@code ThreadLocal} backing in {@link AbstractTransactionRequest}), so reads
+ * through this view always return the caller thread's own values.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class WFSBaseGetFeatureRequestParam implements WFSGetFeatureRequestParam {
-
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    WFSBaseGetFeatureRequestParam() {
-    }
+public interface WFSTransactionRequestState {
 
     /**
-     * @param theRequest
-     * @param theQueryType
-     * @throws Exception
+     * @return the value of the transaction operation.
      */
-    @Override
-    public void applyParam(@Nonnull(when = NEVER) WFSGetFeatureRequestState theRequest, @Nonnull(when = NEVER) QueryType theQueryType) throws Exception {
-        checkArgument(theRequest != null, "The Parameter WFSGetFeatureRequestState mut not be null.");
-        checkArgument(theQueryType != null, "The Parameter QueryType mut not be null.");
-        if (this.canBeApplyParam(theRequest)) {
-            this.internalApply(theRequest, theQueryType);
-        }
-    }
+    TransactionOperation getOperation();
 
     /**
-     * @param theRequest
-     * @param theQueryType
-     * @throws Exception
+     * @return the value of the {@link TransactionIdGen} idGen. Default value is GenerateNew.
      */
-    protected abstract void internalApply(WFSGetFeatureRequestState theRequest, QueryType theQueryType) throws Exception;
+    TransactionIdGen getTransactionIdGen();
 
     /**
-     * @return {@link Boolean}
+     * @return the value of the type name query property.
      */
-    protected abstract boolean canBeApplyParam(@Nonnull(when = NEVER) WFSGetFeatureRequestState theRequest);
+    QName getTypeName();
+
+    /**
+     * @return the value of the SRS query property.
+     */
+    String getSRS();
+
+    /**
+     * @return the value of the inputFormat property.
+     */
+    String getInputFormat();
+
+    /**
+     * @return the value of the feature ID property.
+     */
+    String getFID();
+
+    /**
+     * @return the value of the attributes property.
+     */
+    List<? extends AttributeDTO> getAttributes();
 }

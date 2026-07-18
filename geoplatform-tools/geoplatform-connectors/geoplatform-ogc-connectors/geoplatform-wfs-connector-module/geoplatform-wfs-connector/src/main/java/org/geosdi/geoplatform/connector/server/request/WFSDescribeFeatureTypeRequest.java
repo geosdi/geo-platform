@@ -35,42 +35,43 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.namespace.QName;
 import java.util.List;
 
+import static javax.annotation.meta.When.NEVER;
+
 /**
+ * Fluent, thread-safe request to configure and send a WFS {@code DescribeFeatureType}. Every
+ * {@code withXxx(...)} mutator stores its value in per-thread state and returns this same request, so calls
+ * can be chained and a single shared instance can be configured concurrently from many threads.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface WFSDescribeFeatureTypeRequest<T> extends IGPostConnectorRequest<T> {
 
     /**
-     * Set the value of the typeName property.
-     *
-     * @param typeName
+     * @param theTypeName the value of the typeName property.
+     * @return {@link WFSDescribeFeatureTypeRequest<T>}
      */
-    void setTypeName(List<QName> typeName);
+    WFSDescribeFeatureTypeRequest<T> withTypeName(@Nonnull(when = NEVER) List<QName> theTypeName);
 
     /**
-     * Gets the value of the typeName property.
+     * Sets the value of the outputFormat property. Default value is "text/xml; subtype=gml/3.1.1".
      *
-     * @return {@link  List<QName>}
+     * @param theOutputFormat the value of the outputFormat property.
+     * @return {@link WFSDescribeFeatureTypeRequest<T>}
      */
-    List<QName> getTypeName();
+    WFSDescribeFeatureTypeRequest<T> withOutputFormat(@Nullable String theOutputFormat);
 
     /**
-     * Set the value of the outputFormat property.
-     *
-     * @param outputFormat
+     * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an
+     * <b>opt-in</b> operation : it is <b>not</b> invoked automatically, because a configured request may be
+     * reused across several terminal calls. Invoke it explicitly when a shared request instance is done being
+     * used on a pooled thread, to avoid retaining per-thread values. Subsequent {@code withXxx(...)} calls
+     * re-initialize the state.
      */
-    void setOutputFormat(String outputFormat);
-
-    /**
-     * Gets the value of the outputFormat property.
-     * <p>
-     * <p>Default value is "text/xml; subtype=gml/3.1.1".</p>
-     *
-     * @return {@link String}
-     */
-    String getOutputFormat();
+    void clearState();
 }

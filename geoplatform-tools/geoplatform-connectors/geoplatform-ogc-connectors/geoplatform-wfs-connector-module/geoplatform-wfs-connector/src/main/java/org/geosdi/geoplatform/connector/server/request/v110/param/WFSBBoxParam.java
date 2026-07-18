@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110.param;
 
 import com.google.common.collect.Lists;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequestState;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
@@ -73,7 +73,7 @@ class WFSBBoxParam extends WFSBaseGetFeatureRequestParam {
      * @throws Exception
      */
     @Override
-    protected void internalApply(WFSGetFeatureRequest theRequest, QueryType theQueryType) throws Exception {
+    protected void internalApply(WFSGetFeatureRequestState theRequest, QueryType theQueryType) throws Exception {
         logger.debug("###################Executing {}#internalApply.", this.toParamName());
         FilterType filter = theQueryType.getFilter();
         if (filter == null) {
@@ -111,7 +111,7 @@ class WFSBBoxParam extends WFSBaseGetFeatureRequestParam {
      * @return {@link Boolean}
      */
     @Override
-    protected boolean canBeApplyParam(@Nonnull(when = NEVER) WFSGetFeatureRequest theRequest) {
+    protected boolean canBeApplyParam(@Nonnull(when = NEVER) WFSGetFeatureRequestState theRequest) {
         checkArgument(theRequest != null, "The Parameter WFSGetFeatureRequest must not be null.");
         return theRequest.isSetBBox();
     }
@@ -120,7 +120,7 @@ class WFSBBoxParam extends WFSBaseGetFeatureRequestParam {
      * @param theRequest
      * @return {@link JAXBElement<BBOXType>}
      */
-    JAXBElement<BBOXType> createAreaOperator(WFSGetFeatureRequest theRequest) {
+    JAXBElement<BBOXType> createAreaOperator(WFSGetFeatureRequestState theRequest) {
         BBox bbox = theRequest.getBBox();
         logger.debug("#######################BBOX : {}\n.", bbox);
         BBOXType bBoxType = new BBOXType();

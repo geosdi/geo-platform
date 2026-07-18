@@ -78,7 +78,7 @@ public abstract class AbstractTranctionUpdate implements ITransactionOperationSt
      * @return {@link List<PropertyType>}
      * @throws Exception
      */
-    final List<PropertyType> getPropertyToUpdate(@Nonnull(when = NEVER) List<AttributeDTO> attributes) throws Exception {
+    final List<PropertyType> getPropertyToUpdate(@Nonnull(when = NEVER) List<? extends AttributeDTO> attributes) throws Exception {
         checkArgument((attributes != null) && !(attributes.isEmpty()), "The Parameter attributes must not be null or empty.");
         List<PropertyType> properties = Lists.newArrayListWithCapacity(attributes.size());
         for (AttributeDTO attribute : attributes) {

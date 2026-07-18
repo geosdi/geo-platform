@@ -96,7 +96,7 @@ public class WFSDescribeFeatureTest {
     public void a_describeToppStatesTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = statesName.getLocalPart();
-        request.setTypeName(Arrays.asList(statesName));
+        request.withTypeName(Arrays.asList(statesName));
         logger.info("\n{}\n", request.showRequestAsString());
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -111,7 +111,7 @@ public class WFSDescribeFeatureTest {
     public void b_describeSFRoadTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = sfRoads.getLocalPart();
-        request.setTypeName(Arrays.asList(sfRoads));
+        request.withTypeName(Arrays.asList(sfRoads));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
@@ -129,7 +129,7 @@ public class WFSDescribeFeatureTest {
                 .build()
                 .createDescribeFeatureTypeRequest();
         String localPart = siteTRCom.getLocalPart();
-        request.setTypeName(Arrays.asList(siteTRCom));
+        request.withTypeName(Arrays.asList(siteTRCom));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -147,7 +147,7 @@ public class WFSDescribeFeatureTest {
                 .createDescribeFeatureTypeRequest();
         QName percorsiNavette = new QName("PianoCampiFlegrei:CF_PercorsiNavette");
         String localPart = percorsiNavette.getLocalPart();
-        request.setTypeName(Arrays.asList(percorsiNavette));
+        request.withTypeName(Arrays.asList(percorsiNavette));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -167,7 +167,7 @@ public class WFSDescribeFeatureTest {
                 .createDescribeFeatureTypeRequest();
         QName dtsupStromboli = new QName("geonode:dtsup_stromboli");
         String localPart = dtsupStromboli.getLocalPart();
-        request.setTypeName(Arrays.asList(dtsupStromboli));
+        request.withTypeName(Arrays.asList(dtsupStromboli));
         logger.info("{}\n", request.showRequestAsString());
         logger.info("#########################SCHEMA_AS_STRING : \n{}\n", request.getResponseAsString());
         Schema s = request.getResponse();
@@ -189,7 +189,7 @@ public class WFSDescribeFeatureTest {
                         .build()).build().createDescribeFeatureTypeRequest();
         QName value = new QName("admin:admin_shp_comuni");
         String localPart = value.getLocalPart();
-        request.setTypeName(Arrays.asList(value));
+        request.withTypeName(Arrays.asList(value));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequestState;
 import org.geosdi.geoplatform.xml.filter.v110.FeatureIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.wfs.v110.PropertyType;
@@ -69,7 +69,7 @@ public class TransactionUpdate extends AbstractTranctionUpdate {
      * @throws Exception
      */
     @Override
-    public Object getOperation(@Nonnull(when = NEVER) WFSTransactionRequest request) throws Exception {
+    public Object getOperation(@Nonnull(when = NEVER) WFSTransactionRequestState request) throws Exception {
         checkArgument(request != null, "The Parameter request must not be null.");
         checkArgument(request.getTypeName() != null, "The Parameter typeName must not be null.");
         checkArgument(((request.getFID() != null) && !(request.getFID().trim().isEmpty())), "The Parameter fid must not be null.");

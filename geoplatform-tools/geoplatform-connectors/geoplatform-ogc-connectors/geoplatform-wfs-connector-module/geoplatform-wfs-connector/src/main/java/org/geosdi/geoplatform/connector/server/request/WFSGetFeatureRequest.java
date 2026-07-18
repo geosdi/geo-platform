@@ -38,225 +38,106 @@ package org.geosdi.geoplatform.connector.server.request;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.namespace.QName;
 import java.math.BigInteger;
 import java.util.List;
 
+import static javax.annotation.meta.When.NEVER;
+
 /**
+ * Fluent, thread-safe request to configure and send a WFS {@code GetFeature}. Every {@code withXxx(...)}
+ * mutator stores its value in per-thread state and returns this same request, so calls can be chained and a
+ * single shared instance can be configured concurrently from many threads without clobbering. The read side
+ * used internally to build the request is exposed by {@link WFSGetFeatureRequestState}.
+ *
  * @param <T>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
 
     /**
-     * Gets the value of the type name query property.
+     * @param theTypeName the value of the type name query property.
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    WFSGetFeatureRequest<T> withTypeName(@Nonnull(when = NEVER) QName theTypeName);
+
+    /**
+     * @param theFeatureIDs the value of the feature ID query property.
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    WFSGetFeatureRequest<T> withFeatureIDs(@Nullable List<String> theFeatureIDs);
+
+    /**
+     * @param thePropertyNames the Property Names to retrieve in {@link org.geosdi.geoplatform.xml.wfs.v110.QueryType} query.
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    WFSGetFeatureRequest<T> withPropertyNames(@Nullable List<String> thePropertyNames);
+
+    /**
+     * @param theBBox the value of the BBox query property.
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    WFSGetFeatureRequest<T> withBBox(@Nullable BBox theBBox);
+
+    /**
+     * @param theGeometryName the geometry attribute name.
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    WFSGetFeatureRequest<T> withGeometryName(@Nullable String theGeometryName);
+
+    /**
+     * @param theSRS the value of the SRS query property.
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    WFSGetFeatureRequest<T> withSRS(@Nullable String theSRS);
+
+    /**
+     * Sets the value of the resultType property. The only admissible parameters are {@code results} and
+     * {@code hits}. Default value is {@code results}.
      *
-     * @return QName
+     * @param theResultType the value of the resultType property.
+     * @return {@link WFSGetFeatureRequest<T>}
      */
-    QName getTypeName();
+    WFSGetFeatureRequest<T> withResultType(@Nullable String theResultType);
 
     /**
-     * Sets the value of the type name query property.
+     * Sets the value of the outputFormat property. Default value is {@link WFSGetFeatureOutputFormat#GML_311}.
      *
-     * @param typeName
+     * @param theOutputFormat the value of the outputFormat property.
+     * @return {@link WFSGetFeatureRequest<T>}
      */
-    void setTypeName(QName typeName);
+    WFSGetFeatureRequest<T> withOutputFormat(@Nullable GPWFSGetFeatureOutputFormat theOutputFormat);
 
     /**
-     * Gets the value of the feature ID query property.
+     * Sets the value of the maxFeatures property. There is no default value defined and the absence of the
+     * attribute means that all feature type instances in the result should be returned to the client.
      *
-     * @return List<String>
+     * @param theMaxFeatures the value of the maxFeatures property.
+     * @return {@link WFSGetFeatureRequest<T>}
      */
-    List<String> getFeatureIDs();
+    WFSGetFeatureRequest<T> withMaxFeatures(@Nullable BigInteger theMaxFeatures);
 
     /**
-     * Sets the value of the feature ID query property.
-     *
-     * @param FeatureIDs
+     * @param theQueryDTO {@link QueryDTO} class contains all Restrictions for Attributes.
+     * @return {@link WFSGetFeatureRequest<T>}
      */
-    void setFeatureIDs(List<String> FeatureIDs);
+    WFSGetFeatureRequest<T> withQueryDTO(@Nullable QueryDTO theQueryDTO);
 
     /**
-     * @return {@link Boolean}
+     * @param theCqlFilter the value of the cql filter property.
+     * @return {@link WFSGetFeatureRequest<T>}
      */
-    Boolean isSetFeatureIDs();
+    WFSGetFeatureRequest<T> withCqlFilter(@Nullable String theCqlFilter);
 
     /**
-     * Gets the value of the BBox query property.
-     *
-     * @return BBox
+     * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an
+     * <b>opt-in</b> operation : it is <b>not</b> invoked automatically, because the request state must survive
+     * the whole request/response lifecycle (the response reader still reads it after the request is sent) and
+     * a configured request may be reused across several terminal calls. Invoke it explicitly when a shared
+     * request instance is done being used on a pooled thread, to avoid retaining per-thread values. Subsequent
+     * {@code withXxx(...)} calls re-initialize the state.
      */
-    BBox getBBox();
-
-    /**
-     * Sets the value of the BBox query property.
-     *
-     * @param bBox
-     */
-    void setBBox(BBox bBox);
-
-    /**
-     * @return {@link Boolean}
-     */
-    default boolean isSetBBox() {
-        return this.getBBox() != null;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    String getGeometryName();
-
-    /**
-     * @param theGeometryName
-     */
-    void setGeometryName(String theGeometryName);
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isSetGeometryName();
-
-    /**
-     * Gets the value of the SRS query property.
-     *
-     * @return srs
-     */
-    String getSRS();
-
-    /**
-     * Sets the value of the SRS query property.
-     *
-     * @param srs
-     */
-    void setSRS(String srs);
-
-    /**
-     * @return {@link Boolean}
-     */
-    default boolean isSetSRS() {
-        return ((this.getSRS() != null) && !(this.getSRS().trim().isEmpty()));
-    }
-
-    /**
-     * Gets the value of the resultType property.
-     *
-     * @return ResultType
-     */
-    String getResultType();
-
-    /**
-     * Sets the value of the resultType property.
-     * <p>
-     * The only admissible parameters are:
-     * <p>
-     * <ul> <li>results</li> <li>hits</li> </ul>
-     * <p>
-     * <p>Default value is "results".</p>
-     *
-     * @param resultType
-     */
-    void setResultType(String resultType);
-
-    /**
-     * @return {@link Boolean}
-     */
-    default boolean isSetResultType() {
-        return ((this.getResultType() != null) && !(this.getResultType().trim().isEmpty()));
-    }
-
-    /**
-     * Gets the value of the outputFormat property.
-     *
-     * @return OutputFormat
-     */
-    GPWFSGetFeatureOutputFormat getOutputFormat();
-
-    /**
-     * Sets the value of the outputFormat property.
-     * <p>Default value is {@link WFSGetFeatureOutputFormat#GML_311}.</p>
-     *
-     * @param outputFormat
-     */
-    void setOutputFormat(GPWFSGetFeatureOutputFormat outputFormat);
-
-    /**
-     * @return {@link Boolean}
-     */
-    default boolean isSetOutputFormat() {
-        return ((this.getOutputFormat() != null));
-    }
-
-    /**
-     * Gets the value of the maxFeatures property.
-     *
-     * @return MaxFeatures Number
-     */
-    BigInteger getMaxFeatures();
-
-    /**
-     * Sets the value of the maxFeatures property.
-     * <p>There is no default value defined and the absence of the attribute
-     * means that all feature type instances in the result should should be
-     * returned to the client.</p>
-     *
-     * @param value
-     */
-    void setMaxFeatures(BigInteger value);
-
-    /**
-     * @return {@link Boolean}
-     */
-    default boolean isSetMaxFeatures() {
-        return (this.getMaxFeatures() != null);
-    }
-
-    /**
-     * <p>The Property Names to retrieve in {@link org.geosdi.geoplatform.xml.wfs.v110.QueryType} query</p>
-     *
-     * @param propertyNames
-     */
-    void setPropertyNames(List<String> propertyNames);
-
-    /**
-     * @return {@link List<String>} Property Names
-     */
-    List<String> getPropertyNames();
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isSetPropertyNames();
-
-    /**
-     * <p>{@link QueryDTO} class contains all Restrictions for Attributes</p>
-     *
-     * @param queryDTO
-     */
-    void setQueryDTO(QueryDTO queryDTO);
-
-    /**
-     * @return {@link QueryDTO}
-     */
-    QueryDTO getQueryDTO();
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isSetQueryDTO();
-
-    /**
-     * @param theCqlFilter
-     */
-    void setCqlFilter(String theCqlFilter);
-
-    /**
-     * @return {@link String}
-     */
-    String getCqlFilter();
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isSetCqlFilter();
+    void clearState();
 }

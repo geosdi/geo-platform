@@ -40,6 +40,7 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.GPTransactionMediator;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeatureStreamWriter;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
@@ -74,7 +75,7 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
      */
     @Override
     protected HttpEntity preparePostEntity() throws Exception {
-        return ((operation == INSERT) ? preparePostEntityWithStax() : super.preparePostEntity());
+        return ((this.getOperation() == INSERT) ? preparePostEntityWithStax() : super.preparePostEntity());
     }
 
     /**
@@ -83,8 +84,8 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
      */
     @Override
     protected TransactionType createRequest() throws Exception {
-        checkArgument(this.operation != null, "The Parameter Transaction Operation must not be null.");
-        ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(operation);
+        checkArgument(this.getOperation() != null, "The Parameter Transaction Operation must not be null.");
+        ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(this.getOperation());
         Object elementType = operationStrategy.getOperation(this);
         TransactionType request = new TransactionType();
         request.setInsertOrUpdateOrDelete(asList(elementType));
@@ -97,7 +98,15 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
      */
     @Override
     public String showRequestAsString() throws Exception {
-        return ((operation == INSERT) ? showRequestWithStax() : super.showRequestAsString());
+        return ((this.getOperation() == INSERT) ? showRequestWithStax() : super.showRequestAsString());
+    }
+
+    /**
+     * @return {@link WFSTransactionRequest<TransactionResponseType>}
+     */
+    @Override
+    protected WFSTransactionRequest<TransactionResponseType> self() {
+        return this;
     }
 
     /**

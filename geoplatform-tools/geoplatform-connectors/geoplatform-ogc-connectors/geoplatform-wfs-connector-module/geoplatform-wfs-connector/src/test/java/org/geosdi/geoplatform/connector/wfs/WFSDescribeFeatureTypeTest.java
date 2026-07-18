@@ -55,7 +55,7 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
     public void testV110() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = super.serverConnector.createDescribeFeatureTypeRequest();
         QName name = new QName("sf:streams");
-        request.setTypeName(Arrays.asList(name));
+        request.withTypeName(Arrays.asList(name));
         Schema s = request.getResponse();
         logger.info("TARGET NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", s.getTargetNamespace());
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
@@ -85,7 +85,7 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
     public void testSecureV110() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = super.secureServerConnector.createDescribeFeatureTypeRequest();
         QName name = new QName("tiger:poi");
-        request.setTypeName(Arrays.asList(name));
+        request.withTypeName(Arrays.asList(name));
         Schema s = request.getResponse();
         logger.info("TARGET SECURE NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", s.getTargetNamespace());
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
 
 import org.geosdi.geoplatform.connector.AbstractFeatureStreamWriter;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequestState;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
@@ -59,7 +59,7 @@ import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLConte
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransactionRequest> {
+public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransactionRequestState> {
 
     static {
         gmlContext = createJAXBContext(POOLED);
@@ -77,7 +77,7 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
      * @throws Exception
      */
     @Override
-    public void write(@Nonnull(when = NEVER) WFSTransactionRequest target, @Nonnull(when = NEVER) Object output) throws Exception {
+    public void write(@Nonnull(when = NEVER) WFSTransactionRequestState target, @Nonnull(when = NEVER) Object output) throws Exception {
         checkArgument(target != null, "The Parameter target must not be null.");
         try {
             super.acquireWriter(output);

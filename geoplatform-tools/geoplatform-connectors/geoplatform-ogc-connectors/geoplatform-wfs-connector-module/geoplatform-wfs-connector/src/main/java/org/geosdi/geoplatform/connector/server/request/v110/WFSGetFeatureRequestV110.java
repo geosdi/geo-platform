@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.bridge.store.GPWFSGetFeatureReaderStore;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.request.GPWFSGetFeatureOutputFormat;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
@@ -75,16 +76,16 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<Object, 
      */
     @Override
     protected GetFeatureType createRequest() throws Exception {
-        checkArgument(this.typeName != null, "The Parameter typeName must not be null.");
+        checkArgument(this.getTypeName() != null, "The Parameter typeName must not be null.");
         GetFeatureType request = new GetFeatureType();
         QueryType query = new QueryType();
-        query.setTypeName(asList(typeName));
+        query.setTypeName(asList(this.getTypeName()));
         request.getQuery().add(query);
         wfsGetFeatureRequestParamChain().applyParam(this, query);
-        request.setResultType(this.isSetResultType() ? fromValue(resultType) : RESULTS);
-        request.setOutputFormat(this.isSetOutputFormat() ? outputFormat.getOutputFormat() : GML_311.getOutputFormat());
+        request.setResultType(this.isSetResultType() ? fromValue(this.getResultType()) : RESULTS);
+        request.setOutputFormat(this.isSetOutputFormat() ? this.getOutputFormat().getOutputFormat() : GML_311.getOutputFormat());
         if (this.isSetMaxFeatures()) {
-            request.setMaxFeatures(maxFeatures);
+            request.setMaxFeatures(this.getMaxFeatures());
         }
         return request;
     }
@@ -96,9 +97,17 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<Object, 
      */
     @Override
     protected final Object readInternal(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
-        GPWFSGetFeatureOutputFormat outpuFormat = this.isSetOutputFormat() ? this.outputFormat : GML_311;
+        GPWFSGetFeatureOutputFormat outpuFormat = this.isSetOutputFormat() ? this.getOutputFormat() : GML_311;
         GPWFSGetFeatureReader<?> reader = store.getImplementorByKey(outpuFormat);
         checkArgument(reader != null, "There is no GetFeatureReader for outputFormat : " + outpuFormat.getOutputFormat());
         return reader.read(inputStream);
+    }
+
+    /**
+     * @return {@link WFSGetFeatureRequest<Object>}
+     */
+    @Override
+    protected WFSGetFeatureRequest<Object> self() {
+        return this;
     }
 }

@@ -76,8 +76,8 @@ public class WFSTransactionInsertTest {
     public void tasmaniaRoads() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
 
-        request.setOperation(TransactionOperation.INSERT);
-        request.setTypeName(TASMANIA_ROADS);
+        request.withOperation(TransactionOperation.INSERT);
+        request.withTypeName(TASMANIA_ROADS);
 
         AttributeDTO att = new AttributeDTO();
         att.setName("TYPE");
@@ -89,7 +89,7 @@ public class WFSTransactionInsertTest {
         geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), "
                 + "(40 40, 30 30, 40 20, 30 10))");
 
-        request.setAttributes(Arrays.asList(att, geometry));
+        request.withAttributes(Arrays.asList(att, geometry));
 
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@Request TRANSACTION INSERT ***\n{}\n",
                 request.showRequestAsString());

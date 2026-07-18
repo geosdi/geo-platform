@@ -49,5 +49,5 @@ public interface ITransactionOperationStrategy {
      * @return {@link Object}
      * @throws Exception
      */
-    Object getOperation(@Nonnull(when = NEVER) WFSTransactionRequest request) throws Exception;
+    Object getOperation(@Nonnull(when = NEVER) WFSTransactionRequestState request) throws Exception;
 }

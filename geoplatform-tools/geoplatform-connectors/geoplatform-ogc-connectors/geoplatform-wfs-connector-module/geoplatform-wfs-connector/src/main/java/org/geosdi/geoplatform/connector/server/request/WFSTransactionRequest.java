@@ -38,87 +38,73 @@ package org.geosdi.geoplatform.connector.server.request;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.namespace.QName;
 import java.util.List;
 
+import static javax.annotation.meta.When.NEVER;
+
 /**
- * WFS_110 Transaction compose of a single operation.
+ * Fluent, thread-safe WFS_110 Transaction composed of a single operation. Every {@code withXxx(...)}
+ * mutator stores its value in per-thread state and returns this same request, so calls can be chained and a
+ * single shared instance can be configured concurrently from many threads. The read side used internally to
+ * serialize the request is exposed by {@link WFSTransactionRequestState}.
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface WFSTransactionRequest<T> extends IGPostConnectorRequest<T> {
 
     /**
-     * Gets the value of the transaction operation.
+     * @param theOperation the value of the transaction operation.
+     * @return {@link WFSTransactionRequest<T>}
      */
-    TransactionOperation getOperation();
+    WFSTransactionRequest<T> withOperation(@Nonnull(when = NEVER) TransactionOperation theOperation);
 
     /**
-     * Sets the value of the transaction operation.
+     * @param theTransactionIdGen the value of the {@link TransactionIdGen} idGen. Default value is GenerateNew.
+     * @return {@link WFSTransactionRequest<T>}
      */
-    void setOperation(TransactionOperation operation);
+    WFSTransactionRequest<T> withTransactionIdGen(@Nullable TransactionIdGen theTransactionIdGen);
 
     /**
-     * Sets the value of the {@link TransactionIdGen} idGen.
+     * @param theTypeName the value of the type name query property.
+     * @return {@link WFSTransactionRequest<T>}
      */
-    void setTransactionIdGen(TransactionIdGen transactionIdGen);
+    WFSTransactionRequest<T> withTypeName(@Nonnull(when = NEVER) QName theTypeName);
 
     /**
-     * Gets the value of the {@link TransactionIdGen} idGen.
+     * @param theSRS the value of the SRS query property.
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    WFSTransactionRequest<T> withSRS(@Nullable String theSRS);
+
+    /**
+     * Sets the value of the inputFormat property. Default value is "x-application/gml:3".
      *
-     * Default Value is GenerateNew.
+     * @param theInputFormat the value of the inputFormat property.
+     * @return {@link WFSTransactionRequest<T>}
      */
-    TransactionIdGen getTransactionIdGen();
+    WFSTransactionRequest<T> withInputFormat(@Nullable String theInputFormat);
 
     /**
-     * Gets the value of the type name query property.
+     * @param theFID the value of the feature ID property.
+     * @return {@link WFSTransactionRequest<T>}
      */
-    QName getTypeName();
+    WFSTransactionRequest<T> withFID(@Nullable String theFID);
 
     /**
-     * Sets the value of the type name query property.
+     * @param theAttributes the values of the attributes property.
+     * @return {@link WFSTransactionRequest<T>}
      */
-    void setTypeName(QName typeName);
+    WFSTransactionRequest<T> withAttributes(@Nullable List<? extends AttributeDTO> theAttributes);
 
     /**
-     * Gets the value of the SRS query property.
+     * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an
+     * <b>opt-in</b> operation : it is <b>not</b> invoked automatically, because a configured request may be
+     * reused across several terminal calls. Invoke it explicitly when a shared request instance is done being
+     * used on a pooled thread, to avoid retaining per-thread values. Subsequent {@code withXxx(...)} calls
+     * re-initialize the state.
      */
-    String getSRS();
-
-    /**
-     * Sets the value of the SRS query property.
-     */
-    void setSRS(String srs);
-
-    /**
-     * Gets the value of the inputFormat property.
-     */
-    String getInputFormat();
-
-    /**
-     * Sets the value of the inputFormat property.
-     *
-     * <p>Default value is "x-application/gml:3".</p>
-     */
-    void setInputFormat(String inputFormat);
-
-    /**
-     * Gets the value of the feature ID property.
-     */
-    String getFID();
-
-    /**
-     * Sets the value of the feature ID property.
-     */
-    void setFID(String fid);
-
-    /**
-     * Gets the value of the attributes property.
-     */
-    List<? extends AttributeDTO> getAttributes();
-
-    /**
-     * Sets the values of the attributes property.
-     */
-    void setAttributes(List<? extends AttributeDTO> attributes);
+    void clearState();
 }

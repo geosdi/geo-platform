@@ -95,10 +95,10 @@ public class GPTransactionService extends AbstractFeatureService implements Tran
             GPWFSConnectorStore serverConnector = ((headerParams != null) && (headerParams.size() > 0)) ?
                     super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);
             WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
-            request.setOperation(TransactionOperation.UPDATE);
-            request.setTypeName(new QName(typeName));
-            request.setFID(fid);
-            request.setAttributes(attributes);
+            request.withOperation(TransactionOperation.UPDATE);
+            request.withTypeName(new QName(typeName));
+            request.withFID(fid);
+            request.withAttributes(attributes);
             TransactionResponseType response = request.getResponse();
             if (response.getTransactionSummary().getTotalUpdated().intValue() == 1) {
                 return TRUE;
@@ -150,9 +150,9 @@ public class GPTransactionService extends AbstractFeatureService implements Tran
             StringTokenizer st = new StringTokenizer(typeName, ":");
             String wk = st.nextToken();
             QName qName = new QName(targetNamespace, typeName, wk);
-            request.setOperation(TransactionOperation.INSERT);
-            request.setTypeName(qName);
-            request.setAttributes(attributes);
+            request.withOperation(TransactionOperation.INSERT);
+            request.withTypeName(qName);
+            request.withAttributes(attributes);
             TransactionResponseType response = request.getResponse();
             if (response.getTransactionSummary().getTotalInserted().intValue() == 1) {
                 return TRUE;
@@ -196,9 +196,9 @@ public class GPTransactionService extends AbstractFeatureService implements Tran
             GPWFSConnectorStore serverConnector = ((headerParams != null) && (headerParams.size() > 0)) ?
                     super.createWFSConnector(serverURL, headerParams) : super.createWFSConnector(serverURL);
             WFSTransactionRequest<TransactionResponseType> request = serverConnector.createTransactionRequest();
-            request.setOperation(TransactionOperation.DELETE);
-            request.setTypeName(new QName(typeName));
-            request.setFID(fid);
+            request.withOperation(TransactionOperation.DELETE);
+            request.withTypeName(new QName(typeName));
+            request.withFID(fid);
             TransactionResponseType response = request.getResponse();
             if (response.getTransactionSummary().getTotalDeleted().intValue() == 1) {
                 return TRUE;

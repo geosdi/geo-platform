@@ -35,44 +35,131 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.namespace.QName;
 import java.util.List;
 
+import static java.lang.ThreadLocal.withInitial;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.request.TransactionIdGen.GENERATE_NEW;
 
 /**
+ * Thread-safe base for the WFS {@code Transaction} request. The configuration set through the fluent
+ * {@code withXxx(...)} mutators of {@link WFSTransactionRequest} is kept in {@link ThreadLocal} state, so a
+ * single shared instance can be configured concurrently from many threads without cross-thread clobbering;
+ * the read side consumed by the transaction strategies and the stax writer is exposed via
+ * {@link WFSTransactionRequestState}.
+ *
  * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @TODO : Change Attributes type from AttributeDTO to GPFeatureDescriptor
  */
-public abstract class AbstractTransactionRequest<T, Response> extends WFSRequest<T, Response> implements WFSTransactionRequest<T> {
+@ThreadSafe
+public abstract class AbstractTransactionRequest<T, Response> extends WFSRequest<T, Response> implements WFSTransactionRequest<T>, WFSTransactionRequestState {
 
     private static final String DEFAULT_INPUT_FORMAT = "text/xml; subtype=gml/3.1.1";
     //
-    @Getter
-    @Setter
-    protected TransactionOperation operation;
-    @Setter
-    private TransactionIdGen transactionIdGen;
-    @Getter
-    @Setter
-    protected QName typeName;
-    protected String srs;
-    @Setter
-    protected String inputFormat;
-    protected String fid;
-    @Getter
-    @Setter
-    protected List<? extends AttributeDTO> attributes;
+    protected final ThreadLocal<TransactionOperation> operation;
+    protected final ThreadLocal<TransactionIdGen> transactionIdGen;
+    protected final ThreadLocal<QName> typeName;
+    protected final ThreadLocal<String> srs;
+    protected final ThreadLocal<String> inputFormat;
+    protected final ThreadLocal<String> fid;
+    protected final ThreadLocal<List<? extends AttributeDTO>> attributes;
 
     public AbstractTransactionRequest(GPServerConnector server) {
         super(server);
+        this.operation = withInitial(() -> null);
+        this.transactionIdGen = withInitial(() -> null);
+        this.typeName = withInitial(() -> null);
+        this.srs = withInitial(() -> null);
+        this.inputFormat = withInitial(() -> null);
+        this.fid = withInitial(() -> null);
+        this.attributes = withInitial(() -> null);
+    }
+
+    /**
+     * @param theOperation
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    @Override
+    public WFSTransactionRequest<T> withOperation(@Nonnull(when = NEVER) TransactionOperation theOperation) {
+        this.operation.set(theOperation);
+        return self();
+    }
+
+    /**
+     * @param theTransactionIdGen
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    @Override
+    public WFSTransactionRequest<T> withTransactionIdGen(@Nullable TransactionIdGen theTransactionIdGen) {
+        this.transactionIdGen.set(theTransactionIdGen);
+        return self();
+    }
+
+    /**
+     * @param theTypeName
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    @Override
+    public WFSTransactionRequest<T> withTypeName(@Nonnull(when = NEVER) QName theTypeName) {
+        this.typeName.set(theTypeName);
+        return self();
+    }
+
+    /**
+     * @param theSRS
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    @Override
+    public WFSTransactionRequest<T> withSRS(@Nullable String theSRS) {
+        this.srs.set(theSRS);
+        return self();
+    }
+
+    /**
+     * @param theInputFormat
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    @Override
+    public WFSTransactionRequest<T> withInputFormat(@Nullable String theInputFormat) {
+        this.inputFormat.set(theInputFormat);
+        return self();
+    }
+
+    /**
+     * @param theFID
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    @Override
+    public WFSTransactionRequest<T> withFID(@Nullable String theFID) {
+        this.fid.set(theFID);
+        return self();
+    }
+
+    /**
+     * @param theAttributes
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    @Override
+    public WFSTransactionRequest<T> withAttributes(@Nullable List<? extends AttributeDTO> theAttributes) {
+        this.attributes.set(theAttributes);
+        return self();
+    }
+
+    /**
+     * @return the value of the transaction operation.
+     */
+    @Override
+    public TransactionOperation getOperation() {
+        return this.operation.get();
     }
 
     /**
@@ -80,51 +167,78 @@ public abstract class AbstractTransactionRequest<T, Response> extends WFSRequest
      */
     @Override
     public TransactionIdGen getTransactionIdGen() {
-        return ((transactionIdGen != null) ? transactionIdGen : GENERATE_NEW);
-    }
-
-    @Override
-    public String getSRS() {
-        return srs;
-    }
-
-    @Override
-    public void setSRS(String srs) {
-        this.srs = srs;
-    }
-
-    @Override
-    public String getInputFormat() {
-        return ((inputFormat != null) && !(inputFormat.isEmpty()) ? inputFormat : DEFAULT_INPUT_FORMAT);
+        TransactionIdGen theTransactionIdGen = this.transactionIdGen.get();
+        return ((theTransactionIdGen != null) ? theTransactionIdGen : GENERATE_NEW);
     }
 
     /**
-     * Gets the value of the feature ID property.
+     * @return the value of the type name query property.
+     */
+    @Override
+    public QName getTypeName() {
+        return this.typeName.get();
+    }
+
+    /**
+     * @return the value of the SRS query property.
+     */
+    @Override
+    public String getSRS() {
+        return this.srs.get();
+    }
+
+    /**
+     * @return the value of the inputFormat property.
+     */
+    @Override
+    public String getInputFormat() {
+        String theInputFormat = this.inputFormat.get();
+        return ((theInputFormat != null) && !(theInputFormat.isEmpty()) ? theInputFormat : DEFAULT_INPUT_FORMAT);
+    }
+
+    /**
+     * @return the value of the feature ID property.
      */
     @Override
     public String getFID() {
-        return this.fid;
+        return this.fid.get();
     }
 
     /**
-     * Sets the value of the feature ID property.
-     *
-     * @param fid
+     * @return the value of the attributes property.
      */
     @Override
-    public void setFID(String fid) {
-        this.fid = fid;
+    public List<? extends AttributeDTO> getAttributes() {
+        return this.attributes.get();
+    }
+
+    /**
+     * @return {@link WFSTransactionRequest<T>}
+     */
+    protected abstract WFSTransactionRequest<T> self();
+
+    /**
+     * Opt-in release of the per-thread configuration held in the {@code ThreadLocal} state.
+     */
+    @Override
+    public void clearState() {
+        this.operation.remove();
+        this.transactionIdGen.remove();
+        this.typeName.remove();
+        this.srs.remove();
+        this.inputFormat.remove();
+        this.fid.remove();
+        this.attributes.remove();
     }
 
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + "{"
-                + "typeName=" + typeName
-                + ", srs=" + srs
-                + ", outputFormat=" + inputFormat
-                + ", FID=" + fid
-                + ", attributes=" + attributes
+                + "typeName=" + this.typeName.get()
+                + ", srs=" + this.srs.get()
+                + ", outputFormat=" + this.inputFormat.get()
+                + ", FID=" + this.fid.get()
+                + ", attributes=" + this.attributes.get()
                 + '}';
     }
-
 }

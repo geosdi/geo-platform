@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.param;
 
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequestState;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
 import javax.annotation.Nonnull;
@@ -53,7 +53,7 @@ public interface WFSGetFeatureRequestParam {
      * @param theQueryType
      * @throws Exception
      */
-    void applyParam(@Nonnull(when = NEVER) WFSGetFeatureRequest theRequest, @Nonnull(when = NEVER) QueryType theQueryType) throws Exception;
+    void applyParam(@Nonnull(when = NEVER) WFSGetFeatureRequestState theRequest, @Nonnull(when = NEVER) QueryType theQueryType) throws Exception;
 
     /**
      * @return {@link String}

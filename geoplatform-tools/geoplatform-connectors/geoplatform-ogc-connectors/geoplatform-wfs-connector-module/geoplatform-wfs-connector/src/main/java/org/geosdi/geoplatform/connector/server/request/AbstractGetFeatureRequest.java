@@ -35,60 +35,188 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.namespace.QName;
 import java.math.BigInteger;
 import java.util.List;
 
+import static java.lang.ThreadLocal.withInitial;
+import static javax.annotation.meta.When.NEVER;
+
 /**
+ * Thread-safe base for the WFS {@code GetFeature} request. The configuration set through the fluent
+ * {@code withXxx(...)} mutators of {@link WFSGetFeatureRequest} is kept in {@link ThreadLocal} state, so a
+ * single shared instance can be configured concurrently from many threads without cross-thread clobbering;
+ * the read side consumed by the {@code v110.param} classes is exposed via {@link WFSGetFeatureRequestState}.
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T, Request> implements WFSGetFeatureRequest<T> {
+@ThreadSafe
+public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T, Request> implements WFSGetFeatureRequest<T>, WFSGetFeatureRequestState {
 
     private static final String DEFAULT_GEOMETRY_NAME = "the_geom";
     private static final String DEFAULT_SRS = "EPSG:4326";
     //
-    @Getter
-    @Setter
-    protected QName typeName;
-    @Getter
-    @Setter
-    protected List<String> featureIDs;
-    @Getter
-    @Setter
-    protected List<String> propertyNames;
-    @Getter
-    @Setter
-    protected BBox bBox;
-    protected String srs;
-    @Getter
-    @Setter
-    protected String resultType;
-    @Getter
-    @Setter
-    protected GPWFSGetFeatureOutputFormat outputFormat;
-    @Getter
-    @Setter
-    protected BigInteger maxFeatures;
-    @Getter
-    @Setter
-    protected QueryDTO queryDTO;
-    @Getter
-    @Setter
-    protected String cqlFilter;
-    @Setter
-    private String geometryName;
+    protected final ThreadLocal<QName> typeName;
+    protected final ThreadLocal<List<String>> featureIDs;
+    protected final ThreadLocal<List<String>> propertyNames;
+    protected final ThreadLocal<BBox> bBox;
+    protected final ThreadLocal<String> srs;
+    protected final ThreadLocal<String> resultType;
+    protected final ThreadLocal<GPWFSGetFeatureOutputFormat> outputFormat;
+    protected final ThreadLocal<BigInteger> maxFeatures;
+    protected final ThreadLocal<QueryDTO> queryDTO;
+    protected final ThreadLocal<String> cqlFilter;
+    protected final ThreadLocal<String> geometryName;
 
     /**
      * @param server
      */
     public AbstractGetFeatureRequest(GPServerConnector server) {
         super(server);
+        this.typeName = withInitial(() -> null);
+        this.featureIDs = withInitial(() -> null);
+        this.propertyNames = withInitial(() -> null);
+        this.bBox = withInitial(() -> null);
+        this.srs = withInitial(() -> null);
+        this.resultType = withInitial(() -> null);
+        this.outputFormat = withInitial(() -> null);
+        this.maxFeatures = withInitial(() -> null);
+        this.queryDTO = withInitial(() -> null);
+        this.cqlFilter = withInitial(() -> null);
+        this.geometryName = withInitial(() -> null);
+    }
+
+    /**
+     * @param theTypeName
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withTypeName(@Nonnull(when = NEVER) QName theTypeName) {
+        this.typeName.set(theTypeName);
+        return self();
+    }
+
+    /**
+     * @param theFeatureIDs
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withFeatureIDs(@Nullable List<String> theFeatureIDs) {
+        this.featureIDs.set(theFeatureIDs);
+        return self();
+    }
+
+    /**
+     * @param thePropertyNames
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withPropertyNames(@Nullable List<String> thePropertyNames) {
+        this.propertyNames.set(thePropertyNames);
+        return self();
+    }
+
+    /**
+     * @param theBBox
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withBBox(@Nullable BBox theBBox) {
+        this.bBox.set(theBBox);
+        return self();
+    }
+
+    /**
+     * @param theGeometryName
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withGeometryName(@Nullable String theGeometryName) {
+        this.geometryName.set(theGeometryName);
+        return self();
+    }
+
+    /**
+     * @param theSRS
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withSRS(@Nullable String theSRS) {
+        this.srs.set(theSRS);
+        return self();
+    }
+
+    /**
+     * @param theResultType
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withResultType(@Nullable String theResultType) {
+        this.resultType.set(theResultType);
+        return self();
+    }
+
+    /**
+     * @param theOutputFormat
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withOutputFormat(@Nullable GPWFSGetFeatureOutputFormat theOutputFormat) {
+        this.outputFormat.set(theOutputFormat);
+        return self();
+    }
+
+    /**
+     * @param theMaxFeatures
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withMaxFeatures(@Nullable BigInteger theMaxFeatures) {
+        this.maxFeatures.set(theMaxFeatures);
+        return self();
+    }
+
+    /**
+     * @param theQueryDTO
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withQueryDTO(@Nullable QueryDTO theQueryDTO) {
+        this.queryDTO.set(theQueryDTO);
+        return self();
+    }
+
+    /**
+     * @param theCqlFilter
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    @Override
+    public WFSGetFeatureRequest<T> withCqlFilter(@Nullable String theCqlFilter) {
+        this.cqlFilter.set(theCqlFilter);
+        return self();
+    }
+
+    /**
+     * @return the value of the type name query property.
+     */
+    @Override
+    public QName getTypeName() {
+        return this.typeName.get();
+    }
+
+    /**
+     * @return the value of the feature ID query property.
+     */
+    @Override
+    public List<String> getFeatureIDs() {
+        return this.featureIDs.get();
     }
 
     /**
@@ -96,7 +224,16 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public Boolean isSetFeatureIDs() {
-        return ((this.featureIDs != null) && !(this.featureIDs.isEmpty()));
+        List<String> theFeatureIDs = this.featureIDs.get();
+        return ((theFeatureIDs != null) && !(theFeatureIDs.isEmpty()));
+    }
+
+    /**
+     * @return the Property Names to retrieve.
+     */
+    @Override
+    public List<String> getPropertyNames() {
+        return this.propertyNames.get();
     }
 
     /**
@@ -104,27 +241,29 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public Boolean isSetPropertyNames() {
-        return ((this.propertyNames != null) && !(this.propertyNames.isEmpty()));
+        List<String> thePropertyNames = this.propertyNames.get();
+        return ((thePropertyNames != null) && !(thePropertyNames.isEmpty()));
     }
 
     /**
-     * Sets the value of the SRS query property.
-     *
-     * @param theSrs
+     * @return the value of the BBox query property.
      */
     @Override
-    public void setSRS(String theSrs) {
-        this.srs = theSrs;
+    public BBox getBBox() {
+        return this.bBox.get();
     }
 
     /**
-     * Gets the value of the SRS query property.
-     *
-     * @return srs
+     * @return the value of the SRS query property.
      */
     @Override
     public String getSRS() {
-        return this.srs = (((this.srs != null) && !(this.srs.trim().isEmpty())) ? this.srs : DEFAULT_SRS);
+        String theSRS = this.srs.get();
+        if ((theSRS == null) || (theSRS.trim().isEmpty())) {
+            theSRS = DEFAULT_SRS;
+            this.srs.set(theSRS);
+        }
+        return theSRS;
     }
 
     /**
@@ -132,7 +271,7 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public String getGeometryName() {
-        return (isSetGeometryName() ? this.geometryName : DEFAULT_GEOMETRY_NAME);
+        return (isSetGeometryName() ? this.geometryName.get() : DEFAULT_GEOMETRY_NAME);
     }
 
     /**
@@ -140,7 +279,40 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public Boolean isSetGeometryName() {
-        return ((this.geometryName != null) && !(this.geometryName.trim().isEmpty()));
+        String theGeometryName = this.geometryName.get();
+        return ((theGeometryName != null) && !(theGeometryName.trim().isEmpty()));
+    }
+
+    /**
+     * @return the value of the resultType property.
+     */
+    @Override
+    public String getResultType() {
+        return this.resultType.get();
+    }
+
+    /**
+     * @return the value of the outputFormat property.
+     */
+    @Override
+    public GPWFSGetFeatureOutputFormat getOutputFormat() {
+        return this.outputFormat.get();
+    }
+
+    /**
+     * @return the value of the maxFeatures property.
+     */
+    @Override
+    public BigInteger getMaxFeatures() {
+        return this.maxFeatures.get();
+    }
+
+    /**
+     * @return {@link QueryDTO}
+     */
+    @Override
+    public QueryDTO getQueryDTO() {
+        return this.queryDTO.get();
     }
 
     /**
@@ -148,7 +320,16 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public Boolean isSetQueryDTO() {
-        return ((this.queryDTO != null) && (this.queryDTO.isSetQueryRestrictionList()));
+        QueryDTO theQueryDTO = this.queryDTO.get();
+        return ((theQueryDTO != null) && (theQueryDTO.isSetQueryRestrictionList()));
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getCqlFilter() {
+        return this.cqlFilter.get();
     }
 
     /**
@@ -156,21 +337,45 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public Boolean isSetCqlFilter() {
-        return ((this.cqlFilter != null) && !(this.cqlFilter.trim().isEmpty()));
+        String theCqlFilter = this.cqlFilter.get();
+        return ((theCqlFilter != null) && !(theCqlFilter.trim().isEmpty()));
+    }
+
+    /**
+     * @return {@link WFSGetFeatureRequest<T>}
+     */
+    protected abstract WFSGetFeatureRequest<T> self();
+
+    /**
+     * Opt-in release of the per-thread configuration held in the {@code ThreadLocal} state.
+     */
+    @Override
+    public void clearState() {
+        this.typeName.remove();
+        this.featureIDs.remove();
+        this.propertyNames.remove();
+        this.bBox.remove();
+        this.srs.remove();
+        this.resultType.remove();
+        this.outputFormat.remove();
+        this.maxFeatures.remove();
+        this.queryDTO.remove();
+        this.cqlFilter.remove();
+        this.geometryName.remove();
     }
 
     @Override
     public String toString() {
         return this.getClass().getSimpleName()
                 + " {"
-                + "  typeName = " + typeName
-                + ", featureIDs = " + featureIDs
-                + ", bBox = " + bBox
-                + ", srs = " + srs
-                + ", resultType = " + resultType
-                + ", outputFormat = " + outputFormat
-                + ", maxFeatures = " + maxFeatures
-                + ", cqlFilter = " + cqlFilter
-                + ", queryDTO = " + queryDTO + '}';
+                + "  typeName = " + this.typeName.get()
+                + ", featureIDs = " + this.featureIDs.get()
+                + ", bBox = " + this.bBox.get()
+                + ", srs = " + this.srs.get()
+                + ", resultType = " + this.resultType.get()
+                + ", outputFormat = " + this.outputFormat.get()
+                + ", maxFeatures = " + this.maxFeatures.get()
+                + ", cqlFilter = " + this.cqlFilter.get()
+                + ", queryDTO = " + this.queryDTO.get() + '}';
     }
 }

@@ -96,8 +96,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void a_statesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(HITS.value());
-        request.setTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withTypeName(statesName);
         FeatureCollectionType response = request.getResponse();
         logger.info("@@@@@@@@@@@@@@@ STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
     }
@@ -105,9 +105,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void b_statesHitsQueryRestrictions() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(HITS.value());
-        request.setTypeName(statesName);
-        request.setQueryDTO(queryDTOAnd);
+        request.withResultType(HITS.value());
+        request.withTypeName(statesName);
+        request.withQueryDTO(queryDTOAnd);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("#############################statesHitsQueryRestrictions#Features {}\n", response.getNumberOfFeatures().intValue());
@@ -116,8 +116,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void c_secureStatesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-        request.setResultType(HITS.value());
-        request.setTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withTypeName(statesName);
         FeatureCollectionType response = request.getResponse();
         logger.info("@@@@@@@@@@@@@@@ SECURE STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
     }
@@ -125,9 +125,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void d_secureStatesHitsQueryRestrictions() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-        request.setResultType(HITS.value());
-        request.setTypeName(statesName);
-        request.setQueryDTO(queryDTOAnd);
+        request.withResultType(HITS.value());
+        request.withTypeName(statesName);
+        request.withQueryDTO(queryDTOAnd);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("###############################secureStatesHitsQueryRestrictions#Features {}\n", request.getResponseAsString());
@@ -136,10 +136,10 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void e_statesResults() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setMaxFeatures(ONE);
+        request.withResultType(RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withMaxFeatures(ONE);
         FeatureCollection response = request.getResponse();
         logger.info("xxxxxxxxxxx {}", response.getFeatures().size());
     }
@@ -147,10 +147,10 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void f_statesFeatureIDs() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setFeatureIDs(Arrays.asList("states.1", "states.49"));
+        request.withResultType(RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withFeatureIDs(Arrays.asList("states.1", "states.49"));
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
         FeatureCollection response = request.getResponse();
         logger.info("#############################statesFeatureIDs#Features : {}\n", response.getFeatures().size());
@@ -159,12 +159,12 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void g_statesBBox() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(RESULTS.value());
-        request.setTypeName(statesName);
-        request.setOutputFormat(GEOJSON);
-        request.setPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
-        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
-        request.setSRS("EPSG:4326");
+        request.withResultType(RESULTS.value());
+        request.withTypeName(statesName);
+        request.withOutputFormat(GEOJSON);
+        request.withPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
+        request.withBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.withSRS("EPSG:4326");
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", request.getResponseAsString());
         FeatureCollection response = request.getResponse();
@@ -174,10 +174,10 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void h_statesContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(RESULTS.value());
-        request.setOutputFormat(GEOJSON);
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(RESULTS.value());
+        request.withOutputFormat(GEOJSON);
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ALL</matchOperator>\n"
@@ -206,9 +206,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void i_statesSecureContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(HITS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ALL</matchOperator>\n"
@@ -235,9 +235,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void l_statesNotContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(HITS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ALL</matchOperator>\n"
@@ -265,9 +265,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void m_statesSecureNotContainsRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(HITS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -294,9 +294,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void n_statesGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(HITS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ALL</matchOperator>\n"
@@ -324,9 +324,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void o_statesSecureGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(HITS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ALL</matchOperator>\n"
@@ -354,9 +354,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void p_statesNotGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(HITS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(HITS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -385,9 +385,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void q_statesSecureNotGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = secureServerConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(RESULTS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(RESULTS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -407,7 +407,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        request.setOutputFormat(GEOJSON);
+        request.withOutputFormat(GEOJSON);
         FeatureCollection response = request.getResponse();
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getFeatures().size());
     }
@@ -416,9 +416,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void r_statesSecureNotGreatherThanRestrictionAsGeoJsonTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = secureServerConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(RESULTS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(RESULTS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -437,7 +437,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setOutputFormat(GEOJSON);
+        request.withOutputFormat(GEOJSON);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollection response = request.getResponse();
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getFeatures().size());
@@ -446,9 +446,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Test
     public void s_statesSecureNotGreatherThanRestrictionAsCsvTest() throws Exception {
         WFSGetFeatureRequest<IGPCSVBaseSchema> request = secureServerConnector.createGetFeatureRequest();
-        request.setTypeName(statesName);
-        request.setResultType(RESULTS.value());
-        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+        request.withTypeName(statesName);
+        request.withResultType(RESULTS.value());
+        request.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
                         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>NONE</matchOperator>\n"
@@ -467,7 +467,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "        </queryRestriction>\n"
                                 + "    </queryRestrictionList>\n"
                                 + "</QueryDTO>"), QueryDTO.class));
-        request.setOutputFormat(CSV);
+        request.withOutputFormat(CSV);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         IGPCSVBaseSchema response = request.getResponse();
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getRowAttributes().size());

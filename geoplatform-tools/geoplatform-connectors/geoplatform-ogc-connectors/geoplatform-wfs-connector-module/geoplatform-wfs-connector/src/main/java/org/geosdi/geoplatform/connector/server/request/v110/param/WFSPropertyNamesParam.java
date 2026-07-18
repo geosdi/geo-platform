@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.param;
 
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequestState;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +65,7 @@ class WFSPropertyNamesParam extends WFSBaseGetFeatureRequestParam {
      * @throws Exception
      */
     @Override
-    protected void internalApply(WFSGetFeatureRequest theRequest, QueryType theQueryType) throws Exception {
+    protected void internalApply(WFSGetFeatureRequestState theRequest, QueryType theQueryType) throws Exception {
         List<String> propertyNames = theRequest.getPropertyNames();
         fromIterable(propertyNames)
                 .filter(v -> ((v != null) && !(v.trim().isEmpty())))
@@ -78,7 +78,7 @@ class WFSPropertyNamesParam extends WFSBaseGetFeatureRequestParam {
      * @return {@link Boolean}
      */
     @Override
-    protected boolean canBeApplyParam(@Nonnull(when = NEVER) WFSGetFeatureRequest theRequest) {
+    protected boolean canBeApplyParam(@Nonnull(when = NEVER) WFSGetFeatureRequestState theRequest) {
         checkArgument(theRequest != null, "The Parameter WFSGetFeatureRequest must not be null.");
         return theRequest.isSetPropertyNames();
     }

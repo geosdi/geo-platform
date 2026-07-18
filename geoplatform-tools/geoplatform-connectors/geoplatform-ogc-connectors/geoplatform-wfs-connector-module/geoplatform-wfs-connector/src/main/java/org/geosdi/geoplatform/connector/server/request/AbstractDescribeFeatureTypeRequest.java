@@ -35,40 +35,81 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.namespace.QName;
 import java.util.List;
 
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Thread-safe base for the WFS {@code DescribeFeatureType} request. The configuration set through the fluent
+ * {@code withXxx(...)} mutators is kept in {@link ThreadLocal} state, so a single shared instance can be
+ * configured concurrently from many threads without cross-thread clobbering; the concrete subclass reads the
+ * per-thread values directly from the {@link ThreadLocal} fields when building the request.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@Setter
+@ThreadSafe
 public abstract class AbstractDescribeFeatureTypeRequest<T, Request> extends WFSRequest<T, Request> implements WFSDescribeFeatureTypeRequest<T> {
 
-    protected List<QName> typeName;
-    protected String outputFormat;
+    protected final ThreadLocal<List<QName>> typeName;
+    protected final ThreadLocal<String> outputFormat;
 
     /**
      * @param server
      */
     protected AbstractDescribeFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server);
+        this.typeName = withInitial(() -> null);
+        this.outputFormat = withInitial(() -> null);
+    }
+
+    /**
+     * @param theTypeName
+     * @return {@link WFSDescribeFeatureTypeRequest<T>}
+     */
+    @Override
+    public WFSDescribeFeatureTypeRequest<T> withTypeName(@Nonnull(when = NEVER) List<QName> theTypeName) {
+        this.typeName.set(theTypeName);
+        return self();
+    }
+
+    /**
+     * @param theOutputFormat
+     * @return {@link WFSDescribeFeatureTypeRequest<T>}
+     */
+    @Override
+    public WFSDescribeFeatureTypeRequest<T> withOutputFormat(@Nullable String theOutputFormat) {
+        this.outputFormat.set(theOutputFormat);
+        return self();
+    }
+
+    /**
+     * @return {@link WFSDescribeFeatureTypeRequest<T>}
+     */
+    protected abstract WFSDescribeFeatureTypeRequest<T> self();
+
+    /**
+     * Opt-in release of the per-thread configuration held in the {@code ThreadLocal} state.
+     */
+    @Override
+    public void clearState() {
+        this.typeName.remove();
+        this.outputFormat.remove();
     }
 
     @Override
     public String toString() {
         return getClass()
                 .getSimpleName() + "{\n"
-                + "typeName = " + typeName
-                + "\n, outputFormat = " + outputFormat
+                + "typeName = " + this.typeName.get()
+                + "\n, outputFormat = " + this.outputFormat.get()
                 + "\n}";
     }
 }

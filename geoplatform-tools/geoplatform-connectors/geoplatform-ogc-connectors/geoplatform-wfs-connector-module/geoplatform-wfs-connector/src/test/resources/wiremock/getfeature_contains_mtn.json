@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "totalFeatures": 2,
+  "numberMatched": 2,
+  "numberReturned": 2,
+  "features": [
+    {
+      "type": "Feature",
+      "id": "states.6",
+      "geometry": null,
+      "properties": {
+        "STATE_NAME": "Colorado",
+        "SUB_REGION": "Mtn"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "states.26",
+      "geometry": null,
+      "properties": {
+        "STATE_NAME": "Montana",
+        "SUB_REGION": "Mtn"
+      }
+    }
+  ]
+}

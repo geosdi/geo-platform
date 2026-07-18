@@ -183,6 +183,19 @@ public abstract class GPWMSBaseGetFeatureInfoRequest<T, R extends GPWMSGetFeatur
     }
 
     /**
+     * Opt-in release of the per-thread configuration held in the {@code ThreadLocal} state.
+     */
+    @Override
+    public void clearState() {
+        this.wmsGetMapBaseRequest.remove();
+        this.queryLayers.remove();
+        this.infoFormat.remove();
+        this.x.remove();
+        this.y.remove();
+        this.featureCount.remove();
+    }
+
+    /**
      * @return {@link R}
      */
     protected abstract R self();

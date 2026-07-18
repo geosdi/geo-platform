@@ -83,4 +83,12 @@ public interface GPWMSGetFeatureInfoRequest<T, R extends GPWMSGetFeatureInfoRequ
      * @return {@link R}
      */
     R withFeatureCount(@Nullable Integer theFeatureCount);
+
+    /**
+     * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an
+     * <b>opt-in</b> operation : it is <b>not</b> invoked automatically. Invoke it explicitly when a shared
+     * request instance is done being used on a pooled thread, to avoid retaining per-thread values. Subsequent
+     * {@code withXxx(...)} calls re-initialize the state.
+     */
+    void clearState();
 }

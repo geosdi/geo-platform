@@ -81,6 +81,14 @@ public abstract class GPBaseWMSDescribeLayerRequest<T> extends GPWMSBaseGetReque
     }
 
     /**
+     * Opt-in release of the per-thread configuration held in the {@code ThreadLocal} state.
+     */
+    @Override
+    public void clearState() {
+        this.layers.remove();
+    }
+
+    /**
      * @return {@link String}
      */
     @Override

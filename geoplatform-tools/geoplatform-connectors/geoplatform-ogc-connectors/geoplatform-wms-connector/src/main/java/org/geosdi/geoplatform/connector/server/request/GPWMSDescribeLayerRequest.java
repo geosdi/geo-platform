@@ -51,4 +51,12 @@ public interface GPWMSDescribeLayerRequest<T> extends GPConnectorRequest<T> {
      * @return {@link GPWMSDescribeLayerRequest<T>}
      */
     GPWMSDescribeLayerRequest<T> withLayers(@Nonnull(when = When.NEVER) String... theLayers);
+
+    /**
+     * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an
+     * <b>opt-in</b> operation : it is <b>not</b> invoked automatically. Invoke it explicitly when a shared
+     * request instance is done being used on a pooled thread, to avoid retaining per-thread values. Subsequent
+     * {@code withXxx(...)} calls re-initialize the state.
+     */
+    void clearState();
 }

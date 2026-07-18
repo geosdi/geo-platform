@@ -63,6 +63,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import static org.junit.Assert.assertNotNull;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -128,6 +130,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(information));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, informationName);
         if(layerSchema == null) {
@@ -146,6 +149,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
@@ -162,6 +166,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(states));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, statesName);
         if(layerSchema == null) {
             throw new IllegalStateException("The Layer Schema is null.");
@@ -180,6 +185,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
@@ -195,6 +201,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(tigerRoads));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, tigerRoadsName);
         if(layerSchema == null) {
@@ -211,6 +218,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
 
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
@@ -229,6 +237,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(siteTRCom));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
 
         String localPart = siteTRCom.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -251,6 +260,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
@@ -279,6 +289,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(layerQName));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
 
         String localPart = layerQName.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -347,6 +358,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(TASMANIA_ROADS));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, TASMANIA_ROADS.getLocalPart());
         if(layerSchema == null) {
@@ -364,6 +376,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
 
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
@@ -403,6 +416,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(percorsiNavette));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
         logger.info("#################SCHEMA : {}\n", response);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
@@ -420,6 +434,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
 
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
@@ -449,6 +464,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(ospedali));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
         logger.info("#################SCHEMA : {}\n", response);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
@@ -466,6 +482,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
 
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
@@ -511,6 +528,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(grandiDighe));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
         logger.info("#################SCHEMA : {}\n", response);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
@@ -560,6 +578,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
 
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
@@ -592,6 +611,7 @@ public class WFSGetFeaturesRequestTest {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.withTypeName(asList(shpComuni));
         Schema response = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", response);
         logger.info("#################SCHEMA : {}\n", response);
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
@@ -612,6 +632,7 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
 
         if(!featureCollection.isFeaturesLoaded()) {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());

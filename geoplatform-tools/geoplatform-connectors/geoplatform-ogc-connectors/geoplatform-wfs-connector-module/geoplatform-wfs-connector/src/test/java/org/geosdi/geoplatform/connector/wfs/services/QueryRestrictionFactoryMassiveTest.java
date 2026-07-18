@@ -47,6 +47,10 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.QUERY_RESTRICTION_REPOSITORY;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -104,13 +108,13 @@ public class QueryRestrictionFactoryMassiveTest {
         executor.shutdown();
 
         boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
-
-        if (flag) {
-            for (Future<QueryRestrictionStrategy> future : results) {
-                logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", future.get());
-            }
-        } else {
-            throw new InterruptedException("Some Threads are not executed.");
+        assertTrue("Some Threads are not executed within the timeout.", flag);
+        assertFalse("No strategy was resolved.", results.isEmpty());
+        assertEquals("Every submitted task must produce a result.", tasks.size(), results.size());
+        for (Future<QueryRestrictionStrategy> future : results) {
+            QueryRestrictionStrategy strategy = future.get();
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", strategy);
+            assertNotNull("The repository must always resolve a strategy for a supported operator.", strategy);
         }
     }
 

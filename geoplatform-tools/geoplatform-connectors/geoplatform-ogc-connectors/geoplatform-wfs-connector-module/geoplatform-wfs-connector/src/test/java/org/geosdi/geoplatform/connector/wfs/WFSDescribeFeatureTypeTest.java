@@ -45,6 +45,9 @@ import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -57,6 +60,9 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
         QName name = new QName("sf:streams");
         request.withTypeName(Arrays.asList(name));
         Schema s = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", s);
+        assertNotNull("the schema must declare a target namespace", s.getTargetNamespace());
+        assertFalse("the schema must declare at least one type/element", s.getSimpleTypeOrComplexTypeOrGroup().isEmpty());
         logger.info("TARGET NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", s.getTargetNamespace());
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
             if (o instanceof TopLevelElement) {
@@ -87,6 +93,9 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
         QName name = new QName("tiger:poi");
         request.withTypeName(Arrays.asList(name));
         Schema s = request.getResponse();
+        assertNotNull("the secure DescribeFeatureType schema must not be null", s);
+        assertNotNull("the schema must declare a target namespace", s.getTargetNamespace());
+        assertFalse("the schema must declare at least one type/element", s.getSimpleTypeOrComplexTypeOrGroup().isEmpty());
         logger.info("TARGET SECURE NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", s.getTargetNamespace());
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
             if (o instanceof TopLevelElement) {

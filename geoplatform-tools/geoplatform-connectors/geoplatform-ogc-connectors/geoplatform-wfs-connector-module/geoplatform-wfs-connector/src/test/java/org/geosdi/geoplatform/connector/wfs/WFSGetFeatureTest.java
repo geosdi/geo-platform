@@ -49,6 +49,8 @@ import java.io.StringReader;
 import java.util.Arrays;
 
 import static java.math.BigInteger.ONE;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.CSV;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
@@ -99,6 +101,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withResultType(HITS.value());
         request.withTypeName(statesName);
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
+        assertEquals("topp:states is the canonical GeoServer sample with 49 features", 49, response.getNumberOfFeatures().intValue());
         logger.info("@@@@@@@@@@@@@@@ STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
     }
 
@@ -110,6 +114,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withQueryDTO(queryDTOAnd);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("#############################statesHitsQueryRestrictions#Features {}\n", response.getNumberOfFeatures().intValue());
     }
 
@@ -119,6 +124,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withResultType(HITS.value());
         request.withTypeName(statesName);
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
+        assertEquals("topp:states is the canonical GeoServer sample with 49 features", 49, response.getNumberOfFeatures().intValue());
         logger.info("@@@@@@@@@@@@@@@ SECURE STATES Features Found : " + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
     }
 
@@ -130,6 +137,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withQueryDTO(queryDTOAnd);
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("###############################secureStatesHitsQueryRestrictions#Features {}\n", request.getResponseAsString());
     }
 
@@ -141,6 +149,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withOutputFormat(GEOJSON);
         request.withMaxFeatures(ONE);
         FeatureCollection response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("xxxxxxxxxxx {}", response.getFeatures().size());
     }
 
@@ -153,6 +162,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withFeatureIDs(Arrays.asList("states.1", "states.49"));
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", request.getResponseAsString());
         FeatureCollection response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("#############################statesFeatureIDs#Features : {}\n", response.getFeatures().size());
     }
 
@@ -168,6 +178,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", request.getResponseAsString());
         FeatureCollection response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("##################################statesBBox#Features : {}\n", response.getFeatures().size());
     }
 
@@ -199,6 +210,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollection response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("##############################statesContainsRestrictionTest#Features : {}\n", response.getFeatures().size());
     }
 
@@ -229,6 +241,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("###################################statesSecureContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
@@ -258,6 +271,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("##################################statesNotContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
@@ -288,6 +302,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("#####################################statesSecureNotContainsRestrictionTest#Features {}\n", response.getNumberOfFeatures().intValue());
     }
 
@@ -317,6 +332,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("#########################################statesGreatherThanRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
     }
 
@@ -347,6 +363,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("#############################statesSecureGreatherThanRestrictionTest#Features : {}\n",
                 response.getNumberOfFeatures().intValue());
     }
@@ -377,6 +394,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                                 + "</QueryDTO>"), QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("##################################statesNotGreatherThanRestrictionTest#Features {}\n",
                 response.getNumberOfFeatures().intValue());
     }
@@ -409,6 +427,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         request.withOutputFormat(GEOJSON);
         FeatureCollection response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getFeatures().size());
     }
 
@@ -440,6 +459,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withOutputFormat(GEOJSON);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollection response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getFeatures().size());
     }
 
@@ -470,6 +490,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.withOutputFormat(CSV);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         IGPCSVBaseSchema response = request.getResponse();
+        assertNotNull("the WFS response must not be null", response);
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getRowAttributes().size());
     }
 }

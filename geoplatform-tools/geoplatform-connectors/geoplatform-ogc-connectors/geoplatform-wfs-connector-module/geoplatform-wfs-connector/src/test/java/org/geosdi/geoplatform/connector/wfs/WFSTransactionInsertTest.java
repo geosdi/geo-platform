@@ -45,6 +45,8 @@ import org.junit.Test;
 import javax.xml.namespace.QName;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -67,14 +69,13 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
         geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), "
                 + "(40 40, 30 30, 40 20, 30 10))");
         request.withAttributes(Arrays.asList(att, geometry));
-        logger.info("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request.showRequestAsString());
-//        TransactionResponseType response = request.getResponse();
-//        logger.info("\n*** {}", response.getTransactionResults());
-//
-//        TransactionSummaryType transactionSummary = response.getTransactionSummary();
-//        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
-//        Assert.assertEquals(0, transactionSummary.getTotalUpdated().intValue());
-//        Assert.assertEquals(1, transactionSummary.getTotalInserted().intValue());
-//        Assert.assertEquals("1.1.0", response.getVersion());
+        String requestAsString = request.showRequestAsString();
+        logger.info("\n*** Request TRANSACTION INSERT ***\n{}\n\n", requestAsString);
+        // Non-destructive verification : assert the INSERT transaction is serialized correctly from the
+        // per-thread ThreadLocal state, without mutating the live GeoServer.
+        assertTrue("must serialize a wfs:Insert element", requestAsString.contains("<wfs:Insert"));
+        assertTrue("must carry the target typeName", requestAsString.contains("tasmania_roads"));
+        assertTrue("must carry the TYPE attribute value", requestAsString.contains("NEW attribute"));
+        assertTrue("must carry the geometry attribute", requestAsString.contains("the_geom"));
     }
 }

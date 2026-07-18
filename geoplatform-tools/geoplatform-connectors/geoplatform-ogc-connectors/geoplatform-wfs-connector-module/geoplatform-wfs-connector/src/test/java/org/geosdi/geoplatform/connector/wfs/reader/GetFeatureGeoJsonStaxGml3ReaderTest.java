@@ -41,6 +41,10 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 
+import org.geojson.FeatureCollection;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -53,60 +57,75 @@ public class GetFeatureGeoJsonStaxGml3ReaderTest extends BaseGetFeatureGeoJsonSt
     @Test
     public void a_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("extra_rt_webgis_strade_comunali.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void b_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("extra_rt_webgis:Cippi_SR_SP_ettometriche_v1.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void c_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("RTWebGIS:SINS_4069_4365_pr_lu.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void d_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("RTWebGIS:SINS_4068_1454677_punti_tappa_francigena.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void e_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("RTWebGIS:SINS_4068_9363_totem_asl7.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void f_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("extra_rt_webgis:Cippi_km_v2_4.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void g_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("extra_rt_webgis:strade_private.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void h_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("aggregati_strutturali_edificato.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void i_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("mappa_vulnerabilita_edificato.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
     }
 
     @Test
     public void l_readFeatureCollectionWithStaxTest() throws Exception {
         File file = new File(dirFiles.concat("pai_frane_II_agg_2015.xml"));
-        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file))));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION  : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(assertRead(file)));
+    }
+
+    /**
+     * Reads the given fixture with the StAX GeoJSON reader and asserts a non-empty {@link FeatureCollection}
+     * was parsed, then returns it for logging.
+     *
+     * @param file the WFS GetFeature response fixture
+     * @return the parsed {@link FeatureCollection}
+     * @throws Exception
+     */
+    private FeatureCollection assertRead(File file) throws Exception {
+        FeatureCollection featureCollection = getFeatureGeoJsonStaxGml3Reader.read(new FileInputStream(file));
+        assertNotNull("the reader must not return a null FeatureCollection", featureCollection);
+        assertFalse("expected at least one parsed feature in " + file.getName(), featureCollection.getFeatures().isEmpty());
+        return featureCollection;
     }
 }

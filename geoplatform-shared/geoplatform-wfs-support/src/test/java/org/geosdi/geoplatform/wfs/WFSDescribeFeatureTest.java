@@ -47,6 +47,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.junit.Assert.assertNotNull;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.StringWriter;
@@ -99,6 +101,7 @@ public class WFSDescribeFeatureTest {
         request.withTypeName(Arrays.asList(statesName));
         logger.info("\n{}\n", request.showRequestAsString());
         Schema s = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", s);
         String name = localPart.substring(localPart.indexOf(":") + 1);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
         JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
@@ -113,6 +116,7 @@ public class WFSDescribeFeatureTest {
         String localPart = sfRoads.getLocalPart();
         request.withTypeName(Arrays.asList(sfRoads));
         Schema s = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", s);
         String name = localPart.substring(localPart.indexOf(":") + 1);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
         JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
@@ -132,6 +136,7 @@ public class WFSDescribeFeatureTest {
         request.withTypeName(Arrays.asList(siteTRCom));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
         Schema s = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", s);
         String name = localPart.substring(localPart.indexOf(":") + 1);
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(schemaReader.getFeature(s, name), writer);
@@ -150,6 +155,7 @@ public class WFSDescribeFeatureTest {
         request.withTypeName(Arrays.asList(percorsiNavette));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
         Schema s = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", s);
         String name = localPart.substring(localPart.indexOf(":") + 1);
         JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(percorsiNavette, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
         StringWriter writer = new StringWriter();
@@ -171,6 +177,7 @@ public class WFSDescribeFeatureTest {
         logger.info("{}\n", request.showRequestAsString());
         logger.info("#########################SCHEMA_AS_STRING : \n{}\n", request.getResponseAsString());
         Schema s = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", s);
         String name = localPart.substring(localPart.indexOf(":") + 1);
         JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(dtsupStromboli, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
         StringWriter writer = new StringWriter();
@@ -191,6 +198,7 @@ public class WFSDescribeFeatureTest {
         String localPart = value.getLocalPart();
         request.withTypeName(Arrays.asList(value));
         Schema s = request.getResponse();
+        assertNotNull("the DescribeFeatureType schema must not be null", s);
         String name = localPart.substring(localPart.indexOf(":") + 1);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
         JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));

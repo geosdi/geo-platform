@@ -41,6 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.WFSTransactionParam.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,36 +53,50 @@ public class TransactionParametersTest {
 
     @Test
     public void a_transactionParameterTest() throws Exception {
-        logger.info("#####################TRANSANCTION_PARAM : {}\n", TransactionParameters.getParam(TRANSACTION));
+        String param = TransactionParameters.getParam(TRANSACTION);
+        logger.info("#####################TRANSANCTION_PARAM : {}\n", param);
+        assertEquals("Transaction", param);
     }
 
     @Test
     public void b_transactionParameterTest() throws Exception {
-        logger.info("#####################TRANSANCTION_PARAM : {}\n", TransactionParameters.getParam(TRANSACTION_INSERT));
+        String param = TransactionParameters.getParam(TRANSACTION_INSERT);
+        logger.info("#####################TRANSANCTION_PARAM : {}\n", param);
+        assertEquals("Insert", param);
     }
 
     @Test
     public void c_transactionParameterTest() throws Exception {
-        logger.info("#####################TRANSANCTION_PARAM : {}\n", TransactionParameters.getParam(ID_GEN));
+        String param = TransactionParameters.getParam(ID_GEN);
+        logger.info("#####################TRANSANCTION_PARAM : {}\n", param);
+        assertEquals("idgen", param);
     }
 
     @Test
     public void d_transactionParameterTest() throws Exception {
-        logger.info("#####################TRANSANCTION_PARAM : {}\n", TransactionParameters.getParam(INPUT_FORMAT));
+        String param = TransactionParameters.getParam(INPUT_FORMAT);
+        logger.info("#####################TRANSANCTION_PARAM : {}\n", param);
+        assertEquals("inputFormat", param);
     }
 
     @Test
     public void e_transactionParameterTest() throws Exception {
-        logger.info("#####################TRANSANCTION_PARAM : {}\n", TransactionParameters.getParam(SRS_NAME));
+        String param = TransactionParameters.getParam(SRS_NAME);
+        logger.info("#####################TRANSANCTION_PARAM : {}\n", param);
+        assertEquals("srsName", param);
     }
 
     @Test
     public void f_transactionParameterTest() throws Exception {
-        logger.info("#####################TRANSANCTION_PARAM : {}\n", TransactionParameters.getParam(LOCKID));
+        String param = TransactionParameters.getParam(LOCKID);
+        logger.info("#####################TRANSANCTION_PARAM : {}\n", param);
+        assertEquals("LockId", param);
     }
 
     @Test
     public void g_transactionParameterTest() throws Exception {
-        logger.info("#####################TRANSANCTION_PARAM : {}\n", TransactionParameters.getParam(RELEASE_ACTION));
+        String param = TransactionParameters.getParam(RELEASE_ACTION);
+        logger.info("#####################TRANSANCTION_PARAM : {}\n", param);
+        assertEquals("releaseAction", param);
     }
 }

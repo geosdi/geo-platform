@@ -44,6 +44,10 @@ import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -55,6 +59,9 @@ public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
         WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.serverConnector.createGetCapabilitiesRequest();
         String responseAsString = request.formatResponseAsString(2);
         logger.info("WFS_110 GetCapabilities @@@@@@@@@@@@@@@@@@@@@@@ \n{}\n", responseAsString);
+        assertNotNull("the GetCapabilities response must not be null", responseAsString);
+        assertFalse("the GetCapabilities response must not be empty", responseAsString.trim().isEmpty());
+        assertTrue("the response must be a WFS capabilities document", responseAsString.contains("WFS_Capabilities"));
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("target/wfsGetCapabilitiesv110.xml"))) {
             writer.write(responseAsString);
@@ -66,6 +73,9 @@ public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
         WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.secureServerConnector.createGetCapabilitiesRequest();
         String responseAsString = request.formatResponseAsString(2);
         logger.info("WFS_110 Secure GetCapabilities @@@@@@@@@@@@@@@@@@@@@@@ \n{}\n", responseAsString);
+        assertNotNull("the secure GetCapabilities response must not be null", responseAsString);
+        assertFalse("the secure GetCapabilities response must not be empty", responseAsString.trim().isEmpty());
+        assertTrue("the response must be a WFS capabilities document", responseAsString.contains("WFS_Capabilities"));
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("target/wfsSecureGetCapabilitiesv110.xml"))) {
             writer.write(responseAsString);

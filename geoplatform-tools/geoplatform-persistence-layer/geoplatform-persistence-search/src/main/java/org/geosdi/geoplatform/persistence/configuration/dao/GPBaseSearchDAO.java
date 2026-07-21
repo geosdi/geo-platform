@@ -46,7 +46,6 @@ public interface GPBaseSearchDAO<T extends Object> extends GPGenericDAO<T> {
 
     /**
      * @return {@link SearchSession}
-     * @throws Exception
      */
-    SearchSession searchSession() throws Exception;
+    SearchSession searchSession();
 }

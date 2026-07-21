@@ -66,7 +66,6 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     //
     @PersistenceContext
     protected EntityManager entityManager;
-    private volatile SearchSession searchSession;
 
     /**
      * @param thePersistentClass
@@ -77,8 +76,8 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     }
 
     @Override
-    public final SearchSession searchSession() throws Exception {
-        return this.searchSession = ((this.searchSession != null) ? this.searchSession : Search.session((Session) this.entityManager.getDelegate()));
+    public final SearchSession searchSession() {
+        return Search.session(this.getSession());
     }
 
     @Override

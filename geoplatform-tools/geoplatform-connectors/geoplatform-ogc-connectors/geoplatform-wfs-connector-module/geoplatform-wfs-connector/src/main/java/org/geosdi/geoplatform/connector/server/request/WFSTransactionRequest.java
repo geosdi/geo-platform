@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSTransactionRequest<T> extends IGPostConnectorRequest<T> {
+public interface WFSTransactionRequest<T> extends WFSStatefulRequest<T, WFSTransactionRequest<T>> {
 
     /**
      * @param theOperation the value of the transaction operation.
@@ -98,13 +98,4 @@ public interface WFSTransactionRequest<T> extends IGPostConnectorRequest<T> {
      * @return {@link WFSTransactionRequest<T>}
      */
     WFSTransactionRequest<T> withAttributes(@Nullable List<? extends AttributeDTO> theAttributes);
-
-    /**
-     * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an
-     * <b>opt-in</b> operation : it is <b>not</b> invoked automatically, because a configured request may be
-     * reused across several terminal calls. Invoke it explicitly when a shared request instance is done being
-     * used on a pooled thread, to avoid retaining per-thread values. Subsequent {@code withXxx(...)} calls
-     * re-initialize the state.
-     */
-    void clearState();
 }

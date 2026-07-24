@@ -55,7 +55,7 @@ import static javax.annotation.meta.When.NEVER;
  * @param <T>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
+public interface WFSGetFeatureRequest<T> extends WFSStatefulRequest<T, WFSGetFeatureRequest<T>> {
 
     /**
      * @param theTypeName the value of the type name query property.
@@ -130,14 +130,4 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
      * @return {@link WFSGetFeatureRequest<T>}
      */
     WFSGetFeatureRequest<T> withCqlFilter(@Nullable String theCqlFilter);
-
-    /**
-     * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an
-     * <b>opt-in</b> operation : it is <b>not</b> invoked automatically, because the request state must survive
-     * the whole request/response lifecycle (the response reader still reads it after the request is sent) and
-     * a configured request may be reused across several terminal calls. Invoke it explicitly when a shared
-     * request instance is done being used on a pooled thread, to avoid retaining per-thread values. Subsequent
-     * {@code withXxx(...)} calls re-initialize the state.
-     */
-    void clearState();
 }

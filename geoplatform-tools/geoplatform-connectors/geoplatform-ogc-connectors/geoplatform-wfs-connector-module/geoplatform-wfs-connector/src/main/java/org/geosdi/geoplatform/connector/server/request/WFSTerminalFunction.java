@@ -35,34 +35,28 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.xml.namespace.QName;
-import java.util.List;
-
-import static javax.annotation.meta.When.NEVER;
-
 /**
- * Fluent, thread-safe request to configure and send a WFS {@code DescribeFeatureType}. Every
- * {@code withXxx(...)} mutator stores its value in per-thread state and returns this same request, so calls
- * can be chained and a single shared instance can be configured concurrently from many threads.
+ * A terminal operation performed on a fluent WFS request, producing a result of type {@code R} and allowed to
+ * throw the checked {@link Exception} declared by the request terminal methods (e.g.
+ * {@link org.geosdi.geoplatform.connector.server.request.GPConnectorRequest#getResponse()} /
+ * {@code getResponseAsStream(...)}). It is the counterpart of {@link java.util.function.Function} that the
+ * standard functional interfaces cannot model because they do not allow checked exceptions.
+ * <p>
+ * It is consumed by {@link WFSStatefulRequest#execute} to represent the action to run against the request
+ * before its per-thread state is released.
  *
+ * @param <T> the request type handed to the action.
+ * @param <R> the type produced by the action.
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface WFSDescribeFeatureTypeRequest<T> extends WFSStatefulRequest<T, WFSDescribeFeatureTypeRequest<T>> {
+@FunctionalInterface
+public interface WFSTerminalFunction<T, R> {
 
     /**
-     * @param theTypeName the value of the typeName property.
-     * @return {@link WFSDescribeFeatureTypeRequest<T>}
+     * @param request the request the action operates on.
+     * @return the value produced by the action.
+     * @throws Exception if the terminal operation fails.
      */
-    WFSDescribeFeatureTypeRequest<T> withTypeName(@Nonnull(when = NEVER) List<QName> theTypeName);
-
-    /**
-     * Sets the value of the outputFormat property. Default value is "text/xml; subtype=gml/3.1.1".
-     *
-     * @param theOutputFormat the value of the outputFormat property.
-     * @return {@link WFSDescribeFeatureTypeRequest<T>}
-     */
-    WFSDescribeFeatureTypeRequest<T> withOutputFormat(@Nullable String theOutputFormat);
+    R apply(T request) throws Exception;
 }

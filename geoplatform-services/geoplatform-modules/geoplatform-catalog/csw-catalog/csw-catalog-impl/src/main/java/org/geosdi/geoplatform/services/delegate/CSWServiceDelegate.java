@@ -272,13 +272,13 @@ class CSWServiceDelegate implements CSWDelegate {
         logger.trace("########################## getRecordsCount {}\n", catalogFinder);
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
         CatalogGetRecordsRequest<GetRecordsResponseType> request = this.createGetRecordsRequest(server.getServerUrl());
-        request.setTypeName(TypeName.RECORD_V202);
-        request.setOutputSchema(OutputSchema.CSW_V202);
-        request.setElementSetName(ElementSetType.BRIEF.value());
-        request.setResultType(ResultType.HITS.value());
-        request.setConstraintLanguage(ConstraintLanguage.FILTER);
-        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
-        request.setCatalogFinder(catalogFinder);
+        request.withTypeName(TypeName.RECORD_V202)
+                .withOutputSchema(OutputSchema.CSW_V202)
+                .withElementSetName(ElementSetType.BRIEF.value())
+                .withResultType(ResultType.HITS.value())
+                .withConstraintLanguage(ConstraintLanguage.FILTER)
+                .withConstraintLanguageVersion(ConstraintLanguageVersion.V110)
+                .withCatalogFinder(catalogFinder);
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RESPONSE : {}\n\n\n", request);
         return response.getSearchResults().getNumberOfRecordsMatched().intValue();
@@ -300,20 +300,17 @@ class CSWServiceDelegate implements CSWDelegate {
         CatalogGetRecordsRequest<GetRecordsResponseType> request
                 = this.createGetRecordsRequest(server.getServerUrl());
 
-        request.setTypeName(TypeName.RECORD_V202);
-        request.setOutputSchema(OutputSchema.CSW_V202);
-        request.setElementSetName(ElementSetType.SUMMARY.value());
-        request.setResultType(ResultType.RESULTS.value());
-
-        request.setConstraintLanguage(ConstraintLanguage.FILTER);
-        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
-        request.setCatalogFinder(catalogFinder);
-
-        // Pagination search
-        request.setMaxRecords(BigInteger.valueOf(num));
-        request.setStartPosition(BigInteger.valueOf(start));
-        logger.debug("\n*** Num: {} *** Start: {} ***",
-                request.getMaxRecords(), request.getStartPosition());
+        request.withTypeName(TypeName.RECORD_V202)
+                .withOutputSchema(OutputSchema.CSW_V202)
+                .withElementSetName(ElementSetType.SUMMARY.value())
+                .withResultType(ResultType.RESULTS.value())
+                .withConstraintLanguage(ConstraintLanguage.FILTER)
+                .withConstraintLanguageVersion(ConstraintLanguageVersion.V110)
+                .withCatalogFinder(catalogFinder)
+                // Pagination search
+                .withMaxRecords(BigInteger.valueOf(num))
+                .withStartPosition(BigInteger.valueOf(start));
+        logger.debug("\n*** Num: {} *** Start: {} ***", num, start);
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
@@ -363,20 +360,17 @@ class CSWServiceDelegate implements CSWDelegate {
         CatalogGetRecordsRequest<GetRecordsResponseType> request
                 = this.createGetRecordsRequest(server.getServerUrl());
 
-        request.setTypeName(TypeName.RECORD_V202);
-        request.setOutputSchema(OutputSchema.CSW_V202);
-        request.setElementSetName(ElementSetType.FULL.value());
-        request.setResultType(ResultType.RESULTS.value());
-
-        request.setConstraintLanguage(ConstraintLanguage.FILTER);
-        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
-        request.setCatalogFinder(catalogFinder);
-
-        // Pagination search
-        request.setMaxRecords(BigInteger.valueOf(num));
-        request.setStartPosition(BigInteger.valueOf(start));
-        logger.debug("\n*** Num: {} *** Start: {} ***",
-                request.getMaxRecords(), request.getStartPosition());
+        request.withTypeName(TypeName.RECORD_V202)
+                .withOutputSchema(OutputSchema.CSW_V202)
+                .withElementSetName(ElementSetType.FULL.value())
+                .withResultType(ResultType.RESULTS.value())
+                .withConstraintLanguage(ConstraintLanguage.FILTER)
+                .withConstraintLanguageVersion(ConstraintLanguageVersion.V110)
+                .withCatalogFinder(catalogFinder)
+                // Pagination search
+                .withMaxRecords(BigInteger.valueOf(num))
+                .withStartPosition(BigInteger.valueOf(start));
+        logger.debug("\n*** Num: {} *** Start: {} ***", num, start);
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
@@ -502,9 +496,9 @@ class CSWServiceDelegate implements CSWDelegate {
 
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request
                 = serverConnector.createGetRecordByIdRequest();
-        request.setId(identifier);
-        request.setElementSetType(ElementSetType.FULL.value());
-        request.setOutputSchema(outputSchema);
+        request.withId(identifier)
+                .withElementSetType(ElementSetType.FULL.value())
+                .withOutputSchema(outputSchema);
 
         String response = this.createGetRecordByIdResponseAsString(request);
 

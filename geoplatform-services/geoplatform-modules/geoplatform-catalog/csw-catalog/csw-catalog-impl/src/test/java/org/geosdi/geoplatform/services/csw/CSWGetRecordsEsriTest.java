@@ -97,15 +97,15 @@ public class CSWGetRecordsEsriTest {
 
         });
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-        request.setTypeName(TypeName.RECORD_V202);
-        request.setOutputSchema(OutputSchema.CSW_V202);
-        request.setElementSetName(ElementSetType.FULL.value());
-        request.setResultType(ResultType.RESULTS.value());
-        request.setConstraintLanguage(ConstraintLanguage.FILTER);
-        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
-        request.setCatalogFinder(finderBean);
-        request.setStartPosition(BigInteger.ONE);
-        request.setMaxRecords(BigInteger.valueOf(25));
+        request.withTypeName(TypeName.RECORD_V202)
+                .withOutputSchema(OutputSchema.CSW_V202)
+                .withElementSetName(ElementSetType.FULL.value())
+                .withResultType(ResultType.RESULTS.value())
+                .withConstraintLanguage(ConstraintLanguage.FILTER)
+                .withConstraintLanguageVersion(ConstraintLanguageVersion.V110)
+                .withCatalogFinder(finderBean)
+                .withStartPosition(BigInteger.ONE)
+                .withMaxRecords(BigInteger.valueOf(25));
         logger.debug("\n\n#####################RESPONSE AS STRING : {}\n\n", request.getResponseAsString());
         GetRecordsResponseType response = request.getResponse();
         SearchResultsType result = response.getSearchResults();
@@ -121,12 +121,12 @@ public class CSWGetRecordsEsriTest {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder
                 .newConnector().withServerUrl(url).build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-        request.setTypeName(TypeName.METADATA);
-        request.setOutputSchema(OutputSchema.CSW_V202);
-        request.setElementSetName(ElementSetType.FULL.toString());
-        request.setResultType(ResultType.RESULTS.toString());
-        request.setStartPosition(BigInteger.ONE);
-        request.setMaxRecords(BigInteger.valueOf(25));
+        request.withTypeName(TypeName.METADATA)
+                .withOutputSchema(OutputSchema.CSW_V202)
+                .withElementSetName(ElementSetType.FULL.toString())
+                .withResultType(ResultType.RESULTS.toString())
+                .withStartPosition(BigInteger.ONE)
+                .withMaxRecords(BigInteger.valueOf(25));
         logger.debug("\n\n#####################RESPONSE AS STRING : {}\n\n", request.getResponseAsString());
         GetRecordsResponseType response = request.getResponse();
         SearchResultsType result = response.getSearchResults();

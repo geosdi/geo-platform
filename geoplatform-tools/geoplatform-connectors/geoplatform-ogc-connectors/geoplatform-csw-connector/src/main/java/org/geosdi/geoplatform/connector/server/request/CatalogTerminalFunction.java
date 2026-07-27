@@ -33,36 +33,30 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request.v202.cql;
-
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
-import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import static javax.annotation.meta.When.NEVER;
+package org.geosdi.geoplatform.connector.server.request;
 
 /**
+ * A terminal operation performed on a fluent CSW catalog request, producing a result of type {@code R} and
+ * allowed to throw the checked {@link Exception} declared by the request terminal methods (e.g.
+ * {@link GPConnectorRequest#getResponse()} / {@code getResponseAsString()}). It is the counterpart of
+ * {@link java.util.function.Function} that the standard functional interfaces cannot model because they do not
+ * allow checked exceptions.
+ * <p>
+ * It is consumed by {@link CatalogStatefulRequest#execute} to represent the action to run against the request
+ * before its per-thread state is released.
+ *
+ * @param <T> the request type handed to the action.
+ * @param <R> the type produced by the action.
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGetRecordsRequestHandlerCQL {
+@FunctionalInterface
+public interface CatalogTerminalFunction<T, R> {
 
     /**
-     * @param theSuccessor
+     * @param request the request the action operates on.
+     * @return the value produced by the action.
+     * @throws Exception if the terminal operation fails.
      */
-    void setSuccessor(@Nullable GetRecordsRequestHandlerCQL theSuccessor);
-
-    /**
-     * @param request
-     * @throws Exception
-     */
-    void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState request) throws Exception;
-
-    /**
-     * @param <HandlerType>
-     * @return {@link HandlerType}
-     */
-    <HandlerType extends GPGetRecordsHandlerType> HandlerType getType();
+    R apply(T request) throws Exception;
 }

@@ -37,33 +37,32 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
-import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Fluent, thread-safe request to configure and send a CSW {@code GetRecordById}. Every {@code withXxx(...)}
+ * mutator stores its value in per-thread state and returns this same request, so calls can be chained and a
+ * single shared instance can be configured concurrently from many threads without cross-thread clobbering.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface CatalogGetRecordByIdRequest<T> extends GPJAXBConnectorRequest<T> {
+public interface CatalogGetRecordByIdRequest<T> extends CatalogStatefulRequest<T, CatalogGetRecordByIdRequest<T>> {
 
     /**
-     * @param outputSchema
+     * @param theOutputSchema the value of the outputSchema property.
+     * @return {@link CatalogGetRecordByIdRequest<T>}
      */
-    void setOutputSchema(OutputSchema outputSchema);
+    CatalogGetRecordByIdRequest<T> withOutputSchema(@Nullable OutputSchema theOutputSchema);
 
     /**
-     * @return {@link OutputSchema}
+     * @param theId the identifiers of the records to retrieve; {@code null} and blank values are discarded.
+     * @return {@link CatalogGetRecordByIdRequest<T>}
      */
-    OutputSchema getOutputSchema();
-
-    /**
-     * @param theId
-     */
-    void setId(String... theId);
-
-    /**
-     * @return {@link List<String>}
-     */
-    List<String> getId();
+    CatalogGetRecordByIdRequest<T> withId(@Nonnull(when = NEVER) String... theId);
 
     /**
      * The only admissible parameters are:
@@ -76,12 +75,8 @@ public interface CatalogGetRecordByIdRequest<T> extends GPJAXBConnectorRequest<T
      * <p>The default value is Summary</p>
      * <p/>
      *
-     * @param value
+     * @param theElementSetType the value of the elementSetType property.
+     * @return {@link CatalogGetRecordByIdRequest<T>}
      */
-    void setElementSetType(String value);
-
-    /**
-     * @return {@link String}
-     */
-    String getElementSetType();
+    CatalogGetRecordByIdRequest<T> withElementSetType(@Nullable String theElementSetType);
 }

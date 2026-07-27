@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
@@ -58,7 +58,7 @@ public interface GPGetRecordsRequestHandlerFilter {
      * @param theFilterPredicates
      * @throws IllegalParameterFault
      */
-    void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest theRequest, @Nonnull(when = NEVER) FilterType theFilterType, @Nonnull(when = NEVER) List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault;
+    void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState theRequest, @Nonnull(when = NEVER) FilterType theFilterType, @Nonnull(when = NEVER) List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault;
 
     /**
      * @param theSuccessor

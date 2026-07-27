@@ -98,7 +98,7 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testTypeSummary() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
-        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
+        request.withId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
         GetRecordByIdResponseType response = request.getResponse();
         assertEquals(true, response.isSetAbstractRecord());
         assertEquals(false, response.isSetAny());
@@ -112,9 +112,9 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testTypeFull() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
-        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
-        request.setOutputSchema(OutputSchema.GMD);
-        request.setElementSetType(ElementSetType.FULL.value());
+        request.withId("7e418dac-3764-4290-b8ac-47c9ac2a12af")
+                .withOutputSchema(OutputSchema.GMD)
+                .withElementSetType(ElementSetType.FULL.value());
         GetRecordByIdResponseType response = request.getResponse();
         assertEquals(false, response.isSetAbstractRecord());
         assertEquals(true, response.isSetAny());
@@ -131,9 +131,9 @@ public class CatalogGetRecordByIdTest {
                         + "geoportale/csw/discovery").toURL())
                 .build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = ispraServerConnector.createGetRecordByIdRequest();
-        request.setId("ispra_rm:20150521:185000");
-        request.setOutputSchema(OutputSchema.GMD);
-        request.setElementSetType(ElementSetType.FULL.value());
+        request.withId("ispra_rm:20150521:185000")
+                .withOutputSchema(OutputSchema.GMD)
+                .withElementSetType(ElementSetType.FULL.value());
         GetRecordByIdResponseType response = request.getResponse();
         assertEquals(false, response.isSetAbstractRecord());
         assertEquals(true, response.isSetAny());
@@ -145,7 +145,7 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testDoubleRequest() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
-        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af", "r_friuli:m8726-cc-i1286");
+        request.withId("7e418dac-3764-4290-b8ac-47c9ac2a12af", "r_friuli:m8726-cc-i1286");
         GetRecordByIdResponseType response = request.getResponse();
         assertEquals(true, response.isSetAbstractRecord());
         assertEquals(false, response.isSetAny());
@@ -160,9 +160,9 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testOutputGmd() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = serverConnector.createGetRecordByIdRequest();
-        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
-        request.setElementSetType(ElementSetType.FULL.value());
-        request.setOutputSchema(OutputSchema.GMD);
+        request.withId("7e418dac-3764-4290-b8ac-47c9ac2a12af")
+                .withElementSetType(ElementSetType.FULL.value())
+                .withOutputSchema(OutputSchema.GMD);
         GetRecordByIdResponseType response = request.getResponse();
         assertEquals(false, response.isSetAbstractRecord());
         assertEquals(true, response.isSetAny());
@@ -181,9 +181,9 @@ public class CatalogGetRecordByIdTest {
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = connector.createGetRecordByIdRequest();
-        request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
-        request.setElementSetType(ElementSetType.FULL.value());
-        request.setOutputSchema(OutputSchema.GMD);
+        request.withId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}")
+                .withElementSetType(ElementSetType.FULL.value())
+                .withOutputSchema(OutputSchema.GMD);
         GetRecordByIdResponseType response = request.getResponse();
         assertEquals(false, response.isSetAbstractRecord());
         assertEquals(true, response.isSetAny());
@@ -202,9 +202,9 @@ public class CatalogGetRecordByIdTest {
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = connector.createGetRecordByIdRequest();
-        request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
-        request.setElementSetType(ElementSetType.FULL.value());
-        request.setOutputSchema(OutputSchema.ORIGINAL);
+        request.withId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}")
+                .withElementSetType(ElementSetType.FULL.value())
+                .withOutputSchema(OutputSchema.ORIGINAL);
         Object o = request.getResponse();
         MDMetadataType metadata = (MDMetadataType) o;
         Assert.assertNotNull(metadata);
@@ -222,9 +222,9 @@ public class CatalogGetRecordByIdTest {
                 withClientSecurity(securityConnector).
                 build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = snipcConnector.createGetRecordByIdRequest();
-        request.setId("PCM:901:20101021:112931");
-        request.setElementSetType(ElementSetType.FULL.toString());
-//        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.withId("PCM:901:20101021:112931")
+                .withElementSetType(ElementSetType.FULL.toString());
+//                .withOutputSchema(OutputSchema.CSW_V202);
         GetRecordByIdResponseType response = request.getResponse();
         assertEquals(true, response.isSetAbstractRecord());
         assertEquals(false, response.isSetAny());
@@ -256,9 +256,9 @@ public class CatalogGetRecordByIdTest {
 
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = snipcConnector.createGetRecordByIdRequest();
 
-        request.setId("{3DEE88CB-A0DB-4794-941A-FD8119621A2F}");
-        request.setElementSetType(ElementSetType.FULL.toString());
-        request.setOutputSchema(OutputSchema.ORIGINAL);
+        request.withId("{3DEE88CB-A0DB-4794-941A-FD8119621A2F}")
+                .withElementSetType(ElementSetType.FULL.toString())
+                .withOutputSchema(OutputSchema.ORIGINAL);
 
         Object o = request.getResponse();
 //        MDMetadataType metadata = (MDMetadataType) o;

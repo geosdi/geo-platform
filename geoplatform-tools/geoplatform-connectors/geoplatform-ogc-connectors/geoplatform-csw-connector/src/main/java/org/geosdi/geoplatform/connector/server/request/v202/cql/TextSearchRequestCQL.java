@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.cql;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
@@ -62,7 +62,7 @@ public class TextSearchRequestCQL extends GetRecordsRequestHandlerCQL {
      * @throws IllegalParameterFault
      */
     @Override
-    protected void processGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest request) throws Exception {
+    protected void processGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState request) throws Exception {
         checkArgument(request != null, "The Parameter request must not be null.");
         logger.debug("##########################Called {}#processGetRecordsRequest\n", this);
         TextInfo textInfo = request.getCatalogFinder().getTextInfo();

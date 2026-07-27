@@ -101,12 +101,12 @@ public class CatalogGetRecordsTest {
     @Test
     public void testSummaryRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-        request.setTypeName(TypeName.METADATA);
-        request.setOutputSchema(CSW_V202);
-        request.setElementSetName(ElementSetType.SUMMARY.toString());
-        request.setResultType(ResultType.RESULTS.toString());
-        request.setStartPosition(BigInteger.ONE);
-        request.setMaxRecords(BigInteger.valueOf(25));
+        request.withTypeName(TypeName.METADATA)
+                .withOutputSchema(CSW_V202)
+                .withElementSetName(ElementSetType.SUMMARY.toString())
+                .withResultType(ResultType.RESULTS.toString())
+                .withStartPosition(BigInteger.ONE)
+                .withMaxRecords(BigInteger.valueOf(25));
         GetRecordsResponseType response = request.getResponse();
         SearchResultsType result = response.getSearchResults();
         logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
@@ -122,12 +122,12 @@ public class CatalogGetRecordsTest {
     @Test
     public void testFullRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-        request.setTypeName(TypeName.METADATA);
-        request.setOutputSchema(CSW_V202);
-        request.setElementSetName(ElementSetType.FULL.toString());
-        request.setResultType(ResultType.RESULTS.toString());
-        request.setStartPosition(BigInteger.ONE);
-        request.setMaxRecords(BigInteger.valueOf(25));
+        request.withTypeName(TypeName.METADATA)
+                .withOutputSchema(CSW_V202)
+                .withElementSetName(ElementSetType.FULL.toString())
+                .withResultType(ResultType.RESULTS.toString())
+                .withStartPosition(BigInteger.ONE)
+                .withMaxRecords(BigInteger.valueOf(25));
         GetRecordsResponseType response = request.getResponse();
         SearchResultsType result = response.getSearchResults();
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
@@ -144,9 +144,9 @@ public class CatalogGetRecordsTest {
         GPCatalogConnectorStore sc = newConnector().
                 withServerUrl(url).build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = sc.createGetRecordsRequest();
-        request.setTypeName(RECORD_V202);
-        request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
-        request.setConstraintLanguageVersion(V110);
+        request.withTypeName(RECORD_V202)
+                .withConstraintLanguage(ConstraintLanguage.CQL_TEXT)
+                .withConstraintLanguageVersion(V110);
         // Text filter
         StringBuilder str = new StringBuilder();
         str.append("AnyText LIKE '%%'");
@@ -158,8 +158,8 @@ public class CatalogGetRecordsTest {
         str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
         str.append(" AND ");
         str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
-        request.setConstraint(str.toString());
-        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", request.getConstraint());
+        request.withConstraint(str.toString());
+        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", str);
         GetRecordsResponseType response = request.getResponse();
         SearchResultsType searchResult = response.getSearchResults();
         logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###", searchResult.getNumberOfRecordsMatched());
@@ -173,12 +173,12 @@ public class CatalogGetRecordsTest {
                 .withClientSecurity(new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword))
                 .build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = snipcServerConnector.createGetRecordsRequest();
-        request.setTypeName(RECORD_V202);
-        request.setOutputSchema(CSW_V202);
-        request.setElementSetName(ElementSetType.FULL.toString());
-        request.setResultType(ResultType.RESULTS.toString());
-        request.setStartPosition(BigInteger.ONE);
-        request.setMaxRecords(BigInteger.valueOf(25));
+        request.withTypeName(RECORD_V202)
+                .withOutputSchema(CSW_V202)
+                .withElementSetName(ElementSetType.FULL.toString())
+                .withResultType(ResultType.RESULTS.toString())
+                .withStartPosition(BigInteger.ONE)
+                .withMaxRecords(BigInteger.valueOf(25));
         GetRecordsResponseType response = request.getResponse();
         SearchResultsType result = response.getSearchResults();
         logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
@@ -197,12 +197,12 @@ public class CatalogGetRecordsTest {
                 .withServerUrl(new URI("http://www.rndt.gov.it/RNDT/CSW").toURL())
                 .build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = rndtServerConnector.createGetRecordsRequest();
-        request.setTypeName(RECORD_V202);
-        request.setOutputSchema(CSW_V202);
-        request.setElementSetName(ElementSetType.FULL.toString());
-        request.setResultType(ResultType.RESULTS.toString());
-        request.setStartPosition(BigInteger.ONE);
-        request.setMaxRecords(BigInteger.valueOf(25));
+        request.withTypeName(RECORD_V202)
+                .withOutputSchema(CSW_V202)
+                .withElementSetName(ElementSetType.FULL.toString())
+                .withResultType(ResultType.RESULTS.toString())
+                .withStartPosition(BigInteger.ONE)
+                .withMaxRecords(BigInteger.valueOf(25));
         GetRecordsResponseType response = request.getResponse();
         SearchResultsType result = response.getSearchResults();
         logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
@@ -233,13 +233,13 @@ public class CatalogGetRecordsTest {
         catalogFinder.setTextInfo(textInfo);
         catalogFinder.setTimeInfo(timeInfo);
         CatalogGetRecordsRequest<GetRecordsResponseType> request = internalServer.createGetRecordsRequest();
-        request.setTypeName(RECORD_V202);
-        request.setOutputSchema(CSW_V202);
-        request.setElementSetName(ElementSetType.BRIEF.value());
-        request.setResultType(ResultType.HITS.value());
-        request.setConstraintLanguage(FILTER);
-        request.setConstraintLanguageVersion(V110);
-        request.setCatalogFinder(catalogFinder);
+        request.withTypeName(RECORD_V202)
+                .withOutputSchema(CSW_V202)
+                .withElementSetName(ElementSetType.BRIEF.value())
+                .withResultType(ResultType.HITS.value())
+                .withConstraintLanguage(FILTER)
+                .withConstraintLanguageVersion(V110)
+                .withCatalogFinder(catalogFinder);
         logger.info("###########################RESPONSE : {}\n", request.getResponse());
     }
 
@@ -257,13 +257,13 @@ public class CatalogGetRecordsTest {
         areaInfo.setAreaSearchType(OVERLAP);
         catalogFinder.setAreaInfo(areaInfo);
         CatalogGetRecordsRequest<GetRecordsResponseType> request = internalServer.createGetRecordsRequest();
-        request.setTypeName(RECORD_V202);
-        request.setOutputSchema(CSW_V202);
-        request.setElementSetName(ElementSetType.BRIEF.value());
-        request.setResultType(ResultType.HITS.value());
-        request.setConstraintLanguage(FILTER);
-        request.setConstraintLanguageVersion(V110);
-        request.setCatalogFinder(catalogFinder);
+        request.withTypeName(RECORD_V202)
+                .withOutputSchema(CSW_V202)
+                .withElementSetName(ElementSetType.BRIEF.value())
+                .withResultType(ResultType.HITS.value())
+                .withConstraintLanguage(FILTER)
+                .withConstraintLanguageVersion(V110)
+                .withCatalogFinder(catalogFinder);
         logger.info("###########################RESPONSE : \n{}\n", request.getResponseAsString());
     }
 }

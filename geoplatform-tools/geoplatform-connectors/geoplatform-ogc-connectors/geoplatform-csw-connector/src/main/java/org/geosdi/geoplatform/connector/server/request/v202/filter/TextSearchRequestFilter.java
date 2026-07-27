@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
@@ -66,7 +66,7 @@ public class TextSearchRequestFilter extends GetRecordsRequestHandlerFilter {
      * @throws IllegalParameterFault
      */
     @Override
-    protected void processGetRecordsRequest(CatalogGetRecordsRequest theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
+    protected void processGetRecordsRequest(CatalogGetRecordsRequestState theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
         logger.debug("#####################Called {}#processGetRecordsRequest", this);
         TextInfo textInfo = theRequest.getCatalogFinder().getTextInfo();
         if (textInfo != null) {

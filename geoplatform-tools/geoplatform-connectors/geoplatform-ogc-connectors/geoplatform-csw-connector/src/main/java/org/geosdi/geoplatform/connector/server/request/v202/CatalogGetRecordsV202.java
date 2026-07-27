@@ -37,13 +37,18 @@ package org.geosdi.geoplatform.connector.server.request.v202;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecords;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.GetRecordsRequestManager;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.xml.namespace.QName;
 import java.io.StringWriter;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,18 +78,22 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
      */
     @Override
     protected GetRecordsType createRequest() throws Exception {
+        String theResultType = this.resultType.get();
+        OutputSchema theOutputSchema = this.outputSchema.get();
+        TypeName theTypeName = this.typeName.get();
+        String theElementSetName = this.elementSetName.get();
         GetRecordsType request = new GetRecordsType();
-        request.setResultType(resultType != null ? fromValue(resultType) : HITS);
-        request.setOutputSchema(outputSchema != null ? outputSchema.toString() : CSW_V202.toString());
+        request.setResultType(theResultType != null ? fromValue(theResultType) : HITS);
+        request.setOutputSchema(theOutputSchema != null ? theOutputSchema.toString() : CSW_V202.toString());
         // The default 'output format' is the MIME type "application/xml"
         request.setOutputFormat("application/xml");
         QueryType query = new QueryType();
         request.setAbstractQuery(query);
         List<QName> typNameList = new ArrayList<>();
-        typNameList.add(typeName != null ? typeName.getQName() : TypeName.RECORD_V202.getQName());
+        typNameList.add(theTypeName != null ? theTypeName.getQName() : TypeName.RECORD_V202.getQName());
         query.setTypeNames(typNameList);
         ElementSetNameType elementSetNameType = new ElementSetNameType();
-        elementSetNameType.setValue(elementSetName != null ? ElementSetType.fromValue(elementSetName) : SUMMARY);
+        elementSetNameType.setValue(theElementSetName != null ? ElementSetType.fromValue(theElementSetName) : SUMMARY);
         query.setElementSetName(elementSetNameType);
         FilterType filterType = new FilterType();
         catalogRequestManager.filterGetRecordsRequest(this, filterType);
@@ -93,27 +102,41 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
             this.getMarshaller().marshal(filterType, writer);
             logger.trace("@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE CREATED :  \n{}\n", writer.toString());
         }
-        if (filterType.isSetLogicOps() || filterType.isSetComparisonOps() || filterType.isSetSpatialOps() || constraint != null) {
-            checkArgument(this.constraintLanguage != null, "If there is at least one filter criteria, 'Constraint Language' must not be null.");
-            checkArgument(this.constraintLanguageVersion != null, "'Constraint Language Version' must not be null.");
+        // Read after the handler chain : the CQL handlers accumulate the constraint into the per-thread state.
+        String theConstraint = this.constraint.get();
+        if (filterType.isSetLogicOps() || filterType.isSetComparisonOps() || filterType.isSetSpatialOps() || theConstraint != null) {
+            ConstraintLanguage theConstraintLanguage = this.constraintLanguage.get();
+            ConstraintLanguageVersion theConstraintLanguageVersion = this.constraintLanguageVersion.get();
+            checkArgument(theConstraintLanguage != null, "If there is at least one filter criteria, 'Constraint Language' must not be null.");
+            checkArgument(theConstraintLanguageVersion != null, "'Constraint Language Version' must not be null.");
             QueryConstraintType queryConstraintType = new QueryConstraintType();
-            queryConstraintType.setVersion(constraintLanguageVersion.getVersion());
-            switch (constraintLanguage) {
+            queryConstraintType.setVersion(theConstraintLanguageVersion.getVersion());
+            switch (theConstraintLanguage) {
                 case FILTER:
                     queryConstraintType.setFilter(filterType);
                     break;
                 case CQL_TEXT:
-                    queryConstraintType.setCqlText(constraint);
+                    queryConstraintType.setCqlText(theConstraint);
                     break;
             }
             query.setConstraint(queryConstraintType);
         }
-        if (startPosition != null) {
-            request.setStartPosition(startPosition);
+        BigInteger theStartPosition = this.startPosition.get();
+        if (theStartPosition != null) {
+            request.setStartPosition(theStartPosition);
         }
-        if (maxRecords != null) {
-            request.setMaxRecords(maxRecords);
+        BigInteger theMaxRecords = this.maxRecords.get();
+        if (theMaxRecords != null) {
+            request.setMaxRecords(theMaxRecords);
         }
         return request;
+    }
+
+    /**
+     * @return {@link CatalogGetRecordsRequest<GetRecordsResponseType>}
+     */
+    @Override
+    protected CatalogGetRecordsRequest<GetRecordsResponseType> self() {
+        return this;
     }
 }

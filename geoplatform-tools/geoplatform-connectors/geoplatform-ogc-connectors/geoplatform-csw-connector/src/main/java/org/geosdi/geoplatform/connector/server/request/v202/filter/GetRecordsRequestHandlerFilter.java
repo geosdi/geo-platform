@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.filter.v110.*;
 import org.slf4j.Logger;
@@ -72,7 +72,7 @@ public abstract class GetRecordsRequestHandlerFilter implements GPGetRecordsRequ
      * @param theFilterPredicates
      * @throws IllegalParameterFault
      */
-    public void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest theRequest, @Nonnull(when = NEVER) FilterType theFilterType, @Nonnull(when = NEVER) List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
+    public void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState theRequest, @Nonnull(when = NEVER) FilterType theFilterType, @Nonnull(when = NEVER) List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault {
         checkArgument(theRequest != null, "The Parameter request must not be null.");
         checkArgument(theFilterType != null, "The Parameter filterType must not be null.");
         checkArgument(theFilterPredicates != null);
@@ -92,7 +92,7 @@ public abstract class GetRecordsRequestHandlerFilter implements GPGetRecordsRequ
         successor = theSuccessor;
     }
 
-    protected abstract void processGetRecordsRequest(CatalogGetRecordsRequest theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault;
+    protected abstract void processGetRecordsRequest(CatalogGetRecordsRequestState theRequest, FilterType theFilterType, List<JAXBElement<?>> theFilterPredicates) throws IllegalParameterFault;
 
     /**
      * @param propertyName
@@ -117,7 +117,7 @@ public abstract class GetRecordsRequestHandlerFilter implements GPGetRecordsRequ
      * @param filterType
      * @param filterPredicates
      */
-    private void addFilterConstraint(CatalogGetRecordsRequest request, FilterType filterType, List<JAXBElement<?>> filterPredicates) {
+    private void addFilterConstraint(CatalogGetRecordsRequestState request, FilterType filterType, List<JAXBElement<?>> filterPredicates) {
         checkArgument(request.getConstraintLanguage() == FILTER, "Constraint Language must be FILTER.");
         if (filterPredicates.size() == 1) {
             Object value = filterPredicates.get(0).getValue();

@@ -38,9 +38,12 @@ package org.geosdi.geoplatform.connector.server.request.v202;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordById;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdType;
+
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.xml.csw.v202.ElementSetType.SUMMARY;
@@ -62,15 +65,26 @@ public class CatalogGetRecordByIdV202 extends CatalogGetRecordById<GetRecordById
      */
     @Override
     protected GetRecordByIdType createRequest() throws Exception {
-        checkArgument((this.id != null) && !(this.id.isEmpty()), "The Parameter id must not be null or an empty list");
+        List<String> theId = this.id.get();
+        checkArgument((theId != null) && !(theId.isEmpty()), "The Parameter id must not be null or an empty list");
         GetRecordByIdType request = new GetRecordByIdType();
-        request.setId(id);
-        if (this.outputSchema != null) {
-            request.setOutputSchema(this.outputSchema.toString());
+        request.setId(theId);
+        OutputSchema theOutputSchema = this.outputSchema.get();
+        if (theOutputSchema != null) {
+            request.setOutputSchema(theOutputSchema.toString());
         }
+        String theElementSetType = this.elementSetType.get();
         ElementSetNameType elementSetNameType = new ElementSetNameType();
-        elementSetNameType.setValue(elementSetType != null ? fromValue(elementSetType) : SUMMARY);
+        elementSetNameType.setValue(theElementSetType != null ? fromValue(theElementSetType) : SUMMARY);
         request.setElementSetName(elementSetNameType);
         return request;
+    }
+
+    /**
+     * @return {@link CatalogGetRecordByIdRequest<GetRecordByIdResponseType>}
+     */
+    @Override
+    protected CatalogGetRecordByIdRequest<GetRecordByIdResponseType> self() {
+        return this;
     }
 }

@@ -35,52 +35,98 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static java.lang.ThreadLocal.withInitial;
 import static java.util.stream.Collectors.toList;
+import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Thread-safe base of the CSW {@code GetRecordById} request. The configuration set through the fluent
+ * {@code withXxx(...)} mutators of {@link CatalogGetRecordByIdRequest} is kept in {@link ThreadLocal} state, so
+ * a single shared instance can be configured concurrently from many threads without cross-thread clobbering;
+ * the concrete subclass reads the per-thread values directly from the {@link ThreadLocal} fields when building
+ * the request.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
+@ThreadSafe
 public abstract class CatalogGetRecordById<T, Request> extends CatalogCSWRequest<T, Request> implements CatalogGetRecordByIdRequest<T> {
 
-    protected List<String> id;
-    @Setter
-    protected OutputSchema outputSchema;
-    @Setter
-    protected String elementSetType;
+    protected final ThreadLocal<List<String>> id;
+    protected final ThreadLocal<OutputSchema> outputSchema;
+    protected final ThreadLocal<String> elementSetType;
 
     public CatalogGetRecordById(GPServerConnector server) {
         super(server);
+        this.id = withInitial(() -> null);
+        this.outputSchema = withInitial(() -> null);
+        this.elementSetType = withInitial(() -> null);
     }
 
     /**
      * @param theId
+     * @return {@link CatalogGetRecordByIdRequest<T>}
      */
     @Override
-    public void setId(String... theId) {
-        this.id = Arrays.stream(theId)
+    public CatalogGetRecordByIdRequest<T> withId(@Nonnull(when = NEVER) String... theId) {
+        this.id.set(Arrays.stream(theId)
                 .filter(Objects::nonNull)
                 .filter(id -> !id.trim().isEmpty())
-                .collect(toList());
+                .collect(toList()));
+        return self();
+    }
+
+    /**
+     * @param theOutputSchema
+     * @return {@link CatalogGetRecordByIdRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordByIdRequest<T> withOutputSchema(@Nullable OutputSchema theOutputSchema) {
+        this.outputSchema.set(theOutputSchema);
+        return self();
+    }
+
+    /**
+     * @param theElementSetType
+     * @return {@link CatalogGetRecordByIdRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordByIdRequest<T> withElementSetType(@Nullable String theElementSetType) {
+        this.elementSetType.set(theElementSetType);
+        return self();
+    }
+
+    /**
+     * @return {@link CatalogGetRecordByIdRequest<T>}
+     */
+    protected abstract CatalogGetRecordByIdRequest<T> self();
+
+    /**
+     * Opt-in release of the per-thread configuration held in the {@code ThreadLocal} state.
+     */
+    @Override
+    public void clearState() {
+        this.id.remove();
+        this.outputSchema.remove();
+        this.elementSetType.remove();
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + " {\n"
-                + "id = " + id +
-                ", outputSchema = " + outputSchema +
-                ", elementSetType = " + elementSetType +
+                + "id = " + this.id.get() +
+                ", outputSchema = " + this.outputSchema.get() +
+                ", elementSetType = " + this.elementSetType.get() +
                 "\n}";
     }
 }

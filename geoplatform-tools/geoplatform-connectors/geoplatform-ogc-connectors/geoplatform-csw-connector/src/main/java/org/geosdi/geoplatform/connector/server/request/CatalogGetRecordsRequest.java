@@ -41,89 +41,60 @@ import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 
+import javax.annotation.Nullable;
 import java.math.BigInteger;
 
 /**
- * API of GetRecords CSW_202 request
+ * Fluent, thread-safe API of the GetRecords CSW_202 request. Every {@code withXxx(...)} mutator stores its
+ * value in per-thread state and returns this same request, so calls can be chained and a single shared
+ * instance can be configured concurrently from many threads without cross-thread clobbering. The read side
+ * consumed by the {@code v202} handler chain is exposed via {@link CatalogGetRecordsRequestState}.
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface CatalogGetRecordsRequest<T> extends GPJAXBConnectorRequest<T> {
+public interface CatalogGetRecordsRequest<T> extends CatalogStatefulRequest<T, CatalogGetRecordsRequest<T>> {
 
     /**
-     * @return {@link ConstraintLanguage}
+     * @param theConstraintLanguage the value of the constraintLanguage property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    ConstraintLanguage getConstraintLanguage();
+    CatalogGetRecordsRequest<T> withConstraintLanguage(@Nullable ConstraintLanguage theConstraintLanguage);
 
     /**
-     * @param constraintLanguage
+     * @param theConstraintLanguageVersion the value of the constraintLanguageVersion property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    void setConstraintLanguage(ConstraintLanguage constraintLanguage);
+    CatalogGetRecordsRequest<T> withConstraintLanguageVersion(@Nullable ConstraintLanguageVersion theConstraintLanguageVersion);
 
     /**
-     * @return {@link ConstraintLanguageVersion}
+     * @param theConstraint the value of the constraint property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    ConstraintLanguageVersion getConstraintLanguageVersion();
+    CatalogGetRecordsRequest<T> withConstraint(@Nullable String theConstraint);
 
     /**
-     * @param constraintLanguageVersion
+     * @param theCatalogFinder the {@link CatalogFinderBean} carrying the search criteria.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    void setConstraintLanguageVersion(ConstraintLanguageVersion constraintLanguageVersion);
+    CatalogGetRecordsRequest<T> withCatalogFinder(@Nullable CatalogFinderBean theCatalogFinder);
 
     /**
-     * @return {@link String}
+     * @param theMaxRecords the value of the maxRecords property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    String getConstraint();
+    CatalogGetRecordsRequest<T> withMaxRecords(@Nullable BigInteger theMaxRecords);
 
     /**
-     * @param constraint
+     * @param theStartPosition the value of the startPosition property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    void setConstraint(String constraint);
+    CatalogGetRecordsRequest<T> withStartPosition(@Nullable BigInteger theStartPosition);
 
     /**
-     * @return {@link CatalogFinderBean}
+     * @param theOutputSchema the value of the outputSchema property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    CatalogFinderBean getCatalogFinder();
-
-    /**
-     * @param catalogFinder
-     */
-    void setCatalogFinder(CatalogFinderBean catalogFinder);
-
-    /**
-     * @return {@link BigInteger}
-     */
-    BigInteger getMaxRecords();
-
-    /**
-     * @param maxRecords
-     */
-    void setMaxRecords(BigInteger maxRecords);
-
-    /**
-     * @return {@link BigInteger}
-     */
-    BigInteger getStartPosition();
-
-    /**
-     * @param startPosition
-     */
-    void setStartPosition(BigInteger startPosition);
-
-    /**
-     * @return {@link OutputSchema}
-     */
-    OutputSchema getOutputSchema();
-
-    /**
-     * @param outputSchema
-     */
-    void setOutputSchema(OutputSchema outputSchema);
-
-    /**
-     * @return {@link String}
-     */
-    String getResultType();
+    CatalogGetRecordsRequest<T> withOutputSchema(@Nullable OutputSchema theOutputSchema);
 
     /**
      * The only admissible parameters are:
@@ -136,14 +107,10 @@ public interface CatalogGetRecordsRequest<T> extends GPJAXBConnectorRequest<T> {
      * <p>The default value is Hits</p>
      * <p/>
      *
-     * @param resultType
+     * @param theResultType the value of the resultType property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    void setResultType(String resultType);
-
-    /**
-     * @return {@link String}
-     */
-    String getElementSetName();
+    CatalogGetRecordsRequest<T> withResultType(@Nullable String theResultType);
 
     /**
      * The only admissible parameters are:
@@ -156,14 +123,14 @@ public interface CatalogGetRecordsRequest<T> extends GPJAXBConnectorRequest<T> {
      * <p>The default value is Summary</p>
      * <p/>
      *
-     * @param elementSetName
+     * @param theElementSetName the value of the elementSetName property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    void setElementSetName(String elementSetName);
+    CatalogGetRecordsRequest<T> withElementSetName(@Nullable String theElementSetName);
 
     /**
-     * @return {@link TypeName}
+     * @param theTypeName the value of the typeName property.
+     * @return {@link CatalogGetRecordsRequest<T>}
      */
-    TypeName getTypeName();
-
-    void setTypeName(TypeName typeName);
+    CatalogGetRecordsRequest<T> withTypeName(@Nullable TypeName theTypeName);
 }

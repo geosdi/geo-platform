@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.cql;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +66,7 @@ public abstract class GetRecordsRequestHandlerCQL implements GPGetRecordsRequest
      * @param request
      * @throws Exception
      */
-    public void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest request) throws Exception {
+    public void forwardGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState request) throws Exception {
         this.processGetRecordsRequest(request);
         if (successor != null) {
             successor.forwardGetRecordsRequest(request);
@@ -84,13 +84,13 @@ public abstract class GetRecordsRequestHandlerCQL implements GPGetRecordsRequest
      * @param request
      * @throws IllegalParameterFault
      */
-    protected abstract void processGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest request) throws Exception;
+    protected abstract void processGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState request) throws Exception;
 
     /**
      * @param request
      * @param followingConstraint
      */
-    protected void addCQLConstraint(@Nonnull(when = NEVER) CatalogGetRecordsRequest request, @Nonnull(when = NEVER) String followingConstraint) {
+    protected void addCQLConstraint(@Nonnull(when = NEVER) CatalogGetRecordsRequestState request, @Nonnull(when = NEVER) String followingConstraint) {
         checkArgument(request != null, "The Parameter request must not be null.");
         checkArgument(((followingConstraint != null) && !(followingConstraint.trim().isEmpty())), "The Parameter followingConstraint must not be null or an empty string.");
         checkArgument(request.getConstraintLanguage() == CQL_TEXT, "Constraint Language must be CQL_TEXT.");

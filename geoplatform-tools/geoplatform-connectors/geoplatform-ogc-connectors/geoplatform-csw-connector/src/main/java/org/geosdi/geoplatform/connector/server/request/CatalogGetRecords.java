@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
@@ -44,49 +43,274 @@ import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 
+import javax.annotation.Nullable;
 import java.math.BigInteger;
 
+import static java.lang.ThreadLocal.withInitial;
+
 /**
- * Abstract class of GetRecords CSW_202 request
+ * Thread-safe base of the GetRecords CSW_202 request. The configuration set through the fluent
+ * {@code withXxx(...)} mutators of {@link CatalogGetRecordsRequest} is kept in {@link ThreadLocal} state, so a
+ * single shared instance can be configured concurrently from many threads without cross-thread clobbering; the
+ * read side consumed by the {@code v202} handler chain is exposed via {@link CatalogGetRecordsRequestState}.
  *
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@Getter
-@Setter
-public abstract class CatalogGetRecords<T, Request> extends CatalogCSWRequest<T, Request> implements CatalogGetRecordsRequest<T> {
+@ThreadSafe
+public abstract class CatalogGetRecords<T, Request> extends CatalogCSWRequest<T, Request> implements CatalogGetRecordsRequest<T>, CatalogGetRecordsRequestState {
 
-    protected ConstraintLanguage constraintLanguage;
-    protected ConstraintLanguageVersion constraintLanguageVersion;
-    protected String constraint;
-    protected CatalogFinderBean catalogFinder;
-    protected BigInteger maxRecords;
-    protected BigInteger startPosition;
-    protected OutputSchema outputSchema;
-    protected String resultType;
-    protected String elementSetName;
-    protected TypeName typeName;
+    protected final ThreadLocal<ConstraintLanguage> constraintLanguage;
+    protected final ThreadLocal<ConstraintLanguageVersion> constraintLanguageVersion;
+    protected final ThreadLocal<String> constraint;
+    protected final ThreadLocal<CatalogFinderBean> catalogFinder;
+    protected final ThreadLocal<BigInteger> maxRecords;
+    protected final ThreadLocal<BigInteger> startPosition;
+    protected final ThreadLocal<OutputSchema> outputSchema;
+    protected final ThreadLocal<String> resultType;
+    protected final ThreadLocal<String> elementSetName;
+    protected final ThreadLocal<TypeName> typeName;
 
     /**
      * @param server
      */
     public CatalogGetRecords(GPServerConnector server) {
         super(server);
+        this.constraintLanguage = withInitial(() -> null);
+        this.constraintLanguageVersion = withInitial(() -> null);
+        this.constraint = withInitial(() -> null);
+        this.catalogFinder = withInitial(() -> null);
+        this.maxRecords = withInitial(() -> null);
+        this.startPosition = withInitial(() -> null);
+        this.outputSchema = withInitial(() -> null);
+        this.resultType = withInitial(() -> null);
+        this.elementSetName = withInitial(() -> null);
+        this.typeName = withInitial(() -> null);
+    }
+
+    /**
+     * @param theConstraintLanguage
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withConstraintLanguage(@Nullable ConstraintLanguage theConstraintLanguage) {
+        this.constraintLanguage.set(theConstraintLanguage);
+        return self();
+    }
+
+    /**
+     * @param theConstraintLanguageVersion
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withConstraintLanguageVersion(@Nullable ConstraintLanguageVersion theConstraintLanguageVersion) {
+        this.constraintLanguageVersion.set(theConstraintLanguageVersion);
+        return self();
+    }
+
+    /**
+     * @param theConstraint
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withConstraint(@Nullable String theConstraint) {
+        this.constraint.set(theConstraint);
+        return self();
+    }
+
+    /**
+     * @param theCatalogFinder
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withCatalogFinder(@Nullable CatalogFinderBean theCatalogFinder) {
+        this.catalogFinder.set(theCatalogFinder);
+        return self();
+    }
+
+    /**
+     * @param theMaxRecords
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withMaxRecords(@Nullable BigInteger theMaxRecords) {
+        this.maxRecords.set(theMaxRecords);
+        return self();
+    }
+
+    /**
+     * @param theStartPosition
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withStartPosition(@Nullable BigInteger theStartPosition) {
+        this.startPosition.set(theStartPosition);
+        return self();
+    }
+
+    /**
+     * @param theOutputSchema
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withOutputSchema(@Nullable OutputSchema theOutputSchema) {
+        this.outputSchema.set(theOutputSchema);
+        return self();
+    }
+
+    /**
+     * @param theResultType
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withResultType(@Nullable String theResultType) {
+        this.resultType.set(theResultType);
+        return self();
+    }
+
+    /**
+     * @param theElementSetName
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withElementSetName(@Nullable String theElementSetName) {
+        this.elementSetName.set(theElementSetName);
+        return self();
+    }
+
+    /**
+     * @param theTypeName
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    @Override
+    public CatalogGetRecordsRequest<T> withTypeName(@Nullable TypeName theTypeName) {
+        this.typeName.set(theTypeName);
+        return self();
+    }
+
+    /**
+     * @return {@link ConstraintLanguage}
+     */
+    @Override
+    public ConstraintLanguage getConstraintLanguage() {
+        return this.constraintLanguage.get();
+    }
+
+    /**
+     * @return {@link ConstraintLanguageVersion}
+     */
+    @Override
+    public ConstraintLanguageVersion getConstraintLanguageVersion() {
+        return this.constraintLanguageVersion.get();
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getConstraint() {
+        return this.constraint.get();
+    }
+
+    /**
+     * @param theConstraint
+     */
+    @Override
+    public void setConstraint(@Nullable String theConstraint) {
+        this.constraint.set(theConstraint);
+    }
+
+    /**
+     * @return {@link CatalogFinderBean}
+     */
+    @Override
+    public CatalogFinderBean getCatalogFinder() {
+        return this.catalogFinder.get();
+    }
+
+    /**
+     * @return {@link BigInteger}
+     */
+    @Override
+    public BigInteger getMaxRecords() {
+        return this.maxRecords.get();
+    }
+
+    /**
+     * @return {@link BigInteger}
+     */
+    @Override
+    public BigInteger getStartPosition() {
+        return this.startPosition.get();
+    }
+
+    /**
+     * @return {@link OutputSchema}
+     */
+    @Override
+    public OutputSchema getOutputSchema() {
+        return this.outputSchema.get();
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getResultType() {
+        return this.resultType.get();
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getElementSetName() {
+        return this.elementSetName.get();
+    }
+
+    /**
+     * @return {@link TypeName}
+     */
+    @Override
+    public TypeName getTypeName() {
+        return this.typeName.get();
+    }
+
+    /**
+     * @return {@link CatalogGetRecordsRequest<T>}
+     */
+    protected abstract CatalogGetRecordsRequest<T> self();
+
+    /**
+     * Opt-in release of the per-thread configuration held in the {@code ThreadLocal} state.
+     */
+    @Override
+    public void clearState() {
+        this.constraintLanguage.remove();
+        this.constraintLanguageVersion.remove();
+        this.constraint.remove();
+        this.catalogFinder.remove();
+        this.maxRecords.remove();
+        this.startPosition.remove();
+        this.outputSchema.remove();
+        this.resultType.remove();
+        this.elementSetName.remove();
+        this.typeName.remove();
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append("constraintLanguage").append(constraintLanguage);
-        str.append(", constraintLanguageVersion").append(constraintLanguageVersion);
-        str.append(", constraint").append(constraint);
-        str.append(", catalogFinder").append(catalogFinder);
-        str.append(", maxRecords=").append(maxRecords);
-        str.append(", startPosition=").append(startPosition);
-        str.append(", outputSchema=").append(outputSchema);
-        str.append(", resultType=").append(resultType);
-        str.append(", elementSetName=").append(elementSetName);
-        str.append(", typeName=").append(typeName);
+        str.append("constraintLanguage").append(this.constraintLanguage.get());
+        str.append(", constraintLanguageVersion").append(this.constraintLanguageVersion.get());
+        str.append(", constraint").append(this.constraint.get());
+        str.append(", catalogFinder").append(this.catalogFinder.get());
+        str.append(", maxRecords=").append(this.maxRecords.get());
+        str.append(", startPosition=").append(this.startPosition.get());
+        str.append(", outputSchema=").append(this.outputSchema.get());
+        str.append(", resultType=").append(this.resultType.get());
+        str.append(", elementSetName=").append(this.elementSetName.get());
+        str.append(", typeName=").append(this.typeName.get());
         return str.append("}").toString();
     }
 }

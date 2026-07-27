@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.connector.server.request.v202.cql.AreaSearchRequestCQL;
 import org.geosdi.geoplatform.connector.server.request.v202.cql.GetRecordsRequestHandlerCQL;
 import org.geosdi.geoplatform.connector.server.request.v202.cql.TextSearchRequestCQL;
@@ -71,8 +71,8 @@ public class GetRecordsRequestManager implements GPGetRecordsRequestManager {
      * @param filterType
      * @throws Exception
      */
-    public void filterGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest request, @Nonnull(when = NEVER) FilterType filterType) throws Exception {
-        checkArgument(request != null, "The Parameter CatalogGetRecordsRequest must not be null.");
+    public void filterGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState request, @Nonnull(when = NEVER) FilterType filterType) throws Exception {
+        checkArgument(request != null, "The Parameter CatalogGetRecordsRequestState must not be null.");
         checkArgument(filterType != null, "The Parameter filterType must not be null.");
         // Filter request if there is a catalog finder setted
         if (request.getCatalogFinder() == null) {

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.annotation.Nonnull;
@@ -54,5 +54,5 @@ public interface GPGetRecordsRequestManager extends Serializable {
      * @param filterType
      * @throws Exception
      */
-    void filterGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequest request, @Nonnull(when = NEVER) FilterType filterType) throws Exception;
+    void filterGetRecordsRequest(@Nonnull(when = NEVER) CatalogGetRecordsRequestState request, @Nonnull(when = NEVER) FilterType filterType) throws Exception;
 }

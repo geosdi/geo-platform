@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V28x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V3x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
@@ -55,23 +55,23 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_28_x = "http://150.145.141.92/geoserver/rest";
-    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_28_x;
+    private static final String geoserverURLV3_0_x = "http://150.145.141.92/geoserver/rest";
+    protected static GPGeoserverConnectorStore geoserverConnectorStoreV3_0_x;
 
     /**
      * @throws Exception
      */
     @BeforeClass
     public static void beforeClass() throws Exception {
-        geoserverConnectorStoreV2_28_x = geoserverConnectorBuilder()
-                .withServerUrl(new URI(geoserverURLV2_28_x).toURL())
+        geoserverConnectorStoreV3_0_x = geoserverConnectorBuilder()
+                .withServerUrl(new URI(geoserverURLV3_0_x).toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)
                         .withMaxRedirect(20)
                         .build())
                 .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoserver"))
-                .withVersion(V28x.getVersion())
+                .withVersion(V3x.getVersion())
                 .build();
     }
 
@@ -80,6 +80,6 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
      */
     @AfterClass
     public static void afterClass() throws Exception {
-        geoserverConnectorStoreV2_28_x.dispose();
+        geoserverConnectorStoreV3_0_x.dispose();
     }
 }

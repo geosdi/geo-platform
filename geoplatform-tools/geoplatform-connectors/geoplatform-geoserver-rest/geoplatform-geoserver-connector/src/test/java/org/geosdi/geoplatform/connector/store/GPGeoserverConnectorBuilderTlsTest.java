@@ -41,7 +41,7 @@ import org.junit.Test;
 import java.net.URI;
 
 import static org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy.createSystemDefault;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V28x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V3x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 import static org.junit.Assert.assertNotNull;
@@ -69,7 +69,7 @@ public class GPGeoserverConnectorBuilderTlsTest {
                         .withInsecureTls(false)
                         .build())
                 .withDefaultClientTlsStrategy(createSystemDefault())
-                .withVersion(V28x.getVersion())
+                .withVersion(V3x.getVersion())
                 .build();
         try {
             assertNotNull("Store must be built with a custom TLS strategy", store);

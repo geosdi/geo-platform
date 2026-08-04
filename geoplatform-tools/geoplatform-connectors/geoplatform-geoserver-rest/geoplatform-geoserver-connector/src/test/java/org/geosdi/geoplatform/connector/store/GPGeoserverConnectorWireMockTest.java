@@ -52,7 +52,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.verify;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V28x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V3x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 import static org.junit.Assert.assertEquals;
@@ -85,7 +85,7 @@ public class GPGeoserverConnectorWireMockTest {
                         .withDefaultMaxPerRoute(10)
                         .withMaxRedirect(5)
                         .build())
-                .withVersion(V28x.getVersion())
+                .withVersion(V3x.getVersion())
                 .build();
     }
 

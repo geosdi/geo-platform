@@ -149,8 +149,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      */
     protected void checkGeoserverVersion() {
         switch (this.version) {
-            case V27x:
             case V28x:
+            case V3x:
                 return;
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

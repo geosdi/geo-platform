@@ -49,7 +49,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V28x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V3x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 import static org.junit.Assert.assertTrue;
@@ -79,7 +79,7 @@ public class GPGeoserverLoadLayerRequestThreadSafeTest {
                         .withDefaultMaxPerRoute(30)
                         .withMaxRedirect(10)
                         .build())
-                .withVersion(V28x.getVersion())
+                .withVersion(V3x.getVersion())
                 .build();
     }
 

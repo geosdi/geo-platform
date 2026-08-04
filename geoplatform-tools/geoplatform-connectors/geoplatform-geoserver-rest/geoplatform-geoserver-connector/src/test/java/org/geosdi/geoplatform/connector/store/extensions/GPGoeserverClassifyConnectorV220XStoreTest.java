@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.extensions;
 
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.classify.GeoserverClassifyRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV227xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV228xTest;
 import org.junit.Test;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.extensions.classify.GeoserverMethod.uniqueInterval;
@@ -46,11 +46,11 @@ import static org.geosdi.geoplatform.connector.geoserver.model.extensions.raster
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGoeserverClassifyConnectorV220XStoreTest extends GPBaseGeoserverConnectorStoreV227xTest {
+public class GPGoeserverClassifyConnectorV220XStoreTest extends GPBaseGeoserverConnectorStoreV228xTest {
 
     @Test
     public void classifyTest() throws Exception {
-        GeoserverClassifyRequest request = geoserverConnectorStoreV2_27_x.classifyData();
+        GeoserverClassifyRequest request = geoserverConnectorStoreV2_28_x.classifyData();
         logger.info("#################RESPONSE : \n{}\n", request.withVectorName("topp:states")
                 .withAttribute("FEMALE")
                 .withGeoserverRamp(random)

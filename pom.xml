@@ -1538,7 +1538,7 @@
         <activemq-version>5.8.0</activemq-version>
 
         <jettison>1.5.5</jettison>
-        <joda-version>2.14.2</joda-version>
+        <joda-version>2.14.3</joda-version>
 
         <javax.ws.rs-api-version>2.1.1</javax.ws.rs-api-version>
 
@@ -1546,9 +1546,9 @@
 
 
         <aspectj-version>1.9.25.1</aspectj-version>
-        <jetty-version>12.1.10</jetty-version>
+        <jetty-version>12.1.12</jetty-version>
 
-        <postgresql-version>42.7.11</postgresql-version>
+        <postgresql-version>42.7.13</postgresql-version>
         <postgis-jdbc-version>2025.1.0</postgis-jdbc-version>
 
         <cglib-version>3.3.0</cglib-version>
@@ -1564,8 +1564,8 @@
         <jasypt-version>1.9.3</jasypt-version>
         <gson.version>2.14.0</gson.version>
 
-        <guava-gwt-version>33.6.0-jre</guava-gwt-version>
-        <guava-version>33.6.0-jre</guava-version>
+        <guava-gwt-version>33.7.1-jre</guava-gwt-version>
+        <guava-version>33.7.1-jre</guava-version>
         <guice-version>5.1.0</guice-version>
 
         <ehcache-version>2.10.9.2</ehcache-version>

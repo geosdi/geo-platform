@@ -1546,7 +1546,7 @@
 
 
         <aspectj-version>1.9.25.1</aspectj-version>
-        <jetty-version>12.1.12</jetty-version>
+        <jetty-version>12.1.13</jetty-version>
 
         <postgresql-version>42.7.13</postgresql-version>
         <postgis-jdbc-version>2025.1.0</postgis-jdbc-version>

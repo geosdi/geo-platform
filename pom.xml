@@ -1382,7 +1382,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>10.0.0</version>
+                <version>10.0.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -1394,6 +1394,7 @@
                     <prefix>build</prefix>
                     <failOnNoGitDirectory>false</failOnNoGitDirectory>
                     <skipPoms>false</skipPoms>
+                    <useNativeGit>true</useNativeGit>
                 </configuration>
             </plugin>
         </plugins>

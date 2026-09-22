@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Reque
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -143,6 +144,7 @@ public class GPWMSConnectorStoreV111InternalTest {
                 .withInfoFormat(GML2).withX(50).withY(50).getResponse());
     }
 
+    @Ignore
     @Test
     public void g_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();

@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector.GPServerConnect
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
@@ -86,7 +85,7 @@ public enum WMSVersion implements GPServerConnectorVersion {
      * @return {@link WMSVersion} <p>Default value if no version is found is : {@link WMSVersion#V111}</p>
      */
     public static WMSVersion forValue(@Nullable String version) {
-        Optional<WMSVersion> optional = stream(WMSVersion.values())
+        var optional = stream(WMSVersion.values())
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ?
                         v.getVersion().equalsIgnoreCase(version) : FALSE).findFirst();
         return optional.orElse(V111);

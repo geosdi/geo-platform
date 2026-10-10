@@ -234,4 +234,32 @@ public class GPJacksonSupportThreadSafeBuilderTest {
         logger.info("@@@@@@@@@@@@@@@@@@FORK_IDENTITIES root={} chain1={} chain2={}\n",
                 System.identityHashCode(sharedBuilder), System.identityHashCode(afterLocale), System.identityHashCode(otherChain));
     }
+
+    /**
+     * The forked copy must preserve the insertion order of the config features, exactly like the
+     * non thread-safe builder: when two conflicting features are configured in the same chain, the
+     * last one wins. Both orders are checked, so a copy backed by an unordered collection (whose
+     * iteration order depends on the identity hash of the enum constants) fails one of them.
+     */
+    @Order(value = 6)
+    @Test
+    public void g_configFeatureOrderPreservedTest() throws Exception {
+        JacksonSupportBuilder sharedBuilder = builder(TRUE);
+
+        JacksonSupport disableLast = sharedBuilder
+                .withLocale(ITALY)
+                .configure(UNWRAP_ROOT_VALUE_ENABLE)
+                .configure(UNWRAP_ROOT_VALUE_DISABLE)
+                .build();
+        assertFalse(disableLast.getDefaultMapper().deserializationConfig().isEnabled(UNWRAP_ROOT_VALUE),
+                "UNWRAP_ROOT_VALUE_DISABLE configured last must win");
+
+        JacksonSupport enableLast = sharedBuilder
+                .withLocale(ITALY)
+                .configure(UNWRAP_ROOT_VALUE_DISABLE)
+                .configure(UNWRAP_ROOT_VALUE_ENABLE)
+                .build();
+        assertTrue(enableLast.getDefaultMapper().deserializationConfig().isEnabled(UNWRAP_ROOT_VALUE),
+                "UNWRAP_ROOT_VALUE_ENABLE configured last must win");
+    }
 }

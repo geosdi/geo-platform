@@ -154,8 +154,8 @@ public interface JacksonSupportThreadSafeBuilder<M extends JsonMapper> extends J
             this.locale = other.locale;
             this.dateFormat = other.dateFormat;
             this.timeZone = other.timeZone;
-            this.jacksonModules = new HashMap<>(other.jacksonModules);
-            this.jacksonSupportConfigFeatures = new HashSet<>(other.jacksonSupportConfigFeatures);
+            this.jacksonModules = new LinkedHashMap<>(other.jacksonModules);
+            this.jacksonSupportConfigFeatures = new LinkedHashSet<>(other.jacksonSupportConfigFeatures);
             this.introspectorBuilder = other.introspectorBuilder;
             this.coercionConfigs = other.coercionConfigs;
             this.frozen = false;

@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 import java.time.ZoneId;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,6 +54,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static java.lang.Boolean.TRUE;
 import static java.util.Locale.*;
 import static java.util.concurrent.Executors.newFixedThreadPool;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -71,39 +73,56 @@ import static tools.jackson.databind.DeserializationFeature.UNWRAP_ROOT_VALUE;
 public class GPJacksonSupportThreadSafeBuilderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJacksonSupportThreadSafeBuilderTest.class);
+    private static final int CONCURRENT_ITERATIONS = 100;
 
     /**
      * Two concurrent chains starting from the SAME shared thread-safe builder must produce mappers
      * with independent config features (not just an independent Locale).
+     * <p>
+     * A {@link CyclicBarrier} releases both threads together right before the chains start, so they
+     * really overlap on the shared root instead of running one after the other; the scenario is
+     * repeated {@link #CONCURRENT_ITERATIONS} times to widen the window for a race.
      */
     @Order(value = 0)
     @Test
     public void a_concurrentConfigFeatureIsolationTest() throws Exception {
         JacksonSupportBuilder sharedBuilder = builder(TRUE);
 
-        Callable<JacksonSupport> task1 = () -> sharedBuilder
-                .withLocale(ITALY)
-                .configure(UNWRAP_ROOT_VALUE_ENABLE)
-                .build();
-
-        Callable<JacksonSupport> task2 = () -> sharedBuilder
-                .withLocale(FRANCE)
-                .configure(UNWRAP_ROOT_VALUE_DISABLE)
-                .build();
-
         try (ExecutorService executor = newFixedThreadPool(2)) {
-            Future<JacksonSupport> future1 = executor.submit(task1);
-            Future<JacksonSupport> future2 = executor.submit(task2);
+            for (int i = 0; i < CONCURRENT_ITERATIONS; i++) {
+                CyclicBarrier barrier = new CyclicBarrier(2);
 
-            JacksonSupport support1 = future1.get();
-            JacksonSupport support2 = future2.get();
+                Callable<JacksonSupport> task1 = () -> {
+                    barrier.await(5, SECONDS);
+                    return sharedBuilder
+                            .withLocale(ITALY)
+                            .configure(UNWRAP_ROOT_VALUE_ENABLE)
+                            .build();
+                };
 
-            assertEquals(ITALY, support1.getDefaultMapper().serializationConfig().getLocale());
-            assertEquals(FRANCE, support2.getDefaultMapper().serializationConfig().getLocale());
-            assertTrue(support1.getDefaultMapper().deserializationConfig().isEnabled(UNWRAP_ROOT_VALUE),
-                    "task1 mapper must have UNWRAP_ROOT_VALUE enabled");
-            assertFalse(support2.getDefaultMapper().deserializationConfig().isEnabled(UNWRAP_ROOT_VALUE),
-                    "task2 mapper must have UNWRAP_ROOT_VALUE disabled");
+                Callable<JacksonSupport> task2 = () -> {
+                    barrier.await(5, SECONDS);
+                    return sharedBuilder
+                            .withLocale(FRANCE)
+                            .configure(UNWRAP_ROOT_VALUE_DISABLE)
+                            .build();
+                };
+
+                Future<JacksonSupport> future1 = executor.submit(task1);
+                Future<JacksonSupport> future2 = executor.submit(task2);
+
+                JacksonSupport support1 = future1.get(10, SECONDS);
+                JacksonSupport support2 = future2.get(10, SECONDS);
+
+                assertEquals(ITALY, support1.getDefaultMapper().serializationConfig().getLocale(),
+                        "iteration " + i + ": task1 mapper must have the ITALY locale");
+                assertEquals(FRANCE, support2.getDefaultMapper().serializationConfig().getLocale(),
+                        "iteration " + i + ": task2 mapper must have the FRANCE locale");
+                assertTrue(support1.getDefaultMapper().deserializationConfig().isEnabled(UNWRAP_ROOT_VALUE),
+                        "iteration " + i + ": task1 mapper must have UNWRAP_ROOT_VALUE enabled");
+                assertFalse(support2.getDefaultMapper().deserializationConfig().isEnabled(UNWRAP_ROOT_VALUE),
+                        "iteration " + i + ": task2 mapper must have UNWRAP_ROOT_VALUE disabled");
+            }
         }
     }
 

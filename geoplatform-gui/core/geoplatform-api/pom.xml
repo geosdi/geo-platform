@@ -69,6 +69,13 @@
             <artifactId>guava-gwt</artifactId>
         </dependency>
 
+        <!-- sources of the jspecify annotations used by guava-gwt, exposed by org/jspecify/Jspecify.gwt.xml -->
+        <dependency>
+            <groupId>org.jspecify</groupId>
+            <artifactId>jspecify</artifactId>
+            <classifier>sources</classifier>
+        </dependency>
+
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>

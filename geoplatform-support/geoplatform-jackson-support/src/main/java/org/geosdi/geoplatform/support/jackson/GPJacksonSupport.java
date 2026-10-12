@@ -108,8 +108,7 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
      * @param features
      */
     public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
-        checkArgument(features != null, "The Parameter features must not be null.");
-        this(theBuilder, Arrays.asList(features), null);//List.of(new BlackbirdModule()));
+        this(theBuilder, toFeatureList(features), null);//List.of(new BlackbirdModule()));
     }
 
     /**
@@ -166,5 +165,17 @@ public class GPJacksonSupport implements JacksonSupport<JsonMapper> {
         return new JacksonSupportConfigFeature[]{UNWRAP_ROOT_VALUE_ENABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                 ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE, INDENT_OUTPUT_ENABLE,
                 FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, USE_FAST_DOUBLE_PARSER_ENABLE, USE_FAST_BIG_NUMBER_PARSER_ENABLE};
+    }
+
+    /**
+     * <p>Validates the features before the constructor delegates to this(...), which Java 17 requires to be the
+     * first statement.</p>
+     *
+     * @param theFeatures
+     * @return {@link List<JacksonSupportConfigFeature>}
+     */
+    private static List<JacksonSupportConfigFeature> toFeatureList(@Nonnull(when = NEVER) JacksonSupportConfigFeature[] theFeatures) {
+        checkArgument(theFeatures != null, "The Parameter features must not be null.");
+        return Arrays.asList(theFeatures);
     }
 }

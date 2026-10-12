@@ -176,7 +176,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
         String name = xmlStreamReader().getLocalName();
         if(((prefix != null) && !(prefix.trim().isEmpty())) && ((name != null) && !(name.trim().isEmpty()))) {
             logger.trace("##############################PREFIX : {} - NAME : {}\n", prefix, name);
-            IGPFeatureType featureType = featureTypes.computeIfAbsent(name, _ -> new GPFeatureType(prefix, name));
+            IGPFeatureType featureType = featureTypes.computeIfAbsent(name, key -> new GPFeatureType(prefix, name));
             logger.trace("########################################FEATURE_TYPE : {}\n\n", featureType);
             if ((featureType != null) && (super.isTagName(prefix, name))) {
                 String featureID = xmlStreamReader().getAttributeValue(this.fidNameSpaceURI, this.fidLocalName);

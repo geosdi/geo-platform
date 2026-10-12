@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    guava-gwt sources use the jspecify annotations (e.g. org.jspecify.annotations.Nullable), but jspecify ships
+    no GWT module: this one exposes the sources of org.jspecify:jspecify:sources to the GWT compiler.
+-->
+<module>
+    <source path="annotations"/>
+</module>

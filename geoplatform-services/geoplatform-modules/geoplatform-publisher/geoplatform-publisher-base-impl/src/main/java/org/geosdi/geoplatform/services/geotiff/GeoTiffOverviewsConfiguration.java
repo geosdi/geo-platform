@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.services.geotiff;
 
-import org.geotools.utils.CoverageToolsConstants;
-import org.geotools.utils.imageoverviews.OverviewsEmbedder.SubsampleAlgorithm;
+import org.eclipse.imagen.Interpolation;
 import org.springframework.stereotype.Component;
 
-import javax.media.jai.Interpolation;
+import static org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsScaleAlgorithm.NEAREST;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -57,13 +56,13 @@ public class GeoTiffOverviewsConfiguration {
     public void setJAICapacity(long JAICapacity) {
         this.JAICapacity = JAICapacity;
     }
-    private double compressionRatio = CoverageToolsConstants.DEFAULT_COMPRESSION_RATIO;
-    private String compressionScheme = CoverageToolsConstants.DEFAULT_COMPRESSION_SCHEME;
+    private double compressionRatio = 0.75d;
+    private String compressionScheme = "LZW";
     /** Downsampling step. */
     private int downsampleStep = 2;
     private int numSteps = 8;
-    /** Scale algorithm. */
-    private String scaleAlgorithm = SubsampleAlgorithm.Nearest.toString();
+    /** Scale algorithm, one of the {@link GeoTiffOverviewsScaleAlgorithm} names. */
+    private String scaleAlgorithm = NEAREST.getName();
     /** Tile height. */
     private int tileH = 256;
     /** Tile width. */

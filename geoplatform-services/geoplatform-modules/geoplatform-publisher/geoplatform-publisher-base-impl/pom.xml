@@ -125,45 +125,14 @@
             <groupId>org.geotools</groupId>
             <artifactId>gt-epsg-wkt</artifactId>
         </dependency>
+        <!-- full EPSG database: with gt-epsg-wkt alone GeoTiffReader can't decode EPSG:4326 -->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-geotiff</artifactId>
-        </dependency>
-
-
-        <!-- =========================================================== -->
-        <!-- ===================== GT COVERAGETOOLS ==================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <!-- contains geotiff -->
-            <artifactId>gt-coveragetools</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.geotools</groupId>
-                    <artifactId>gt-imageio-ext-gdal</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.geotools</groupId>
-                    <artifactId>gt-imagemosaic</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.geotools</groupId>
-                    <artifactId>gt-imagepyramid</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.geotools</groupId>
-                    <artifactId>gt-arcgrid</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.vividsolutions</groupId>
-                    <artifactId>jts</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.geotools</groupId>
-                    <artifactId>gt-geotiff</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

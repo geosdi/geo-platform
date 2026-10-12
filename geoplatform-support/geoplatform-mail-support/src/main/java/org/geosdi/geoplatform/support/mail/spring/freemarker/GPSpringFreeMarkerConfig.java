@@ -67,7 +67,7 @@ class GPSpringFreeMarkerConfig {
             throws Exception {
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@GP_MAIL_SUPPORT FreeMarkerConfigLocation at --------------> {}\n",
                 gpFreeMarkerConfigLocation);
-        freemarker.template.Configuration freeMarkerConfiguration = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_27);
+        freemarker.template.Configuration freeMarkerConfiguration = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_35);
         freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(Thread.currentThread().getContextClassLoader(), gpFreeMarkerConfigLocation.getFreeMarkerConfigLocation()));
         freeMarkerConfiguration.setDefaultEncoding("UTF-8");
         freeMarkerConfiguration.setTemplateExceptionHandler(RETHROW_HANDLER);

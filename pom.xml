@@ -644,7 +644,7 @@
             <dependency>
                 <groupId>org.jdom</groupId>
                 <artifactId>jdom2</artifactId>
-                <version>2.0.6</version>
+                <version>2.0.6.1</version>
             </dependency>
 
             <dependency>
@@ -744,6 +744,17 @@
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-extras</artifactId>
                 <version>${jibx-version}</version>
+                <!-- only the dom4j / jdom mappers need them, and nobody uses those -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>dom4j</groupId>
+                        <artifactId>dom4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.jdom</groupId>
+                        <artifactId>jdom</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- =========================================================== -->
@@ -1559,7 +1570,7 @@
 
         <javax.ws.rs-api-version>2.1.1</javax.ws.rs-api-version>
 
-        <jibx-version>1.4.2</jibx-version>
+        <jibx-version>1.4.5</jibx-version>
 
 
         <aspectj-version>1.9.25.1</aspectj-version>

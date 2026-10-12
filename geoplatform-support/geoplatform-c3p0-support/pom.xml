@@ -17,14 +17,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <c3p0.version>0.12.0</c3p0.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
-            <version>${c3p0.version}</version>
         </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->

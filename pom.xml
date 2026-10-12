@@ -605,6 +605,13 @@
                 <version>${gson.version}</version>
             </dependency>
 
+            <!-- managed here so it also wins over the c3p0 that hibernate-c3p0 brings in -->
+            <dependency>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${c3p0.version}</version>
+            </dependency>
+
             <!-- =========================================================== -->
             <!-- 4J -->
             <!-- =========================================================== -->
@@ -1573,6 +1580,7 @@
 
         <jasypt-version>1.9.3</jasypt-version>
         <gson.version>2.14.0</gson.version>
+        <c3p0.version>0.14.2</c3p0.version>
 
         <guava-gwt-version>33.7.2-jre</guava-gwt-version>
         <guava-version>33.7.2-jre</guava-version>

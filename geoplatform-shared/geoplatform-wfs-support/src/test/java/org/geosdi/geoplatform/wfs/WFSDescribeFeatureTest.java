@@ -42,21 +42,25 @@ import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBIntrospector;
 import javax.xml.namespace.QName;
+import java.io.InputStream;
 import java.io.StringWriter;
-import java.net.URL;
 import java.util.Arrays;
 
 import static java.net.URLDecoder.decode;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
-import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
+import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,105 +70,103 @@ public class WFSDescribeFeatureTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSDescribeFeatureTest.class);
     //
-    private static final String wfsURL = "http://150.145.141.92/geoserver/wfs";
-
-    static {
-        try {
-            serverConnector = newConnector().withServerUrl(new URL(wfsURL))
-                    .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                            .withMaxTotalConnections(150)
-                            .withDefaultMaxPerRoute(80)
-                            .withMaxRedirect(20)
-                            .build())
-                    .build();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            logger.error("#######################EXCEPTION : {}", ex.getMessage());
-        }
-    }
-
-    //
     private static final QName statesName = new QName("topp:states");
     private static final QName siteTRCom = new QName("cite:tr_com");
     private static final QName sfRoads = new QName("sf:roads");
     //
-    private static GPWFSConnectorStore serverConnector;
     protected static final GPJAXBContextBuilder gpJAXBContextBuilder = GPJAXBContextBuilder.newInstance();
     private static final FeatureSchemaReader schemaReader = new GPFeatureSchemaReader();
+    //
+    private GPWFSConnectorStore serverConnector;
+
+    @Before
+    public void setUp() throws Exception {
+        this.serverConnector = mock(GPWFSConnectorStore.class);
+    }
 
     @Test
     public void a_describeToppStatesTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> mockRequest = this.mockDescribeFeatureTypeRequest("toppStates.xsd");
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = statesName.getLocalPart();
         request.setTypeName(Arrays.asList(statesName));
         logger.info("\n{}\n", request.showRequestAsString());
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
+        LayerSchemaDTO layerSchema = schemaReader.getFeature(s, name);
+        assertLayerSchema(layerSchema, "topp:states", "MultiPolygon", 22);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
-        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, layerSchema);
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_TOPP_STATES_XML : \n{}\n", writer);
+        this.verifyDescribeFeatureTypeRequest(mockRequest, statesName);
     }
 
     @Test
     public void b_describeSFRoadTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> mockRequest = this.mockDescribeFeatureTypeRequest("sfRoads.xsd");
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = sfRoads.getLocalPart();
         request.setTypeName(Arrays.asList(sfRoads));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
+        LayerSchemaDTO layerSchema = schemaReader.getFeature(s, name);
+        assertLayerSchema(layerSchema, "sf:roads", "MultiLineString", 2);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
-        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, layerSchema);
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_SF_ROAD_XML : \n{}\n", writer);
+        this.verifyDescribeFeatureTypeRequest(mockRequest, sfRoads);
     }
 
-    @Ignore(value = "Geoserver is Down")
     @Test
     public void c_describeSiteTrTest() throws Exception {
-        WFSDescribeFeatureTypeRequest<Schema> request = newConnector()
-                .withServerUrl(new URL("http://150.145.141.241/geoserver/wfs"))
-                .build()
-                .createDescribeFeatureTypeRequest();
+        WFSDescribeFeatureTypeRequest<Schema> mockRequest = this.mockDescribeFeatureTypeRequest("citeTrCom.xsd");
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = siteTRCom.getLocalPart();
         request.setTypeName(Arrays.asList(siteTRCom));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
+        LayerSchemaDTO layerSchema = schemaReader.getFeature(s, name);
+        assertLayerSchema(layerSchema, "cite:tr_com", "LineString", 9);
+        QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, layerSchema);
         StringWriter writer = new StringWriter();
-        gpJAXBContextBuilder.marshal(schemaReader.getFeature(s, name), writer);
+        gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_SITE_COM_XML : \n{}\n", writer);
+        this.verifyDescribeFeatureTypeRequest(mockRequest, siteTRCom);
     }
 
-    @Ignore
     @Test
     public void d_describeLayerPercorsiNavetteTest() throws Exception {
-        WFSDescribeFeatureTypeRequest<Schema> request = newConnector()
-                .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wfs"))
-                .build()
-                .createDescribeFeatureTypeRequest();
+        WFSDescribeFeatureTypeRequest<Schema> mockRequest = this.mockDescribeFeatureTypeRequest("cfPercorsiNavette.xsd");
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         QName percorsiNavette = new QName("PianoCampiFlegrei:CF_PercorsiNavette");
         String localPart = percorsiNavette.getLocalPart();
         request.setTypeName(Arrays.asList(percorsiNavette));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
-        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(percorsiNavette, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        LayerSchemaDTO layerSchema = schemaReader.getFeature(s, name);
+        assertLayerSchema(layerSchema, "PianoCampiFlegrei:CF_PercorsiNavette", "MultiLineString", 4);
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(percorsiNavette, LayerSchemaDTO.class, layerSchema);
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_PERCORSI_NAVETTE_XML : \n{}\n", writer);
+        this.verifyDescribeFeatureTypeRequest(mockRequest, percorsiNavette);
     }
 
     @Test
-    @Ignore
     public void e_describeLayerDtsupStromboliTest() throws Exception {
         String serverURL = "https://servizi.protezionecivile.it/webgis/sitdpc/gpServerProxy?targetURL=https://insar.irea.cnr.it/geoserver/wms%26v=dpc%26p=4WzL06EA";
         serverURL = decode(serverURL.replaceAll("wms", "wfs"), UTF_8.name());
         logger.info("########################SERVER_URL : {}\n", serverURL);
-        WFSDescribeFeatureTypeRequest<Schema> request = newConnector().withServerUrl(new URL(serverURL)).build()
-                .createDescribeFeatureTypeRequest();
+        assertEquals("https://servizi.protezionecivile.it/webgis/sitdpc/gpServerProxy?targetURL=https://insar.irea.cnr.it/geoserver/wfs&v=dpc&p=4WzL06EA", serverURL);
+        WFSDescribeFeatureTypeRequest<Schema> mockRequest = this.mockDescribeFeatureTypeRequest("dtsupStromboli.xsd");
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         QName dtsupStromboli = new QName("geonode:dtsup_stromboli");
         String localPart = dtsupStromboli.getLocalPart();
         request.setTypeName(Arrays.asList(dtsupStromboli));
@@ -172,30 +174,81 @@ public class WFSDescribeFeatureTest {
         logger.info("#########################SCHEMA_AS_STRING : \n{}\n", request.getResponseAsString());
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
-        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(dtsupStromboli, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        LayerSchemaDTO layerSchema = schemaReader.getFeature(s, name);
+        assertLayerSchema(layerSchema, "geonode:dtsup_stromboli", "Point", 4);
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(dtsupStromboli, LayerSchemaDTO.class, layerSchema);
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_DTSUP_STROMBOLI_XML : \n{}\n", writer);
+        this.verifyDescribeFeatureTypeRequest(mockRequest, dtsupStromboli);
     }
 
     @Test
     public void f_describeAdminSHPComuniTest() throws Exception {
-        WFSDescribeFeatureTypeRequest<Schema> request =  newConnector()
-                .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
-                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
-                        .build()).build().createDescribeFeatureTypeRequest();
+        WFSDescribeFeatureTypeRequest<Schema> mockRequest = this.mockDescribeFeatureTypeRequest("adminShpComuni.xsd");
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         QName value = new QName("admin:admin_shp_comuni");
         String localPart = value.getLocalPart();
         request.setTypeName(Arrays.asList(value));
         Schema s = request.getResponse();
         String name = localPart.substring(localPart.indexOf(":") + 1);
+        LayerSchemaDTO layerSchema = schemaReader.getFeature(s, name);
+        assertLayerSchema(layerSchema, "admin:admin_shp_comuni", "MultiPolygon", 7);
         QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
-        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, layerSchema);
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_ADMIN_SHP_COMUNI_XML : \n{}\n", writer);
+        this.verifyDescribeFeatureTypeRequest(mockRequest, value);
+    }
+
+    /**
+     * @param xsdFileName the DescribeFeatureType response stored in src/test/resources/describe
+     * @return {@link WFSDescribeFeatureTypeRequest<Schema>}
+     * @throws Exception
+     */
+    private WFSDescribeFeatureTypeRequest<Schema> mockDescribeFeatureTypeRequest(String xsdFileName) throws Exception {
+        String resource = "/describe/".concat(xsdFileName);
+        String schemaAsString;
+        try (InputStream inputStream = getClass().getResourceAsStream(resource)) {
+            assertNotNull("The resource " + resource + " must not be null", inputStream);
+            schemaAsString = new String(inputStream.readAllBytes(), UTF_8);
+        }
+        Schema schema;
+        try (InputStream inputStream = getClass().getResourceAsStream(resource)) {
+            schema = (Schema) JAXBIntrospector.getValue(getProvider(WFS_CONTEXT_KEY).acquireUnmarshaller().unmarshal(inputStream));
+        }
+        WFSDescribeFeatureTypeRequest<Schema> mockRequest = mock(WFSDescribeFeatureTypeRequest.class, RETURNS_SELF);
+        doReturn(schema).when(mockRequest).getResponse();
+        doReturn(schemaAsString).when(mockRequest).getResponseAsString();
+        doReturn(schemaAsString).when(mockRequest).formatResponseAsString(anyInt());
+        doReturn("DescribeFeatureType request for ".concat(xsdFileName)).when(mockRequest).showRequestAsString();
+        doReturn(mockRequest).when(this.serverConnector).createDescribeFeatureTypeRequest();
+        return mockRequest;
+    }
+
+    /**
+     * @param mockRequest
+     * @param typeName
+     * @throws Exception
+     */
+    private void verifyDescribeFeatureTypeRequest(WFSDescribeFeatureTypeRequest<Schema> mockRequest, QName typeName) throws Exception {
+        verify(this.serverConnector).createDescribeFeatureTypeRequest();
+        verify(mockRequest).setTypeName(Arrays.asList(typeName));
+        verify(mockRequest).getResponse();
+    }
+
+    /**
+     * @param layerSchema
+     * @param typeName
+     * @param geometryType
+     * @param attributesSize
+     */
+    private static void assertLayerSchema(LayerSchemaDTO layerSchema, String typeName, String geometryType, int attributesSize) {
+        assertNotNull("The LayerSchemaDTO must not be null", layerSchema);
+        assertEquals(typeName, layerSchema.getTypeName());
+        assertNotNull("The Geometry Attribute must not be null", layerSchema.getGeometry());
+        assertEquals(geometryType, layerSchema.getGeometry().getType());
+        assertEquals(attributesSize, layerSchema.getAttributes().size());
     }
 }

@@ -1,0 +1,57 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "CAL_4_6_ospedali.1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.38905171,
+          39.49157108
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "note": "Ospedale",
+        "id_osp": "A053-4.1-OS-01",
+        "denominaz": "Presidio Ospedaliero Beato Angelo",
+        "e_mail": "",
+        "indirizzo": "Via Ippocrate",
+        "proprieta": "pubblico",
+        "telefono": "0984-9131",
+        "fax": "0984-913240"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "CAL_4_6_ospedali.2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.21055237,
+          39.81756675
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "note": "Ospedale",
+        "id_osp": "C349-4.1-OS-01",
+        "denominaz": "OSPEDALE CIVILE FERRARI",
+        "e_mail": "dspocastrovillari@asp.cosenza.it",
+        "indirizzo": "VIALE DEL LAVORO",
+        "proprieta": "PUBBLICO",
+        "telefono": "09841/4851",
+        "fax": "0981/491515"
+      }
+    }
+  ],
+  "totalFeatures": 2,
+  "numberReturned": 2,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::4326"
+    }
+  }
+}

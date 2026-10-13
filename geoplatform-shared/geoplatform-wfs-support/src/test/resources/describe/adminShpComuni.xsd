@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://prosit.geosdi.org/admin" elementFormDefault="qualified" targetNamespace="http://prosit.geosdi.org/admin">
+  <xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+  <xsd:complexType name="admin_shp_comuniType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" name="the_geom" nillable="true" type="gml:MultiSurfacePropertyType"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="COD_RIP" nillable="true" type="xsd:long"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="COD_REG" nillable="true" type="xsd:long"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="COD_PROV" nillable="true" type="xsd:long"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="PRO_COM" nillable="true" type="xsd:long"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="COMUNE" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="SHAPE_AREA" nillable="true" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="SHAPE_LEN" nillable="true" type="xsd:double"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="admin_shp_comuni" substitutionGroup="gml:_Feature" type="admin:admin_shp_comuniType"/>
+</xsd:schema>

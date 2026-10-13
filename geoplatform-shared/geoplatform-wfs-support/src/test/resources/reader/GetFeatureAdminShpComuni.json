@@ -1,0 +1,185 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "admin_shp_comuni.1",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                15.66,
+                40.7
+              ],
+              [
+                15.82,
+                40.7
+              ],
+              [
+                15.82,
+                40.8
+              ],
+              [
+                15.66,
+                40.8
+              ],
+              [
+                15.66,
+                40.7
+              ]
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "COD_RIP": 4,
+        "COD_REG": 17,
+        "COD_PROV": 76,
+        "PRO_COM": 76008,
+        "COMUNE": "AVIGLIANO",
+        "SHAPE_AREA": 85.6,
+        "SHAPE_LEN": 52300.1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "admin_shp_comuni.2",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                16.45,
+                40.55
+              ],
+              [
+                16.7,
+                40.55
+              ],
+              [
+                16.7,
+                40.75
+              ],
+              [
+                16.45,
+                40.75
+              ],
+              [
+                16.45,
+                40.55
+              ]
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "COD_RIP": 4,
+        "COD_REG": 17,
+        "COD_PROV": 77,
+        "PRO_COM": 77014,
+        "COMUNE": "MATERA",
+        "SHAPE_AREA": 387.9,
+        "SHAPE_LEN": 121400.7
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "admin_shp_comuni.3",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                15.62,
+                40.55
+              ],
+              [
+                15.74,
+                40.55
+              ],
+              [
+                15.74,
+                40.62
+              ],
+              [
+                15.62,
+                40.62
+              ],
+              [
+                15.62,
+                40.55
+              ]
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "COD_RIP": 4,
+        "COD_REG": 17,
+        "COD_PROV": 76,
+        "PRO_COM": 76089,
+        "COMUNE": "TITO",
+        "SHAPE_AREA": 71.2,
+        "SHAPE_LEN": 47100.3
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "admin_shp_comuni.4",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                16.08,
+                40.56
+              ],
+              [
+                16.22,
+                40.56
+              ],
+              [
+                16.22,
+                40.66
+              ],
+              [
+                16.08,
+                40.66
+              ],
+              [
+                16.08,
+                40.56
+              ]
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "COD_RIP": 4,
+        "COD_REG": 17,
+        "COD_PROV": 77,
+        "PRO_COM": 77028,
+        "COMUNE": "TRICARICO",
+        "SHAPE_AREA": 178.4,
+        "SHAPE_LEN": 78900.4
+      }
+    }
+  ],
+  "totalFeatures": 4,
+  "numberReturned": 4,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::4326"
+    }
+  }
+}

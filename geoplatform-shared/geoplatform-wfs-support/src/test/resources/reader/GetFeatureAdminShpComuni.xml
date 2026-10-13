@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="4" timeStamp="2026-10-13T08:00:00.000Z" xmlns:admin="http://prosit.geosdi.org/admin" xmlns:gml="http://www.opengis.net/gml" xmlns:wfs="http://www.opengis.net/wfs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <gml:featureMembers>
+        <admin:admin_shp_comuni gml:id="admin_shp_comuni.1">
+            <admin:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>15.66 40.7 15.82 40.7 15.82 40.8 15.66 40.8 15.66 40.7</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COD_RIP>4</admin:COD_RIP>
+            <admin:COD_REG>17</admin:COD_REG>
+            <admin:COD_PROV>76</admin:COD_PROV>
+            <admin:PRO_COM>76008</admin:PRO_COM>
+            <admin:COMUNE>AVIGLIANO</admin:COMUNE>
+            <admin:SHAPE_AREA>85.6</admin:SHAPE_AREA>
+            <admin:SHAPE_LEN>52300.1</admin:SHAPE_LEN>
+        </admin:admin_shp_comuni>
+        <admin:admin_shp_comuni gml:id="admin_shp_comuni.2">
+            <admin:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>16.45 40.55 16.7 40.55 16.7 40.75 16.45 40.75 16.45 40.55</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COD_RIP>4</admin:COD_RIP>
+            <admin:COD_REG>17</admin:COD_REG>
+            <admin:COD_PROV>77</admin:COD_PROV>
+            <admin:PRO_COM>77014</admin:PRO_COM>
+            <admin:COMUNE>MATERA</admin:COMUNE>
+            <admin:SHAPE_AREA>387.9</admin:SHAPE_AREA>
+            <admin:SHAPE_LEN>121400.7</admin:SHAPE_LEN>
+        </admin:admin_shp_comuni>
+        <admin:admin_shp_comuni gml:id="admin_shp_comuni.3">
+            <admin:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>15.62 40.55 15.74 40.55 15.74 40.62 15.62 40.62 15.62 40.55</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COD_RIP>4</admin:COD_RIP>
+            <admin:COD_REG>17</admin:COD_REG>
+            <admin:COD_PROV>76</admin:COD_PROV>
+            <admin:PRO_COM>76089</admin:PRO_COM>
+            <admin:COMUNE>TITO</admin:COMUNE>
+            <admin:SHAPE_AREA>71.2</admin:SHAPE_AREA>
+            <admin:SHAPE_LEN>47100.3</admin:SHAPE_LEN>
+        </admin:admin_shp_comuni>
+        <admin:admin_shp_comuni gml:id="admin_shp_comuni.4">
+            <admin:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>16.08 40.56 16.22 40.56 16.22 40.66 16.08 40.66 16.08 40.56</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COD_RIP>4</admin:COD_RIP>
+            <admin:COD_REG>17</admin:COD_REG>
+            <admin:COD_PROV>77</admin:COD_PROV>
+            <admin:PRO_COM>77028</admin:PRO_COM>
+            <admin:COMUNE>TRICARICO</admin:COMUNE>
+            <admin:SHAPE_AREA>178.4</admin:SHAPE_AREA>
+            <admin:SHAPE_LEN>78900.4</admin:SHAPE_LEN>
+        </admin:admin_shp_comuni>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

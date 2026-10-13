@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="2" timeStamp="2026-10-13T08:00:00.000Z" xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS" xmlns:gml="http://www.opengis.net/gml" xmlns:wfs="http://www.opengis.net/wfs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <gml:featureMembers>
+        <PNSRS:CAL_4_6_ospedali gml:id="CAL_4_6_ospedali.1">
+            <PNSRS:the_geom>
+                <gml:Point srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:pos>16.38905171 39.49157108</gml:pos></gml:Point>
+            </PNSRS:the_geom>
+            <PNSRS:note>Ospedale</PNSRS:note>
+            <PNSRS:id_osp>A053-4.1-OS-01</PNSRS:id_osp>
+            <PNSRS:denominaz>Presidio Ospedaliero Beato Angelo</PNSRS:denominaz>
+            <PNSRS:e_mail/>
+            <PNSRS:indirizzo>Via Ippocrate</PNSRS:indirizzo>
+            <PNSRS:proprieta>pubblico</PNSRS:proprieta>
+            <PNSRS:telefono>0984-9131</PNSRS:telefono>
+            <PNSRS:fax>0984-913240</PNSRS:fax>
+        </PNSRS:CAL_4_6_ospedali>
+        <PNSRS:CAL_4_6_ospedali gml:id="CAL_4_6_ospedali.2">
+            <PNSRS:the_geom>
+                <gml:Point srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:pos>16.21055237 39.81756675</gml:pos></gml:Point>
+            </PNSRS:the_geom>
+            <PNSRS:note>Ospedale</PNSRS:note>
+            <PNSRS:id_osp>C349-4.1-OS-01</PNSRS:id_osp>
+            <PNSRS:denominaz>OSPEDALE CIVILE FERRARI</PNSRS:denominaz>
+            <PNSRS:e_mail>dspocastrovillari@asp.cosenza.it</PNSRS:e_mail>
+            <PNSRS:indirizzo>VIALE DEL LAVORO</PNSRS:indirizzo>
+            <PNSRS:proprieta>PUBBLICO</PNSRS:proprieta>
+            <PNSRS:telefono>09841/4851</PNSRS:telefono>
+            <PNSRS:fax>0981/491515</PNSRS:fax>
+        </PNSRS:CAL_4_6_ospedali>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

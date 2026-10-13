@@ -63,14 +63,20 @@ import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.PrecisionModel;
+import org.mockito.stubbing.OngoingStubbing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -86,14 +92,24 @@ import static java.io.File.separator;
 import static java.math.BigInteger.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
+import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
+import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.geosdi.geoplatform.wfs.WFSDescribeFeatureTest.gpJAXBContextBuilder;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.RETURNS_SELF;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -121,11 +137,12 @@ public class WFSGetFeaturesRequestTest {
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
-    @Ignore(value = "Geoserver is Down")
     @Test
     public void a_getAllFeaturesTest() throws Exception {
         String wfsURL = "http://geoserver.wfppal.org/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = newConnector().withServerUrl(new URL(wfsURL)).build();
+        GPWFSConnectorStore serverConnector = mock(GPWFSConnectorStore.class);
+        WFSDescribeFeatureTypeRequest<Schema> mockDescribeRequest = mockDescribeFeatureTypeRequest(serverConnector, "/describe/toppHebronNablus.xsd");
+        WFSGetFeatureRequest<Object> mockGetFeatureRequest = mockGetFeatureRequest(serverConnector, "/reader/GetFeatureHebronNablus.xml");
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.setTypeName(asList(information));
         Schema response = request.getResponse();
@@ -147,10 +164,16 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-        if(!featureCollection.isFeaturesLoaded()) {
-            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
-        }
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
+        assertTrue("the FeatureCollectionDTO must have features loaded", featureCollection.isFeaturesLoaded());
+        assertEquals(3, featureCollection.getFeatures().size());
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
+
+        verify(mockDescribeRequest).setTypeName(asList(information));
+        verify(mockGetFeatureRequest).setTypeName(new QName("topp:polygon_loc_hebron_nablus_pcd"));
+        verify(mockGetFeatureRequest).setSRS("EPSG:4326");
+        verify(mockGetFeatureRequest).setResultType(RESULTS.value());
+        verify(mockGetFeatureRequest).setMaxFeatures(valueOf(50));
     }
 
     //@Ignore(value = "FIX PROBLEM TO RETRIEVE ATTRIBUTES WITHOUT GEOMETRY")
@@ -219,14 +242,14 @@ public class WFSGetFeaturesRequestTest {
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@@@FEATURE_COLLECTION_DTO : {}", featureCollection);
     }
 
-    @Ignore(value = "Geoserver is Down")
     @Test
     public void d_siteTrTest() throws Exception {
         String wfsURL = "http://150.145.141.241/geoserver/wfs";
         QName siteTRCom = new QName("cite:tr_com");
-        GPWFSConnectorStore serverConnector = newConnector()
-                .withServerUrl(new URL(wfsURL))
-                .build();
+        GPWFSConnectorStore serverConnector = mock(GPWFSConnectorStore.class);
+        WFSDescribeFeatureTypeRequest<Schema> mockDescribeRequest = mockDescribeFeatureTypeRequest(serverConnector, "/describe/citeTrCom.xsd");
+        WFSGetFeatureRequest<Object> mockGetFeatureRequest = mockGetFeatureRequest(serverConnector, "/reader/GetFeatureSiteTR.xml",
+                "/reader/GetFeatureSiteTR.xml");
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.setTypeName(asList(siteTRCom));
         Schema response = request.getResponse();
@@ -252,31 +275,38 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-        if(!featureCollection.isFeaturesLoaded()) {
-            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
-        }
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
+        assertTrue("the FeatureCollectionDTO must have features loaded", featureCollection.isFeaturesLoaded());
+        assertEquals(50, featureCollection.getFeatures().size());
         logger.info("###################################FEATURE_COLLECTION : {}\n", featureCollection);
 
         getFeatureRequest.setGeometryName(layerSchema.getGeometry().getName());
-        getFeatureRequest.setBBox(new BBox(10.329274141729897, 44.64877730606194, 10.35673996203874, 44.66831396911103));
+        BBox bBox = new BBox(10.329274141729897, 44.64877730606194, 10.35673996203874, 44.66831396911103);
+        getFeatureRequest.setBBox(bBox);
 
         logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_FILTERED_BY_BBOX_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
         logger.debug("######################RESPONSE_FILTERED_BY_BBOX_AS_STRING : \n{}\n", getFeatureRequest.formatResponseAsString(2));
 
         InputStream si = getFeatureRequest.getResponseAsStream();
         FeatureCollectionDTO featureCollectionByBBOX = featureReaderStAX.read(si);
-        if(!featureCollectionByBBOX.isFeaturesLoaded()) {
-            featureCollectionByBBOX.setErrorMessage(getFeatureRequest.getResponseAsString());
-        }
+        assertTrue("the FeatureCollectionDTO by BBOX must have features loaded", featureCollectionByBBOX.isFeaturesLoaded());
         logger.info("###################################FEATURE_COLLECTION_BY_BBOX : {}\n", featureCollectionByBBOX);
+
+        verify(mockDescribeRequest).setTypeName(asList(siteTRCom));
+        verify(mockGetFeatureRequest).setTypeName(new QName("cite:tr_com"));
+        verify(mockGetFeatureRequest).setMaxFeatures(valueOf(50));
+        verify(mockGetFeatureRequest).setGeometryName("tr_com_tra");
+        verify(mockGetFeatureRequest).setBBox(bBox);
+        verify(mockGetFeatureRequest, times(2)).getResponseAsStream();
     }
 
-    @Ignore(value = "Test to Prepare XML Files")
     @Test
     public void e_generateXMLFilesTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         QName layerQName = new QName("sf:restricted");
-        GPWFSConnectorStore serverConnector = newConnector().withServerUrl(new URL(wfsURL)).build();
+        GPWFSConnectorStore serverConnector = mock(GPWFSConnectorStore.class);
+        WFSDescribeFeatureTypeRequest<Schema> mockDescribeRequest = mockDescribeFeatureTypeRequest(serverConnector, "/describe/sfRestricted.xsd");
+        WFSGetFeatureRequest<Object> mockGetFeatureRequest = mockGetFeatureRequest(serverConnector, "/reader/GetFeatureSFRestricted.xml");
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.setTypeName(asList(layerQName));
         Schema response = request.getResponse();
@@ -289,8 +319,13 @@ public class WFSGetFeaturesRequestTest {
             throw new IllegalStateException("The Layer Schema is null.");
         }
         layerSchema.setScope(wfsURL);
+        assertEquals("sf:restricted", layerSchema.getTypeName());
+        assertEquals("MultiPolygon", layerSchema.getGeometry().getType());
+        assertEquals(1, layerSchema.getAttributes().size());
 
-        GPJAXBContextBuilder.newInstance().marshal(layerSchema, new File("./target/LayerSchemaSFRestricted.xml"));
+        File layerSchemaFile = new File("./target/LayerSchemaSFRestricted.xml");
+        GPJAXBContextBuilder.newInstance().marshal(new JAXBElement<>(new QName("LayerSchemaDTO"), LayerSchemaDTO.class, layerSchema), layerSchemaFile);
+        assertTrue("the LayerSchema file must exist", layerSchemaFile.exists());
 
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
@@ -301,6 +336,11 @@ public class WFSGetFeaturesRequestTest {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("./target/GetFeatureSFRestricted.xml"))) {
             writer.write(responseAsString);
         }
+        assertEquals(responseAsString, new String(Files.readAllBytes(Paths.get("./target/GetFeatureSFRestricted.xml")), UTF_8));
+
+        verify(mockDescribeRequest).setTypeName(asList(layerQName));
+        verify(mockGetFeatureRequest).setTypeName(new QName("sf:restricted"));
+        verify(mockGetFeatureRequest).formatResponseAsString(2);
     }
 
     @Test
@@ -391,13 +431,13 @@ public class WFSGetFeaturesRequestTest {
                 .getDefaultMapper().readValue(is, FeatureCollection.class));
     }
 
-    @Ignore
     @Test
     public void l_percorsiNavetteTest() throws Exception {
         String wfsURL = "http://mappe-dpc.protezionecivile.it/gssitdpc/wfs";
-        GPWFSConnectorStore serverConnector = newConnector()
-                .withServerUrl(new URL(wfsURL))
-                .build();
+        GPWFSConnectorStore serverConnector = mock(GPWFSConnectorStore.class);
+        WFSDescribeFeatureTypeRequest<Schema> mockDescribeRequest = mockDescribeFeatureTypeRequest(serverConnector, "/describe/cfPercorsiNavette.xsd");
+        WFSGetFeatureRequest<Object> mockGetFeatureRequest = mockGetFeatureRequest(serverConnector, "/reader/GetFeaturePercorsiNavette.xml",
+                "/reader/GetFeaturePercorsiNavette.json");
         QName percorsiNavette = new QName("PianoCampiFlegrei:CF_PercorsiNavette");
         String localPart = percorsiNavette.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -421,10 +461,9 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-
-        if(!featureCollection.isFeaturesLoaded()) {
-            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
-        }
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
+        assertTrue("the FeatureCollectionDTO must have features loaded", featureCollection.isFeaturesLoaded());
+        assertEquals(3, featureCollection.getFeatures().size());
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(percorsiNavette, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "PercorsiNavette")
                 .collect(joining(separator, "", ".xml"))));
@@ -432,18 +471,24 @@ public class WFSGetFeaturesRequestTest {
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT
                 .getDefaultMapper().readValue(isJson, FeatureCollection.class);
+        assertEquals(3, featureCollectionJson.getFeatures().size());
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "PercorsiNavette")
                 .collect(joining(separator, "", ".json"))), featureCollectionJson);
+
+        verify(mockDescribeRequest).setTypeName(asList(percorsiNavette));
+        verify(mockGetFeatureRequest).setTypeName(new QName("PianoCampiFlegrei:CF_PercorsiNavette"));
+        verify(mockGetFeatureRequest).setMaxFeatures(valueOf(50));
+        verify(mockGetFeatureRequest).setOutputFormat(GEOJSON);
+        verify(mockGetFeatureRequest, times(2)).getResponseAsStream();
     }
 
-    @Ignore(value = "Serivce is unavailable")
     @Test
     public void m_ospedaliTest() throws Exception {
         String wfsURL = "https://servizi.protezionecivile.it/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = newConnector()
-                .withClientSecurity(new BasicPreemptiveSecurityConnector("MAIDNT78M23G942L", "mdonato"))
-                .withServerUrl(new URL(wfsURL))
-                .build();
+        GPWFSConnectorStore serverConnector = mock(GPWFSConnectorStore.class);
+        WFSDescribeFeatureTypeRequest<Schema> mockDescribeRequest = mockDescribeFeatureTypeRequest(serverConnector, "/describe/pnsrsOspedali.xsd");
+        WFSGetFeatureRequest<Object> mockGetFeatureRequest = mockGetFeatureRequest(serverConnector, "/reader/GetFeatureOspedali.xml",
+                "/reader/GetFeatureOspedali.json");
         QName ospedali = new QName("PNSRS:CAL_4_6_ospedali");
         String localPart = ospedali.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -467,18 +512,24 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-
-        if(!featureCollection.isFeaturesLoaded()) {
-            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
-        }
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
+        assertTrue("the FeatureCollectionDTO must have features loaded", featureCollection.isFeaturesLoaded());
+        assertEquals(2, featureCollection.getFeatures().size());
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(ospedali, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "Ospedali")
                 .collect(joining(separator, "", ".xml"))));
         getFeatureRequest.setOutputFormat(GEOJSON);
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
+        assertEquals(2, featureCollectionJson.getFeatures().size());
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Ospedali")
                 .collect(joining(separator, "", ".json"))), featureCollectionJson);
+
+        verify(mockDescribeRequest).setTypeName(asList(ospedali));
+        verify(mockGetFeatureRequest).setTypeName(new QName("PNSRS:CAL_4_6_ospedali"));
+        verify(mockGetFeatureRequest).setMaxFeatures(valueOf(2));
+        verify(mockGetFeatureRequest).setOutputFormat(GEOJSON);
+        verify(mockGetFeatureRequest, times(2)).getResponseAsStream();
     }
 
     @Test
@@ -586,7 +637,11 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void r_shpAdminComuniTest() throws Exception {
         String wfsURL = "https://prosit.geosdi.org/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = newConnector().withServerUrl(new URL(wfsURL)).build();
+        GPWFSConnectorStore serverConnector = mock(GPWFSConnectorStore.class);
+        WFSDescribeFeatureTypeRequest<Schema> mockDescribeRequest = mockDescribeFeatureTypeRequest(serverConnector, "/describe/adminShpComuni.xsd");
+        WFSGetFeatureRequest<Object> mockGetFeatureRequest = mockGetFeatureRequest(serverConnector, "/reader/GetFeatureAdminShpComuni.xml",
+                "/reader/GetFeatureAdminShpComuni.json");
+
         QName shpComuni = new QName("admin:admin_shp_comuni");
         String localPart = shpComuni.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
@@ -604,7 +659,8 @@ public class WFSGetFeaturesRequestTest {
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+        BBox bBox = new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002);
+        getFeatureRequest.setBBox(bBox);
         getFeatureRequest.setGeometryName(layerSchema.getGeometry().getName());
         getFeatureRequest.setResultType(RESULTS.value());
         getFeatureRequest.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
@@ -613,10 +669,9 @@ public class WFSGetFeaturesRequestTest {
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
-
-        if(!featureCollection.isFeaturesLoaded()) {
-            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
-        }
+        assertNotNull("the parsed FeatureCollectionDTO must not be null", featureCollection);
+        assertTrue("the FeatureCollectionDTO must have features loaded", featureCollection.isFeaturesLoaded());
+        assertEquals(4, featureCollection.getFeatures().size());
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(shpComuni, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "AdminShpComuni")
                 .collect(joining(separator, "", ".xml"))));
@@ -624,8 +679,79 @@ public class WFSGetFeaturesRequestTest {
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@NUMBER_OF_FEATURES : {}\n", featureCollectionJson.getFeatures().size());
+        assertEquals(4, featureCollectionJson.getFeatures().size());
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "AdminShpComuni")
                 .collect(joining(separator, "", ".json"))), featureCollectionJson);
+
+        verify(mockDescribeRequest).setTypeName(asList(shpComuni));
+        verify(mockGetFeatureRequest).setTypeName(new QName("admin:admin_shp_comuni"));
+        verify(mockGetFeatureRequest).setSRS("EPSG:4326");
+        verify(mockGetFeatureRequest).setBBox(bBox);
+        verify(mockGetFeatureRequest).setGeometryName("the_geom");
+        verify(mockGetFeatureRequest).setResultType(RESULTS.value());
+        verify(mockGetFeatureRequest).setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        verify(mockGetFeatureRequest).setMaxFeatures(valueOf(50));
+        verify(mockGetFeatureRequest).setOutputFormat(GEOJSON);
+        verify(mockGetFeatureRequest, times(2)).getResponseAsStream();
+    }
+
+    /**
+     * @param serverConnector
+     * @param schemaResource the DescribeFeatureType response
+     * @return {@link WFSDescribeFeatureTypeRequest<Schema>}
+     * @throws Exception
+     */
+    private static WFSDescribeFeatureTypeRequest<Schema> mockDescribeFeatureTypeRequest(GPWFSConnectorStore serverConnector,
+            String schemaResource) throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> mockDescribeRequest = mock(WFSDescribeFeatureTypeRequest.class, RETURNS_SELF);
+        doReturn(readSchema(schemaResource)).when(mockDescribeRequest).getResponse();
+        doReturn(mockDescribeRequest).when(serverConnector).createDescribeFeatureTypeRequest();
+        return mockDescribeRequest;
+    }
+
+    /**
+     * @param serverConnector
+     * @param responseResources the GetFeature responses returned, in order, by each call to getResponseAsStream
+     * @return {@link WFSGetFeatureRequest<Object>}
+     * @throws Exception
+     */
+    private static WFSGetFeatureRequest<Object> mockGetFeatureRequest(GPWFSConnectorStore serverConnector,
+            String... responseResources) throws Exception {
+        WFSGetFeatureRequest<Object> mockGetFeatureRequest = mock(WFSGetFeatureRequest.class, RETURNS_SELF);
+        String responseAsString;
+        try (InputStream inputStream = openResource(responseResources[0])) {
+            responseAsString = new String(inputStream.readAllBytes(), UTF_8);
+        }
+        doReturn("GetFeature request mocked with ".concat(responseResources[0])).when(mockGetFeatureRequest).showRequestAsString();
+        doReturn(responseAsString).when(mockGetFeatureRequest).getResponseAsString();
+        doReturn(responseAsString).when(mockGetFeatureRequest).formatResponseAsString(anyInt());
+        OngoingStubbing<InputStream> stubbing = when(mockGetFeatureRequest.getResponseAsStream());
+        for (String responseResource : responseResources) {
+            stubbing = stubbing.thenAnswer(invocation -> openResource(responseResource));
+        }
+        doReturn(mockGetFeatureRequest).when(serverConnector).createGetFeatureRequest();
+        return mockGetFeatureRequest;
+    }
+
+    /**
+     * @param resource
+     * @return {@link Schema}
+     * @throws Exception
+     */
+    private static Schema readSchema(String resource) throws Exception {
+        try (InputStream inputStream = openResource(resource)) {
+            return (Schema) JAXBIntrospector.getValue(getProvider(WFS_CONTEXT_KEY).acquireUnmarshaller().unmarshal(inputStream));
+        }
+    }
+
+    /**
+     * @param resource
+     * @return {@link InputStream}
+     */
+    private static InputStream openResource(String resource) {
+        InputStream inputStream = WFSGetFeaturesRequestTest.class.getResourceAsStream(resource);
+        assertNotNull("The resource " + resource + " must not be null", inputStream);
+        return inputStream;
     }
 
     @Getter

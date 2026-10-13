@@ -36,16 +36,23 @@
 package org.geosdi.geoplatform.connector.wfs.prosit;
 
 import org.geojson.FeatureCollection;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.geojson.Feature;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
+import org.geosdi.geoplatform.csv.support.model.GPCSVBaseSchema;
 import org.geosdi.geoplatform.csv.support.model.IGPCSVBaseSchema;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -56,21 +63,27 @@ import tools.jackson.databind.ObjectMapper;
 
 import javax.xml.namespace.QName;
 import java.io.File;
-import java.net.URL;
+import java.math.BigInteger;
+import java.net.URI;
 
 import static java.io.File.separator;
 import static java.math.BigInteger.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.CSV;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.gui.shared.wfs.OperatorType.LIKE;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.HITS;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,26 +94,38 @@ public class GPWFSGetFeatureLayerTempoTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWFSGetFeatureLayerTempoTest.class);
     //
-    static {
-        try {
-            serverConnector = newConnector()
-                    .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
-                    .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                            .withMaxTotalConnections(40)
-                            .withDefaultMaxPerRoute(20)
-                            .withMaxRedirect(10)
-                            .build())
-                    .build();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+    private static final String PROSIT_WFS_URL = "https://prosit.geosdi.org/geoserver/wfs";
+    //
+    private GPWFSConnectorStore serverConnector;
+    private WFSGetFeatureRequest<Object> getFeatureRequest;
 
-    private static GPWFSConnectorStore serverConnector;
+    /**
+     * The prosit GeoServer is mocked : the {@link GPWFSConnectorStore} returns a real {@link WFSGetFeatureRequestV110}
+     * (so the GetFeature request is really built) built on a mocked {@link GPServerConnector}, and only the server
+     * responses are stubbed.
+     *
+     * @throws Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+        GPServerConnector mockServer = mock(GPServerConnector.class);
+        when(mockServer.getURI()).thenReturn(new URI(PROSIT_WFS_URL));
+        when(mockServer.getCredentialsStore()).thenReturn(mock(CredentialsStore.class));
+        when(mockServer.getClientConnection()).thenReturn(mock(CloseableHttpClient.class));
+        when(mockServer.getPooledConnectorConfig()).thenReturn(pooledConnectorConfigBuilder()
+                .withMaxTotalConnections(40)
+                .withDefaultMaxPerRoute(20)
+                .withMaxRedirect(10)
+                .build());
+        this.getFeatureRequest = spy(new WFSGetFeatureRequestV110(mockServer));
+        this.serverConnector = mock(GPWFSConnectorStore.class);
+        doReturn(this.getFeatureRequest).when(this.serverConnector).createGetFeatureRequest();
+    }
 
     @Test
     public void a_searchStartWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(featureCollectionType(7));
         request.withResultType(RESULTS.value());
         request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
@@ -111,14 +136,18 @@ public class GPWFSGetFeatureLayerTempoTest {
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.STARTS_WITH, "te");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
         request.withQueryDTO(queryDTO);
-        logger.info("######################\n{}\n", request.showRequestAsString());
+        String requestAsString = request.showRequestAsString();
+        logger.info("######################\n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "resultType=\"results\"", "<ogc:PropertyIsLike", "typeName=\"admin:tempo\"", "<ogc:PropertyName>string</ogc:PropertyName>", "<ogc:Literal>te%</ogc:Literal>");
         FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 7);
+        assertEquals(7, response.getNumberOfFeatures().intValue());
+        verify(this.getFeatureRequest).getResponse();
     }
 
     @Test
     public void b_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(featureCollectionType(0));
         request.withResultType(RESULTS.value());
         request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
@@ -129,14 +158,18 @@ public class GPWFSGetFeatureLayerTempoTest {
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.ENDS_WITH, "te");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
         request.withQueryDTO(queryDTO);
-        logger.info("######################\n{}\n", request.showRequestAsString());
+        String requestAsString = request.showRequestAsString();
+        logger.info("######################\n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "resultType=\"results\"", "<ogc:PropertyIsLike", "typeName=\"admin:tempo\"", "<ogc:PropertyName>string</ogc:PropertyName>", "<ogc:Literal>%te</ogc:Literal>");
         FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 0);
+        assertEquals(0, response.getNumberOfFeatures().intValue());
+        verify(this.getFeatureRequest).getResponse();
     }
 
     @Test
     public void c_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(featureCollectionType(1));
         request.withResultType(RESULTS.value());
         request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
@@ -147,14 +180,18 @@ public class GPWFSGetFeatureLayerTempoTest {
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.ENDS_WITH, "sto");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
         request.withQueryDTO(queryDTO);
-        logger.info("######################\n{}\n", request.showRequestAsString());
+        String requestAsString = request.showRequestAsString();
+        logger.info("######################\n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "resultType=\"results\"", "<ogc:PropertyIsLike", "typeName=\"admin:tempo\"", "<ogc:PropertyName>string</ogc:PropertyName>", "<ogc:Literal>%sto</ogc:Literal>");
         FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 1);
+        assertEquals(1, response.getNumberOfFeatures().intValue());
+        verify(this.getFeatureRequest).getResponse();
     }
 
     @Test
     public void d_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(featureCollectionType(1));
         request.withResultType(RESULTS.value());
         request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
@@ -165,14 +202,18 @@ public class GPWFSGetFeatureLayerTempoTest {
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, OperatorType.ENDS_WITH, "sto1");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
         request.withQueryDTO(queryDTO);
-        logger.info("######################\n{}\n", request.showRequestAsString());
+        String requestAsString = request.showRequestAsString();
+        logger.info("######################\n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "resultType=\"results\"", "<ogc:PropertyIsLike", "typeName=\"admin:tempo\"", "<ogc:PropertyName>string</ogc:PropertyName>", "<ogc:Literal>%sto1</ogc:Literal>");
         FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 1);
+        assertEquals(1, response.getNumberOfFeatures().intValue());
+        verify(this.getFeatureRequest).getResponse();
     }
 
     @Test
     public void e_searchLikeLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(featureCollectionType(7));
         request.withResultType(RESULTS.value());
         request.withTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
@@ -183,64 +224,92 @@ public class GPWFSGetFeatureLayerTempoTest {
         QueryRestrictionDTO queryRestrictionDTO = new QueryRestrictionDTO(attributeDTO, LIKE, "testo");
         queryDTO.setQueryRestrictionList(asList(queryRestrictionDTO));
         request.withQueryDTO(queryDTO);
-        logger.info("######################\n{}\n", request.showRequestAsString());
+        String requestAsString = request.showRequestAsString();
+        logger.info("######################\n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "resultType=\"results\"", "<ogc:PropertyIsLike", "typeName=\"admin:tempo\"", "<ogc:PropertyName>string</ogc:PropertyName>", "<ogc:Literal>%testo%</ogc:Literal>");
         FeatureCollectionType response = request.getResponse();
-        assertTrue(response.getNumberOfFeatures().intValue() == 7);
+        assertEquals(7, response.getNumberOfFeatures().intValue());
+        verify(this.getFeatureRequest).getResponse();
     }
 
     @Test
     public void f_adminSHPComCqlFilterTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponseAsString("<wfs:FeatureCollection xmlns:wfs=\"http://www.opengis.net/wfs\" numberOfFeatures=\"4\" timeStamp=\"2026-10-13T08:00:00.000Z\"/>");
         request.withTypeName(new QName("admin:admin_shp_comuni"));
         request.withResultType(HITS.value());
         request.withCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
-        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
+        String requestAsString = request.showRequestAsString();
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "resultType=\"hits\"", "typeName=\"admin:admin_shp_comuni\"", "<ogc:Or>", "<ogc:Literal>AVIGLIANO</ogc:Literal>", "<ogc:PropertyIsEqualTo>", "<ogc:Literal>77014</ogc:Literal>", "<ogc:Literal>T%</ogc:Literal>");
+        String response = request.getResponseAsString();
+        logger.info("#########################################RESPONSE : {}\n", response);
+        assertTrue(response.contains("numberOfFeatures=\"4\""));
     }
 
     @Test
     public void g_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponseAsString("<wfs:FeatureCollection xmlns:wfs=\"http://www.opengis.net/wfs\" numberOfFeatures=\"0\" timeStamp=\"2026-10-13T08:00:00.000Z\"/>");
         request.withTypeName(new QName("admin:admin_shp_comuni"));
         request.withResultType(RESULTS.value());
         request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
-        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
+        String requestAsString = request.showRequestAsString();
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "resultType=\"results\"", "typeName=\"admin:admin_shp_comuni\"", "<ogc:BBOX>", "<gml:lowerCorner>14.403076171875002 38.83542884007305</gml:lowerCorner>", "<gml:upperCorner>19.368896484375004 40.94671366508002</gml:upperCorner>");
+        String response = request.getResponseAsString();
+        logger.info("#########################################RESPONSE : {}\n", response);
+        assertTrue(response.contains("numberOfFeatures=\"0\""));
     }
 
     @Test
     public void h_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollection> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(geoJsonFeatureCollection("AVIGLIANO", "MATERA"));
         request.withTypeName(new QName("admin:admin_shp_comuni"));
         request.withResultType(RESULTS.value());
         request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
         request.withOutputFormat(GEOJSON);
         request.withMaxFeatures(valueOf(2));
-        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        logger.info("#########################################RESPONSE : {}\n", request.getResponse().getFeatures().size());
+        String requestAsString = request.showRequestAsString();
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "outputFormat=\"application/json\"", "maxFeatures=\"2\"", "<ogc:BBOX>", "<gml:lowerCorner>14.403076171875002 38.83542884007305</gml:lowerCorner>", "<gml:upperCorner>19.368896484375004 40.94671366508002</gml:upperCorner>");
+        FeatureCollection response = request.getResponse();
+        logger.info("#########################################RESPONSE : {}\n", response.getFeatures().size());
+        assertEquals(2, response.getFeatures().size());
     }
 
     @Test
     public void i_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(featureCollectionType(2));
         request.withTypeName(new QName("admin:admin_shp_comuni"));
         request.withResultType(RESULTS.value());
         request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
         request.withMaxFeatures(valueOf(2));
-        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        logger.info("#########################################RESPONSE : {}\n", request.getResponse().getNumberOfFeatures());
+        String requestAsString = request.showRequestAsString();
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "outputFormat=\"text/xml; subtype=gml/3.1.1\"", "maxFeatures=\"2\"", "<ogc:BBOX>", "<gml:lowerCorner>14.403076171875002 38.83542884007305</gml:lowerCorner>", "<gml:upperCorner>19.368896484375004 40.94671366508002</gml:upperCorner>");
+        FeatureCollectionType response = request.getResponse();
+        logger.info("#########################################RESPONSE : {}\n", response.getNumberOfFeatures());
+        assertEquals(2, response.getNumberOfFeatures().intValue());
     }
 
     @Test
     public void l_adminSHPComCqlFilterAndBboxTest() throws Exception {
         WFSGetFeatureRequest<IGPCSVBaseSchema> request = serverConnector.createGetFeatureRequest();
+        this.mockGetFeatureResponse(csvSchema("FID", "the_geom", "COD_REG", "PRO_COM", "COMUNE"));
         request.withTypeName(new QName("admin:admin_shp_comuni"));
         request.withResultType(RESULTS.value());
         request.withBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
         request.withOutputFormat(CSV);
         request.withMaxFeatures(valueOf(2));
-        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        logger.info("#########################################RESPONSE : {}\n", request.getResponse().getHeaders());
+        String requestAsString = request.showRequestAsString();
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", requestAsString);
+        assertRequestContains(requestAsString, "outputFormat=\"csv\"", "maxFeatures=\"2\"", "<ogc:BBOX>", "<gml:lowerCorner>14.403076171875002 38.83542884007305</gml:lowerCorner>", "<gml:upperCorner>19.368896484375004 40.94671366508002</gml:upperCorner>");
+        IGPCSVBaseSchema response = request.getResponse();
+        logger.info("#########################################RESPONSE : {}\n", response.getHeaders());
+        assertEquals(asList("FID", "the_geom", "COD_REG", "PRO_COM", "COMUNE"), response.getHeaders());
     }
 
     @Test
@@ -249,6 +318,67 @@ public class GPWFSGetFeatureLayerTempoTest {
         ObjectMapper mapper = new GPJacksonJTSSupport().getDefaultMapper();
         mapper.writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Polygon.json")
                 .collect(joining(separator))), polygon);
+    }
+
+    /**
+     * @param requestAsString the GetFeature request really built by {@link WFSGetFeatureRequestV110}
+     * @param expectedFragments
+     */
+    private static void assertRequestContains(String requestAsString, String... expectedFragments) {
+        for (String expectedFragment : expectedFragments) {
+            assertTrue("The GetFeature request must contain : " + expectedFragment, requestAsString.contains(expectedFragment));
+        }
+    }
+
+    /**
+     * @param response the response returned by the mocked server
+     * @throws Exception
+     */
+    private void mockGetFeatureResponse(Object response) throws Exception {
+        doReturn(response).when(this.getFeatureRequest).getResponse();
+    }
+
+    /**
+     * @param response the response returned by the mocked server
+     * @throws Exception
+     */
+    private void mockGetFeatureResponseAsString(String response) throws Exception {
+        doReturn(response).when(this.getFeatureRequest).getResponseAsString();
+    }
+
+    /**
+     * @param numberOfFeatures
+     * @return {@link FeatureCollectionType}
+     */
+    private static FeatureCollectionType featureCollectionType(int numberOfFeatures) {
+        FeatureCollectionType featureCollectionType = new FeatureCollectionType();
+        featureCollectionType.setNumberOfFeatures(BigInteger.valueOf(numberOfFeatures));
+        return featureCollectionType;
+    }
+
+    /**
+     * @param comuni
+     * @return {@link FeatureCollection}
+     */
+    private static FeatureCollection geoJsonFeatureCollection(String... comuni) {
+        FeatureCollection featureCollection = new FeatureCollection();
+        for (String comune : comuni) {
+            Feature feature = new Feature();
+            feature.setId("admin_shp_comuni.".concat(comune));
+            feature.setProperty("COMUNE", comune);
+            featureCollection.add(feature);
+        }
+        return featureCollection;
+    }
+
+    /**
+     * @param headers
+     * @return {@link IGPCSVBaseSchema}
+     */
+    private static IGPCSVBaseSchema csvSchema(String... headers) {
+        IGPCSVBaseSchema csvSchema = new GPCSVBaseSchema();
+        csvSchema.setHeaders(asList(headers));
+        return csvSchema;
     }
 
     /**

@@ -35,19 +35,37 @@
  */
 package org.geosdi.geoplatform.wms;
 
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder;
+import org.geosdi.geoplatform.services.builder.GeoSDIHttpClient5;
 import org.geosdi.geoplatform.services.builder.IGPWMSCapabilitesBuilder;
+import org.geotools.ows.wms.CRSEnvelope;
+import org.geotools.ows.wms.Layer;
+import org.geotools.ows.wms.StyleImpl;
+import org.geotools.ows.wms.WMSCapabilities;
+import org.geotools.ows.wms.WebMapServer;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.mockito.MockedConstruction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mockConstruction;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,10 +99,39 @@ public class GPWMSCapabilitesBuilderTest {
 
     @Test
     public void c_loadWMSCapabilitiesTest() throws Exception {
-        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://prosit.geosdi.org/geoserver/wms", null, null, null, null, null);
-        checkArgument(rasterLayers.size() > 0);
-        for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
-            logger.info("######################LAYER : {} \n", rasterLayerDTO);
+        WMSCapabilities wmsCapabilities = createPrositWMSCapabilities();
+        try (MockedConstruction<WebMapServer> mockedWebMapServer = mockConstruction(WebMapServer.class, (mock, context) -> {
+            assertEquals(new URL("https://prosit.geosdi.org/geoserver/wms?request=GetCapabilities"), context.arguments().get(0));
+            assertTrue(context.arguments().get(1) instanceof GeoSDIHttpClient5);
+            when(mock.getCapabilities()).thenReturn(wmsCapabilities);
+        })) {
+            List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://prosit.geosdi.org/geoserver/wms", null, null, null, null, null);
+            checkArgument(rasterLayers.size() > 0);
+            for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
+                logger.info("######################LAYER : {} \n", rasterLayerDTO);
+            }
+            assertEquals(1, mockedWebMapServer.constructed().size());
+            verify(mockedWebMapServer.constructed().get(0)).getCapabilities();
+            assertEquals(1, rasterLayers.size());
+            RasterLayerDTO rootLayer = rasterLayers.get(0);
+            assertEquals("GeoServer Web Map Service", rootLayer.getTitle());
+            assertEquals("https://prosit.geosdi.org/geoserver/wms", rootLayer.getUrlServer());
+            List<RasterLayerDTO> subLayers = rootLayer.getSubLayerList();
+            assertEquals(3, subLayers.size());
+            assertEquals(asList("admin:admin_shp_comuni", "admin:admin_shp_oliveti_catastali", "admin:admin_shp_vigneti_catastali"),
+                    subLayers.stream().map(RasterLayerDTO::getName).collect(toList()));
+            RasterLayerDTO comuni = subLayers.get(0);
+            assertEquals("EPSG:3857", comuni.getSrs());
+            assertEquals(asList("polygon", "admin_comuni"), comuni.getStyleList());
+            assertTrue(comuni.getLayerInfo().isQueryable());
+            RasterLayerDTO oliveti = subLayers.get(1);
+            assertEquals("EPSG:4326", oliveti.getSrs());
+            assertEquals(15.5, oliveti.getBbox().getMinX(), 0d);
+            assertEquals(asList("polygon"), oliveti.getStyleList());
+            RasterLayerDTO vigneti = subLayers.get(2);
+            assertEquals("Vigneti Catastali", vigneti.getTitle());
+            assertEquals("EPSG:4326", vigneti.getSrs());
+            assertEquals(13.9, vigneti.getBbox().getMinX(), 0d);
         }
     }
 
@@ -95,5 +142,51 @@ public class GPWMSCapabilitesBuilderTest {
         for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
             logger.info("######################LAYER : {} \n", rasterLayerDTO);
         }
+    }
+
+    /**
+     * @return the {@link WMSCapabilities} published by the prosit GeoServer, used in place of the remote GetCapabilities response.
+     */
+    private static WMSCapabilities createPrositWMSCapabilities() {
+        Layer rootLayer = new Layer("GeoServer Web Map Service");
+        rootLayer.setLatLonBoundingBox(new CRSEnvelope("CRS:84", 13.9, 39.8, 16.9, 41.2));
+        rootLayer.setBoundingBoxes(new HashMap<>());
+        Layer comuni = createLayer("admin:admin_shp_comuni", "Comuni", new CRSEnvelope("CRS:84", 15.3, 39.9, 16.9, 41.2),
+                "polygon", "admin_comuni");
+        Map<String, CRSEnvelope> comuniBoundingBoxes = new HashMap<>();
+        comuniBoundingBoxes.put("EPSG:4326", new CRSEnvelope("EPSG:4326", 15.3, 39.9, 16.9, 41.2));
+        comuniBoundingBoxes.put("EPSG:3857", new CRSEnvelope("EPSG:3857", 1703201.1, 4850570.9, 1881314.8, 5040013.8));
+        comuni.setBoundingBoxes(comuniBoundingBoxes);
+        Layer oliveti = createLayer("admin:admin_shp_oliveti_catastali", "Oliveti Catastali",
+                new CRSEnvelope("CRS:84", 15.5, 40.1, 16.6, 41.1), "polygon");
+        Map<String, CRSEnvelope> olivetiBoundingBoxes = new HashMap<>();
+        olivetiBoundingBoxes.put("EPSG:4326", new CRSEnvelope("EPSG:4326", 15.5, 40.1, 16.6, 41.1));
+        oliveti.setBoundingBoxes(olivetiBoundingBoxes);
+        // no BoundingBox : the root layer bounds are used
+        Layer vigneti = createLayer("admin:admin_shp_vigneti_catastali", "Vigneti Catastali",
+                new CRSEnvelope("CRS:84", 15.6, 40.2, 16.5, 41.0), "polygon");
+        vigneti.setBoundingBoxes(new HashMap<>());
+        rootLayer.addChildren(comuni);
+        rootLayer.addChildren(oliveti);
+        rootLayer.addChildren(vigneti);
+        WMSCapabilities wmsCapabilities = new WMSCapabilities();
+        wmsCapabilities.setLayer(rootLayer);
+        return wmsCapabilities;
+    }
+
+    /**
+     * @param name
+     * @param title
+     * @param latLonBoundingBox
+     * @param styles
+     * @return {@link Layer}
+     */
+    private static Layer createLayer(String name, String title, CRSEnvelope latLonBoundingBox, String... styles) {
+        Layer layer = new Layer(title);
+        layer.setName(name);
+        layer.setQueryable(true);
+        layer.setLatLonBoundingBox(latLonBoundingBox);
+        layer.setStyles(of(styles).map(StyleImpl::new).collect(toList()));
+        return layer;
     }
 }

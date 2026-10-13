@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="3" timeStamp="2026-10-13T08:00:00.000Z" xmlns:topp="http://www.openplans.org/topp" xmlns:gml="http://www.opengis.net/gml" xmlns:wfs="http://www.opengis.net/wfs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <gml:featureMembers>
+        <topp:polygon_loc_hebron_nablus_pcd gml:id="polygon_loc_hebron_nablus_pcd.1">
+            <topp:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:surfaceMember><gml:Polygon><gml:exterior><gml:LinearRing><gml:posList>35.08 31.51 35.12 31.51 35.12 31.55 35.08 31.55 35.08 31.51</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></gml:surfaceMember></gml:MultiSurface>
+            </topp:the_geom>
+            <topp:OBJECTID>1</topp:OBJECTID>
+            <topp:LOC_CODE>505065</topp:LOC_CODE>
+            <topp:LOC_NAME>Hebron</topp:LOC_NAME>
+            <topp:GOV_NAME>Hebron</topp:GOV_NAME>
+            <topp:AREA_KM2>74.1</topp:AREA_KM2>
+        </topp:polygon_loc_hebron_nablus_pcd>
+        <topp:polygon_loc_hebron_nablus_pcd gml:id="polygon_loc_hebron_nablus_pcd.2">
+            <topp:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:surfaceMember><gml:Polygon><gml:exterior><gml:LinearRing><gml:posList>35.24 32.2 35.29 32.2 35.29 32.24 35.24 32.24 35.24 32.2</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></gml:surfaceMember></gml:MultiSurface>
+            </topp:the_geom>
+            <topp:OBJECTID>2</topp:OBJECTID>
+            <topp:LOC_CODE>150445</topp:LOC_CODE>
+            <topp:LOC_NAME>Nablus</topp:LOC_NAME>
+            <topp:GOV_NAME>Nablus</topp:GOV_NAME>
+            <topp:AREA_KM2>28.6</topp:AREA_KM2>
+        </topp:polygon_loc_hebron_nablus_pcd>
+        <topp:polygon_loc_hebron_nablus_pcd gml:id="polygon_loc_hebron_nablus_pcd.3">
+            <topp:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:surfaceMember><gml:Polygon><gml:exterior><gml:LinearRing><gml:posList>35.06 31.42 35.1 31.42 35.1 31.45 35.06 31.45 35.06 31.42</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></gml:surfaceMember></gml:MultiSurface>
+            </topp:the_geom>
+            <topp:OBJECTID>3</topp:OBJECTID>
+            <topp:LOC_CODE>505215</topp:LOC_CODE>
+            <topp:LOC_NAME>Dura</topp:LOC_NAME>
+            <topp:GOV_NAME>Hebron</topp:GOV_NAME>
+            <topp:AREA_KM2>15.4</topp:AREA_KM2>
+        </topp:polygon_loc_hebron_nablus_pcd>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:PianoCampiFlegrei="http://mappe-dpc.protezionecivile.it/PianoCampiFlegrei" elementFormDefault="qualified" targetNamespace="http://mappe-dpc.protezionecivile.it/PianoCampiFlegrei">
+  <xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+  <xsd:complexType name="CF_PercorsiNavetteType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" name="the_geom" nillable="true" type="gml:MultiLineStringPropertyType"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="id" nillable="true" type="xsd:long"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="COMUNE" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="PERCORSO" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="LUNGHEZZA" nillable="true" type="xsd:double"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CF_PercorsiNavette" substitutionGroup="gml:_Feature" type="PianoCampiFlegrei:CF_PercorsiNavetteType"/>
+</xsd:schema>

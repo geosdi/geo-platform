@@ -1,0 +1,103 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "CF_PercorsiNavette.1",
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              14.12,
+              40.83
+            ],
+            [
+              14.15,
+              40.84
+            ],
+            [
+              14.19,
+              40.85
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "id": 1,
+        "COMUNE": "Pozzuoli",
+        "PERCORSO": "Navetta 1",
+        "LUNGHEZZA": 6.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "CF_PercorsiNavette.2",
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              14.07,
+              40.85
+            ],
+            [
+              14.1,
+              40.86
+            ],
+            [
+              14.14,
+              40.86
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "id": 2,
+        "COMUNE": "Bacoli",
+        "PERCORSO": "Navetta 2",
+        "LUNGHEZZA": 5.9
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "CF_PercorsiNavette.3",
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              14.08,
+              40.88
+            ],
+            [
+              14.12,
+              40.89
+            ],
+            [
+              14.16,
+              40.9
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "the_geom",
+      "properties": {
+        "id": 3,
+        "COMUNE": "Monte di Procida",
+        "PERCORSO": "Navetta 3",
+        "LUNGHEZZA": 7.2
+      }
+    }
+  ],
+  "totalFeatures": 3,
+  "numberReturned": 3,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::4326"
+    }
+  }
+}

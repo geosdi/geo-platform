@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:cite="http://www.opengeospatial.net/cite" elementFormDefault="qualified" targetNamespace="http://www.opengeospatial.net/cite">
+  <xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+  <xsd:complexType name="tr_comType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="1" name="tr_com_cod" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="data_fin" nillable="true" type="xsd:date"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="data_ini" nillable="true" type="xsd:date"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="fonte" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="scala" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="tr_com_nom" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="tr_com_psu" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="tr_com_tra" nillable="false" type="gml:LineStringPropertyType"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="validated" nillable="true" type="xsd:decimal"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="upload_id" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="tr_com" substitutionGroup="gml:_Feature" type="cite:tr_comType"/>
+</xsd:schema>

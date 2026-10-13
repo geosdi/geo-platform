@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="3" timeStamp="2026-10-13T08:00:00.000Z" xmlns:PianoCampiFlegrei="http://mappe-dpc.protezionecivile.it/PianoCampiFlegrei" xmlns:gml="http://www.opengis.net/gml" xmlns:wfs="http://www.opengis.net/wfs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <gml:featureMembers>
+        <PianoCampiFlegrei:CF_PercorsiNavette gml:id="CF_PercorsiNavette.1">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiCurve srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:curveMember><gml:LineString><gml:posList>14.12 40.83 14.15 40.84 14.19 40.85</gml:posList></gml:LineString></gml:curveMember></gml:MultiCurve>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>1</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:COMUNE>Pozzuoli</PianoCampiFlegrei:COMUNE>
+            <PianoCampiFlegrei:PERCORSO>Navetta 1</PianoCampiFlegrei:PERCORSO>
+            <PianoCampiFlegrei:LUNGHEZZA>6.4</PianoCampiFlegrei:LUNGHEZZA>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+        <PianoCampiFlegrei:CF_PercorsiNavette gml:id="CF_PercorsiNavette.2">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiCurve srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:curveMember><gml:LineString><gml:posList>14.07 40.85 14.1 40.86 14.14 40.86</gml:posList></gml:LineString></gml:curveMember></gml:MultiCurve>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>2</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:COMUNE>Bacoli</PianoCampiFlegrei:COMUNE>
+            <PianoCampiFlegrei:PERCORSO>Navetta 2</PianoCampiFlegrei:PERCORSO>
+            <PianoCampiFlegrei:LUNGHEZZA>5.9</PianoCampiFlegrei:LUNGHEZZA>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+        <PianoCampiFlegrei:CF_PercorsiNavette gml:id="CF_PercorsiNavette.3">
+            <PianoCampiFlegrei:the_geom>
+                <gml:MultiCurve srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:curveMember><gml:LineString><gml:posList>14.08 40.88 14.12 40.89 14.16 40.9</gml:posList></gml:LineString></gml:curveMember></gml:MultiCurve>
+            </PianoCampiFlegrei:the_geom>
+            <PianoCampiFlegrei:id>3</PianoCampiFlegrei:id>
+            <PianoCampiFlegrei:COMUNE>Monte di Procida</PianoCampiFlegrei:COMUNE>
+            <PianoCampiFlegrei:PERCORSO>Navetta 3</PianoCampiFlegrei:PERCORSO>
+            <PianoCampiFlegrei:LUNGHEZZA>7.2</PianoCampiFlegrei:LUNGHEZZA>
+        </PianoCampiFlegrei:CF_PercorsiNavette>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

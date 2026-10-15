@@ -1206,28 +1206,32 @@
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>5.0.0</version>
+                    <version>5.1.2</version>
                     <configuration>
-                        <header>etc/header.txt</header>
+                        <licenseSets>
+                            <licenseSet>
+                                <header>etc/header.txt</header>
+                                <includes>
+                                    <include>**/java/**</include>
+                                    <include>**/test/**</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>**/README</exclude>
+                                    <exclude>**/pom.xml</exclude>
+                                    <exclude>**/applicationContext.xml</exclude>
+                                    <exclude>**/resources/**</exclude>
+                                    <exclude>**/target/**</exclude>
+                                    <exclude>**/public/**</exclude>
+                                    <exclude>**/site/**</exclude>
+                                </excludes>
+                                <useDefaultExcludes>true</useDefaultExcludes>
+                            </licenseSet>
+                        </licenseSets>
                         <aggregate>true</aggregate>
                         <headerDefinitions>
                             <headerDefinition>etc/geoPlatformDefinition.xml</headerDefinition>
                         </headerDefinitions>
                         <strictCheck>true</strictCheck>
-                        <includes>
-                            <include>**/java/**</include>
-                            <include>**/test/**</include>
-                        </includes>
-                        <excludes>
-                            <exclude>**/README</exclude>
-                            <exclude>**/pom.xml</exclude>
-                            <exclude>**/applicationContext.xml</exclude>
-                            <exclude>**/resources/**</exclude>
-                            <exclude>**/target/**</exclude>
-                            <exclude>**/public/**</exclude>
-                            <exclude>**/site/**</exclude>
-                        </excludes>
-                        <useDefaultExcludes>true</useDefaultExcludes>
                         <useDefaultMapping>true</useDefaultMapping>
                         <properties>
                             <year>2015</year>

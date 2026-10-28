@@ -1622,7 +1622,7 @@
         <geodb-version>0.9</geodb-version>
         <junit.version>4.13.2</junit.version>
         <wiremock.version>3.9.2</wiremock.version>
-        <maven-surefire.version>3.6.0</maven-surefire.version>
+        <maven-surefire.version>3.6.1</maven-surefire.version>
         <gwt-plugin.version>2.10.0</gwt-plugin.version>
         <univocity.parsers.version>2.10.2</univocity.parsers.version>
 

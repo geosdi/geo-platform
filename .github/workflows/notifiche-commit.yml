@@ -1,0 +1,52 @@
+# Una mail per ogni push sui rami scelti, con i commit e il link al confronto.
+# Variabili del repository: MAIL_SERVER, MAIL_PORT, MAIL_FROM, MAIL_TO (destinatari separati da virgola).
+# Segreti: MAIL_USERNAME, MAIL_PASSWORD.
+name: Notifiche dei commit
+
+on:
+  push:
+    branches: ['**']
+
+permissions: {}
+
+jobs:
+  mail:
+    # Niente mail per la cancellazione di un ramo o per un push senza commit nuovi.
+    if: ${{ !github.event.deleted && github.event.commits[0] }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Messaggio
+        id: messaggio
+        # I testi dei commit si leggono dal file dell'evento con jq: mai dentro lo script, dove
+        # un messaggio di commit potrebbe diventare un comando.
+        run: |
+          ev="$GITHUB_EVENT_PATH"
+          n=$(jq '.commits | length' "$ev")
+          titolo=$(jq -r '.head_commit.message | split("\n")[0] | .[0:120]' "$ev")
+          echo "oggetto=[${GITHUB_REPOSITORY}] ${GITHUB_REF_NAME}: ${titolo} (${n} commit)" >> "$GITHUB_OUTPUT"
+          jq -r '
+            "Repository: \(.repository.full_name)",
+            "Ramo: \(.ref | sub("^refs/heads/"; ""))\(if .forced then " (push forzato)" else "" end)",
+            "Push di: \(.pusher.name)",
+            "",
+            (.commits[] |
+              "\(.id[0:10])  \(.author.name)  \(.timestamp)",
+              "    \(.message | rtrimstr("\n") | gsub("\n(?!\n)"; "\n    "))",
+              "    \(.url)",
+              ""),
+            "Confronto: \(.compare)"
+          ' "$ev" > "$RUNNER_TEMP/corpo.txt"
+
+      # Fissata su un commit (v22): l'action riceve la password SMTP.
+      - uses: dawidd6/action-send-mail@67ce3558d613188179559c61d3565140cf389968
+        with:
+          server_address: ${{ vars.MAIL_SERVER }}
+          server_port: ${{ vars.MAIL_PORT }}
+          require_tls: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: ${{ vars.MAIL_FROM }}
+          to: ${{ vars.MAIL_TO }}
+          subject: ${{ steps.messaggio.outputs.oggetto }}
+          body: file://${{ runner.temp }}/corpo.txt

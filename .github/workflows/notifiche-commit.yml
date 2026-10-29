@@ -11,8 +11,9 @@ permissions: {}
 
 jobs:
   mail:
-    # Niente mail per la cancellazione di un ramo o per un push senza commit nuovi.
-    if: ${{ !github.event.deleted && github.event.commits[0] }}
+    # Solo sul progetto del gruppo: nei fork il job viene saltato. Niente mail per la cancellazione di
+    # un ramo o per un push senza commit nuovi.
+    if: ${{ github.repository == 'geosdi/geo-platform' && !github.event.deleted && github.event.commits[0] }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

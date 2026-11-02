@@ -137,7 +137,7 @@
         <pluginManagement>
             <plugins>
                 <!-- Plugin dei binding jakarta (JAXB 4) con jaxb-plugins. Le classi generate stanno in src/main/java: per
-                     rigenerarle vedi MIGRAZIONE-JAKARTA.md. -->
+                     rigenerarle vedi RIGENERAZIONE-BINDING.md. -->
                 <plugin>
                     <groupId>org.jvnet.jaxb</groupId>
                     <artifactId>jaxb-maven-plugin</artifactId>

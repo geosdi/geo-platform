@@ -46,16 +46,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -235,17 +235,17 @@ public class AbstractGriddedSurfaceType
         {
             List<AbstractGriddedSurfaceType.Row> theRow;
             theRow = (this.isSetRow()?this.getRow():null);
-            strategy.appendField(locator, this, "row", buffer, theRow);
+            strategy.appendField(locator, this, "row", buffer, theRow, true);
         }
         {
             BigInteger theRows;
             theRows = this.getRows();
-            strategy.appendField(locator, this, "rows", buffer, theRows);
+            strategy.appendField(locator, this, "rows", buffer, theRows, true);
         }
         {
             BigInteger theColumns;
             theColumns = this.getColumns();
-            strategy.appendField(locator, this, "columns", buffer, theColumns);
+            strategy.appendField(locator, this, "columns", buffer, theColumns, true);
         }
         return buffer;
     }
@@ -376,12 +376,12 @@ public class AbstractGriddedSurfaceType
             {
                 DirectPositionListType thePosList;
                 thePosList = this.getPosList();
-                strategy.appendField(locator, this, "posList", buffer, thePosList);
+                strategy.appendField(locator, this, "posList", buffer, thePosList, true);
             }
             {
                 List<Object> theGeometricPositionGroup;
                 theGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
-                strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup);
+                strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup, true);
             }
             return buffer;
         }

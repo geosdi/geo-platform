@@ -44,16 +44,16 @@
 package org.geosdi.geoplatform.xml.wrs._1_0.iri;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -296,37 +296,37 @@ public class GetRecordById
         {
             String theService;
             theService = this.getService();
-            strategy.appendField(locator, this, "service", buffer, theService);
+            strategy.appendField(locator, this, "service", buffer, theService, true);
         }
         {
             String theRequest;
             theRequest = this.getRequest();
-            strategy.appendField(locator, this, "request", buffer, theRequest);
+            strategy.appendField(locator, this, "request", buffer, theRequest, true);
         }
         {
             String theVersion;
             theVersion = this.getVersion();
-            strategy.appendField(locator, this, "version", buffer, theVersion);
+            strategy.appendField(locator, this, "version", buffer, theVersion, true);
         }
         {
             String theId;
             theId = this.getId();
-            strategy.appendField(locator, this, "id", buffer, theId);
+            strategy.appendField(locator, this, "id", buffer, theId, true);
         }
         {
             ElementSetType theElementSetName;
             theElementSetName = this.getElementSetName();
-            strategy.appendField(locator, this, "elementSetName", buffer, theElementSetName);
+            strategy.appendField(locator, this, "elementSetName", buffer, theElementSetName, true);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
-            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat);
+            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat, true);
         }
         {
             String theOutputSchema;
             theOutputSchema = this.getOutputSchema();
-            strategy.appendField(locator, this, "outputSchema", buffer, theOutputSchema);
+            strategy.appendField(locator, this, "outputSchema", buffer, theOutputSchema, true);
         }
         return buffer;
     }

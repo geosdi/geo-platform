@@ -43,15 +43,15 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -259,27 +259,27 @@ public class FileType
         {
             RangeParametersType theRangeParameters;
             theRangeParameters = this.getRangeParameters();
-            strategy.appendField(locator, this, "rangeParameters", buffer, theRangeParameters);
+            strategy.appendField(locator, this, "rangeParameters", buffer, theRangeParameters, true);
         }
         {
             String theFileName;
             theFileName = this.getFileName();
-            strategy.appendField(locator, this, "fileName", buffer, theFileName);
+            strategy.appendField(locator, this, "fileName", buffer, theFileName, true);
         }
         {
             FileValueModelType theFileStructure;
             theFileStructure = this.getFileStructure();
-            strategy.appendField(locator, this, "fileStructure", buffer, theFileStructure);
+            strategy.appendField(locator, this, "fileStructure", buffer, theFileStructure, true);
         }
         {
             String theMimeType;
             theMimeType = this.getMimeType();
-            strategy.appendField(locator, this, "mimeType", buffer, theMimeType);
+            strategy.appendField(locator, this, "mimeType", buffer, theMimeType, true);
         }
         {
             String theCompression;
             theCompression = this.getCompression();
-            strategy.appendField(locator, this, "compression", buffer, theCompression);
+            strategy.appendField(locator, this, "compression", buffer, theCompression, true);
         }
         return buffer;
     }

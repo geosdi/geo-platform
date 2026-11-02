@@ -45,14 +45,14 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -206,17 +206,17 @@ public class PrimeMeridianType
         {
             List<IdentifierType> theMeridianID;
             theMeridianID = (this.isSetMeridianID()?this.getMeridianID():null);
-            strategy.appendField(locator, this, "meridianID", buffer, theMeridianID);
+            strategy.appendField(locator, this, "meridianID", buffer, theMeridianID, true);
         }
         {
             StringOrRefType theRemarks;
             theRemarks = this.getRemarks();
-            strategy.appendField(locator, this, "remarks", buffer, theRemarks);
+            strategy.appendField(locator, this, "remarks", buffer, theRemarks, true);
         }
         {
             AngleChoiceType theGreenwichLongitude;
             theGreenwichLongitude = this.getGreenwichLongitude();
-            strategy.appendField(locator, this, "greenwichLongitude", buffer, theGreenwichLongitude);
+            strategy.appendField(locator, this, "greenwichLongitude", buffer, theGreenwichLongitude, true);
         }
         return buffer;
     }

@@ -43,20 +43,20 @@ package org.geosdi.geoplatform.xml.xsd.v2001;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for complexType complex type.
@@ -505,67 +505,67 @@ public abstract class ComplexType
         {
             SimpleContent theSimpleContent;
             theSimpleContent = this.getSimpleContent();
-            strategy.appendField(locator, this, "simpleContent", buffer, theSimpleContent);
+            strategy.appendField(locator, this, "simpleContent", buffer, theSimpleContent, true);
         }
         {
             ComplexContent theComplexContent;
             theComplexContent = this.getComplexContent();
-            strategy.appendField(locator, this, "complexContent", buffer, theComplexContent);
+            strategy.appendField(locator, this, "complexContent", buffer, theComplexContent, true);
         }
         {
             GroupRef theGroup;
             theGroup = this.getGroup();
-            strategy.appendField(locator, this, "group", buffer, theGroup);
+            strategy.appendField(locator, this, "group", buffer, theGroup, true);
         }
         {
             All theAll;
             theAll = this.getAll();
-            strategy.appendField(locator, this, "all", buffer, theAll);
+            strategy.appendField(locator, this, "all", buffer, theAll, true);
         }
         {
             ExplicitGroup theChoice;
             theChoice = this.getChoice();
-            strategy.appendField(locator, this, "choice", buffer, theChoice);
+            strategy.appendField(locator, this, "choice", buffer, theChoice, true);
         }
         {
             ExplicitGroup theSequence;
             theSequence = this.getSequence();
-            strategy.appendField(locator, this, "sequence", buffer, theSequence);
+            strategy.appendField(locator, this, "sequence", buffer, theSequence, true);
         }
         {
             List<Annotated> theAttributeOrAttributeGroup;
             theAttributeOrAttributeGroup = (this.isSetAttributeOrAttributeGroup() ? this.getAttributeOrAttributeGroup() : null);
-            strategy.appendField(locator, this, "attributeOrAttributeGroup", buffer, theAttributeOrAttributeGroup);
+            strategy.appendField(locator, this, "attributeOrAttributeGroup", buffer, theAttributeOrAttributeGroup, true);
         }
         {
             Wildcard theAnyAttribute;
             theAnyAttribute = this.getAnyAttribute();
-            strategy.appendField(locator, this, "anyAttribute", buffer, theAnyAttribute);
+            strategy.appendField(locator, this, "anyAttribute", buffer, theAnyAttribute, true);
         }
         {
             String theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         {
             boolean theMixed;
             theMixed = (this.isSetMixed() ? this.isMixed() : false);
-            strategy.appendField(locator, this, "mixed", buffer, theMixed);
+            strategy.appendField(locator, this, "mixed", buffer, theMixed, true);
         }
         {
             boolean theAbstract;
             theAbstract = (this.isSetAbstract() ? this.isAbstract() : false);
-            strategy.appendField(locator, this, "_abstract", buffer, theAbstract);
+            strategy.appendField(locator, this, "_abstract", buffer, theAbstract, true);
         }
         {
             List<String> theFinal;
             theFinal = (this.isSetFinal() ? this.getFinal() : null);
-            strategy.appendField(locator, this, "_final", buffer, theFinal);
+            strategy.appendField(locator, this, "_final", buffer, theFinal, true);
         }
         {
             List<String> theBlock;
             theBlock = (this.isSetBlock() ? this.getBlock() : null);
-            strategy.appendField(locator, this, "block", buffer, theBlock);
+            strategy.appendField(locator, this, "block", buffer, theBlock, true);
         }
         return buffer;
     }

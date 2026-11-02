@@ -45,18 +45,18 @@ package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -294,32 +294,32 @@ public class UpdateElementType implements ToString
         {
             List<PropertyType> theProperty;
             theProperty = (((this.property!= null)&&(!this.property.isEmpty()))?this.getProperty():null);
-            strategy.appendField(locator, this, "property", buffer, theProperty);
+            strategy.appendField(locator, this, "property", buffer, theProperty, true);
         }
         {
             FilterType theFilter;
             theFilter = this.getFilter();
-            strategy.appendField(locator, this, "filter", buffer, theFilter);
+            strategy.appendField(locator, this, "filter", buffer, theFilter, true);
         }
         {
             String theHandle;
             theHandle = this.getHandle();
-            strategy.appendField(locator, this, "handle", buffer, theHandle);
+            strategy.appendField(locator, this, "handle", buffer, theHandle, true);
         }
         {
             QName theTypeName;
             theTypeName = this.getTypeName();
-            strategy.appendField(locator, this, "typeName", buffer, theTypeName);
+            strategy.appendField(locator, this, "typeName", buffer, theTypeName, true);
         }
         {
             String theInputFormat;
             theInputFormat = this.getInputFormat();
-            strategy.appendField(locator, this, "inputFormat", buffer, theInputFormat);
+            strategy.appendField(locator, this, "inputFormat", buffer, theInputFormat, true);
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, true);
         }
         return buffer;
     }

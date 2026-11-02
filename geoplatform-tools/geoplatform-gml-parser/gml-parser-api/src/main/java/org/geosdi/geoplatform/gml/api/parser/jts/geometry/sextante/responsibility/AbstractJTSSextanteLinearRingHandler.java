@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.responsibility;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.linearring.JTSLinearRingParser;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.LinearRing;
-
-import javax.xml.bind.JAXBElement;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

@@ -43,13 +43,13 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -206,22 +206,22 @@ public class FormulaType
         {
             Double theA;
             theA = this.getA();
-            strategy.appendField(locator, this, "a", buffer, theA);
+            strategy.appendField(locator, this, "a", buffer, theA, true);
         }
         {
             double theB;
             theB = (this.isSetB()?this.getB(): 0.0D);
-            strategy.appendField(locator, this, "b", buffer, theB);
+            strategy.appendField(locator, this, "b", buffer, theB, true);
         }
         {
             double theC;
             theC = (this.isSetC()?this.getC(): 0.0D);
-            strategy.appendField(locator, this, "c", buffer, theC);
+            strategy.appendField(locator, this, "c", buffer, theC, true);
         }
         {
             Double theD;
             theD = this.getD();
-            strategy.appendField(locator, this, "d", buffer, theD);
+            strategy.appendField(locator, this, "d", buffer, theD, true);
         }
         return buffer;
     }

@@ -45,14 +45,14 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -143,7 +143,7 @@ public class DescribeRecordResponseType
         {
             List<SchemaComponentType> theSchemaComponent;
             theSchemaComponent = (this.isSetSchemaComponent()?this.getSchemaComponent():null);
-            strategy.appendField(locator, this, "schemaComponent", buffer, theSchemaComponent);
+            strategy.appendField(locator, this, "schemaComponent", buffer, theSchemaComponent, true);
         }
         return buffer;
     }

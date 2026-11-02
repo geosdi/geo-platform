@@ -33,5 +33,5 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.w3.org/2001/SMIL20/")
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://www.w3.org/2001/SMIL20/")
 package org.geosdi.geoplatform.xml.gml.w3._2001.smil20;

@@ -48,9 +48,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static jakarta.xml.bind.Marshaller.JAXB_FRAGMENT;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
-import static javax.xml.bind.Marshaller.JAXB_FRAGMENT;
 import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311.createJAXBContext;
 import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.POOLED;
 

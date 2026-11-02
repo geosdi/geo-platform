@@ -44,17 +44,17 @@
 package org.geosdi.geoplatform.xml.ebrim._3;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -243,27 +243,27 @@ public class AuditableEventType
         {
             ObjectRefListType theAffectedObjects;
             theAffectedObjects = this.getAffectedObjects();
-            strategy.appendField(locator, this, "affectedObjects", buffer, theAffectedObjects);
+            strategy.appendField(locator, this, "affectedObjects", buffer, theAffectedObjects, true);
         }
         {
             String theEventType;
             theEventType = this.getEventType();
-            strategy.appendField(locator, this, "eventType", buffer, theEventType);
+            strategy.appendField(locator, this, "eventType", buffer, theEventType, true);
         }
         {
             XMLGregorianCalendar theTimestamp;
             theTimestamp = this.getTimestamp();
-            strategy.appendField(locator, this, "timestamp", buffer, theTimestamp);
+            strategy.appendField(locator, this, "timestamp", buffer, theTimestamp, true);
         }
         {
             String theUser;
             theUser = this.getUser();
-            strategy.appendField(locator, this, "user", buffer, theUser);
+            strategy.appendField(locator, this, "user", buffer, theUser, true);
         }
         {
             String theRequestId;
             theRequestId = this.getRequestId();
-            strategy.appendField(locator, this, "requestId", buffer, theRequestId);
+            strategy.appendField(locator, this, "requestId", buffer, theRequestId, true);
         }
         return buffer;
     }

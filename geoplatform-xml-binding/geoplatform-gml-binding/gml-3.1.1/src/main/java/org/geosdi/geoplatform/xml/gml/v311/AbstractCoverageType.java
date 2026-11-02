@@ -44,19 +44,19 @@
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.math.BigInteger;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -219,17 +219,17 @@ public abstract class AbstractCoverageType
         {
             JAXBElement<? extends DomainSetType> theDomainSet;
             theDomainSet = this.getDomainSet();
-            strategy.appendField(locator, this, "domainSet", buffer, theDomainSet);
+            strategy.appendField(locator, this, "domainSet", buffer, theDomainSet, true);
         }
         {
             RangeSetType theRangeSet;
             theRangeSet = this.getRangeSet();
-            strategy.appendField(locator, this, "rangeSet", buffer, theRangeSet);
+            strategy.appendField(locator, this, "rangeSet", buffer, theRangeSet, true);
         }
         {
             BigInteger theDimension;
             theDimension = this.getDimension();
-            strategy.appendField(locator, this, "dimension", buffer, theDimension);
+            strategy.appendField(locator, this, "dimension", buffer, theDimension, true);
         }
         return buffer;
     }

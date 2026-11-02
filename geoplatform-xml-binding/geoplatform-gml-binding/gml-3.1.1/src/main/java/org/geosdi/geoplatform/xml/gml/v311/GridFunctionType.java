@@ -46,15 +46,15 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -177,12 +177,12 @@ public class GridFunctionType implements ToString
         {
             SequenceRuleType theSequenceRule;
             theSequenceRule = this.getSequenceRule();
-            strategy.appendField(locator, this, "sequenceRule", buffer, theSequenceRule);
+            strategy.appendField(locator, this, "sequenceRule", buffer, theSequenceRule, true);
         }
         {
             List<BigInteger> theStartPoint;
             theStartPoint = (this.isSetStartPoint()?this.getStartPoint():null);
-            strategy.appendField(locator, this, "startPoint", buffer, theStartPoint);
+            strategy.appendField(locator, this, "startPoint", buffer, theStartPoint, true);
         }
         return buffer;
     }

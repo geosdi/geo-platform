@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geojson.LineString;
 import org.geojson.LngLatAlt;
 import org.geosdi.geoplatform.gml.api.LinearRing;
@@ -48,7 +49,6 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.List;
 

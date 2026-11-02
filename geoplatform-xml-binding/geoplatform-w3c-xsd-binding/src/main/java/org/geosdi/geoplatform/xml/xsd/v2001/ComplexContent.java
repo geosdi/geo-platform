@@ -41,15 +41,15 @@
 //
 package org.geosdi.geoplatform.xml.xsd.v2001;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for anonymous complex type.
@@ -184,17 +184,17 @@ public class ComplexContent
         {
             ComplexRestrictionType theRestriction;
             theRestriction = this.getRestriction();
-            strategy.appendField(locator, this, "restriction", buffer, theRestriction);
+            strategy.appendField(locator, this, "restriction", buffer, theRestriction, true);
         }
         {
             ExtensionType theExtension;
             theExtension = this.getExtension();
-            strategy.appendField(locator, this, "extension", buffer, theExtension);
+            strategy.appendField(locator, this, "extension", buffer, theExtension, true);
         }
         {
             boolean theMixed;
             theMixed = (this.isSetMixed() ? this.isMixed() : false);
-            strategy.appendField(locator, this, "mixed", buffer, theMixed);
+            strategy.appendField(locator, this, "mixed", buffer, theMixed, true);
         }
         return buffer;
     }

@@ -43,15 +43,15 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import org.geosdi.geoplatform.gml.api.DirectPosition;
 import org.geosdi.geoplatform.gml.api.Point;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * A Point is defined by a single coordinate tuple.
@@ -201,18 +201,18 @@ public class PointType extends AbstractGeometricPrimitiveType implements ToStrin
         {
             DirectPositionType thePos;
             thePos = this.getPos();
-            strategy.appendField(locator, this, "pos", buffer, thePos);
+            strategy.appendField(locator, this, "pos", buffer, thePos, true);
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
             strategy.appendField(locator, this, "coordinates", buffer,
-                    theCoordinates);
+                    theCoordinates, true);
         }
         {
             CoordType theCoord;
             theCoord = this.getCoord();
-            strategy.appendField(locator, this, "coord", buffer, theCoord);
+            strategy.appendField(locator, this, "coord", buffer, theCoord, true);
         }
         return buffer;
     }

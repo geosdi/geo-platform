@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gml.impl.v311.gml;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.surface.GMLBaseMultiSurfaceParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.MultiSurfaceType;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class GMLMultiSurfaceParserTest {
 
     @Test
     public void a_multiSurfaceJTSParserTest() throws Exception {
-        MultiSurfaceType multiSurfaceType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        MultiSurfaceType multiSurfaceType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "MultiSurface.xml")
                 .collect(joining(separator))), MultiSurfaceType.class);
         logger.info("##########################MULTI_POLYGON_JTS : {}\n", multiSurfaceParser.parseGeometry(multiSurfaceType));
@@ -72,7 +73,7 @@ public class GMLMultiSurfaceParserTest {
 
     @Test
     public void b_multiSurfaceJTSParserTest() throws Exception {
-        MultiSurfaceType multiSurfaceType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        MultiSurfaceType multiSurfaceType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "MultiSurface1.xml")
                 .collect(joining(separator))), MultiSurfaceType.class);
         logger.info("##########################MULTI_POLYGON_JTS_1 : {}\n", multiSurfaceParser.parseGeometry(multiSurfaceType));
@@ -80,7 +81,7 @@ public class GMLMultiSurfaceParserTest {
 
     @Test
     public void c_multiSurfaceJTSParserTest() throws Exception {
-        MultiSurfaceType multiSurfaceType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        MultiSurfaceType multiSurfaceType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "MultiSurface2.xml")
                 .collect(joining(separator))), MultiSurfaceType.class);
         logger.info("##########################MULTI_POLYGON_JTS_2 : {}\n", multiSurfaceParser.parseGeometry(multiSurfaceType));
@@ -88,7 +89,7 @@ public class GMLMultiSurfaceParserTest {
 
     @Test
     public void d_multiSurfaceJTSParserTest() throws Exception {
-        MultiSurfaceType multiSurfaceType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        MultiSurfaceType multiSurfaceType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "MultiSurface3.xml")
                 .collect(joining(separator))), MultiSurfaceType.class);
         logger.info("##########################MULTI_POLYGON_JTS_2 : {}\n", multiSurfaceParser.parseGeometry(multiSurfaceType));

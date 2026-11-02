@@ -41,19 +41,19 @@
 //
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.AbstractSurface;
 import org.geosdi.geoplatform.gml.api.SurfaceProperty;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * A property that has a surface as its value domain can either be an
@@ -375,48 +375,48 @@ public class SurfacePropertyType implements ToString, SurfaceProperty {
         {
             JAXBElement<? extends AbstractSurfaceType> theSurface;
             theSurface = this.getSurface();
-            strategy.appendField(locator, this, "surface", buffer, theSurface);
+            strategy.appendField(locator, this, "surface", buffer, theSurface, true);
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
             strategy.appendField(locator, this, "remoteSchema", buffer,
-                    theRemoteSchema);
+                    theRemoteSchema, true);
         }
         {
             String theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, true);
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, true);
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, true);
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, true);
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, true);
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, true);
         }
         return buffer;
     }

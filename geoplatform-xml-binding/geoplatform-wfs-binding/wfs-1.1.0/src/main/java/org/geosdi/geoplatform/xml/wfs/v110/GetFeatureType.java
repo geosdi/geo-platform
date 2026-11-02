@@ -44,17 +44,17 @@ package org.geosdi.geoplatform.xml.wfs.v110;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  *
@@ -271,37 +271,37 @@ public class GetFeatureType
         {
             List<QueryType> theQuery;
             theQuery = (((this.query != null) && (!this.query.isEmpty())) ? this.getQuery() : null);
-            strategy.appendField(locator, this, "query", buffer, theQuery);
+            strategy.appendField(locator, this, "query", buffer, theQuery, true);
         }
         {
             ResultTypeType theResultType;
             theResultType = this.getResultType();
             strategy.appendField(locator, this, "resultType", buffer,
-                    theResultType);
+                    theResultType, true);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
             strategy.appendField(locator, this, "outputFormat", buffer,
-                    theOutputFormat);
+                    theOutputFormat, true);
         }
         {
             BigInteger theMaxFeatures;
             theMaxFeatures = this.getMaxFeatures();
             strategy.appendField(locator, this, "maxFeatures", buffer,
-                    theMaxFeatures);
+                    theMaxFeatures, true);
         }
         {
             String theTraverseXlinkDepth;
             theTraverseXlinkDepth = this.getTraverseXlinkDepth();
             strategy.appendField(locator, this, "traverseXlinkDepth", buffer,
-                    theTraverseXlinkDepth);
+                    theTraverseXlinkDepth, true);
         }
         {
             BigInteger theTraverseXlinkExpiry;
             theTraverseXlinkExpiry = this.getTraverseXlinkExpiry();
             strategy.appendField(locator, this, "traverseXlinkExpiry", buffer,
-                    theTraverseXlinkExpiry);
+                    theTraverseXlinkExpiry, true);
         }
         return buffer;
     }

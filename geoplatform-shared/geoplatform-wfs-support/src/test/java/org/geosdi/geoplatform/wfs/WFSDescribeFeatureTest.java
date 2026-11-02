@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.wfs;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBIntrospector;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
@@ -47,8 +50,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBIntrospector;
 import javax.xml.namespace.QName;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -56,7 +57,7 @@ import java.util.Arrays;
 
 import static java.net.URLDecoder.decode;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
+import static org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository.getProvider;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -74,7 +75,7 @@ public class WFSDescribeFeatureTest {
     private static final QName siteTRCom = new QName("cite:tr_com");
     private static final QName sfRoads = new QName("sf:roads");
     //
-    protected static final GPJAXBContextBuilder gpJAXBContextBuilder = GPJAXBContextBuilder.newInstance();
+    protected static final IGPJAXBJakartaContextBuilder gpJAXBContextBuilder = GPJAXBJakartaContextBuilder.jakartaContextBuilder();
     private static final FeatureSchemaReader schemaReader = new GPFeatureSchemaReader();
     //
     private GPWFSConnectorStore serverConnector;

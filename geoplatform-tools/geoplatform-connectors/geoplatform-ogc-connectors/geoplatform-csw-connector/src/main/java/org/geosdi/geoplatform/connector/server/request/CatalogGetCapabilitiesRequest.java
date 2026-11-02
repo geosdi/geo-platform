@@ -40,5 +40,5 @@ package org.geosdi.geoplatform.connector.server.request;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface CatalogGetCapabilitiesRequest<T> extends GPJAXBConnectorRequest<T> {
+public interface CatalogGetCapabilitiesRequest<T> extends GPJakartaConnectorRequest<T> {
 }

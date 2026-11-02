@@ -46,15 +46,15 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -314,32 +314,32 @@ public class OperationMethodType
         {
             List<IdentifierType> theMethodID;
             theMethodID = (this.isSetMethodID()?this.getMethodID():null);
-            strategy.appendField(locator, this, "methodID", buffer, theMethodID);
+            strategy.appendField(locator, this, "methodID", buffer, theMethodID, true);
         }
         {
             StringOrRefType theRemarks;
             theRemarks = this.getRemarks();
-            strategy.appendField(locator, this, "remarks", buffer, theRemarks);
+            strategy.appendField(locator, this, "remarks", buffer, theRemarks, true);
         }
         {
             CodeType theMethodFormula;
             theMethodFormula = this.getMethodFormula();
-            strategy.appendField(locator, this, "methodFormula", buffer, theMethodFormula);
+            strategy.appendField(locator, this, "methodFormula", buffer, theMethodFormula, true);
         }
         {
             BigInteger theSourceDimensions;
             theSourceDimensions = this.getSourceDimensions();
-            strategy.appendField(locator, this, "sourceDimensions", buffer, theSourceDimensions);
+            strategy.appendField(locator, this, "sourceDimensions", buffer, theSourceDimensions, true);
         }
         {
             BigInteger theTargetDimensions;
             theTargetDimensions = this.getTargetDimensions();
-            strategy.appendField(locator, this, "targetDimensions", buffer, theTargetDimensions);
+            strategy.appendField(locator, this, "targetDimensions", buffer, theTargetDimensions, true);
         }
         {
             List<AbstractGeneralOperationParameterRefType> theUsesParameter;
             theUsesParameter = (this.isSetUsesParameter()?this.getUsesParameter():null);
-            strategy.appendField(locator, this, "usesParameter", buffer, theUsesParameter);
+            strategy.appendField(locator, this, "usesParameter", buffer, theUsesParameter, true);
         }
         return buffer;
     }

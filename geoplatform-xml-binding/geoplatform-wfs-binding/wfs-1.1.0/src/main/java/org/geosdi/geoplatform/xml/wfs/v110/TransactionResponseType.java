@@ -43,16 +43,16 @@
 
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -221,22 +221,22 @@ public class TransactionResponseType
         {
             TransactionSummaryType theTransactionSummary;
             theTransactionSummary = this.getTransactionSummary();
-            strategy.appendField(locator, this, "transactionSummary", buffer, theTransactionSummary);
+            strategy.appendField(locator, this, "transactionSummary", buffer, theTransactionSummary, true);
         }
         {
             TransactionResultsType theTransactionResults;
             theTransactionResults = this.getTransactionResults();
-            strategy.appendField(locator, this, "transactionResults", buffer, theTransactionResults);
+            strategy.appendField(locator, this, "transactionResults", buffer, theTransactionResults, true);
         }
         {
             InsertResultsType theInsertResults;
             theInsertResults = this.getInsertResults();
-            strategy.appendField(locator, this, "insertResults", buffer, theInsertResults);
+            strategy.appendField(locator, this, "insertResults", buffer, theInsertResults, true);
         }
         {
             String theVersion;
             theVersion = this.getVersion();
-            strategy.appendField(locator, this, "version", buffer, theVersion);
+            strategy.appendField(locator, this, "version", buffer, theVersion, true);
         }
         return buffer;
     }

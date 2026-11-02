@@ -41,17 +41,17 @@
 //
 package org.geosdi.geoplatform.xml.csw.v202;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterCapabilities;
 import org.geosdi.geoplatform.xml.ows.v100.CapabilitiesBaseType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * This type extends ows:CapabilitiesBaseType defined in OGC-05-008 
@@ -136,7 +136,7 @@ public class CapabilitiesType extends CapabilitiesBaseType
             FilterCapabilities theFilterCapabilities;
             theFilterCapabilities = this.getFilterCapabilities();
             strategy.appendField(locator, this, "filterCapabilities", buffer,
-                    theFilterCapabilities);
+                    theFilterCapabilities, true);
         }
         return buffer;
     }

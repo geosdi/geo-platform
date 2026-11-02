@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBIntrospector;
+import jakarta.xml.bind.Unmarshaller;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PropertyType;
@@ -45,13 +48,9 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBIntrospector;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.Source;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;

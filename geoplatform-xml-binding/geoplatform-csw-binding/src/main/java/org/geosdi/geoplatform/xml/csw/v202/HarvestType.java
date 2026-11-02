@@ -45,16 +45,16 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.Duration;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -293,27 +293,27 @@ public class HarvestType
         {
             String theSource;
             theSource = this.getSource();
-            strategy.appendField(locator, this, "source", buffer, theSource);
+            strategy.appendField(locator, this, "source", buffer, theSource, true);
         }
         {
             String theResourceType;
             theResourceType = this.getResourceType();
-            strategy.appendField(locator, this, "resourceType", buffer, theResourceType);
+            strategy.appendField(locator, this, "resourceType", buffer, theResourceType, true);
         }
         {
             String theResourceFormat;
             theResourceFormat = this.getResourceFormat();
-            strategy.appendField(locator, this, "resourceFormat", buffer, theResourceFormat);
+            strategy.appendField(locator, this, "resourceFormat", buffer, theResourceFormat, true);
         }
         {
             Duration theHarvestInterval;
             theHarvestInterval = this.getHarvestInterval();
-            strategy.appendField(locator, this, "harvestInterval", buffer, theHarvestInterval);
+            strategy.appendField(locator, this, "harvestInterval", buffer, theHarvestInterval, true);
         }
         {
             List<String> theResponseHandler;
             theResponseHandler = (this.isSetResponseHandler()?this.getResponseHandler():null);
-            strategy.appendField(locator, this, "responseHandler", buffer, theResponseHandler);
+            strategy.appendField(locator, this, "responseHandler", buffer, theResponseHandler, true);
         }
         return buffer;
     }

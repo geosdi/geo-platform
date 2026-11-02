@@ -43,18 +43,18 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.LinearRing;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * A LinearRing is defined by four or more coordinate tuples, with linear
@@ -267,23 +267,23 @@ public class LinearRingType extends AbstractRingType
             List<JAXBElement<?>> thePosOrPointPropertyOrPointRep;
             thePosOrPointPropertyOrPointRep = (this.isSetPosOrPointPropertyOrPointRep() ? this.getPosOrPointPropertyOrPointRep() : null);
             strategy.appendField(locator, this, "posOrPointPropertyOrPointRep",
-                    buffer, thePosOrPointPropertyOrPointRep);
+                    buffer, thePosOrPointPropertyOrPointRep, true);
         }
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, true);
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
             strategy.appendField(locator, this, "coordinates", buffer,
-                    theCoordinates);
+                    theCoordinates, true);
         }
         {
             List<CoordType> theCoord;
             theCoord = (this.isSetCoord() ? this.getCoord() : null);
-            strategy.appendField(locator, this, "coord", buffer, theCoord);
+            strategy.appendField(locator, this, "coord", buffer, theCoord, true);
         }
         return buffer;
     }

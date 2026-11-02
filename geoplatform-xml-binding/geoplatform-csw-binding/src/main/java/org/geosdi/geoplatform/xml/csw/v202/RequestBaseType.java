@@ -43,12 +43,12 @@
 
 package org.geosdi.geoplatform.xml.csw.v202;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 
 /**
@@ -119,12 +119,12 @@ public abstract class RequestBaseType
         {
             String theSERVICE;
             theSERVICE = RequestBaseType.SERVICE;
-            strategy.appendField(locator, this, "service", buffer, theSERVICE);
+            strategy.appendField(locator, this, "service", buffer, theSERVICE, true);
         }
         {
             String theVERSION;
             theVERSION = RequestBaseType.VERSION;
-            strategy.appendField(locator, this, "version", buffer, theVERSION);
+            strategy.appendField(locator, this, "version", buffer, theVERSION, true);
         }
         return buffer;
     }

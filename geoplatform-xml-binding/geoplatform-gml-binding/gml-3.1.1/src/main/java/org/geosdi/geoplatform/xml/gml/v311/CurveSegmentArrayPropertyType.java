@@ -43,17 +43,17 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.AbstractCurveSegment;
 import org.geosdi.geoplatform.gml.api.CurveSegmentArrayProperty;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * A container for an array of curve segments.
@@ -172,7 +172,7 @@ public class CurveSegmentArrayPropertyType implements ToString,
             List<JAXBElement<? extends AbstractCurveSegmentType>> theCurveSegment;
             theCurveSegment = (this.isSetCurveSegment() ? this.getCurveSegment() : null);
             strategy.appendField(locator, this, "curveSegment", buffer,
-                    theCurveSegment);
+                    theCurveSegment, true);
         }
         return buffer;
     }

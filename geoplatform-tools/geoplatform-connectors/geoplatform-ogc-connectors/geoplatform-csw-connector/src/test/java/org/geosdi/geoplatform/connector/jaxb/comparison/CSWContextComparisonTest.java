@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.comparison;
 
+import jakarta.xml.bind.JAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.context.CSWJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBContext;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

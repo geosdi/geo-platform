@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.ebrim._3;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -179,17 +179,17 @@ public class PersonNameType
         {
             String theFirstName;
             theFirstName = this.getFirstName();
-            strategy.appendField(locator, this, "firstName", buffer, theFirstName);
+            strategy.appendField(locator, this, "firstName", buffer, theFirstName, true);
         }
         {
             String theMiddleName;
             theMiddleName = this.getMiddleName();
-            strategy.appendField(locator, this, "middleName", buffer, theMiddleName);
+            strategy.appendField(locator, this, "middleName", buffer, theMiddleName, true);
         }
         {
             String theLastName;
             theLastName = this.getLastName();
-            strategy.appendField(locator, this, "lastName", buffer, theLastName);
+            strategy.appendField(locator, this, "lastName", buffer, theLastName, true);
         }
         return buffer;
     }

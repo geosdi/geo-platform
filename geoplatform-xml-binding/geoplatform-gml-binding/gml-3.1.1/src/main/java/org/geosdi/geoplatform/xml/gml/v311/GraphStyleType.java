@@ -45,13 +45,13 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -390,47 +390,47 @@ public class GraphStyleType
         {
             Boolean thePlanar;
             thePlanar = this.isPlanar();
-            strategy.appendField(locator, this, "planar", buffer, thePlanar);
+            strategy.appendField(locator, this, "planar", buffer, thePlanar, true);
         }
         {
             Boolean theDirected;
             theDirected = this.isDirected();
-            strategy.appendField(locator, this, "directed", buffer, theDirected);
+            strategy.appendField(locator, this, "directed", buffer, theDirected, true);
         }
         {
             Boolean theGrid;
             theGrid = this.isGrid();
-            strategy.appendField(locator, this, "grid", buffer, theGrid);
+            strategy.appendField(locator, this, "grid", buffer, theGrid, true);
         }
         {
             Double theMinDistance;
             theMinDistance = this.getMinDistance();
-            strategy.appendField(locator, this, "minDistance", buffer, theMinDistance);
+            strategy.appendField(locator, this, "minDistance", buffer, theMinDistance, true);
         }
         {
             Double theMinAngle;
             theMinAngle = this.getMinAngle();
-            strategy.appendField(locator, this, "minAngle", buffer, theMinAngle);
+            strategy.appendField(locator, this, "minAngle", buffer, theMinAngle, true);
         }
         {
             GraphTypeType theGraphType;
             theGraphType = this.getGraphType();
-            strategy.appendField(locator, this, "graphType", buffer, theGraphType);
+            strategy.appendField(locator, this, "graphType", buffer, theGraphType, true);
         }
         {
             DrawingTypeType theDrawingType;
             theDrawingType = this.getDrawingType();
-            strategy.appendField(locator, this, "drawingType", buffer, theDrawingType);
+            strategy.appendField(locator, this, "drawingType", buffer, theDrawingType, true);
         }
         {
             LineTypeType theLineType;
             theLineType = this.getLineType();
-            strategy.appendField(locator, this, "lineType", buffer, theLineType);
+            strategy.appendField(locator, this, "lineType", buffer, theLineType, true);
         }
         {
             List<AesheticCriteriaType> theAestheticCriteria;
             theAestheticCriteria = (this.isSetAestheticCriteria()?this.getAestheticCriteria():null);
-            strategy.appendField(locator, this, "aestheticCriteria", buffer, theAestheticCriteria);
+            strategy.appendField(locator, this, "aestheticCriteria", buffer, theAestheticCriteria, true);
         }
         return buffer;
     }

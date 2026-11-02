@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.repository;
 
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.WFSJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
+import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.xml.bind.JAXBException;
 
 import static org.geosdi.geoplatform.xml.wfs.v110.WFSContextServiceProviderV110.WFS_CONTEXT_SERVICE_PROVIDER;
 
@@ -48,7 +47,7 @@ import static org.geosdi.geoplatform.xml.wfs.v110.WFSContextServiceProviderV110.
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class WFSConnectorJAXBContextPool implements GeoPlatformJAXBContextProvider {
+public final class WFSConnectorJAXBContextPool implements GeoPlatformJakartaContextProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSConnectorJAXBContextPool.class);
 
@@ -69,7 +68,7 @@ public final class WFSConnectorJAXBContextPool implements GeoPlatformJAXBContext
     }
 
     @Override
-    public WFSJAXBContextPool getJAXBProvider() {
+    public WFSJAXBContextPool getJakartaProvider() {
         return jaxbContext;
     }
 

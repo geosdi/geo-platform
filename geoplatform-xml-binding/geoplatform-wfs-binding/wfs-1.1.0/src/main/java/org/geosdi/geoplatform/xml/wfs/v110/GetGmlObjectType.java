@@ -44,17 +44,17 @@
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -224,22 +224,22 @@ public class GetGmlObjectType
         {
             GmlObjectIdType theGmlObjectId;
             theGmlObjectId = this.getGmlObjectId();
-            strategy.appendField(locator, this, "gmlObjectId", buffer, theGmlObjectId);
+            strategy.appendField(locator, this, "gmlObjectId", buffer, theGmlObjectId, true);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
-            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat);
+            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat, true);
         }
         {
             String theTraverseXlinkDepth;
             theTraverseXlinkDepth = this.getTraverseXlinkDepth();
-            strategy.appendField(locator, this, "traverseXlinkDepth", buffer, theTraverseXlinkDepth);
+            strategy.appendField(locator, this, "traverseXlinkDepth", buffer, theTraverseXlinkDepth, true);
         }
         {
             BigInteger theTraverseXlinkExpiry;
             theTraverseXlinkExpiry = this.getTraverseXlinkExpiry();
-            strategy.appendField(locator, this, "traverseXlinkExpiry", buffer, theTraverseXlinkExpiry);
+            strategy.appendField(locator, this, "traverseXlinkExpiry", buffer, theTraverseXlinkExpiry, true);
         }
         return buffer;
     }

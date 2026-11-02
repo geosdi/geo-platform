@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.*;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 /**

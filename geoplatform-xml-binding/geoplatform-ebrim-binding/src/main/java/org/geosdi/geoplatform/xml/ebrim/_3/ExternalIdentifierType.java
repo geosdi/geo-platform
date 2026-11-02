@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.ebrim._3;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -184,17 +184,17 @@ public class ExternalIdentifierType
         {
             String theRegistryObject;
             theRegistryObject = this.getRegistryObject();
-            strategy.appendField(locator, this, "registryObject", buffer, theRegistryObject);
+            strategy.appendField(locator, this, "registryObject", buffer, theRegistryObject, true);
         }
         {
             String theIdentificationScheme;
             theIdentificationScheme = this.getIdentificationScheme();
-            strategy.appendField(locator, this, "identificationScheme", buffer, theIdentificationScheme);
+            strategy.appendField(locator, this, "identificationScheme", buffer, theIdentificationScheme, true);
         }
         {
             String theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         return buffer;
     }

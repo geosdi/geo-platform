@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geojson.LngLatAlt;
 import org.geosdi.geoplatform.gml.api.ArcString;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
@@ -48,7 +49,6 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
 
-import javax.xml.bind.JAXBElement;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;

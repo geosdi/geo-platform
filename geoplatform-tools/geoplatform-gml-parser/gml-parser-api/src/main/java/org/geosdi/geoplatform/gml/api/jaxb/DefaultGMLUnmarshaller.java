@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.locationtech.jts.geom.Geometry;
@@ -42,9 +45,6 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.Source;

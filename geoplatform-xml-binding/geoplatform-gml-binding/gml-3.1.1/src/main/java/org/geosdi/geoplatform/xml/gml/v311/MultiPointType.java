@@ -43,16 +43,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.MultiPoint;
 import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * A MultiPoint is defined by one or more Points, referenced through pointMember
@@ -184,13 +184,13 @@ public class MultiPointType extends AbstractGeometricAggregateType
             thePointMember = (this.isSetPointMember() ? this.getPointMember()
                               : null);
             strategy.appendField(locator, this, "pointMember", buffer,
-                    thePointMember);
+                    thePointMember, true);
         }
         {
             PointArrayPropertyType thePointMembers;
             thePointMembers = this.getPointMembers();
             strategy.appendField(locator, this, "pointMembers", buffer,
-                    thePointMembers);
+                    thePointMembers, true);
         }
         return buffer;
     }

@@ -45,17 +45,17 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -225,17 +225,17 @@ public class DescribeRecordType
         {
             List<QName> theTypeName;
             theTypeName = (this.isSetTypeName()?this.getTypeName():null);
-            strategy.appendField(locator, this, "typeName", buffer, theTypeName);
+            strategy.appendField(locator, this, "typeName", buffer, theTypeName, true);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
-            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat);
+            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat, true);
         }
         {
             String theSchemaLanguage;
             theSchemaLanguage = this.getSchemaLanguage();
-            strategy.appendField(locator, this, "schemaLanguage", buffer, theSchemaLanguage);
+            strategy.appendField(locator, this, "schemaLanguage", buffer, theSchemaLanguage, true);
         }
         return buffer;
     }

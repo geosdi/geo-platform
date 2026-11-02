@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

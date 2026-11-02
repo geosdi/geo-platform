@@ -46,17 +46,17 @@ package org.geosdi.geoplatform.xml.ebrim._3;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -359,42 +359,42 @@ public class RegistryObjectType
         {
             InternationalStringType theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         {
             InternationalStringType theDescription;
             theDescription = this.getDescription();
-            strategy.appendField(locator, this, "description", buffer, theDescription);
+            strategy.appendField(locator, this, "description", buffer, theDescription, true);
         }
         {
             VersionInfoType theVersionInfo;
             theVersionInfo = this.getVersionInfo();
-            strategy.appendField(locator, this, "versionInfo", buffer, theVersionInfo);
+            strategy.appendField(locator, this, "versionInfo", buffer, theVersionInfo, true);
         }
         {
             List<ClassificationType> theClassification;
             theClassification = (((this.classification!= null)&&(!this.classification.isEmpty()))?this.getClassification():null);
-            strategy.appendField(locator, this, "classification", buffer, theClassification);
+            strategy.appendField(locator, this, "classification", buffer, theClassification, true);
         }
         {
             List<ExternalIdentifierType> theExternalIdentifier;
             theExternalIdentifier = (((this.externalIdentifier!= null)&&(!this.externalIdentifier.isEmpty()))?this.getExternalIdentifier():null);
-            strategy.appendField(locator, this, "externalIdentifier", buffer, theExternalIdentifier);
+            strategy.appendField(locator, this, "externalIdentifier", buffer, theExternalIdentifier, true);
         }
         {
             String theLid;
             theLid = this.getLid();
-            strategy.appendField(locator, this, "lid", buffer, theLid);
+            strategy.appendField(locator, this, "lid", buffer, theLid, true);
         }
         {
             String theObjectType;
             theObjectType = this.getObjectType();
-            strategy.appendField(locator, this, "objectType", buffer, theObjectType);
+            strategy.appendField(locator, this, "objectType", buffer, theObjectType, true);
         }
         {
             String theStatus;
             theStatus = this.getStatus();
-            strategy.appendField(locator, this, "status", buffer, theStatus);
+            strategy.appendField(locator, this, "status", buffer, theStatus, true);
         }
         return buffer;
     }

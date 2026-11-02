@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.repository;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
-
-import javax.xml.bind.JAXBElement;
 
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategyKey.forStrategy;

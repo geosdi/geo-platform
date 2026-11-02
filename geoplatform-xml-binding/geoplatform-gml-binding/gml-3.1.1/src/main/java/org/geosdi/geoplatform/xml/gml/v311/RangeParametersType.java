@@ -46,19 +46,19 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -763,102 +763,102 @@ public class RangeParametersType
         {
             Boolean theBoolean;
             theBoolean = this.isBoolean();
-            strategy.appendField(locator, this, "_boolean", buffer, theBoolean);
+            strategy.appendField(locator, this, "_boolean", buffer, theBoolean, true);
         }
         {
             CodeType theCategory;
             theCategory = this.getCategory();
-            strategy.appendField(locator, this, "category", buffer, theCategory);
+            strategy.appendField(locator, this, "category", buffer, theCategory, true);
         }
         {
             MeasureType theQuantity;
             theQuantity = this.getQuantity();
-            strategy.appendField(locator, this, "quantity", buffer, theQuantity);
+            strategy.appendField(locator, this, "quantity", buffer, theQuantity, true);
         }
         {
             BigInteger theCount;
             theCount = this.getCount();
-            strategy.appendField(locator, this, "count", buffer, theCount);
+            strategy.appendField(locator, this, "count", buffer, theCount, true);
         }
         {
             List<String> theBooleanList;
             theBooleanList = (this.isSetBooleanList()?this.getBooleanList():null);
-            strategy.appendField(locator, this, "booleanList", buffer, theBooleanList);
+            strategy.appendField(locator, this, "booleanList", buffer, theBooleanList, true);
         }
         {
             CodeOrNullListType theCategoryList;
             theCategoryList = this.getCategoryList();
-            strategy.appendField(locator, this, "categoryList", buffer, theCategoryList);
+            strategy.appendField(locator, this, "categoryList", buffer, theCategoryList, true);
         }
         {
             MeasureOrNullListType theQuantityList;
             theQuantityList = this.getQuantityList();
-            strategy.appendField(locator, this, "quantityList", buffer, theQuantityList);
+            strategy.appendField(locator, this, "quantityList", buffer, theQuantityList, true);
         }
         {
             List<String> theCountList;
             theCountList = (this.isSetCountList()?this.getCountList():null);
-            strategy.appendField(locator, this, "countList", buffer, theCountList);
+            strategy.appendField(locator, this, "countList", buffer, theCountList, true);
         }
         {
             CategoryExtentType theCategoryExtent;
             theCategoryExtent = this.getCategoryExtent();
-            strategy.appendField(locator, this, "categoryExtent", buffer, theCategoryExtent);
+            strategy.appendField(locator, this, "categoryExtent", buffer, theCategoryExtent, true);
         }
         {
             QuantityExtentType theQuantityExtent;
             theQuantityExtent = this.getQuantityExtent();
-            strategy.appendField(locator, this, "quantityExtent", buffer, theQuantityExtent);
+            strategy.appendField(locator, this, "quantityExtent", buffer, theQuantityExtent, true);
         }
         {
             List<String> theCountExtent;
             theCountExtent = (this.isSetCountExtent()?this.getCountExtent():null);
-            strategy.appendField(locator, this, "countExtent", buffer, theCountExtent);
+            strategy.appendField(locator, this, "countExtent", buffer, theCountExtent, true);
         }
         {
             JAXBElement<? extends CompositeValueType> theCompositeValue;
             theCompositeValue = this.getCompositeValue();
-            strategy.appendField(locator, this, "compositeValue", buffer, theCompositeValue);
+            strategy.appendField(locator, this, "compositeValue", buffer, theCompositeValue, true);
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema, true);
         }
         {
             String theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, true);
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, true);
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, true);
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, true);
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, true);
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, true);
         }
         return buffer;
     }

@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
 import java.util.List;
 
 import static javax.annotation.meta.When.NEVER;

@@ -43,7 +43,7 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 public class AStyleElement

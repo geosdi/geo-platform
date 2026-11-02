@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.ebrim._3;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -188,17 +188,17 @@ public class AssociationType1
         {
             String theAssociationType;
             theAssociationType = this.getAssociationType();
-            strategy.appendField(locator, this, "associationType", buffer, theAssociationType);
+            strategy.appendField(locator, this, "associationType", buffer, theAssociationType, true);
         }
         {
             String theSourceObject;
             theSourceObject = this.getSourceObject();
-            strategy.appendField(locator, this, "sourceObject", buffer, theSourceObject);
+            strategy.appendField(locator, this, "sourceObject", buffer, theSourceObject, true);
         }
         {
             String theTargetObject;
             theTargetObject = this.getTargetObject();
-            strategy.appendField(locator, this, "targetObject", buffer, theTargetObject);
+            strategy.appendField(locator, this, "targetObject", buffer, theTargetObject, true);
         }
         return buffer;
     }

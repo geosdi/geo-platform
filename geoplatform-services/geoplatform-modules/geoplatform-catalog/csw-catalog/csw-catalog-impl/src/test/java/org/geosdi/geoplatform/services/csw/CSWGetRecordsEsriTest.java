@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services.csw;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
@@ -56,7 +57,6 @@ import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.bind.JAXBElement;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.List;

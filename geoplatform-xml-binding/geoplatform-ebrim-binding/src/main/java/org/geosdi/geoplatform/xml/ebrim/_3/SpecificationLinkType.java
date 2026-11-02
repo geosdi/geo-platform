@@ -46,15 +46,15 @@ package org.geosdi.geoplatform.xml.ebrim._3;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -219,22 +219,22 @@ public class SpecificationLinkType
         {
             InternationalStringType theUsageDescription;
             theUsageDescription = this.getUsageDescription();
-            strategy.appendField(locator, this, "usageDescription", buffer, theUsageDescription);
+            strategy.appendField(locator, this, "usageDescription", buffer, theUsageDescription, true);
         }
         {
             List<String> theUsageParameter;
             theUsageParameter = (((this.usageParameter!= null)&&(!this.usageParameter.isEmpty()))?this.getUsageParameter():null);
-            strategy.appendField(locator, this, "usageParameter", buffer, theUsageParameter);
+            strategy.appendField(locator, this, "usageParameter", buffer, theUsageParameter, true);
         }
         {
             String theServiceBinding;
             theServiceBinding = this.getServiceBinding();
-            strategy.appendField(locator, this, "serviceBinding", buffer, theServiceBinding);
+            strategy.appendField(locator, this, "serviceBinding", buffer, theServiceBinding, true);
         }
         {
             String theSpecificationObject;
             theSpecificationObject = this.getSpecificationObject();
-            strategy.appendField(locator, this, "specificationObject", buffer, theSpecificationObject);
+            strategy.appendField(locator, this, "specificationObject", buffer, theSpecificationObject, true);
         }
         return buffer;
     }

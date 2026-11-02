@@ -18,6 +18,21 @@
 
     <dependencies>
         <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.jaxb</groupId>
+            <artifactId>jaxb-plugins-runtime</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-csw-binding</artifactId>
         </dependency>
@@ -37,15 +52,6 @@
             <artifactId>ows-1.0.0</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics-runtime</artifactId>
-        </dependency>
     </dependencies>
   
     <build>
@@ -92,8 +98,8 @@
 
             <!-- mvn jaxb2:generate -X -->
             <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
 
                 <configuration>
                     <schemaIncludes>

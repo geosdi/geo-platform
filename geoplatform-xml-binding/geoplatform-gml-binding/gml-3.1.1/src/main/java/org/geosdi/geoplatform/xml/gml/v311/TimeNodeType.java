@@ -45,13 +45,13 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -213,17 +213,17 @@ public class TimeNodeType
         {
             List<TimeEdgePropertyType> thePreviousEdge;
             thePreviousEdge = (this.isSetPreviousEdge()?this.getPreviousEdge():null);
-            strategy.appendField(locator, this, "previousEdge", buffer, thePreviousEdge);
+            strategy.appendField(locator, this, "previousEdge", buffer, thePreviousEdge, true);
         }
         {
             List<TimeEdgePropertyType> theNextEdge;
             theNextEdge = (this.isSetNextEdge()?this.getNextEdge():null);
-            strategy.appendField(locator, this, "nextEdge", buffer, theNextEdge);
+            strategy.appendField(locator, this, "nextEdge", buffer, theNextEdge, true);
         }
         {
             TimeInstantPropertyType thePosition;
             thePosition = this.getPosition();
-            strategy.appendField(locator, this, "position", buffer, thePosition);
+            strategy.appendField(locator, this, "position", buffer, thePosition, true);
         }
         return buffer;
     }

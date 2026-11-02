@@ -35,6 +35,12 @@
  */
 package org.geosdi.geoplatform.wfs;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBIntrospector;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import org.geojson.FeatureCollection;
@@ -47,7 +53,8 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
@@ -63,10 +70,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -75,12 +78,6 @@ import org.mockito.stubbing.OngoingStubbing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBIntrospector;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
@@ -90,20 +87,23 @@ import java.nio.file.Paths;
 
 import static java.io.File.separator;
 import static java.math.BigInteger.valueOf;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
-import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
+import static org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository.getProvider;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
-import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.geosdi.geoplatform.wfs.WFSDescribeFeatureTest.gpJAXBContextBuilder;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.RETURNS_SELF;
 import static org.mockito.Mockito.doReturn;
@@ -132,7 +132,7 @@ public class WFSGetFeaturesRequestTest {
             .substring(tigerRoads.getLocalPart().indexOf(":") + 1, tigerRoads.getLocalPart().length());
     //
     private final static FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
@@ -330,7 +330,7 @@ public class WFSGetFeaturesRequestTest {
         assertEquals(1, layerSchema.getAttributes().size());
 
         File layerSchemaFile = new File("./target/LayerSchemaSFRestricted.xml");
-        GPJAXBContextBuilder.newInstance().marshal(new JAXBElement<>(new QName("LayerSchemaDTO"), LayerSchemaDTO.class, layerSchema), layerSchemaFile);
+        GPJAXBJakartaContextBuilder.jakartaContextBuilder().marshal(new JAXBElement<>(new QName("LayerSchemaDTO"), LayerSchemaDTO.class, layerSchema), layerSchemaFile);
         assertTrue("the LayerSchema file must exist", layerSchemaFile.exists());
 
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
@@ -351,7 +351,7 @@ public class WFSGetFeaturesRequestTest {
 
     @Test
     public void f_getFeatureMappingTest() throws Exception {
-        GetFeatureType getFeatureType = GPJAXBContextBuilder.newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        GetFeatureType getFeatureType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<wfs:GetFeature xmlns:wfs=\"http://www.opengis.net/wfs\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" service=\"WFS\" version=\"1.1.0\" maxFeatures=\"10\" xsi:schemaLocation=\"http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd\">\n" +
                         "   <wfs:Query xmlns:cite=\"http://www.opengeospatial.net/cite\" typeName=\"cite:tr_com\" srsName=\"EPSG:3857\">\n" +
                         "      <ogc:Filter xmlns:ogc=\"http://www.opengis.net/ogc\">\n" +
@@ -586,7 +586,7 @@ public class WFSGetFeaturesRequestTest {
         getFeatureRequest.withTypeName(new QName(layerSchema.getTypeName()));
         getFeatureRequest.withSRS("EPSG:4326");
         getFeatureRequest.withBBox(new BBox(14.131237640976908, 36.56356461583572, 15.821758881211283, 37.143760728459014));
-        getFeatureRequest.withQueryDTO(newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+        getFeatureRequest.withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                 + "<QueryDTO>\n"
                 + "    <matchOperator>ANY</matchOperator>\n"
                 + "    <queryRestrictionList>\n"

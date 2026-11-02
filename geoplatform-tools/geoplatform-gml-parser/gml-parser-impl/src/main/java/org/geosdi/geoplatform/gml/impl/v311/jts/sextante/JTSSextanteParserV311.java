@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jts.sextante;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.GeometryProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -43,8 +44,6 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
 import org.geosdi.geoplatform.gml.impl.v311.jts.sextante.responsibility.JTSSextantePointHandler;
 import org.locationtech.jts.geom.Geometry;
-
-import javax.xml.bind.JAXBElement;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.gml.impl.v311.jts.parameter.JTSParametersRepo.getDefaultGmlObjectFactory;

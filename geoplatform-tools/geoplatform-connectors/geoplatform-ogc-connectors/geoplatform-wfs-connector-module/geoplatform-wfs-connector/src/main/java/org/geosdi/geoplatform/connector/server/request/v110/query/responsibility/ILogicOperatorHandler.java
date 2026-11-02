@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.connector.server.request.v110.query.responsibilit
 import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionRepository;
 import org.geosdi.geoplatform.connector.server.request.v110.query.repository.WFSQueryRestrictionRepository;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.slf4j.Logger;
@@ -102,12 +103,12 @@ public interface ILogicOperatorHandler {
     class WFSQueryRestrictionsBuilder implements IWFSQueryRestrictionsBuilder {
 
         static {
-            jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+            jaxbContextBuilder = GPJAXBJakartaContextBuilder.jakartaContextBuilder();
             orOperator = new OrOperatorHandler();
         }
 
         //
-        private static final GPJAXBContextBuilder jaxbContextBuilder;
+        private static final IGPJAXBJakartaContextBuilder jaxbContextBuilder;
         private static final ILogicOperatorHandler orOperator;
         //
         private static final Logger logger = LoggerFactory.getLogger(WFSQueryRestrictionsBuilder.class);

@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.geometry;
 
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryCollection;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.MultiGeometry;
 import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -44,8 +43,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
-
-import javax.xml.bind.JAXBElement;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

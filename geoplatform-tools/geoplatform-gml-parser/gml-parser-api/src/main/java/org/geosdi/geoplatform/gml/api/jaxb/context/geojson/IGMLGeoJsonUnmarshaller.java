@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.geojson;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geojson.GeoJsonObject;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.Source;

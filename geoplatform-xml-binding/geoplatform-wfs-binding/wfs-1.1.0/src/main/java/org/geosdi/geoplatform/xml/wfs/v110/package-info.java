@@ -45,6 +45,6 @@
                            namespaceURI = "http://www.opengis.net/wfs")})
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNsForm;
+import jakarta.xml.bind.annotation.XmlSchema;

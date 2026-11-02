@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
 import com.google.common.collect.Lists;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType;
@@ -45,7 +46,6 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.xml.bind.JAXBElement;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.point;
 
-import org.locationtech.jts.geom.Point;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.MultiPoint;
 import org.geosdi.geoplatform.gml.api.MultiPointProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -43,8 +43,7 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.point.JTSPointParser;
-
-import javax.xml.bind.JAXBElement;
+import org.locationtech.jts.geom.Point;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

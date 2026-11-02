@@ -46,20 +46,20 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -403,42 +403,42 @@ public class BSplineType
         {
             List<JAXBElement<?>> thePosOrPointPropertyOrPointRep;
             thePosOrPointPropertyOrPointRep = (this.isSetPosOrPointPropertyOrPointRep()?this.getPosOrPointPropertyOrPointRep():null);
-            strategy.appendField(locator, this, "posOrPointPropertyOrPointRep", buffer, thePosOrPointPropertyOrPointRep);
+            strategy.appendField(locator, this, "posOrPointPropertyOrPointRep", buffer, thePosOrPointPropertyOrPointRep, true);
         }
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, true);
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, true);
         }
         {
             BigInteger theDegree;
             theDegree = this.getDegree();
-            strategy.appendField(locator, this, "degree", buffer, theDegree);
+            strategy.appendField(locator, this, "degree", buffer, theDegree, true);
         }
         {
             List<KnotPropertyType> theKnot;
             theKnot = (this.isSetKnot()?this.getKnot():null);
-            strategy.appendField(locator, this, "knot", buffer, theKnot);
+            strategy.appendField(locator, this, "knot", buffer, theKnot, true);
         }
         {
             CurveInterpolationType theInterpolation;
             theInterpolation = this.getInterpolation();
-            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation);
+            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation, true);
         }
         {
             boolean theIsPolynomial;
             theIsPolynomial = (this.isSetIsPolynomial()?this.isIsPolynomial():false);
-            strategy.appendField(locator, this, "isPolynomial", buffer, theIsPolynomial);
+            strategy.appendField(locator, this, "isPolynomial", buffer, theIsPolynomial, true);
         }
         {
             KnotTypesType theKnotType;
             theKnotType = this.getKnotType();
-            strategy.appendField(locator, this, "knotType", buffer, theKnotType);
+            strategy.appendField(locator, this, "knotType", buffer, theKnotType, true);
         }
         return buffer;
     }

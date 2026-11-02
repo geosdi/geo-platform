@@ -42,13 +42,13 @@
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import org.geosdi.geoplatform.gml.api.ArcString;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -290,27 +290,27 @@ public class ArcStringType extends AbstractCurveSegmentType implements ToString,
         {
             List<JAXBElement<?>> thePosOrPointPropertyOrPointRep;
             thePosOrPointPropertyOrPointRep = (this.isSetPosOrPointPropertyOrPointRep()?this.getPosOrPointPropertyOrPointRep():null);
-            strategy.appendField(locator, this, "posOrPointPropertyOrPointRep", buffer, thePosOrPointPropertyOrPointRep);
+            strategy.appendField(locator, this, "posOrPointPropertyOrPointRep", buffer, thePosOrPointPropertyOrPointRep, true);
         }
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, true);
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, true);
         }
         {
             CurveInterpolationType theInterpolation;
             theInterpolation = this.getInterpolation();
-            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation);
+            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation, true);
         }
         {
             BigInteger theNumArc;
             theNumArc = this.getNumArc();
-            strategy.appendField(locator, this, "numArc", buffer, theNumArc);
+            strategy.appendField(locator, this, "numArc", buffer, theNumArc, true);
         }
         return buffer;
     }

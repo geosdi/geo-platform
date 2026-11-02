@@ -43,16 +43,16 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -476,62 +476,62 @@ public class DirectionPropertyType
         {
             DirectionVectorType theDirectionVector;
             theDirectionVector = this.getDirectionVector();
-            strategy.appendField(locator, this, "directionVector", buffer, theDirectionVector);
+            strategy.appendField(locator, this, "directionVector", buffer, theDirectionVector, true);
         }
         {
             CompassPointEnumeration theCompassPoint;
             theCompassPoint = this.getCompassPoint();
-            strategy.appendField(locator, this, "compassPoint", buffer, theCompassPoint);
+            strategy.appendField(locator, this, "compassPoint", buffer, theCompassPoint, true);
         }
         {
             CodeType theDirectionKeyword;
             theDirectionKeyword = this.getDirectionKeyword();
-            strategy.appendField(locator, this, "directionKeyword", buffer, theDirectionKeyword);
+            strategy.appendField(locator, this, "directionKeyword", buffer, theDirectionKeyword, true);
         }
         {
             StringOrRefType theDirectionString;
             theDirectionString = this.getDirectionString();
-            strategy.appendField(locator, this, "directionString", buffer, theDirectionString);
+            strategy.appendField(locator, this, "directionString", buffer, theDirectionString, true);
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema, true);
         }
         {
             String theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, true);
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, true);
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, true);
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, true);
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, true);
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, true);
         }
         return buffer;
     }

@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gml.impl.v311.gml;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.GMLBaseCurveParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.CurveType;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -65,7 +66,7 @@ public class GMLCurveParserTest {
 
     @Test
     public void a_curveJTSParserTest() throws Exception {
-        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        CurveType curveType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Curve.xml")
                 .collect(joining(separator))), CurveType.class);
         logger.info("##########################CURVE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
@@ -73,7 +74,7 @@ public class GMLCurveParserTest {
 
     @Test
     public void b_curveJTSParserTest() throws Exception {
-        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        CurveType curveType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Curve1.xml")
                 .collect(joining(separator))), CurveType.class);
         logger.info("##########################CURVE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
@@ -81,7 +82,7 @@ public class GMLCurveParserTest {
 
     @Test
     public void c_curveJTSParserTest() throws Exception {
-        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        CurveType curveType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Curve2.xml")
                 .collect(joining(separator))), CurveType.class);
         logger.info("##########################CURVE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
@@ -89,7 +90,7 @@ public class GMLCurveParserTest {
 
     @Test
     public void d_curveJTSParserTest() throws Exception {
-        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        CurveType curveType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                 + "<gml:Curve xmlns:gml=\"http://www.opengis.net/gml\" srsName=\"SDO:\">\n"
                 + "   <gml:segments>\n"
                 + "      <gml:LineStringSegment>\n"

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.geojson.theories;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
@@ -50,7 +51,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tools.jackson.databind.ObjectMapper;
 
-import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.io.IOException;
 
@@ -58,7 +58,7 @@ import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.SIMPLE;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -71,7 +71,7 @@ public class GMLTheoriesGeoJsonSexanteParserTest {
     private static final Logger logger = LoggerFactory.getLogger(GMLTheoriesGeoJsonSexanteParserTest.class);
     //
     private static final GMLJAXBContext gmlJAXBContext = GMLContextFactoryV311.createJAXBContext(SIMPLE);
-    private static final ObjectMapper mapper = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+    private static final ObjectMapper mapper = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE).getDefaultMapper();
     private static final GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();

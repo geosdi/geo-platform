@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.comparison.factory;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.context.CSWJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 
 import static org.geosdi.geoplatform.connector.jaxb.comparison.factory.CSWContextFactory.CSWContextType.SIMPLE;
 import static org.geosdi.geoplatform.xml.csw.CSWContextServiceProviderV202.CSW_CONTEXT_SERVICE_PROVIDER;
@@ -70,10 +70,10 @@ public class CSWContextFactory {
 
     /**
      * @param type
-     * @return {@link GPBaseJAXBContext}
+     * @return {@link GPBaseJakartaContext}
      * @throws Exception
      */
-    public static GPBaseJAXBContext createCSWContext(@Nullable CSWContextType type) throws Exception {
+    public static GPBaseJakartaContext createCSWContext(@Nullable CSWContextType type) throws Exception {
         return switch (type == null ? SIMPLE : type) {
             case SIMPLE -> new CSWJAXBContext(jaxbContext);
             case POOLED -> new CSWJAXBContextPool(jaxbContext);

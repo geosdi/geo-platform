@@ -16,23 +16,24 @@
     <name>Geo-Platform :: == GML API Module</name>
     
     <dependencies>
-        <!-- =========================================================== -->
-        <!-- ============================ JAXB ========================= -->
-        <!-- =========================================================== -->
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.sun.activation</groupId>
-            <artifactId>javax.activation</artifactId>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.jaxb</groupId>
+            <artifactId>jaxb-plugins-runtime</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ============================ JAXB ========================= -->
+        <!-- =========================================================== -->
      </dependencies>
     
     <build>

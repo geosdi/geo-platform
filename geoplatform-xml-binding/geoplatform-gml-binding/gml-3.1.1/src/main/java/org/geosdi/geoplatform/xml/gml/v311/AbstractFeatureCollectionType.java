@@ -43,14 +43,14 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * A feature collection contains zero or more features.
@@ -175,13 +175,13 @@ public abstract class AbstractFeatureCollectionType
             List<FeaturePropertyType> theFeatureMember;
             theFeatureMember = (this.isSetFeatureMember() ? this.getFeatureMember() : null);
             strategy.appendField(locator, this, "featureMember", buffer,
-                    theFeatureMember);
+                    theFeatureMember, true);
         }
         {
             FeatureArrayPropertyType theFeatureMembers;
             theFeatureMembers = this.getFeatureMembers();
             strategy.appendField(locator, this, "featureMembers", buffer,
-                    theFeatureMembers);
+                    theFeatureMembers, true);
         }
         return buffer;
     }

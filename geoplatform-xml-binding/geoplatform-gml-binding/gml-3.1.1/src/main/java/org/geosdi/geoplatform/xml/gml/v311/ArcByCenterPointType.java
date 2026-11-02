@@ -43,12 +43,12 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.math.BigInteger;
 
 
@@ -423,52 +423,52 @@ public class ArcByCenterPointType extends AbstractCurveSegmentType implements To
         {
             DirectPositionType thePos;
             thePos = this.getPos();
-            strategy.appendField(locator, this, "pos", buffer, thePos);
+            strategy.appendField(locator, this, "pos", buffer, thePos, true);
         }
         {
             PointPropertyType thePointProperty;
             thePointProperty = this.getPointProperty();
-            strategy.appendField(locator, this, "pointProperty", buffer, thePointProperty);
+            strategy.appendField(locator, this, "pointProperty", buffer, thePointProperty, true);
         }
         {
             PointPropertyType thePointRep;
             thePointRep = this.getPointRep();
-            strategy.appendField(locator, this, "pointRep", buffer, thePointRep);
+            strategy.appendField(locator, this, "pointRep", buffer, thePointRep, true);
         }
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, true);
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, true);
         }
         {
             LengthType theRadius;
             theRadius = this.getRadius();
-            strategy.appendField(locator, this, "radius", buffer, theRadius);
+            strategy.appendField(locator, this, "radius", buffer, theRadius, true);
         }
         {
             AngleType theStartAngle;
             theStartAngle = this.getStartAngle();
-            strategy.appendField(locator, this, "startAngle", buffer, theStartAngle);
+            strategy.appendField(locator, this, "startAngle", buffer, theStartAngle, true);
         }
         {
             AngleType theEndAngle;
             theEndAngle = this.getEndAngle();
-            strategy.appendField(locator, this, "endAngle", buffer, theEndAngle);
+            strategy.appendField(locator, this, "endAngle", buffer, theEndAngle, true);
         }
         {
             CurveInterpolationType theInterpolation;
             theInterpolation = this.getInterpolation();
-            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation);
+            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation, true);
         }
         {
             BigInteger theNumArc;
             theNumArc = this.getNumArc();
-            strategy.appendField(locator, this, "numArc", buffer, theNumArc);
+            strategy.appendField(locator, this, "numArc", buffer, theNumArc, true);
         }
         return buffer;
     }

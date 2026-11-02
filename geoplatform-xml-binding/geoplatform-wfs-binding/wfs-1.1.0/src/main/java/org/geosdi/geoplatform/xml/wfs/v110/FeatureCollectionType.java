@@ -42,18 +42,18 @@
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.geosdi.geoplatform.xml.gml.v311.AbstractFeatureCollectionType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  *
@@ -184,19 +184,19 @@ public class FeatureCollectionType
         {
             String theLockId;
             theLockId = this.getLockId();
-            strategy.appendField(locator, this, "lockId", buffer, theLockId);
+            strategy.appendField(locator, this, "lockId", buffer, theLockId, true);
         }
         {
             XMLGregorianCalendar theTimeStamp;
             theTimeStamp = this.getTimeStamp();
             strategy.appendField(locator, this, "timeStamp", buffer,
-                    theTimeStamp);
+                    theTimeStamp, true);
         }
         {
             BigInteger theNumberOfFeatures;
             theNumberOfFeatures = this.getNumberOfFeatures();
             strategy.appendField(locator, this, "numberOfFeatures", buffer,
-                    theNumberOfFeatures);
+                    theNumberOfFeatures, true);
         }
         return buffer;
     }

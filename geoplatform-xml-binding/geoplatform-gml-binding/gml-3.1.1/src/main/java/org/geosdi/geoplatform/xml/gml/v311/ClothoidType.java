@@ -43,15 +43,15 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 import java.math.BigDecimal;
 
 
@@ -236,22 +236,22 @@ public class ClothoidType extends AbstractCurveSegmentType implements ToString {
         {
             ClothoidType.RefLocation theRefLocation;
             theRefLocation = this.getRefLocation();
-            strategy.appendField(locator, this, "refLocation", buffer, theRefLocation);
+            strategy.appendField(locator, this, "refLocation", buffer, theRefLocation, true);
         }
         {
             BigDecimal theScaleFactor;
             theScaleFactor = this.getScaleFactor();
-            strategy.appendField(locator, this, "scaleFactor", buffer, theScaleFactor);
+            strategy.appendField(locator, this, "scaleFactor", buffer, theScaleFactor, true);
         }
         {
             double theStartParameter;
             theStartParameter = (this.isSetStartParameter()?this.getStartParameter(): 0.0D);
-            strategy.appendField(locator, this, "startParameter", buffer, theStartParameter);
+            strategy.appendField(locator, this, "startParameter", buffer, theStartParameter, true);
         }
         {
             double theEndParameter;
             theEndParameter = (this.isSetEndParameter()?this.getEndParameter(): 0.0D);
-            strategy.appendField(locator, this, "endParameter", buffer, theEndParameter);
+            strategy.appendField(locator, this, "endParameter", buffer, theEndParameter, true);
         }
         return buffer;
     }
@@ -335,7 +335,7 @@ public class ClothoidType extends AbstractCurveSegmentType implements ToString {
             {
                 AffinePlacementType theAffinePlacement;
                 theAffinePlacement = this.getAffinePlacement();
-                strategy.appendField(locator, this, "affinePlacement", buffer, theAffinePlacement);
+                strategy.appendField(locator, this, "affinePlacement", buffer, theAffinePlacement, true);
             }
             return buffer;
         }

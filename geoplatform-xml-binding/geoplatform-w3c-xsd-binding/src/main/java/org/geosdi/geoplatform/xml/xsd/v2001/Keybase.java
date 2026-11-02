@@ -43,19 +43,19 @@ package org.geosdi.geoplatform.xml.xsd.v2001;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for keybase complex type.
@@ -202,17 +202,17 @@ public class Keybase
         {
             Selector theSelector;
             theSelector = this.getSelector();
-            strategy.appendField(locator, this, "selector", buffer, theSelector);
+            strategy.appendField(locator, this, "selector", buffer, theSelector, true);
         }
         {
             List<Field> theField;
             theField = (this.isSetField() ? this.getField() : null);
-            strategy.appendField(locator, this, "field", buffer, theField);
+            strategy.appendField(locator, this, "field", buffer, theField, true);
         }
         {
             String theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         return buffer;
     }

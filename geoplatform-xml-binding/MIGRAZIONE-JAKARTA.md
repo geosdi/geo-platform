@@ -16,7 +16,7 @@ Maven tra i moduli.
 | 1 | `wms-1.1.1` | fatto |
 | 3 | `xlink-1.0.0`, `gml-2.1.2`, `filter-1.0.0`, `sld-1.0.0`, `wmc-1.1.0`, `ows-1.1.0`, `wps-1.0.0`, `wms-1.3.0` | fatto |
 | 2 | `gml-3.2.0`, `iso19139-v20060504` | fatto |
-| 4 | `gml-api`, `gml-3.1.1`, `gml-3.2.1`, `filter-1.1.0`, `ows-1.0.0`, `w3c-xsd`, `wfs-1.1.0`, `csw`, `ebrim`, `feature-catalogue`, `iso19139-v20070417` | da fare |
+| 4 | `gml-api`, `gml-3.1.1`, `gml-3.2.1`, `filter-1.1.0`, `ows-1.0.0`, `w3c-xsd`, `wfs-1.1.0`, `csw`, `ebrim`, `feature-catalogue`, `iso19139-v20070417` | fatto |
 
 Con il gruppo 3 sono passati a jakarta anche il connettore GeoServer (il suo modello contiene i tipi SLD),
 `wps-connector`, `wmc-jaxb-support` e la parte WMS 1.3.0 di `wms-connector`.
@@ -25,6 +25,17 @@ Il gruppo 2 non è usato da altri moduli di geo-platform. `gml-3.2.0` era genera
 `copyTo` e `mergeFrom` (`-Xequals`, `-XhashCode`, `-Xcopyable`, `-Xmergeable`): la configurazione jakarta li mantiene, per
 chi usa questi binding fuori da geo-platform. Il modulo non ha test: la verifica è la creazione del `JAXBContext` sui suoi
 package e su quelli di `iso19139-v20060504`.
+
+Nel gruppo 4 i moduli con molte modifiche fatte a mano non sono stati rigenerati ma convertiti sul posto (import
+javax → jakarta, `org.jvnet.jaxb2_commons` → `org.jvnet.jaxb`, `ToString2` → `ToString`, sesto argomento `true` negli
+`appendField`): `gml-3.1.1` (classi che implementano le interfacce di `gml-api`, metodi aggiunti, `@XmlRootElement`,
+package SMIL rinominato), `filter-1.1.0`, `wfs-1.1.0`, `w3c-xsd`, `csw`, `ebrim` (le classi stanno in package diversi da
+quelli del `.xjb`). Pom e `.xjb` sono su jakarta, ma per questi moduli una nuova generazione richiede di riportare a mano
+le modifiche (o di scriverle prima nei `.xjb`). `gml-3.2.1`, `ows-1.0.0`, `iso19139-v20070417` e `feature-catalogue`
+sono stati rigenerati, con i prefissi `xmlns` e la radice `FC_FeatureCatalogue` nei `.xjb`.
+
+Con il gruppo 4 sono passati a jakarta anche il parser GML (`gml-parser-api`, `gml-parser-impl`), i connettori WFS e CSW,
+`wfs-support` e `csw-catalog-impl`.
 
 `geoplatform-xml-context-provider` non dipende da JAXB e non va migrato.
 

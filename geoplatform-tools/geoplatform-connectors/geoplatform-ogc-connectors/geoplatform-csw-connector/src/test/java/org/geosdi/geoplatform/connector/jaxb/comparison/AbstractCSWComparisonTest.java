@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.comparison;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public abstract class AbstractCSWComparisonTest {
         return 300;
     }
 
-    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext) throws Exception {
+    protected long executeMultiThreadsTasks(GPBaseJakartaContext jaxbContext) throws Exception {
         long time = 0;
         int numThreads = defineNumThreads();
         try (ExecutorService executor = newThreadPerTaskExecutor(CSWComparisonThreadFactory)) {
@@ -113,7 +113,7 @@ public abstract class AbstractCSWComparisonTest {
         }
     }
 
-    private long executeSimpleTask(GPBaseJAXBContext jaxbContext) throws Exception {
+    private long executeSimpleTask(GPBaseJakartaContext jaxbContext) throws Exception {
         long start = System.currentTimeMillis();
         GetRecordsType getRecords = ((JAXBElement<GetRecordsType>) jaxbContext.acquireUnmarshaller().unmarshal(file)).getValue();
         StringWriter writer = new StringWriter();
@@ -122,7 +122,7 @@ public abstract class AbstractCSWComparisonTest {
         return System.currentTimeMillis() - start;
     }
 
-    private long executePooledTask(GPBaseJAXBContext jaxbContext) throws Exception {
+    private long executePooledTask(GPBaseJakartaContext jaxbContext) throws Exception {
         long start = System.currentTimeMillis();
         GetRecordsType getRecords = (GetRecordsType) ((CSWJAXBContextPool) jaxbContext).unmarshal(file);
         StringWriter writer = new StringWriter();
@@ -135,9 +135,9 @@ public abstract class AbstractCSWComparisonTest {
 
     private class CSWSimpleTask implements Callable<Long> {
 
-        final GPBaseJAXBContext jaxbContext;
+        final GPBaseJakartaContext jaxbContext;
 
-        public CSWSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public CSWSimpleTask(GPBaseJakartaContext theJaxbContext) {
             this.jaxbContext = theJaxbContext;
         }
 
@@ -149,7 +149,7 @@ public abstract class AbstractCSWComparisonTest {
 
     private class CSWPooledTask extends CSWSimpleTask {
 
-        public CSWPooledTask(GPBaseJAXBContext theJaxbContext) {
+        public CSWPooledTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 

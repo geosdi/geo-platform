@@ -45,14 +45,14 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -246,22 +246,22 @@ public abstract class AbstractReferenceSystemType
         {
             List<IdentifierType> theSrsID;
             theSrsID = (this.isSetSrsID()?this.getSrsID():null);
-            strategy.appendField(locator, this, "srsID", buffer, theSrsID);
+            strategy.appendField(locator, this, "srsID", buffer, theSrsID, true);
         }
         {
             StringOrRefType theRemarks;
             theRemarks = this.getRemarks();
-            strategy.appendField(locator, this, "remarks", buffer, theRemarks);
+            strategy.appendField(locator, this, "remarks", buffer, theRemarks, true);
         }
         {
             ExtentType theValidArea;
             theValidArea = this.getValidArea();
-            strategy.appendField(locator, this, "validArea", buffer, theValidArea);
+            strategy.appendField(locator, this, "validArea", buffer, theValidArea, true);
         }
         {
             String theScope;
             theScope = this.getScope();
-            strategy.appendField(locator, this, "scope", buffer, theScope);
+            strategy.appendField(locator, this, "scope", buffer, theScope, true);
         }
         return buffer;
     }

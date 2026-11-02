@@ -46,12 +46,12 @@ package org.geosdi.geoplatform.xml.wfs.v110;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.FunctionType;
 import org.geosdi.geoplatform.xml.filter.v110.SortByType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
@@ -329,37 +329,37 @@ public class QueryType
         {
             List<Object> thePropertyNameOrXlinkPropertyNameOrFunction;
             thePropertyNameOrXlinkPropertyNameOrFunction = (((this.propertyNameOrXlinkPropertyNameOrFunction!= null)&&(!this.propertyNameOrXlinkPropertyNameOrFunction.isEmpty()))?this.getPropertyNameOrXlinkPropertyNameOrFunction():null);
-            strategy.appendField(locator, this, "propertyNameOrXlinkPropertyNameOrFunction", buffer, thePropertyNameOrXlinkPropertyNameOrFunction);
+            strategy.appendField(locator, this, "propertyNameOrXlinkPropertyNameOrFunction", buffer, thePropertyNameOrXlinkPropertyNameOrFunction, true);
         }
         {
             FilterType theFilter;
             theFilter = this.getFilter();
-            strategy.appendField(locator, this, "filter", buffer, theFilter);
+            strategy.appendField(locator, this, "filter", buffer, theFilter, true);
         }
         {
             SortByType theSortBy;
             theSortBy = this.getSortBy();
-            strategy.appendField(locator, this, "sortBy", buffer, theSortBy);
+            strategy.appendField(locator, this, "sortBy", buffer, theSortBy, true);
         }
         {
             String theHandle;
             theHandle = this.getHandle();
-            strategy.appendField(locator, this, "handle", buffer, theHandle);
+            strategy.appendField(locator, this, "handle", buffer, theHandle, true);
         }
         {
             List<QName> theTypeName;
             theTypeName = (((this.typeName!= null)&&(!this.typeName.isEmpty()))?this.getTypeName():null);
-            strategy.appendField(locator, this, "typeName", buffer, theTypeName);
+            strategy.appendField(locator, this, "typeName", buffer, theTypeName, true);
         }
         {
             String theFeatureVersion;
             theFeatureVersion = this.getFeatureVersion();
-            strategy.appendField(locator, this, "featureVersion", buffer, theFeatureVersion);
+            strategy.appendField(locator, this, "featureVersion", buffer, theFeatureVersion, true);
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, true);
         }
         return buffer;
     }

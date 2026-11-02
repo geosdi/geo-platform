@@ -45,19 +45,19 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 import org.w3c.dom.Element;
 
 
@@ -218,17 +218,17 @@ public class InsertType implements ToString
         {
             List<Element> theAny;
             theAny = (this.isSetAny()?this.getAny():null);
-            strategy.appendField(locator, this, "any", buffer, theAny);
+            strategy.appendField(locator, this, "any", buffer, theAny, true);
         }
         {
             String theTypeName;
             theTypeName = this.getTypeName();
-            strategy.appendField(locator, this, "typeName", buffer, theTypeName);
+            strategy.appendField(locator, this, "typeName", buffer, theTypeName, true);
         }
         {
             String theHandle;
             theHandle = this.getHandle();
-            strategy.appendField(locator, this, "handle", buffer, theHandle);
+            strategy.appendField(locator, this, "handle", buffer, theHandle, true);
         }
         return buffer;
     }

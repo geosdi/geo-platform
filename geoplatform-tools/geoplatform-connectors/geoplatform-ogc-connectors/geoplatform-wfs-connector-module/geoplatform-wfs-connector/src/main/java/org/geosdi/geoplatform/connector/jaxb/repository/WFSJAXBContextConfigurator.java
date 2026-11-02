@@ -47,14 +47,14 @@ class WFSJAXBContextConfigurator {
 
     /**
      * Create an Instance for WFSConnectorJAXBContext and register it in
-     * GeoPlatformJAXBContextRepository with the specific Key.
+     * GeoPlatformJakartaContextRepository with the specific Key.
      *
      * @return WFSConnectorJAXBContext
      */
     @Bean(name = "WFSConnectorJAXBContext")
     public WFSConnectorJAXBContext WFSConnectorJAXBContext() {
         WFSConnectorJAXBContext wfsJAXBContext = new WFSConnectorJAXBContext();
-        JAXBContextConnectorRepository.registerProvider(wfsJAXBContext.getKeyProvider(), wfsJAXBContext.getJAXBProvider());
+        JakartaContextConnectorRepository.registerProvider(wfsJAXBContext.getKeyProvider(), wfsJAXBContext.getJakartaProvider());
         return wfsJAXBContext;
     }
 }

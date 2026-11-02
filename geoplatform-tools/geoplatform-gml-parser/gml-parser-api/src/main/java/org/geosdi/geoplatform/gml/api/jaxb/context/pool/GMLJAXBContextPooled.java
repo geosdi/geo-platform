@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLJAXBContext;
@@ -44,8 +46,6 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.Source;

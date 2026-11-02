@@ -43,7 +43,7 @@
 
 package org.geosdi.geoplatform.xml.wrs._1_0.iri;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**

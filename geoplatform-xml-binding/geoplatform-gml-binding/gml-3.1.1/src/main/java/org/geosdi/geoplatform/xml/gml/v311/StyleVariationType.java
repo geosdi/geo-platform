@@ -43,15 +43,15 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -191,17 +191,17 @@ public class StyleVariationType
         {
             String theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         {
             String theStyleProperty;
             theStyleProperty = this.getStyleProperty();
-            strategy.appendField(locator, this, "styleProperty", buffer, theStyleProperty);
+            strategy.appendField(locator, this, "styleProperty", buffer, theStyleProperty, true);
         }
         {
             String theFeaturePropertyRange;
             theFeaturePropertyRange = this.getFeaturePropertyRange();
-            strategy.appendField(locator, this, "featurePropertyRange", buffer, theFeaturePropertyRange);
+            strategy.appendField(locator, this, "featurePropertyRange", buffer, theFeaturePropertyRange, true);
         }
         return buffer;
     }

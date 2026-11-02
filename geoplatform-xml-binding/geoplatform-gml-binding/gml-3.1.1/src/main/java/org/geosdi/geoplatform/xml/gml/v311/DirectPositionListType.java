@@ -42,12 +42,12 @@
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import org.geosdi.geoplatform.gml.api.DirectPositionList;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -297,35 +297,35 @@ public class DirectPositionListType implements ToString, DirectPositionList {
         {
             List<Double> theValue;
             theValue = (this.isSetValue() ? this.getValue() : null);
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         {
             BigInteger theCount;
             theCount = this.getCount();
-            strategy.appendField(locator, this, "count", buffer, theCount);
+            strategy.appendField(locator, this, "count", buffer, theCount, true);
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, true);
         }
         {
             BigInteger theSrsDimension;
             theSrsDimension = this.getSrsDimension();
             strategy.appendField(locator, this, "srsDimension", buffer,
-                    theSrsDimension);
+                    theSrsDimension, true);
         }
         {
             List<String> theAxisLabels;
             theAxisLabels = (this.isSetAxisLabels() ? this.getAxisLabels() : null);
             strategy.appendField(locator, this, "axisLabels", buffer,
-                    theAxisLabels);
+                    theAxisLabels, true);
         }
         {
             List<String> theUomLabels;
             theUomLabels = (this.isSetUomLabels() ? this.getUomLabels() : null);
             strategy.appendField(locator, this, "uomLabels", buffer,
-                    theUomLabels);
+                    theUomLabels, true);
         }
         return buffer;
     }

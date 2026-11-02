@@ -43,18 +43,18 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.xml.filter.v110.SortByType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * Specifies a query to execute against instances of one or
@@ -291,30 +291,30 @@ public class QueryType extends AbstractQueryType
             ElementSetNameType theElementSetName;
             theElementSetName = this.getElementSetName();
             strategy.appendField(locator, this, "elementSetName", buffer,
-                    theElementSetName);
+                    theElementSetName, true);
         }
         {
             List<QName> theElementName;
             theElementName = (this.isSetElementName() ? this.getElementName() : null);
             strategy.appendField(locator, this, "elementName", buffer,
-                    theElementName);
+                    theElementName, true);
         }
         {
             QueryConstraintType theConstraint;
             theConstraint = this.getConstraint();
             strategy.appendField(locator, this, "constraint", buffer,
-                    theConstraint);
+                    theConstraint, true);
         }
         {
             SortByType theSortBy;
             theSortBy = this.getSortBy();
-            strategy.appendField(locator, this, "sortBy", buffer, theSortBy);
+            strategy.appendField(locator, this, "sortBy", buffer, theSortBy, true);
         }
         {
             List<QName> theTypeNames;
             theTypeNames = (this.isSetTypeNames() ? this.getTypeNames() : null);
             strategy.appendField(locator, this, "typeNames", buffer,
-                    theTypeNames);
+                    theTypeNames, true);
         }
         return buffer;
     }

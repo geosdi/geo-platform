@@ -45,16 +45,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -381,42 +381,42 @@ public abstract class AbstractCoordinateOperationType
         {
             List<IdentifierType> theCoordinateOperationID;
             theCoordinateOperationID = (this.isSetCoordinateOperationID()?this.getCoordinateOperationID():null);
-            strategy.appendField(locator, this, "coordinateOperationID", buffer, theCoordinateOperationID);
+            strategy.appendField(locator, this, "coordinateOperationID", buffer, theCoordinateOperationID, true);
         }
         {
             StringOrRefType theRemarks;
             theRemarks = this.getRemarks();
-            strategy.appendField(locator, this, "remarks", buffer, theRemarks);
+            strategy.appendField(locator, this, "remarks", buffer, theRemarks, true);
         }
         {
             String theOperationVersion;
             theOperationVersion = this.getOperationVersion();
-            strategy.appendField(locator, this, "operationVersion", buffer, theOperationVersion);
+            strategy.appendField(locator, this, "operationVersion", buffer, theOperationVersion, true);
         }
         {
             ExtentType theValidArea;
             theValidArea = this.getValidArea();
-            strategy.appendField(locator, this, "validArea", buffer, theValidArea);
+            strategy.appendField(locator, this, "validArea", buffer, theValidArea, true);
         }
         {
             String theScope;
             theScope = this.getScope();
-            strategy.appendField(locator, this, "scope", buffer, theScope);
+            strategy.appendField(locator, this, "scope", buffer, theScope, true);
         }
         {
             List<JAXBElement<? extends AbstractPositionalAccuracyType>> thePositionalAccuracy;
             thePositionalAccuracy = (this.isSetPositionalAccuracy()?this.getPositionalAccuracy():null);
-            strategy.appendField(locator, this, "positionalAccuracy", buffer, thePositionalAccuracy);
+            strategy.appendField(locator, this, "positionalAccuracy", buffer, thePositionalAccuracy, true);
         }
         {
             CRSRefType theSourceCRS;
             theSourceCRS = this.getSourceCRS();
-            strategy.appendField(locator, this, "sourceCRS", buffer, theSourceCRS);
+            strategy.appendField(locator, this, "sourceCRS", buffer, theSourceCRS, true);
         }
         {
             CRSRefType theTargetCRS;
             theTargetCRS = this.getTargetCRS();
-            strategy.appendField(locator, this, "targetCRS", buffer, theTargetCRS);
+            strategy.appendField(locator, this, "targetCRS", buffer, theTargetCRS, true);
         }
         return buffer;
     }

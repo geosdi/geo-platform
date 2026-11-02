@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -229,22 +229,22 @@ public class DMSAngleType
         {
             DegreesType theDegrees;
             theDegrees = this.getDegrees();
-            strategy.appendField(locator, this, "degrees", buffer, theDegrees);
+            strategy.appendField(locator, this, "degrees", buffer, theDegrees, true);
         }
         {
             BigDecimal theDecimalMinutes;
             theDecimalMinutes = this.getDecimalMinutes();
-            strategy.appendField(locator, this, "decimalMinutes", buffer, theDecimalMinutes);
+            strategy.appendField(locator, this, "decimalMinutes", buffer, theDecimalMinutes, true);
         }
         {
             Integer theMinutes;
             theMinutes = this.getMinutes();
-            strategy.appendField(locator, this, "minutes", buffer, theMinutes);
+            strategy.appendField(locator, this, "minutes", buffer, theMinutes, true);
         }
         {
             BigDecimal theSeconds;
             theSeconds = this.getSeconds();
-            strategy.appendField(locator, this, "seconds", buffer, theSeconds);
+            strategy.appendField(locator, this, "seconds", buffer, theSeconds, true);
         }
         return buffer;
     }

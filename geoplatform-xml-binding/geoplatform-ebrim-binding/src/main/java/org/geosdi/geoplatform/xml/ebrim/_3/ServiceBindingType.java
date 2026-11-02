@@ -46,16 +46,16 @@ package org.geosdi.geoplatform.xml.ebrim._3;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -220,22 +220,22 @@ public class ServiceBindingType
         {
             List<SpecificationLinkType> theSpecificationLink;
             theSpecificationLink = (((this.specificationLink!= null)&&(!this.specificationLink.isEmpty()))?this.getSpecificationLink():null);
-            strategy.appendField(locator, this, "specificationLink", buffer, theSpecificationLink);
+            strategy.appendField(locator, this, "specificationLink", buffer, theSpecificationLink, true);
         }
         {
             String theService;
             theService = this.getService();
-            strategy.appendField(locator, this, "service", buffer, theService);
+            strategy.appendField(locator, this, "service", buffer, theService, true);
         }
         {
             String theAccessURI;
             theAccessURI = this.getAccessURI();
-            strategy.appendField(locator, this, "accessURI", buffer, theAccessURI);
+            strategy.appendField(locator, this, "accessURI", buffer, theAccessURI, true);
         }
         {
             String theTargetBinding;
             theTargetBinding = this.getTargetBinding();
-            strategy.appendField(locator, this, "targetBinding", buffer, theTargetBinding);
+            strategy.appendField(locator, this, "targetBinding", buffer, theTargetBinding, true);
         }
         return buffer;
     }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110.param;
 
 import com.google.common.collect.Lists;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequestState;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
@@ -47,8 +48,6 @@ import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
-
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;

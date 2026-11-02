@@ -43,13 +43,13 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -193,17 +193,17 @@ public class DirectionVectorType
         {
             VectorType theVector;
             theVector = this.getVector();
-            strategy.appendField(locator, this, "vector", buffer, theVector);
+            strategy.appendField(locator, this, "vector", buffer, theVector, true);
         }
         {
             AngleType theHorizontalAngle;
             theHorizontalAngle = this.getHorizontalAngle();
-            strategy.appendField(locator, this, "horizontalAngle", buffer, theHorizontalAngle);
+            strategy.appendField(locator, this, "horizontalAngle", buffer, theHorizontalAngle, true);
         }
         {
             AngleType theVerticalAngle;
             theVerticalAngle = this.getVerticalAngle();
-            strategy.appendField(locator, this, "verticalAngle", buffer, theVerticalAngle);
+            strategy.appendField(locator, this, "verticalAngle", buffer, theVerticalAngle, true);
         }
         return buffer;
     }

@@ -45,16 +45,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -231,22 +231,22 @@ public class TimeIntervalLengthType
         {
             BigDecimal theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         {
             String theUnit;
             theUnit = this.getUnit();
-            strategy.appendField(locator, this, "unit", buffer, theUnit);
+            strategy.appendField(locator, this, "unit", buffer, theUnit, true);
         }
         {
             BigInteger theRadix;
             theRadix = this.getRadix();
-            strategy.appendField(locator, this, "radix", buffer, theRadix);
+            strategy.appendField(locator, this, "radix", buffer, theRadix, true);
         }
         {
             BigInteger theFactor;
             theFactor = this.getFactor();
-            strategy.appendField(locator, this, "factor", buffer, theFactor);
+            strategy.appendField(locator, this, "factor", buffer, theFactor, true);
         }
         return buffer;
     }

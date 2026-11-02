@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.WFSJAXBContextPool;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.junit.BeforeClass;
@@ -43,8 +45,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;

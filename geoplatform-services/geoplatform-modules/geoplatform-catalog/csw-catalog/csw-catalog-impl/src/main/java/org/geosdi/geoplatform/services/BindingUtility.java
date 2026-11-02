@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
 import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

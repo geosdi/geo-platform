@@ -45,16 +45,16 @@ package org.geosdi.geoplatform.xml.wrs._1_0.iri;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -271,32 +271,32 @@ public class Query
         {
             String theService;
             theService = this.getService();
-            strategy.appendField(locator, this, "service", buffer, theService);
+            strategy.appendField(locator, this, "service", buffer, theService, true);
         }
         {
             String theRequest;
             theRequest = this.getRequest();
-            strategy.appendField(locator, this, "request", buffer, theRequest);
+            strategy.appendField(locator, this, "request", buffer, theRequest, true);
         }
         {
             String theQid;
             theQid = this.getQid();
-            strategy.appendField(locator, this, "qid", buffer, theQid);
+            strategy.appendField(locator, this, "qid", buffer, theQid, true);
         }
         {
             ElementSetType theElementSetName;
             theElementSetName = this.getElementSetName();
-            strategy.appendField(locator, this, "elementSetName", buffer, theElementSetName);
+            strategy.appendField(locator, this, "elementSetName", buffer, theElementSetName, true);
         }
         {
             BigInteger theStartPosition;
             theStartPosition = this.getStartPosition();
-            strategy.appendField(locator, this, "startPosition", buffer, theStartPosition);
+            strategy.appendField(locator, this, "startPosition", buffer, theStartPosition, true);
         }
         {
             BigInteger theMaxRecords;
             theMaxRecords = this.getMaxRecords();
-            strategy.appendField(locator, this, "maxRecords", buffer, theMaxRecords);
+            strategy.appendField(locator, this, "maxRecords", buffer, theMaxRecords, true);
         }
         return buffer;
     }

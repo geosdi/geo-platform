@@ -34,10 +34,10 @@
  *   wish to do so, delete this exception statement from your version.
  */
 @XmlSchema(namespace = "http://www.opengis.net/ogc",
-        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+        elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED,
         xmlns = {@XmlNs(prefix = "ogc",
                 namespaceURI = "http://www.opengis.net/ogc")})
 package org.geosdi.geoplatform.xml.filter.v110;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlSchema;

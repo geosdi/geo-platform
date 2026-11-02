@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -187,17 +187,17 @@ public class TransactionSummaryType
         {
             BigInteger theTotalInserted;
             theTotalInserted = this.getTotalInserted();
-            strategy.appendField(locator, this, "totalInserted", buffer, theTotalInserted);
+            strategy.appendField(locator, this, "totalInserted", buffer, theTotalInserted, true);
         }
         {
             BigInteger theTotalUpdated;
             theTotalUpdated = this.getTotalUpdated();
-            strategy.appendField(locator, this, "totalUpdated", buffer, theTotalUpdated);
+            strategy.appendField(locator, this, "totalUpdated", buffer, theTotalUpdated, true);
         }
         {
             BigInteger theTotalDeleted;
             theTotalDeleted = this.getTotalDeleted();
-            strategy.appendField(locator, this, "totalDeleted", buffer, theTotalDeleted);
+            strategy.appendField(locator, this, "totalDeleted", buffer, theTotalDeleted, true);
         }
         return buffer;
     }

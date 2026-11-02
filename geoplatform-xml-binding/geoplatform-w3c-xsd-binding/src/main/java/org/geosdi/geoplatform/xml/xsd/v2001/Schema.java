@@ -43,21 +43,21 @@ package org.geosdi.geoplatform.xml.xsd.v2001;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for anonymous complex type.
@@ -548,58 +548,58 @@ public class Schema
             List<OpenAttrs> theIncludeOrImportOrRedefine;
             theIncludeOrImportOrRedefine = (this.isSetIncludeOrImportOrRedefine() ? this.getIncludeOrImportOrRedefine() : null);
             strategy.appendField(locator, this, "includeOrImportOrRedefine",
-                                 buffer, theIncludeOrImportOrRedefine);
+                                 buffer, theIncludeOrImportOrRedefine, true);
         }
         {
             List<OpenAttrs> theSimpleTypeOrComplexTypeOrGroup;
             theSimpleTypeOrComplexTypeOrGroup = (this.isSetSimpleTypeOrComplexTypeOrGroup() ? this.getSimpleTypeOrComplexTypeOrGroup() : null);
             strategy.appendField(locator, this, "simpleTypeOrComplexTypeOrGroup",
-                                 buffer, theSimpleTypeOrComplexTypeOrGroup);
+                                 buffer, theSimpleTypeOrComplexTypeOrGroup, true);
         }
         {
             String theTargetNamespace;
             theTargetNamespace = this.getTargetNamespace();
             strategy.appendField(locator, this, "targetNamespace", buffer,
-                                 theTargetNamespace);
+                                 theTargetNamespace, true);
         }
         {
             String theVersion;
             theVersion = this.getVersion();
-            strategy.appendField(locator, this, "version", buffer, theVersion);
+            strategy.appendField(locator, this, "version", buffer, theVersion, true);
         }
         {
             List<String> theFinalDefault;
             theFinalDefault = (this.isSetFinalDefault() ? this.getFinalDefault() : null);
             strategy.appendField(locator, this, "finalDefault", buffer,
-                                 theFinalDefault);
+                                 theFinalDefault, true);
         }
         {
             List<String> theBlockDefault;
             theBlockDefault = (this.isSetBlockDefault() ? this.getBlockDefault() : null);
             strategy.appendField(locator, this, "blockDefault", buffer,
-                                 theBlockDefault);
+                                 theBlockDefault, true);
         }
         {
             FormChoice theAttributeFormDefault;
             theAttributeFormDefault = this.getAttributeFormDefault();
             strategy.appendField(locator, this, "attributeFormDefault", buffer,
-                                 theAttributeFormDefault);
+                                 theAttributeFormDefault, true);
         }
         {
             FormChoice theElementFormDefault;
             theElementFormDefault = this.getElementFormDefault();
             strategy.appendField(locator, this, "elementFormDefault", buffer,
-                                 theElementFormDefault);
+                                 theElementFormDefault, true);
         }
         {
             String theId;
             theId = this.getId();
-            strategy.appendField(locator, this, "id", buffer, theId);
+            strategy.appendField(locator, this, "id", buffer, theId, true);
         }
         {
             String theLang;
             theLang = this.getLang();
-            strategy.appendField(locator, this, "lang", buffer, theLang);
+            strategy.appendField(locator, this, "lang", buffer, theLang, true);
         }
         return buffer;
     }

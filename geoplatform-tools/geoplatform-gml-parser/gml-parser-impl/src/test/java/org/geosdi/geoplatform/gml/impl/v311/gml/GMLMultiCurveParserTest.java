@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gml.impl.v311.gml;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.GMLBaseMultiCurveParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.MultiCurveType;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -69,7 +70,7 @@ public class GMLMultiCurveParserTest {
 
     @Test
     public void multiCurveJTSParserTest() throws Exception {
-        MultiCurveType multiCurveType = GPJAXBContextBuilder.newInstance().unmarshal(file, MultiCurveType.class);
+        MultiCurveType multiCurveType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(file, MultiCurveType.class);
         logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", multiCurveParser.parseGeometry(multiCurveType));
     }
 }

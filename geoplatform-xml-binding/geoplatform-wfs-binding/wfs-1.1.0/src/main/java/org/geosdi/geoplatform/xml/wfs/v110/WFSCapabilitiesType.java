@@ -43,12 +43,12 @@ package org.geosdi.geoplatform.xml.wfs.v110;
 
 import org.geosdi.geoplatform.xml.filter.v110.FilterCapabilities;
 import org.geosdi.geoplatform.xml.ows.v100.CapabilitiesBaseType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  *
@@ -215,25 +215,25 @@ public class WFSCapabilitiesType extends CapabilitiesBaseType
             FeatureTypeListType theFeatureTypeList;
             theFeatureTypeList = this.getFeatureTypeList();
             strategy.appendField(locator, this, "featureTypeList", buffer,
-                    theFeatureTypeList);
+                    theFeatureTypeList, true);
         }
         {
             GMLObjectTypeListType theServesGMLObjectTypeList;
             theServesGMLObjectTypeList = this.getServesGMLObjectTypeList();
             strategy.appendField(locator, this, "servesGMLObjectTypeList",
-                    buffer, theServesGMLObjectTypeList);
+                    buffer, theServesGMLObjectTypeList, true);
         }
         {
             GMLObjectTypeListType theSupportsGMLObjectTypeList;
             theSupportsGMLObjectTypeList = this.getSupportsGMLObjectTypeList();
             strategy.appendField(locator, this, "supportsGMLObjectTypeList",
-                    buffer, theSupportsGMLObjectTypeList);
+                    buffer, theSupportsGMLObjectTypeList, true);
         }
         {
             FilterCapabilities theFilterCapabilities;
             theFilterCapabilities = this.getFilterCapabilities();
             strategy.appendField(locator, this, "filterCapabilities", buffer,
-                    theFilterCapabilities);
+                    theFilterCapabilities, true);
         }
         return buffer;
     }

@@ -45,15 +45,15 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -342,37 +342,37 @@ public class FeatureStyleType
         {
             String theFeatureConstraint;
             theFeatureConstraint = this.getFeatureConstraint();
-            strategy.appendField(locator, this, "featureConstraint", buffer, theFeatureConstraint);
+            strategy.appendField(locator, this, "featureConstraint", buffer, theFeatureConstraint, true);
         }
         {
             List<GeometryStylePropertyElement> theGeometryStyle;
             theGeometryStyle = (this.isSetGeometryStyle()?this.getGeometryStyle():null);
-            strategy.appendField(locator, this, "geometryStyle", buffer, theGeometryStyle);
+            strategy.appendField(locator, this, "geometryStyle", buffer, theGeometryStyle, true);
         }
         {
             List<TopologyStylePropertyElement> theTopologyStyle;
             theTopologyStyle = (this.isSetTopologyStyle()?this.getTopologyStyle():null);
-            strategy.appendField(locator, this, "topologyStyle", buffer, theTopologyStyle);
+            strategy.appendField(locator, this, "topologyStyle", buffer, theTopologyStyle, true);
         }
         {
             LabelStylePropertyElement theLabelStyle;
             theLabelStyle = this.getLabelStyle();
-            strategy.appendField(locator, this, "labelStyle", buffer, theLabelStyle);
+            strategy.appendField(locator, this, "labelStyle", buffer, theLabelStyle, true);
         }
         {
             String theFeatureType;
             theFeatureType = this.getFeatureType();
-            strategy.appendField(locator, this, "featureType", buffer, theFeatureType);
+            strategy.appendField(locator, this, "featureType", buffer, theFeatureType, true);
         }
         {
             String theBaseType;
             theBaseType = this.getBaseType();
-            strategy.appendField(locator, this, "baseType", buffer, theBaseType);
+            strategy.appendField(locator, this, "baseType", buffer, theBaseType, true);
         }
         {
             QueryGrammarEnumeration theQueryGrammar;
             theQueryGrammar = this.getQueryGrammar();
-            strategy.appendField(locator, this, "queryGrammar", buffer, theQueryGrammar);
+            strategy.appendField(locator, this, "queryGrammar", buffer, theQueryGrammar, true);
         }
         return buffer;
     }

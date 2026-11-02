@@ -43,16 +43,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
 import org.geosdi.geoplatform.gml.api.MultiLineString;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * A MultiLineString is defined by one or more LineStrings, referenced through
@@ -157,7 +157,7 @@ public class MultiLineStringType extends AbstractGeometricAggregateType
             theLineStringMember = (this.isSetLineStringMember()
                                    ? this.getLineStringMember() : null);
             strategy.appendField(locator, this, "lineStringMember", buffer,
-                    theLineStringMember);
+                    theLineStringMember, true);
         }
         return buffer;
     }

@@ -46,15 +46,15 @@ package org.geosdi.geoplatform.xml.ebrim._3;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -236,22 +236,22 @@ public class PersonType
         {
             List<PostalAddressType> theAddress;
             theAddress = (((this.address!= null)&&(!this.address.isEmpty()))?this.getAddress():null);
-            strategy.appendField(locator, this, "address", buffer, theAddress);
+            strategy.appendField(locator, this, "address", buffer, theAddress, true);
         }
         {
             PersonNameType thePersonName;
             thePersonName = this.getPersonName();
-            strategy.appendField(locator, this, "personName", buffer, thePersonName);
+            strategy.appendField(locator, this, "personName", buffer, thePersonName, true);
         }
         {
             List<TelephoneNumberType> theTelephoneNumber;
             theTelephoneNumber = (((this.telephoneNumber!= null)&&(!this.telephoneNumber.isEmpty()))?this.getTelephoneNumber():null);
-            strategy.appendField(locator, this, "telephoneNumber", buffer, theTelephoneNumber);
+            strategy.appendField(locator, this, "telephoneNumber", buffer, theTelephoneNumber, true);
         }
         {
             List<EmailAddressType> theEmailAddress;
             theEmailAddress = (((this.emailAddress!= null)&&(!this.emailAddress.isEmpty()))?this.getEmailAddress():null);
-            strategy.appendField(locator, this, "emailAddress", buffer, theEmailAddress);
+            strategy.appendField(locator, this, "emailAddress", buffer, theEmailAddress, true);
         }
         return buffer;
     }

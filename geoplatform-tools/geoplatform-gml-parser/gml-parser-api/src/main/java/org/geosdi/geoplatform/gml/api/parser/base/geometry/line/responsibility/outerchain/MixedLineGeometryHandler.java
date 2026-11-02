@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.outerchain;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geojson.LngLatAlt;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
@@ -50,7 +51,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
-import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.List;
 

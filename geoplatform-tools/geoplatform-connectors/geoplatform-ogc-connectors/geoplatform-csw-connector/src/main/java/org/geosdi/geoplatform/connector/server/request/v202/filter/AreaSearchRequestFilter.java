@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequestState;
 import org.geosdi.geoplatform.connector.server.request.v202.responsibility.handler.GPGetRecordsHandlerType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
@@ -48,7 +49,6 @@ import org.geosdi.geoplatform.xml.filter.v110.UnaryLogicOpType;
 import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
 import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 
-import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

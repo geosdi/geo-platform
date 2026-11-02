@@ -46,16 +46,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -400,47 +400,47 @@ public class ParameterValueType
         {
             MeasureType theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         {
             DMSAngleType theDmsAngleValue;
             theDmsAngleValue = this.getDmsAngleValue();
-            strategy.appendField(locator, this, "dmsAngleValue", buffer, theDmsAngleValue);
+            strategy.appendField(locator, this, "dmsAngleValue", buffer, theDmsAngleValue, true);
         }
         {
             String theStringValue;
             theStringValue = this.getStringValue();
-            strategy.appendField(locator, this, "stringValue", buffer, theStringValue);
+            strategy.appendField(locator, this, "stringValue", buffer, theStringValue, true);
         }
         {
             BigInteger theIntegerValue;
             theIntegerValue = this.getIntegerValue();
-            strategy.appendField(locator, this, "integerValue", buffer, theIntegerValue);
+            strategy.appendField(locator, this, "integerValue", buffer, theIntegerValue, true);
         }
         {
             Boolean theBooleanValue;
             theBooleanValue = this.isBooleanValue();
-            strategy.appendField(locator, this, "booleanValue", buffer, theBooleanValue);
+            strategy.appendField(locator, this, "booleanValue", buffer, theBooleanValue, true);
         }
         {
             MeasureListType theValueList;
             theValueList = this.getValueList();
-            strategy.appendField(locator, this, "valueList", buffer, theValueList);
+            strategy.appendField(locator, this, "valueList", buffer, theValueList, true);
         }
         {
             List<BigInteger> theIntegerValueList;
             theIntegerValueList = (this.isSetIntegerValueList()?this.getIntegerValueList():null);
-            strategy.appendField(locator, this, "integerValueList", buffer, theIntegerValueList);
+            strategy.appendField(locator, this, "integerValueList", buffer, theIntegerValueList, true);
         }
         {
             String theValueFile;
             theValueFile = this.getValueFile();
-            strategy.appendField(locator, this, "valueFile", buffer, theValueFile);
+            strategy.appendField(locator, this, "valueFile", buffer, theValueFile, true);
         }
         {
             OperationParameterRefType theValueOfParameter;
             theValueOfParameter = this.getValueOfParameter();
-            strategy.appendField(locator, this, "valueOfParameter", buffer, theValueOfParameter);
+            strategy.appendField(locator, this, "valueOfParameter", buffer, theValueOfParameter, true);
         }
         return buffer;
     }

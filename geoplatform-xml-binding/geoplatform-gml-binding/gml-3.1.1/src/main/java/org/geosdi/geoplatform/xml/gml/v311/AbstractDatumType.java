@@ -45,16 +45,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -308,32 +308,32 @@ public abstract class AbstractDatumType
         {
             List<IdentifierType> theDatumID;
             theDatumID = (this.isSetDatumID()?this.getDatumID():null);
-            strategy.appendField(locator, this, "datumID", buffer, theDatumID);
+            strategy.appendField(locator, this, "datumID", buffer, theDatumID, true);
         }
         {
             StringOrRefType theRemarks;
             theRemarks = this.getRemarks();
-            strategy.appendField(locator, this, "remarks", buffer, theRemarks);
+            strategy.appendField(locator, this, "remarks", buffer, theRemarks, true);
         }
         {
             CodeType theAnchorPoint;
             theAnchorPoint = this.getAnchorPoint();
-            strategy.appendField(locator, this, "anchorPoint", buffer, theAnchorPoint);
+            strategy.appendField(locator, this, "anchorPoint", buffer, theAnchorPoint, true);
         }
         {
             XMLGregorianCalendar theRealizationEpoch;
             theRealizationEpoch = this.getRealizationEpoch();
-            strategy.appendField(locator, this, "realizationEpoch", buffer, theRealizationEpoch);
+            strategy.appendField(locator, this, "realizationEpoch", buffer, theRealizationEpoch, true);
         }
         {
             ExtentType theValidArea;
             theValidArea = this.getValidArea();
-            strategy.appendField(locator, this, "validArea", buffer, theValidArea);
+            strategy.appendField(locator, this, "validArea", buffer, theValidArea, true);
         }
         {
             String theScope;
             theScope = this.getScope();
-            strategy.appendField(locator, this, "scope", buffer, theScope);
+            strategy.appendField(locator, this, "scope", buffer, theScope, true);
         }
         return buffer;
     }

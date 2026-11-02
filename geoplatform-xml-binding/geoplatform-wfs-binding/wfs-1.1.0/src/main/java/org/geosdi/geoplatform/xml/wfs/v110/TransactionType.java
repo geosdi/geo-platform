@@ -45,17 +45,17 @@ package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -228,17 +228,17 @@ public class TransactionType
         {
             String theLockId;
             theLockId = this.getLockId();
-            strategy.appendField(locator, this, "lockId", buffer, theLockId);
+            strategy.appendField(locator, this, "lockId", buffer, theLockId, true);
         }
         {
             List<Object> theInsertOrUpdateOrDelete;
             theInsertOrUpdateOrDelete = (((this.insertOrUpdateOrDelete!= null)&&(!this.insertOrUpdateOrDelete.isEmpty()))?this.getInsertOrUpdateOrDelete():null);
-            strategy.appendField(locator, this, "insertOrUpdateOrDelete", buffer, theInsertOrUpdateOrDelete);
+            strategy.appendField(locator, this, "insertOrUpdateOrDelete", buffer, theInsertOrUpdateOrDelete, true);
         }
         {
             AllSomeType theReleaseAction;
             theReleaseAction = this.getReleaseAction();
-            strategy.appendField(locator, this, "releaseAction", buffer, theReleaseAction);
+            strategy.appendField(locator, this, "releaseAction", buffer, theReleaseAction, true);
         }
         return buffer;
     }

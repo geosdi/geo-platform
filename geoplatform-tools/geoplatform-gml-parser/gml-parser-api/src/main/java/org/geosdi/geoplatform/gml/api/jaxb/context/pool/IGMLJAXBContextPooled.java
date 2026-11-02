@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.locationtech.jts.geom.Geometry;
 import org.w3c.dom.Node;
@@ -42,8 +44,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamReader;

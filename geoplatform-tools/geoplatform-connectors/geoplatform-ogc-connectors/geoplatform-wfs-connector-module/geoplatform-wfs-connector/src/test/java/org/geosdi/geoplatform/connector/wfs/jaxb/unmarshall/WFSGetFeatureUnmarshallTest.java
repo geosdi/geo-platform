@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.context.WFSJAXBContext;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.junit.BeforeClass;
@@ -47,9 +50,6 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.StringWriter;
 

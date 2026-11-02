@@ -45,16 +45,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 import org.w3c.dom.Element;
 
 
@@ -488,62 +488,62 @@ public class SymbolType
         {
             List<Element> theAny;
             theAny = (this.isSetAny()?this.getAny():null);
-            strategy.appendField(locator, this, "any", buffer, theAny);
+            strategy.appendField(locator, this, "any", buffer, theAny, true);
         }
         {
             SymbolTypeEnumeration theSymbolType;
             theSymbolType = this.getSymbolType();
-            strategy.appendField(locator, this, "symbolType", buffer, theSymbolType);
+            strategy.appendField(locator, this, "symbolType", buffer, theSymbolType, true);
         }
         {
             String theTransform;
             theTransform = this.getTransform();
-            strategy.appendField(locator, this, "transform", buffer, theTransform);
+            strategy.appendField(locator, this, "transform", buffer, theTransform, true);
         }
         {
             String theAbout;
             theAbout = this.getAbout();
-            strategy.appendField(locator, this, "about", buffer, theAbout);
+            strategy.appendField(locator, this, "about", buffer, theAbout, true);
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema, true);
         }
         {
             String theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, true);
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, true);
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, true);
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, true);
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, true);
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, true);
         }
         return buffer;
     }

@@ -43,17 +43,17 @@
 
 package org.geosdi.geoplatform.xml.csw.v202;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -329,37 +329,37 @@ public class DomainValuesType
         {
             String thePropertyName;
             thePropertyName = this.getPropertyName();
-            strategy.appendField(locator, this, "propertyName", buffer, thePropertyName);
+            strategy.appendField(locator, this, "propertyName", buffer, thePropertyName, true);
         }
         {
             String theParameterName;
             theParameterName = this.getParameterName();
-            strategy.appendField(locator, this, "parameterName", buffer, theParameterName);
+            strategy.appendField(locator, this, "parameterName", buffer, theParameterName, true);
         }
         {
             ListOfValuesType theListOfValues;
             theListOfValues = this.getListOfValues();
-            strategy.appendField(locator, this, "listOfValues", buffer, theListOfValues);
+            strategy.appendField(locator, this, "listOfValues", buffer, theListOfValues, true);
         }
         {
             ConceptualSchemeType theConceptualScheme;
             theConceptualScheme = this.getConceptualScheme();
-            strategy.appendField(locator, this, "conceptualScheme", buffer, theConceptualScheme);
+            strategy.appendField(locator, this, "conceptualScheme", buffer, theConceptualScheme, true);
         }
         {
             RangeOfValuesType theRangeOfValues;
             theRangeOfValues = this.getRangeOfValues();
-            strategy.appendField(locator, this, "rangeOfValues", buffer, theRangeOfValues);
+            strategy.appendField(locator, this, "rangeOfValues", buffer, theRangeOfValues, true);
         }
         {
             QName theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             String theUom;
             theUom = this.getUom();
-            strategy.appendField(locator, this, "uom", buffer, theUom);
+            strategy.appendField(locator, this, "uom", buffer, theUom, true);
         }
         return buffer;
     }

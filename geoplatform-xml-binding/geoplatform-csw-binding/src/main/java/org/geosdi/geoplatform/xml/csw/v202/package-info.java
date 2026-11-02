@@ -45,6 +45,6 @@
                            namespaceURI = "http://www.opengis.net/cat/csw/2.0.2")})
 package org.geosdi.geoplatform.xml.csw.v202;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNsForm;
+import jakarta.xml.bind.annotation.XmlSchema;

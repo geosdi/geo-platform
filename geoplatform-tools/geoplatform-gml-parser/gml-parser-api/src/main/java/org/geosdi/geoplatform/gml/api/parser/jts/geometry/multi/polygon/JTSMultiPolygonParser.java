@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.polygon;
 
-import org.locationtech.jts.geom.Polygon;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.MultiPolygon;
 import org.geosdi.geoplatform.gml.api.MultiPolygonProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -43,8 +43,7 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.polygon.JTSPolygonParser;
-
-import javax.xml.bind.JAXBElement;
+import org.locationtech.jts.geom.Polygon;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

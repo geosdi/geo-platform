@@ -46,16 +46,16 @@ package org.geosdi.geoplatform.xml.ebrim._3;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlMixed;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 import org.w3c.dom.Element;
 
 
@@ -167,12 +167,12 @@ public class QueryExpressionType
         {
             List<Object> theContent;
             theContent = (((this.content!= null)&&(!this.content.isEmpty()))?this.getContent():null);
-            strategy.appendField(locator, this, "content", buffer, theContent);
+            strategy.appendField(locator, this, "content", buffer, theContent, true);
         }
         {
             String theQueryLanguage;
             theQueryLanguage = this.getQueryLanguage();
-            strategy.appendField(locator, this, "queryLanguage", buffer, theQueryLanguage);
+            strategy.appendField(locator, this, "queryLanguage", buffer, theQueryLanguage, true);
         }
         return buffer;
     }

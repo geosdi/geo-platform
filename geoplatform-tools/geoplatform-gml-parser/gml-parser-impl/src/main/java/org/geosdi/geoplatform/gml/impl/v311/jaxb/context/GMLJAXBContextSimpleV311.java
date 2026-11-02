@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jaxb.context;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContextSimple;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 
+import static jakarta.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
 import static javax.annotation.meta.When.NEVER;
-import static javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

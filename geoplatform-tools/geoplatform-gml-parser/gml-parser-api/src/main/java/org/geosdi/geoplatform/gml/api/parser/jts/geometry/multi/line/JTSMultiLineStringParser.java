@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.line;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.MultiLineString;
 import org.geosdi.geoplatform.gml.api.MultiLineStringProperty;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
@@ -43,8 +44,6 @@ import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.line.JTSLineStringParser;
 import org.locationtech.jts.geom.LineString;
-
-import javax.xml.bind.JAXBElement;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

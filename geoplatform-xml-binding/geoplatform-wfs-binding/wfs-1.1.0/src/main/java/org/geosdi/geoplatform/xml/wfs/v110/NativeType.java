@@ -43,14 +43,14 @@
 
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -139,12 +139,12 @@ public class NativeType implements ToString
         {
             String theVendorId;
             theVendorId = this.getVendorId();
-            strategy.appendField(locator, this, "vendorId", buffer, theVendorId);
+            strategy.appendField(locator, this, "vendorId", buffer, theVendorId, true);
         }
         {
             boolean theSafeToIgnore;
             theSafeToIgnore = (true?this.isSafeToIgnore():false);
-            strategy.appendField(locator, this, "safeToIgnore", buffer, theSafeToIgnore);
+            strategy.appendField(locator, this, "safeToIgnore", buffer, theSafeToIgnore, true);
         }
         return buffer;
     }

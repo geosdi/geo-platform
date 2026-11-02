@@ -44,16 +44,16 @@
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -235,22 +235,22 @@ public class TimeCalendarEraType
         {
             StringOrRefType theReferenceEvent;
             theReferenceEvent = this.getReferenceEvent();
-            strategy.appendField(locator, this, "referenceEvent", buffer, theReferenceEvent);
+            strategy.appendField(locator, this, "referenceEvent", buffer, theReferenceEvent, true);
         }
         {
             XMLGregorianCalendar theReferenceDate;
             theReferenceDate = this.getReferenceDate();
-            strategy.appendField(locator, this, "referenceDate", buffer, theReferenceDate);
+            strategy.appendField(locator, this, "referenceDate", buffer, theReferenceDate, true);
         }
         {
             BigDecimal theJulianReference;
             theJulianReference = this.getJulianReference();
-            strategy.appendField(locator, this, "julianReference", buffer, theJulianReference);
+            strategy.appendField(locator, this, "julianReference", buffer, theJulianReference, true);
         }
         {
             TimePeriodPropertyType theEpochOfUse;
             theEpochOfUse = this.getEpochOfUse();
-            strategy.appendField(locator, this, "epochOfUse", buffer, theEpochOfUse);
+            strategy.appendField(locator, this, "epochOfUse", buffer, theEpochOfUse, true);
         }
         return buffer;
     }

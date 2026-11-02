@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.geojson;
 
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
@@ -62,7 +63,7 @@ public abstract class GMLBaseGeoJsonParserTest {
     protected static final ObjectMapper mapper = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE).getDefaultMapper();
-    protected static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    protected static final IGPJAXBJakartaContextBuilder jaxbContextBuilder = GPJAXBJakartaContextBuilder.jakartaContextBuilder();
     protected static String dirFiles;
 
     @BeforeClass

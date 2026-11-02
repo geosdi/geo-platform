@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.geojson;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBIntrospector;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PropertyType;
@@ -43,9 +45,6 @@ import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRep
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBIntrospector;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

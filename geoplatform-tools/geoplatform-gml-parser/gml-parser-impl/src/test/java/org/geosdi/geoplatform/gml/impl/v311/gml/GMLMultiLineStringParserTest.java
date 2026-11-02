@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gml.impl.v311.gml;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.MultiLineStringType;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -75,13 +76,13 @@ public class GMLMultiLineStringParserTest {
 
     @Test
     public void a_multiLineStringJTSParserTest() throws Exception {
-        MultiLineStringType multiLineStringType = GPJAXBContextBuilder.newInstance().unmarshal(file, MultiLineStringType.class);
+        MultiLineStringType multiLineStringType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(file, MultiLineStringType.class);
         logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", multiLineStringParser.parseGeometry(multiLineStringType));
     }
 
     @Test
     public void b_multiLineStringJTSParserTest() throws Exception {
-        MultiLineStringType multiLineStringType = GPJAXBContextBuilder.newInstance().unmarshal(file1, MultiLineStringType.class);
+        MultiLineStringType multiLineStringType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(file1, MultiLineStringType.class);
         logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", multiLineStringParser.parseGeometry(multiLineStringType));
     }
 }

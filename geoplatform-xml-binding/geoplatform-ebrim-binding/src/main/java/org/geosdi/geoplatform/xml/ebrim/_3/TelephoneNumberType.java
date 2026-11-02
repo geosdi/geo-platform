@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.ebrim._3;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -233,27 +233,27 @@ public class TelephoneNumberType
         {
             String theAreaCode;
             theAreaCode = this.getAreaCode();
-            strategy.appendField(locator, this, "areaCode", buffer, theAreaCode);
+            strategy.appendField(locator, this, "areaCode", buffer, theAreaCode, true);
         }
         {
             String theCountryCode;
             theCountryCode = this.getCountryCode();
-            strategy.appendField(locator, this, "countryCode", buffer, theCountryCode);
+            strategy.appendField(locator, this, "countryCode", buffer, theCountryCode, true);
         }
         {
             String theExtension;
             theExtension = this.getExtension();
-            strategy.appendField(locator, this, "extension", buffer, theExtension);
+            strategy.appendField(locator, this, "extension", buffer, theExtension, true);
         }
         {
             String theNumber;
             theNumber = this.getNumber();
-            strategy.appendField(locator, this, "number", buffer, theNumber);
+            strategy.appendField(locator, this, "number", buffer, theNumber, true);
         }
         {
             String thePhoneType;
             thePhoneType = this.getPhoneType();
-            strategy.appendField(locator, this, "phoneType", buffer, thePhoneType);
+            strategy.appendField(locator, this, "phoneType", buffer, thePhoneType, true);
         }
         return buffer;
     }

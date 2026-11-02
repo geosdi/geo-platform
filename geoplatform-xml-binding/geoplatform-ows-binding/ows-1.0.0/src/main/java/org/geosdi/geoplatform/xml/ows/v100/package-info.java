@@ -33,12 +33,14 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-@XmlSchema(namespace = "http://www.opengis.net/ows",
-           elementFormDefault = XmlNsForm.QUALIFIED,
-           xmlns = {@XmlNs(prefix = "ows",
-                           namespaceURI = "http://www.opengis.net/ows")})
-package org.geosdi.geoplatform.xml.ows.v100;
+//
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:48:08 PM CET
+//
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/ows", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns = {
+    @jakarta.xml.bind.annotation.XmlNs(namespaceURI = "http://www.opengis.net/ows", prefix = "ows")
+})
+package org.geosdi.geoplatform.xml.ows.v100;

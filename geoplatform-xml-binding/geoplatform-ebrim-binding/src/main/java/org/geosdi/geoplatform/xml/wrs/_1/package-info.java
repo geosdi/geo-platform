@@ -40,5 +40,5 @@
 // Generated on: 2012.04.16 at 04:57:06 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/cat/wrs/1.0", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/cat/wrs/1.0", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package org.geosdi.geoplatform.xml.wrs._1;

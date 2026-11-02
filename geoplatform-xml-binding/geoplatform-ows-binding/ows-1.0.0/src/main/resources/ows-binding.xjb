@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" 
                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:namespace="urn:jaxb.jvnet.org:plugin:namespace-prefix" 
                jaxb:schemaLocation="
-               http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               https://jakarta.ee/xml/ns/jaxb
+               https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd
                http://www.w3.org/2001/XMLSchema
                http://www.w3.org/2001/XMLSchema.xsd"
-               jaxb:extensionBindingPrefixes="xjc">
+               jaxb:extensionBindingPrefixes="xjc namespace">
 
 	<jaxb:bindings schemaLocation="ows/1.0.0/owsAll.xsd" 
 		node="/xs:schema">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.geosdi.geoplatform.xml.ows.v100"/>
 		</jaxb:schemaBindings>
+		<namespace:prefix name="ows"/>
 	</jaxb:bindings>
 	<jaxb:bindings schemaLocation="ows/1.0.0/owsCommon.xsd" 
 		node="/xs:schema">

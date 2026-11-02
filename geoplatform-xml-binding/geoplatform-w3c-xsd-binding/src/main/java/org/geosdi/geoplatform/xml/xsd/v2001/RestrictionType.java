@@ -43,21 +43,21 @@ package org.geosdi.geoplatform.xml.xsd.v2001;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for restrictionType complex type.
@@ -398,47 +398,47 @@ public class RestrictionType
         {
             GroupRef theGroup;
             theGroup = this.getGroup();
-            strategy.appendField(locator, this, "group", buffer, theGroup);
+            strategy.appendField(locator, this, "group", buffer, theGroup, true);
         }
         {
             All theAll;
             theAll = this.getAll();
-            strategy.appendField(locator, this, "all", buffer, theAll);
+            strategy.appendField(locator, this, "all", buffer, theAll, true);
         }
         {
             ExplicitGroup theChoice;
             theChoice = this.getChoice();
-            strategy.appendField(locator, this, "choice", buffer, theChoice);
+            strategy.appendField(locator, this, "choice", buffer, theChoice, true);
         }
         {
             ExplicitGroup theSequence;
             theSequence = this.getSequence();
-            strategy.appendField(locator, this, "sequence", buffer, theSequence);
+            strategy.appendField(locator, this, "sequence", buffer, theSequence, true);
         }
         {
             LocalSimpleType theSimpleType;
             theSimpleType = this.getSimpleType();
-            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType);
+            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType, true);
         }
         {
             List<Object> theFacets;
             theFacets = (this.isSetFacets() ? this.getFacets() : null);
-            strategy.appendField(locator, this, "facets", buffer, theFacets);
+            strategy.appendField(locator, this, "facets", buffer, theFacets, true);
         }
         {
             List<Annotated> theAttributeOrAttributeGroup;
             theAttributeOrAttributeGroup = (this.isSetAttributeOrAttributeGroup() ? this.getAttributeOrAttributeGroup() : null);
-            strategy.appendField(locator, this, "attributeOrAttributeGroup", buffer, theAttributeOrAttributeGroup);
+            strategy.appendField(locator, this, "attributeOrAttributeGroup", buffer, theAttributeOrAttributeGroup, true);
         }
         {
             Wildcard theAnyAttribute;
             theAnyAttribute = this.getAnyAttribute();
-            strategy.appendField(locator, this, "anyAttribute", buffer, theAnyAttribute);
+            strategy.appendField(locator, this, "anyAttribute", buffer, theAnyAttribute, true);
         }
         {
             QName theBase;
             theBase = this.getBase();
-            strategy.appendField(locator, this, "base", buffer, theBase);
+            strategy.appendField(locator, this, "base", buffer, theBase, true);
         }
         return buffer;
     }

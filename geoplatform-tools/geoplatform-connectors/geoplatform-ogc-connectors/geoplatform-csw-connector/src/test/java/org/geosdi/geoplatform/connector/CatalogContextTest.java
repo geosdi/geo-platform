@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.connector;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.apache.hc.client5.http.ClientProtocolException;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -45,8 +48,8 @@ import org.apache.hc.core5.http.NameValuePair;
 import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.junit.Before;
@@ -57,9 +60,6 @@ import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,7 +86,7 @@ public class CatalogContextTest {
     private final static String CSW_HOST = "catalog.geosdi.org";
     private final static String CSW_PATH = "/geonetwork/srv/eng/csw";
     //
-    private final GPBaseJAXBContext cswContext = JAXBContextConnectorRepository
+    private final GPBaseJakartaContext cswContext = JakartaContextConnectorRepository
             .getProvider(CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     private HttpEntity entity;
 

@@ -43,18 +43,18 @@ package org.geosdi.geoplatform.xml.csw.v202.dc.elements;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlMixed;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.csw.v202.dc.terms.URI;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * This is the default type for all of the DC elements. It defines a complexType
@@ -191,12 +191,12 @@ public class SimpleLiteral
         {
             List<String> theContent;
             theContent = (this.isSetContent() ? this.getContent() : null);
-            strategy.appendField(locator, this, "content", buffer, theContent);
+            strategy.appendField(locator, this, "content", buffer, theContent, true);
         }
         {
             String theScheme;
             theScheme = this.getScheme();
-            strategy.appendField(locator, this, "scheme", buffer, theScheme);
+            strategy.appendField(locator, this, "scheme", buffer, theScheme, true);
         }
         return buffer;
     }

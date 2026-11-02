@@ -42,12 +42,12 @@
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * 
@@ -143,7 +143,7 @@ public class GetCapabilitiesType
         {
             String theService;
             theService = this.getService();
-            strategy.appendField(locator, this, "service", buffer, theService);
+            strategy.appendField(locator, this, "service", buffer, theService, true);
         }
         return buffer;
     }

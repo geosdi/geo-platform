@@ -45,14 +45,14 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -175,12 +175,12 @@ public class MultiSolidType
         {
             List<SolidPropertyType> theSolidMember;
             theSolidMember = (this.isSetSolidMember()?this.getSolidMember():null);
-            strategy.appendField(locator, this, "solidMember", buffer, theSolidMember);
+            strategy.appendField(locator, this, "solidMember", buffer, theSolidMember, true);
         }
         {
             SolidArrayPropertyType theSolidMembers;
             theSolidMembers = this.getSolidMembers();
-            strategy.appendField(locator, this, "solidMembers", buffer, theSolidMembers);
+            strategy.appendField(locator, this, "solidMembers", buffer, theSolidMembers, true);
         }
         return buffer;
     }

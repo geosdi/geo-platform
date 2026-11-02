@@ -43,15 +43,15 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -260,27 +260,27 @@ public class TopologyStyleType
         {
             SymbolType theSymbol;
             theSymbol = this.getSymbol();
-            strategy.appendField(locator, this, "symbol", buffer, theSymbol);
+            strategy.appendField(locator, this, "symbol", buffer, theSymbol, true);
         }
         {
             String theStyle;
             theStyle = this.getStyle();
-            strategy.appendField(locator, this, "style", buffer, theStyle);
+            strategy.appendField(locator, this, "style", buffer, theStyle, true);
         }
         {
             LabelStylePropertyElement theLabelStyle;
             theLabelStyle = this.getLabelStyle();
-            strategy.appendField(locator, this, "labelStyle", buffer, theLabelStyle);
+            strategy.appendField(locator, this, "labelStyle", buffer, theLabelStyle, true);
         }
         {
             String theTopologyProperty;
             theTopologyProperty = this.getTopologyProperty();
-            strategy.appendField(locator, this, "topologyProperty", buffer, theTopologyProperty);
+            strategy.appendField(locator, this, "topologyProperty", buffer, theTopologyProperty, true);
         }
         {
             String theTopologyType;
             theTopologyType = this.getTopologyType();
-            strategy.appendField(locator, this, "topologyType", buffer, theTopologyType);
+            strategy.appendField(locator, this, "topologyType", buffer, theTopologyType, true);
         }
         return buffer;
     }

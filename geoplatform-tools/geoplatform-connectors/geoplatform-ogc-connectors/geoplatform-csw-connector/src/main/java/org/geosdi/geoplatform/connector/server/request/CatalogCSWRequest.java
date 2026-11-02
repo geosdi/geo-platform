@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.io.StringWriter;
 
 import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
@@ -52,14 +52,14 @@ import static org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBC
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class CatalogCSWRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
+public abstract class CatalogCSWRequest<T, Request> extends GPPostJakartaConnectorRequest<T, Request> {
 
     static {
-        cswContext = JAXBContextConnectorRepository.getProvider(CSW_CONTEXT_KEY);
+        cswContext = JakartaContextConnectorRepository.getProvider(CSW_CONTEXT_KEY);
     }
 
     //
-    private static final GPBaseJAXBContext cswContext;
+    private static final GPBaseJakartaContext cswContext;
 
     /**
      * @param server

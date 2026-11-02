@@ -43,21 +43,21 @@ package org.geosdi.geoplatform.xml.xsd.v2001;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for anonymous complex type.
@@ -214,17 +214,17 @@ public class Redefine
         {
             List<OpenAttrs> theAnnotationOrSimpleTypeOrComplexType;
             theAnnotationOrSimpleTypeOrComplexType = (this.isSetAnnotationOrSimpleTypeOrComplexType() ? this.getAnnotationOrSimpleTypeOrComplexType() : null);
-            strategy.appendField(locator, this, "annotationOrSimpleTypeOrComplexType", buffer, theAnnotationOrSimpleTypeOrComplexType);
+            strategy.appendField(locator, this, "annotationOrSimpleTypeOrComplexType", buffer, theAnnotationOrSimpleTypeOrComplexType, true);
         }
         {
             String theSchemaLocation;
             theSchemaLocation = this.getSchemaLocation();
-            strategy.appendField(locator, this, "schemaLocation", buffer, theSchemaLocation);
+            strategy.appendField(locator, this, "schemaLocation", buffer, theSchemaLocation, true);
         }
         {
             String theId;
             theId = this.getId();
-            strategy.appendField(locator, this, "id", buffer, theId);
+            strategy.appendField(locator, this, "id", buffer, theId, true);
         }
         return buffer;
     }

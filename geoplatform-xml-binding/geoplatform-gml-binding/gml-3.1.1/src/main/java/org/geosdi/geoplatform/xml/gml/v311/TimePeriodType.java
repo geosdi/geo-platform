@@ -43,14 +43,14 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.Duration;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -288,32 +288,32 @@ public class TimePeriodType
         {
             TimePositionType theBeginPosition;
             theBeginPosition = this.getBeginPosition();
-            strategy.appendField(locator, this, "beginPosition", buffer, theBeginPosition);
+            strategy.appendField(locator, this, "beginPosition", buffer, theBeginPosition, true);
         }
         {
             TimeInstantPropertyType theBegin;
             theBegin = this.getBegin();
-            strategy.appendField(locator, this, "begin", buffer, theBegin);
+            strategy.appendField(locator, this, "begin", buffer, theBegin, true);
         }
         {
             TimePositionType theEndPosition;
             theEndPosition = this.getEndPosition();
-            strategy.appendField(locator, this, "endPosition", buffer, theEndPosition);
+            strategy.appendField(locator, this, "endPosition", buffer, theEndPosition, true);
         }
         {
             TimeInstantPropertyType theEnd;
             theEnd = this.getEnd();
-            strategy.appendField(locator, this, "end", buffer, theEnd);
+            strategy.appendField(locator, this, "end", buffer, theEnd, true);
         }
         {
             Duration theDuration;
             theDuration = this.getDuration();
-            strategy.appendField(locator, this, "duration", buffer, theDuration);
+            strategy.appendField(locator, this, "duration", buffer, theDuration, true);
         }
         {
             TimeIntervalLengthType theTimeInterval;
             theTimeInterval = this.getTimeInterval();
-            strategy.appendField(locator, this, "timeInterval", buffer, theTimeInterval);
+            strategy.appendField(locator, this, "timeInterval", buffer, theTimeInterval, true);
         }
         return buffer;
     }

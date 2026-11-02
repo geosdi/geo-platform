@@ -45,13 +45,13 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -185,12 +185,12 @@ public class BagType
         {
             List<AssociationType> theMember;
             theMember = (this.isSetMember()?this.getMember():null);
-            strategy.appendField(locator, this, "member", buffer, theMember);
+            strategy.appendField(locator, this, "member", buffer, theMember, true);
         }
         {
             ArrayAssociationType theMembers;
             theMembers = this.getMembers();
-            strategy.appendField(locator, this, "members", buffer, theMembers);
+            strategy.appendField(locator, this, "members", buffer, theMembers, true);
         }
         return buffer;
     }

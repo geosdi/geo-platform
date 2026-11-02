@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.repository;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.v110.query.repository.IDateFormatStrategyFinder.DateFormatStrategyPatter;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
@@ -42,7 +43,6 @@ import org.geosdi.geoplatform.xml.filter.v110.FunctionType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
 
-import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.List;
 

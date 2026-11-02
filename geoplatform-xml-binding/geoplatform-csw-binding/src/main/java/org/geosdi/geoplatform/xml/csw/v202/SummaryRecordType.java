@@ -45,18 +45,18 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
 import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -529,52 +529,52 @@ public class SummaryRecordType
         {
             List<JAXBElement<SimpleLiteral>> theIdentifier;
             theIdentifier = (this.isSetIdentifier()?this.getIdentifier():null);
-            strategy.appendField(locator, this, "identifier", buffer, theIdentifier);
+            strategy.appendField(locator, this, "identifier", buffer, theIdentifier, true);
         }
         {
             List<JAXBElement<SimpleLiteral>> theTitle;
             theTitle = (this.isSetTitle()?this.getTitle():null);
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, true);
         }
         {
             SimpleLiteral theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             List<SimpleLiteral> theSubject;
             theSubject = (this.isSetSubject()?this.getSubject():null);
-            strategy.appendField(locator, this, "subject", buffer, theSubject);
+            strategy.appendField(locator, this, "subject", buffer, theSubject, true);
         }
         {
             List<JAXBElement<SimpleLiteral>> theFormat;
             theFormat = (this.isSetFormat()?this.getFormat():null);
-            strategy.appendField(locator, this, "format", buffer, theFormat);
+            strategy.appendField(locator, this, "format", buffer, theFormat, true);
         }
         {
             List<JAXBElement<SimpleLiteral>> theRelation;
             theRelation = (this.isSetRelation()?this.getRelation():null);
-            strategy.appendField(locator, this, "relation", buffer, theRelation);
+            strategy.appendField(locator, this, "relation", buffer, theRelation, true);
         }
         {
             List<SimpleLiteral> theModified;
             theModified = (this.isSetModified()?this.getModified():null);
-            strategy.appendField(locator, this, "modified", buffer, theModified);
+            strategy.appendField(locator, this, "modified", buffer, theModified, true);
         }
         {
             List<SimpleLiteral> theAbstract;
             theAbstract = (this.isSetAbstract()?this.getAbstract():null);
-            strategy.appendField(locator, this, "_abstract", buffer, theAbstract);
+            strategy.appendField(locator, this, "_abstract", buffer, theAbstract, true);
         }
         {
             List<SimpleLiteral> theSpatial;
             theSpatial = (this.isSetSpatial()?this.getSpatial():null);
-            strategy.appendField(locator, this, "spatial", buffer, theSpatial);
+            strategy.appendField(locator, this, "spatial", buffer, theSpatial, true);
         }
         {
             List<JAXBElement<BoundingBoxType>> theBoundingBox;
             theBoundingBox = (this.isSetBoundingBox()?this.getBoundingBox():null);
-            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox);
+            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox, true);
         }
         return buffer;
     }

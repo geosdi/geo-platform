@@ -43,15 +43,15 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.MultiSurface;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * A MultiSurface is defined by one or more Surfaces, referenced through
@@ -178,13 +178,13 @@ public class MultiSurfaceType extends AbstractGeometricAggregateType
             List<SurfacePropertyType> theSurfaceMember;
             theSurfaceMember = (this.isSetSurfaceMember() ? this.getSurfaceMember() : null);
             strategy.appendField(locator, this, "surfaceMember", buffer,
-                    theSurfaceMember);
+                    theSurfaceMember, true);
         }
         {
             SurfaceArrayPropertyType theSurfaceMembers;
             theSurfaceMembers = this.getSurfaceMembers();
             strategy.appendField(locator, this, "surfaceMembers", buffer,
-                    theSurfaceMembers);
+                    theSurfaceMembers, true);
         }
         return buffer;
     }

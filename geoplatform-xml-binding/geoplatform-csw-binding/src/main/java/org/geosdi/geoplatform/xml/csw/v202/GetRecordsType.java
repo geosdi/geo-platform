@@ -44,21 +44,21 @@ package org.geosdi.geoplatform.xml.csw.v202;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * 
@@ -466,60 +466,60 @@ public class GetRecordsType extends RequestBaseType
             DistributedSearchType theDistributedSearch;
             theDistributedSearch = this.getDistributedSearch();
             strategy.appendField(locator, this, "distributedSearch", buffer,
-                    theDistributedSearch);
+                    theDistributedSearch, true);
         }
         {
             List<String> theResponseHandler;
             theResponseHandler = (this.isSetResponseHandler() ? this.getResponseHandler() : null);
             strategy.appendField(locator, this, "responseHandler", buffer,
-                    theResponseHandler);
+                    theResponseHandler, true);
         }
         {
             AbstractQueryType theAbstractQuery;
             theAbstractQuery = this.getAbstractQuery();
             strategy.appendField(locator, this, "abstractQuery", buffer,
-                    theAbstractQuery);
+                    theAbstractQuery, true);
         }
         {
             Object theAny;
             theAny = this.getAny();
-            strategy.appendField(locator, this, "any", buffer, theAny);
+            strategy.appendField(locator, this, "any", buffer, theAny, true);
         }
         {
             String theRequestId;
             theRequestId = this.getRequestId();
             strategy.appendField(locator, this, "requestId", buffer,
-                    theRequestId);
+                    theRequestId, true);
         }
         {
             ResultType theResultType;
             theResultType = this.getResultType();
             strategy.appendField(locator, this, "resultType", buffer,
-                    theResultType);
+                    theResultType, true);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
             strategy.appendField(locator, this, "outputFormat", buffer,
-                    theOutputFormat);
+                    theOutputFormat, true);
         }
         {
             String theOutputSchema;
             theOutputSchema = this.getOutputSchema();
             strategy.appendField(locator, this, "outputSchema", buffer,
-                    theOutputSchema);
+                    theOutputSchema, true);
         }
         {
             BigInteger theStartPosition;
             theStartPosition = this.getStartPosition();
             strategy.appendField(locator, this, "startPosition", buffer,
-                    theStartPosition);
+                    theStartPosition, true);
         }
         {
             BigInteger theMaxRecords;
             theMaxRecords = this.getMaxRecords();
             strategy.appendField(locator, this, "maxRecords", buffer,
-                    theMaxRecords);
+                    theMaxRecords, true);
         }
         return buffer;
     }

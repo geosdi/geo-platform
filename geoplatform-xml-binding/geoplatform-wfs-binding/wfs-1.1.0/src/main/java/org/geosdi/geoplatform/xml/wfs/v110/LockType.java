@@ -43,17 +43,17 @@
 
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -192,17 +192,17 @@ public class LockType
         {
             FilterType theFilter;
             theFilter = this.getFilter();
-            strategy.appendField(locator, this, "filter", buffer, theFilter);
+            strategy.appendField(locator, this, "filter", buffer, theFilter, true);
         }
         {
             String theHandle;
             theHandle = this.getHandle();
-            strategy.appendField(locator, this, "handle", buffer, theHandle);
+            strategy.appendField(locator, this, "handle", buffer, theHandle, true);
         }
         {
             QName theTypeName;
             theTypeName = this.getTypeName();
-            strategy.appendField(locator, this, "typeName", buffer, theTypeName);
+            strategy.appendField(locator, this, "typeName", buffer, theTypeName, true);
         }
         return buffer;
     }

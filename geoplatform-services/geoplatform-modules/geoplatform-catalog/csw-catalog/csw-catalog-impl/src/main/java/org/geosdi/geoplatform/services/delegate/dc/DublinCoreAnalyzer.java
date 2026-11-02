@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services.delegate.dc;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gui.responce.DCEsriScheme;
 import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
@@ -47,7 +48,6 @@ import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
 import java.util.List;
 
 /**

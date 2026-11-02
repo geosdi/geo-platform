@@ -44,13 +44,13 @@
 package org.geosdi.geoplatform.xml.filter.v110;
 
 import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.*;
 
 
 /**
@@ -76,7 +76,7 @@ import javax.xml.bind.annotation.*;
         "propertyName",
         "envelope"
 })
-public class BBOXType extends SpatialOpsType implements ToString2 {
+public class BBOXType extends SpatialOpsType implements ToString {
 
     @XmlElement(name = "PropertyName", required = true)
     protected PropertyNameType propertyName;
@@ -132,20 +132,20 @@ public class BBOXType extends SpatialOpsType implements ToString2 {
     }
 
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             PropertyNameType thePropertyName;

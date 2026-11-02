@@ -46,19 +46,19 @@ package org.geosdi.geoplatform.xml.ebrim._3;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -254,27 +254,27 @@ public class SubscriptionType
         {
             List<JAXBElement<? extends ActionType>> theAction;
             theAction = (((this.action!= null)&&(!this.action.isEmpty()))?this.getAction():null);
-            strategy.appendField(locator, this, "action", buffer, theAction);
+            strategy.appendField(locator, this, "action", buffer, theAction, true);
         }
         {
             String theSelector;
             theSelector = this.getSelector();
-            strategy.appendField(locator, this, "selector", buffer, theSelector);
+            strategy.appendField(locator, this, "selector", buffer, theSelector, true);
         }
         {
             XMLGregorianCalendar theStartTime;
             theStartTime = this.getStartTime();
-            strategy.appendField(locator, this, "startTime", buffer, theStartTime);
+            strategy.appendField(locator, this, "startTime", buffer, theStartTime, true);
         }
         {
             XMLGregorianCalendar theEndTime;
             theEndTime = this.getEndTime();
-            strategy.appendField(locator, this, "endTime", buffer, theEndTime);
+            strategy.appendField(locator, this, "endTime", buffer, theEndTime, true);
         }
         {
             Duration theNotificationInterval;
             theNotificationInterval = this.getNotificationInterval();
-            strategy.appendField(locator, this, "notificationInterval", buffer, theNotificationInterval);
+            strategy.appendField(locator, this, "notificationInterval", buffer, theNotificationInterval, true);
         }
         return buffer;
     }

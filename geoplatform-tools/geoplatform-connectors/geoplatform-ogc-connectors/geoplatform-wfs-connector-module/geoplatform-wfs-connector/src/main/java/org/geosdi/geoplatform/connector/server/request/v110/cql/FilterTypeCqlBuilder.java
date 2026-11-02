@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.cql;
 
-import org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool;
+import org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geotools.api.filter.Filter;
 import org.geotools.filter.text.ecql.ECQL;
@@ -48,7 +48,7 @@ import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 
-import static org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool.jaxbContextBuilderPool;
+import static org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool.jaxbJakartaContextBuilderPool;
 import static org.geotools.factory.CommonFactoryFinder.getFilterFactory;
 import static org.geotools.util.factory.GeoTools.getDefaultHints;
 
@@ -60,7 +60,7 @@ class FilterTypeCqlBuilder implements GPFilterTypeCqlBuilder {
 
     private static final Logger logger = LoggerFactory.getLogger(FilterTypeCqlBuilder.class);
     //
-    private static final GPJAXBContextBuilderPool jaxbContextBuilder = jaxbContextBuilderPool();
+    private static final GPJAXBJakartaContextBuilderPool jaxbContextBuilder = jaxbJakartaContextBuilderPool();
     //
     private String cqlFilter;
 

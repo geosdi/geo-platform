@@ -43,13 +43,13 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import org.geosdi.geoplatform.gml.api.DirectPositionList;
 import org.geosdi.geoplatform.gml.api.LineString;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -233,18 +233,18 @@ public class LineStringType extends AbstractCurveType implements ToString, LineS
                     ? this.getPosOrPointPropertyOrPointRep()
                     : null);
             strategy.appendField(locator, this, "posOrPointPropertyOrPointRep",
-                    buffer, thePosOrPointPropertyOrPointRep);
+                    buffer, thePosOrPointPropertyOrPointRep, true);
         }
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, true);
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
             strategy.appendField(locator, this, "coordinates", buffer,
-                    theCoordinates);
+                    theCoordinates, true);
         }
         return buffer;
     }

@@ -45,19 +45,19 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.AnimateColorType;
 import org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.AnimateMotionType;
 import org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.AnimateType;
 import org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.SetType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 
@@ -350,32 +350,32 @@ public class BaseStyleDescriptorType
         {
             ScaleType theSpatialResolution;
             theSpatialResolution = this.getSpatialResolution();
-            strategy.appendField(locator, this, "spatialResolution", buffer, theSpatialResolution);
+            strategy.appendField(locator, this, "spatialResolution", buffer, theSpatialResolution, true);
         }
         {
             List<StyleVariationType> theStyleVariation;
             theStyleVariation = (this.isSetStyleVariation()?this.getStyleVariation():null);
-            strategy.appendField(locator, this, "styleVariation", buffer, theStyleVariation);
+            strategy.appendField(locator, this, "styleVariation", buffer, theStyleVariation, true);
         }
         {
             List<AnimateType> theAnimate;
             theAnimate = (this.isSetAnimate()?this.getAnimate():null);
-            strategy.appendField(locator, this, "animate", buffer, theAnimate);
+            strategy.appendField(locator, this, "animate", buffer, theAnimate, true);
         }
         {
             List<AnimateMotionType> theAnimateMotion;
             theAnimateMotion = (this.isSetAnimateMotion()?this.getAnimateMotion():null);
-            strategy.appendField(locator, this, "animateMotion", buffer, theAnimateMotion);
+            strategy.appendField(locator, this, "animateMotion", buffer, theAnimateMotion, true);
         }
         {
             List<AnimateColorType> theAnimateColor;
             theAnimateColor = (this.isSetAnimateColor()?this.getAnimateColor():null);
-            strategy.appendField(locator, this, "animateColor", buffer, theAnimateColor);
+            strategy.appendField(locator, this, "animateColor", buffer, theAnimateColor, true);
         }
         {
             List<SetType> theSet;
             theSet = (this.isSetSet()?this.getSet():null);
-            strategy.appendField(locator, this, "set", buffer, theSet);
+            strategy.appendField(locator, this, "set", buffer, theSet, true);
         }
         return buffer;
     }

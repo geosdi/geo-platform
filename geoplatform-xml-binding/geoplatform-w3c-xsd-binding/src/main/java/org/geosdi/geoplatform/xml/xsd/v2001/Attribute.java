@@ -41,19 +41,19 @@
 //
 package org.geosdi.geoplatform.xml.xsd.v2001;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for attribute complex type.
@@ -335,42 +335,42 @@ public class Attribute
         {
             LocalSimpleType theSimpleType;
             theSimpleType = this.getSimpleType();
-            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType);
+            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType, true);
         }
         {
             QName theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             String theUse;
             theUse = this.getUse();
-            strategy.appendField(locator, this, "use", buffer, theUse);
+            strategy.appendField(locator, this, "use", buffer, theUse, true);
         }
         {
             String theDefault;
             theDefault = this.getDefault();
-            strategy.appendField(locator, this, "_default", buffer, theDefault);
+            strategy.appendField(locator, this, "_default", buffer, theDefault, true);
         }
         {
             String theFixed;
             theFixed = this.getFixed();
-            strategy.appendField(locator, this, "fixed", buffer, theFixed);
+            strategy.appendField(locator, this, "fixed", buffer, theFixed, true);
         }
         {
             FormChoice theForm;
             theForm = this.getForm();
-            strategy.appendField(locator, this, "form", buffer, theForm);
+            strategy.appendField(locator, this, "form", buffer, theForm, true);
         }
         {
             String theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         {
             QName theRef;
             theRef = this.getRef();
-            strategy.appendField(locator, this, "ref", buffer, theRef);
+            strategy.appendField(locator, this, "ref", buffer, theRef, true);
         }
         return buffer;
     }

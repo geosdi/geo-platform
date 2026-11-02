@@ -43,16 +43,16 @@
 
 package org.geosdi.geoplatform.xml.csw.v202;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -233,22 +233,22 @@ public class GetRecordsResponseType
         {
             String theRequestId;
             theRequestId = this.getRequestId();
-            strategy.appendField(locator, this, "requestId", buffer, theRequestId);
+            strategy.appendField(locator, this, "requestId", buffer, theRequestId, true);
         }
         {
             RequestStatusType theSearchStatus;
             theSearchStatus = this.getSearchStatus();
-            strategy.appendField(locator, this, "searchStatus", buffer, theSearchStatus);
+            strategy.appendField(locator, this, "searchStatus", buffer, theSearchStatus, true);
         }
         {
             SearchResultsType theSearchResults;
             theSearchResults = this.getSearchResults();
-            strategy.appendField(locator, this, "searchResults", buffer, theSearchResults);
+            strategy.appendField(locator, this, "searchResults", buffer, theSearchResults, true);
         }
         {
             String theVersion;
             theVersion = this.getVersion();
-            strategy.appendField(locator, this, "version", buffer, theVersion);
+            strategy.appendField(locator, this, "version", buffer, theVersion, true);
         }
         return buffer;
     }

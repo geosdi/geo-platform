@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gml.impl.v311.gml;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.point.GMLBaseMultiPointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.MultiPointType;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -69,7 +70,7 @@ public class GMLMultiPointParserTest {
 
     @Test
     public void multiPointJTSParserTest() throws Exception {
-        MultiPointType multiPointType = GPJAXBContextBuilder.newInstance().unmarshal(file, MultiPointType.class);
+        MultiPointType multiPointType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(file, MultiPointType.class);
         logger.info("##########################MULTI_POINT_JTS : {}\n", multiPointParser.parseGeometry(multiPointType));
     }
 }

@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.xml.xsd.v2001.*;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.FileOutputStream;
 import java.util.Arrays;

@@ -41,16 +41,16 @@
 //
 package org.geosdi.geoplatform.xml.xsd.v2001;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  *
@@ -159,12 +159,12 @@ public class List
         {
             LocalSimpleType theSimpleType;
             theSimpleType = this.getSimpleType();
-            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType);
+            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType, true);
         }
         {
             QName theItemType;
             theItemType = this.getItemType();
-            strategy.appendField(locator, this, "itemType", buffer, theItemType);
+            strategy.appendField(locator, this, "itemType", buffer, theItemType, true);
         }
         return buffer;
     }

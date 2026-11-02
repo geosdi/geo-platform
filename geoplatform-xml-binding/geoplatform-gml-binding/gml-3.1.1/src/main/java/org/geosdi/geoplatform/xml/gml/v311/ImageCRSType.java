@@ -43,14 +43,14 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -197,17 +197,17 @@ public class ImageCRSType
         {
             CartesianCSRefType theUsesCartesianCS;
             theUsesCartesianCS = this.getUsesCartesianCS();
-            strategy.appendField(locator, this, "usesCartesianCS", buffer, theUsesCartesianCS);
+            strategy.appendField(locator, this, "usesCartesianCS", buffer, theUsesCartesianCS, true);
         }
         {
             ObliqueCartesianCSRefType theUsesObliqueCartesianCS;
             theUsesObliqueCartesianCS = this.getUsesObliqueCartesianCS();
-            strategy.appendField(locator, this, "usesObliqueCartesianCS", buffer, theUsesObliqueCartesianCS);
+            strategy.appendField(locator, this, "usesObliqueCartesianCS", buffer, theUsesObliqueCartesianCS, true);
         }
         {
             ImageDatumRefType theUsesImageDatum;
             theUsesImageDatum = this.getUsesImageDatum();
-            strategy.appendField(locator, this, "usesImageDatum", buffer, theUsesImageDatum);
+            strategy.appendField(locator, this, "usesImageDatum", buffer, theUsesImageDatum, true);
         }
         return buffer;
     }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wfs.jaxb.comparison;
 
+import jakarta.xml.bind.JAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.context.WFSJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.WFSJAXBContextPool;
 import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
@@ -42,7 +43,6 @@ import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBContext;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

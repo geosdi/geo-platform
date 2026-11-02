@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" 
                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:namespace="urn:jaxb.jvnet.org:plugin:namespace-prefix" 
                jaxb:schemaLocation="
-               http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               https://jakarta.ee/xml/ns/jaxb
+               https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd
                http://www.w3.org/2001/XMLSchema
                http://www.w3.org/2001/XMLSchema.xsd"
-               jaxb:extensionBindingPrefixes="xjc">
+               jaxb:extensionBindingPrefixes="xjc namespace">
 
     <jaxb:bindings schemaLocation="iso/19139/20070417/gmd/gmd.xsd" 
                        node="/xs:schema">
@@ -23,6 +24,7 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gmd"/>
         </jaxb:schemaBindings>
+        <namespace:prefix name="gmd"/>
     </jaxb:bindings>
 
     <jaxb:bindings schemaLocation="iso/19139/20070417/gco/gco.xsd" 
@@ -30,6 +32,7 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gco"/>
         </jaxb:schemaBindings>
+        <namespace:prefix name="gco"/>
     </jaxb:bindings>
 
     <jaxb:bindings schemaLocation="iso/19139/20070417/gmx/gmx.xsd" 
@@ -37,6 +40,7 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gmx"/>
         </jaxb:schemaBindings>
+        <namespace:prefix name="gmx"/>
     </jaxb:bindings>
 
     <jaxb:bindings schemaLocation="iso/19139/20070417/gsr/gsr.xsd" 
@@ -44,6 +48,7 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gsr"/>
         </jaxb:schemaBindings>
+        <namespace:prefix name="gsr"/>
     </jaxb:bindings>
 
     <jaxb:bindings schemaLocation="iso/19139/20070417/gss/gss.xsd" 
@@ -51,6 +56,7 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gss"/>
         </jaxb:schemaBindings>
+        <namespace:prefix name="gss"/>
     </jaxb:bindings>
 
     <jaxb:bindings schemaLocation="iso/19139/20070417/gts/gts.xsd" 
@@ -58,6 +64,7 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gts"/>
         </jaxb:schemaBindings>
+        <namespace:prefix name="gts"/>
     </jaxb:bindings>
 
 </jaxb:bindings>

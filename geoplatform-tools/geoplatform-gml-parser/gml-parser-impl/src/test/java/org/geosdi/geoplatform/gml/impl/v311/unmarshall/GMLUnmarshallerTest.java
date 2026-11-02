@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.unmarshall;
 
-import org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool;
+import org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool;
 import org.geosdi.geoplatform.xml.gml.v311.*;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
 
-import static org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool.jaxbContextBuilderPool;
+import static org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool.jaxbJakartaContextBuilderPool;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -56,7 +56,7 @@ public class GMLUnmarshallerTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GMLUnmarshallerTest.class);
     //
-    private static final GPJAXBContextBuilderPool GPJAXB_CONTEXT_BUILDER_POOL = jaxbContextBuilderPool();
+    private static final GPJAXBJakartaContextBuilderPool GPJAXB_CONTEXT_BUILDER_POOL = jaxbJakartaContextBuilderPool();
 
     @Test
     public void a_unmarshallerTest() throws Exception {

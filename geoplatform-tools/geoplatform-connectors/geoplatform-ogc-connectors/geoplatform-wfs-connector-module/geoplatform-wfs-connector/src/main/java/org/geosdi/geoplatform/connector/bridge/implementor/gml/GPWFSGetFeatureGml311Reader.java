@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.connector.bridge.implementor.gml;
 
 import org.geosdi.geoplatform.connector.bridge.implementor.GPWFSGetFeatureReader;
 import org.geosdi.geoplatform.connector.server.request.GPWFSGetFeatureOutputFormat;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.slf4j.Logger;
@@ -61,7 +62,7 @@ public class GPWFSGetFeatureGml311Reader implements GPWFSGetFeatureReader<Featur
 
     private static final Logger logger = LoggerFactory.getLogger(GPWFSGetFeatureGml311Reader.class);
     //
-    private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static IGPJAXBJakartaContextBuilder jaxbContextBuilder = GPJAXBJakartaContextBuilder.jakartaContextBuilder();
 
     /**
      * @param inputStream

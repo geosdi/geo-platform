@@ -43,14 +43,14 @@ package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  *
@@ -159,13 +159,13 @@ public class FeatureTypeListType
             OperationsType theOperations;
             theOperations = this.getOperations();
             strategy.appendField(locator, this, "operations", buffer,
-                    theOperations);
+                    theOperations, true);
         }
         {
             List<FeatureTypeType> theFeatureType;
             theFeatureType = (((this.featureType != null) && (!this.featureType.isEmpty())) ? this.getFeatureType() : null);
             strategy.appendField(locator, this, "featureType", buffer,
-                    theFeatureType);
+                    theFeatureType, true);
         }
         return buffer;
     }

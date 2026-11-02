@@ -45,16 +45,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -245,22 +245,22 @@ public class TimeClockType
         {
             StringOrRefType theReferenceEvent;
             theReferenceEvent = this.getReferenceEvent();
-            strategy.appendField(locator, this, "referenceEvent", buffer, theReferenceEvent);
+            strategy.appendField(locator, this, "referenceEvent", buffer, theReferenceEvent, true);
         }
         {
             XMLGregorianCalendar theReferenceTime;
             theReferenceTime = this.getReferenceTime();
-            strategy.appendField(locator, this, "referenceTime", buffer, theReferenceTime);
+            strategy.appendField(locator, this, "referenceTime", buffer, theReferenceTime, true);
         }
         {
             XMLGregorianCalendar theUtcReference;
             theUtcReference = this.getUtcReference();
-            strategy.appendField(locator, this, "utcReference", buffer, theUtcReference);
+            strategy.appendField(locator, this, "utcReference", buffer, theUtcReference, true);
         }
         {
             List<TimeCalendarPropertyType> theDateBasis;
             theDateBasis = (this.isSetDateBasis()?this.getDateBasis():null);
-            strategy.appendField(locator, this, "dateBasis", buffer, theDateBasis);
+            strategy.appendField(locator, this, "dateBasis", buffer, theDateBasis, true);
         }
         return buffer;
     }

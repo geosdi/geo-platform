@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.xml.csw.v202.dc.terms;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for URI complex type.
@@ -149,18 +149,18 @@ public class URI
         {
             String theProtocol;
             theProtocol = this.getProtocol();
-            strategy.appendField(locator, this, "protocol", buffer, theProtocol);
+            strategy.appendField(locator, this, "protocol", buffer, theProtocol, true);
         }
         {
             String theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         {
             String theDescription;
             theDescription = this.getDescription();
             strategy.appendField(locator, this, "description", buffer,
-                    theDescription);
+                    theDescription, true);
         }
 
         return buffer;

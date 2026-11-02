@@ -43,13 +43,13 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -160,12 +160,12 @@ public class AngleChoiceType
         {
             MeasureType theAngle;
             theAngle = this.getAngle();
-            strategy.appendField(locator, this, "angle", buffer, theAngle);
+            strategy.appendField(locator, this, "angle", buffer, theAngle, true);
         }
         {
             DMSAngleType theDmsAngle;
             theDmsAngle = this.getDmsAngle();
-            strategy.appendField(locator, this, "dmsAngle", buffer, theDmsAngle);
+            strategy.appendField(locator, this, "dmsAngle", buffer, theDmsAngle, true);
         }
         return buffer;
     }

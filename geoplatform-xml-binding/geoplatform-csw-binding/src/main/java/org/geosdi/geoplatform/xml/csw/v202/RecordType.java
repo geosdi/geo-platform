@@ -45,17 +45,17 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -192,12 +192,12 @@ public class RecordType
         {
             List<EmptyType> theAnyText;
             theAnyText = (this.isSetAnyText()?this.getAnyText():null);
-            strategy.appendField(locator, this, "anyText", buffer, theAnyText);
+            strategy.appendField(locator, this, "anyText", buffer, theAnyText, true);
         }
         {
             List<JAXBElement<BoundingBoxType>> theBoundingBox;
             theBoundingBox = (this.isSetBoundingBox()?this.getBoundingBox():null);
-            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox);
+            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox, true);
         }
         return buffer;
     }

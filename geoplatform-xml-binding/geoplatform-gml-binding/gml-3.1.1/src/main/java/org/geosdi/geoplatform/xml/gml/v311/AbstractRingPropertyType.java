@@ -41,17 +41,17 @@
 //
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.AbstractRing;
 import org.geosdi.geoplatform.gml.api.AbstractRingProperty;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * Encapsulates a ring to represent the surface boundary property of a surface.
@@ -145,7 +145,7 @@ public class AbstractRingPropertyType implements ToString,
         {
             JAXBElement<? extends AbstractRingType> theRing;
             theRing = this.getRing();
-            strategy.appendField(locator, this, "ring", buffer, theRing);
+            strategy.appendField(locator, this, "ring", buffer, theRing, true);
         }
         return buffer;
     }

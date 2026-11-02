@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services.delegate;
 
 import com.google.common.collect.Lists;
 import jakarta.annotation.Resource;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
@@ -75,7 +76,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.xml.bind.JAXBElement;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;

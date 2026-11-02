@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.wfs.jaxb.comparison;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.WFSJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.junit.BeforeClass;
@@ -44,7 +45,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.io.StringWriter;
 import java.util.concurrent.Callable;
@@ -80,12 +80,12 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
 
     protected class WFSDescribeFeatureSimpleTask implements Callable<Long> {
 
-        final GPBaseJAXBContext jaxbContext;
+        final GPBaseJakartaContext jaxbContext;
 
         /**
          * @param theJaxbContext
          */
-        public WFSDescribeFeatureSimpleTask(@Nonnull(when = NEVER) GPBaseJAXBContext theJaxbContext) {
+        public WFSDescribeFeatureSimpleTask(@Nonnull(when = NEVER) GPBaseJakartaContext theJaxbContext) {
             checkArgument(theJaxbContext != null, "The Parameter jaxbContext must not be null.");
             this.jaxbContext = theJaxbContext;
         }
@@ -106,7 +106,7 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
         /**
          * @param theJaxbContext
          */
-        public WFSDescribeFeaturePooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSDescribeFeaturePooledTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -126,7 +126,7 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
         /**
          * @param theJaxbContext
          */
-        public WFSSecureDescribeFeatureSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureDescribeFeatureSimpleTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -146,7 +146,7 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
         /**
          * @param theJaxbContext
          */
-        public WFSSecureDescribeFeaturePooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureDescribeFeaturePooledTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -166,7 +166,7 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
         /**
          * @param theJaxbContext
          */
-        public WFSGetCapabilitiesSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSGetCapabilitiesSimpleTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -186,7 +186,7 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
         /**
          * @param theJaxbContext
          */
-        public WFSGetCapabilitiesPooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSGetCapabilitiesPooledTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -206,7 +206,7 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
         /**
          * @param theJaxbContext
          */
-        public WFSSecureGetCapabilitiesSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureGetCapabilitiesSimpleTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 
@@ -226,7 +226,7 @@ public class WFSBaseComparisonTest implements GPWFSComparisonTest {
         /**
          * @param theJaxbContext
          */
-        public WFSSecureGetCapabilitiesPooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WFSSecureGetCapabilitiesPooledTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 

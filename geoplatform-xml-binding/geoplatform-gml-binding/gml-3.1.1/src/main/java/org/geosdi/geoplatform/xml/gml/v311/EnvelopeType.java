@@ -46,16 +46,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -425,47 +425,47 @@ public class EnvelopeType implements ToString
         {
             DirectPositionType theLowerCorner;
             theLowerCorner = this.getLowerCorner();
-            strategy.appendField(locator, this, "lowerCorner", buffer, theLowerCorner);
+            strategy.appendField(locator, this, "lowerCorner", buffer, theLowerCorner, true);
         }
         {
             DirectPositionType theUpperCorner;
             theUpperCorner = this.getUpperCorner();
-            strategy.appendField(locator, this, "upperCorner", buffer, theUpperCorner);
+            strategy.appendField(locator, this, "upperCorner", buffer, theUpperCorner, true);
         }
         {
             List<CoordType> theCoord;
             theCoord = (this.isSetCoord()?this.getCoord():null);
-            strategy.appendField(locator, this, "coord", buffer, theCoord);
+            strategy.appendField(locator, this, "coord", buffer, theCoord, true);
         }
         {
             List<DirectPositionType> thePos;
             thePos = (this.isSetPos()?this.getPos():null);
-            strategy.appendField(locator, this, "pos", buffer, thePos);
+            strategy.appendField(locator, this, "pos", buffer, thePos, true);
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, true);
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, true);
         }
         {
             BigInteger theSrsDimension;
             theSrsDimension = this.getSrsDimension();
-            strategy.appendField(locator, this, "srsDimension", buffer, theSrsDimension);
+            strategy.appendField(locator, this, "srsDimension", buffer, theSrsDimension, true);
         }
         {
             List<String> theAxisLabels;
             theAxisLabels = (this.isSetAxisLabels()?this.getAxisLabels():null);
-            strategy.appendField(locator, this, "axisLabels", buffer, theAxisLabels);
+            strategy.appendField(locator, this, "axisLabels", buffer, theAxisLabels, true);
         }
         {
             List<String> theUomLabels;
             theUomLabels = (this.isSetUomLabels()?this.getUomLabels():null);
-            strategy.appendField(locator, this, "uomLabels", buffer, theUomLabels);
+            strategy.appendField(locator, this, "uomLabels", buffer, theUomLabels, true);
         }
         return buffer;
     }

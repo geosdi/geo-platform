@@ -46,16 +46,16 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -287,27 +287,27 @@ public class VectorType
         {
             List<Double> theValue;
             theValue = (this.isSetValue()?this.getValue():null);
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, true);
         }
         {
             BigInteger theSrsDimension;
             theSrsDimension = this.getSrsDimension();
-            strategy.appendField(locator, this, "srsDimension", buffer, theSrsDimension);
+            strategy.appendField(locator, this, "srsDimension", buffer, theSrsDimension, true);
         }
         {
             List<String> theAxisLabels;
             theAxisLabels = (this.isSetAxisLabels()?this.getAxisLabels():null);
-            strategy.appendField(locator, this, "axisLabels", buffer, theAxisLabels);
+            strategy.appendField(locator, this, "axisLabels", buffer, theAxisLabels, true);
         }
         {
             List<String> theUomLabels;
             theUomLabels = (this.isSetUomLabels()?this.getUomLabels():null);
-            strategy.appendField(locator, this, "uomLabels", buffer, theUomLabels);
+            strategy.appendField(locator, this, "uomLabels", buffer, theUomLabels, true);
         }
         return buffer;
     }

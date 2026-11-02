@@ -43,13 +43,13 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import org.geosdi.geoplatform.gml.api.AbstractRingProperty;
 import org.geosdi.geoplatform.gml.api.Polygon;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,12 +221,12 @@ public class PolygonType extends AbstractSurfaceType implements ToString, Polygo
         {
             JAXBElement<AbstractRingPropertyType> theExterior;
             theExterior = this.getExterior();
-            strategy.appendField(locator, this, "exterior", buffer, theExterior);
+            strategy.appendField(locator, this, "exterior", buffer, theExterior, true);
         }
         {
             List<JAXBElement<AbstractRingPropertyType>> theInterior;
             theInterior = (this.isSetInterior() ? this.getInterior() : null);
-            strategy.appendField(locator, this, "interior", buffer, theInterior);
+            strategy.appendField(locator, this, "interior", buffer, theInterior, true);
         }
         return buffer;
     }

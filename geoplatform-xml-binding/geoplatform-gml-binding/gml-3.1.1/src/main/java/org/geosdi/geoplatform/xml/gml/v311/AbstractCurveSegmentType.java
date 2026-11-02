@@ -42,12 +42,12 @@
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import org.geosdi.geoplatform.gml.api.AbstractCurveSegment;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.math.BigInteger;
 
 /**
@@ -203,19 +203,19 @@ public abstract class AbstractCurveSegmentType implements ToString, AbstractCurv
             BigInteger theNumDerivativesAtStart;
             theNumDerivativesAtStart = this.getNumDerivativesAtStart();
             strategy.appendField(locator, this, "numDerivativesAtStart", buffer,
-                    theNumDerivativesAtStart);
+                    theNumDerivativesAtStart, true);
         }
         {
             BigInteger theNumDerivativesAtEnd;
             theNumDerivativesAtEnd = this.getNumDerivativesAtEnd();
             strategy.appendField(locator, this, "numDerivativesAtEnd", buffer,
-                    theNumDerivativesAtEnd);
+                    theNumDerivativesAtEnd, true);
         }
         {
             BigInteger theNumDerivativeInterior;
             theNumDerivativeInterior = this.getNumDerivativeInterior();
             strategy.appendField(locator, this, "numDerivativeInterior", buffer,
-                    theNumDerivativeInterior);
+                    theNumDerivativeInterior, true);
         }
         return buffer;
     }

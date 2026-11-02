@@ -44,17 +44,17 @@
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -181,17 +181,17 @@ public class XlinkPropertyName implements ToString
         {
             String theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         {
             String theTraverseXlinkDepth;
             theTraverseXlinkDepth = this.getTraverseXlinkDepth();
-            strategy.appendField(locator, this, "traverseXlinkDepth", buffer, theTraverseXlinkDepth);
+            strategy.appendField(locator, this, "traverseXlinkDepth", buffer, theTraverseXlinkDepth, true);
         }
         {
             BigInteger theTraverseXlinkExpiry;
             theTraverseXlinkExpiry = this.getTraverseXlinkExpiry();
-            strategy.appendField(locator, this, "traverseXlinkExpiry", buffer, theTraverseXlinkExpiry);
+            strategy.appendField(locator, this, "traverseXlinkExpiry", buffer, theTraverseXlinkExpiry, true);
         }
         return buffer;
     }

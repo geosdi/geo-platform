@@ -16,16 +16,21 @@
     <name>Geo-Platform :: == Binding ISO19139 (2007-04-17) XML Module</name>
 
     <dependencies>
-        
         <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>        
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
-        
+
         <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics-runtime</artifactId>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.jaxb</groupId>
+            <artifactId>jaxb-plugins-runtime</artifactId>
+        </dependency>
+
         
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -81,36 +86,14 @@
                 </configuration>
             </plugin>
 
-            <!-- mvn jaxb2:generate -X -->
-            <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-
-                <configuration>
-                    <schemaIncludes>
-                        <value>iso/19139/*/gco/gco.xsd</value>
-                        <value>iso/19139/*/gmd/gmd.xsd</value>
-                        <value>iso/19139/*/gmx/gmx.xsd</value>
-                        <value>iso/19139/*/gsr/gsr.xsd</value>
-                        <value>iso/19139/*/gss/gss.xsd</value>
-                        <value>iso/19139/*/gts/gts.xsd</value>
-                        <value>gml/3.2.1/gml.xsd</value>
-                    </schemaIncludes>
-                    <episodes>
-                        <episode>
-                            <groupId>org.geosdi</groupId>
-                            <artifactId>gml-3.2.1</artifactId>
-                        </episode>
-                    </episodes>
-                    <episode>true</episode>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.jvnet.jaxb</groupId>
                 <artifactId>jaxb-maven-plugin</artifactId>
-                <version>4.0.10</version>
                 <configuration>
+                    <!-- Per i prefissi xmlns dei package-info (vedi il .xjb). -->
+                    <args combine.children="append">
+                        <arg>-Xnamespace-prefix</arg>
+                    </args>
                     <schemaIncludes>
                         <value>iso/19139/*/gco/gco.xsd</value>
                         <value>iso/19139/*/gmd/gmd.xsd</value>
@@ -120,20 +103,6 @@
                         <value>iso/19139/*/gts/gts.xsd</value>
                         <value>gml/3.2.1/gml.xsd</value>
                     </schemaIncludes>
-                    <args>
-                        <arg>-XtoString</arg>
-                        <arg>-Xsetters</arg>
-                        <arg>-Xwildcard</arg>
-                        <arg>-Xinject-code</arg>
-                        <arg>-Xinheritance</arg>
-                    </args>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.jvnet.jaxb2_commons</groupId>
-                            <artifactId>jaxb2-basics</artifactId>
-                            <version>${jaxb2-basics-version}</version>
-                        </plugin>
-                    </plugins>
                     <episodes>
                         <episode>
                             <groupId>org.geosdi</groupId>

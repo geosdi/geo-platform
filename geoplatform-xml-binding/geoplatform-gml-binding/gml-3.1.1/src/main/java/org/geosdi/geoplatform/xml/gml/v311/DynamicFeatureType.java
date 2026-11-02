@@ -43,15 +43,15 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -194,17 +194,17 @@ public class DynamicFeatureType
         {
             TimePrimitivePropertyType theValidTime;
             theValidTime = this.getValidTime();
-            strategy.appendField(locator, this, "validTime", buffer, theValidTime);
+            strategy.appendField(locator, this, "validTime", buffer, theValidTime, true);
         }
         {
             JAXBElement<? extends HistoryPropertyType> theHistory;
             theHistory = this.getHistory();
-            strategy.appendField(locator, this, "history", buffer, theHistory);
+            strategy.appendField(locator, this, "history", buffer, theHistory, true);
         }
         {
             StringOrRefType theDataSource;
             theDataSource = this.getDataSource();
-            strategy.appendField(locator, this, "dataSource", buffer, theDataSource);
+            strategy.appendField(locator, this, "dataSource", buffer, theDataSource, true);
         }
         return buffer;
     }

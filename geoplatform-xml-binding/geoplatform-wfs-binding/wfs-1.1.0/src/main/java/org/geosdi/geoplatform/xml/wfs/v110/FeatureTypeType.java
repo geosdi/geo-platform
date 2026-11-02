@@ -45,18 +45,18 @@ package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.xml.ows.v100.KeywordsType;
 import org.geosdi.geoplatform.xml.ows.v100.WGS84BoundingBoxType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -450,57 +450,57 @@ public class FeatureTypeType
         {
             QName theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, true);
         }
         {
             String theAbstract;
             theAbstract = this.getAbstract();
-            strategy.appendField(locator, this, "_abstract", buffer, theAbstract);
+            strategy.appendField(locator, this, "_abstract", buffer, theAbstract, true);
         }
         {
             List<KeywordsType> theKeywords;
             theKeywords = (((this.keywords!= null)&&(!this.keywords.isEmpty()))?this.getKeywords():null);
-            strategy.appendField(locator, this, "keywords", buffer, theKeywords);
+            strategy.appendField(locator, this, "keywords", buffer, theKeywords, true);
         }
         {
             String theDefaultSRS;
             theDefaultSRS = this.getDefaultSRS();
-            strategy.appendField(locator, this, "defaultSRS", buffer, theDefaultSRS);
+            strategy.appendField(locator, this, "defaultSRS", buffer, theDefaultSRS, true);
         }
         {
             List<String> theOtherSRS;
             theOtherSRS = (((this.otherSRS!= null)&&(!this.otherSRS.isEmpty()))?this.getOtherSRS():null);
-            strategy.appendField(locator, this, "otherSRS", buffer, theOtherSRS);
+            strategy.appendField(locator, this, "otherSRS", buffer, theOtherSRS, true);
         }
         {
             FeatureTypeType.NoSRS theNoSRS;
             theNoSRS = this.getNoSRS();
-            strategy.appendField(locator, this, "noSRS", buffer, theNoSRS);
+            strategy.appendField(locator, this, "noSRS", buffer, theNoSRS, true);
         }
         {
             OperationsType theOperations;
             theOperations = this.getOperations();
-            strategy.appendField(locator, this, "operations", buffer, theOperations);
+            strategy.appendField(locator, this, "operations", buffer, theOperations, true);
         }
         {
             OutputFormatListType theOutputFormats;
             theOutputFormats = this.getOutputFormats();
-            strategy.appendField(locator, this, "outputFormats", buffer, theOutputFormats);
+            strategy.appendField(locator, this, "outputFormats", buffer, theOutputFormats, true);
         }
         {
             List<WGS84BoundingBoxType> theWGS84BoundingBox;
             theWGS84BoundingBox = (((this.wgs84BoundingBox!= null)&&(!this.wgs84BoundingBox.isEmpty()))?this.getWGS84BoundingBox():null);
-            strategy.appendField(locator, this, "wgs84BoundingBox", buffer, theWGS84BoundingBox);
+            strategy.appendField(locator, this, "wgs84BoundingBox", buffer, theWGS84BoundingBox, true);
         }
         {
             List<MetadataURLType> theMetadataURL;
             theMetadataURL = (((this.metadataURL!= null)&&(!this.metadataURL.isEmpty()))?this.getMetadataURL():null);
-            strategy.appendField(locator, this, "metadataURL", buffer, theMetadataURL);
+            strategy.appendField(locator, this, "metadataURL", buffer, theMetadataURL, true);
         }
         return buffer;
     }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
+import jakarta.xml.bind.JAXBContext;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
@@ -42,7 +43,6 @@ import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBContext;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;

@@ -47,14 +47,14 @@ class CatalogJAXBContextConfigurator {
 
     /**
      * Create an Instance for CSWConnectorJAXBContext and register it in
-     * GeoPlatformJAXBContextRepository with the specific Key.
+     * GeoPlatformJakartaContextRepository with the specific Key.
      *
      * @return CSWConnectorJAXBContext
      */
     @Bean(name = "cswConnectorJAXBContext")
     public CSWConnectorJAXBContext cswConnectorJAXBContext() {
         CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
-        JAXBContextConnectorRepository.registerProvider(cswJAXBContext.getKeyProvider(), cswJAXBContext.getJAXBProvider());
+        JakartaContextConnectorRepository.registerProvider(cswJAXBContext.getKeyProvider(), cswJAXBContext.getJakartaProvider());
         return cswJAXBContext;
     }
 }

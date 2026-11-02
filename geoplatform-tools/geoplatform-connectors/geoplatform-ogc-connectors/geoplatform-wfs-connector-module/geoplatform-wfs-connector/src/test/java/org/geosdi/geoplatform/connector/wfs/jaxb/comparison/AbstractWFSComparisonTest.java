@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wfs.jaxb.comparison;
 
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class AbstractWFSComparisonTest extends WFSBaseComparisonTest {
      * @return {@link Long}
      * @throws Exception
      */
-    long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext, WFSTaskType wfsTaskType) throws Exception {
+    long executeMultiThreadsTasks(GPBaseJakartaContext jaxbContext, WFSTaskType wfsTaskType) throws Exception {
         long time = 0;
         int numThreads = defineNumThreads();
         try (ExecutorService executor = newFixedThreadPool(numThreads, WFSComparisonThreadFactory)) {
@@ -88,7 +88,7 @@ public class AbstractWFSComparisonTest extends WFSBaseComparisonTest {
      * @param wfsTaskType
      * @param numThreads
      */
-    private void fillTasksList(GPBaseJAXBContext jaxbContext, List<Callable<Long>> tasks, WFSTaskType wfsTaskType, int numThreads) {
+    private void fillTasksList(GPBaseJakartaContext jaxbContext, List<Callable<Long>> tasks, WFSTaskType wfsTaskType, int numThreads) {
         switch (wfsTaskType) {
             case DESCRIBE_FEATURE_SIMPLE:
                 for (int i = 0; i < numThreads; i++) {

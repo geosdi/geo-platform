@@ -45,20 +45,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyAttribute;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlMixed;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 import org.w3c.dom.Element;
 
 /**
@@ -220,17 +220,17 @@ public class Documentation implements ToString {
         {
             List<Object> theContent;
             theContent = (this.isSetContent() ? this.getContent() : null);
-            strategy.appendField(locator, this, "content", buffer, theContent);
+            strategy.appendField(locator, this, "content", buffer, theContent, true);
         }
         {
             String theSource;
             theSource = this.getSource();
-            strategy.appendField(locator, this, "source", buffer, theSource);
+            strategy.appendField(locator, this, "source", buffer, theSource, true);
         }
         {
             String theLang;
             theLang = this.getLang();
-            strategy.appendField(locator, this, "lang", buffer, theLang);
+            strategy.appendField(locator, this, "lang", buffer, theLang, true);
         }
         return buffer;
     }

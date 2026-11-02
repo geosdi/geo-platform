@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLJAXBContextSimpleV311;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool.GMLJAXBContextPooledV311;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 
 import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.SIMPLE;
 

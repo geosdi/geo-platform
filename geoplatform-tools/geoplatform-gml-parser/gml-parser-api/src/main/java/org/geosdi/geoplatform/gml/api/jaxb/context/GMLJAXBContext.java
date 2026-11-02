@@ -42,7 +42,7 @@ package org.geosdi.geoplatform.gml.api.jaxb.context;
 public interface GMLJAXBContext extends GMLDefaultJAXBContext {
 
     /**
-     * <p>With this method we have a special {@link javax.xml.bind.Marshaller} to transform
+     * <p>With this method we have a special {@link jakarta.xml.bind.Marshaller} to transform
      * JTS {@link org.locationtech.jts.geom.Geometry} in GML Geometry</p>
      *
      * @return {@link GMLMarshaller}
@@ -51,7 +51,7 @@ public interface GMLJAXBContext extends GMLDefaultJAXBContext {
     GMLMarshaller acquireMarshaller() throws Exception;
 
     /**
-     * <p>With this method we have a special {@link javax.xml.bind.Unmarshaller} to transform
+     * <p>With this method we have a special {@link jakarta.xml.bind.Unmarshaller} to transform
      * GML Geometry in JTS {@link org.locationtech.jts.geom.Geometry}</p>
      *
      * @return {@link GMLUnmarshaller}

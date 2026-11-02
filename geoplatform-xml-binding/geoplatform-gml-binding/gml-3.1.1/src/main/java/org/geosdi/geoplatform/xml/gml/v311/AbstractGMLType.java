@@ -43,15 +43,15 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -255,22 +255,22 @@ public abstract class AbstractGMLType implements ToString {
         {
             List<MetaDataPropertyType> theMetaDataProperty;
             theMetaDataProperty = (this.isSetMetaDataProperty() ? this.getMetaDataProperty() : null);
-            strategy.appendField(locator, this, "metaDataProperty", buffer, theMetaDataProperty);
+            strategy.appendField(locator, this, "metaDataProperty", buffer, theMetaDataProperty, true);
         }
         {
             StringOrRefType theDescription;
             theDescription = this.getDescription();
-            strategy.appendField(locator, this, "description", buffer, theDescription);
+            strategy.appendField(locator, this, "description", buffer, theDescription, true);
         }
         {
             List<JAXBElement<CodeType>> theName;
             theName = (this.isSetName() ? this.getName() : null);
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         {
             String theId;
             theId = this.getId();
-            strategy.appendField(locator, this, "id", buffer, theId);
+            strategy.appendField(locator, this, "id", buffer, theId, true);
         }
         return buffer;
     }

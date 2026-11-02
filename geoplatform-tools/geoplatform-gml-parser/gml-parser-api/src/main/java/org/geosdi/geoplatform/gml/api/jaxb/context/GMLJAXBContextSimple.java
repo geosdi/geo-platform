@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
+import jakarta.xml.bind.JAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBContext;
 
 import static javax.annotation.meta.When.NEVER;
 

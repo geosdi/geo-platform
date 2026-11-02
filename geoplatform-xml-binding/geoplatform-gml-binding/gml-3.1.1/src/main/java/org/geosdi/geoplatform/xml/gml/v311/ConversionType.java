@@ -45,14 +45,14 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -177,12 +177,12 @@ public class ConversionType
         {
             OperationMethodRefType theUsesMethod;
             theUsesMethod = this.getUsesMethod();
-            strategy.appendField(locator, this, "usesMethod", buffer, theUsesMethod);
+            strategy.appendField(locator, this, "usesMethod", buffer, theUsesMethod, true);
         }
         {
             List<ParameterValueType> theUsesValue;
             theUsesValue = (this.isSetUsesValue()?this.getUsesValue():null);
-            strategy.appendField(locator, this, "usesValue", buffer, theUsesValue);
+            strategy.appendField(locator, this, "usesValue", buffer, theUsesValue, true);
         }
         return buffer;
     }

@@ -42,18 +42,18 @@
 package org.geosdi.geoplatform.xml.xsd.v2001;
 
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  * <p>Java class for simpleType complex type.
@@ -252,27 +252,27 @@ public abstract class SimpleType
         {
             Restriction theRestriction;
             theRestriction = this.getRestriction();
-            strategy.appendField(locator, this, "restriction", buffer, theRestriction);
+            strategy.appendField(locator, this, "restriction", buffer, theRestriction, true);
         }
         {
             org.geosdi.geoplatform.xml.xsd.v2001.List theList;
             theList = this.getList();
-            strategy.appendField(locator, this, "list", buffer, theList);
+            strategy.appendField(locator, this, "list", buffer, theList, true);
         }
         {
             Union theUnion;
             theUnion = this.getUnion();
-            strategy.appendField(locator, this, "union", buffer, theUnion);
+            strategy.appendField(locator, this, "union", buffer, theUnion, true);
         }
         {
             java.util.List<String> theFinal;
             theFinal = (this.isSetFinal() ? this.getFinal() : null);
-            strategy.appendField(locator, this, "_final", buffer, theFinal);
+            strategy.appendField(locator, this, "_final", buffer, theFinal, true);
         }
         {
             String theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         return buffer;
     }

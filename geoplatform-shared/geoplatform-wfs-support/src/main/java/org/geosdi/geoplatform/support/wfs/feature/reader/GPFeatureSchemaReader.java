@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.support.wfs.feature.reader;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.support.wfs.feature.geometry.GeometryBinding;
 import org.geosdi.geoplatform.xml.xsd.v2001.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -53,7 +53,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
+import static org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository.getProvider;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
 
 /**
@@ -63,7 +63,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private static final GPBaseJAXBContext wfsContext;
+    private static final GPBaseJakartaContext wfsContext;
 
     static {
         wfsContext = getProvider(WFS_CONTEXT_KEY);

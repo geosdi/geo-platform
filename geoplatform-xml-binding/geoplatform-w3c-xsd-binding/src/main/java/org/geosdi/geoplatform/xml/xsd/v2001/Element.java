@@ -44,22 +44,22 @@ package org.geosdi.geoplatform.xml.xsd.v2001;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  *
@@ -616,82 +616,82 @@ public abstract class Element
         {
             LocalSimpleType theSimpleType;
             theSimpleType = this.getSimpleType();
-            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType);
+            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType, true);
         }
         {
             LocalComplexType theComplexType;
             theComplexType = this.getComplexType();
-            strategy.appendField(locator, this, "complexType", buffer, theComplexType);
+            strategy.appendField(locator, this, "complexType", buffer, theComplexType, true);
         }
         {
             List<Object> theIdentityConstraint;
             theIdentityConstraint = (this.isSetIdentityConstraint() ? this.getIdentityConstraint() : null);
-            strategy.appendField(locator, this, "identityConstraint", buffer, theIdentityConstraint);
+            strategy.appendField(locator, this, "identityConstraint", buffer, theIdentityConstraint, true);
         }
         {
             QName theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             QName theSubstitutionGroup;
             theSubstitutionGroup = this.getSubstitutionGroup();
-            strategy.appendField(locator, this, "substitutionGroup", buffer, theSubstitutionGroup);
+            strategy.appendField(locator, this, "substitutionGroup", buffer, theSubstitutionGroup, true);
         }
         {
             String theDefault;
             theDefault = this.getDefault();
-            strategy.appendField(locator, this, "_default", buffer, theDefault);
+            strategy.appendField(locator, this, "_default", buffer, theDefault, true);
         }
         {
             String theFixed;
             theFixed = this.getFixed();
-            strategy.appendField(locator, this, "fixed", buffer, theFixed);
+            strategy.appendField(locator, this, "fixed", buffer, theFixed, true);
         }
         {
             boolean theNillable;
             theNillable = (this.isSetNillable() ? this.isNillable() : false);
-            strategy.appendField(locator, this, "nillable", buffer, theNillable);
+            strategy.appendField(locator, this, "nillable", buffer, theNillable, true);
         }
         {
             boolean theAbstract;
             theAbstract = (this.isSetAbstract() ? this.isAbstract() : false);
-            strategy.appendField(locator, this, "_abstract", buffer, theAbstract);
+            strategy.appendField(locator, this, "_abstract", buffer, theAbstract, true);
         }
         {
             List<String> theFinal;
             theFinal = (this.isSetFinal() ? this.getFinal() : null);
-            strategy.appendField(locator, this, "_final", buffer, theFinal);
+            strategy.appendField(locator, this, "_final", buffer, theFinal, true);
         }
         {
             List<String> theBlock;
             theBlock = (this.isSetBlock() ? this.getBlock() : null);
-            strategy.appendField(locator, this, "block", buffer, theBlock);
+            strategy.appendField(locator, this, "block", buffer, theBlock, true);
         }
         {
             FormChoice theForm;
             theForm = this.getForm();
-            strategy.appendField(locator, this, "form", buffer, theForm);
+            strategy.appendField(locator, this, "form", buffer, theForm, true);
         }
         {
             String theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, true);
         }
         {
             QName theRef;
             theRef = this.getRef();
-            strategy.appendField(locator, this, "ref", buffer, theRef);
+            strategy.appendField(locator, this, "ref", buffer, theRef, true);
         }
         {
             BigInteger theMinOccurs;
             theMinOccurs = this.getMinOccurs();
-            strategy.appendField(locator, this, "minOccurs", buffer, theMinOccurs);
+            strategy.appendField(locator, this, "minOccurs", buffer, theMinOccurs, true);
         }
         {
             String theMaxOccurs;
             theMaxOccurs = this.getMaxOccurs();
-            strategy.appendField(locator, this, "maxOccurs", buffer, theMaxOccurs);
+            strategy.appendField(locator, this, "maxOccurs", buffer, theMaxOccurs, true);
         }
         return buffer;
     }

@@ -45,15 +45,15 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -265,22 +265,22 @@ public class TinType
         {
             List<LineStringSegmentArrayPropertyType> theStopLines;
             theStopLines = (this.isSetStopLines()?this.getStopLines():null);
-            strategy.appendField(locator, this, "stopLines", buffer, theStopLines);
+            strategy.appendField(locator, this, "stopLines", buffer, theStopLines, true);
         }
         {
             List<LineStringSegmentArrayPropertyType> theBreakLines;
             theBreakLines = (this.isSetBreakLines()?this.getBreakLines():null);
-            strategy.appendField(locator, this, "breakLines", buffer, theBreakLines);
+            strategy.appendField(locator, this, "breakLines", buffer, theBreakLines, true);
         }
         {
             LengthType theMaxLength;
             theMaxLength = this.getMaxLength();
-            strategy.appendField(locator, this, "maxLength", buffer, theMaxLength);
+            strategy.appendField(locator, this, "maxLength", buffer, theMaxLength, true);
         }
         {
             TinType.ControlPoint theControlPoint;
             theControlPoint = this.getControlPoint();
-            strategy.appendField(locator, this, "controlPoint", buffer, theControlPoint);
+            strategy.appendField(locator, this, "controlPoint", buffer, theControlPoint, true);
         }
         return buffer;
     }
@@ -418,12 +418,12 @@ public class TinType
             {
                 DirectPositionListType thePosList;
                 thePosList = this.getPosList();
-                strategy.appendField(locator, this, "posList", buffer, thePosList);
+                strategy.appendField(locator, this, "posList", buffer, thePosList, true);
             }
             {
                 List<Object> theGeometricPositionGroup;
                 theGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
-                strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup);
+                strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup, true);
             }
             return buffer;
         }

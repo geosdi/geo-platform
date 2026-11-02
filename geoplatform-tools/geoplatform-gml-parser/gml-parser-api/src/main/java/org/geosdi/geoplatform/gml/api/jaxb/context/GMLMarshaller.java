@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.PropertyException;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.w3c.dom.Node;
 import org.xml.sax.ContentHandler;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.PropertyException;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.wfs.feature.reader;
 
+import jakarta.xml.bind.DatatypeConverter;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
@@ -44,7 +45,6 @@ import org.locationtech.jts.io.WKTWriter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import java.util.ArrayList;

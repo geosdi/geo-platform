@@ -46,15 +46,15 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -249,22 +249,22 @@ public class OperationParameterGroupType
         {
             List<IdentifierType> theGroupID;
             theGroupID = (this.isSetGroupID()?this.getGroupID():null);
-            strategy.appendField(locator, this, "groupID", buffer, theGroupID);
+            strategy.appendField(locator, this, "groupID", buffer, theGroupID, true);
         }
         {
             StringOrRefType theRemarks;
             theRemarks = this.getRemarks();
-            strategy.appendField(locator, this, "remarks", buffer, theRemarks);
+            strategy.appendField(locator, this, "remarks", buffer, theRemarks, true);
         }
         {
             BigInteger theMaximumOccurs;
             theMaximumOccurs = this.getMaximumOccurs();
-            strategy.appendField(locator, this, "maximumOccurs", buffer, theMaximumOccurs);
+            strategy.appendField(locator, this, "maximumOccurs", buffer, theMaximumOccurs, true);
         }
         {
             List<AbstractGeneralOperationParameterRefType> theIncludesParameter;
             theIncludesParameter = (this.isSetIncludesParameter()?this.getIncludesParameter():null);
-            strategy.appendField(locator, this, "includesParameter", buffer, theIncludesParameter);
+            strategy.appendField(locator, this, "includesParameter", buffer, theIncludesParameter, true);
         }
         return buffer;
     }

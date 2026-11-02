@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.ebrim._3;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -154,12 +154,12 @@ public class VersionInfoType
         {
             String theVersionName;
             theVersionName = this.getVersionName();
-            strategy.appendField(locator, this, "versionName", buffer, theVersionName);
+            strategy.appendField(locator, this, "versionName", buffer, theVersionName, true);
         }
         {
             String theComment;
             theComment = this.getComment();
-            strategy.appendField(locator, this, "comment", buffer, theComment);
+            strategy.appendField(locator, this, "comment", buffer, theComment, true);
         }
         return buffer;
     }

@@ -41,12 +41,12 @@
 //
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -209,17 +209,17 @@ public class GeodesicStringType extends AbstractCurveSegmentType implements ToSt
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, true);
         }
         {
             List<Object> theGeometricPositionGroup;
             theGeometricPositionGroup = (this.isSetGeometricPositionGroup() ? this.getGeometricPositionGroup() : null);
-            strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup);
+            strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup, true);
         }
         {
             CurveInterpolationType theInterpolation;
             theInterpolation = this.getInterpolation();
-            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation);
+            strategy.appendField(locator, this, "interpolation", buffer, theInterpolation, true);
         }
         return buffer;
     }

@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jaxb;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlElementDecl;
 import org.geosdi.geoplatform.gml.api.*;
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
 import org.geosdi.geoplatform.xml.gml.v311.*;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector;
 
 import jakarta.annotation.Resource;
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
@@ -54,7 +55,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.bind.JAXBElement;
 import java.io.FileOutputStream;
 import java.net.URI;
 import java.net.URL;

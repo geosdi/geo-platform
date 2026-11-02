@@ -45,17 +45,17 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlMixed;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 import org.w3c.dom.Element;
 
 
@@ -251,22 +251,22 @@ public class SchemaComponentType
         {
             List<Object> theContent;
             theContent = (this.isSetContent()?this.getContent():null);
-            strategy.appendField(locator, this, "content", buffer, theContent);
+            strategy.appendField(locator, this, "content", buffer, theContent, true);
         }
         {
             String theTargetNamespace;
             theTargetNamespace = this.getTargetNamespace();
-            strategy.appendField(locator, this, "targetNamespace", buffer, theTargetNamespace);
+            strategy.appendField(locator, this, "targetNamespace", buffer, theTargetNamespace, true);
         }
         {
             String theParentSchema;
             theParentSchema = this.getParentSchema();
-            strategy.appendField(locator, this, "parentSchema", buffer, theParentSchema);
+            strategy.appendField(locator, this, "parentSchema", buffer, theParentSchema, true);
         }
         {
             String theSchemaLanguage;
             theSchemaLanguage = this.getSchemaLanguage();
-            strategy.appendField(locator, this, "schemaLanguage", buffer, theSchemaLanguage);
+            strategy.appendField(locator, this, "schemaLanguage", buffer, theSchemaLanguage, true);
         }
         return buffer;
     }

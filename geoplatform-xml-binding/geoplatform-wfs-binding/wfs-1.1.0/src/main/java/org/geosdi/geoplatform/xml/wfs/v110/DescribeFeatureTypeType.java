@@ -41,12 +41,12 @@
 //
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,13 +174,13 @@ public class DescribeFeatureTypeType extends BaseRequestType implements ToString
         {
             List<QName> theTypeName;
             theTypeName = (((this.typeName != null) && (!this.typeName.isEmpty())) ? this.getTypeName() : null);
-            strategy.appendField(locator, this, "typeName", buffer, theTypeName);
+            strategy.appendField(locator, this, "typeName", buffer, theTypeName, true);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
             strategy.appendField(locator, this, "outputFormat", buffer,
-                    theOutputFormat);
+                    theOutputFormat, true);
         }
         return buffer;
     }

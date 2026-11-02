@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

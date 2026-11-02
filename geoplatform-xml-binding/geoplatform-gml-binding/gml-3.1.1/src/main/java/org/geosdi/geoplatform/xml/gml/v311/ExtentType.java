@@ -45,13 +45,13 @@ package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -293,27 +293,27 @@ public class ExtentType
         {
             StringOrRefType theDescription;
             theDescription = this.getDescription();
-            strategy.appendField(locator, this, "description", buffer, theDescription);
+            strategy.appendField(locator, this, "description", buffer, theDescription, true);
         }
         {
             List<EnvelopeType> theBoundingBox;
             theBoundingBox = (this.isSetBoundingBox()?this.getBoundingBox():null);
-            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox);
+            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox, true);
         }
         {
             List<PolygonType> theBoundingPolygon;
             theBoundingPolygon = (this.isSetBoundingPolygon()?this.getBoundingPolygon():null);
-            strategy.appendField(locator, this, "boundingPolygon", buffer, theBoundingPolygon);
+            strategy.appendField(locator, this, "boundingPolygon", buffer, theBoundingPolygon, true);
         }
         {
             List<EnvelopeType> theVerticalExtent;
             theVerticalExtent = (this.isSetVerticalExtent()?this.getVerticalExtent():null);
-            strategy.appendField(locator, this, "verticalExtent", buffer, theVerticalExtent);
+            strategy.appendField(locator, this, "verticalExtent", buffer, theVerticalExtent, true);
         }
         {
             List<TimePeriodType> theTemporalExtent;
             theTemporalExtent = (this.isSetTemporalExtent()?this.getTemporalExtent():null);
-            strategy.appendField(locator, this, "temporalExtent", buffer, theTemporalExtent);
+            strategy.appendField(locator, this, "temporalExtent", buffer, theTemporalExtent, true);
         }
         return buffer;
     }

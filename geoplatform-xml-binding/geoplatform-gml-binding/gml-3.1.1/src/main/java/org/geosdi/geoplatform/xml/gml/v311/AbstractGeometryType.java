@@ -42,12 +42,12 @@
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -278,30 +278,30 @@ public abstract class AbstractGeometryType extends AbstractGMLType implements To
         {
             String theGid;
             theGid = this.getGid();
-            strategy.appendField(locator, this, "gid", buffer, theGid);
+            strategy.appendField(locator, this, "gid", buffer, theGid, true);
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, true);
         }
         {
             BigInteger theSrsDimension;
             theSrsDimension = this.getSrsDimension();
             strategy.appendField(locator, this, "srsDimension", buffer,
-                    theSrsDimension);
+                    theSrsDimension, true);
         }
         {
             List<String> theAxisLabels;
             theAxisLabels = (this.isSetAxisLabels() ? this.getAxisLabels() : null);
             strategy.appendField(locator, this, "axisLabels", buffer,
-                    theAxisLabels);
+                    theAxisLabels, true);
         }
         {
             List<String> theUomLabels;
             theUomLabels = (this.isSetUomLabels() ? this.getUomLabels() : null);
             strategy.appendField(locator, this, "uomLabels", buffer,
-                    theUomLabels);
+                    theUomLabels, true);
         }
         return buffer;
     }

@@ -44,14 +44,14 @@
 package org.geosdi.geoplatform.xml.ebrim._3;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -260,32 +260,32 @@ public class PostalAddressType
         {
             String theCity;
             theCity = this.getCity();
-            strategy.appendField(locator, this, "city", buffer, theCity);
+            strategy.appendField(locator, this, "city", buffer, theCity, true);
         }
         {
             String theCountry;
             theCountry = this.getCountry();
-            strategy.appendField(locator, this, "country", buffer, theCountry);
+            strategy.appendField(locator, this, "country", buffer, theCountry, true);
         }
         {
             String thePostalCode;
             thePostalCode = this.getPostalCode();
-            strategy.appendField(locator, this, "postalCode", buffer, thePostalCode);
+            strategy.appendField(locator, this, "postalCode", buffer, thePostalCode, true);
         }
         {
             String theStateOrProvince;
             theStateOrProvince = this.getStateOrProvince();
-            strategy.appendField(locator, this, "stateOrProvince", buffer, theStateOrProvince);
+            strategy.appendField(locator, this, "stateOrProvince", buffer, theStateOrProvince, true);
         }
         {
             String theStreet;
             theStreet = this.getStreet();
-            strategy.appendField(locator, this, "street", buffer, theStreet);
+            strategy.appendField(locator, this, "street", buffer, theStreet, true);
         }
         {
             String theStreetNumber;
             theStreetNumber = this.getStreetNumber();
-            strategy.appendField(locator, this, "streetNumber", buffer, theStreetNumber);
+            strategy.appendField(locator, this, "streetNumber", buffer, theStreetNumber, true);
         }
         return buffer;
     }

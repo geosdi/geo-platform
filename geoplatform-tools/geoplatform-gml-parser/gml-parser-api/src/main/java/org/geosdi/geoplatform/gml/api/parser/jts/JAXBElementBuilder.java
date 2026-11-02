@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.locationtech.jts.geom.Geometry;
-
-import javax.xml.bind.JAXBElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

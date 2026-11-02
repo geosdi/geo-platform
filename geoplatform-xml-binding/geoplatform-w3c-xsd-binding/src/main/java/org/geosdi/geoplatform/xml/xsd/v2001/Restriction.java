@@ -43,19 +43,19 @@ package org.geosdi.geoplatform.xml.xsd.v2001;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 /**
  *
@@ -222,17 +222,17 @@ public class Restriction
         {
             LocalSimpleType theSimpleType;
             theSimpleType = this.getSimpleType();
-            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType);
+            strategy.appendField(locator, this, "simpleType", buffer, theSimpleType, true);
         }
         {
             List<Object> theFacets;
             theFacets = (this.isSetFacets() ? this.getFacets() : null);
-            strategy.appendField(locator, this, "facets", buffer, theFacets);
+            strategy.appendField(locator, this, "facets", buffer, theFacets, true);
         }
         {
             QName theBase;
             theBase = this.getBase();
-            strategy.appendField(locator, this, "base", buffer, theBase);
+            strategy.appendField(locator, this, "base", buffer, theBase, true);
         }
         return buffer;
     }

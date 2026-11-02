@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.v110.query.repository.QueryRestrictionStrategy;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
@@ -45,7 +46,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import javax.xml.bind.JAXBElement;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;

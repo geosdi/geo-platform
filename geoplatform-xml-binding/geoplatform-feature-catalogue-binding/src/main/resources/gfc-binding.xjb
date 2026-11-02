@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" 
                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:annox="urn:jaxb.jvnet.org:annox"
+               xmlns:namespace="urn:jaxb.jvnet.org:plugin:namespace-prefix" 
                jaxb:schemaLocation="
-               http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               https://jakarta.ee/xml/ns/jaxb
+               https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd
                http://www.w3.org/2001/XMLSchema
                http://www.w3.org/2001/XMLSchema.xsd"
-               jaxb:extensionBindingPrefixes="xjc">
+               jaxb:extensionBindingPrefixes="xjc namespace annox">
 
     <jaxb:bindings schemaLocation="gfc/gfc.xsd" 
                        node="/xs:schema">
@@ -23,6 +25,11 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.gfc"/>
         </jaxb:schemaBindings>
+        <namespace:prefix name="gfc"/>
+        <!-- Elemento radice aggiunto a mano alla classe generata. -->
+        <jaxb:bindings node="xs:complexType[@name='FC_FeatureCatalogue_Type']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "FC_FeatureCatalogue")</annox:annotateClass>
+        </jaxb:bindings>
     </jaxb:bindings>
         
     <jaxb:bindings schemaLocation="iso/19139/20070417/gmd/gmd.xsd" 

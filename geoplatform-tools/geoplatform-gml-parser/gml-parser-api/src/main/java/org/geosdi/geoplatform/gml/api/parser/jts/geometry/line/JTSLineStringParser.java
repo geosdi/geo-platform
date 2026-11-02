@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.jts.geometry.line;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
@@ -43,8 +44,6 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.coordinate.CoordinateParser;
-
-import javax.xml.bind.JAXBElement;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

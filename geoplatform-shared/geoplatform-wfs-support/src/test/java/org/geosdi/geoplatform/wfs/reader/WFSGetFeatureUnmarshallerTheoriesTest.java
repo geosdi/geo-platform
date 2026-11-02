@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.wfs.reader;
 
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
@@ -61,7 +62,7 @@ public class WFSGetFeatureUnmarshallerTheoriesTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureUnmarshallerTheoriesTest.class);
     //
-    private static final GPJAXBContextBuilder GPJAXB_CONTEXT_BUILDER = GPJAXBContextBuilder.newInstance();
+    private static final IGPJAXBJakartaContextBuilder GPJAXB_CONTEXT_BUILDER = GPJAXBJakartaContextBuilder.jakartaContextBuilder();
     private static String dirFiles;
 
     @BeforeClass

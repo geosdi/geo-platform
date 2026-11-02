@@ -40,5 +40,5 @@
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://purl.org/dc/elements/1.1/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://purl.org/dc/elements/1.1/", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package org.geosdi.geoplatform.xml.csw.v202.dc.elements;

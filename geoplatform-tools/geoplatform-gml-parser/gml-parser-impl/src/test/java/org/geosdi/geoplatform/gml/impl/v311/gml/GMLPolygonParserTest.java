@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gml.impl.v311.gml;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.GMLBasePolygonParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.PolygonType;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class GMLPolygonParserTest {
 
     @Test
     public void a_polygonJTSParserTest() throws Exception {
-        PolygonType polygonType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        PolygonType polygonType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Polygon_2.xml")
                 .collect(joining(File.separator))), PolygonType.class);
         logger.info("##########################POLYGON_STRING_JTS : {}\n", polygonParser.parseGeometry(polygonType));
@@ -72,7 +73,7 @@ public class GMLPolygonParserTest {
 
     @Test
     public void b_polygonJTSParserTest() throws Exception {
-        PolygonType polygonType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+        PolygonType polygonType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Polygon_3.xml")
                 .collect(joining(File.separator))), PolygonType.class);
         logger.info("##########################POLYGON_STRING_JTS : {}\n", polygonParser.parseGeometry(polygonType));
@@ -80,7 +81,7 @@ public class GMLPolygonParserTest {
 
     @Test
     public void c_polygonJTSParserTest() throws Exception {
-        PolygonType polygonType = GPJAXBContextBuilder.newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        PolygonType polygonType = GPJAXBJakartaContextBuilder.jakartaContextBuilder().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                 + "<gml:Polygon xmlns:gml=\"http://www.opengis.net/gml\" srsName=\"SDO:\">\n"
                 + "   <gml:exterior>\n"
                 + "      <gml:LinearRing>\n"

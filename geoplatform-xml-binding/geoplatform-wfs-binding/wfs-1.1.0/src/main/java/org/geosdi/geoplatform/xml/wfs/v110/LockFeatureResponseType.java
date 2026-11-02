@@ -43,14 +43,14 @@
 
 package org.geosdi.geoplatform.xml.wfs.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -192,17 +192,17 @@ public class LockFeatureResponseType
         {
             String theLockId;
             theLockId = this.getLockId();
-            strategy.appendField(locator, this, "lockId", buffer, theLockId);
+            strategy.appendField(locator, this, "lockId", buffer, theLockId, true);
         }
         {
             FeaturesLockedType theFeaturesLocked;
             theFeaturesLocked = this.getFeaturesLocked();
-            strategy.appendField(locator, this, "featuresLocked", buffer, theFeaturesLocked);
+            strategy.appendField(locator, this, "featuresLocked", buffer, theFeaturesLocked, true);
         }
         {
             FeaturesNotLockedType theFeaturesNotLocked;
             theFeaturesNotLocked = this.getFeaturesNotLocked();
-            strategy.appendField(locator, this, "featuresNotLocked", buffer, theFeaturesNotLocked);
+            strategy.appendField(locator, this, "featuresNotLocked", buffer, theFeaturesNotLocked, true);
         }
         return buffer;
     }

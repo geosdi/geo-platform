@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.connector;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.Marshaller;
 import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.geosdi.geoplatform.xml.filter.v110.*;
 import org.geosdi.geoplatform.xml.gml.v311.*;
@@ -46,8 +48,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.math.BigInteger;
@@ -63,7 +63,7 @@ public class CatalogRequestTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private final GPBaseJAXBContext cswContext = JAXBContextConnectorRepository.getProvider(
+    private final GPBaseJakartaContext cswContext = JakartaContextConnectorRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     private org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
     private org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;

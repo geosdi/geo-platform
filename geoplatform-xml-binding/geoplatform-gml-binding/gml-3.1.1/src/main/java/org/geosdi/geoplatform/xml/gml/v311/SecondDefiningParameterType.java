@@ -43,13 +43,13 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -191,17 +191,17 @@ public class SecondDefiningParameterType
         {
             MeasureType theInverseFlattening;
             theInverseFlattening = this.getInverseFlattening();
-            strategy.appendField(locator, this, "inverseFlattening", buffer, theInverseFlattening);
+            strategy.appendField(locator, this, "inverseFlattening", buffer, theInverseFlattening, true);
         }
         {
             MeasureType theSemiMinorAxis;
             theSemiMinorAxis = this.getSemiMinorAxis();
-            strategy.appendField(locator, this, "semiMinorAxis", buffer, theSemiMinorAxis);
+            strategy.appendField(locator, this, "semiMinorAxis", buffer, theSemiMinorAxis, true);
         }
         {
             String theIsSphere;
             theIsSphere = this.getIsSphere();
-            strategy.appendField(locator, this, "isSphere", buffer, theIsSphere);
+            strategy.appendField(locator, this, "isSphere", buffer, theIsSphere, true);
         }
         return buffer;
     }

@@ -45,18 +45,18 @@ package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
 import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -268,22 +268,22 @@ public class BriefRecordType
         {
             List<JAXBElement<SimpleLiteral>> theIdentifier;
             theIdentifier = (this.isSetIdentifier()?this.getIdentifier():null);
-            strategy.appendField(locator, this, "identifier", buffer, theIdentifier);
+            strategy.appendField(locator, this, "identifier", buffer, theIdentifier, true);
         }
         {
             List<JAXBElement<SimpleLiteral>> theTitle;
             theTitle = (this.isSetTitle()?this.getTitle():null);
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, true);
         }
         {
             SimpleLiteral theType;
             theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType);
+            strategy.appendField(locator, this, "type", buffer, theType, true);
         }
         {
             List<JAXBElement<BoundingBoxType>> theBoundingBox;
             theBoundingBox = (this.isSetBoundingBox()?this.getBoundingBox():null);
-            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox);
+            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox, true);
         }
         return buffer;
     }

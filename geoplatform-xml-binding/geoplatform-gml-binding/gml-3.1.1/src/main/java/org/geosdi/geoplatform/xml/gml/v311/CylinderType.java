@@ -43,14 +43,14 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -174,12 +174,12 @@ public class CylinderType
         {
             CurveInterpolationType theHorizontalCurveType;
             theHorizontalCurveType = this.getHorizontalCurveType();
-            strategy.appendField(locator, this, "horizontalCurveType", buffer, theHorizontalCurveType);
+            strategy.appendField(locator, this, "horizontalCurveType", buffer, theHorizontalCurveType, true);
         }
         {
             CurveInterpolationType theVerticalCurveType;
             theVerticalCurveType = this.getVerticalCurveType();
-            strategy.appendField(locator, this, "verticalCurveType", buffer, theVerticalCurveType);
+            strategy.appendField(locator, this, "verticalCurveType", buffer, theVerticalCurveType, true);
         }
         return buffer;
     }

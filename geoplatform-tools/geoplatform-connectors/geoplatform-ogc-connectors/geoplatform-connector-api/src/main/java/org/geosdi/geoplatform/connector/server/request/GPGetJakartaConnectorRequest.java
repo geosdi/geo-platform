@@ -33,66 +33,43 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.jaxb.repository;
+package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.WMSVersion;
-import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
-import javax.xml.bind.JAXBException;
+import javax.annotation.Nonnull;
 
-import static org.geosdi.geoplatform.connector.WMSVersion.V111;
-import static org.geosdi.geoplatform.wms.v111.WMSContextServiceProviderV111.WMS_CONTEXT_SERVICE_PROVIDER_V110;
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Richiesta GET con JAXB {@code jakarta.xml.bind}: è la versione jakarta di {@link GPGetConnectorRequest}.
+ *
+ * @param <T> il tipo della risposta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class WMSConnectorJAXBContextV111 implements GPWMSConnectorJAXBContext {
+public abstract class GPGetJakartaConnectorRequest<T> extends GetJakartaConnectorRequest<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(WMSConnectorJAXBContextV111.class);
-
-    static {
-        try {
-            jaxbContext = new WMSJAXBContext(V111, WMS_CONTEXT_SERVICE_PROVIDER_V110.getContextClasses());
-        } catch (JAXBException e) {
-            e.printStackTrace();
-            logger.error("Failed to Initialize JAXBContext for Class " + WMSConnectorJAXBContextV111.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
-        }
-    }
-
-    //
-    private static WMSJAXBContext jaxbContext;
-    public static final WMSJAXBContext.WMSJAXBContextKey WMS_CONTEXT_KEY_V111 = new WMSJAXBContext.WMSJAXBContextKey(WMSConnectorJAXBContextV111.class);
-
-    protected WMSConnectorJAXBContextV111() {
+    /**
+     * @param theServer il connettore del server
+     */
+    protected GPGetJakartaConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        super(theServer);
     }
 
     /**
-     * @return {@link P}
+     * @return {@link HttpGet}
+     * @throws Exception se il percorso della richiesta non è valido
      */
     @Override
-    public <P extends GPBaseJAXBContext> P getJAXBProvider() {
-        return (P) jaxbContext;
-    }
-
-    /**
-     * @return {@link K}
-     */
-    @Override
-    public <K extends GeoPlatformJAXBContextKey> K getKeyProvider() {
-        return (K) WMS_CONTEXT_KEY_V111;
-    }
-
-    /**
-     * @return {@link Version}
-     */
-    @Override
-    public <Version extends WMSVersion> Version getVersion() {
-        return (Version) V111;
+    protected HttpGet prepareHttpMethod() throws Exception {
+        String uriPath = this.checkUriPath();
+        checkArgument((uriPath != null) && !(uriPath.trim().isEmpty()), "The Parameter uriPath must not be null or an empty string.");
+        logger.trace("#########################URI_PATH : {}\n", uriPath);
+        HttpGet httpGet = new HttpGet(uriPath);
+        httpGet.setConfig(this.prepareRequestConfig());
+        return httpGet;
     }
 }

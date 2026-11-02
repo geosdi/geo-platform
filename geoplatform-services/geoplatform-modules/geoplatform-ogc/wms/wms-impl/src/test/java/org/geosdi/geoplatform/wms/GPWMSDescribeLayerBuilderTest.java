@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.wms;
 
+import jakarta.xml.bind.UnmarshalException;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.UnmarshalException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 

@@ -34,27 +34,30 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2019.01.24 alle 07:06:40 PM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:14:56 PM CET
 //
-
 
 package org.geosdi.geoplatform.wms.v111;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.NormalizedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
@@ -82,10 +85,10 @@ import java.util.List;
     "layer"
 })
 @XmlRootElement(name = "Layer")
-public class Layer implements Serializable, ToString2
+public class Layer implements Serializable, ToString
 {
 
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @XmlAttribute(name = "queryable")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String queryable;
@@ -396,28 +399,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the srs property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the srs property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the srs property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getSRS().add(newItem);
+     * getSRS().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link SRS }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the srs property.
      */
     public List<SRS> getSRS() {
         if (srs == null) {
-            srs = new ArrayList<SRS>();
+            srs = new ArrayList<>();
         }
         return this.srs;
     }
@@ -449,28 +455,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the boundingBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the boundingBox property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the boundingBox property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getBoundingBox().add(newItem);
+     * getBoundingBox().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link BoundingBox }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the boundingBox property.
      */
     public List<BoundingBox> getBoundingBox() {
         if (boundingBox == null) {
-            boundingBox = new ArrayList<BoundingBox>();
+            boundingBox = new ArrayList<>();
         }
         return this.boundingBox;
     }
@@ -478,28 +487,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the dimension property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dimension property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the dimension property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDimension().add(newItem);
+     * getDimension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Dimension }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the dimension property.
      */
     public List<Dimension> getDimension() {
         if (dimension == null) {
-            dimension = new ArrayList<Dimension>();
+            dimension = new ArrayList<>();
         }
         return this.dimension;
     }
@@ -507,28 +519,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the extent property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extent property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the extent property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getExtent().add(newItem);
+     * getExtent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Extent }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the extent property.
      */
     public List<Extent> getExtent() {
         if (extent == null) {
-            extent = new ArrayList<Extent>();
+            extent = new ArrayList<>();
         }
         return this.extent;
     }
@@ -560,28 +575,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the authorityURL property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the authorityURL property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the authorityURL property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAuthorityURL().add(newItem);
+     * getAuthorityURL().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link AuthorityURL }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the authorityURL property.
      */
     public List<AuthorityURL> getAuthorityURL() {
         if (authorityURL == null) {
-            authorityURL = new ArrayList<AuthorityURL>();
+            authorityURL = new ArrayList<>();
         }
         return this.authorityURL;
     }
@@ -589,28 +607,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the identifier property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the identifier property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the identifier property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getIdentifier().add(newItem);
+     * getIdentifier().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Identifier }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the identifier property.
      */
     public List<Identifier> getIdentifier() {
         if (identifier == null) {
-            identifier = new ArrayList<Identifier>();
+            identifier = new ArrayList<>();
         }
         return this.identifier;
     }
@@ -618,28 +639,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the metadataURL property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the metadataURL property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the metadataURL property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getMetadataURL().add(newItem);
+     * getMetadataURL().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link MetadataURL }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the metadataURL property.
      */
     public List<MetadataURL> getMetadataURL() {
         if (metadataURL == null) {
-            metadataURL = new ArrayList<MetadataURL>();
+            metadataURL = new ArrayList<>();
         }
         return this.metadataURL;
     }
@@ -647,28 +671,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the dataURL property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dataURL property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the dataURL property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDataURL().add(newItem);
+     * getDataURL().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DataURL }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the dataURL property.
      */
     public List<DataURL> getDataURL() {
         if (dataURL == null) {
-            dataURL = new ArrayList<DataURL>();
+            dataURL = new ArrayList<>();
         }
         return this.dataURL;
     }
@@ -676,28 +703,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the featureListURL property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the featureListURL property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the featureListURL property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getFeatureListURL().add(newItem);
+     * getFeatureListURL().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link FeatureListURL }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the featureListURL property.
      */
     public List<FeatureListURL> getFeatureListURL() {
         if (featureListURL == null) {
-            featureListURL = new ArrayList<FeatureListURL>();
+            featureListURL = new ArrayList<>();
         }
         return this.featureListURL;
     }
@@ -705,28 +735,31 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the style property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the style property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the style property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getStyle().add(newItem);
+     * getStyle().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Style }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the style property.
      */
     public List<Style> getStyle() {
         if (style == null) {
-            style = new ArrayList<Style>();
+            style = new ArrayList<>();
         }
         return this.style;
     }
@@ -758,47 +791,53 @@ public class Layer implements Serializable, ToString2
     /**
      * Gets the value of the layer property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layer property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the layer property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getLayer().add(newItem);
+     * getLayer().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Layer }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the layer property.
      */
     public List<Layer> getLayer() {
         if (layer == null) {
-            layer = new ArrayList<Layer>();
+            layer = new ArrayList<>();
         }
         return this.layer;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theQueryable;
             theQueryable = this.getQueryable();

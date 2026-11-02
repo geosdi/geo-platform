@@ -35,61 +35,70 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.repository;
 
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.WMSVersion;
-import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.context.pool.WMSJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+import org.geosdi.geoplatform.connector.jaxb.context.WMSJakartaContext;
+import org.geosdi.geoplatform.connector.jaxb.context.WMSJakartaContext.WMSJakartaContextKey;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.xml.bind.JAXBException;
 
 import static org.geosdi.geoplatform.connector.WMSVersion.V111;
 import static org.geosdi.geoplatform.wms.v111.WMSContextServiceProviderV111.WMS_CONTEXT_SERVICE_PROVIDER_V110;
 
 /**
+ * Contesto JAXB {@code jakarta.xml.bind} dei binding WMS 1.1.1, registrato nel repository dei connettori con la
+ * chiave {@link #WMS_CONTEXT_KEY_V111}.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class WMSConnectorJAXBContextPoolV111 implements GPWMSConnectorJAXBContextPool {
+public final class WMSConnectorJakartaContextV111 implements GPWMSConnectorJakartaContext {
 
-    private static final Logger logger = LoggerFactory.getLogger(WMSConnectorJAXBContextPoolV111.class);
+    private static final Logger logger = LoggerFactory.getLogger(WMSConnectorJakartaContextV111.class);
+    //
+    private static final WMSJakartaContext jakartaContext = createContext();
+    public static final WMSJakartaContextKey WMS_CONTEXT_KEY_V111 = new WMSJakartaContextKey(WMSConnectorJakartaContextV111.class);
 
-    static {
+    /**
+     * Usato dal repository dei connettori, che crea il provider per riflessione.
+     */
+    protected WMSConnectorJakartaContextV111() {
+    }
+
+    /**
+     * @return il contesto dei binding WMS 1.1.1, o null se non è stato possibile crearlo
+     */
+    private static WMSJakartaContext createContext() {
         try {
-            jaxbContext = new WMSJAXBContextPool(WMS_CONTEXT_SERVICE_PROVIDER_V110.getContextPath(), V111);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-            logger.error("Failed to Initialize JAXBContext for Class " + WMSConnectorJAXBContextPoolV111.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
+            return new WMSJakartaContext(V111, WMS_CONTEXT_SERVICE_PROVIDER_V110.getContextClasses());
+        } catch (JAXBException ex) {
+            logger.error("Impossibile creare il contesto jakarta dei binding WMS 1.1.1", ex);
+            return null;
         }
     }
 
-    //
-    private static WMSJAXBContextPool jaxbContext;
-    public static final WMSJAXBContext.WMSJAXBContextKey WMS_CONTEXT_POOL_KEY_V111 = new WMSJAXBContext.WMSJAXBContextKey(WMSConnectorJAXBContextPoolV111.class);
-
-    protected WMSConnectorJAXBContextPoolV111() {
-    }
-
     /**
+     * @param <P> il tipo del contesto
      * @return {@link P}
      */
     @Override
-    public <P extends GPBaseJAXBContext> P getJAXBProvider() {
-        return (P) jaxbContext;
+    public <P extends GPBaseJakartaContext> P getJakartaProvider() {
+        return (P) jakartaContext;
     }
 
     /**
+     * @param <K> il tipo della chiave
      * @return {@link K}
      */
     @Override
-    public <K extends GeoPlatformJAXBContextKey> K getKeyProvider() {
-        return (K) WMSConnectorJAXBContextPoolV111.WMS_CONTEXT_POOL_KEY_V111;
+    public <K extends GeoPlatformJakartaContextKey> K getKeyProvider() {
+        return (K) WMS_CONTEXT_KEY_V111;
     }
 
     /**
+     * @param <Version> il tipo della versione
      * @return {@link Version}
      */
     @Override

@@ -34,30 +34,30 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2019.01.24 alle 07:06:40 PM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:14:56 PM CET
 //
-
 
 package org.geosdi.geoplatform.wms.v111;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**
- * This object contains factory methods for each
- * Java content interface and Java element interface
- * generated in the org.geosdi.geoplatform.wms.v111 package.
- * <p>An ObjectFactory allows you to programatically
- * construct new instances of the Java representation
- * for XML content. The Java representation of XML
- * content can consist of schema derived interfaces
- * and classes representing the binding of schema
- * type definitions, element declarations and model
- * groups.  Factory methods for each of these are
+ * This object contains factory methods for each 
+ * Java content interface and Java element interface 
+ * generated in the org.geosdi.geoplatform.wms.v111 package. 
+ * <p>An ObjectFactory allows you to programmatically 
+ * construct new instances of the Java representation 
+ * for XML content. The Java representation of XML 
+ * content can consist of schema derived interfaces 
+ * and classes representing the binding of schema 
+ * type definitions, element declarations and model 
+ * groups.  Factory methods for each of these are 
  * provided in this class.
+ * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -65,12 +65,16 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.wms.v111
+     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link DCPType }
+     * 
+     * @return
+     *     the new instance of {@link DCPType }
      */
     public DCPType createDCPType() {
         return new DCPType();
@@ -78,6 +82,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link HTTP }
+     * 
+     * @return
+     *     the new instance of {@link HTTP }
      */
     public HTTP createHTTP() {
         return new HTTP();
@@ -85,6 +92,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FeatureListURL }
+     * 
+     * @return
+     *     the new instance of {@link FeatureListURL }
      */
     public FeatureListURL createFeatureListURL() {
         return new FeatureListURL();
@@ -92,6 +102,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Format }
+     * 
+     * @return
+     *     the new instance of {@link Format }
      */
     public Format createFormat() {
         return new Format();
@@ -99,6 +112,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link OnlineResource }
+     * 
+     * @return
+     *     the new instance of {@link OnlineResource }
      */
     public OnlineResource createOnlineResource() {
         return new OnlineResource();
@@ -106,6 +122,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WMTMSCapabilities }
+     * 
+     * @return
+     *     the new instance of {@link WMTMSCapabilities }
      */
     public WMTMSCapabilities createWMTMSCapabilities() {
         return new WMTMSCapabilities();
@@ -113,6 +132,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Service }
+     * 
+     * @return
+     *     the new instance of {@link Service }
      */
     public Service createService() {
         return new Service();
@@ -120,6 +142,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Capability }
+     * 
+     * @return
+     *     the new instance of {@link Capability }
      */
     public Capability createCapability() {
         return new Capability();
@@ -127,6 +152,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Query }
+     * 
+     * @return
+     *     the new instance of {@link Query }
      */
     public Query createQuery() {
         return new Query();
@@ -134,6 +162,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LogoURL }
+     * 
+     * @return
+     *     the new instance of {@link LogoURL }
      */
     public LogoURL createLogoURL() {
         return new LogoURL();
@@ -141,6 +172,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactPersonPrimary }
+     * 
+     * @return
+     *     the new instance of {@link ContactPersonPrimary }
      */
     public ContactPersonPrimary createContactPersonPrimary() {
         return new ContactPersonPrimary();
@@ -148,6 +182,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DescribeLayer }
+     * 
+     * @return
+     *     the new instance of {@link DescribeLayer }
      */
     public DescribeLayer createDescribeLayer() {
         return new DescribeLayer();
@@ -155,6 +192,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Identifier }
+     * 
+     * @return
+     *     the new instance of {@link Identifier }
      */
     public Identifier createIdentifier() {
         return new Identifier();
@@ -162,6 +202,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UserDefinedSymbolization }
+     * 
+     * @return
+     *     the new instance of {@link UserDefinedSymbolization }
      */
     public UserDefinedSymbolization createUserDefinedSymbolization() {
         return new UserDefinedSymbolization();
@@ -169,6 +212,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactAddress }
+     * 
+     * @return
+     *     the new instance of {@link ContactAddress }
      */
     public ContactAddress createContactAddress() {
         return new ContactAddress();
@@ -176,6 +222,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Request }
+     * 
+     * @return
+     *     the new instance of {@link Request }
      */
     public Request createRequest() {
         return new Request();
@@ -183,6 +232,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Exception }
+     * 
+     * @return
+     *     the new instance of {@link Exception }
      */
     public Exception createException() {
         return new Exception();
@@ -190,6 +242,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VendorSpecificCapabilities }
+     * 
+     * @return
+     *     the new instance of {@link VendorSpecificCapabilities }
      */
     public VendorSpecificCapabilities createVendorSpecificCapabilities() {
         return new VendorSpecificCapabilities();
@@ -197,6 +252,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Layer }
+     * 
+     * @return
+     *     the new instance of {@link Layer }
      */
     public Layer createLayer() {
         return new Layer();
@@ -204,6 +262,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Get }
+     * 
+     * @return
+     *     the new instance of {@link Get }
      */
     public Get createGet() {
         return new Get();
@@ -211,6 +272,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Post }
+     * 
+     * @return
+     *     the new instance of {@link Post }
      */
     public Post createPost() {
         return new Post();
@@ -218,6 +282,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMap }
+     * 
+     * @return
+     *     the new instance of {@link GetMap }
      */
     public GetMap createGetMap() {
         return new GetMap();
@@ -225,6 +292,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ScaleHint }
+     * 
+     * @return
+     *     the new instance of {@link ScaleHint }
      */
     public ScaleHint createScaleHint() {
         return new ScaleHint();
@@ -232,6 +302,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Attribution }
+     * 
+     * @return
+     *     the new instance of {@link Attribution }
      */
     public Attribution createAttribution() {
         return new Attribution();
@@ -239,6 +312,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetFeatureInfo }
+     * 
+     * @return
+     *     the new instance of {@link GetFeatureInfo }
      */
     public GetFeatureInfo createGetFeatureInfo() {
         return new GetFeatureInfo();
@@ -246,6 +322,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceException }
+     * 
+     * @return
+     *     the new instance of {@link ServiceException }
      */
     public ServiceException createServiceException() {
         return new ServiceException();
@@ -253,6 +332,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LayerDescription }
+     * 
+     * @return
+     *     the new instance of {@link LayerDescription }
      */
     public LayerDescription createLayerDescription() {
         return new LayerDescription();
@@ -260,6 +342,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MetadataURL }
+     * 
+     * @return
+     *     the new instance of {@link MetadataURL }
      */
     public MetadataURL createMetadataURL() {
         return new MetadataURL();
@@ -267,6 +352,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Extent }
+     * 
+     * @return
+     *     the new instance of {@link Extent }
      */
     public Extent createExtent() {
         return new Extent();
@@ -274,6 +362,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLegendGraphic }
+     * 
+     * @return
+     *     the new instance of {@link GetLegendGraphic }
      */
     public GetLegendGraphic createGetLegendGraphic() {
         return new GetLegendGraphic();
@@ -281,6 +372,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LatLonBoundingBox }
+     * 
+     * @return
+     *     the new instance of {@link LatLonBoundingBox }
      */
     public LatLonBoundingBox createLatLonBoundingBox() {
         return new LatLonBoundingBox();
@@ -288,6 +382,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link WMSDescribeLayerResponse }
+     * 
+     * @return
+     *     the new instance of {@link WMSDescribeLayerResponse }
      */
     public WMSDescribeLayerResponse createWMSDescribeLayerResponse() {
         return new WMSDescribeLayerResponse();
@@ -295,6 +392,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SRS }
+     * 
+     * @return
+     *     the new instance of {@link SRS }
      */
     public SRS createSRS() {
         return new SRS();
@@ -302,6 +402,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetCapabilities }
+     * 
+     * @return
+     *     the new instance of {@link GetCapabilities }
      */
     public GetCapabilities createGetCapabilities() {
         return new GetCapabilities();
@@ -309,6 +412,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link BoundingBox }
+     * 
+     * @return
+     *     the new instance of {@link BoundingBox }
      */
     public BoundingBox createBoundingBox() {
         return new BoundingBox();
@@ -316,6 +422,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetStyles }
+     * 
+     * @return
+     *     the new instance of {@link GetStyles }
      */
     public GetStyles createGetStyles() {
         return new GetStyles();
@@ -323,6 +432,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Style }
+     * 
+     * @return
+     *     the new instance of {@link Style }
      */
     public Style createStyle() {
         return new Style();
@@ -330,6 +442,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LegendURL }
+     * 
+     * @return
+     *     the new instance of {@link LegendURL }
      */
     public LegendURL createLegendURL() {
         return new LegendURL();
@@ -337,6 +452,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link StyleSheetURL }
+     * 
+     * @return
+     *     the new instance of {@link StyleSheetURL }
      */
     public StyleSheetURL createStyleSheetURL() {
         return new StyleSheetURL();
@@ -344,6 +462,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link StyleURL }
+     * 
+     * @return
+     *     the new instance of {@link StyleURL }
      */
     public StyleURL createStyleURL() {
         return new StyleURL();
@@ -351,6 +472,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Keyword }
+     * 
+     * @return
+     *     the new instance of {@link Keyword }
      */
     public Keyword createKeyword() {
         return new Keyword();
@@ -358,6 +482,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PutStyles }
+     * 
+     * @return
+     *     the new instance of {@link PutStyles }
      */
     public PutStyles createPutStyles() {
         return new PutStyles();
@@ -365,6 +492,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceExceptionReport }
+     * 
+     * @return
+     *     the new instance of {@link ServiceExceptionReport }
      */
     public ServiceExceptionReport createServiceExceptionReport() {
         return new ServiceExceptionReport();
@@ -372,6 +502,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link KeywordList }
+     * 
+     * @return
+     *     the new instance of {@link KeywordList }
      */
     public KeywordList createKeywordList() {
         return new KeywordList();
@@ -379,6 +512,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ContactInformation }
+     * 
+     * @return
+     *     the new instance of {@link ContactInformation }
      */
     public ContactInformation createContactInformation() {
         return new ContactInformation();
@@ -386,6 +522,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AuthorityURL }
+     * 
+     * @return
+     *     the new instance of {@link AuthorityURL }
      */
     public AuthorityURL createAuthorityURL() {
         return new AuthorityURL();
@@ -393,6 +532,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Dimension }
+     * 
+     * @return
+     *     the new instance of {@link Dimension }
      */
     public Dimension createDimension() {
         return new Dimension();
@@ -400,6 +542,9 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DataURL }
+     * 
+     * @return
+     *     the new instance of {@link DataURL }
      */
     public DataURL createDataURL() {
         return new DataURL();

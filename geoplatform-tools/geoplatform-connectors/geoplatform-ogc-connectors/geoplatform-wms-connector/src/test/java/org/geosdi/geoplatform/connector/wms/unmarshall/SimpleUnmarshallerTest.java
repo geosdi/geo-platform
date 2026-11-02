@@ -35,10 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.wms.unmarshall;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.wms.v111.*;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -46,10 +50,6 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.io.Serializable;
 import java.io.StringReader;
@@ -64,7 +64,7 @@ import java.util.List;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -76,7 +76,7 @@ public class SimpleUnmarshallerTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleUnmarshallerTest.class);
     //
-    private static final GPJAXBContextBuilder jaxbContextBuilder = newInstance();
+    private static final IGPJAXBJakartaContextBuilder jaxbContextBuilder = jakartaContextBuilder();
 
     @Test
     public void a_simpleTest() throws Exception {
@@ -134,7 +134,7 @@ public class SimpleUnmarshallerTest {
                 + "        </Style>\n"
                 + "      </Layer>"), Layer.class);
         logger.info("#####################Layer : {}\n", layer.getExtent());
-        List<String> values = Arrays.asList(layer.getExtent().get(0).getvalue().split(","));
+        List<String> values = Arrays.asList(layer.getExtent().get(0).getValue().split(","));
         assertTrue(values.size() == 104);
     }
 

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services.builder;
 
+import jakarta.xml.bind.JAXBContext;
 import org.apache.commons.io.IOUtils;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -50,7 +51,6 @@ import org.xml.sax.XMLReader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
 import java.io.InputStream;

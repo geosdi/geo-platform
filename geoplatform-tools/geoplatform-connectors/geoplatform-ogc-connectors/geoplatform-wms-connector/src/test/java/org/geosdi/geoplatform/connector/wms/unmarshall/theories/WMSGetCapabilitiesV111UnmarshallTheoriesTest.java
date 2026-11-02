@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.wms.unmarshall.theories;
 
-import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.context.WMSJakartaContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.wms.v111.WMTMSCapabilities;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
@@ -61,7 +61,7 @@ import static java.lang.Boolean.FALSE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WMSVersion.V111;
-import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJAXBContextV111.WMS_CONTEXT_KEY_V111;
+import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJakartaContextV111.WMS_CONTEXT_KEY_V111;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -75,18 +75,18 @@ public class WMSGetCapabilitiesV111UnmarshallTheoriesTest {
     private static final Logger logger = LoggerFactory.getLogger(WMSGetCapabilitiesV111UnmarshallTheoriesTest.class);
 
     static {
-        wmsContext = JAXBContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V111);
+        wmsContext = JakartaContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V111);
     }
 
     private static String dirFiles;
     private static final SAXParserFactory spf = SAXParserFactory.newInstance();
-    private static final GPBaseJAXBContext wmsContext;
+    private static final GPBaseJakartaContext wmsContext;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         assertNotNull(wmsContext);
-        assertTrue(wmsContext instanceof WMSJAXBContext);
-        assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V111);
+        assertTrue(wmsContext instanceof WMSJakartaContext);
+        assertTrue(((WMSJakartaContext) wmsContext).getVersion() == V111);
         dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);

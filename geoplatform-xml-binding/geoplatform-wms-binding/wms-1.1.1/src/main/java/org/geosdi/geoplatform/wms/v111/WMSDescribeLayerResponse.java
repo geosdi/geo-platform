@@ -34,39 +34,43 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2019.01.24 alle 07:06:40 PM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:14:56 PM CET
 //
-
 
 package org.geosdi.geoplatform.wms.v111;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.NormalizedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- *
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "layerDescription"
+    "layerDescription"
 })
 @XmlRootElement(name = "WMS_DescribeLayerResponse")
-public class WMSDescribeLayerResponse implements Serializable, ToString2 {
+public class WMSDescribeLayerResponse implements Serializable, ToString
+{
 
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @XmlAttribute(name = "version", required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String version;
@@ -75,9 +79,11 @@ public class WMSDescribeLayerResponse implements Serializable, ToString2 {
 
     /**
      * Recupera il valore della proprietà version.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getVersion() {
         return version;
@@ -85,9 +91,11 @@ public class WMSDescribeLayerResponse implements Serializable, ToString2 {
 
     /**
      * Imposta il valore della proprietà version.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setVersion(String value) {
         this.version = value;
@@ -95,62 +103,70 @@ public class WMSDescribeLayerResponse implements Serializable, ToString2 {
 
     /**
      * Gets the value of the layerDescription property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layerDescription property.
-     *
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the layerDescription property.</p>
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getLayerDescription().add(newItem);
+     * getLayerDescription().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link LayerDescription }
+     * </p>
+     * 
+     * 
+     * @return
+     *     The value of the layerDescription property.
      */
     public List<LayerDescription> getLayerDescription() {
         if (layerDescription == null) {
-            layerDescription = new ArrayList<LayerDescription>();
+            layerDescription = new ArrayList<>();
         }
         return this.layerDescription;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theVersion;
             theVersion = this.getVersion();
-            strategy.appendField(locator, this, "version", buffer, theVersion, (this.version != null));
+            strategy.appendField(locator, this, "version", buffer, theVersion, (this.version!= null));
         }
         {
             List<LayerDescription> theLayerDescription;
-            theLayerDescription = (((this.layerDescription != null) && (!this.layerDescription.isEmpty())) ? this.getLayerDescription() : null);
-            strategy.appendField(locator, this, "layerDescription", buffer, theLayerDescription, ((this.layerDescription != null) && (!this.layerDescription.isEmpty())));
+            theLayerDescription = (((this.layerDescription!= null)&&(!this.layerDescription.isEmpty()))?this.getLayerDescription():null);
+            strategy.appendField(locator, this, "layerDescription", buffer, theLayerDescription, ((this.layerDescription!= null)&&(!this.layerDescription.isEmpty())));
         }
         return buffer;
     }
 
     public void setLayerDescription(List<LayerDescription> value) {
         this.layerDescription = null;
-        if (value != null) {
+        if (value!= null) {
             List<LayerDescription> draftl = this.getLayerDescription();
             draftl.addAll(value);
         }

@@ -129,6 +129,13 @@
                 <artifactId>jaxb2-basics-runtime</artifactId>
                 <version>${jaxb2-basics-version}</version>
             </dependency>
+
+            <!-- Runtime di jaxb-plugins (ToString2 e strategie in org.jvnet.jaxb.lang) per i binding jakarta. -->
+            <dependency>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-plugins-runtime</artifactId>
+                <version>${jaxb-tools-version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     
@@ -168,12 +175,39 @@
                         </plugins>
                     </configuration>
                 </plugin>
+
+                <!-- Plugin per i binding jakarta (JAXB 4), con jaxb-plugins al posto di jaxb2-basics: stessi
+                     argomenti del plugin javax. I binding passano qui un gruppo alla volta (vedi CLAUDE.md, punto C). -->
+                <plugin>
+                    <groupId>org.jvnet.jaxb</groupId>
+                    <artifactId>jaxb-maven-plugin</artifactId>
+                    <version>${jaxb-tools-version}</version>
+                    <configuration>
+                        <strict>false</strict>
+                        <extension>true</extension>
+                        <args>
+                            <arg>-XtoString</arg>
+                            <arg>-Xsetters</arg>
+                            <arg>-Xwildcard</arg>
+                            <arg>-Xinject-code</arg>
+                            <arg>-Xinheritance</arg>
+                        </args>
+                        <plugins>
+                            <plugin>
+                                <groupId>org.jvnet.jaxb</groupId>
+                                <artifactId>jaxb-plugins</artifactId>
+                                <version>${jaxb-tools-version}</version>
+                            </plugin>
+                        </plugins>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
     
     <properties>
         <jaxb2-basics-version>1.11.1</jaxb2-basics-version>
+        <jaxb-tools-version>4.0.16</jaxb-tools-version>
     </properties>
 
 </project>

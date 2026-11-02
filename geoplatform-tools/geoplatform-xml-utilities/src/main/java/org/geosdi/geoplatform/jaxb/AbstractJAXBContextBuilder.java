@@ -37,23 +37,29 @@ package org.geosdi.geoplatform.jaxb;
 
 import org.w3c.dom.Node;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.*;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 import static javax.xml.bind.Marshaller.JAXB_ENCODING;
 import static javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
+import static org.geosdi.geoplatform.stax.reader.factory.GPSecureXMLInputFactory.newSecureReader;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -84,10 +90,9 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
     @Override
     public <T> T unmarshal(File file, Class<T> type) {
         checkArgument((file != null) && (file.exists()) && !(file.isDirectory()), "The Parameter file must not be null, must exists and must not be a directory");
-        try {
-            Object item = getContext(type).createUnmarshaller().unmarshal(new StreamSource(file), type);
-            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
-        } catch (JAXBException e) {
+        try (InputStream stream = new FileInputStream(file)) {
+            return unmarshalDeclared(type, newSecureReader(file.toURI().toString(), stream));
+        } catch (JAXBException | XMLStreamException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -100,10 +105,9 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
     @Override
     public <T> T unmarshal(URL url, Class<T> type) {
         checkArgument(url != null, "The Parameter url must not be null");
-        try {
-            Object item = getContext(type).createUnmarshaller().unmarshal(url);
-            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
-        } catch (JAXBException e) {
+        try (InputStream stream = url.openStream()) {
+            return unmarshalRoot(type, newSecureReader(url.toExternalForm(), stream));
+        } catch (JAXBException | XMLStreamException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -117,9 +121,8 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
     public <T> T unmarshal(URI uri, Class<T> type) {
         checkArgument(uri != null, "The Parameter uri must not be null.");
         try {
-            Object item = getContext(type).createUnmarshaller().unmarshal(uri.toURL());
-            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
-        } catch (Exception e) {
+            return unmarshal(uri.toURL(), type);
+        } catch (MalformedURLException | IllegalArgumentException e) {
             throw new DataBindingException(e);
         }
     }
@@ -132,6 +135,10 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
     @Override
     public <T> T unmarshal(Source source, Class<T> type) {
         checkArgument(source != null, "The Parameter source must not be null.");
+        if (source instanceof StreamSource streamSource) {
+            return unmarshal(streamSource, type);
+        }
+        // DOMSource, SAXSource e StAXSource sono già letti, o letti da un parser scelto dal chiamante.
         try {
             Object item = getContext(type).createUnmarshaller().unmarshal(source);
             return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
@@ -165,9 +172,8 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
     public <T> T unmarshal(Reader reader, Class<T> type) {
         checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
         try {
-            Object item = getContext(type).createUnmarshaller().unmarshal(new StreamSource(reader), type);
-            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
-        } catch (JAXBException e) {
+            return unmarshalDeclared(type, newSecureReader(null, reader));
+        } catch (JAXBException | XMLStreamException e) {
             throw new DataBindingException(e);
         }
     }
@@ -213,10 +219,96 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
     public <T> T unmarshal(InputStream inputStream, Class<T> type) {
         checkArgument(inputStream != null, "The Parameter inputStream must not be null.");
         try {
-            Object item = getContext(type).createUnmarshaller().unmarshal(new StreamSource(inputStream), type);
-            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
-        } catch (JAXBException e) {
+            return unmarshalDeclared(type, newSecureReader(null, inputStream));
+        } catch (JAXBException | XMLStreamException e) {
             throw new DataBindingException(e);
+        }
+    }
+
+    /**
+     * Legge una {@link StreamSource} con un reader sicuro. Se la sorgente ha solo il system id, il documento
+     * viene aperto da quell'indirizzo.
+     *
+     * @param theSource la sorgente da leggere
+     * @param type      la classe attesa
+     * @param <T>       il tipo atteso
+     * @return {@link T}
+     */
+    private <T> T unmarshal(@Nonnull(when = NEVER) StreamSource theSource, Class<T> type) {
+        checkArgument(theSource != null, "Il parametro theSource non deve essere null.");
+        if ((theSource.getInputStream() == null) && (theSource.getReader() == null)) {
+            checkArgument(theSource.getSystemId() != null, "La StreamSource deve avere uno stream, un reader o un system id.");
+            return unmarshal(systemIdToURI(theSource.getSystemId()), type);
+        }
+        try {
+            return unmarshalRoot(type, newSecureReader(theSource));
+        } catch (JAXBException | XMLStreamException e) {
+            throw new DataBindingException(e);
+        }
+    }
+
+    /**
+     * Converte il system id di una {@link StreamSource} in un {@link URI}: un URI assoluto resta com'è,
+     * altrimenti il system id è un percorso di file, come JAXB ha sempre accettato.
+     *
+     * @param theSystemId il system id
+     * @return {@link URI}
+     */
+    private static URI systemIdToURI(@Nonnull(when = NEVER) String theSystemId) {
+        checkArgument(theSystemId != null, "Il parametro theSystemId non deve essere null.");
+        try {
+            URI uri = new URI(theSystemId);
+            if (uri.isAbsolute()) {
+                return uri;
+            }
+        } catch (URISyntaxException e) {
+            // Non è un URI (per esempio un percorso Windows o con spazi): lo si tratta come file.
+        }
+        return new File(theSystemId).toURI();
+    }
+
+    /**
+     * Legge il documento da un reader sicuro come istanza di {@code type}, anche se la classe non ha
+     * {@code @XmlRootElement}, e chiude il reader (non lo stream sottostante).
+     *
+     * @param type      la classe attesa
+     * @param theReader il reader creato con
+     *                  {@link org.geosdi.geoplatform.stax.reader.factory.GPSecureXMLInputFactory}
+     * @param <T>       il tipo atteso
+     * @return {@link T}
+     * @throws JAXBException      se il documento non si può convertire
+     * @throws XMLStreamException se il reader non si può chiudere
+     */
+    private <T> T unmarshalDeclared(Class<T> type, @Nonnull(when = NEVER) XMLStreamReader theReader)
+            throws JAXBException, XMLStreamException {
+        checkArgument(theReader != null, "Il parametro theReader non deve essere null.");
+        try {
+            return getContext(type).createUnmarshaller().unmarshal(theReader, type).getValue();
+        } finally {
+            theReader.close();
+        }
+    }
+
+    /**
+     * Legge il documento da un reader sicuro in base al suo elemento radice e chiude il reader (non lo stream
+     * sottostante).
+     *
+     * @param type      la classe attesa, usata per scegliere il contesto JAXB
+     * @param theReader il reader creato con
+     *                  {@link org.geosdi.geoplatform.stax.reader.factory.GPSecureXMLInputFactory}
+     * @param <T>       il tipo atteso
+     * @return {@link T}
+     * @throws JAXBException      se il documento non si può convertire
+     * @throws XMLStreamException se il reader non si può chiudere
+     */
+    private <T> T unmarshalRoot(Class<T> type, @Nonnull(when = NEVER) XMLStreamReader theReader)
+            throws JAXBException, XMLStreamException {
+        checkArgument(theReader != null, "Il parametro theReader non deve essere null.");
+        try {
+            Object item = getContext(type).createUnmarshaller().unmarshal(theReader);
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
+        } finally {
+            theReader.close();
         }
     }
 

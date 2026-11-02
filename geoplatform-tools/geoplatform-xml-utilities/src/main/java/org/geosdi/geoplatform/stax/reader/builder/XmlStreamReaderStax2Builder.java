@@ -63,10 +63,11 @@ public class XmlStreamReaderStax2Builder extends BaseXmlStreamReaderBuilder<XMLI
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
      * <ul>
-     *      <li>Enable <code>SUPPORT_DTD</code> property.</li>
+     *      <li><code>SUPPORT_DTD</code>: <b>resta disattivata</b>, vedi
+     *      {@link org.geosdi.geoplatform.stax.reader.factory.GPSecureXMLInputFactory}.</li>
      *      <li>Enable <code>IS_NAMESPACE_AWARE</code></li>
      *      <li>Enable <code>IS_REPLACING_ENTITY_REFERENCES</code></li>
-     *      <li>Enable <code>IS_SUPPORTING_EXTERNAL_ENTITIES</code></li>
+     *      <li><code>IS_SUPPORTING_EXTERNAL_ENTITIES</code>: <b>resta disattivata</b>.</li>
      * </ul>
      * All the other standard settings should be left as is.
      * <p>
@@ -194,10 +195,11 @@ public class XmlStreamReaderStax2Builder extends BaseXmlStreamReaderBuilder<XMLI
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
      * <ul>
-     *      <li>Enable <code>SUPPORT_DTD</code> property.</li>
+     *      <li><code>SUPPORT_DTD</code>: <b>resta disattivata</b>, vedi
+     *      {@link org.geosdi.geoplatform.stax.reader.factory.GPSecureXMLInputFactory}.</li>
      *      <li>Enable <code>IS_NAMESPACE_AWARE</code></li>
      *      <li>Enable <code>IS_REPLACING_ENTITY_REFERENCES</code></li>
-     *      <li>Enable <code>IS_SUPPORTING_EXTERNAL_ENTITIES</code></li>
+     *      <li><code>IS_SUPPORTING_EXTERNAL_ENTITIES</code>: <b>resta disattivata</b>.</li>
      * </ul>
      * All the other standard settings should be left as is.
      * <p>

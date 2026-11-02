@@ -50,8 +50,12 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.stax.reader.factory.GPSecureXMLInputFactory.secure;
 
 /**
+ * Crea le {@link XMLInputFactory2} di Woodstox e Aalto, sempre con DTD ed entità esterne disattivate
+ * (vedi {@link GPSecureXMLInputFactory}).
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -67,13 +71,15 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          * Regarding the default StAX property settings,
          * implementations are suggested to do following:
          * <ul>
-         * <li>Enable <code>SUPPORT_DTD</code> property.
+         * <li>Enable <code>SUPPORT_DTD</code> property: <b>in questo modulo resta disattivata</b>,
+         *   vedi {@link GPSecureXMLInputFactory}.
          *  </li>
          * <li>Enable <code>IS_NAMESPACE_AWARE</code>
          *  </li>
          * <li>Enable <code>IS_REPLACING_ENTITY_REFERENCES</code>
          *  </li>
-         * <li>Enable <code>IS_SUPPORTING_EXTERNAL_ENTITIES</code>
+         * <li>Enable <code>IS_SUPPORTING_EXTERNAL_ENTITIES</code>: <b>in questo modulo resta
+         *   disattivata</b>, vedi {@link GPSecureXMLInputFactory}.
          *  </li>
          * </ul>
          * All the other standard settings should be left as is.
@@ -86,6 +92,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForXmlConformance() {
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForXmlConformance();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -122,6 +129,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForConvenience() {
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForConvenience();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -161,6 +169,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForSpeed() {
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForSpeed();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -191,6 +200,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForLowMemUsage() {
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForLowMemUsage();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -230,18 +240,24 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForRoundTripping() {
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
             factory.configureForRoundTripping();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
 
         /**
-         * @param theProp
+         * Crea la factory con le impostazioni sicure di {@link GPSecureXMLInputFactory} e poi applica le
+         * proprietà passate, che possono sovrascriverle.
+         *
+         * @param theProp le proprietà da impostare sulla factory
          * @return {@link F}
          */
         @Override
         public <F extends XMLInputFactory> F withProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
             checkArgument((theProp != null) && !(theProp.isEmpty()), "The Parameter prop must not be null or an empty Map.");
             XMLInputFactory2 factory = (XMLInputFactory2) WstxInputFactory.newInstance();
+            // Prima le impostazioni sicure: chi ha davvero bisogno delle DTD deve chiederlo in theProp.
+            secure(factory);
             Map<String, Object> properties = theProp.entrySet().stream()
                     .filter(Objects::nonNull)
                     .filter(entry -> (entry.getKey() != null) && !(entry.getKey().trim().isEmpty()))
@@ -265,13 +281,15 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
          * Regarding the default StAX property settings,
          * implementations are suggested to do following:
          * <ul>
-         * <li>Enable <code>SUPPORT_DTD</code> property.
+         * <li>Enable <code>SUPPORT_DTD</code> property: <b>in questo modulo resta disattivata</b>,
+         *   vedi {@link GPSecureXMLInputFactory}.
          *  </li>
          * <li>Enable <code>IS_NAMESPACE_AWARE</code>
          *  </li>
          * <li>Enable <code>IS_REPLACING_ENTITY_REFERENCES</code>
          *  </li>
-         * <li>Enable <code>IS_SUPPORTING_EXTERNAL_ENTITIES</code>
+         * <li>Enable <code>IS_SUPPORTING_EXTERNAL_ENTITIES</code>: <b>in questo modulo resta
+         *   disattivata</b>, vedi {@link GPSecureXMLInputFactory}.
          *  </li>
          * </ul>
          * All the other standard settings should be left as is.
@@ -284,6 +302,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForXmlConformance() {
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForXmlConformance();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -320,6 +339,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForConvenience() {
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForConvenience();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -359,6 +379,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForSpeed() {
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForSpeed();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -389,6 +410,7 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForLowMemUsage() {
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForLowMemUsage();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
@@ -428,12 +450,16 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory2> F configureForRoundTripping() {
             InputFactoryImpl factory = new InputFactoryImpl();
             factory.configureForRoundTripping();
+            secure(factory);
             logger.debug("###########################{}#Creates : {}\n", this.getClass().getSimpleName(), factory);
             return (F) factory;
         }
 
         /**
-         * @param theProp
+         * Crea la factory con le impostazioni sicure di {@link GPSecureXMLInputFactory} e poi applica le
+         * proprietà passate, che possono sovrascriverle.
+         *
+         * @param theProp le proprietà da impostare sulla factory
          * @return {@link F}
          */
         @Override
@@ -446,6 +472,8 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
                     .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
             checkArgument((properties != null) && !(properties.isEmpty()), "The Parameter prop must not contains null keys or null values.");
             InputFactoryImpl factory = new InputFactoryImpl();
+            // Prima le impostazioni sicure: chi ha davvero bisogno delle DTD deve chiederlo in theProp.
+            secure(factory);
             fromIterable(properties.entrySet())
                     .doOnComplete(() -> logger.debug("###########RX terminated its work"))
                     .subscribe(e -> factory.setProperty(e.getKey(), e.getValue()), Throwable::printStackTrace);

@@ -37,12 +37,12 @@ package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.configured
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;

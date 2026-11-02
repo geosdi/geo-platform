@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute;
 
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlTransient;
 import tools.jackson.databind.annotation.JsonDeserialize;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 /**

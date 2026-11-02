@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import tools.jackson.databind.annotation.JsonDeserialize;
 import tools.jackson.databind.annotation.JsonSerialize;
-
-import javax.xml.bind.annotation.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

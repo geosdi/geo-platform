@@ -34,48 +34,47 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * An Exception element describes one detected error that a server chooses to convey to the client. 
+ * An Exception element describes one detected error that a server chooses to convey to the client.
  * 
- * <p>Classe Java per ExceptionType complex type.
+ * <p>Classe Java per ExceptionType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ExceptionType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="ExceptionText" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="exceptionCode" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="locator" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="ExceptionType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="ExceptionText" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="exceptionCode" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="locator" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -83,47 +82,64 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlType(name = "ExceptionType", propOrder = {
     "exceptionText"
 })
-public class ExceptionType implements ToString2
+public class ExceptionType implements ToString
 {
 
+    /**
+     * Ordered sequence of text strings that describe this specific exception or error. The contents of these strings are left open to definition by each server implementation. A server is strongly encouraged to include at least one ExceptionText value, to provide more information about the detected error than provided by the exceptionCode. When included, multiple ExceptionText values shall provide hierarchical information about one detected error, with the most significant information listed first.
+     * 
+     */
     @XmlElement(name = "ExceptionText")
     protected List<String> exceptionText;
+    /**
+     * A code representing the type of this exception, which shall be selected from a set of exceptionCode values specified for the specific service operation and server.
+     * 
+     */
     @XmlAttribute(name = "exceptionCode", required = true)
     protected String exceptionCode;
+    /**
+     * When included, this locator shall indicate to the client where an exception was encountered in servicing the client's operation request. This locator should be included whenever meaningful information can be provided by the server. The contents of this locator will depend on the specific exceptionCode and OWS service, and shall be specified in the OWS Implementation Specification.
+     * 
+     */
     @XmlAttribute(name = "locator")
     protected String locator;
 
     /**
+     * Ordered sequence of text strings that describe this specific exception or error. The contents of these strings are left open to definition by each server implementation. A server is strongly encouraged to include at least one ExceptionText value, to provide more information about the detected error than provided by the exceptionCode. When included, multiple ExceptionText values shall provide hierarchical information about one detected error, with the most significant information listed first.
+     * 
      * Gets the value of the exceptionText property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the exceptionText property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the exceptionText property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getExceptionText().add(newItem);
+     * getExceptionText().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the exceptionText property.
      */
     public List<String> getExceptionText() {
         if (exceptionText == null) {
-            exceptionText = new ArrayList<String>();
+            exceptionText = new ArrayList<>();
         }
         return this.exceptionText;
     }
 
     /**
-     * Recupera il valore della proprietà exceptionCode.
+     * A code representing the type of this exception, which shall be selected from a set of exceptionCode values specified for the specific service operation and server.
      * 
      * @return
      *     possible object is
@@ -141,13 +157,14 @@ public class ExceptionType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getExceptionCode()
      */
     public void setExceptionCode(String value) {
         this.exceptionCode = value;
     }
 
     /**
-     * Recupera il valore della proprietà locator.
+     * When included, this locator shall indicate to the client where an exception was encountered in servicing the client's operation request. This locator should be included whenever meaningful information can be provided by the server. The contents of this locator will depend on the specific exceptionCode and OWS service, and shall be specified in the OWS Implementation Specification.
      * 
      * @return
      *     possible object is
@@ -165,26 +182,30 @@ public class ExceptionType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getLocator()
      */
     public void setLocator(String value) {
         this.locator = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<String> theExceptionText;
             theExceptionText = (((this.exceptionText!= null)&&(!this.exceptionText.isEmpty()))?this.getExceptionText():null);

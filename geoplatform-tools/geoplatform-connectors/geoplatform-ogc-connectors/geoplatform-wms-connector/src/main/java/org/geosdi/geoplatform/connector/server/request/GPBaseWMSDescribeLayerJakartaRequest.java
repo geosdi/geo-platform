@@ -51,8 +51,8 @@ import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Base delle richieste DescribeLayer con JAXB {@code jakarta.xml.bind}: è la versione jakarta di
- * {@link GPBaseWMSDescribeLayerRequest}.
+ * Base delle richieste DescribeLayer con JAXB {@code jakarta.xml.bind}: ha preso il posto di
+ * {@code GPBaseWMSDescribeLayerRequest}, la versione javax tolta con il passaggio di WMS 1.3.0 a jakarta.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

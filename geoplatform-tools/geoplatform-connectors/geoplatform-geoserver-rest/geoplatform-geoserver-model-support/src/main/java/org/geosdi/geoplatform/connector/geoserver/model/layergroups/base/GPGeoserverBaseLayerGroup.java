@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups.base;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLayerGroupMode;
@@ -42,9 +44,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.layergroups.keywords.GPG
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.keywords.IGPGeoserverLayerGroupKeywords;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.style.GPGeoserverLayerGroupStyles;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.style.IGPGeoserverLayerGroupStyles;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

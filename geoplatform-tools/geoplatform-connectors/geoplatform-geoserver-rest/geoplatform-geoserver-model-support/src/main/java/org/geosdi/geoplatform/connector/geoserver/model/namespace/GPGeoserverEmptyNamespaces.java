@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.namespace;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

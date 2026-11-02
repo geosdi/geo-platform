@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.metadata;
 
-import org.geosdi.geoplatform.response.collection.GPGenericMapType;
+import org.geosdi.geoplatform.response.collection.jakarta.GPGenericJakartaMapType;
 
 import java.util.List;
 import java.util.Map;
@@ -44,7 +44,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverMetadataMapType extends GPGenericMapType<String, String, GPGeoserverMetadataParam> {
+public class GPGeoserverMetadataMapType extends GPGenericJakartaMapType<String, String, GPGeoserverMetadataParam> {
 
     public GPGeoserverMetadataMapType() {
     }

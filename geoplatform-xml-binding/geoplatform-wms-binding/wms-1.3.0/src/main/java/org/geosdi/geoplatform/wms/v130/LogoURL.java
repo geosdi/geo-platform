@@ -34,48 +34,47 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2019.01.25 alle 11:53:13 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:45 PM CET
 //
-
 
 package org.geosdi.geoplatform.wms.v130;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}Format"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}OnlineResource"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="width" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" /&gt;
- *       &lt;attribute name="height" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/wms}Format"/>
+ *         <element ref="{http://www.opengis.net/wms}OnlineResource"/>
+ *       </sequence>
+ *       <attribute name="width" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
+ *       <attribute name="height" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -85,11 +84,21 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "onlineResource"
 })
 @XmlRootElement(name = "LogoURL")
-public class LogoURL implements ToString2
+public class LogoURL implements ToString
 {
 
+    /**
+     * A container for listing an available format's MIME type.
+     * 
+     */
     @XmlElement(name = "Format", required = true)
     protected String format;
+    /**
+     * An OnlineResource is typically an HTTP URL.  The URL is placed in
+     *         the xlink:href attribute, and the value "simple" is placed in the
+     *         xlink:type attribute.
+     * 
+     */
     @XmlElement(name = "OnlineResource", required = true)
     protected OnlineResource onlineResource;
     @XmlAttribute(name = "width")
@@ -100,7 +109,7 @@ public class LogoURL implements ToString2
     protected BigInteger height;
 
     /**
-     * Recupera il valore della proprietà format.
+     * A container for listing an available format's MIME type.
      * 
      * @return
      *     possible object is
@@ -118,13 +127,16 @@ public class LogoURL implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getFormat()
      */
     public void setFormat(String value) {
         this.format = value;
     }
 
     /**
-     * Recupera il valore della proprietà onlineResource.
+     * An OnlineResource is typically an HTTP URL.  The URL is placed in
+     *         the xlink:href attribute, and the value "simple" is placed in the
+     *         xlink:type attribute.
      * 
      * @return
      *     possible object is
@@ -142,6 +154,7 @@ public class LogoURL implements ToString2
      *     allowed object is
      *     {@link OnlineResource }
      *     
+     * @see #getOnlineResource()
      */
     public void setOnlineResource(OnlineResource value) {
         this.onlineResource = value;
@@ -195,21 +208,24 @@ public class LogoURL implements ToString2
         this.height = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theFormat;
             theFormat = this.getFormat();

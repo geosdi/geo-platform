@@ -34,45 +34,44 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * Complete reference to a remote resource that needs to be retrieved from an OWS using an XML-encoded operation request. This element shall be used, within an InputData or Manifest element that is used for input data, when that input data needs to be retrieved from another web service using a XML-encoded OWS operation request. This element shall not be used for local payload input data or for requesting the resource from a web server using HTTP Get. 
+ * Complete reference to a remote resource that needs to be retrieved from an OWS using an XML-encoded operation request. This element shall be used, within an InputData or Manifest element that is used for input data, when that input data needs to be retrieved from another web service using a XML-encoded OWS operation request. This element shall not be used for local payload input data or for requesting the resource from a web server using HTTP Get.
  * 
- * <p>Classe Java per ServiceReferenceType complex type.
+ * <p>Classe Java per ServiceReferenceType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ServiceReferenceType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/ows/1.1}ReferenceType"&gt;
- *       &lt;choice&gt;
- *         &lt;element name="RequestMessage" type="{http://www.w3.org/2001/XMLSchema}anyType"/&gt;
- *         &lt;element name="RequestMessageReference" type="{http://www.w3.org/2001/XMLSchema}anyURI"/&gt;
- *       &lt;/choice&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="ServiceReferenceType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/ows/1.1}ReferenceType">
+ *       <choice>
+ *         <element name="RequestMessage" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+ *         <element name="RequestMessageReference" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
+ *       </choice>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -83,17 +82,25 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class ServiceReferenceType
     extends ReferenceType
-    implements ToString2
+    implements ToString
 {
 
+    /**
+     * The XML-encoded operation request message to be sent to request this input data from another web server using HTTP Post.
+     * 
+     */
     @XmlElement(name = "RequestMessage")
     protected Object requestMessage;
+    /**
+     * Reference to the XML-encoded operation request message to be sent to request this input data from another web server using HTTP Post. The referenced message shall be attached to the same message (using the cid scheme), or be accessible using a URL.
+     * 
+     */
     @XmlElement(name = "RequestMessageReference")
     @XmlSchemaType(name = "anyURI")
     protected String requestMessageReference;
 
     /**
-     * Recupera il valore della proprietà requestMessage.
+     * The XML-encoded operation request message to be sent to request this input data from another web server using HTTP Post.
      * 
      * @return
      *     possible object is
@@ -111,13 +118,14 @@ public class ServiceReferenceType
      *     allowed object is
      *     {@link Object }
      *     
+     * @see #getRequestMessage()
      */
     public void setRequestMessage(Object value) {
         this.requestMessage = value;
     }
 
     /**
-     * Recupera il valore della proprietà requestMessageReference.
+     * Reference to the XML-encoded operation request message to be sent to request this input data from another web server using HTTP Post. The referenced message shall be attached to the same message (using the cid scheme), or be accessible using a URL.
      * 
      * @return
      *     possible object is
@@ -135,26 +143,30 @@ public class ServiceReferenceType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getRequestMessageReference()
      */
     public void setRequestMessageReference(String value) {
         this.requestMessageReference = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             Object theRequestMessage;

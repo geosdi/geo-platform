@@ -35,18 +35,17 @@
  */
 package org.geosdi.geoplatform.wmc.support.v110.jaxb.repository;
 
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
+import jakarta.xml.bind.JAXBException;
+import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.context.pool.WMCJAXBContextPoolV110;
 import org.geosdi.geoplatform.xml.wmc.WMCServiceProviderV110;
 import org.slf4j.LoggerFactory;
-
-import javax.xml.bind.JAXBException;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WMCJAXBContextProviderPoolV110 implements GeoPlatformJAXBContextProvider {
+public class WMCJAXBContextProviderPoolV110 implements GeoPlatformJakartaContextProvider {
 
     static {
         try {
@@ -68,7 +67,7 @@ public class WMCJAXBContextProviderPoolV110 implements GeoPlatformJAXBContextPro
     }
 
     @Override
-    public WMCJAXBContextPoolV110 getJAXBProvider() {
+    public WMCJAXBContextPoolV110 getJakartaProvider() {
         return jaxbContext;
     }
 

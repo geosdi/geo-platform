@@ -33,73 +33,57 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-//
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:19:44 PM CEST 
-//
+package org.geosdi.geoplatform.response.collection.jakarta;
 
+import jakarta.xml.bind.annotation.XmlTransient;
+import lombok.Getter;
+import lombok.Setter;
+import org.geosdi.geoplatform.response.collection.GPGenericEntryType;
+import org.geosdi.geoplatform.response.collection.GPGenericMapType;
 
-package org.geosdi.geoplatform.xml.xlink.v100;
+import javax.annotation.Nullable;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlType;
-
+import static java.util.Collections.EMPTY_LIST;
+import static java.util.stream.Collectors.toList;
 
 /**
- * <p>Classe Java per typeType.
- * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;simpleType name="typeType">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}token">
- *     &lt;enumeration value="simple"/>
- *     &lt;enumeration value="extended"/>
- *     &lt;enumeration value="title"/>
- *     &lt;enumeration value="resource"/>
- *     &lt;enumeration value="locator"/>
- *     &lt;enumeration value="arc"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
- * 
+ * Mappa scritta come elenco di {@link GPGenericEntryType} per JAXB {@code jakarta.xml.bind}: è la versione jakarta di
+ * {@link GPGenericMapType}.
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlType(name = "typeType", namespace = "http://www.w3.org/1999/xlink")
-@XmlEnum
-public enum TypeType {
+@Getter
+@Setter
+@XmlTransient
+public abstract class GPGenericJakartaMapType<K, V, Entry extends GPGenericEntryType<K, V>> implements Serializable {
 
-    @XmlEnumValue("simple")
-    SIMPLE("simple"),
-    @XmlEnumValue("extended")
-    EXTENDED("extended"),
-    @XmlEnumValue("title")
-    TITLE("title"),
-    @XmlEnumValue("resource")
-    RESOURCE("resource"),
-    @XmlEnumValue("locator")
-    LOCATOR("locator"),
-    @XmlEnumValue("arc")
-    ARC("arc");
-    private final String value;
+    private static final long serialVersionUID = 8201121335219233924L;
+    //
+    private List<Entry> entry = new ArrayList<>();
 
-    TypeType(String v) {
-        value = v;
+    public GPGenericJakartaMapType() {
     }
 
-    public String value() {
-        return value;
+    /**
+     * @param map
+     */
+    public GPGenericJakartaMapType(@Nullable Map<K, V> map) {
+        this.entry = ((map != null) ? map.entrySet()
+                .stream()
+                .map(this::toEntry)
+                .filter(Objects::nonNull)
+                .collect(toList()) : EMPTY_LIST);
     }
 
-    public static TypeType fromValue(String v) {
-        for (TypeType c: TypeType.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
-
+    /**
+     * @param entry
+     * @return {@link Entry}
+     */
+    protected abstract Entry toEntry(Map.Entry<K, V> entry);
 }

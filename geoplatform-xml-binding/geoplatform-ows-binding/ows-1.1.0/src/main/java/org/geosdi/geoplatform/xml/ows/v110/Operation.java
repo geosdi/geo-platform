@@ -34,49 +34,48 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}DCP" maxOccurs="unbounded"/&gt;
- *         &lt;element name="Parameter" type="{http://www.opengis.net/ows/1.1}DomainType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="Constraint" type="{http://www.opengis.net/ows/1.1}DomainType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Metadata" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/ows/1.1}DCP" maxOccurs="unbounded"/>
+ *         <element name="Parameter" type="{http://www.opengis.net/ows/1.1}DomainType" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="Constraint" type="{http://www.opengis.net/ows/1.1}DomainType" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Metadata" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -88,138 +87,178 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "metadata"
 })
 @XmlRootElement(name = "Operation")
-public class Operation implements ToString2
+public class Operation implements ToString
 {
 
+    /**
+     * Unordered list of Distributed Computing Platforms (DCPs) supported for this operation. At present, only the HTTP DCP is defined, so this element will appear only once.
+     * 
+     */
     @XmlElement(name = "DCP", required = true)
     protected List<DCP> dcp;
+    /**
+     * Optional unordered list of parameter domains that each apply to this operation which this server implements. If one of these Parameter elements has the same "name" attribute as a Parameter element in the OperationsMetadata element, this Parameter element shall override the other one for this operation. The list of required and optional parameter domain limitations for this operation shall be specified in the Implementation Specification for this service.
+     * 
+     */
     @XmlElement(name = "Parameter")
     protected List<DomainType> parameter;
+    /**
+     * Optional unordered list of valid domain constraints on non-parameter quantities that each apply to this operation. If one of these Constraint elements has the same "name" attribute as a Constraint element in the OperationsMetadata element, this Constraint element shall override the other one for this operation. The list of required and optional constraints for this operation shall be specified in the Implementation Specification for this service.
+     * 
+     */
     @XmlElement(name = "Constraint")
     protected List<DomainType> constraint;
+    /**
+     * Optional unordered list of additional metadata about this operation and its' implementation. A list of required and optional metadata elements for this operation should be specified in the Implementation Specification for this service. (Informative: This metadata might specify the operation request parameters or provide the XML Schemas for the operation request.)
+     * 
+     */
     @XmlElement(name = "Metadata")
     protected List<MetadataType> metadata;
+    /**
+     * Name or identifier of this operation (request) (for example, GetCapabilities). The list of required and optional operations implemented shall be specified in the Implementation Specification for this service.
+     * 
+     */
     @XmlAttribute(name = "name", required = true)
     protected String name;
 
     /**
-     * Unordered list of Distributed Computing Platforms (DCPs) supported for this operation. At present, only the HTTP DCP is defined, so this element will appear only once. Gets the value of the dcp property.
+     * Unordered list of Distributed Computing Platforms (DCPs) supported for this operation. At present, only the HTTP DCP is defined, so this element will appear only once.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dcp property.
+     * Gets the value of the dcp property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the dcp property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDCP().add(newItem);
+     * getDCP().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DCP }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the dcp property.
      */
     public List<DCP> getDCP() {
         if (dcp == null) {
-            dcp = new ArrayList<DCP>();
+            dcp = new ArrayList<>();
         }
         return this.dcp;
     }
 
     /**
+     * Optional unordered list of parameter domains that each apply to this operation which this server implements. If one of these Parameter elements has the same "name" attribute as a Parameter element in the OperationsMetadata element, this Parameter element shall override the other one for this operation. The list of required and optional parameter domain limitations for this operation shall be specified in the Implementation Specification for this service.
+     * 
      * Gets the value of the parameter property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parameter property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the parameter property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getParameter().add(newItem);
+     * getParameter().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DomainType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the parameter property.
      */
     public List<DomainType> getParameter() {
         if (parameter == null) {
-            parameter = new ArrayList<DomainType>();
+            parameter = new ArrayList<>();
         }
         return this.parameter;
     }
 
     /**
+     * Optional unordered list of valid domain constraints on non-parameter quantities that each apply to this operation. If one of these Constraint elements has the same "name" attribute as a Constraint element in the OperationsMetadata element, this Constraint element shall override the other one for this operation. The list of required and optional constraints for this operation shall be specified in the Implementation Specification for this service.
+     * 
      * Gets the value of the constraint property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the constraint property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the constraint property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getConstraint().add(newItem);
+     * getConstraint().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DomainType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the constraint property.
      */
     public List<DomainType> getConstraint() {
         if (constraint == null) {
-            constraint = new ArrayList<DomainType>();
+            constraint = new ArrayList<>();
         }
         return this.constraint;
     }
 
     /**
-     * Optional unordered list of additional metadata about this operation and its' implementation. A list of required and optional metadata elements for this operation should be specified in the Implementation Specification for this service. (Informative: This metadata might specify the operation request parameters or provide the XML Schemas for the operation request.) Gets the value of the metadata property.
+     * Optional unordered list of additional metadata about this operation and its' implementation. A list of required and optional metadata elements for this operation should be specified in the Implementation Specification for this service. (Informative: This metadata might specify the operation request parameters or provide the XML Schemas for the operation request.)
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the metadata property.
+     * Gets the value of the metadata property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the metadata property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getMetadata().add(newItem);
+     * getMetadata().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link MetadataType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the metadata property.
      */
     public List<MetadataType> getMetadata() {
         if (metadata == null) {
-            metadata = new ArrayList<MetadataType>();
+            metadata = new ArrayList<>();
         }
         return this.metadata;
     }
 
     /**
-     * Recupera il valore della proprietà name.
+     * Name or identifier of this operation (request) (for example, GetCapabilities). The list of required and optional operations implemented shall be specified in the Implementation Specification for this service.
      * 
      * @return
      *     possible object is
@@ -237,26 +276,30 @@ public class Operation implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getName()
      */
     public void setName(String value) {
         this.name = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<DCP> theDCP;
             theDCP = (((this.dcp!= null)&&(!this.dcp.isEmpty()))?this.getDCP():null);

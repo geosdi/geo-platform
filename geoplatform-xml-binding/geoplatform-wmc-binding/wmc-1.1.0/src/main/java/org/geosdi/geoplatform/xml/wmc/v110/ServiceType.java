@@ -34,51 +34,71 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:33:43 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:01 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wmc.v110;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnumValue;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per serviceType.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;simpleType name="serviceType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="OGC:WMS"/&gt;
- *     &lt;enumeration value="OGC:WFS"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * 
+ * 
+ * <p>Classe Java per serviceType.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * <pre>{@code
+ * <simpleType name="serviceType">
+ *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     <enumeration value="OGC:WMS"/>
+ *     <enumeration value="OGC:WFS"/>
+ *   </restriction>
+ * </simpleType>
+ * }</pre>
+ * 
  */
 @XmlType(name = "serviceType")
 @XmlEnum
 public enum ServiceType {
 
-    @XmlEnumValue("OGC:WMS") OGC_WMS("OGC:WMS"), @XmlEnumValue("OGC:WFS") OGC_WFS("OGC:WFS");
+    @XmlEnumValue("OGC:WMS")
+    OGC_WMS("OGC:WMS"),
+    @XmlEnumValue("OGC:WFS")
+    OGC_WFS("OGC:WFS");
     private final String value;
 
     ServiceType(String v) {
         value = v;
     }
 
+    /**
+     * Gets the value associated to the enum constant.
+     * 
+     * @return
+     *     The value linked to the enum.
+     */
     public String value() {
         return value;
     }
 
+    /**
+     * Gets the enum associated to the value passed as parameter.
+     * 
+     * @param v
+     *     The value to get the enum from.
+     * @return
+     *     The enum which corresponds to the value, if it exists.
+     * @throws IllegalArgumentException
+     *     If no value matches in the enum declaration.
+     */
     public static ServiceType fromValue(String v) {
-        for (ServiceType c : ServiceType.values()) {
+        for (ServiceType c: ServiceType.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

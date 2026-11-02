@@ -34,54 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * A Polygon is defined by an outer boundary and zero or more inner
- * boundaries which are in turn defined by LinearRings.
- *
- *
- * <p>Classe Java per PolygonType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="PolygonType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometryType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}outerBoundaryIs"/>
- *         &lt;element ref="{http://www.opengis.net/gml}innerBoundaryIs" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * A Polygon is defined by an outer boundary and zero or more inner 
+ *         boundaries which are in turn defined by LinearRings.
+ * 
+ * <p>Classe Java per PolygonType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="PolygonType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometryType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}outerBoundaryIs"/>
+ *         <element ref="{http://www.opengis.net/gml}innerBoundaryIs" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PolygonType", propOrder = {
-        "outerBoundaryIs",
-        "innerBoundaryIs"
+    "outerBoundaryIs",
+    "innerBoundaryIs"
 })
 @XmlRootElement(name = "Polygon")
-public class PolygonType extends AbstractGeometryType implements ToString {
+public class PolygonType
+    extends AbstractGeometryType
+    implements ToString
+{
 
     @XmlElement(required = true)
     protected LinearRingMemberType outerBoundaryIs;
@@ -89,9 +95,11 @@ public class PolygonType extends AbstractGeometryType implements ToString {
 
     /**
      * Recupera il valore della proprietà outerBoundaryIs.
-     *
-     * @return possible object is
-     * {@link LinearRingMemberType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link LinearRingMemberType }
+     *     
      */
     public LinearRingMemberType getOuterBoundaryIs() {
         return outerBoundaryIs;
@@ -99,60 +107,69 @@ public class PolygonType extends AbstractGeometryType implements ToString {
 
     /**
      * Imposta il valore della proprietà outerBoundaryIs.
-     *
-     * @param value allowed object is
-     *              {@link LinearRingMemberType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link LinearRingMemberType }
+     *     
      */
     public void setOuterBoundaryIs(LinearRingMemberType value) {
         this.outerBoundaryIs = value;
     }
 
     public boolean isSetOuterBoundaryIs() {
-        return (this.outerBoundaryIs != null);
+        return (this.outerBoundaryIs!= null);
     }
 
     /**
      * Gets the value of the innerBoundaryIs property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the innerBoundaryIs property.
-     *
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the innerBoundaryIs property.</p>
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getInnerBoundaryIs().add(newItem);
+     * getInnerBoundaryIs().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link LinearRingMemberType }
+     * </p>
+     * 
+     * 
+     * @return
+     *     The value of the innerBoundaryIs property.
      */
     public List<LinearRingMemberType> getInnerBoundaryIs() {
         if (innerBoundaryIs == null) {
-            innerBoundaryIs = new ArrayList<LinearRingMemberType>();
+            innerBoundaryIs = new ArrayList<>();
         }
         return this.innerBoundaryIs;
     }
 
     public boolean isSetInnerBoundaryIs() {
-        return ((this.innerBoundaryIs != null) && (!this.innerBoundaryIs.isEmpty()));
+        return ((this.innerBoundaryIs!= null)&&(!this.innerBoundaryIs.isEmpty()));
     }
 
     public void unsetInnerBoundaryIs() {
         this.innerBoundaryIs = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -160,25 +177,28 @@ public class PolygonType extends AbstractGeometryType implements ToString {
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             LinearRingMemberType theOuterBoundaryIs;
             theOuterBoundaryIs = this.getOuterBoundaryIs();
-            strategy.appendField(locator, this, "outerBoundaryIs", buffer, theOuterBoundaryIs);
+            strategy.appendField(locator, this, "outerBoundaryIs", buffer, theOuterBoundaryIs, this.isSetOuterBoundaryIs());
         }
         {
             List<LinearRingMemberType> theInnerBoundaryIs;
-            theInnerBoundaryIs = (this.isSetInnerBoundaryIs() ? this.getInnerBoundaryIs() : null);
-            strategy.appendField(locator, this, "innerBoundaryIs", buffer, theInnerBoundaryIs);
+            theInnerBoundaryIs = (this.isSetInnerBoundaryIs()?this.getInnerBoundaryIs():null);
+            strategy.appendField(locator, this, "innerBoundaryIs", buffer, theInnerBoundaryIs, this.isSetInnerBoundaryIs());
         }
         return buffer;
     }
 
     public void setInnerBoundaryIs(List<LinearRingMemberType> value) {
         this.innerBoundaryIs = null;
-        List<LinearRingMemberType> draftl = this.getInnerBoundaryIs();
-        draftl.addAll(value);
+        if (value!= null) {
+            List<LinearRingMemberType> draftl = this.getInnerBoundaryIs();
+            draftl.addAll(value);
+        }
     }
 
 }

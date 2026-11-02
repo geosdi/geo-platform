@@ -34,49 +34,48 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/ows/1.1}DescriptionType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="ServiceType" type="{http://www.opengis.net/ows/1.1}CodeType"/&gt;
- *         &lt;element name="ServiceTypeVersion" type="{http://www.opengis.net/ows/1.1}VersionType" maxOccurs="unbounded"/&gt;
- *         &lt;element name="Profile" type="{http://www.w3.org/2001/XMLSchema}anyURI" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Fees" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}AccessConstraints" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/ows/1.1}DescriptionType">
+ *       <sequence>
+ *         <element name="ServiceType" type="{http://www.opengis.net/ows/1.1}CodeType"/>
+ *         <element name="ServiceTypeVersion" type="{http://www.opengis.net/ows/1.1}VersionType" maxOccurs="unbounded"/>
+ *         <element name="Profile" type="{http://www.w3.org/2001/XMLSchema}anyURI" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Fees" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}AccessConstraints" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -91,23 +90,43 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlRootElement(name = "ServiceIdentification")
 public class ServiceIdentification
     extends DescriptionType
-    implements ToString2
+    implements ToString
 {
 
+    /**
+     * A service type name from a registry of services. For example, the values of the codeSpace URI and name and code string may be "OGC" and "catalogue." This type name is normally used for machine-to-machine communication.
+     * 
+     */
     @XmlElement(name = "ServiceType", required = true)
     protected CodeType serviceType;
+    /**
+     * Unordered list of one or more versions of this service type implemented by this server. This information is not adequate for version negotiation, and shall not be used for that purpose.
+     * 
+     */
     @XmlElement(name = "ServiceTypeVersion", required = true)
     protected List<String> serviceTypeVersion;
+    /**
+     * Unordered list of identifiers of Application Profiles that are implemented by this server. This element should be included for each specified application profile implemented by this server. The identifier value should be specified by each Application Profile. If this element is omitted, no meaning is implied.
+     * 
+     */
     @XmlElement(name = "Profile")
     @XmlSchemaType(name = "anyURI")
     protected List<String> profile;
+    /**
+     * If this element is omitted, no meaning is implied.
+     * 
+     */
     @XmlElement(name = "Fees")
     protected String fees;
+    /**
+     * Unordered list of access constraints applied to assure the protection of privacy or intellectual property, and any other restrictions on retrieving or using data from or otherwise using this server. The reserved value NONE (case insensitive) shall be used to mean no access constraints are imposed. When this element is omitted, no meaning is implied.
+     * 
+     */
     @XmlElement(name = "AccessConstraints")
     protected List<String> accessConstraints;
 
     /**
-     * Recupera il valore della proprietà serviceType.
+     * A service type name from a registry of services. For example, the values of the codeSpace URI and name and code string may be "OGC" and "catalogue." This type name is normally used for machine-to-machine communication.
      * 
      * @return
      *     possible object is
@@ -125,71 +144,82 @@ public class ServiceIdentification
      *     allowed object is
      *     {@link CodeType }
      *     
+     * @see #getServiceType()
      */
     public void setServiceType(CodeType value) {
         this.serviceType = value;
     }
 
     /**
+     * Unordered list of one or more versions of this service type implemented by this server. This information is not adequate for version negotiation, and shall not be used for that purpose.
+     * 
      * Gets the value of the serviceTypeVersion property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the serviceTypeVersion property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the serviceTypeVersion property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getServiceTypeVersion().add(newItem);
+     * getServiceTypeVersion().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the serviceTypeVersion property.
      */
     public List<String> getServiceTypeVersion() {
         if (serviceTypeVersion == null) {
-            serviceTypeVersion = new ArrayList<String>();
+            serviceTypeVersion = new ArrayList<>();
         }
         return this.serviceTypeVersion;
     }
 
     /**
+     * Unordered list of identifiers of Application Profiles that are implemented by this server. This element should be included for each specified application profile implemented by this server. The identifier value should be specified by each Application Profile. If this element is omitted, no meaning is implied.
+     * 
      * Gets the value of the profile property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the profile property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the profile property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getProfile().add(newItem);
+     * getProfile().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the profile property.
      */
     public List<String> getProfile() {
         if (profile == null) {
-            profile = new ArrayList<String>();
+            profile = new ArrayList<>();
         }
         return this.profile;
     }
 
     /**
-     * If this element is omitted, no meaning is implied. 
+     * If this element is omitted, no meaning is implied.
      * 
      * @return
      *     possible object is
@@ -207,55 +237,64 @@ public class ServiceIdentification
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getFees()
      */
     public void setFees(String value) {
         this.fees = value;
     }
 
     /**
-     * Unordered list of access constraints applied to assure the protection of privacy or intellectual property, and any other restrictions on retrieving or using data from or otherwise using this server. The reserved value NONE (case insensitive) shall be used to mean no access constraints are imposed. When this element is omitted, no meaning is implied. Gets the value of the accessConstraints property.
+     * Unordered list of access constraints applied to assure the protection of privacy or intellectual property, and any other restrictions on retrieving or using data from or otherwise using this server. The reserved value NONE (case insensitive) shall be used to mean no access constraints are imposed. When this element is omitted, no meaning is implied.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the accessConstraints property.
+     * Gets the value of the accessConstraints property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the accessConstraints property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAccessConstraints().add(newItem);
+     * getAccessConstraints().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the accessConstraints property.
      */
     public List<String> getAccessConstraints() {
         if (accessConstraints == null) {
-            accessConstraints = new ArrayList<String>();
+            accessConstraints = new ArrayList<>();
         }
         return this.accessConstraints;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             CodeType theServiceType;

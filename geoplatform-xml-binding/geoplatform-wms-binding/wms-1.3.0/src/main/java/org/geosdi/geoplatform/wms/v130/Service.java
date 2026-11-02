@@ -34,60 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2019.01.25 alle 11:53:13 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:45 PM CET
 //
-
 
 package org.geosdi.geoplatform.wms.v130;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="Name"&gt;
- *           &lt;simpleType&gt;
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *               &lt;enumeration value="WMS"/&gt;
- *             &lt;/restriction&gt;
- *           &lt;/simpleType&gt;
- *         &lt;/element&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}Title"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}Abstract" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}KeywordList" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}OnlineResource"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}ContactInformation" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}Fees" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}AccessConstraints" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}LayerLimit" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}MaxWidth" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}MaxHeight" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="Name">
+ *           <simpleType>
+ *             <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               <enumeration value="WMS"/>
+ *             </restriction>
+ *           </simpleType>
+ *         </element>
+ *         <element ref="{http://www.opengis.net/wms}Title"/>
+ *         <element ref="{http://www.opengis.net/wms}Abstract" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}KeywordList" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}OnlineResource"/>
+ *         <element ref="{http://www.opengis.net/wms}ContactInformation" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}Fees" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}AccessConstraints" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}LayerLimit" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}MaxWidth" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}MaxHeight" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -106,19 +105,41 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "maxHeight"
 })
 @XmlRootElement(name = "Service")
-public class Service implements ToString2
+public class Service implements ToString
 {
 
     @XmlElement(name = "Name", required = true)
     protected String name;
+    /**
+     * The Title is for informative display to a human.
+     * 
+     */
     @XmlElement(name = "Title", required = true)
     protected String title;
+    /**
+     * The abstract is a longer narrative description of an object.
+     * 
+     */
     @XmlElement(name = "Abstract")
     protected String _abstract;
+    /**
+     * List of keywords or keyword phrases to help catalog searching.
+     * 
+     */
     @XmlElement(name = "KeywordList")
     protected KeywordList keywordList;
+    /**
+     * An OnlineResource is typically an HTTP URL.  The URL is placed in
+     *         the xlink:href attribute, and the value "simple" is placed in the
+     *         xlink:type attribute.
+     * 
+     */
     @XmlElement(name = "OnlineResource", required = true)
     protected OnlineResource onlineResource;
+    /**
+     * Information about a contact person for the service.
+     * 
+     */
     @XmlElement(name = "ContactInformation")
     protected ContactInformation contactInformation;
     @XmlElement(name = "Fees")
@@ -160,7 +181,7 @@ public class Service implements ToString2
     }
 
     /**
-     * Recupera il valore della proprietà title.
+     * The Title is for informative display to a human.
      * 
      * @return
      *     possible object is
@@ -178,13 +199,14 @@ public class Service implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getTitle()
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     /**
-     * Recupera il valore della proprietà abstract.
+     * The abstract is a longer narrative description of an object.
      * 
      * @return
      *     possible object is
@@ -202,13 +224,14 @@ public class Service implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getAbstract()
      */
     public void setAbstract(String value) {
         this._abstract = value;
     }
 
     /**
-     * Recupera il valore della proprietà keywordList.
+     * List of keywords or keyword phrases to help catalog searching.
      * 
      * @return
      *     possible object is
@@ -226,13 +249,16 @@ public class Service implements ToString2
      *     allowed object is
      *     {@link KeywordList }
      *     
+     * @see #getKeywordList()
      */
     public void setKeywordList(KeywordList value) {
         this.keywordList = value;
     }
 
     /**
-     * Recupera il valore della proprietà onlineResource.
+     * An OnlineResource is typically an HTTP URL.  The URL is placed in
+     *         the xlink:href attribute, and the value "simple" is placed in the
+     *         xlink:type attribute.
      * 
      * @return
      *     possible object is
@@ -250,13 +276,14 @@ public class Service implements ToString2
      *     allowed object is
      *     {@link OnlineResource }
      *     
+     * @see #getOnlineResource()
      */
     public void setOnlineResource(OnlineResource value) {
         this.onlineResource = value;
     }
 
     /**
-     * Recupera il valore della proprietà contactInformation.
+     * Information about a contact person for the service.
      * 
      * @return
      *     possible object is
@@ -274,6 +301,7 @@ public class Service implements ToString2
      *     allowed object is
      *     {@link ContactInformation }
      *     
+     * @see #getContactInformation()
      */
     public void setContactInformation(ContactInformation value) {
         this.contactInformation = value;
@@ -399,21 +427,24 @@ public class Service implements ToString2
         this.maxHeight = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theName;
             theName = this.getName();

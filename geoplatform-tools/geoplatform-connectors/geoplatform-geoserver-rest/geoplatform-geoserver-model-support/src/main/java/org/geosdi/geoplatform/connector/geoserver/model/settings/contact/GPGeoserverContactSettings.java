@@ -37,10 +37,9 @@ package org.geosdi.geoplatform.connector.geoserver.model.settings.contact;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.ToString;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

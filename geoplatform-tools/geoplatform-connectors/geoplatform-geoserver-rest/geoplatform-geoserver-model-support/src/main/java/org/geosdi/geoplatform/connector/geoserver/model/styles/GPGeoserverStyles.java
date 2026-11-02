@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**

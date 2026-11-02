@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
+import jakarta.xml.bind.UnmarshalException;
 import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
@@ -50,7 +51,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.UnmarshalException;
 import java.net.URI;
 
 import static java.util.concurrent.TimeUnit.MINUTES;

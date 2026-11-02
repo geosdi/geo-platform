@@ -34,48 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:33:43 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:01 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wmc.v110;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per DimensionType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="DimensionType"&gt;
- *   &lt;simpleContent&gt;
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
- *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="units" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="unitSymbol" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="userValue" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="default" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="multipleValues" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="nearestValue" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="current" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/simpleContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per DimensionType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="DimensionType">
+ *   <simpleContent>
+ *     <extension base="<http://www.w3.org/2001/XMLSchema>string">
+ *       <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="units" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="unitSymbol" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="userValue" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="default" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       <attribute name="multipleValues" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       <attribute name="nearestValue" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       <attribute name="current" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *     </extension>
+ *   </simpleContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DimensionType", propOrder = {"value"})
-public class DimensionType implements ToString2 {
+@XmlType(name = "DimensionType", propOrder = {
+    "value"
+})
+public class DimensionType implements ToString
+{
 
     @XmlValue
     protected String value;
@@ -98,9 +105,11 @@ public class DimensionType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà value.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getValue() {
         return value;
@@ -108,23 +117,27 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà value.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setValue(String value) {
         this.value = value;
     }
 
     public boolean isSetValue() {
-        return (this.value != null);
+        return (this.value!= null);
     }
 
     /**
      * Recupera il valore della proprietà name.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getName() {
         return name;
@@ -132,23 +145,27 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà name.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setName(String value) {
         this.name = value;
     }
 
     public boolean isSetName() {
-        return (this.name != null);
+        return (this.name!= null);
     }
 
     /**
      * Recupera il valore della proprietà units.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getUnits() {
         return units;
@@ -156,23 +173,27 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà units.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setUnits(String value) {
         this.units = value;
     }
 
     public boolean isSetUnits() {
-        return (this.units != null);
+        return (this.units!= null);
     }
 
     /**
      * Recupera il valore della proprietà unitSymbol.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getUnitSymbol() {
         return unitSymbol;
@@ -180,23 +201,27 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà unitSymbol.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setUnitSymbol(String value) {
         this.unitSymbol = value;
     }
 
     public boolean isSetUnitSymbol() {
-        return (this.unitSymbol != null);
+        return (this.unitSymbol!= null);
     }
 
     /**
      * Recupera il valore della proprietà userValue.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getUserValue() {
         return userValue;
@@ -204,23 +229,27 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà userValue.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setUserValue(String value) {
         this.userValue = value;
     }
 
     public boolean isSetUserValue() {
-        return (this.userValue != null);
+        return (this.userValue!= null);
     }
 
     /**
      * Recupera il valore della proprietà default.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getDefault() {
         return _default;
@@ -228,23 +257,27 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà default.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setDefault(String value) {
         this._default = value;
     }
 
     public boolean isSetDefault() {
-        return (this._default != null);
+        return (this._default!= null);
     }
 
     /**
      * Recupera il valore della proprietà multipleValues.
-     *
-     * @return possible object is
-     * {@link Boolean }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public boolean isMultipleValues() {
         return multipleValues;
@@ -252,16 +285,18 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà multipleValues.
-     *
-     * @param value allowed object is
-     * {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
     public void setMultipleValues(boolean value) {
         this.multipleValues = value;
     }
 
     public boolean isSetMultipleValues() {
-        return (this.multipleValues != null);
+        return (this.multipleValues!= null);
     }
 
     public void unsetMultipleValues() {
@@ -270,9 +305,11 @@ public class DimensionType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà nearestValue.
-     *
-     * @return possible object is
-     * {@link Boolean }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public boolean isNearestValue() {
         return nearestValue;
@@ -280,16 +317,18 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà nearestValue.
-     *
-     * @param value allowed object is
-     * {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
     public void setNearestValue(boolean value) {
         this.nearestValue = value;
     }
 
     public boolean isSetNearestValue() {
-        return (this.nearestValue != null);
+        return (this.nearestValue!= null);
     }
 
     public void unsetNearestValue() {
@@ -298,9 +337,11 @@ public class DimensionType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà current.
-     *
-     * @return possible object is
-     * {@link Boolean }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public boolean isCurrent() {
         return current;
@@ -308,37 +349,42 @@ public class DimensionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà current.
-     *
-     * @param value allowed object is
-     * {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
     public void setCurrent(boolean value) {
         this.current = value;
     }
 
     public boolean isSetCurrent() {
-        return (this.current != null);
+        return (this.current!= null);
     }
 
     public void unsetCurrent() {
         this.current = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theValue;
             theValue = this.getValue();
@@ -371,18 +417,17 @@ public class DimensionType implements ToString2 {
         }
         {
             boolean theMultipleValues;
-            theMultipleValues = (this.isSetMultipleValues() ? this.isMultipleValues() : false);
-            strategy.appendField(locator, this, "multipleValues", buffer, theMultipleValues,
-                    this.isSetMultipleValues());
+            theMultipleValues = (this.isSetMultipleValues()?this.isMultipleValues():false);
+            strategy.appendField(locator, this, "multipleValues", buffer, theMultipleValues, this.isSetMultipleValues());
         }
         {
             boolean theNearestValue;
-            theNearestValue = (this.isSetNearestValue() ? this.isNearestValue() : false);
+            theNearestValue = (this.isSetNearestValue()?this.isNearestValue():false);
             strategy.appendField(locator, this, "nearestValue", buffer, theNearestValue, this.isSetNearestValue());
         }
         {
             boolean theCurrent;
-            theCurrent = (this.isSetCurrent() ? this.isCurrent() : false);
+            theCurrent = (this.isSetCurrent()?this.isCurrent():false);
             strategy.appendField(locator, this, "current", buffer, theCurrent, this.isSetCurrent());
         }
         return buffer;

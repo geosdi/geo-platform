@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;

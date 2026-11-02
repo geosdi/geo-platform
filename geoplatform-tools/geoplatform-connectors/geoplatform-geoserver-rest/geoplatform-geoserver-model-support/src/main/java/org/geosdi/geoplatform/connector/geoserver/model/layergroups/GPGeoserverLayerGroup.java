@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.ToString;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

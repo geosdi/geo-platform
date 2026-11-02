@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.classify;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.xml.sld.v100.Rule;
 
-import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**

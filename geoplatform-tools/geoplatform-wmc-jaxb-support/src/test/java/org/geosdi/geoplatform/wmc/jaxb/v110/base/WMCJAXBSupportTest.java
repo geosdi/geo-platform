@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.wmc.jaxb.v110.base;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.context.WMCJAXBContextV110;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextSupport;
 import org.geosdi.geoplatform.xml.wmc.v110.*;
@@ -45,9 +48,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.URL;

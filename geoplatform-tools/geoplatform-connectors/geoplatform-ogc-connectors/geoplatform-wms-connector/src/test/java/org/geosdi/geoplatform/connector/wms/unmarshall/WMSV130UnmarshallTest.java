@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.wms.unmarshall;
 
-import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.context.WMSJakartaContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.wms.v130.WMSCapabilities;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -52,7 +52,7 @@ import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WMSVersion.V130;
-import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJAXBContextV130.WMS_CONTEXT_KEY_V130;
+import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJakartaContextV130.WMS_CONTEXT_KEY_V130;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -67,17 +67,17 @@ public class WMSV130UnmarshallTest {
     private static final Logger logger = LoggerFactory.getLogger(WMSV130UnmarshallTest.class);
 
     static {
-        wmsContext = JAXBContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V130);
+        wmsContext = JakartaContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V130);
     }
     //
-    private static final GPBaseJAXBContext wmsContext;
+    private static final GPBaseJakartaContext wmsContext;
     private static String basePath;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         assertNotNull(wmsContext);
-        assertTrue(wmsContext instanceof WMSJAXBContext);
-        assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V130);
+        assertTrue(wmsContext instanceof WMSJakartaContext);
+        assertTrue(((WMSJakartaContext) wmsContext).getVersion() == V130);
         basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
     }

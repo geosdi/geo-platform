@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layers.raster;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverAbstractLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType.Raster;
 

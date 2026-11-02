@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.store.service;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverBaseStore;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

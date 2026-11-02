@@ -35,16 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.namespace;
 
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

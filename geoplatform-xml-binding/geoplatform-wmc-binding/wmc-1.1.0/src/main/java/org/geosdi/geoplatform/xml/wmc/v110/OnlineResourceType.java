@@ -34,42 +34,47 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:33:43 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:01 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wmc.v110;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.xlink.v100.TypeType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per OnlineResourceType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="OnlineResourceType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per OnlineResourceType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="OnlineResourceType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OnlineResourceType")
-public class OnlineResourceType implements ToString2 {
+public class OnlineResourceType implements ToString
+{
 
     @XmlAttribute(name = "type", namespace = "http://www.w3.org/1999/xlink")
     protected TypeType type;
@@ -84,16 +89,47 @@ public class OnlineResourceType implements ToString2 {
     protected String arcrole;
     @XmlAttribute(name = "title", namespace = "http://www.w3.org/1999/xlink")
     protected String title;
+    /**
+     * The 'show' attribute is used to communicate the desired presentation 
+     *                 of the ending resource on traversal from the starting resource; it's 
+     *                 value should be treated as follows: 
+     *                 new - load ending resource in a new window, frame, pane, or other 
+     *                 presentation context
+     *                 replace - load the resource in the same window, frame, pane, or 
+     *                 other presentation context
+     *                 embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *                 other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *                 none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "show", namespace = "http://www.w3.org/1999/xlink")
     protected String show;
+    /**
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *                 of traversal from the starting resource to the ending resource; 
+     *                 it's value should be treated as follows:
+     *                 onLoad - traverse to the ending resource immediately on loading 
+     *                 the starting resource 
+     *                 onRequest - traverse from the starting resource to the ending 
+     *                 resource only on a post-loading event triggered for 
+     *                 this purpose 
+     *                 other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *                 none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
     protected String actuate;
 
     /**
      * Recupera il valore della proprietà type.
-     *
-     * @return possible object is
-     * {@link TypeType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link TypeType }
+     *     
      */
     public TypeType getTYPE() {
         return type;
@@ -101,23 +137,27 @@ public class OnlineResourceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà type.
-     *
-     * @param value allowed object is
-     * {@link TypeType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TypeType }
+     *     
      */
     public void setTYPE(TypeType value) {
         this.type = value;
     }
 
     public boolean isSetTYPE() {
-        return (this.type != null);
+        return (this.type!= null);
     }
 
     /**
      * Recupera il valore della proprietà href.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getHref() {
         return href;
@@ -125,23 +165,27 @@ public class OnlineResourceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà href.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setHref(String value) {
         this.href = value;
     }
 
     public boolean isSetHref() {
-        return (this.href != null);
+        return (this.href!= null);
     }
 
     /**
      * Recupera il valore della proprietà role.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getRole() {
         return role;
@@ -149,23 +193,27 @@ public class OnlineResourceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà role.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setRole(String value) {
         this.role = value;
     }
 
     public boolean isSetRole() {
-        return (this.role != null);
+        return (this.role!= null);
     }
 
     /**
      * Recupera il valore della proprietà arcrole.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getArcrole() {
         return arcrole;
@@ -173,23 +221,27 @@ public class OnlineResourceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà arcrole.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setArcrole(String value) {
         this.arcrole = value;
     }
 
     public boolean isSetArcrole() {
-        return (this.arcrole != null);
+        return (this.arcrole!= null);
     }
 
     /**
      * Recupera il valore della proprietà title.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getTitle() {
         return title;
@@ -197,23 +249,38 @@ public class OnlineResourceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà title.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     public boolean isSetTitle() {
-        return (this.title != null);
+        return (this.title!= null);
     }
 
     /**
-     * Recupera il valore della proprietà show.
-     *
-     * @return possible object is
-     * {@link String }
+     * The 'show' attribute is used to communicate the desired presentation 
+     *                 of the ending resource on traversal from the starting resource; it's 
+     *                 value should be treated as follows: 
+     *                 new - load ending resource in a new window, frame, pane, or other 
+     *                 presentation context
+     *                 replace - load the resource in the same window, frame, pane, or 
+     *                 other presentation context
+     *                 embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *                 other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *                 none - behavior is unconstrained
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getShow() {
         return show;
@@ -221,23 +288,38 @@ public class OnlineResourceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà show.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getShow()
      */
     public void setShow(String value) {
         this.show = value;
     }
 
     public boolean isSetShow() {
-        return (this.show != null);
+        return (this.show!= null);
     }
 
     /**
-     * Recupera il valore della proprietà actuate.
-     *
-     * @return possible object is
-     * {@link String }
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *                 of traversal from the starting resource to the ending resource; 
+     *                 it's value should be treated as follows:
+     *                 onLoad - traverse to the ending resource immediately on loading 
+     *                 the starting resource 
+     *                 onRequest - traverse from the starting resource to the ending 
+     *                 resource only on a post-loading event triggered for 
+     *                 this purpose 
+     *                 other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *                 none - behavior is unconstrained
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getActuate() {
         return actuate;
@@ -245,33 +327,39 @@ public class OnlineResourceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà actuate.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getActuate()
      */
     public void setActuate(String value) {
         this.actuate = value;
     }
 
     public boolean isSetActuate() {
-        return (this.actuate != null);
+        return (this.actuate!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             TypeType theTYPE;
             theTYPE = this.getTYPE();

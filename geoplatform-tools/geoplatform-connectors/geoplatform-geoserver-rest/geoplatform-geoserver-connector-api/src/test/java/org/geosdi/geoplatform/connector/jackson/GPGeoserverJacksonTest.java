@@ -69,7 +69,7 @@ import java.io.Writer;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -83,13 +83,13 @@ public class GPGeoserverJacksonTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverJacksonTest.class);
     //
-    public static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_ENABLE,
+    public static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_ENABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE,
             ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE, INDENT_OUTPUT_ENABLE, NON_NULL);
-    public static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+    public static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_DISABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE);
-    public static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport(JAXB);
+    public static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport(JAKARTA);
 
     @Test
     public void a_a_unmarshallGeoserverWorkspacesTest() throws Exception {

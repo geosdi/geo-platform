@@ -34,51 +34,50 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * Valid domain (or allowed set of values) of one quantity, with needed metadata but without a quantity name or identifier. 
+ * Valid domain (or allowed set of values) of one quantity, with needed metadata but without a quantity name or identifier.
  * 
- * <p>Classe Java per UnNamedDomainType complex type.
+ * <p>Classe Java per UnNamedDomainType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="UnNamedDomainType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;group ref="{http://www.opengis.net/ows/1.1}PossibleValues"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}DefaultValue" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Meaning" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}DataType" minOccurs="0"/&gt;
- *         &lt;group ref="{http://www.opengis.net/ows/1.1}ValuesUnit" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Metadata" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="UnNamedDomainType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <group ref="{http://www.opengis.net/ows/1.1}PossibleValues"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}DefaultValue" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Meaning" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}DataType" minOccurs="0"/>
+ *         <group ref="{http://www.opengis.net/ows/1.1}ValuesUnit" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Metadata" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -98,32 +97,72 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlSeeAlso({
     DomainType.class
 })
-public class UnNamedDomainType implements ToString2
+public class UnNamedDomainType implements ToString
 {
 
+    /**
+     * List of all the valid values and/or ranges of values for this quantity. For numeric quantities, signed values should be ordered from negative infinity to positive infinity.
+     * 
+     */
     @XmlElement(name = "AllowedValues")
     protected AllowedValues allowedValues;
+    /**
+     * Specifies that any value is allowed for this parameter.
+     * 
+     */
     @XmlElement(name = "AnyValue")
     protected AnyValue anyValue;
+    /**
+     * Specifies that no values are allowed for this parameter or quantity.
+     * 
+     */
     @XmlElement(name = "NoValues")
     protected NoValues noValues;
+    /**
+     * Reference to externally specified list of all the valid values and/or ranges of values for this quantity. (Informative: This element was simplified from the metaDataProperty element in GML 3.0.)
+     * 
+     */
     @XmlElement(name = "ValuesReference")
     protected ValuesReference valuesReference;
+    /**
+     * Optional default value for this quantity, which should be included when this quantity has a default value.
+     * 
+     */
     @XmlElement(name = "DefaultValue")
     protected ValueType defaultValue;
+    /**
+     * Meaning metadata should be referenced or included for each quantity.
+     * 
+     */
     @XmlElement(name = "Meaning")
     protected DomainMetadataType meaning;
+    /**
+     * This data type metadata should be referenced or included for each quantity.
+     * 
+     */
     @XmlElement(name = "DataType")
     protected DomainMetadataType dataType;
+    /**
+     * Identifier of unit of measure of this set of values. Should be included then this set of values has units (and not a more complete reference system).
+     * 
+     */
     @XmlElement(name = "UOM")
     protected DomainMetadataType uom;
+    /**
+     * Identifier of reference system used by this set of values. Should be included then this set of values has a reference system (not just units).
+     * 
+     */
     @XmlElement(name = "ReferenceSystem")
     protected DomainMetadataType referenceSystem;
+    /**
+     * Optional unordered list of other metadata about this quantity. A list of required and optional other metadata elements for this quantity should be specified in the Implementation Specification for this service.
+     * 
+     */
     @XmlElement(name = "Metadata")
     protected List<MetadataType> metadata;
 
     /**
-     * Recupera il valore della proprietà allowedValues.
+     * List of all the valid values and/or ranges of values for this quantity. For numeric quantities, signed values should be ordered from negative infinity to positive infinity.
      * 
      * @return
      *     possible object is
@@ -141,13 +180,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link AllowedValues }
      *     
+     * @see #getAllowedValues()
      */
     public void setAllowedValues(AllowedValues value) {
         this.allowedValues = value;
     }
 
     /**
-     * Recupera il valore della proprietà anyValue.
+     * Specifies that any value is allowed for this parameter.
      * 
      * @return
      *     possible object is
@@ -165,13 +205,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link AnyValue }
      *     
+     * @see #getAnyValue()
      */
     public void setAnyValue(AnyValue value) {
         this.anyValue = value;
     }
 
     /**
-     * Recupera il valore della proprietà noValues.
+     * Specifies that no values are allowed for this parameter or quantity.
      * 
      * @return
      *     possible object is
@@ -189,13 +230,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link NoValues }
      *     
+     * @see #getNoValues()
      */
     public void setNoValues(NoValues value) {
         this.noValues = value;
     }
 
     /**
-     * Recupera il valore della proprietà valuesReference.
+     * Reference to externally specified list of all the valid values and/or ranges of values for this quantity. (Informative: This element was simplified from the metaDataProperty element in GML 3.0.)
      * 
      * @return
      *     possible object is
@@ -213,13 +255,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link ValuesReference }
      *     
+     * @see #getValuesReference()
      */
     public void setValuesReference(ValuesReference value) {
         this.valuesReference = value;
     }
 
     /**
-     * Optional default value for this quantity, which should be included when this quantity has a default value. 
+     * Optional default value for this quantity, which should be included when this quantity has a default value.
      * 
      * @return
      *     possible object is
@@ -237,13 +280,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link ValueType }
      *     
+     * @see #getDefaultValue()
      */
     public void setDefaultValue(ValueType value) {
         this.defaultValue = value;
     }
 
     /**
-     * Meaning metadata should be referenced or included for each quantity. 
+     * Meaning metadata should be referenced or included for each quantity.
      * 
      * @return
      *     possible object is
@@ -261,13 +305,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link DomainMetadataType }
      *     
+     * @see #getMeaning()
      */
     public void setMeaning(DomainMetadataType value) {
         this.meaning = value;
     }
 
     /**
-     * This data type metadata should be referenced or included for each quantity. 
+     * This data type metadata should be referenced or included for each quantity.
      * 
      * @return
      *     possible object is
@@ -285,13 +330,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link DomainMetadataType }
      *     
+     * @see #getDataType()
      */
     public void setDataType(DomainMetadataType value) {
         this.dataType = value;
     }
 
     /**
-     * Identifier of unit of measure of this set of values. Should be included then this set of values has units (and not a more complete reference system). 
+     * Identifier of unit of measure of this set of values. Should be included then this set of values has units (and not a more complete reference system).
      * 
      * @return
      *     possible object is
@@ -309,13 +355,14 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link DomainMetadataType }
      *     
+     * @see #getUOM()
      */
     public void setUOM(DomainMetadataType value) {
         this.uom = value;
     }
 
     /**
-     * Identifier of reference system used by this set of values. Should be included then this set of values has a reference system (not just units). 
+     * Identifier of reference system used by this set of values. Should be included then this set of values has a reference system (not just units).
      * 
      * @return
      *     possible object is
@@ -333,55 +380,64 @@ public class UnNamedDomainType implements ToString2
      *     allowed object is
      *     {@link DomainMetadataType }
      *     
+     * @see #getReferenceSystem()
      */
     public void setReferenceSystem(DomainMetadataType value) {
         this.referenceSystem = value;
     }
 
     /**
-     * Optional unordered list of other metadata about this quantity. A list of required and optional other metadata elements for this quantity should be specified in the Implementation Specification for this service. Gets the value of the metadata property.
+     * Optional unordered list of other metadata about this quantity. A list of required and optional other metadata elements for this quantity should be specified in the Implementation Specification for this service.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the metadata property.
+     * Gets the value of the metadata property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the metadata property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getMetadata().add(newItem);
+     * getMetadata().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link MetadataType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the metadata property.
      */
     public List<MetadataType> getMetadata() {
         if (metadata == null) {
-            metadata = new ArrayList<MetadataType>();
+            metadata = new ArrayList<>();
         }
         return this.metadata;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             AllowedValues theAllowedValues;
             theAllowedValues = this.getAllowedValues();

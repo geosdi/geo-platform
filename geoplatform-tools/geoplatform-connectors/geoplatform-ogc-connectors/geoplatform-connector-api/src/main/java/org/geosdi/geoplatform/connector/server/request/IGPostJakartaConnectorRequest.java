@@ -35,60 +35,18 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-
-import javax.annotation.Nonnull;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static javax.annotation.meta.When.NEVER;
-
 /**
+ * Richiesta POST con JAXB {@code jakarta.xml.bind}: è la versione jakarta di {@link IGPostConnectorRequest}.
+ *
+ * @param <T> il tipo della risposta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class GPWMSBaseGetRequest<T> extends GPGetConnectorRequest<T> {
-
-    private final GPBaseJAXBContext wmsJAXBContext;
+public interface IGPostJakartaConnectorRequest<T> extends GPJakartaConnectorRequest<T> {
 
     /**
-     * @param server
-     * @param theWmsJAXBContext
+     * @return l'XML della richiesta da inviare al server
+     * @throws Exception se non è possibile scriverlo
      */
-    protected GPWMSBaseGetRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) GPBaseJAXBContext theWmsJAXBContext) {
-        super(server);
-        checkArgument(theWmsJAXBContext != null, "The Parameter wmsJAXBContext must not be null.");
-        this.wmsJAXBContext = theWmsJAXBContext;
-    }
-
-    /**
-     * @return Marshaller
-     * @throws Exception
-     */
-    @Override
-    public Marshaller getMarshaller() throws Exception {
-        return this.wmsJAXBContext.acquireMarshaller();
-    }
-
-    /**
-     * @return Unmarshaller
-     * @throws Exception
-     */
-    @Override
-    public Unmarshaller getUnmarshaller() throws Exception {
-        return this.wmsJAXBContext.acquireUnmarshaller();
-    }
-
-    /**
-     * Show the XML Object created for the Request to send to Server
-     *
-     * @return Request as a String
-     * @throws Exception
-     */
-    @Override
-    public String showRequestAsString() throws Exception {
-        return this.createUriPath();
-    }
+    String showRequestAsString() throws Exception;
 }

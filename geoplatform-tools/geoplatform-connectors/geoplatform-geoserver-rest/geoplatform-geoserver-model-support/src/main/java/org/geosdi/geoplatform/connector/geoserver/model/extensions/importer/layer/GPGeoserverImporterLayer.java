@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.layer;
 
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.*;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.IGPGeoserverImporterAttribute;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.layer.style.IGPGeoserverImporterLayerStyle;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 /**

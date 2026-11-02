@@ -35,16 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.store;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStore;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.COVERAGE;
 

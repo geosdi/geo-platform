@@ -34,73 +34,103 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
 import java.math.BigInteger;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * Description of an input to a process.
- * <p>
+ * Description of an input to a process. 
+ * 
  * In this use, the DescriptionType shall describe this process input.
- * <p>
- * <p>Classe Java per InputDescriptionType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="InputDescriptionType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/wps/1.0.0}DescriptionType"&gt;
- *       &lt;sequence&gt;
- *         &lt;group ref="{http://www.opengis.net/wps/1.0.0}InputFormChoice"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="minOccurs" use="required" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" /&gt;
- *       &lt;attribute name="maxOccurs" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per InputDescriptionType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="InputDescriptionType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/wps/1.0.0}DescriptionType">
+ *       <sequence>
+ *         <group ref="{http://www.opengis.net/wps/1.0.0}InputFormChoice"/>
+ *       </sequence>
+ *       <attribute name="minOccurs" use="required" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
+ *       <attribute name="maxOccurs" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InputDescriptionType", propOrder = {
-        "complexData",
-        "literalData",
-        "boundingBoxData"
+    "complexData",
+    "literalData",
+    "boundingBoxData"
 })
-public class InputDescriptionType extends DescriptionType implements ToString2 {
+public class InputDescriptionType
+    extends DescriptionType
+    implements ToString
+{
 
+    /**
+     * Indicates that this Input shall be a complex data structure (such as a GML document), and provides a list of Formats, Encodings, and Schemas supported for this Input. The value of this ComplexData structure can be input either embedded in the Execute request or remotely accessible to the server.  The client can select from among the identified combinations of Formats, Encodings, and Schemas to specify the form of the Input. This allows for complete specification of particular versions of GML, or image formats.
+     * 
+     */
     @XmlElement(name = "ComplexData", namespace = "")
     protected SupportedComplexDataInputType complexData;
+    /**
+     * Indicates that this Input shall be a simple numeric value or character string that is embedded in the execute request, and describes the possible values.
+     * 
+     */
     @XmlElement(name = "LiteralData", namespace = "")
     protected LiteralInputType literalData;
+    /**
+     * Indicates that this Input shall be a BoundingBox data structure that is embedded in the execute request, and provides a list of the Coordinate Reference System support for this Bounding Box.
+     * 
+     */
     @XmlElement(name = "BoundingBoxData", namespace = "")
     protected SupportedCRSsType boundingBoxData;
+    /**
+     * The minimum number of times that values for this parameter are required in an Execute request.  If "0", this data input is optional. If greater than "0" then this process input is required.
+     * 
+     */
     @XmlAttribute(name = "minOccurs", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger minOccurs;
+    /**
+     * The maximum number of times that values for this parameter are permitted in an Execute request. If "1" then this parameter may appear only once in an Execute request.  If greater than "1", then this input parameter may appear that many times in an Execute request.
+     * 
+     */
     @XmlAttribute(name = "maxOccurs", required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger maxOccurs;
 
     /**
-     * Recupera il valore della proprietà complexData.
-     *
-     * @return possible object is
-     * {@link SupportedComplexDataInputType }
+     * Indicates that this Input shall be a complex data structure (such as a GML document), and provides a list of Formats, Encodings, and Schemas supported for this Input. The value of this ComplexData structure can be input either embedded in the Execute request or remotely accessible to the server.  The client can select from among the identified combinations of Formats, Encodings, and Schemas to specify the form of the Input. This allows for complete specification of particular versions of GML, or image formats.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SupportedComplexDataInputType }
+     *     
      */
     public SupportedComplexDataInputType getComplexData() {
         return complexData;
@@ -108,23 +138,28 @@ public class InputDescriptionType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà complexData.
-     *
-     * @param value allowed object is
-     *              {@link SupportedComplexDataInputType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SupportedComplexDataInputType }
+     *     
+     * @see #getComplexData()
      */
     public void setComplexData(SupportedComplexDataInputType value) {
         this.complexData = value;
     }
 
     public boolean isSetComplexData() {
-        return (this.complexData != null);
+        return (this.complexData!= null);
     }
 
     /**
-     * Recupera il valore della proprietà literalData.
-     *
-     * @return possible object is
-     * {@link LiteralInputType }
+     * Indicates that this Input shall be a simple numeric value or character string that is embedded in the execute request, and describes the possible values.
+     * 
+     * @return
+     *     possible object is
+     *     {@link LiteralInputType }
+     *     
      */
     public LiteralInputType getLiteralData() {
         return literalData;
@@ -132,23 +167,28 @@ public class InputDescriptionType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà literalData.
-     *
-     * @param value allowed object is
-     *              {@link LiteralInputType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link LiteralInputType }
+     *     
+     * @see #getLiteralData()
      */
     public void setLiteralData(LiteralInputType value) {
         this.literalData = value;
     }
 
     public boolean isSetLiteralData() {
-        return (this.literalData != null);
+        return (this.literalData!= null);
     }
 
     /**
-     * Recupera il valore della proprietà boundingBoxData.
-     *
-     * @return possible object is
-     * {@link SupportedCRSsType }
+     * Indicates that this Input shall be a BoundingBox data structure that is embedded in the execute request, and provides a list of the Coordinate Reference System support for this Bounding Box.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SupportedCRSsType }
+     *     
      */
     public SupportedCRSsType getBoundingBoxData() {
         return boundingBoxData;
@@ -156,23 +196,28 @@ public class InputDescriptionType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà boundingBoxData.
-     *
-     * @param value allowed object is
-     *              {@link SupportedCRSsType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SupportedCRSsType }
+     *     
+     * @see #getBoundingBoxData()
      */
     public void setBoundingBoxData(SupportedCRSsType value) {
         this.boundingBoxData = value;
     }
 
     public boolean isSetBoundingBoxData() {
-        return (this.boundingBoxData != null);
+        return (this.boundingBoxData!= null);
     }
 
     /**
-     * Recupera il valore della proprietà minOccurs.
-     *
-     * @return possible object is
-     * {@link BigInteger }
+     * The minimum number of times that values for this parameter are required in an Execute request.  If "0", this data input is optional. If greater than "0" then this process input is required.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
     public BigInteger getMinOccurs() {
         return minOccurs;
@@ -180,23 +225,28 @@ public class InputDescriptionType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà minOccurs.
-     *
-     * @param value allowed object is
-     *              {@link BigInteger }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     * @see #getMinOccurs()
      */
     public void setMinOccurs(BigInteger value) {
         this.minOccurs = value;
     }
 
     public boolean isSetMinOccurs() {
-        return (this.minOccurs != null);
+        return (this.minOccurs!= null);
     }
 
     /**
-     * Recupera il valore della proprietà maxOccurs.
-     *
-     * @return possible object is
-     * {@link BigInteger }
+     * The maximum number of times that values for this parameter are permitted in an Execute request. If "1" then this parameter may appear only once in an Execute request.  If greater than "1", then this input parameter may appear that many times in an Execute request.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
     public BigInteger getMaxOccurs() {
         return maxOccurs;
@@ -204,33 +254,39 @@ public class InputDescriptionType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà maxOccurs.
-     *
-     * @param value allowed object is
-     *              {@link BigInteger }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     * @see #getMaxOccurs()
      */
     public void setMaxOccurs(BigInteger value) {
         this.maxOccurs = value;
     }
 
     public boolean isSetMaxOccurs() {
-        return (this.maxOccurs != null);
+        return (this.maxOccurs!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             SupportedComplexDataInputType theComplexData;

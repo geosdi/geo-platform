@@ -34,46 +34,45 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * For OWS use in the ServiceProvider section of a service metadata document, the optional organizationName element was removed, since this type is always used with the ProviderName element which provides that information. The mandatory "role" element was changed to optional, since no clear use of this information is known in the ServiceProvider section. 
+ * For OWS use in the ServiceProvider section of a service metadata document, the optional organizationName element was removed, since this type is always used with the ProviderName element which provides that information. The mandatory "role" element was changed to optional, since no clear use of this information is known in the ServiceProvider section.
  * 
- * <p>Classe Java per ResponsiblePartySubsetType complex type.
+ * <p>Classe Java per ResponsiblePartySubsetType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ResponsiblePartySubsetType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}IndividualName" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}PositionName" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}ContactInfo" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Role" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="ResponsiblePartySubsetType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/ows/1.1}IndividualName" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}PositionName" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}ContactInfo" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Role" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -84,20 +83,36 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "contactInfo",
     "role"
 })
-public class ResponsiblePartySubsetType implements ToString2
+public class ResponsiblePartySubsetType implements ToString
 {
 
+    /**
+     * Name of the responsible person: surname, given name, title separated by a delimiter.
+     * 
+     */
     @XmlElement(name = "IndividualName")
     protected String individualName;
+    /**
+     * Role or position of the responsible person.
+     * 
+     */
     @XmlElement(name = "PositionName")
     protected String positionName;
+    /**
+     * Address of the responsible party.
+     * 
+     */
     @XmlElement(name = "ContactInfo")
     protected ContactType contactInfo;
+    /**
+     * Function performed by the responsible party. Possible values of this Role shall include the values and the meanings listed in Subclause B.5.5 of ISO 19115:2003.
+     * 
+     */
     @XmlElement(name = "Role")
     protected CodeType role;
 
     /**
-     * Recupera il valore della proprietà individualName.
+     * Name of the responsible person: surname, given name, title separated by a delimiter.
      * 
      * @return
      *     possible object is
@@ -115,13 +130,14 @@ public class ResponsiblePartySubsetType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getIndividualName()
      */
     public void setIndividualName(String value) {
         this.individualName = value;
     }
 
     /**
-     * Recupera il valore della proprietà positionName.
+     * Role or position of the responsible person.
      * 
      * @return
      *     possible object is
@@ -139,13 +155,14 @@ public class ResponsiblePartySubsetType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getPositionName()
      */
     public void setPositionName(String value) {
         this.positionName = value;
     }
 
     /**
-     * Recupera il valore della proprietà contactInfo.
+     * Address of the responsible party.
      * 
      * @return
      *     possible object is
@@ -163,13 +180,14 @@ public class ResponsiblePartySubsetType implements ToString2
      *     allowed object is
      *     {@link ContactType }
      *     
+     * @see #getContactInfo()
      */
     public void setContactInfo(ContactType value) {
         this.contactInfo = value;
     }
 
     /**
-     * Recupera il valore della proprietà role.
+     * Function performed by the responsible party. Possible values of this Role shall include the values and the meanings listed in Subclause B.5.5 of ISO 19115:2003.
      * 
      * @return
      *     possible object is
@@ -187,26 +205,30 @@ public class ResponsiblePartySubsetType implements ToString2
      *     allowed object is
      *     {@link CodeType }
      *     
+     * @see #getRole()
      */
     public void setRole(CodeType value) {
         this.role = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theIndividualName;
             theIndividualName = this.getIndividualName();

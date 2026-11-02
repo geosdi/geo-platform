@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.wmc.jaxb.v110.theories;
 
+import jakarta.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.context.pool.WMCJAXBContextPoolV110;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextProviderPoolV110;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextSupport;
@@ -43,7 +44,6 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
-import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.URL;

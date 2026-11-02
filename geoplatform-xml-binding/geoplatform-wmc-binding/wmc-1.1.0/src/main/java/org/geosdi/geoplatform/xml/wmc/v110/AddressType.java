@@ -34,51 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:33:43 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:01 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wmc.v110;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per AddressType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="AddressType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="AddressType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="Address" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="City" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="StateOrProvince" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="PostCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="Country" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per AddressType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="AddressType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="AddressType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="Address" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="City" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="StateOrProvince" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="PostCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="Country" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AddressType", propOrder = {"addressType", "address", "city", "stateOrProvince", "postCode", "country"})
-public class AddressType implements ToString2 {
+@XmlType(name = "AddressType", propOrder = {
+    "addressType",
+    "address",
+    "city",
+    "stateOrProvince",
+    "postCode",
+    "country"
+})
+public class AddressType implements ToString
+{
 
     @XmlElement(name = "AddressType")
     protected String addressType;
@@ -95,9 +103,11 @@ public class AddressType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà addressType.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAddressType() {
         return addressType;
@@ -105,23 +115,27 @@ public class AddressType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà addressType.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAddressType(String value) {
         this.addressType = value;
     }
 
     public boolean isSetAddressType() {
-        return (this.addressType != null);
+        return (this.addressType!= null);
     }
 
     /**
      * Recupera il valore della proprietà address.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAddress() {
         return address;
@@ -129,23 +143,27 @@ public class AddressType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà address.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAddress(String value) {
         this.address = value;
     }
 
     public boolean isSetAddress() {
-        return (this.address != null);
+        return (this.address!= null);
     }
 
     /**
      * Recupera il valore della proprietà city.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getCity() {
         return city;
@@ -153,23 +171,27 @@ public class AddressType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà city.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setCity(String value) {
         this.city = value;
     }
 
     public boolean isSetCity() {
-        return (this.city != null);
+        return (this.city!= null);
     }
 
     /**
      * Recupera il valore della proprietà stateOrProvince.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getStateOrProvince() {
         return stateOrProvince;
@@ -177,23 +199,27 @@ public class AddressType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà stateOrProvince.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setStateOrProvince(String value) {
         this.stateOrProvince = value;
     }
 
     public boolean isSetStateOrProvince() {
-        return (this.stateOrProvince != null);
+        return (this.stateOrProvince!= null);
     }
 
     /**
      * Recupera il valore della proprietà postCode.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPostCode() {
         return postCode;
@@ -201,23 +227,27 @@ public class AddressType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà postCode.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPostCode(String value) {
         this.postCode = value;
     }
 
     public boolean isSetPostCode() {
-        return (this.postCode != null);
+        return (this.postCode!= null);
     }
 
     /**
      * Recupera il valore della proprietà country.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getCountry() {
         return country;
@@ -225,33 +255,38 @@ public class AddressType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà country.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setCountry(String value) {
         this.country = value;
     }
 
     public boolean isSetCountry() {
-        return (this.country != null);
+        return (this.country!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theAddressType;
             theAddressType = this.getAddressType();
@@ -270,8 +305,7 @@ public class AddressType implements ToString2 {
         {
             String theStateOrProvince;
             theStateOrProvince = this.getStateOrProvince();
-            strategy.appendField(locator, this, "stateOrProvince", buffer, theStateOrProvince,
-                    this.isSetStateOrProvince());
+            strategy.appendField(locator, this, "stateOrProvince", buffer, theStateOrProvince, this.isSetStateOrProvince());
         }
         {
             String thePostCode;

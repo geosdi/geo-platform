@@ -34,46 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:33:43 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:01 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wmc.v110;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per ViewContextReferenceType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="ViewContextReferenceType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="Title" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="ContextURL" type="{http://www.opengis.net/context}ContextURLType"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="version" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per ViewContextReferenceType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="ViewContextReferenceType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="Title" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="ContextURL" type="{http://www.opengis.net/context}ContextURLType"/>
+ *       </sequence>
+ *       <attribute name="version" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ViewContextReferenceType", propOrder = {"title", "contextURL"})
-public class ViewContextReferenceType implements ToString2 {
+@XmlType(name = "ViewContextReferenceType", propOrder = {
+    "title",
+    "contextURL"
+})
+public class ViewContextReferenceType implements ToString
+{
 
     @XmlElement(name = "Title", required = true)
     protected String title;
@@ -88,9 +97,11 @@ public class ViewContextReferenceType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà title.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getTitle() {
         return title;
@@ -98,23 +109,27 @@ public class ViewContextReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà title.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     public boolean isSetTitle() {
-        return (this.title != null);
+        return (this.title!= null);
     }
 
     /**
      * Recupera il valore della proprietà contextURL.
-     *
-     * @return possible object is
-     * {@link ContextURLType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ContextURLType }
+     *     
      */
     public ContextURLType getContextURL() {
         return contextURL;
@@ -122,23 +137,27 @@ public class ViewContextReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà contextURL.
-     *
-     * @param value allowed object is
-     * {@link ContextURLType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ContextURLType }
+     *     
      */
     public void setContextURL(ContextURLType value) {
         this.contextURL = value;
     }
 
     public boolean isSetContextURL() {
-        return (this.contextURL != null);
+        return (this.contextURL!= null);
     }
 
     /**
      * Recupera il valore della proprietà version.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getVersion() {
         return version;
@@ -146,23 +165,27 @@ public class ViewContextReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà version.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setVersion(String value) {
         this.version = value;
     }
 
     public boolean isSetVersion() {
-        return (this.version != null);
+        return (this.version!= null);
     }
 
     /**
      * Recupera il valore della proprietà id.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getId() {
         return id;
@@ -170,33 +193,38 @@ public class ViewContextReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà id.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setId(String value) {
         this.id = value;
     }
 
     public boolean isSetId() {
-        return (this.id != null);
+        return (this.id!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theTitle;
             theTitle = this.getTitle();

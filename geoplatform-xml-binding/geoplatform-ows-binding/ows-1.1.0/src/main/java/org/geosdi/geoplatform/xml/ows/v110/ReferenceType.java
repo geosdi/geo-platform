@@ -34,49 +34,48 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * Complete reference to a remote or local resource, allowing including metadata about that resource. 
+ * Complete reference to a remote or local resource, allowing including metadata about that resource.
  * 
- * <p>Classe Java per ReferenceType complex type.
+ * <p>Classe Java per ReferenceType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ReferenceType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/ows/1.1}AbstractReferenceBaseType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Identifier" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Abstract" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="Format" type="{http://www.opengis.net/ows/1.1}MimeType" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Metadata" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="ReferenceType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/ows/1.1}AbstractReferenceBaseType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Identifier" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Abstract" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="Format" type="{http://www.opengis.net/ows/1.1}MimeType" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Metadata" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -92,20 +91,36 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class ReferenceType
     extends AbstractReferenceBaseType
-    implements ToString2
+    implements ToString
 {
 
+    /**
+     * Optional unique identifier of the referenced resource.
+     * 
+     */
     @XmlElement(name = "Identifier")
     protected CodeType identifier;
+    /**
+     * Brief narrative description of this resource, normally used for display to a human.
+     * 
+     */
     @XmlElement(name = "Abstract")
     protected List<LanguageStringType> _abstract;
+    /**
+     * The format of the referenced resource. This element is omitted when the mime type is indicated in the http header of the reference.
+     * 
+     */
     @XmlElement(name = "Format")
     protected String format;
+    /**
+     * Optional unordered list of additional metadata about this resource. A list of optional metadata elements for this ReferenceType could be specified in the Implementation Specification for each use of this type in a specific OWS.
+     * 
+     */
     @XmlElement(name = "Metadata")
     protected List<MetadataType> metadata;
 
     /**
-     * Optional unique identifier of the referenced resource. 
+     * Optional unique identifier of the referenced resource.
      * 
      * @return
      *     possible object is
@@ -123,42 +138,48 @@ public class ReferenceType
      *     allowed object is
      *     {@link CodeType }
      *     
+     * @see #getIdentifier()
      */
     public void setIdentifier(CodeType value) {
         this.identifier = value;
     }
 
     /**
+     * Brief narrative description of this resource, normally used for display to a human.
+     * 
      * Gets the value of the abstract property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the abstract property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the abstract property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAbstract().add(newItem);
+     * getAbstract().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link LanguageStringType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the abstract property.
      */
     public List<LanguageStringType> getAbstract() {
         if (_abstract == null) {
-            _abstract = new ArrayList<LanguageStringType>();
+            _abstract = new ArrayList<>();
         }
         return this._abstract;
     }
 
     /**
-     * Recupera il valore della proprietà format.
+     * The format of the referenced resource. This element is omitted when the mime type is indicated in the http header of the reference.
      * 
      * @return
      *     possible object is
@@ -176,55 +197,64 @@ public class ReferenceType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getFormat()
      */
     public void setFormat(String value) {
         this.format = value;
     }
 
     /**
-     * Optional unordered list of additional metadata about this resource. A list of optional metadata elements for this ReferenceType could be specified in the Implementation Specification for each use of this type in a specific OWS. Gets the value of the metadata property.
+     * Optional unordered list of additional metadata about this resource. A list of optional metadata elements for this ReferenceType could be specified in the Implementation Specification for each use of this type in a specific OWS.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the metadata property.
+     * Gets the value of the metadata property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the metadata property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getMetadata().add(newItem);
+     * getMetadata().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link MetadataType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the metadata property.
      */
     public List<MetadataType> getMetadata() {
         if (metadata == null) {
-            metadata = new ArrayList<MetadataType>();
+            metadata = new ArrayList<>();
         }
         return this.metadata;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             CodeType theIdentifier;

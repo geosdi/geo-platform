@@ -34,91 +34,119 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per ProcessBriefType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="ProcessBriefType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/wps/1.0.0}DescriptionType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="Profile" type="{http://www.w3.org/2001/XMLSchema}anyURI" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wps/1.0.0}WSDL" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute ref="{http://www.opengis.net/wps/1.0.0}processVersion use="required""/&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per ProcessBriefType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="ProcessBriefType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/wps/1.0.0}DescriptionType">
+ *       <sequence>
+ *         <element name="Profile" type="{http://www.w3.org/2001/XMLSchema}anyURI" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wps/1.0.0}WSDL" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute ref="{http://www.opengis.net/wps/1.0.0}processVersion use="required""/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProcessBriefType", propOrder = {
-        "profile",
-        "wsdl"
+    "profile",
+    "wsdl"
 })
 @XmlSeeAlso({
-        ProcessDescriptionType.class
+    ProcessDescriptionType.class
 })
-public class ProcessBriefType extends DescriptionType implements ToString2 {
+public class ProcessBriefType
+    extends DescriptionType
+    implements ToString
+{
 
+    /**
+     * Optional unordered list of application profiles to which this process complies.
+     * 
+     */
     @XmlElement(name = "Profile")
     @XmlSchemaType(name = "anyURI")
     protected List<String> profile;
+    /**
+     * Location of a WSDL document which describes this process.
+     * 
+     */
     @XmlElement(name = "WSDL")
     protected WSDL wsdl;
+    /**
+     * Release version of this Process, included when a process version needs to be included for clarification about the process to be used. It is possible that a WPS supports a process with different versions due to reasons such as modifications of process algorithms.  Notice that this is the version identifier for the process, not the version of the WPS interface. The processVersion is informative only.  Version negotiation for processVersion is not available.  Requests to Execute a process do not include a processVersion identifier.
+     * 
+     */
     @XmlAttribute(name = "processVersion", namespace = "http://www.opengis.net/wps/1.0.0", required = true)
     protected String processVersion;
 
     /**
+     * Optional unordered list of application profiles to which this process complies.
+     * 
      * Gets the value of the profile property.
-     * <p>
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the profile property.
-     * <p>
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the profile property.</p>
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getProfile().add(newItem);
+     * getProfile().add(newItem);
      * </pre>
-     * <p>
-     * <p>
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
+     * 
+     * 
+     * @return
+     *     The value of the profile property.
      */
     public List<String> getProfile() {
         if (profile == null) {
-            profile = new ArrayList<String>();
+            profile = new ArrayList<>();
         }
         return this.profile;
     }
 
     public boolean isSetProfile() {
-        return ((this.profile != null) && (!this.profile.isEmpty()));
+        return ((this.profile!= null)&&(!this.profile.isEmpty()));
     }
 
     public void unsetProfile() {
@@ -127,9 +155,11 @@ public class ProcessBriefType extends DescriptionType implements ToString2 {
 
     /**
      * Location of a WSDL document which describes this process.
-     *
-     * @return possible object is
-     * {@link WSDL }
+     * 
+     * @return
+     *     possible object is
+     *     {@link WSDL }
+     *     
      */
     public WSDL getWSDL() {
         return wsdl;
@@ -137,23 +167,28 @@ public class ProcessBriefType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà wsdl.
-     *
-     * @param value allowed object is
-     *              {@link WSDL }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link WSDL }
+     *     
+     * @see #getWSDL()
      */
     public void setWSDL(WSDL value) {
         this.wsdl = value;
     }
 
     public boolean isSetWSDL() {
-        return (this.wsdl != null);
+        return (this.wsdl!= null);
     }
 
     /**
-     * Recupera il valore della proprietà processVersion.
-     *
-     * @return possible object is
-     * {@link String }
+     * Release version of this Process, included when a process version needs to be included for clarification about the process to be used. It is possible that a WPS supports a process with different versions due to reasons such as modifications of process algorithms.  Notice that this is the version identifier for the process, not the version of the WPS interface. The processVersion is informative only.  Version negotiation for processVersion is not available.  Requests to Execute a process do not include a processVersion identifier.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getProcessVersion() {
         return processVersion;
@@ -161,37 +196,43 @@ public class ProcessBriefType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà processVersion.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getProcessVersion()
      */
     public void setProcessVersion(String value) {
         this.processVersion = value;
     }
 
     public boolean isSetProcessVersion() {
-        return (this.processVersion != null);
+        return (this.processVersion!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<String> theProfile;
-            theProfile = (this.isSetProfile() ? this.getProfile() : null);
+            theProfile = (this.isSetProfile()?this.getProfile():null);
             strategy.appendField(locator, this, "profile", buffer, theProfile, this.isSetProfile());
         }
         {
@@ -209,7 +250,7 @@ public class ProcessBriefType extends DescriptionType implements ToString2 {
 
     public void setProfile(List<String> value) {
         this.profile = null;
-        if (value != null) {
+        if (value!= null) {
             List<String> draftl = this.getProfile();
             draftl.addAll(value);
         }

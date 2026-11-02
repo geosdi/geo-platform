@@ -34,43 +34,42 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:50:57 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.sld.v100;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Service"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}OnlineResource"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/sld}Service"/>
+ *         <element ref="{http://www.opengis.net/sld}OnlineResource"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -80,16 +79,24 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "onlineResource"
 })
 @XmlRootElement(name = "RemoteOWS")
-public class RemoteOWS implements ToString2
+public class RemoteOWS implements ToString
 {
 
+    /**
+     * A Service refers to the type of a remote OWS server.
+     * 
+     */
     @XmlElement(name = "Service", required = true)
     protected String service;
+    /**
+     * An OnlineResource is typically used to refer to an HTTP URL.
+     * 
+     */
     @XmlElement(name = "OnlineResource", required = true)
     protected OnlineResource onlineResource;
 
     /**
-     * Recupera il valore della proprietà service.
+     * A Service refers to the type of a remote OWS server.
      * 
      * @return
      *     possible object is
@@ -107,6 +114,7 @@ public class RemoteOWS implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getService()
      */
     public void setService(String value) {
         this.service = value;
@@ -117,7 +125,7 @@ public class RemoteOWS implements ToString2
     }
 
     /**
-     * Recupera il valore della proprietà onlineResource.
+     * An OnlineResource is typically used to refer to an HTTP URL.
      * 
      * @return
      *     possible object is
@@ -135,6 +143,7 @@ public class RemoteOWS implements ToString2
      *     allowed object is
      *     {@link OnlineResource }
      *     
+     * @see #getOnlineResource()
      */
     public void setOnlineResource(OnlineResource value) {
         this.onlineResource = value;
@@ -144,21 +153,24 @@ public class RemoteOWS implements ToString2
         return (this.onlineResource!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theService;
             theService = this.getService();

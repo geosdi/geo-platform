@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.wps.jaxb.unmarshall;
 
 import org.geosdi.geoplatform.connector.jaxb.context.pool.WPSJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
+import org.geosdi.geoplatform.jakarta.pool.GeoPlatformJakartaContextPool;
 import org.geosdi.geoplatform.xml.wps.v100.WPSCapabilitiesType;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
@@ -48,10 +48,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
+import static jakarta.xml.bind.JAXBContext.newInstance;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static javax.xml.bind.JAXBContext.newInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -70,7 +70,7 @@ public class WPSGetCapabilitiesUnmarshallPoolTest {
         }
     }
 
-    private static GeoPlatformJAXBContextPool wpsJAXBContext;
+    private static GeoPlatformJakartaContextPool wpsJAXBContext;
     private static String dirFiles;
 
     @BeforeClass

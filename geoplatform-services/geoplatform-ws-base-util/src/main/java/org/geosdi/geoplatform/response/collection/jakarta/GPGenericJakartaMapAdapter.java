@@ -33,20 +33,40 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.jaxb.repository;
+package org.geosdi.geoplatform.response.collection.jakarta;
 
-import org.geosdi.geoplatform.connector.WMSVersion;
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import org.geosdi.geoplatform.response.collection.GPGenericEntryType;
+import org.geosdi.geoplatform.response.collection.GPGenericMapAdapter;
+
+import javax.annotation.Nonnull;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.toMap;
+import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Adapter JAXB {@code jakarta.xml.bind} da una mappa al suo {@link GPGenericJakartaMapType}: è la versione jakarta di
+ * {@link GPGenericMapAdapter}.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWMSConnectorJAXBContextPool extends GeoPlatformJAXBContextProvider {
+public abstract class GPGenericJakartaMapAdapter<K, V, Entry extends GPGenericEntryType<K, V>, MapType extends GPGenericJakartaMapType<K, V, Entry>> extends XmlAdapter<MapType, Map<K, V>> {
 
     /**
-     * @param <Version>
-     * @return {@link Version}
+     * Convert a value type to a bound type.
+     *
+     * @param mapType The value to be converted. Can be null.
+     * @throws Exception if there's an error during the conversion. The caller is responsible for
+     *                   reporting the error to the user through {@link jakarta.xml.bind.ValidationEventHandler}.
      */
-    <Version extends WMSVersion> Version getVersion();
+    @Override
+    public Map<K, V> unmarshal(@Nonnull(when = NEVER) MapType mapType) throws Exception {
+        checkArgument(mapType != null, "The Parameter mapType must not be null.");
+        return mapType.getEntry().stream()
+                .collect(toMap(GPGenericEntryType::getKey, GPGenericEntryType::getValue, (v1, v2) -> v1, LinkedHashMap::new));
+    }
 }

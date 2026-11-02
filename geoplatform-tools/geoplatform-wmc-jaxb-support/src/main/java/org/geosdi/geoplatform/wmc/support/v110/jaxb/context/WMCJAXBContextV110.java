@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.wmc.support.v110.jaxb.context;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.jaxb.GeoPlatformJAXBContext;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.jakarta.GeoPlatformJakartaContext;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextProviderV110;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.util.Map;
 
 /**
@@ -51,7 +51,7 @@ import java.util.Map;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class WMCJAXBContextV110 extends GeoPlatformJAXBContext {
+public class WMCJAXBContextV110 extends GeoPlatformJakartaContext {
 
     public WMCJAXBContextV110(String contextPath) throws JAXBException {
         super(contextPath);
@@ -85,7 +85,7 @@ public class WMCJAXBContextV110 extends GeoPlatformJAXBContext {
         return super.createUnmarshaller();
     }
 
-    public static class WMCJAXBContextKeyV110 extends GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey {
+    public static class WMCJAXBContextKeyV110 extends GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey {
 
         public WMCJAXBContextKeyV110() {
             super(WMCJAXBContextProviderV110.class);

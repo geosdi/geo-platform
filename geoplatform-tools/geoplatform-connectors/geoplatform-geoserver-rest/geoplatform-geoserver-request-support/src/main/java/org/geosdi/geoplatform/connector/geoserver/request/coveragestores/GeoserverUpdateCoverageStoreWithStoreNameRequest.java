@@ -40,8 +40,8 @@ import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.jakarta.GPJacksonJAXBJakartaXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.jakarta.JacksonJAXBJakartaXmlSupport;
 
 import javax.annotation.Nonnull;
 import java.io.File;
@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  */
 public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJsonConnectorRequest<GPCoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> {
 
-    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
+    JacksonJAXBJakartaXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBJakartaXmlSupport();
 
     /**
      * @param theWorkspace

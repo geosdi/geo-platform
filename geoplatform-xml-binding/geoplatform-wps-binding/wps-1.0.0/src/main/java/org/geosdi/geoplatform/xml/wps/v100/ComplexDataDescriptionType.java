@@ -34,66 +34,85 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
  * A combination of format, encoding, and/or schema supported by a process input or output.
- * <p>
- * <p>Classe Java per ComplexDataDescriptionType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="ComplexDataDescriptionType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="MimeType" type="{http://www.opengis.net/ows/1.1}MimeType"/&gt;
- *         &lt;element name="Encoding" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/&gt;
- *         &lt;element name="Schema" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per ComplexDataDescriptionType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="ComplexDataDescriptionType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="MimeType" type="{http://www.opengis.net/ows/1.1}MimeType"/>
+ *         <element name="Encoding" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         <element name="Schema" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ComplexDataDescriptionType", propOrder = {
-        "mimeType",
-        "encoding",
-        "schema"
+    "mimeType",
+    "encoding",
+    "schema"
 })
-public class ComplexDataDescriptionType implements ToString2 {
+public class ComplexDataDescriptionType implements ToString
+{
 
+    /**
+     * Mime type supported for this input or output (e.g., text/xml).
+     * 
+     */
     @XmlElement(name = "MimeType", namespace = "", required = true)
     protected String mimeType;
+    /**
+     * Reference to an encoding supported for this input or output (e.g., UTF-8).  This element shall be omitted if Encoding does not apply to this Input/Output.
+     * 
+     */
     @XmlElement(name = "Encoding", namespace = "")
     @XmlSchemaType(name = "anyURI")
     protected String encoding;
+    /**
+     * Reference to a definition of XML elements or types supported for this Input/Output (e.g., GML 2.1 Application Schema). Each of these XML elements or types shall be defined in a separate XML Schema Document. This parameter shall be included when this input/output is XML encoded using an XML schema. When included, the input/output shall validate against the referenced XML Schema. This element shall be omitted if Schema does not apply to this Input/Output. Note: If the Input/Output uses a profile of a larger schema, the server administrator should provide that schema profile for validation purposes.
+     * 
+     */
     @XmlElement(name = "Schema", namespace = "")
     @XmlSchemaType(name = "anyURI")
     protected String schema;
 
     /**
-     * Recupera il valore della proprietà mimeType.
-     *
-     * @return possible object is
-     * {@link String }
+     * Mime type supported for this input or output (e.g., text/xml).
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMimeType() {
         return mimeType;
@@ -101,23 +120,28 @@ public class ComplexDataDescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà mimeType.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getMimeType()
      */
     public void setMimeType(String value) {
         this.mimeType = value;
     }
 
     public boolean isSetMimeType() {
-        return (this.mimeType != null);
+        return (this.mimeType!= null);
     }
 
     /**
-     * Recupera il valore della proprietà encoding.
-     *
-     * @return possible object is
-     * {@link String }
+     * Reference to an encoding supported for this input or output (e.g., UTF-8).  This element shall be omitted if Encoding does not apply to this Input/Output.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEncoding() {
         return encoding;
@@ -125,23 +149,28 @@ public class ComplexDataDescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà encoding.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getEncoding()
      */
     public void setEncoding(String value) {
         this.encoding = value;
     }
 
     public boolean isSetEncoding() {
-        return (this.encoding != null);
+        return (this.encoding!= null);
     }
 
     /**
-     * Recupera il valore della proprietà schema.
-     *
-     * @return possible object is
-     * {@link String }
+     * Reference to a definition of XML elements or types supported for this Input/Output (e.g., GML 2.1 Application Schema). Each of these XML elements or types shall be defined in a separate XML Schema Document. This parameter shall be included when this input/output is XML encoded using an XML schema. When included, the input/output shall validate against the referenced XML Schema. This element shall be omitted if Schema does not apply to this Input/Output. Note: If the Input/Output uses a profile of a larger schema, the server administrator should provide that schema profile for validation purposes.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSchema() {
         return schema;
@@ -149,33 +178,39 @@ public class ComplexDataDescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà schema.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getSchema()
      */
     public void setSchema(String value) {
         this.schema = value;
     }
 
     public boolean isSetSchema() {
-        return (this.schema != null);
+        return (this.schema!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theMimeType;
             theMimeType = this.getMimeType();

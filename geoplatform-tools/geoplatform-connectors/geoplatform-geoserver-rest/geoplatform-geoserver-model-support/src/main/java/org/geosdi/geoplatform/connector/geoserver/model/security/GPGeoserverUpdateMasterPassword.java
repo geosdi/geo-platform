@@ -38,14 +38,14 @@ package org.geosdi.geoplatform.connector.geoserver.model.security;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
-import javax.xml.bind.annotation.XmlAccessorType;
 
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

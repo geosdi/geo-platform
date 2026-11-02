@@ -34,65 +34,69 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
  * A Point is defined by a single coordinate tuple.
- *
- *
- * <p>Classe Java per PointType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="PointType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometryType">
- *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.opengis.net/gml}coord"/>
- *           &lt;element ref="{http://www.opengis.net/gml}coordinates"/>
- *         &lt;/choice>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * 
+ * <p>Classe Java per PointType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="PointType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometryType">
+ *       <sequence>
+ *         <choice>
+ *           <element ref="{http://www.opengis.net/gml}coord"/>
+ *           <element ref="{http://www.opengis.net/gml}coordinates"/>
+ *         </choice>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PointType", propOrder = {
-        "coord",
-        "coordinates"
+    "coord",
+    "coordinates"
 })
 @XmlRootElement(name = "Point")
-public class PointType extends AbstractGeometryType implements ToString {
+public class PointType
+    extends AbstractGeometryType
+    implements ToString
+{
 
     protected CoordType coord;
     protected CoordinatesType coordinates;
 
     /**
      * Recupera il valore della proprietà coord.
-     *
-     * @return possible object is
-     * {@link CoordType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CoordType }
+     *     
      */
     public CoordType getCoord() {
         return coord;
@@ -100,23 +104,27 @@ public class PointType extends AbstractGeometryType implements ToString {
 
     /**
      * Imposta il valore della proprietà coord.
-     *
-     * @param value allowed object is
-     *              {@link CoordType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CoordType }
+     *     
      */
     public void setCoord(CoordType value) {
         this.coord = value;
     }
 
     public boolean isSetCoord() {
-        return (this.coord != null);
+        return (this.coord!= null);
     }
 
     /**
      * Recupera il valore della proprietà coordinates.
-     *
-     * @return possible object is
-     * {@link CoordinatesType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CoordinatesType }
+     *     
      */
     public CoordinatesType getCoordinates() {
         return coordinates;
@@ -124,25 +132,29 @@ public class PointType extends AbstractGeometryType implements ToString {
 
     /**
      * Imposta il valore della proprietà coordinates.
-     *
-     * @param value allowed object is
-     *              {@link CoordinatesType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CoordinatesType }
+     *     
      */
     public void setCoordinates(CoordinatesType value) {
         this.coordinates = value;
     }
 
     public boolean isSetCoordinates() {
-        return (this.coordinates != null);
+        return (this.coordinates!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -150,17 +162,18 @@ public class PointType extends AbstractGeometryType implements ToString {
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             CoordType theCoord;
             theCoord = this.getCoord();
-            strategy.appendField(locator, this, "coord", buffer, theCoord);
+            strategy.appendField(locator, this, "coord", buffer, theCoord, this.isSetCoord());
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, this.isSetCoordinates());
         }
         return buffer;
     }

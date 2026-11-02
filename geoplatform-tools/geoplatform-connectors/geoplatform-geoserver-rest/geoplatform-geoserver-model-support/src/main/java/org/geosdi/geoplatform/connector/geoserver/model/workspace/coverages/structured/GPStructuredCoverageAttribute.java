@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.structured;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.GPFeatureTypeAttribute;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

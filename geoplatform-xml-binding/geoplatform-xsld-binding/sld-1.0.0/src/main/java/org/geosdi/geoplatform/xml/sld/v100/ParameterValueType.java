@@ -34,55 +34,52 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:50:57 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.sld.v100;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlMixed;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.filter.v100.ExpressionType;
 import org.geosdi.geoplatform.xml.filter.v100.PropertyNameType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * 
- *         The "ParameterValueType" uses WFS-Filter expressions to give
+ * The "ParameterValueType" uses WFS-Filter expressions to give
  *         values for SLD graphic parameters.  A "mixed" element-content
  *         model is used with textual substitution for values.
- *       
  * 
- * <p>Classe Java per ParameterValueType complex type.
+ * <p>Classe Java per ParameterValueType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ParameterValueType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence maxOccurs="unbounded" minOccurs="0"&gt;
- *         &lt;element ref="{http://www.opengis.net/ogc}expression"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="ParameterValueType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence maxOccurs="unbounded" minOccurs="0">
+ *         <element ref="{http://www.opengis.net/ogc}expression"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -93,44 +90,53 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlSeeAlso({
     CssParameter.class
 })
-public class ParameterValueType implements ToString2
+public class ParameterValueType implements ToString
 {
 
+    /**
+     * The "ParameterValueType" uses WFS-Filter expressions to give
+     *         values for SLD graphic parameters.  A "mixed" element-content
+     *         model is used with textual substitution for values.
+     * 
+     */
     @XmlElementRef(name = "expression", namespace = "http://www.opengis.net/ogc", type = JAXBElement.class, required = false)
     @XmlMixed
     protected List<Serializable> content;
 
     /**
-     * 
-     *         The "ParameterValueType" uses WFS-Filter expressions to give
+     * The "ParameterValueType" uses WFS-Filter expressions to give
      *         values for SLD graphic parameters.  A "mixed" element-content
      *         model is used with textual substitution for values.
-     *       Gets the value of the content property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * Gets the value of the content property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the content property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link PropertyNameType }{@code >}
      * {@link JAXBElement }{@code <}{@link ExpressionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PropertyNameType }{@code >}
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the content property.
      */
     public List<Serializable> getContent() {
         if (content == null) {
-            content = new ArrayList<Serializable>();
+            content = new ArrayList<>();
         }
         return this.content;
     }
@@ -143,21 +149,24 @@ public class ParameterValueType implements ToString2
         this.content = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<Serializable> theContent;
             theContent = (this.isSetContent()?this.getContent():null);

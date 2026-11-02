@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.targetstore.datastore;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.*;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.adapter.GPGeoserverConnectionMapParamAdapter;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 
 /**

@@ -34,66 +34,87 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.ows.v110.LanguageStringType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * Definition of a format, encoding,  schema, and unit-of-measure for an output to be returned from a process.
- * <p>
+ * Definition of a format, encoding,  schema, and unit-of-measure for an output to be returned from a process. 
+ * 
  * In this use, the DescriptionType shall describe this process input or output.
- * <p>
- * <p>Classe Java per DocumentOutputDefinitionType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="DocumentOutputDefinitionType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/wps/1.0.0}OutputDefinitionType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Title" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Abstract" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="asReference" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per DocumentOutputDefinitionType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="DocumentOutputDefinitionType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/wps/1.0.0}OutputDefinitionType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Title" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Abstract" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="asReference" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DocumentOutputDefinitionType", propOrder = {
-        "title",
-        "_abstract"
+    "title",
+    "_abstract"
 })
-public class DocumentOutputDefinitionType extends OutputDefinitionType implements ToString2 {
+public class DocumentOutputDefinitionType
+    extends OutputDefinitionType
+    implements ToString
+{
 
+    /**
+     * Title of the process output, normally available for display to a human. This element should be used if the client wishes to customize the Title in the execute response. This element should not be used if the Title provided for this output in the ProcessDescription is adequate.
+     * 
+     */
     @XmlElement(name = "Title", namespace = "http://www.opengis.net/ows/1.1")
     protected LanguageStringType title;
+    /**
+     * Brief narrative description of a process output, normally available for display to a human. This element should be used if the client wishes to customize the Abstract in the execute response. This element should not be used if the Abstract provided for this output in the ProcessDescription is adequate.
+     * 
+     */
     @XmlElement(name = "Abstract", namespace = "http://www.opengis.net/ows/1.1")
     protected LanguageStringType _abstract;
+    /**
+     * Specifies if this output should be stored by the process as a web-accessible resource. If asReference is "true", the server shall store this output so that the client can retrieve it as required. If store is "false", all the output shall be encoded in the Execute operation response document. This parameter only applies to ComplexData outputs.  This parameter shall not be included unless the corresponding "storeSupported" parameter is included and is "true" in the ProcessDescription for this process.
+     * 
+     */
     @XmlAttribute(name = "asReference")
     protected Boolean asReference;
 
     /**
      * Title of the process output, normally available for display to a human. This element should be used if the client wishes to customize the Title in the execute response. This element should not be used if the Title provided for this output in the ProcessDescription is adequate.
-     *
-     * @return possible object is
-     * {@link LanguageStringType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link LanguageStringType }
+     *     
      */
     public LanguageStringType getTitle() {
         return title;
@@ -101,23 +122,28 @@ public class DocumentOutputDefinitionType extends OutputDefinitionType implement
 
     /**
      * Imposta il valore della proprietà title.
-     *
-     * @param value allowed object is
-     *              {@link LanguageStringType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link LanguageStringType }
+     *     
+     * @see #getTitle()
      */
     public void setTitle(LanguageStringType value) {
         this.title = value;
     }
 
     public boolean isSetTitle() {
-        return (this.title != null);
+        return (this.title!= null);
     }
 
     /**
      * Brief narrative description of a process output, normally available for display to a human. This element should be used if the client wishes to customize the Abstract in the execute response. This element should not be used if the Abstract provided for this output in the ProcessDescription is adequate.
-     *
-     * @return possible object is
-     * {@link LanguageStringType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link LanguageStringType }
+     *     
      */
     public LanguageStringType getAbstract() {
         return _abstract;
@@ -125,23 +151,28 @@ public class DocumentOutputDefinitionType extends OutputDefinitionType implement
 
     /**
      * Imposta il valore della proprietà abstract.
-     *
-     * @param value allowed object is
-     *              {@link LanguageStringType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link LanguageStringType }
+     *     
+     * @see #getAbstract()
      */
     public void setAbstract(LanguageStringType value) {
         this._abstract = value;
     }
 
     public boolean isSetAbstract() {
-        return (this._abstract != null);
+        return (this._abstract!= null);
     }
 
     /**
-     * Recupera il valore della proprietà asReference.
-     *
-     * @return possible object is
-     * {@link Boolean }
+     * Specifies if this output should be stored by the process as a web-accessible resource. If asReference is "true", the server shall store this output so that the client can retrieve it as required. If store is "false", all the output shall be encoded in the Execute operation response document. This parameter only applies to ComplexData outputs.  This parameter shall not be included unless the corresponding "storeSupported" parameter is included and is "true" in the ProcessDescription for this process.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public boolean isAsReference() {
         if (asReference == null) {
@@ -153,37 +184,43 @@ public class DocumentOutputDefinitionType extends OutputDefinitionType implement
 
     /**
      * Imposta il valore della proprietà asReference.
-     *
-     * @param value allowed object is
-     *              {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     * @see #isAsReference()
      */
     public void setAsReference(boolean value) {
         this.asReference = value;
     }
 
     public boolean isSetAsReference() {
-        return (this.asReference != null);
+        return (this.asReference!= null);
     }
 
     public void unsetAsReference() {
         this.asReference = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             LanguageStringType theTitle;
@@ -197,7 +234,7 @@ public class DocumentOutputDefinitionType extends OutputDefinitionType implement
         }
         {
             boolean theAsReference;
-            theAsReference = (this.isSetAsReference() ? this.isAsReference() : false);
+            theAsReference = (this.isSetAsReference()?this.isAsReference():false);
             strategy.appendField(locator, this, "asReference", buffer, theAsReference, this.isSetAsReference());
         }
         return buffer;

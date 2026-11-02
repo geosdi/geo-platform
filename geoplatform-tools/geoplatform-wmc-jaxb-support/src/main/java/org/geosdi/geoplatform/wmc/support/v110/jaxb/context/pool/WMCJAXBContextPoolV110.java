@@ -35,19 +35,19 @@
  */
 package org.geosdi.geoplatform.wmc.support.v110.jaxb.context.pool;
 
-import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import org.geosdi.geoplatform.jakarta.pool.GeoPlatformJakartaContextPool;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextProviderPoolV110;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WMCJAXBContextPoolV110 extends GeoPlatformJAXBContextPool {
+public class WMCJAXBContextPoolV110 extends GeoPlatformJakartaContextPool {
 
     public WMCJAXBContextPoolV110(String contextPath) throws JAXBException {
         super(contextPath);
@@ -72,7 +72,7 @@ public class WMCJAXBContextPoolV110 extends GeoPlatformJAXBContextPool {
     }
 
     public static class WMCJAXBContextPoolKeyV110
-            extends GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey {
+            extends GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey {
 
         public WMCJAXBContextPoolKeyV110() {
             super(WMCJAXBContextProviderPoolV110.class);

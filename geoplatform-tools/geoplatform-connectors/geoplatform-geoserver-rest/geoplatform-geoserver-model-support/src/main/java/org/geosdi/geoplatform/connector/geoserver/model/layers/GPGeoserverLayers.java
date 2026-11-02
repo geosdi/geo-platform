@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layers;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.ToString;
 import tools.jackson.databind.annotation.JsonDeserialize;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**

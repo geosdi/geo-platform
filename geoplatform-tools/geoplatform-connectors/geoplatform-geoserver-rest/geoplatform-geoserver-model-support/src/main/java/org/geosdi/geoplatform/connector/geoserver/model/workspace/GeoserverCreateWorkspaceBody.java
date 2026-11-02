@@ -36,14 +36,14 @@
 package org.geosdi.geoplatform.connector.geoserver.model.workspace;
 
 import com.google.common.base.Preconditions;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

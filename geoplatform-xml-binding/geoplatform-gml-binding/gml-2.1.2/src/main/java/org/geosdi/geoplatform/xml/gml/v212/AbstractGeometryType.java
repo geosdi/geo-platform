@@ -34,60 +34,63 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- *
- *         All geometry elements are derived from this abstract supertype; 
+ * All geometry elements are derived from this abstract supertype; 
  *         a geometry element may have an identifying attribute (gid). 
  *         It may be associated with a spatial reference system.
- *
- *
- * <p>Classe Java per AbstractGeometryType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="AbstractGeometryType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="gid" type="{http://www.w3.org/2001/XMLSchema}ID" />
- *       &lt;attribute name="srsName" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- *
- *
+ * 
+ * <p>Classe Java per AbstractGeometryType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="AbstractGeometryType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attribute name="gid" type="{http://www.w3.org/2001/XMLSchema}ID" />
+ *       <attribute name="srsName" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractGeometryType")
 @XmlSeeAlso({
-        LinearRingType.class,
-        PointType.class,
-        LineStringType.class,
-        BoxType.class,
-        PolygonType.class,
-        AbstractGeometryCollectionBaseType.class
+    PointType.class,
+    LineStringType.class,
+    LinearRingType.class,
+    PolygonType.class,
+    BoxType.class,
+    AbstractGeometryCollectionBaseType.class
 })
-public abstract class AbstractGeometryType implements ToString {
+public abstract class AbstractGeometryType implements ToString
+{
 
     @XmlAttribute(name = "gid")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
@@ -100,11 +103,11 @@ public abstract class AbstractGeometryType implements ToString {
 
     /**
      * Recupera il valore della proprietà gid.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getGid() {
         return gid;
@@ -112,27 +115,27 @@ public abstract class AbstractGeometryType implements ToString {
 
     /**
      * Imposta il valore della proprietà gid.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
      */
     public void setGid(String value) {
         this.gid = value;
     }
 
     public boolean isSetGid() {
-        return (this.gid != null);
+        return (this.gid!= null);
     }
 
     /**
      * Recupera il valore della proprietà srsName.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getSrsName() {
         return srsName;
@@ -140,27 +143,29 @@ public abstract class AbstractGeometryType implements ToString {
 
     /**
      * Imposta il valore della proprietà srsName.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
      */
     public void setSrsName(String value) {
         this.srsName = value;
     }
 
     public boolean isSetSrsName() {
-        return (this.srsName != null);
+        return (this.srsName!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -168,16 +173,17 @@ public abstract class AbstractGeometryType implements ToString {
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theGid;
             theGid = this.getGid();
-            strategy.appendField(locator, this, "gid", buffer, theGid);
+            strategy.appendField(locator, this, "gid", buffer, theGid, this.isSetGid());
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, this.isSetSrsName());
         }
         return buffer;
     }

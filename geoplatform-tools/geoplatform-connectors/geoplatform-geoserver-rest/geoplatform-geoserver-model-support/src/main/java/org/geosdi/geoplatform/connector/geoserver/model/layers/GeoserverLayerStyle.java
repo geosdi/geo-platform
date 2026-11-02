@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layers;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,9 +45,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
 import tools.jackson.databind.annotation.JsonDeserialize;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 import java.util.List;
 

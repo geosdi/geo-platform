@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.repository;
 
-import org.geosdi.geoplatform.connector.jaxb.context.pool.WPSJAXBContextPool;
 import org.geosdi.geoplatform.connector.jaxb.context.pool.WPSJAXBContextPool.WPSJAXBContextPoolKey;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.jaxb.context.pool.WPSJAXBContextPool;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
+import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ import static org.geosdi.geoplatform.xml.wps.v100.context.WPSContextServiceProvi
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class WPSConnectorJAXBContextPool implements GeoPlatformJAXBContextProvider {
+public final class WPSConnectorJAXBContextPool implements GeoPlatformJakartaContextProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(WPSConnectorJAXBContextPool.class);
 
@@ -76,7 +76,7 @@ public final class WPSConnectorJAXBContextPool implements GeoPlatformJAXBContext
      * @return {@link P}
      */
     @Override
-    public <P extends GPBaseJAXBContext> P getJAXBProvider() {
+    public <P extends GPBaseJakartaContext> P getJakartaProvider() {
         return (P) jaxbContext;
     }
 
@@ -85,7 +85,7 @@ public final class WPSConnectorJAXBContextPool implements GeoPlatformJAXBContext
      * @return {@link K}
      */
     @Override
-    public <K extends GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey> K getKeyProvider() {
+    public <K extends GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey> K getKeyProvider() {
         return (K) WPS_CONTEXT_POOL_KEY;
     }
 }

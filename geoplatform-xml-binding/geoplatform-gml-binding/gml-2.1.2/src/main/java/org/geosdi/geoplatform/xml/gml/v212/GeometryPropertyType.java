@@ -34,53 +34,50 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.xlink.v100.TypeType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * 
- *         A simple geometry property encapsulates a geometry element.
+ * A simple geometry property encapsulates a geometry element.
  *         Alternatively, it can function as a pointer (simple-type link) 
  *         that refers to a remote geometry element.
- *       
  * 
- * <p>Classe Java per GeometryPropertyType complex type.
+ * <p>Classe Java per GeometryPropertyType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="GeometryPropertyType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}_Geometry"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/>
- *       &lt;attribute ref="{http://www.opengis.net/gml}remoteSchema"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="GeometryPropertyType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}_Geometry"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/>
+ *       <attribute ref="{http://www.opengis.net/gml}remoteSchema"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -88,8 +85,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlType(name = "GeometryPropertyType", propOrder = {
     "geometry"
 })
-public class GeometryPropertyType
-    implements ToString
+public class GeometryPropertyType implements ToString
 {
 
     @XmlElementRef(name = "_Geometry", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
@@ -110,8 +106,37 @@ public class GeometryPropertyType
     protected String arcrole;
     @XmlAttribute(name = "title", namespace = "http://www.w3.org/1999/xlink")
     protected String title;
+    /**
+     * The 'show' attribute is used to communicate the desired presentation 
+     *                 of the ending resource on traversal from the starting resource; it's 
+     *                 value should be treated as follows: 
+     *                 new - load ending resource in a new window, frame, pane, or other 
+     *                 presentation context
+     *                 replace - load the resource in the same window, frame, pane, or 
+     *                 other presentation context
+     *                 embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *                 other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *                 none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "show", namespace = "http://www.w3.org/1999/xlink")
     protected String show;
+    /**
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *                 of traversal from the starting resource to the ending resource; 
+     *                 it's value should be treated as follows:
+     *                 onLoad - traverse to the ending resource immediately on loading 
+     *                 the starting resource 
+     *                 onRequest - traverse from the starting resource to the ending 
+     *                 resource only on a post-loading event triggered for 
+     *                 this purpose 
+     *                 other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *                 none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
     protected String actuate;
 
@@ -120,16 +145,16 @@ public class GeometryPropertyType
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiPointType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PointType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PolygonType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
      *     
      */
     public JAXBElement<? extends AbstractGeometryType> getGeometry() {
@@ -141,16 +166,16 @@ public class GeometryPropertyType
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiPointType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PointType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PolygonType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
      *     
      */
     public void setGeometry(JAXBElement<? extends AbstractGeometryType> value) {
@@ -330,7 +355,18 @@ public class GeometryPropertyType
     }
 
     /**
-     * Recupera il valore della proprietà show.
+     * The 'show' attribute is used to communicate the desired presentation 
+     *                 of the ending resource on traversal from the starting resource; it's 
+     *                 value should be treated as follows: 
+     *                 new - load ending resource in a new window, frame, pane, or other 
+     *                 presentation context
+     *                 replace - load the resource in the same window, frame, pane, or 
+     *                 other presentation context
+     *                 embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *                 other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *                 none - behavior is unconstrained
      * 
      * @return
      *     possible object is
@@ -348,6 +384,7 @@ public class GeometryPropertyType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getShow()
      */
     public void setShow(String value) {
         this.show = value;
@@ -358,7 +395,17 @@ public class GeometryPropertyType
     }
 
     /**
-     * Recupera il valore della proprietà actuate.
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *                 of traversal from the starting resource to the ending resource; 
+     *                 it's value should be treated as follows:
+     *                 onLoad - traverse to the ending resource immediately on loading 
+     *                 the starting resource 
+     *                 onRequest - traverse from the starting resource to the ending 
+     *                 resource only on a post-loading event triggered for 
+     *                 this purpose 
+     *                 other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *                 none - behavior is unconstrained
      * 
      * @return
      *     possible object is
@@ -376,6 +423,7 @@ public class GeometryPropertyType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getActuate()
      */
     public void setActuate(String value) {
         this.actuate = value;
@@ -385,13 +433,15 @@ public class GeometryPropertyType
         return (this.actuate!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -399,51 +449,52 @@ public class GeometryPropertyType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             JAXBElement<? extends AbstractGeometryType> theGeometry;
             theGeometry = this.getGeometry();
-            strategy.appendField(locator, this, "geometry", buffer, theGeometry);
+            strategy.appendField(locator, this, "geometry", buffer, theGeometry, this.isSetGeometry());
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema, this.isSetRemoteSchema());
         }
         {
             TypeType theTYPE;
             theTYPE = this.getTYPE();
-            strategy.appendField(locator, this, "type", buffer, theTYPE);
+            strategy.appendField(locator, this, "type", buffer, theTYPE, this.isSetTYPE());
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, this.isSetHref());
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, this.isSetRole());
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, this.isSetArcrole());
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, this.isSetTitle());
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, this.isSetShow());
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, this.isSetActuate());
         }
         return buffer;
     }

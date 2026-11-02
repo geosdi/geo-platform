@@ -34,132 +34,177 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
  * Reference to an input or output value that is a web accessible resource.
- * <p>
- * <p>Classe Java per InputReferenceType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="InputReferenceType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence minOccurs="0"&gt;
- *         &lt;element name="Header" maxOccurs="unbounded" minOccurs="0"&gt;
- *           &lt;complexType&gt;
- *             &lt;complexContent&gt;
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *                 &lt;attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *                 &lt;attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *               &lt;/restriction&gt;
- *             &lt;/complexContent&gt;
- *           &lt;/complexType&gt;
- *         &lt;/element&gt;
- *         &lt;choice minOccurs="0"&gt;
- *           &lt;element name="Body" type="{http://www.w3.org/2001/XMLSchema}anyType"/&gt;
- *           &lt;element name="BodyReference"&gt;
- *             &lt;complexType&gt;
- *               &lt;complexContent&gt;
- *                 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *                   &lt;attribute ref="{http://www.w3.org/1999/xlink}href use="required""/&gt;
- *                 &lt;/restriction&gt;
- *               &lt;/complexContent&gt;
- *             &lt;/complexType&gt;
- *           &lt;/element&gt;
- *         &lt;/choice&gt;
- *       &lt;/sequence&gt;
- *       &lt;attGroup ref="{http://www.opengis.net/wps/1.0.0}ComplexDataEncoding"/&gt;
- *       &lt;attribute ref="{http://www.w3.org/1999/xlink}href use="required""/&gt;
- *       &lt;attribute name="method" default="GET"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;enumeration value="GET"/&gt;
- *             &lt;enumeration value="POST"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per InputReferenceType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="InputReferenceType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence minOccurs="0">
+ *         <element name="Header" maxOccurs="unbounded" minOccurs="0">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *                 <attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
+ *         <choice minOccurs="0">
+ *           <element name="Body" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+ *           <element name="BodyReference">
+ *             <complexType>
+ *               <complexContent>
+ *                 <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                   <attribute ref="{http://www.w3.org/1999/xlink}href use="required""/>
+ *                 </restriction>
+ *               </complexContent>
+ *             </complexType>
+ *           </element>
+ *         </choice>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/wps/1.0.0}ComplexDataEncoding"/>
+ *       <attribute ref="{http://www.w3.org/1999/xlink}href use="required""/>
+ *       <attribute name="method" default="GET">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             <enumeration value="GET"/>
+ *             <enumeration value="POST"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InputReferenceType", propOrder = {
-        "header",
-        "body",
-        "bodyReference"
+    "header",
+    "body",
+    "bodyReference"
 })
-public class InputReferenceType implements ToString2 {
+public class InputReferenceType implements ToString
+{
 
+    /**
+     * Extra HTTP request headers needed by the service identified in ../Reference/&#064;href.  For example, an HTTP SOAP request requires a SOAPAction header.  This permits the creation of a complete and valid POST request.
+     * 
+     */
     @XmlElement(name = "Header")
     protected List<InputReferenceType.Header> header;
+    /**
+     * The contents of this element to be used as the body of the HTTP request message to be sent to the service identified in ../Reference/&#064;href.  For example, it could be an XML encoded WFS request using HTTP POST
+     * 
+     */
     @XmlElement(name = "Body")
     protected Object body;
+    /**
+     * Reference to a remote document to be used as the body of the an HTTP POST request message to the service identified in ../Reference/&#064;href.
+     * 
+     */
     @XmlElement(name = "BodyReference")
     protected InputReferenceType.BodyReference bodyReference;
+    /**
+     * Reference to a web-accessible resource that can be used as input, or is provided by the process as output. This attribute shall contain a URL from which this input/output can be electronically retrieved.
+     * 
+     */
     @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink", required = true)
     @XmlSchemaType(name = "anyURI")
     protected String href;
+    /**
+     * Identifies the HTTP method.  Allows a choice of GET or POST.  Default is GET.
+     * 
+     */
     @XmlAttribute(name = "method")
     protected String method;
+    /**
+     * The Format of this input or requested for this output (e.g., text/xml). This element shall be omitted when the Format is indicated in the http header of the output. When included, this format shall be one published for this output or input in the Process full description.
+     * 
+     */
     @XmlAttribute(name = "mimeType")
     protected String mimeType;
+    /**
+     * The encoding of this input or requested for this output (e.g., UTF-8). This "encoding" shall be included whenever the encoding required is not the default encoding indicated in the Process full description. When included, this encoding shall be one published for this output or input in the Process full description.
+     * 
+     */
     @XmlAttribute(name = "encoding")
     @XmlSchemaType(name = "anyURI")
     protected String encoding;
+    /**
+     * PS I changed the name of this attribute to be consistent with the ProcessDescription.  The original was giving me validation troubles in XMLSpy.
+     * 
+     */
     @XmlAttribute(name = "schema")
     @XmlSchemaType(name = "anyURI")
     protected String schema;
 
     /**
+     * Extra HTTP request headers needed by the service identified in ../Reference/&#064;href.  For example, an HTTP SOAP request requires a SOAPAction header.  This permits the creation of a complete and valid POST request.
+     * 
      * Gets the value of the header property.
-     * <p>
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the header property.
-     * <p>
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the header property.</p>
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getHeader().add(newItem);
+     * getHeader().add(newItem);
      * </pre>
-     * <p>
-     * <p>
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link InputReferenceType.Header }
+     * </p>
+     * 
+     * 
+     * @return
+     *     The value of the header property.
      */
     public List<InputReferenceType.Header> getHeader() {
         if (header == null) {
-            header = new ArrayList<InputReferenceType.Header>();
+            header = new ArrayList<>();
         }
         return this.header;
     }
 
     public boolean isSetHeader() {
-        return ((this.header != null) && (!this.header.isEmpty()));
+        return ((this.header!= null)&&(!this.header.isEmpty()));
     }
 
     public void unsetHeader() {
@@ -167,10 +212,12 @@ public class InputReferenceType implements ToString2 {
     }
 
     /**
-     * Recupera il valore della proprietà body.
-     *
-     * @return possible object is
-     * {@link Object }
+     * The contents of this element to be used as the body of the HTTP request message to be sent to the service identified in ../Reference/&#064;href.  For example, it could be an XML encoded WFS request using HTTP POST
+     * 
+     * @return
+     *     possible object is
+     *     {@link Object }
+     *     
      */
     public Object getBody() {
         return body;
@@ -178,23 +225,28 @@ public class InputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà body.
-     *
-     * @param value allowed object is
-     *              {@link Object }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Object }
+     *     
+     * @see #getBody()
      */
     public void setBody(Object value) {
         this.body = value;
     }
 
     public boolean isSetBody() {
-        return (this.body != null);
+        return (this.body!= null);
     }
 
     /**
-     * Recupera il valore della proprietà bodyReference.
-     *
-     * @return possible object is
-     * {@link InputReferenceType.BodyReference }
+     * Reference to a remote document to be used as the body of the an HTTP POST request message to the service identified in ../Reference/&#064;href.
+     * 
+     * @return
+     *     possible object is
+     *     {@link InputReferenceType.BodyReference }
+     *     
      */
     public InputReferenceType.BodyReference getBodyReference() {
         return bodyReference;
@@ -202,23 +254,28 @@ public class InputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà bodyReference.
-     *
-     * @param value allowed object is
-     *              {@link InputReferenceType.BodyReference }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link InputReferenceType.BodyReference }
+     *     
+     * @see #getBodyReference()
      */
     public void setBodyReference(InputReferenceType.BodyReference value) {
         this.bodyReference = value;
     }
 
     public boolean isSetBodyReference() {
-        return (this.bodyReference != null);
+        return (this.bodyReference!= null);
     }
 
     /**
      * Reference to a web-accessible resource that can be used as input, or is provided by the process as output. This attribute shall contain a URL from which this input/output can be electronically retrieved.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getHref() {
         return href;
@@ -226,23 +283,28 @@ public class InputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà href.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getHref()
      */
     public void setHref(String value) {
         this.href = value;
     }
 
     public boolean isSetHref() {
-        return (this.href != null);
+        return (this.href!= null);
     }
 
     /**
-     * Recupera il valore della proprietà method.
-     *
-     * @return possible object is
-     * {@link String }
+     * Identifies the HTTP method.  Allows a choice of GET or POST.  Default is GET.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMethod() {
         if (method == null) {
@@ -254,23 +316,28 @@ public class InputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà method.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getMethod()
      */
     public void setMethod(String value) {
         this.method = value;
     }
 
     public boolean isSetMethod() {
-        return (this.method != null);
+        return (this.method!= null);
     }
 
     /**
-     * Recupera il valore della proprietà mimeType.
-     *
-     * @return possible object is
-     * {@link String }
+     * The Format of this input or requested for this output (e.g., text/xml). This element shall be omitted when the Format is indicated in the http header of the output. When included, this format shall be one published for this output or input in the Process full description.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMimeType() {
         return mimeType;
@@ -278,23 +345,28 @@ public class InputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà mimeType.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getMimeType()
      */
     public void setMimeType(String value) {
         this.mimeType = value;
     }
 
     public boolean isSetMimeType() {
-        return (this.mimeType != null);
+        return (this.mimeType!= null);
     }
 
     /**
-     * Recupera il valore della proprietà encoding.
-     *
-     * @return possible object is
-     * {@link String }
+     * The encoding of this input or requested for this output (e.g., UTF-8). This "encoding" shall be included whenever the encoding required is not the default encoding indicated in the Process full description. When included, this encoding shall be one published for this output or input in the Process full description.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEncoding() {
         return encoding;
@@ -302,23 +374,28 @@ public class InputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà encoding.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getEncoding()
      */
     public void setEncoding(String value) {
         this.encoding = value;
     }
 
     public boolean isSetEncoding() {
-        return (this.encoding != null);
+        return (this.encoding!= null);
     }
 
     /**
-     * Recupera il valore della proprietà schema.
-     *
-     * @return possible object is
-     * {@link String }
+     * PS I changed the name of this attribute to be consistent with the ProcessDescription.  The original was giving me validation troubles in XMLSpy.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSchema() {
         return schema;
@@ -326,36 +403,42 @@ public class InputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà schema.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getSchema()
      */
     public void setSchema(String value) {
         this.schema = value;
     }
 
     public boolean isSetSchema() {
-        return (this.schema != null);
+        return (this.schema!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<InputReferenceType.Header> theHeader;
-            theHeader = (this.isSetHeader() ? this.getHeader() : null);
+            theHeader = (this.isSetHeader()?this.getHeader():null);
             strategy.appendField(locator, this, "header", buffer, theHeader, this.isSetHeader());
         }
         {
@@ -398,7 +481,7 @@ public class InputReferenceType implements ToString2 {
 
     public void setHeader(List<InputReferenceType.Header> value) {
         this.header = null;
-        if (value != null) {
+        if (value!= null) {
             List<InputReferenceType.Header> draftl = this.getHeader();
             draftl.addAll(value);
         }
@@ -406,33 +489,42 @@ public class InputReferenceType implements ToString2 {
 
 
     /**
-     * <p>Classe Java per anonymous complex type.
-     * <p>
-     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
-     * <p>
-     * <pre>
-     * &lt;complexType&gt;
-     *   &lt;complexContent&gt;
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
-     *       &lt;attribute ref="{http://www.w3.org/1999/xlink}href use="required""/&gt;
-     *     &lt;/restriction&gt;
-     *   &lt;/complexContent&gt;
-     * &lt;/complexType&gt;
-     * </pre>
+     * <p>Classe Java per anonymous complex type.</p>
+     * 
+     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <attribute ref="{http://www.w3.org/1999/xlink}href use="required""/>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
-    public static class BodyReference implements ToString2 {
+    public static class BodyReference implements ToString
+    {
 
+        /**
+         * Reference to a remote document to be used as the body of the an HTTP POST request message. This attribute shall contain a URL from which this input can be electronically retrieved.
+         * 
+         */
         @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink", required = true)
         @XmlSchemaType(name = "anyURI")
         protected String href;
 
         /**
          * Reference to a remote document to be used as the body of the an HTTP POST request message. This attribute shall contain a URL from which this input can be electronically retrieved.
-         *
-         * @return possible object is
-         * {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getHref() {
             return href;
@@ -440,33 +532,39 @@ public class InputReferenceType implements ToString2 {
 
         /**
          * Imposta il valore della proprietà href.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         * @see #getHref()
          */
         public void setHref(String value) {
             this.href = value;
         }
 
         public boolean isSetHref() {
-            return (this.href != null);
+            return (this.href!= null);
         }
 
+        @Override
         public String toString() {
-            final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+            final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
             final StringBuilder buffer = new StringBuilder();
             append(null, buffer, strategy);
             return buffer.toString();
         }
 
-        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             strategy.appendStart(locator, this, buffer);
             appendFields(locator, buffer, strategy);
             strategy.appendEnd(locator, this, buffer);
             return buffer;
         }
 
-        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             {
                 String theHref;
                 theHref = this.getHref();
@@ -479,35 +577,48 @@ public class InputReferenceType implements ToString2 {
 
 
     /**
-     * <p>Classe Java per anonymous complex type.
-     * <p>
-     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
-     * <p>
-     * <pre>
-     * &lt;complexType&gt;
-     *   &lt;complexContent&gt;
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
-     *       &lt;attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
-     *       &lt;attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
-     *     &lt;/restriction&gt;
-     *   &lt;/complexContent&gt;
-     * &lt;/complexType&gt;
-     * </pre>
+     * <p>Classe Java per anonymous complex type.</p>
+     * 
+     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+     *       <attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
-    public static class Header implements ToString2 {
+    public static class Header implements ToString
+    {
 
+        /**
+         * Key portion of the Key-Value pair in the HTTP request header.
+         * 
+         */
         @XmlAttribute(name = "key", required = true)
         protected String key;
+        /**
+         * Value portion of the Key-Value pair in the HTTP request header.
+         * 
+         */
         @XmlAttribute(name = "value", required = true)
         protected String value;
 
         /**
-         * Recupera il valore della proprietà key.
-         *
-         * @return possible object is
-         * {@link String }
+         * Key portion of the Key-Value pair in the HTTP request header.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getKey() {
             return key;
@@ -515,23 +626,28 @@ public class InputReferenceType implements ToString2 {
 
         /**
          * Imposta il valore della proprietà key.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         * @see #getKey()
          */
         public void setKey(String value) {
             this.key = value;
         }
 
         public boolean isSetKey() {
-            return (this.key != null);
+            return (this.key!= null);
         }
 
         /**
-         * Recupera il valore della proprietà value.
-         *
-         * @return possible object is
-         * {@link String }
+         * Value portion of the Key-Value pair in the HTTP request header.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getValue() {
             return value;
@@ -539,33 +655,39 @@ public class InputReferenceType implements ToString2 {
 
         /**
          * Imposta il valore della proprietà value.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         * @see #getValue()
          */
         public void setValue(String value) {
             this.value = value;
         }
 
         public boolean isSetValue() {
-            return (this.value != null);
+            return (this.value!= null);
         }
 
+        @Override
         public String toString() {
-            final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+            final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
             final StringBuilder buffer = new StringBuilder();
             append(null, buffer, strategy);
             return buffer.toString();
         }
 
-        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             strategy.appendStart(locator, this, buffer);
             appendFields(locator, buffer, strategy);
             strategy.appendEnd(locator, this, buffer);
             return buffer;
         }
 
-        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             {
                 String theKey;
                 theKey = this.getKey();

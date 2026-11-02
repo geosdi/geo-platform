@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.repository;
 
-import org.geosdi.geoplatform.connector.jaxb.context.WPSJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.context.WPSJAXBContext.WPSJAXBContextKey;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.jaxb.context.WPSJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
+import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ import static org.geosdi.geoplatform.xml.wps.v100.context.WPSContextServiceProvi
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class WPSConnectorJAXBContext implements GeoPlatformJAXBContextProvider {
+public final class WPSConnectorJAXBContext implements GeoPlatformJakartaContextProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(WPSConnectorJAXBContext.class);
 
@@ -72,12 +72,12 @@ public final class WPSConnectorJAXBContext implements GeoPlatformJAXBContextProv
     }
 
     @Override
-    public <P extends GPBaseJAXBContext> P getJAXBProvider() {
+    public <P extends GPBaseJakartaContext> P getJakartaProvider() {
         return (P) jaxbContext;
     }
 
     @Override
-    public <K extends GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey> K getKeyProvider() {
+    public <K extends GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey> K getKeyProvider() {
         return (K) WPS_CONTEXT_KEY;
     }
 }

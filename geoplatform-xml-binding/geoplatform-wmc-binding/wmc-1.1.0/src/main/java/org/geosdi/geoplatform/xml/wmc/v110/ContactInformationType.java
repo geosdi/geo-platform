@@ -34,51 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:33:43 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:01 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wmc.v110;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per ContactInformationType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="ContactInformationType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="ContactPersonPrimary" type="{http://www.opengis.net/context}ContactPersonPrimaryType" minOccurs="0"/&gt;
- *         &lt;element name="ContactPosition" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="ContactAddress" type="{http://www.opengis.net/context}AddressType" minOccurs="0"/&gt;
- *         &lt;element name="ContactVoiceTelephone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="ContactFacsimileTelephone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="ContactElectronicMailAddress" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per ContactInformationType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="ContactInformationType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="ContactPersonPrimary" type="{http://www.opengis.net/context}ContactPersonPrimaryType" minOccurs="0"/>
+ *         <element name="ContactPosition" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="ContactAddress" type="{http://www.opengis.net/context}AddressType" minOccurs="0"/>
+ *         <element name="ContactVoiceTelephone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="ContactFacsimileTelephone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="ContactElectronicMailAddress" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ContactInformationType", propOrder = {"contactPersonPrimary", "contactPosition", "contactAddress", "contactVoiceTelephone", "contactFacsimileTelephone", "contactElectronicMailAddress"})
-public class ContactInformationType implements ToString2 {
+@XmlType(name = "ContactInformationType", propOrder = {
+    "contactPersonPrimary",
+    "contactPosition",
+    "contactAddress",
+    "contactVoiceTelephone",
+    "contactFacsimileTelephone",
+    "contactElectronicMailAddress"
+})
+public class ContactInformationType implements ToString
+{
 
     @XmlElement(name = "ContactPersonPrimary")
     protected ContactPersonPrimaryType contactPersonPrimary;
@@ -95,9 +103,11 @@ public class ContactInformationType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà contactPersonPrimary.
-     *
-     * @return possible object is
-     * {@link ContactPersonPrimaryType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ContactPersonPrimaryType }
+     *     
      */
     public ContactPersonPrimaryType getContactPersonPrimary() {
         return contactPersonPrimary;
@@ -105,23 +115,27 @@ public class ContactInformationType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà contactPersonPrimary.
-     *
-     * @param value allowed object is
-     * {@link ContactPersonPrimaryType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ContactPersonPrimaryType }
+     *     
      */
     public void setContactPersonPrimary(ContactPersonPrimaryType value) {
         this.contactPersonPrimary = value;
     }
 
     public boolean isSetContactPersonPrimary() {
-        return (this.contactPersonPrimary != null);
+        return (this.contactPersonPrimary!= null);
     }
 
     /**
      * Recupera il valore della proprietà contactPosition.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getContactPosition() {
         return contactPosition;
@@ -129,23 +143,27 @@ public class ContactInformationType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà contactPosition.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setContactPosition(String value) {
         this.contactPosition = value;
     }
 
     public boolean isSetContactPosition() {
-        return (this.contactPosition != null);
+        return (this.contactPosition!= null);
     }
 
     /**
      * Recupera il valore della proprietà contactAddress.
-     *
-     * @return possible object is
-     * {@link AddressType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link AddressType }
+     *     
      */
     public AddressType getContactAddress() {
         return contactAddress;
@@ -153,23 +171,27 @@ public class ContactInformationType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà contactAddress.
-     *
-     * @param value allowed object is
-     * {@link AddressType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AddressType }
+     *     
      */
     public void setContactAddress(AddressType value) {
         this.contactAddress = value;
     }
 
     public boolean isSetContactAddress() {
-        return (this.contactAddress != null);
+        return (this.contactAddress!= null);
     }
 
     /**
      * Recupera il valore della proprietà contactVoiceTelephone.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getContactVoiceTelephone() {
         return contactVoiceTelephone;
@@ -177,23 +199,27 @@ public class ContactInformationType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà contactVoiceTelephone.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setContactVoiceTelephone(String value) {
         this.contactVoiceTelephone = value;
     }
 
     public boolean isSetContactVoiceTelephone() {
-        return (this.contactVoiceTelephone != null);
+        return (this.contactVoiceTelephone!= null);
     }
 
     /**
      * Recupera il valore della proprietà contactFacsimileTelephone.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getContactFacsimileTelephone() {
         return contactFacsimileTelephone;
@@ -201,23 +227,27 @@ public class ContactInformationType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà contactFacsimileTelephone.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setContactFacsimileTelephone(String value) {
         this.contactFacsimileTelephone = value;
     }
 
     public boolean isSetContactFacsimileTelephone() {
-        return (this.contactFacsimileTelephone != null);
+        return (this.contactFacsimileTelephone!= null);
     }
 
     /**
      * Recupera il valore della proprietà contactElectronicMailAddress.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getContactElectronicMailAddress() {
         return contactElectronicMailAddress;
@@ -225,68 +255,67 @@ public class ContactInformationType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà contactElectronicMailAddress.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setContactElectronicMailAddress(String value) {
         this.contactElectronicMailAddress = value;
     }
 
     public boolean isSetContactElectronicMailAddress() {
-        return (this.contactElectronicMailAddress != null);
+        return (this.contactElectronicMailAddress!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             ContactPersonPrimaryType theContactPersonPrimary;
             theContactPersonPrimary = this.getContactPersonPrimary();
-            strategy.appendField(locator, this, "contactPersonPrimary", buffer, theContactPersonPrimary,
-                    this.isSetContactPersonPrimary());
+            strategy.appendField(locator, this, "contactPersonPrimary", buffer, theContactPersonPrimary, this.isSetContactPersonPrimary());
         }
         {
             String theContactPosition;
             theContactPosition = this.getContactPosition();
-            strategy.appendField(locator, this, "contactPosition", buffer, theContactPosition,
-                    this.isSetContactPosition());
+            strategy.appendField(locator, this, "contactPosition", buffer, theContactPosition, this.isSetContactPosition());
         }
         {
             AddressType theContactAddress;
             theContactAddress = this.getContactAddress();
-            strategy.appendField(locator, this, "contactAddress", buffer, theContactAddress,
-                    this.isSetContactAddress());
+            strategy.appendField(locator, this, "contactAddress", buffer, theContactAddress, this.isSetContactAddress());
         }
         {
             String theContactVoiceTelephone;
             theContactVoiceTelephone = this.getContactVoiceTelephone();
-            strategy.appendField(locator, this, "contactVoiceTelephone", buffer, theContactVoiceTelephone,
-                    this.isSetContactVoiceTelephone());
+            strategy.appendField(locator, this, "contactVoiceTelephone", buffer, theContactVoiceTelephone, this.isSetContactVoiceTelephone());
         }
         {
             String theContactFacsimileTelephone;
             theContactFacsimileTelephone = this.getContactFacsimileTelephone();
-            strategy.appendField(locator, this, "contactFacsimileTelephone", buffer, theContactFacsimileTelephone,
-                    this.isSetContactFacsimileTelephone());
+            strategy.appendField(locator, this, "contactFacsimileTelephone", buffer, theContactFacsimileTelephone, this.isSetContactFacsimileTelephone());
         }
         {
             String theContactElectronicMailAddress;
             theContactElectronicMailAddress = this.getContactElectronicMailAddress();
-            strategy.appendField(locator, this, "contactElectronicMailAddress", buffer, theContactElectronicMailAddress,
-                    this.isSetContactElectronicMailAddress());
+            strategy.appendField(locator, this, "contactElectronicMailAddress", buffer, theContactElectronicMailAddress, this.isSetContactElectronicMailAddress());
         }
         return buffer;
     }

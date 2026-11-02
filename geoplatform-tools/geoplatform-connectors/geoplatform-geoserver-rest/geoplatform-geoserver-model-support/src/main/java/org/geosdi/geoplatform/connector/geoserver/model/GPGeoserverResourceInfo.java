@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model;
 
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -54,8 +56,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.stor
 import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;

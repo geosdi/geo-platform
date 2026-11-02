@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.coveragestores;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import static java.lang.Boolean.TRUE;
 

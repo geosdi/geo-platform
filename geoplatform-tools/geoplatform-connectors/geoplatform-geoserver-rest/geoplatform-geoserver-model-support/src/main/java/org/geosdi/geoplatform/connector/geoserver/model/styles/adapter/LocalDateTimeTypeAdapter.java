@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.styles.adapter;
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;

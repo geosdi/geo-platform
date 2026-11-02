@@ -34,72 +34,75 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.xlink.v100.TypeType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- *
- *         An instance of this type (e.g. a geometryMember) can either 
+ * An instance of this type (e.g. a geometryMember) can either 
  *         enclose or point to a primitive geometry element. When serving 
  *         as a simple link that references a remote geometry instance, 
  *         the value of the gml:remoteSchema attribute can be used to 
  *         locate a schema fragment that constrains the target instance.
- *
- *
- * <p>Classe Java per GeometryAssociationType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="GeometryAssociationType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}_Geometry"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/>
- *       &lt;attribute ref="{http://www.opengis.net/gml}remoteSchema"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- *
- *
+ * 
+ * <p>Classe Java per GeometryAssociationType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="GeometryAssociationType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}_Geometry"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/>
+ *       <attribute ref="{http://www.opengis.net/gml}remoteSchema"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GeometryAssociationType", propOrder = {
-        "geometry"
+    "geometry"
 })
 @XmlSeeAlso({
-        PointPropertyType.class,
-        MultiPolygonPropertyType.class,
-        LineStringPropertyType.class,
-        MultiPointPropertyType.class,
-        LineStringMemberType.class,
-        PointMemberType.class,
-        LinearRingMemberType.class,
-        PolygonPropertyType.class,
-        MultiLineStringPropertyType.class,
-        PolygonMemberType.class,
-        MultiGeometryPropertyType.class
+    PointMemberType.class,
+    LineStringMemberType.class,
+    PolygonMemberType.class,
+    LinearRingMemberType.class,
+    PointPropertyType.class,
+    PolygonPropertyType.class,
+    LineStringPropertyType.class,
+    MultiPointPropertyType.class,
+    MultiLineStringPropertyType.class,
+    MultiPolygonPropertyType.class,
+    MultiGeometryPropertyType.class
 })
-public class GeometryAssociationType implements ToString {
+public class GeometryAssociationType implements ToString
+{
 
     @XmlElementRef(name = "_Geometry", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected JAXBElement<? extends AbstractGeometryType> geometry;
@@ -119,27 +122,56 @@ public class GeometryAssociationType implements ToString {
     protected String arcrole;
     @XmlAttribute(name = "title", namespace = "http://www.w3.org/1999/xlink")
     protected String title;
+    /**
+     * The 'show' attribute is used to communicate the desired presentation 
+     *                 of the ending resource on traversal from the starting resource; it's 
+     *                 value should be treated as follows: 
+     *                 new - load ending resource in a new window, frame, pane, or other 
+     *                 presentation context
+     *                 replace - load the resource in the same window, frame, pane, or 
+     *                 other presentation context
+     *                 embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *                 other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *                 none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "show", namespace = "http://www.w3.org/1999/xlink")
     protected String show;
+    /**
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *                 of traversal from the starting resource to the ending resource; 
+     *                 it's value should be treated as follows:
+     *                 onLoad - traverse to the ending resource immediately on loading 
+     *                 the starting resource 
+     *                 onRequest - traverse from the starting resource to the ending 
+     *                 resource only on a post-loading event triggered for 
+     *                 this purpose 
+     *                 other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *                 none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
     protected String actuate;
 
     /**
      * Recupera il valore della proprietà geometry.
-     *
+     * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiPointType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PointType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PolygonType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
-     *
+     *     
      */
     public JAXBElement<? extends AbstractGeometryType> getGeometry() {
         return geometry;
@@ -147,36 +179,36 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà geometry.
-     *
+     * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeometryCollectionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiLineStringType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiPointType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PointType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PolygonType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
-     *
+     *     
      */
     public void setGeometry(JAXBElement<? extends AbstractGeometryType> value) {
         this.geometry = value;
     }
 
     public boolean isSetGeometry() {
-        return (this.geometry != null);
+        return (this.geometry!= null);
     }
 
     /**
      * Recupera il valore della proprietà remoteSchema.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getRemoteSchema() {
         return remoteSchema;
@@ -184,27 +216,27 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà remoteSchema.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
      */
     public void setRemoteSchema(String value) {
         this.remoteSchema = value;
     }
 
     public boolean isSetRemoteSchema() {
-        return (this.remoteSchema != null);
+        return (this.remoteSchema!= null);
     }
 
     /**
      * Recupera il valore della proprietà type.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link TypeType }
-     *
+     *     
      */
     public TypeType getTYPE() {
         return type;
@@ -212,27 +244,27 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà type.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link TypeType }
-     *
+     *     
      */
     public void setTYPE(TypeType value) {
         this.type = value;
     }
 
     public boolean isSetTYPE() {
-        return (this.type != null);
+        return (this.type!= null);
     }
 
     /**
      * Recupera il valore della proprietà href.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getHref() {
         return href;
@@ -240,27 +272,27 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà href.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
      */
     public void setHref(String value) {
         this.href = value;
     }
 
     public boolean isSetHref() {
-        return (this.href != null);
+        return (this.href!= null);
     }
 
     /**
      * Recupera il valore della proprietà role.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getRole() {
         return role;
@@ -268,27 +300,27 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà role.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
      */
     public void setRole(String value) {
         this.role = value;
     }
 
     public boolean isSetRole() {
-        return (this.role != null);
+        return (this.role!= null);
     }
 
     /**
      * Recupera il valore della proprietà arcrole.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getArcrole() {
         return arcrole;
@@ -296,27 +328,27 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà arcrole.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
      */
     public void setArcrole(String value) {
         this.arcrole = value;
     }
 
     public boolean isSetArcrole() {
-        return (this.arcrole != null);
+        return (this.arcrole!= null);
     }
 
     /**
      * Recupera il valore della proprietà title.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getTitle() {
         return title;
@@ -324,27 +356,38 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà title.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     public boolean isSetTitle() {
-        return (this.title != null);
+        return (this.title!= null);
     }
 
     /**
-     * Recupera il valore della proprietà show.
-     *
+     * The 'show' attribute is used to communicate the desired presentation 
+     *                 of the ending resource on traversal from the starting resource; it's 
+     *                 value should be treated as follows: 
+     *                 new - load ending resource in a new window, frame, pane, or other 
+     *                 presentation context
+     *                 replace - load the resource in the same window, frame, pane, or 
+     *                 other presentation context
+     *                 embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *                 other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *                 none - behavior is unconstrained
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getShow() {
         return show;
@@ -352,27 +395,38 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà show.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
+     * @see #getShow()
      */
     public void setShow(String value) {
         this.show = value;
     }
 
     public boolean isSetShow() {
-        return (this.show != null);
+        return (this.show!= null);
     }
 
     /**
-     * Recupera il valore della proprietà actuate.
-     *
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *                 of traversal from the starting resource to the ending resource; 
+     *                 it's value should be treated as follows:
+     *                 onLoad - traverse to the ending resource immediately on loading 
+     *                 the starting resource 
+     *                 onRequest - traverse from the starting resource to the ending 
+     *                 resource only on a post-loading event triggered for 
+     *                 this purpose 
+     *                 other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *                 none - behavior is unconstrained
+     * 
      * @return
      *     possible object is
      *     {@link String }
-     *
+     *     
      */
     public String getActuate() {
         return actuate;
@@ -380,27 +434,30 @@ public class GeometryAssociationType implements ToString {
 
     /**
      * Imposta il valore della proprietà actuate.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *
+     *     
+     * @see #getActuate()
      */
     public void setActuate(String value) {
         this.actuate = value;
     }
 
     public boolean isSetActuate() {
-        return (this.actuate != null);
+        return (this.actuate!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -408,51 +465,52 @@ public class GeometryAssociationType implements ToString {
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             JAXBElement<? extends AbstractGeometryType> theGeometry;
             theGeometry = this.getGeometry();
-            strategy.appendField(locator, this, "geometry", buffer, theGeometry);
+            strategy.appendField(locator, this, "geometry", buffer, theGeometry, this.isSetGeometry());
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema, this.isSetRemoteSchema());
         }
         {
             TypeType theTYPE;
             theTYPE = this.getTYPE();
-            strategy.appendField(locator, this, "type", buffer, theTYPE);
+            strategy.appendField(locator, this, "type", buffer, theTYPE, this.isSetTYPE());
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, this.isSetHref());
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, this.isSetRole());
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, this.isSetArcrole());
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, this.isSetTitle());
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, this.isSetShow());
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, this.isSetActuate());
         }
         return buffer;
     }

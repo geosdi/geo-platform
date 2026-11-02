@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups.adapter;
 
+import jakarta.xml.bind.ValidationEventHandler;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
-
-import javax.xml.bind.ValidationEventHandler;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

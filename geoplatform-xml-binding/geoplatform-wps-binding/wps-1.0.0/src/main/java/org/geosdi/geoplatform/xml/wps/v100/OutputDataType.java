@@ -34,62 +34,75 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * Value of one output from a process.
- * <p>
+ * Value of one output from a process. 
+ * 
  * In this use, the DescriptionType shall describe this process output.
- * <p>
- * <p>Classe Java per OutputDataType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="OutputDataType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/wps/1.0.0}DescriptionType"&gt;
- *       &lt;group ref="{http://www.opengis.net/wps/1.0.0}OutputDataFormChoice"/&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per OutputDataType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="OutputDataType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/wps/1.0.0}DescriptionType">
+ *       <group ref="{http://www.opengis.net/wps/1.0.0}OutputDataFormChoice"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OutputDataType", propOrder = {
-        "reference",
-        "data"
+    "reference",
+    "data"
 })
-public class OutputDataType extends DescriptionType implements ToString2 {
+public class OutputDataType
+    extends DescriptionType
+    implements ToString
+{
 
+    /**
+     * Identifies this output as a web accessible resource, and references that resource.  This element shall only be used for complex data. This element shall be used by a server when "store" in the Execute request is "true".
+     * 
+     */
     @XmlElement(name = "Reference")
     protected OutputReferenceType reference;
+    /**
+     * Identifies this output value as a data embedded in this response, and includes that data. This element shall be used by a server when "store" in the Execute request is "false".
+     * 
+     */
     @XmlElement(name = "Data")
     protected DataType data;
 
     /**
-     * Recupera il valore della proprietà reference.
-     *
-     * @return possible object is
-     * {@link OutputReferenceType }
+     * Identifies this output as a web accessible resource, and references that resource.  This element shall only be used for complex data. This element shall be used by a server when "store" in the Execute request is "true".
+     * 
+     * @return
+     *     possible object is
+     *     {@link OutputReferenceType }
+     *     
      */
     public OutputReferenceType getReference() {
         return reference;
@@ -97,23 +110,28 @@ public class OutputDataType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà reference.
-     *
-     * @param value allowed object is
-     *              {@link OutputReferenceType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link OutputReferenceType }
+     *     
+     * @see #getReference()
      */
     public void setReference(OutputReferenceType value) {
         this.reference = value;
     }
 
     public boolean isSetReference() {
-        return (this.reference != null);
+        return (this.reference!= null);
     }
 
     /**
-     * Recupera il valore della proprietà data.
-     *
-     * @return possible object is
-     * {@link DataType }
+     * Identifies this output value as a data embedded in this response, and includes that data. This element shall be used by a server when "store" in the Execute request is "false".
+     * 
+     * @return
+     *     possible object is
+     *     {@link DataType }
+     *     
      */
     public DataType getData() {
         return data;
@@ -121,33 +139,39 @@ public class OutputDataType extends DescriptionType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà data.
-     *
-     * @param value allowed object is
-     *              {@link DataType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DataType }
+     *     
+     * @see #getData()
      */
     public void setData(DataType value) {
         this.data = value;
     }
 
     public boolean isSetData() {
-        return (this.data != null);
+        return (this.data!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             OutputReferenceType theReference;

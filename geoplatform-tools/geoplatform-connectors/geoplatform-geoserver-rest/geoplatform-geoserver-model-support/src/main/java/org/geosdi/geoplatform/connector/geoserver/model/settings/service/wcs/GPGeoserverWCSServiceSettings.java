@@ -35,6 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wcs;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,11 +46,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GPGeose
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettingsDeserializer;
 import tools.jackson.databind.annotation.JsonDeserialize;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

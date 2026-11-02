@@ -33,42 +33,49 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-//
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:19:44 PM CEST 
-//
+package org.geosdi.geoplatform.connector.server.request;
 
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.core5.http.HttpEntity;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
-package org.geosdi.geoplatform.xml.xlink.v100;
+import javax.annotation.Nonnull;
 
-import javax.xml.bind.annotation.XmlRegistry;
-
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the org.geosdi.geoplatform.xml.xlink.v100 package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
- * provided in this class.
- * 
+ * Base delle richieste POST con JAXB {@code jakarta.xml.bind}: è la versione jakarta di
+ * {@link PostConnectorRequest}.
+ *
+ * @param <T> il tipo della risposta
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRegistry
-public class ObjectFactory {
-
+abstract class PostJakartaConnectorRequest<T> extends GPBaseJakartaConnectorRequest<T, HttpPost> {
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.xlink.v100
-     * 
+     * @param theServer il connettore del server
      */
-    public ObjectFactory() {
+    protected PostJakartaConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        super(theServer);
     }
 
+    /**
+     * @return {@link HttpPost}
+     * @throws Exception se non è possibile preparare il corpo della richiesta
+     */
+    @Override
+    protected HttpPost prepareHttpMethod() throws Exception {
+        HttpPost postMethod = new HttpPost(super.serverURI);
+        postMethod.setConfig(this.prepareRequestConfig());
+        HttpEntity httpEntity = this.preparePostEntity();
+        postMethod.setEntity(httpEntity);
+        return postMethod;
+    }
+
+    /**
+     * @return il corpo della richiesta POST
+     * @throws Exception se non è possibile prepararlo
+     */
+    protected abstract HttpEntity preparePostEntity() throws Exception;
 }

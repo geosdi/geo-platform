@@ -39,8 +39,8 @@ import org.geosdi.geoplatform.connector.WMSVersion;
 import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
 
 /**
- * Fornisce il contesto JAXB {@code jakarta.xml.bind} di una versione WMS: è la versione jakarta di
- * {@link GPWMSConnectorJAXBContext}.
+ * Fornisce il contesto JAXB {@code jakarta.xml.bind} di una versione WMS: ha preso il posto di
+ * {@code GPWMSConnectorJAXBContext}, la versione javax tolta con il passaggio di WMS 1.3.0 a jakarta.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" 
                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:annox="urn:jaxb.jvnet.org:annox" 
                jaxb:schemaLocation="
-               http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               https://jakarta.ee/xml/ns/jaxb
+               https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd
                http://www.w3.org/2001/XMLSchema
                http://www.w3.org/2001/XMLSchema.xsd"
-               jaxb:extensionBindingPrefixes="xjc">
+               jaxb:extensionBindingPrefixes="xjc annox">
 
     <jaxb:bindings schemaLocation="gml/2.1.2/feature.xsd" 
                    node="/xs:schema">
@@ -30,6 +31,38 @@
             <jaxb:class name="AbstractGeometryProperty" />
         </jaxb:bindings>
 
+        <!-- Aggiunto a mano nel 2019 per il parser GML del GetFeatureInfo. -->
+        <jaxb:bindings node="xs:complexType[@name='MultiGeometryPropertyType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "MultiGeometry")</annox:annotateClass>
+        </jaxb:bindings>
+
+    </jaxb:bindings>
+    <jaxb:bindings schemaLocation="gml/2.1.2/geometry.xsd" node="/xs:schema">
+        <!-- Aggiunti a mano nel 2019 (parser GML del GetFeatureInfo e marshalling delle geometrie). -->
+        <jaxb:bindings node="xs:complexType[@name='BoxType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "Box")</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='PointType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "Point")</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='LineStringType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "LineString")</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='LinearRingType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "LinearRing")</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='PolygonType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "Polygon")</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='MultiPointType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "MultiPoint")</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='MultiLineStringType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "MultiLineString")</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='MultiPolygonType']">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlRootElement(name = "MultiPolygon")</annox:annotateClass>
+        </jaxb:bindings>
     </jaxb:bindings>
 </jaxb:bindings>
     

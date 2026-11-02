@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.xml.bind.annotation.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

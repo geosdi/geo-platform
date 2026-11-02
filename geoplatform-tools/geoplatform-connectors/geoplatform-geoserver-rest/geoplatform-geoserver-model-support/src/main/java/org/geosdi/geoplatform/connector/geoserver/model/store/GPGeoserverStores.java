@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.store;
 
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
+
 import java.io.Serializable;
 import java.util.List;
 

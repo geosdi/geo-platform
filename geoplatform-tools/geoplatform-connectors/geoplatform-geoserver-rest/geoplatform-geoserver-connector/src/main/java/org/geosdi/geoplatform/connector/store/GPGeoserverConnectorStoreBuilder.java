@@ -46,7 +46,7 @@ import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
@@ -108,7 +108,7 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
      */
     ObjectMapper toJacksonSupport() {
         this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : builder(FALSE)
-                .withIntespectorBuilder(JAXB)
+                .withIntespectorBuilder(JAKARTA)
                 .configure(UNWRAP_ROOT_VALUE_ENABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE, NON_NULL,
                         ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE,
                         ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE, INDENT_OUTPUT_ENABLE)

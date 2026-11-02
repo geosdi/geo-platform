@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata;
 
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserverMetadataLink;
-
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

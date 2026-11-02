@@ -34,61 +34,80 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:33:43 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:01 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wmc.v110;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per LayerType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="LayerType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="Server" type="{http://www.opengis.net/context}ServerType"/&gt;
- *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="Title" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="Abstract" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="DataURL" type="{http://www.opengis.net/context}URLType" minOccurs="0"/&gt;
- *         &lt;element name="MetadataURL" type="{http://www.opengis.net/context}URLType" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}MinScaleDenominator" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}MaxScaleDenominator" minOccurs="0"/&gt;
- *         &lt;element name="SRS" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="FormatList" type="{http://www.opengis.net/context}FormatListType" minOccurs="0"/&gt;
- *         &lt;element name="StyleList" type="{http://www.opengis.net/context}StyleListType" minOccurs="0"/&gt;
- *         &lt;element name="DimensionList" type="{http://www.opengis.net/context}DimensionListType" minOccurs="0"/&gt;
- *         &lt;element name="Extension" type="{http://www.opengis.net/context}ExtensionType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="queryable" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="hidden" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per LayerType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="LayerType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="Server" type="{http://www.opengis.net/context}ServerType"/>
+ *         <element name="Name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="Title" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="Abstract" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="DataURL" type="{http://www.opengis.net/context}URLType" minOccurs="0"/>
+ *         <element name="MetadataURL" type="{http://www.opengis.net/context}URLType" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}MinScaleDenominator" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}MaxScaleDenominator" minOccurs="0"/>
+ *         <element name="SRS" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="FormatList" type="{http://www.opengis.net/context}FormatListType" minOccurs="0"/>
+ *         <element name="StyleList" type="{http://www.opengis.net/context}StyleListType" minOccurs="0"/>
+ *         <element name="DimensionList" type="{http://www.opengis.net/context}DimensionListType" minOccurs="0"/>
+ *         <element name="Extension" type="{http://www.opengis.net/context}ExtensionType" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="queryable" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       <attribute name="hidden" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LayerType", propOrder = {"server", "name", "title", "_abstract", "dataURL", "metadataURL",
-        "minScaleDenominator", "maxScaleDenominator", "srs", "formatList", "styleList", "dimensionList", "extension"})
+@XmlType(name = "LayerType", propOrder = {
+    "server",
+    "name",
+    "title",
+    "_abstract",
+    "dataURL",
+    "metadataURL",
+    "minScaleDenominator",
+    "maxScaleDenominator",
+    "srs",
+    "formatList",
+    "styleList",
+    "dimensionList",
+    "extension"
+})
 @XmlRootElement(name = "Layer")
-public class LayerType implements ToString2 {
+public class LayerType implements ToString
+{
 
     @XmlElement(name = "Server", required = true)
     protected ServerType server;
@@ -123,9 +142,11 @@ public class LayerType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà server.
-     *
-     * @return possible object is
-     * {@link ServerType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ServerType }
+     *     
      */
     public ServerType getServer() {
         return server;
@@ -133,23 +154,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà server.
-     *
-     * @param value allowed object is
-     * {@link ServerType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ServerType }
+     *     
      */
     public void setServer(ServerType value) {
         this.server = value;
     }
 
     public boolean isSetServer() {
-        return (this.server != null);
+        return (this.server!= null);
     }
 
     /**
      * Recupera il valore della proprietà name.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getName() {
         return name;
@@ -157,23 +182,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà name.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setName(String value) {
         this.name = value;
     }
 
     public boolean isSetName() {
-        return (this.name != null);
+        return (this.name!= null);
     }
 
     /**
      * Recupera il valore della proprietà title.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getTitle() {
         return title;
@@ -181,23 +210,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà title.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     public boolean isSetTitle() {
-        return (this.title != null);
+        return (this.title!= null);
     }
 
     /**
      * Recupera il valore della proprietà abstract.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAbstract() {
         return _abstract;
@@ -205,23 +238,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà abstract.
-     *
-     * @param value allowed object is
-     * {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAbstract(String value) {
         this._abstract = value;
     }
 
     public boolean isSetAbstract() {
-        return (this._abstract != null);
+        return (this._abstract!= null);
     }
 
     /**
      * Recupera il valore della proprietà dataURL.
-     *
-     * @return possible object is
-     * {@link URLType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link URLType }
+     *     
      */
     public URLType getDataURL() {
         return dataURL;
@@ -229,23 +266,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà dataURL.
-     *
-     * @param value allowed object is
-     * {@link URLType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link URLType }
+     *     
      */
     public void setDataURL(URLType value) {
         this.dataURL = value;
     }
 
     public boolean isSetDataURL() {
-        return (this.dataURL != null);
+        return (this.dataURL!= null);
     }
 
     /**
      * Recupera il valore della proprietà metadataURL.
-     *
-     * @return possible object is
-     * {@link URLType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link URLType }
+     *     
      */
     public URLType getMetadataURL() {
         return metadataURL;
@@ -253,23 +294,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà metadataURL.
-     *
-     * @param value allowed object is
-     * {@link URLType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link URLType }
+     *     
      */
     public void setMetadataURL(URLType value) {
         this.metadataURL = value;
     }
 
     public boolean isSetMetadataURL() {
-        return (this.metadataURL != null);
+        return (this.metadataURL!= null);
     }
 
     /**
      * Recupera il valore della proprietà minScaleDenominator.
-     *
-     * @return possible object is
-     * {@link Double }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
     public Double getMinScaleDenominator() {
         return minScaleDenominator;
@@ -277,23 +322,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà minScaleDenominator.
-     *
-     * @param value allowed object is
-     * {@link Double }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
      */
     public void setMinScaleDenominator(Double value) {
         this.minScaleDenominator = value;
     }
 
     public boolean isSetMinScaleDenominator() {
-        return (this.minScaleDenominator != null);
+        return (this.minScaleDenominator!= null);
     }
 
     /**
      * Recupera il valore della proprietà maxScaleDenominator.
-     *
-     * @return possible object is
-     * {@link Double }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
     public Double getMaxScaleDenominator() {
         return maxScaleDenominator;
@@ -301,47 +350,54 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà maxScaleDenominator.
-     *
-     * @param value allowed object is
-     * {@link Double }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
      */
     public void setMaxScaleDenominator(Double value) {
         this.maxScaleDenominator = value;
     }
 
     public boolean isSetMaxScaleDenominator() {
-        return (this.maxScaleDenominator != null);
+        return (this.maxScaleDenominator!= null);
     }
 
     /**
      * Gets the value of the srs property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the srs property.
-     *
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the srs property.</p>
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getSRS().add(newItem);
+     * getSRS().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
+     * 
+     * 
+     * @return
+     *     The value of the srs property.
      */
     public List<String> getSRS() {
         if (srs == null) {
-            srs = new ArrayList<String>();
+            srs = new ArrayList<>();
         }
         return this.srs;
     }
 
     public boolean isSetSRS() {
-        return ((this.srs != null) && (!this.srs.isEmpty()));
+        return ((this.srs!= null)&&(!this.srs.isEmpty()));
     }
 
     public void unsetSRS() {
@@ -350,9 +406,11 @@ public class LayerType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà formatList.
-     *
-     * @return possible object is
-     * {@link FormatListType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link FormatListType }
+     *     
      */
     public FormatListType getFormatList() {
         return formatList;
@@ -360,23 +418,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà formatList.
-     *
-     * @param value allowed object is
-     * {@link FormatListType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FormatListType }
+     *     
      */
     public void setFormatList(FormatListType value) {
         this.formatList = value;
     }
 
     public boolean isSetFormatList() {
-        return (this.formatList != null);
+        return (this.formatList!= null);
     }
 
     /**
      * Recupera il valore della proprietà styleList.
-     *
-     * @return possible object is
-     * {@link StyleListType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link StyleListType }
+     *     
      */
     public StyleListType getStyleList() {
         return styleList;
@@ -384,23 +446,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà styleList.
-     *
-     * @param value allowed object is
-     * {@link StyleListType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link StyleListType }
+     *     
      */
     public void setStyleList(StyleListType value) {
         this.styleList = value;
     }
 
     public boolean isSetStyleList() {
-        return (this.styleList != null);
+        return (this.styleList!= null);
     }
 
     /**
      * Recupera il valore della proprietà dimensionList.
-     *
-     * @return possible object is
-     * {@link DimensionListType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link DimensionListType }
+     *     
      */
     public DimensionListType getDimensionList() {
         return dimensionList;
@@ -408,23 +474,27 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà dimensionList.
-     *
-     * @param value allowed object is
-     * {@link DimensionListType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DimensionListType }
+     *     
      */
     public void setDimensionList(DimensionListType value) {
         this.dimensionList = value;
     }
 
     public boolean isSetDimensionList() {
-        return (this.dimensionList != null);
+        return (this.dimensionList!= null);
     }
 
     /**
      * Recupera il valore della proprietà extension.
-     *
-     * @return possible object is
-     * {@link ExtensionType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ExtensionType }
+     *     
      */
     public ExtensionType getExtension() {
         return extension;
@@ -432,20 +502,23 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà extension.
-     *
-     * @param value allowed object is
-     * {@link ExtensionType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ExtensionType }
+     *     
      */
     public void setExtension(ExtensionType value) {
         this.extension = value;
     }
 
     public boolean isSetExtension() {
-        return (this.extension != null);
+        return (this.extension!= null);
     }
 
     /**
      * Recupera il valore della proprietà queryable.
+     * 
      */
     public boolean isQueryable() {
         return queryable;
@@ -453,6 +526,7 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà queryable.
+     * 
      */
     public void setQueryable(boolean value) {
         this.queryable = value;
@@ -464,6 +538,7 @@ public class LayerType implements ToString2 {
 
     /**
      * Recupera il valore della proprietà hidden.
+     * 
      */
     public boolean isHidden() {
         return hidden;
@@ -471,6 +546,7 @@ public class LayerType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà hidden.
+     * 
      */
     public void setHidden(boolean value) {
         this.hidden = value;
@@ -480,21 +556,24 @@ public class LayerType implements ToString2 {
         return true;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             ServerType theServer;
             theServer = this.getServer();
@@ -528,18 +607,16 @@ public class LayerType implements ToString2 {
         {
             Double theMinScaleDenominator;
             theMinScaleDenominator = this.getMinScaleDenominator();
-            strategy.appendField(locator, this, "minScaleDenominator", buffer, theMinScaleDenominator,
-                    this.isSetMinScaleDenominator());
+            strategy.appendField(locator, this, "minScaleDenominator", buffer, theMinScaleDenominator, this.isSetMinScaleDenominator());
         }
         {
             Double theMaxScaleDenominator;
             theMaxScaleDenominator = this.getMaxScaleDenominator();
-            strategy.appendField(locator, this, "maxScaleDenominator", buffer, theMaxScaleDenominator,
-                    this.isSetMaxScaleDenominator());
+            strategy.appendField(locator, this, "maxScaleDenominator", buffer, theMaxScaleDenominator, this.isSetMaxScaleDenominator());
         }
         {
             List<String> theSRS;
-            theSRS = (this.isSetSRS() ? this.getSRS() : null);
+            theSRS = (this.isSetSRS()?this.getSRS():null);
             strategy.appendField(locator, this, "srs", buffer, theSRS, this.isSetSRS());
         }
         {
@@ -577,7 +654,7 @@ public class LayerType implements ToString2 {
 
     public void setSRS(List<String> value) {
         this.srs = null;
-        if (value != null) {
+        if (value!= null) {
             List<String> draftl = this.getSRS();
             draftl.addAll(value);
         }

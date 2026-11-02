@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.wmc.support.v110.jaxb.repository;
 
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,12 +53,12 @@ public final class WMCJAXBContextSupport {
     private WMCJAXBContextSupport() {
     }
 
-    public static void registerProvider(WMCJAXBContextRepository.GeoPlatformJAXBContextKey key,
+    public static void registerProvider(WMCJAXBContextRepository.GeoPlatformJakartaContextKey key,
             Object provider) {
         INSTANCE.registerProvider(key, provider);
     }
 
-    public static <P extends GPBaseJAXBContext> P getProvider(WMCJAXBContextRepository.GeoPlatformJAXBContextKey key) {
+    public static <P extends GPBaseJakartaContext> P getProvider(WMCJAXBContextRepository.GeoPlatformJakartaContextKey key) {
         return INSTANCE.getProvider(key);
     }
 }

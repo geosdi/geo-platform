@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.wmc.jaxb.v110.comparison;
 
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.context.pool.WMCJAXBContextPoolV110;
 import org.geosdi.geoplatform.xml.wmc.v110.ViewContextType;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public abstract class AbstractWMCComparisonTest {
      * @return {@link Long}
      * @throws Exception
      */
-    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext) throws Exception {
+    protected long executeMultiThreadsTasks(GPBaseJakartaContext jaxbContext) throws Exception {
         long time = 0;
         int numThreads = defineNumThreads();
         ExecutorService executor = newFixedThreadPool(numThreads, WMCComparisonThreadFactory);
@@ -120,9 +120,9 @@ public abstract class AbstractWMCComparisonTest {
 
     private class WMCSimpleTask implements Callable<Long> {
 
-        final GPBaseJAXBContext jaxbContext;
+        final GPBaseJakartaContext jaxbContext;
 
-        public WMCSimpleTask(GPBaseJAXBContext theJaxbContext) {
+        public WMCSimpleTask(GPBaseJakartaContext theJaxbContext) {
             this.jaxbContext = theJaxbContext;
         }
 
@@ -143,7 +143,7 @@ public abstract class AbstractWMCComparisonTest {
 
     private class WMCPooledTask extends WMCSimpleTask {
 
-        public WMCPooledTask(GPBaseJAXBContext theJaxbContext) {
+        public WMCPooledTask(GPBaseJakartaContext theJaxbContext) {
             super(theJaxbContext);
         }
 

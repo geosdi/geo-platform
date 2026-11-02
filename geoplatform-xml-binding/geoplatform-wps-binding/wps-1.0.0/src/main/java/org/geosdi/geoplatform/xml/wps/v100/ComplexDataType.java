@@ -34,60 +34,79 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.w3c.dom.Element;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.xml.namespace.QName;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyAttribute;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.w3c.dom.Element;
 
 
 /**
  * Complex data (such as an image), including a definition of the complex value data structure (i.e., schema, format, and encoding).  May be an ows:Manifest data structure.
- * <p>
- * <p>Classe Java per ComplexDataType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="ComplexDataType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attGroup ref="{http://www.opengis.net/wps/1.0.0}ComplexDataEncoding"/&gt;
- *       &lt;anyAttribute processContents='skip'/&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per ComplexDataType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="ComplexDataType">
+ *   <complexContent>
+ *     <extension base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attGroup ref="{http://www.opengis.net/wps/1.0.0}ComplexDataEncoding"/>
+ *       <anyAttribute processContents='skip'/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ComplexDataType", propOrder = {
-        "any"
+    "any"
 })
-public class ComplexDataType implements ToString2 {
+public class ComplexDataType implements ToString
+{
 
     @XmlAnyElement(lax = true)
     protected List<Object> any;
+    /**
+     * The Format of this input or requested for this output (e.g., text/xml). This element shall be omitted when the Format is indicated in the http header of the output. When included, this format shall be one published for this output or input in the Process full description.
+     * 
+     */
     @XmlAttribute(name = "mimeType")
     protected String mimeType;
+    /**
+     * The encoding of this input or requested for this output (e.g., UTF-8). This "encoding" shall be included whenever the encoding required is not the default encoding indicated in the Process full description. When included, this encoding shall be one published for this output or input in the Process full description.
+     * 
+     */
     @XmlAttribute(name = "encoding")
     @XmlSchemaType(name = "anyURI")
     protected String encoding;
+    /**
+     * PS I changed the name of this attribute to be consistent with the ProcessDescription.  The original was giving me validation troubles in XMLSpy.
+     * 
+     */
     @XmlAttribute(name = "schema")
     @XmlSchemaType(name = "anyURI")
     protected String schema;
@@ -96,34 +115,39 @@ public class ComplexDataType implements ToString2 {
 
     /**
      * Gets the value of the any property.
-     * <p>
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the any property.
-     * <p>
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the any property.</p>
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAny().add(newItem);
+     * getAny().add(newItem);
      * </pre>
-     * <p>
-     * <p>
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Element }
      * {@link Object }
+     * {@link Element }
+     * </p>
+     * 
+     * 
+     * @return
+     *     The value of the any property.
      */
     public List<Object> getAny() {
         if (any == null) {
-            any = new ArrayList<Object>();
+            any = new ArrayList<>();
         }
         return this.any;
     }
 
     public boolean isSetAny() {
-        return ((this.any != null) && (!this.any.isEmpty()));
+        return ((this.any!= null)&&(!this.any.isEmpty()));
     }
 
     public void unsetAny() {
@@ -131,10 +155,12 @@ public class ComplexDataType implements ToString2 {
     }
 
     /**
-     * Recupera il valore della proprietà mimeType.
-     *
-     * @return possible object is
-     * {@link String }
+     * The Format of this input or requested for this output (e.g., text/xml). This element shall be omitted when the Format is indicated in the http header of the output. When included, this format shall be one published for this output or input in the Process full description.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMimeType() {
         return mimeType;
@@ -142,23 +168,28 @@ public class ComplexDataType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà mimeType.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getMimeType()
      */
     public void setMimeType(String value) {
         this.mimeType = value;
     }
 
     public boolean isSetMimeType() {
-        return (this.mimeType != null);
+        return (this.mimeType!= null);
     }
 
     /**
-     * Recupera il valore della proprietà encoding.
-     *
-     * @return possible object is
-     * {@link String }
+     * The encoding of this input or requested for this output (e.g., UTF-8). This "encoding" shall be included whenever the encoding required is not the default encoding indicated in the Process full description. When included, this encoding shall be one published for this output or input in the Process full description.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEncoding() {
         return encoding;
@@ -166,23 +197,28 @@ public class ComplexDataType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà encoding.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getEncoding()
      */
     public void setEncoding(String value) {
         this.encoding = value;
     }
 
     public boolean isSetEncoding() {
-        return (this.encoding != null);
+        return (this.encoding!= null);
     }
 
     /**
-     * Recupera il valore della proprietà schema.
-     *
-     * @return possible object is
-     * {@link String }
+     * PS I changed the name of this attribute to be consistent with the ProcessDescription.  The original was giving me validation troubles in XMLSpy.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSchema() {
         return schema;
@@ -190,52 +226,60 @@ public class ComplexDataType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà schema.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getSchema()
      */
     public void setSchema(String value) {
         this.schema = value;
     }
 
     public boolean isSetSchema() {
-        return (this.schema != null);
+        return (this.schema!= null);
     }
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
+     * 
      * <p>
-     * <p>
-     * the map is keyed by the name of the attribute and
+     * the map is keyed by the name of the attribute and 
      * the value is the string value of the attribute.
-     * <p>
+     * 
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     *
-     * @return always non-null
+     * 
+     * 
+     * @return
+     *     always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<Object> theAny;
-            theAny = (this.isSetAny() ? this.getAny() : null);
+            theAny = (this.isSetAny()?this.getAny():null);
             strategy.appendField(locator, this, "any", buffer, theAny, this.isSetAny());
         }
         {
@@ -253,23 +297,27 @@ public class ComplexDataType implements ToString2 {
             theSchema = this.getSchema();
             strategy.appendField(locator, this, "schema", buffer, theSchema, this.isSetSchema());
         }
+        {
+            Map<QName, String> theOtherAttributes = this.getOtherAttributes();
+            strategy.appendField(locator, this, "otherAttributes", buffer, theOtherAttributes, true);
+        }
         return buffer;
     }
 
     public void setAny(List<Object> value) {
         this.any = null;
-        if (value != null) {
+        if (value!= null) {
             List<Object> draftl = this.getAny();
             draftl.addAll(value);
         }
     }
+    
+                public List<Object> getContent() {
+                return getAny();
+                }
 
-    public List<Object> getContent() {
-        return getAny();
-    }
-
-    public void setContent(List<Object> value) {
-        setAny(value);
-    }
-
+                public void setContent(List<Object> value) {
+                setAny(value);
+                }
+            
 }

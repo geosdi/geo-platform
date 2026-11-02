@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.serializer.GPGeoserverLayerTypePublishedSerializer;
 import tools.jackson.databind.annotation.JsonSerialize;
-
-import javax.xml.bind.annotation.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

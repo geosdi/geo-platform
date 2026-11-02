@@ -37,12 +37,12 @@ package org.geosdi.geoplatform.connector.geoserver.model.layers;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.resource.GeoserverLayerResource;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.vector.GeoserverVectorLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.EXISTING_PROPERTY;

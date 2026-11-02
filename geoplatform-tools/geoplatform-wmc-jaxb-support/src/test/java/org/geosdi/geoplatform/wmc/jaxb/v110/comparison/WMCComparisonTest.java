@@ -42,8 +42,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import static jakarta.xml.bind.JAXBContext.newInstance;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static javax.xml.bind.JAXBContext.newInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.connector.geoserver.model.store;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnumValue;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;

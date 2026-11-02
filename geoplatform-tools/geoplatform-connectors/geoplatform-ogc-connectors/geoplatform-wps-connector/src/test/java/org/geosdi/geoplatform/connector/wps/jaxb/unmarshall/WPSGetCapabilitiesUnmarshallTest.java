@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.wps.jaxb.unmarshall;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.connector.jaxb.context.WPSJAXBContext;
 import org.geosdi.geoplatform.xml.wps.v100.WPSCapabilitiesType;
 import org.junit.BeforeClass;
@@ -45,14 +47,12 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
+import static jakarta.xml.bind.JAXBContext.newInstance;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static javax.xml.bind.JAXBContext.newInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

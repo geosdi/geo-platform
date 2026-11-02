@@ -34,45 +34,44 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:29:16 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:38 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.filter.v100;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per PropertyIsBetweenType complex type.
+ * <p>Classe Java per PropertyIsBetweenType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="PropertyIsBetweenType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/ogc}ComparisonOpsType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/ogc}expression"/&gt;
- *         &lt;element name="LowerBoundary" type="{http://www.opengis.net/ogc}LowerBoundaryType"/&gt;
- *         &lt;element name="UpperBoundary" type="{http://www.opengis.net/ogc}UpperBoundaryType"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="PropertyIsBetweenType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/ogc}ComparisonOpsType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/ogc}expression"/>
+ *         <element name="LowerBoundary" type="{http://www.opengis.net/ogc}LowerBoundaryType"/>
+ *         <element name="UpperBoundary" type="{http://www.opengis.net/ogc}UpperBoundaryType"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -84,7 +83,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class PropertyIsBetweenType
     extends ComparisonOpsType
-    implements ToString2
+    implements ToString
 {
 
     @XmlElementRef(name = "expression", namespace = "http://www.opengis.net/ogc", type = JAXBElement.class)
@@ -100,13 +99,13 @@ public class PropertyIsBetweenType
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PropertyNameType }{@code >}
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link FunctionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LiteralType }{@code >}
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
      *     {@link JAXBElement }{@code <}{@link ExpressionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link FunctionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LiteralType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PropertyNameType }{@code >}
      *     
      */
     public JAXBElement<?> getExpression() {
@@ -119,13 +118,13 @@ public class PropertyIsBetweenType
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PropertyNameType }{@code >}
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link FunctionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LiteralType }{@code >}
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
      *     {@link JAXBElement }{@code <}{@link BinaryOperatorType }{@code >}
      *     {@link JAXBElement }{@code <}{@link ExpressionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link FunctionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LiteralType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PropertyNameType }{@code >}
      *     
      */
     public void setExpression(JAXBElement<?> value) {
@@ -192,21 +191,24 @@ public class PropertyIsBetweenType
         return (this.upperBoundary!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             JAXBElement<?> theExpression;

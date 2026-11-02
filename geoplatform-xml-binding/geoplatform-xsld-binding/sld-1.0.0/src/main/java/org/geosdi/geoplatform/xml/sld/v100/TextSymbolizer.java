@@ -34,46 +34,45 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:50:57 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.sld.v100;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/sld}SymbolizerType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Label" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Font" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}LabelPlacement" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Halo" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Fill" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/sld}SymbolizerType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}Label" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}Font" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}LabelPlacement" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}Halo" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}Fill" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -88,24 +87,56 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class TextSymbolizer
     extends SymbolizerType
-    implements ToString2
+    implements ToString
 {
 
+    /**
+     * A Geometry gives reference to a (the) geometry property of a
+     *         feature to be used for rendering.
+     * 
+     */
     @XmlElement(name = "Geometry")
     protected Geometry geometry;
+    /**
+     * A "Label" specifies the textual content to be rendered.
+     * 
+     */
     @XmlElement(name = "Label")
     protected ParameterValueType label;
+    /**
+     * A "Font" element specifies the text font to use.  The allowed
+     *         CssParameters are: "font-family", "font-style", "font-weight",
+     *         and "font-size".
+     * 
+     */
     @XmlElement(name = "Font")
     protected Font font;
+    /**
+     * The "LabelPlacement" specifies where and how a text label should
+     *         be rendered relative to a geometry.  The present mechanism is
+     *         poorly aligned with CSS/SVG.
+     * 
+     */
     @XmlElement(name = "LabelPlacement")
     protected LabelPlacement labelPlacement;
+    /**
+     * A "Halo" fills an extended area outside the glyphs of a rendered
+     *         text label to make the label easier to read over a background.
+     * 
+     */
     @XmlElement(name = "Halo")
     protected Halo halo;
+    /**
+     * A "Fill" specifies the pattern for filling an area geometry.
+     *         The allowed CssParameters are: "fill" (color) and "fill-opacity".
+     * 
+     */
     @XmlElement(name = "Fill")
     protected Fill fill;
 
     /**
-     * Recupera il valore della proprietà geometry.
+     * A Geometry gives reference to a (the) geometry property of a
+     *         feature to be used for rendering.
      * 
      * @return
      *     possible object is
@@ -123,6 +154,7 @@ public class TextSymbolizer
      *     allowed object is
      *     {@link Geometry }
      *     
+     * @see #getGeometry()
      */
     public void setGeometry(Geometry value) {
         this.geometry = value;
@@ -133,7 +165,7 @@ public class TextSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà label.
+     * A "Label" specifies the textual content to be rendered.
      * 
      * @return
      *     possible object is
@@ -151,6 +183,7 @@ public class TextSymbolizer
      *     allowed object is
      *     {@link ParameterValueType }
      *     
+     * @see #getLabel()
      */
     public void setLabel(ParameterValueType value) {
         this.label = value;
@@ -161,7 +194,9 @@ public class TextSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà font.
+     * A "Font" element specifies the text font to use.  The allowed
+     *         CssParameters are: "font-family", "font-style", "font-weight",
+     *         and "font-size".
      * 
      * @return
      *     possible object is
@@ -179,6 +214,7 @@ public class TextSymbolizer
      *     allowed object is
      *     {@link Font }
      *     
+     * @see #getFont()
      */
     public void setFont(Font value) {
         this.font = value;
@@ -189,7 +225,9 @@ public class TextSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà labelPlacement.
+     * The "LabelPlacement" specifies where and how a text label should
+     *         be rendered relative to a geometry.  The present mechanism is
+     *         poorly aligned with CSS/SVG.
      * 
      * @return
      *     possible object is
@@ -207,6 +245,7 @@ public class TextSymbolizer
      *     allowed object is
      *     {@link LabelPlacement }
      *     
+     * @see #getLabelPlacement()
      */
     public void setLabelPlacement(LabelPlacement value) {
         this.labelPlacement = value;
@@ -217,7 +256,8 @@ public class TextSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà halo.
+     * A "Halo" fills an extended area outside the glyphs of a rendered
+     *         text label to make the label easier to read over a background.
      * 
      * @return
      *     possible object is
@@ -235,6 +275,7 @@ public class TextSymbolizer
      *     allowed object is
      *     {@link Halo }
      *     
+     * @see #getHalo()
      */
     public void setHalo(Halo value) {
         this.halo = value;
@@ -245,7 +286,8 @@ public class TextSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà fill.
+     * A "Fill" specifies the pattern for filling an area geometry.
+     *         The allowed CssParameters are: "fill" (color) and "fill-opacity".
      * 
      * @return
      *     possible object is
@@ -263,6 +305,7 @@ public class TextSymbolizer
      *     allowed object is
      *     {@link Fill }
      *     
+     * @see #getFill()
      */
     public void setFill(Fill value) {
         this.fill = value;
@@ -272,21 +315,24 @@ public class TextSymbolizer
         return (this.fill!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             Geometry theGeometry;

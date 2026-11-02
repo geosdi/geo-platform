@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.connector.geoserver.model.security.catalog;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlElement;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;

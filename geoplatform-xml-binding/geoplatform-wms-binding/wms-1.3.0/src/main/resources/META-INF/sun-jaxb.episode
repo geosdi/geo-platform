@@ -1,109 +1,109 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
   <!--
 
-Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-Generato il: 2019.01.25 alle 09:55:42 AM CET 
-
+Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+Generato il: 2026.11.02 alle 02:51:45 PM CET
   -->
-  <bindings xmlns:tns="http://www.opengis.net/wms" if-exists="true" scd="x-schema::tns">
+  <bindings scd="x-schema::tns" if-exists="true" auto-acknowledge="true" xmlns:tns="http://www.opengis.net/wms">
     <schemaBindings map="false">
       <package name="org.geosdi.geoplatform.wms.v130"/>
     </schemaBindings>
-    <bindings if-exists="true" scd="tns:WMS_Capabilities">
+    <bindings scd="tns:WMS_Capabilities" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.WMSCapabilities"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Service">
+    <bindings scd="tns:Service" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Service"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:KeywordList">
+    <bindings scd="tns:KeywordList" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.KeywordList"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Keyword">
+    <bindings scd="tns:Keyword" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Keyword"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:OnlineResource">
+    <bindings scd="tns:OnlineResource" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.OnlineResource"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:ContactInformation">
+    <bindings scd="tns:ContactInformation" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.ContactInformation"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:ContactPersonPrimary">
+    <bindings scd="tns:ContactPersonPrimary" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.ContactPersonPrimary"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:ContactAddress">
+    <bindings scd="tns:ContactAddress" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.ContactAddress"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Capability">
+    <bindings scd="tns:Capability" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Capability"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Request">
+    <bindings scd="tns:Request" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Request"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:OperationType">
+    <bindings scd="~tns:OperationType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.OperationType"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Exception">
+    <bindings scd="tns:Exception" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Exception"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Layer">
+    <bindings scd="tns:Layer" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Layer"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:EX_GeographicBoundingBox">
+    <bindings scd="tns:EX_GeographicBoundingBox" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.EXGeographicBoundingBox"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:BoundingBox">
+    <bindings scd="tns:BoundingBox" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.BoundingBox"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Dimension">
+    <bindings scd="tns:Dimension" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Dimension"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Attribution">
+    <bindings scd="tns:Attribution" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Attribution"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:LogoURL">
+    <bindings scd="tns:LogoURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.LogoURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:AuthorityURL">
+    <bindings scd="tns:AuthorityURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.AuthorityURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Identifier">
+    <bindings scd="tns:Identifier" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Identifier"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:MetadataURL">
+    <bindings scd="tns:MetadataURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.MetadataURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:DataURL">
+    <bindings scd="tns:DataURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.DataURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:FeatureListURL">
+    <bindings scd="tns:FeatureListURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.FeatureListURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Style">
+    <bindings scd="tns:Style" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Style"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:LegendURL">
+    <bindings scd="tns:LegendURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.LegendURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:StyleSheetURL">
+    <bindings scd="tns:StyleSheetURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.StyleSheetURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:StyleURL">
+    <bindings scd="tns:StyleURL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.StyleURL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:DCPType">
+    <bindings scd="tns:DCPType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.DCPType"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:HTTP">
+    <bindings scd="tns:HTTP" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.HTTP"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Get">
+    <bindings scd="tns:Get" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Get"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Post">
+    <bindings scd="tns:Post" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.wms.v130.Post"/>
     </bindings>
   </bindings>
 </bindings>
+

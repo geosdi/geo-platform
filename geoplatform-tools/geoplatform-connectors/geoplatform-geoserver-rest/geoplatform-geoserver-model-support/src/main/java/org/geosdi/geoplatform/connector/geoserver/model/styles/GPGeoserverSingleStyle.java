@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.adapter.LocalDateTimeTypeAdapter;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.legend.GPGeoserverStyleLegend;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.legend.IGPGeoserverStyleLegend;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 
 /**

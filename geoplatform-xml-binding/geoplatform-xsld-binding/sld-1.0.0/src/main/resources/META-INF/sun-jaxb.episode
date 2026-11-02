@@ -1,299 +1,154 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
-      
-    <!--
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
+  <!--
 
-Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-Generato il: 2021.09.20 alle 09:24:24 AM CEST 
-
+Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+Generato il: 2026.11.02 alle 02:50:57 PM CET
   -->
-      
-    <bindings xmlns:tns="http://www.opengis.net/sld" if-exists="true" scd="x-schema::tns">
-            
-        <schemaBindings map="false">
-                  
-            <package name="org.geosdi.geoplatform.xml.sld.v100"/>
-                
-        </schemaBindings>
-            
-        <bindings if-exists="true" scd="tns:StyledLayerDescriptor">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:NamedLayer">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.NamedLayer"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:LayerFeatureConstraints">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.LayerFeatureConstraints"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:FeatureTypeConstraint">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.FeatureTypeConstraint"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Extent">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Extent"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:NamedStyle">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.NamedStyle"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:UserStyle">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.UserStyle"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:FeatureTypeStyle">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.FeatureTypeStyle"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Rule">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Rule"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:LegendGraphic">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.LegendGraphic"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Graphic">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Graphic"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ExternalGraphic">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ExternalGraphic"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:OnlineResource">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.OnlineResource"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Mark">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Mark"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Fill">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Fill"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:GraphicFill">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.GraphicFill"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:CssParameter">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.CssParameter"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="~tns:ParameterValueType">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ParameterValueType"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Stroke">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Stroke"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:GraphicStroke">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.GraphicStroke"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ElseFilter">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ElseFilter"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="~tns:SymbolizerType">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.SymbolizerType"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:UserLayer">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.UserLayer"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:RemoteOWS">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.RemoteOWS"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Geometry">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Geometry"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Font">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Font"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:LabelPlacement">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.LabelPlacement"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:PointPlacement">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.PointPlacement"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:AnchorPoint">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.AnchorPoint"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Displacement">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Displacement"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:LinePlacement">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.LinePlacement"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Halo">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Halo"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ChannelSelection">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ChannelSelection"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="~tns:SelectedChannelType">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.SelectedChannelType"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:OverlapBehavior">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.OverlapBehavior"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:LATEST_ON_TOP">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.LATESTONTOP"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:EARLIEST_ON_TOP">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.EARLIESTONTOP"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:AVERAGE">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.AVERAGE"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:RANDOM">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.RANDOM"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ColorMap">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ColorMap"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ColorMapEntry">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ColorMapEntry"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ContrastEnhancement">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ContrastEnhancement"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Normalize">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Normalize"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Histogram">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.Histogram"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ShadedRelief">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ShadedRelief"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:ImageOutline">
-                  
-            <class ref="org.geosdi.geoplatform.xml.sld.v100.ImageOutline"/>
-                
-        </bindings>
-          
+  <bindings scd="x-schema::tns" if-exists="true" auto-acknowledge="true" xmlns:tns="http://www.opengis.net/sld">
+    <schemaBindings map="false">
+      <package name="org.geosdi.geoplatform.xml.sld.v100"/>
+    </schemaBindings>
+    <bindings scd="tns:StyledLayerDescriptor" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor"/>
     </bindings>
-    
+    <bindings scd="tns:NamedLayer" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.NamedLayer"/>
+    </bindings>
+    <bindings scd="tns:LayerFeatureConstraints" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LayerFeatureConstraints"/>
+    </bindings>
+    <bindings scd="tns:FeatureTypeConstraint" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.FeatureTypeConstraint"/>
+    </bindings>
+    <bindings scd="tns:Extent" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Extent"/>
+    </bindings>
+    <bindings scd="tns:NamedStyle" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.NamedStyle"/>
+    </bindings>
+    <bindings scd="tns:UserStyle" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.UserStyle"/>
+    </bindings>
+    <bindings scd="tns:FeatureTypeStyle" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.FeatureTypeStyle"/>
+    </bindings>
+    <bindings scd="tns:Rule" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Rule"/>
+    </bindings>
+    <bindings scd="tns:LegendGraphic" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LegendGraphic"/>
+    </bindings>
+    <bindings scd="tns:Graphic" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Graphic"/>
+    </bindings>
+    <bindings scd="tns:ExternalGraphic" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ExternalGraphic"/>
+    </bindings>
+    <bindings scd="tns:OnlineResource" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.OnlineResource"/>
+    </bindings>
+    <bindings scd="tns:Mark" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Mark"/>
+    </bindings>
+    <bindings scd="tns:Fill" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Fill"/>
+    </bindings>
+    <bindings scd="tns:GraphicFill" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.GraphicFill"/>
+    </bindings>
+    <bindings scd="tns:CssParameter" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.CssParameter"/>
+    </bindings>
+    <bindings scd="~tns:ParameterValueType" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ParameterValueType"/>
+    </bindings>
+    <bindings scd="tns:Stroke" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Stroke"/>
+    </bindings>
+    <bindings scd="tns:GraphicStroke" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.GraphicStroke"/>
+    </bindings>
+    <bindings scd="tns:ElseFilter" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ElseFilter"/>
+    </bindings>
+    <bindings scd="~tns:SymbolizerType" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.SymbolizerType"/>
+    </bindings>
+    <bindings scd="tns:UserLayer" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.UserLayer"/>
+    </bindings>
+    <bindings scd="tns:RemoteOWS" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.RemoteOWS"/>
+    </bindings>
+    <bindings scd="tns:Geometry" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Geometry"/>
+    </bindings>
+    <bindings scd="tns:Font" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Font"/>
+    </bindings>
+    <bindings scd="tns:LabelPlacement" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LabelPlacement"/>
+    </bindings>
+    <bindings scd="tns:PointPlacement" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.PointPlacement"/>
+    </bindings>
+    <bindings scd="tns:AnchorPoint" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.AnchorPoint"/>
+    </bindings>
+    <bindings scd="tns:Displacement" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Displacement"/>
+    </bindings>
+    <bindings scd="tns:LinePlacement" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LinePlacement"/>
+    </bindings>
+    <bindings scd="tns:Halo" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Halo"/>
+    </bindings>
+    <bindings scd="tns:ChannelSelection" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ChannelSelection"/>
+    </bindings>
+    <bindings scd="~tns:SelectedChannelType" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.SelectedChannelType"/>
+    </bindings>
+    <bindings scd="tns:OverlapBehavior" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.OverlapBehavior"/>
+    </bindings>
+    <bindings scd="tns:LATEST_ON_TOP" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.LATESTONTOP"/>
+    </bindings>
+    <bindings scd="tns:EARLIEST_ON_TOP" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.EARLIESTONTOP"/>
+    </bindings>
+    <bindings scd="tns:AVERAGE" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.AVERAGE"/>
+    </bindings>
+    <bindings scd="tns:RANDOM" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.RANDOM"/>
+    </bindings>
+    <bindings scd="tns:ColorMap" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ColorMap"/>
+    </bindings>
+    <bindings scd="tns:ColorMapEntry" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ColorMapEntry"/>
+    </bindings>
+    <bindings scd="tns:ContrastEnhancement" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ContrastEnhancement"/>
+    </bindings>
+    <bindings scd="tns:Normalize" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Normalize"/>
+    </bindings>
+    <bindings scd="tns:Histogram" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.Histogram"/>
+    </bindings>
+    <bindings scd="tns:ShadedRelief" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ShadedRelief"/>
+    </bindings>
+    <bindings scd="tns:ImageOutline" if-exists="true" auto-acknowledge="true">
+      <class ref="org.geosdi.geoplatform.xml.sld.v100.ImageOutline"/>
+    </bindings>
+  </bindings>
 </bindings>
+

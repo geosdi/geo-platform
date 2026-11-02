@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.store;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 
 /**

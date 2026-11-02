@@ -53,8 +53,9 @@ import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Base delle richieste GetFeatureInfo per le versioni WMS con binding {@code jakarta.xml.bind}: è la versione
- * jakarta di {@link GPWMSBaseGetFeatureInfoRequest}. La risposta si legge con i reader del {@code store}, non con JAXB.
+ * Base delle richieste GetFeatureInfo per le versioni WMS con binding {@code jakarta.xml.bind}: ha preso il
+ * posto di {@code GPWMSBaseGetFeatureInfoRequest}, la versione javax tolta con il passaggio di WMS 1.3.0 a
+ * jakarta. La risposta si legge con i reader del {@code store}, non con JAXB.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

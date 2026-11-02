@@ -34,44 +34,43 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="ProviderName" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="ProviderSite" type="{http://www.opengis.net/ows/1.1}OnlineResourceType" minOccurs="0"/&gt;
- *         &lt;element name="ServiceContact" type="{http://www.opengis.net/ows/1.1}ResponsiblePartySubsetType"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="ProviderName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="ProviderSite" type="{http://www.opengis.net/ows/1.1}OnlineResourceType" minOccurs="0"/>
+ *         <element name="ServiceContact" type="{http://www.opengis.net/ows/1.1}ResponsiblePartySubsetType"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -82,18 +81,30 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "serviceContact"
 })
 @XmlRootElement(name = "ServiceProvider")
-public class ServiceProvider implements ToString2
+public class ServiceProvider implements ToString
 {
 
+    /**
+     * A unique identifier for the service provider organization.
+     * 
+     */
     @XmlElement(name = "ProviderName", required = true)
     protected String providerName;
+    /**
+     * Reference to the most relevant web site of the service provider.
+     * 
+     */
     @XmlElement(name = "ProviderSite")
     protected OnlineResourceType providerSite;
+    /**
+     * Information for contacting the service provider. The OnlineResource element within this ServiceContact element should not be used to reference a web site of the service provider.
+     * 
+     */
     @XmlElement(name = "ServiceContact", required = true)
     protected ResponsiblePartySubsetType serviceContact;
 
     /**
-     * Recupera il valore della proprietà providerName.
+     * A unique identifier for the service provider organization.
      * 
      * @return
      *     possible object is
@@ -111,13 +122,14 @@ public class ServiceProvider implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getProviderName()
      */
     public void setProviderName(String value) {
         this.providerName = value;
     }
 
     /**
-     * Recupera il valore della proprietà providerSite.
+     * Reference to the most relevant web site of the service provider.
      * 
      * @return
      *     possible object is
@@ -135,13 +147,14 @@ public class ServiceProvider implements ToString2
      *     allowed object is
      *     {@link OnlineResourceType }
      *     
+     * @see #getProviderSite()
      */
     public void setProviderSite(OnlineResourceType value) {
         this.providerSite = value;
     }
 
     /**
-     * Recupera il valore della proprietà serviceContact.
+     * Information for contacting the service provider. The OnlineResource element within this ServiceContact element should not be used to reference a web site of the service provider.
      * 
      * @return
      *     possible object is
@@ -159,26 +172,30 @@ public class ServiceProvider implements ToString2
      *     allowed object is
      *     {@link ResponsiblePartySubsetType }
      *     
+     * @see #getServiceContact()
      */
     public void setServiceContact(ResponsiblePartySubsetType value) {
         this.serviceContact = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theProviderName;
             theProviderName = this.getProviderName();

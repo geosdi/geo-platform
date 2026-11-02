@@ -34,93 +34,100 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * A LinearRing is defined by four or more coordinate tuples, with
- * linear interpolation between them; the first and last coordinates
- * must be coincident.
- *
- *
- * <p>Classe Java per LinearRingType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="LinearRingType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometryType">
- *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.opengis.net/gml}coord" maxOccurs="unbounded" minOccurs="4"/>
- *           &lt;element ref="{http://www.opengis.net/gml}coordinates"/>
- *         &lt;/choice>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * A LinearRing is defined by four or more coordinate tuples, with 
+ *         linear interpolation between them; the first and last coordinates 
+ *         must be coincident.
+ * 
+ * <p>Classe Java per LinearRingType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="LinearRingType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometryType">
+ *       <sequence>
+ *         <choice>
+ *           <element ref="{http://www.opengis.net/gml}coord" maxOccurs="unbounded" minOccurs="4"/>
+ *           <element ref="{http://www.opengis.net/gml}coordinates"/>
+ *         </choice>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LinearRingType", propOrder = {
-        "coord",
-        "coordinates"
+    "coord",
+    "coordinates"
 })
 @XmlRootElement(name = "LinearRing")
-public class LinearRingType extends AbstractGeometryType implements ToString {
+public class LinearRingType
+    extends AbstractGeometryType
+    implements ToString
+{
 
     protected List<CoordType> coord;
     protected CoordinatesType coordinates;
 
     /**
      * Gets the value of the coord property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the coord property.
-     *
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the coord property.</p>
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getCoord().add(newItem);
+     * getCoord().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CoordType }
+     * </p>
+     * 
+     * 
+     * @return
+     *     The value of the coord property.
      */
     public List<CoordType> getCoord() {
         if (coord == null) {
-            coord = new ArrayList<CoordType>();
+            coord = new ArrayList<>();
         }
         return this.coord;
     }
 
     public boolean isSetCoord() {
-        return ((this.coord != null) && (!this.coord.isEmpty()));
+        return ((this.coord!= null)&&(!this.coord.isEmpty()));
     }
 
     public void unsetCoord() {
@@ -129,9 +136,11 @@ public class LinearRingType extends AbstractGeometryType implements ToString {
 
     /**
      * Recupera il valore della proprietà coordinates.
-     *
-     * @return possible object is
-     * {@link CoordinatesType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CoordinatesType }
+     *     
      */
     public CoordinatesType getCoordinates() {
         return coordinates;
@@ -139,25 +148,29 @@ public class LinearRingType extends AbstractGeometryType implements ToString {
 
     /**
      * Imposta il valore della proprietà coordinates.
-     *
-     * @param value allowed object is
-     *              {@link CoordinatesType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CoordinatesType }
+     *     
      */
     public void setCoordinates(CoordinatesType value) {
         this.coordinates = value;
     }
 
     public boolean isSetCoordinates() {
-        return (this.coordinates != null);
+        return (this.coordinates!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -165,25 +178,28 @@ public class LinearRingType extends AbstractGeometryType implements ToString {
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<CoordType> theCoord;
-            theCoord = (this.isSetCoord() ? this.getCoord() : null);
-            strategy.appendField(locator, this, "coord", buffer, theCoord);
+            theCoord = (this.isSetCoord()?this.getCoord():null);
+            strategy.appendField(locator, this, "coord", buffer, theCoord, this.isSetCoord());
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, this.isSetCoordinates());
         }
         return buffer;
     }
 
     public void setCoord(List<CoordType> value) {
         this.coord = null;
-        List<CoordType> draftl = this.getCoord();
-        draftl.addAll(value);
+        if (value!= null) {
+            List<CoordType> draftl = this.getCoord();
+            draftl.addAll(value);
+        }
     }
 
 }

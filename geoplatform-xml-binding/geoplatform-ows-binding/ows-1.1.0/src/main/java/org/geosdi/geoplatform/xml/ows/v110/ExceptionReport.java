@@ -34,53 +34,52 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/ows/1.1}Exception" maxOccurs="unbounded"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="version" use="required"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;pattern value="\d+\.\d?\d\.\d?\d"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute ref="{http://www.w3.org/XML/1998/namespace}lang"/&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/ows/1.1}Exception" maxOccurs="unbounded"/>
+ *       </sequence>
+ *       <attribute name="version" use="required">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             <pattern value="\d+\.\d?\d\.\d?\d"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *       <attribute ref="{http://www.w3.org/XML/1998/namespace}lang"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -89,47 +88,64 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "exception"
 })
 @XmlRootElement(name = "ExceptionReport")
-public class ExceptionReport implements ToString2
+public class ExceptionReport implements ToString
 {
 
+    /**
+     * Unordered list of one or more Exception elements that each describes an error. These Exception elements shall be interpreted by clients as being independent of one another (not hierarchical).
+     * 
+     */
     @XmlElement(name = "Exception", required = true)
     protected List<ExceptionType> exception;
+    /**
+     * Specification version for OWS operation. The string value shall contain one x.y.z "version" value (e.g., "2.1.3"). A version number shall contain three non-negative integers separated by decimal points, in the form "x.y.z". The integers y and z shall not exceed 99. Each version shall be for the Implementation Specification (document) and the associated XML Schemas to which requested operations will conform. An Implementation Specification version normally specifies XML Schemas against which an XML encoded operation response must conform and should be validated. See Version negotiation subclause for more information.
+     * 
+     */
     @XmlAttribute(name = "version", required = true)
     protected String version;
+    /**
+     * Identifier of the language used by all included exception text values. These language identifiers shall be as specified in IETF RFC 4646. When this attribute is omitted, the language used is not identified.
+     * 
+     */
     @XmlAttribute(name = "lang", namespace = "http://www.w3.org/XML/1998/namespace")
     protected String lang;
 
     /**
-     * Unordered list of one or more Exception elements that each describes an error. These Exception elements shall be interpreted by clients as being independent of one another (not hierarchical). Gets the value of the exception property.
+     * Unordered list of one or more Exception elements that each describes an error. These Exception elements shall be interpreted by clients as being independent of one another (not hierarchical).
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the exception property.
+     * Gets the value of the exception property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the exception property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getException().add(newItem);
+     * getException().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ExceptionType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the exception property.
      */
     public List<ExceptionType> getException() {
         if (exception == null) {
-            exception = new ArrayList<ExceptionType>();
+            exception = new ArrayList<>();
         }
         return this.exception;
     }
 
     /**
-     * Recupera il valore della proprietà version.
+     * Specification version for OWS operation. The string value shall contain one x.y.z "version" value (e.g., "2.1.3"). A version number shall contain three non-negative integers separated by decimal points, in the form "x.y.z". The integers y and z shall not exceed 99. Each version shall be for the Implementation Specification (document) and the associated XML Schemas to which requested operations will conform. An Implementation Specification version normally specifies XML Schemas against which an XML encoded operation response must conform and should be validated. See Version negotiation subclause for more information.
      * 
      * @return
      *     possible object is
@@ -147,13 +163,14 @@ public class ExceptionReport implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getVersion()
      */
     public void setVersion(String value) {
         this.version = value;
     }
 
     /**
-     * Identifier of the language used by all included exception text values. These language identifiers shall be as specified in IETF RFC 4646. When this attribute is omitted, the language used is not identified. 
+     * Identifier of the language used by all included exception text values. These language identifiers shall be as specified in IETF RFC 4646. When this attribute is omitted, the language used is not identified.
      * 
      * @return
      *     possible object is
@@ -171,26 +188,30 @@ public class ExceptionReport implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getLang()
      */
     public void setLang(String value) {
         this.lang = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<ExceptionType> theException;
             theException = (((this.exception!= null)&&(!this.exception.isEmpty()))?this.getException():null);

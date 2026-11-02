@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" 
                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:annox="urn:jaxb.jvnet.org:annox" 
                jaxb:schemaLocation="
-               http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               https://jakarta.ee/xml/ns/jaxb
+               https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd
                http://www.w3.org/2001/XMLSchema
                http://www.w3.org/2001/XMLSchema.xsd"
-               jaxb:extensionBindingPrefixes="xjc">
+               jaxb:extensionBindingPrefixes="xjc annox">
 
     <jaxb:bindings 
         schemaLocation="sld/1.0.0/StyledLayerDescriptor.xsd"
@@ -24,6 +25,15 @@
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.sld.v100"/>
         </jaxb:schemaBindings>
+
+        <!-- Modifica fatta a mano nel 2023: @XmlType con il nome dell'elemento al posto del tipo anonimo
+             (annotateClass sostituisce l'@XmlType generato). -->
+        <jaxb:bindings node="xs:element[@name='NamedLayer']/xs:complexType">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlType(name = "NamedLayer", propOrder = {"name", "layerFeatureConstraints", "namedStyleOrUserStyle"})</annox:annotateClass>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:element[@name='UserStyle']/xs:complexType">
+            <annox:annotateClass>@jakarta.xml.bind.annotation.XmlType(name = "UserStyle", propOrder = {"name", "title", "_abstract", "isDefault", "featureTypeStyle"})</annox:annotateClass>
+        </jaxb:bindings>
     </jaxb:bindings>
     
 </jaxb:bindings>

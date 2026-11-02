@@ -34,53 +34,52 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:50:57 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.sld.v100;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
- *           &lt;element ref="{http://www.opengis.net/sld}ExternalGraphic"/&gt;
- *           &lt;element ref="{http://www.opengis.net/sld}Mark"/&gt;
- *         &lt;/choice&gt;
- *         &lt;sequence&gt;
- *           &lt;element ref="{http://www.opengis.net/sld}Opacity" minOccurs="0"/&gt;
- *           &lt;element ref="{http://www.opengis.net/sld}Size" minOccurs="0"/&gt;
- *           &lt;element ref="{http://www.opengis.net/sld}Rotation" minOccurs="0"/&gt;
- *         &lt;/sequence&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <choice maxOccurs="unbounded" minOccurs="0">
+ *           <element ref="{http://www.opengis.net/sld}ExternalGraphic"/>
+ *           <element ref="{http://www.opengis.net/sld}Mark"/>
+ *         </choice>
+ *         <sequence>
+ *           <element ref="{http://www.opengis.net/sld}Opacity" minOccurs="0"/>
+ *           <element ref="{http://www.opengis.net/sld}Size" minOccurs="0"/>
+ *           <element ref="{http://www.opengis.net/sld}Rotation" minOccurs="0"/>
+ *         </sequence>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -92,7 +91,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "rotation"
 })
 @XmlRootElement(name = "Graphic")
-public class Graphic implements ToString2
+public class Graphic implements ToString
 {
 
     @XmlElements({
@@ -110,16 +109,16 @@ public class Graphic implements ToString2
     /**
      * Gets the value of the externalGraphicOrMark property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the externalGraphicOrMark property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the externalGraphicOrMark property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getExternalGraphicOrMark().add(newItem);
+     * getExternalGraphicOrMark().add(newItem);
      * </pre>
      * 
      * 
@@ -127,12 +126,15 @@ public class Graphic implements ToString2
      * Objects of the following type(s) are allowed in the list
      * {@link ExternalGraphic }
      * {@link Mark }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the externalGraphicOrMark property.
      */
     public List<Object> getExternalGraphicOrMark() {
         if (externalGraphicOrMark == null) {
-            externalGraphicOrMark = new ArrayList<Object>();
+            externalGraphicOrMark = new ArrayList<>();
         }
         return this.externalGraphicOrMark;
     }
@@ -229,21 +231,24 @@ public class Graphic implements ToString2
         return (this.rotation!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<Object> theExternalGraphicOrMark;
             theExternalGraphicOrMark = (this.isSetExternalGraphicOrMark()?this.getExternalGraphicOrMark():null);

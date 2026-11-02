@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.wmc.support.v110.jaxb.repository;
 
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
+import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,26 +45,26 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class WMCJAXBContextRepository extends GeoPlatformJAXBContextRepository {
+class WMCJAXBContextRepository extends GeoPlatformJakartaContextRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(WMCJAXBContextRepository.class);
 
     @Override
-    public <P extends GPBaseJAXBContext> P lookUpJAXBContext(GeoPlatformJAXBContextKey key) {
+    public <P extends GPBaseJakartaContext> P lookUpJakartaContext(GeoPlatformJakartaContextKey key) {
         Object jaxbContext = null;
 
         try {
-            Class<?> classe = key.getJAXBContextClass();
+            Class<?> classe = key.getJakartaContextClass();
 
             jaxbContext = classe.newInstance();
 
-            if (!(jaxbContext instanceof GeoPlatformJAXBContextProvider)) {
+            if (!(jaxbContext instanceof GeoPlatformJakartaContextProvider)) {
                 throw new IllegalArgumentException(
                         "The class " + jaxbContext.getClass().getName()
-                                + " is not an instance of GeoPlatformJAXBContextProvider");
+                                + " is not an instance of GeoPlatformJakartaContextProvider");
             }
 
-            registerProvider(key, ((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
+            registerProvider(key, ((GeoPlatformJakartaContextProvider) jaxbContext).getJakartaProvider());
         } catch (InstantiationException ex) {
             logger.error("Failed to Initialize JAXBContext for Class " + getRepositoryName()
                     + ": @@@@@@@@@@@@@@@@@ " + ex);
@@ -73,7 +73,7 @@ class WMCJAXBContextRepository extends GeoPlatformJAXBContextRepository {
                     + ": @@@@@@@@@@@@@@@@@ " + ex);
         }
 
-        return (P) (((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
+        return (P) (((GeoPlatformJakartaContextProvider) jaxbContext).getJakartaProvider());
     }
 
     @Override

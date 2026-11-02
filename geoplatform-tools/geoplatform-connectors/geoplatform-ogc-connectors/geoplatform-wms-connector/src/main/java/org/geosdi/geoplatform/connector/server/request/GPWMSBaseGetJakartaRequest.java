@@ -46,8 +46,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Base delle richieste WMS GET con JAXB {@code jakarta.xml.bind}: è la versione jakarta di
- * {@link GPWMSBaseGetRequest}.
+ * Base delle richieste WMS GET con JAXB {@code jakarta.xml.bind}: ha preso il posto di
+ * {@code GPWMSBaseGetRequest}, la versione javax tolta con il passaggio di WMS 1.3.0 a jakarta.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

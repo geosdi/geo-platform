@@ -34,56 +34,53 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * 
- *         An abstract feature provides a set of common properties. A concrete 
+ * An abstract feature provides a set of common properties. A concrete 
  *         feature type must derive from this type and specify additional 
  *         properties in an application schema. A feature may optionally 
  *         possess an identifying attribute ('fid').
- *       
  * 
- * <p>Classe Java per AbstractFeatureType complex type.
+ * <p>Classe Java per AbstractFeatureType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractFeatureType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}description" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}name" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}boundedBy" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="fid" type="{http://www.w3.org/2001/XMLSchema}ID" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractFeatureType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}description" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}name" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}boundedBy" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="fid" type="{http://www.w3.org/2001/XMLSchema}ID" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -220,13 +217,15 @@ public abstract class AbstractFeatureType implements ToString
         return (this.fid!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -234,26 +233,27 @@ public abstract class AbstractFeatureType implements ToString
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theDescription;
             theDescription = this.getDescription();
-            strategy.appendField(locator, this, "description", buffer, theDescription);
+            strategy.appendField(locator, this, "description", buffer, theDescription, this.isSetDescription());
         }
         {
             String theName;
             theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName);
+            strategy.appendField(locator, this, "name", buffer, theName, this.isSetName());
         }
         {
             BoundingShapeType theBoundedBy;
             theBoundedBy = this.getBoundedBy();
-            strategy.appendField(locator, this, "boundedBy", buffer, theBoundedBy);
+            strategy.appendField(locator, this, "boundedBy", buffer, theBoundedBy, this.isSetBoundedBy());
         }
         {
             String theFid;
             theFid = this.getFid();
-            strategy.appendField(locator, this, "fid", buffer, theFid);
+            strategy.appendField(locator, this, "fid", buffer, theFid, this.isSetFid());
         }
         return buffer;
     }

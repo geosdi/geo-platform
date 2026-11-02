@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.parser;
 
 import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
 import org.geosdi.geoplatform.support.jackson.jts.IGPJacksonJTSSupport;
 import org.geosdi.geoplatform.xml.gml.v212.AbstractGeometryType;
@@ -59,6 +59,7 @@ import java.io.StringWriter;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.geotools.referencing.CRS.decode;
 
 /**
@@ -71,7 +72,7 @@ public class WMSGml2GeoJsonParser implements GPWMSGml2GeoJsonParser {
     //
     private static final IGPJacksonJTSSupport JACKSON_JTS_SUPPORT = new GPJacksonJTSSupport();
     private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory(new PrecisionModel());
-    private static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static final IGPJAXBJakartaContextBuilder jaxbContextBuilder = jakartaContextBuilder();
     private static final GPWMSSRSParser srsParser = new GPWMSSRSParser.WMSSRSParser();
 
     /**

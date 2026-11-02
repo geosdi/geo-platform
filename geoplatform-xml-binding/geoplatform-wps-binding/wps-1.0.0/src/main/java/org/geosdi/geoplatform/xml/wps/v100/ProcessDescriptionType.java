@@ -34,88 +34,113 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
  * Full description of a process.
- * <p>
- * <p>Classe Java per ProcessDescriptionType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="ProcessDescriptionType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/wps/1.0.0}ProcessBriefType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="DataInputs" minOccurs="0"&gt;
- *           &lt;complexType&gt;
- *             &lt;complexContent&gt;
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *                 &lt;sequence&gt;
- *                   &lt;element name="Input" type="{http://www.opengis.net/wps/1.0.0}InputDescriptionType" maxOccurs="unbounded"/&gt;
- *                 &lt;/sequence&gt;
- *               &lt;/restriction&gt;
- *             &lt;/complexContent&gt;
- *           &lt;/complexType&gt;
- *         &lt;/element&gt;
- *         &lt;element name="ProcessOutputs"&gt;
- *           &lt;complexType&gt;
- *             &lt;complexContent&gt;
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *                 &lt;sequence&gt;
- *                   &lt;element name="Output" type="{http://www.opengis.net/wps/1.0.0}OutputDescriptionType" maxOccurs="unbounded"/&gt;
- *                 &lt;/sequence&gt;
- *               &lt;/restriction&gt;
- *             &lt;/complexContent&gt;
- *           &lt;/complexType&gt;
- *         &lt;/element&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="storeSupported" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="statusSupported" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per ProcessDescriptionType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="ProcessDescriptionType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/wps/1.0.0}ProcessBriefType">
+ *       <sequence>
+ *         <element name="DataInputs" minOccurs="0">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <sequence>
+ *                   <element name="Input" type="{http://www.opengis.net/wps/1.0.0}InputDescriptionType" maxOccurs="unbounded"/>
+ *                 </sequence>
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
+ *         <element name="ProcessOutputs">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <sequence>
+ *                   <element name="Output" type="{http://www.opengis.net/wps/1.0.0}OutputDescriptionType" maxOccurs="unbounded"/>
+ *                 </sequence>
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
+ *       </sequence>
+ *       <attribute name="storeSupported" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *       <attribute name="statusSupported" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProcessDescriptionType", propOrder = {
-        "dataInputs",
-        "processOutputs"
+    "dataInputs",
+    "processOutputs"
 })
-public class ProcessDescriptionType extends ProcessBriefType implements ToString2 {
+public class ProcessDescriptionType
+    extends ProcessBriefType
+    implements ToString
+{
 
+    /**
+     * List of the inputs to this process. In almost all cases, at least one process input is required. However, no process inputs may be identified when all the inputs are predetermined fixed resources.  In this case, those resources shall be identified in the ows:Abstract element that describes the process.
+     * 
+     */
     @XmlElement(name = "DataInputs", namespace = "")
     protected ProcessDescriptionType.DataInputs dataInputs;
+    /**
+     * List of outputs which will or can result from executing the process.
+     * 
+     */
     @XmlElement(name = "ProcessOutputs", namespace = "", required = true)
     protected ProcessDescriptionType.ProcessOutputs processOutputs;
+    /**
+     * Indicates if ComplexData outputs from this process can be stored by the WPS server as web-accessible resources. If "storeSupported" is "true", the Execute operation request may include "asReference" equals "true" for any complex output, directing that the output of the process be stored so that the client can retrieve it as required. By default for this process, storage is not supported and all outputs are returned encoded in the Execute response.
+     * 
+     */
     @XmlAttribute(name = "storeSupported")
     protected Boolean storeSupported;
+    /**
+     * Indicates if ongoing status information can be provided for this process.  If "true", the Status element of the stored Execute response document shall be kept up to date.  If "false" then the Status element shall not be updated until processing is complete. By default, status information is not provided for this process.
+     * 
+     */
     @XmlAttribute(name = "statusSupported")
     protected Boolean statusSupported;
 
     /**
-     * Recupera il valore della proprietà dataInputs.
-     *
-     * @return possible object is
-     * {@link ProcessDescriptionType.DataInputs }
+     * List of the inputs to this process. In almost all cases, at least one process input is required. However, no process inputs may be identified when all the inputs are predetermined fixed resources.  In this case, those resources shall be identified in the ows:Abstract element that describes the process.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ProcessDescriptionType.DataInputs }
+     *     
      */
     public ProcessDescriptionType.DataInputs getDataInputs() {
         return dataInputs;
@@ -123,23 +148,28 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
     /**
      * Imposta il valore della proprietà dataInputs.
-     *
-     * @param value allowed object is
-     *              {@link ProcessDescriptionType.DataInputs }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ProcessDescriptionType.DataInputs }
+     *     
+     * @see #getDataInputs()
      */
     public void setDataInputs(ProcessDescriptionType.DataInputs value) {
         this.dataInputs = value;
     }
 
     public boolean isSetDataInputs() {
-        return (this.dataInputs != null);
+        return (this.dataInputs!= null);
     }
 
     /**
-     * Recupera il valore della proprietà processOutputs.
-     *
-     * @return possible object is
-     * {@link ProcessDescriptionType.ProcessOutputs }
+     * List of outputs which will or can result from executing the process.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ProcessDescriptionType.ProcessOutputs }
+     *     
      */
     public ProcessDescriptionType.ProcessOutputs getProcessOutputs() {
         return processOutputs;
@@ -147,23 +177,28 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
     /**
      * Imposta il valore della proprietà processOutputs.
-     *
-     * @param value allowed object is
-     *              {@link ProcessDescriptionType.ProcessOutputs }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ProcessDescriptionType.ProcessOutputs }
+     *     
+     * @see #getProcessOutputs()
      */
     public void setProcessOutputs(ProcessDescriptionType.ProcessOutputs value) {
         this.processOutputs = value;
     }
 
     public boolean isSetProcessOutputs() {
-        return (this.processOutputs != null);
+        return (this.processOutputs!= null);
     }
 
     /**
-     * Recupera il valore della proprietà storeSupported.
-     *
-     * @return possible object is
-     * {@link Boolean }
+     * Indicates if ComplexData outputs from this process can be stored by the WPS server as web-accessible resources. If "storeSupported" is "true", the Execute operation request may include "asReference" equals "true" for any complex output, directing that the output of the process be stored so that the client can retrieve it as required. By default for this process, storage is not supported and all outputs are returned encoded in the Execute response.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public boolean isStoreSupported() {
         if (storeSupported == null) {
@@ -175,16 +210,19 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
     /**
      * Imposta il valore della proprietà storeSupported.
-     *
-     * @param value allowed object is
-     *              {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     * @see #isStoreSupported()
      */
     public void setStoreSupported(boolean value) {
         this.storeSupported = value;
     }
 
     public boolean isSetStoreSupported() {
-        return (this.storeSupported != null);
+        return (this.storeSupported!= null);
     }
 
     public void unsetStoreSupported() {
@@ -192,10 +230,12 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
     }
 
     /**
-     * Recupera il valore della proprietà statusSupported.
-     *
-     * @return possible object is
-     * {@link Boolean }
+     * Indicates if ongoing status information can be provided for this process.  If "true", the Status element of the stored Execute response document shall be kept up to date.  If "false" then the Status element shall not be updated until processing is complete. By default, status information is not provided for this process.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public boolean isStatusSupported() {
         if (statusSupported == null) {
@@ -207,37 +247,43 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
     /**
      * Imposta il valore della proprietà statusSupported.
-     *
-     * @param value allowed object is
-     *              {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     * @see #isStatusSupported()
      */
     public void setStatusSupported(boolean value) {
         this.statusSupported = value;
     }
 
     public boolean isSetStatusSupported() {
-        return (this.statusSupported != null);
+        return (this.statusSupported!= null);
     }
 
     public void unsetStatusSupported() {
         this.statusSupported = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             ProcessDescriptionType.DataInputs theDataInputs;
@@ -251,12 +297,12 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
         }
         {
             boolean theStoreSupported;
-            theStoreSupported = (this.isSetStoreSupported() ? this.isStoreSupported() : false);
+            theStoreSupported = (this.isSetStoreSupported()?this.isStoreSupported():false);
             strategy.appendField(locator, this, "storeSupported", buffer, theStoreSupported, this.isSetStoreSupported());
         }
         {
             boolean theStatusSupported;
-            theStatusSupported = (this.isSetStatusSupported() ? this.isStatusSupported() : false);
+            theStatusSupported = (this.isSetStatusSupported()?this.isStatusSupported():false);
             strategy.appendField(locator, this, "statusSupported", buffer, theStatusSupported, this.isSetStatusSupported());
         }
         return buffer;
@@ -264,84 +310,101 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
 
     /**
-     * <p>Classe Java per anonymous complex type.
-     * <p>
-     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
-     * <p>
-     * <pre>
-     * &lt;complexType&gt;
-     *   &lt;complexContent&gt;
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
-     *       &lt;sequence&gt;
-     *         &lt;element name="Input" type="{http://www.opengis.net/wps/1.0.0}InputDescriptionType" maxOccurs="unbounded"/&gt;
-     *       &lt;/sequence&gt;
-     *     &lt;/restriction&gt;
-     *   &lt;/complexContent&gt;
-     * &lt;/complexType&gt;
-     * </pre>
+     * <p>Classe Java per anonymous complex type.</p>
+     * 
+     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <sequence>
+     *         <element name="Input" type="{http://www.opengis.net/wps/1.0.0}InputDescriptionType" maxOccurs="unbounded"/>
+     *       </sequence>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "input"
+        "input"
     })
-    public static class DataInputs implements ToString2 {
+    public static class DataInputs implements ToString
+    {
 
+        /**
+         * Unordered list of one or more descriptions of the inputs that can be accepted by this process, including all required and optional inputs.  Where an input is optional because a default value exists, that default value must be identified in the "ows:Abstract" element for that input, except in the case of LiteralData, where the default must be indicated in the corresponding ows:DefaultValue element. Where an input is optional because it depends on the value(s) of other inputs, this must be indicated in the ows:Abstract element for that input.
+         * 
+         */
         @XmlElement(name = "Input", namespace = "", required = true)
         protected List<InputDescriptionType> input;
 
         /**
+         * Unordered list of one or more descriptions of the inputs that can be accepted by this process, including all required and optional inputs.  Where an input is optional because a default value exists, that default value must be identified in the "ows:Abstract" element for that input, except in the case of LiteralData, where the default must be indicated in the corresponding ows:DefaultValue element. Where an input is optional because it depends on the value(s) of other inputs, this must be indicated in the ows:Abstract element for that input.
+         * 
          * Gets the value of the input property.
-         * <p>
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the input property.
-         * <p>
+         * 
+         * <p>This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore, any modification you make to the
+         * returned list will be present inside the Jakarta XML Binding object.
+         * This is why there is not a {@code set} method for the input property.</p>
+         * 
          * <p>
          * For example, to add a new item, do as follows:
+         * </p>
          * <pre>
-         *    getInput().add(newItem);
+         * getInput().add(newItem);
          * </pre>
-         * <p>
-         * <p>
+         * 
+         * 
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link InputDescriptionType }
+         * </p>
+         * 
+         * 
+         * @return
+         *     The value of the input property.
          */
         public List<InputDescriptionType> getInput() {
             if (input == null) {
-                input = new ArrayList<InputDescriptionType>();
+                input = new ArrayList<>();
             }
             return this.input;
         }
 
         public boolean isSetInput() {
-            return ((this.input != null) && (!this.input.isEmpty()));
+            return ((this.input!= null)&&(!this.input.isEmpty()));
         }
 
         public void unsetInput() {
             this.input = null;
         }
 
+        @Override
         public String toString() {
-            final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+            final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
             final StringBuilder buffer = new StringBuilder();
             append(null, buffer, strategy);
             return buffer.toString();
         }
 
-        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             strategy.appendStart(locator, this, buffer);
             appendFields(locator, buffer, strategy);
             strategy.appendEnd(locator, this, buffer);
             return buffer;
         }
 
-        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             {
                 List<InputDescriptionType> theInput;
-                theInput = (this.isSetInput() ? this.getInput() : null);
+                theInput = (this.isSetInput()?this.getInput():null);
                 strategy.appendField(locator, this, "input", buffer, theInput, this.isSetInput());
             }
             return buffer;
@@ -349,7 +412,7 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
         public void setInput(List<InputDescriptionType> value) {
             this.input = null;
-            if (value != null) {
+            if (value!= null) {
                 List<InputDescriptionType> draftl = this.getInput();
                 draftl.addAll(value);
             }
@@ -359,84 +422,101 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
 
     /**
-     * <p>Classe Java per anonymous complex type.
-     * <p>
-     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
-     * <p>
-     * <pre>
-     * &lt;complexType&gt;
-     *   &lt;complexContent&gt;
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
-     *       &lt;sequence&gt;
-     *         &lt;element name="Output" type="{http://www.opengis.net/wps/1.0.0}OutputDescriptionType" maxOccurs="unbounded"/&gt;
-     *       &lt;/sequence&gt;
-     *     &lt;/restriction&gt;
-     *   &lt;/complexContent&gt;
-     * &lt;/complexType&gt;
-     * </pre>
+     * <p>Classe Java per anonymous complex type.</p>
+     * 
+     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <sequence>
+     *         <element name="Output" type="{http://www.opengis.net/wps/1.0.0}OutputDescriptionType" maxOccurs="unbounded"/>
+     *       </sequence>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "output"
+        "output"
     })
-    public static class ProcessOutputs implements ToString2 {
+    public static class ProcessOutputs implements ToString
+    {
 
+        /**
+         * Unordered list of one or more descriptions of all the outputs that can result from executing this process. At least one output is required from each process.
+         * 
+         */
         @XmlElement(name = "Output", namespace = "", required = true)
         protected List<OutputDescriptionType> output;
 
         /**
+         * Unordered list of one or more descriptions of all the outputs that can result from executing this process. At least one output is required from each process.
+         * 
          * Gets the value of the output property.
-         * <p>
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the output property.
-         * <p>
+         * 
+         * <p>This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore, any modification you make to the
+         * returned list will be present inside the Jakarta XML Binding object.
+         * This is why there is not a {@code set} method for the output property.</p>
+         * 
          * <p>
          * For example, to add a new item, do as follows:
+         * </p>
          * <pre>
-         *    getOutput().add(newItem);
+         * getOutput().add(newItem);
          * </pre>
-         * <p>
-         * <p>
+         * 
+         * 
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link OutputDescriptionType }
+         * </p>
+         * 
+         * 
+         * @return
+         *     The value of the output property.
          */
         public List<OutputDescriptionType> getOutput() {
             if (output == null) {
-                output = new ArrayList<OutputDescriptionType>();
+                output = new ArrayList<>();
             }
             return this.output;
         }
 
         public boolean isSetOutput() {
-            return ((this.output != null) && (!this.output.isEmpty()));
+            return ((this.output!= null)&&(!this.output.isEmpty()));
         }
 
         public void unsetOutput() {
             this.output = null;
         }
 
+        @Override
         public String toString() {
-            final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+            final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
             final StringBuilder buffer = new StringBuilder();
             append(null, buffer, strategy);
             return buffer.toString();
         }
 
-        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             strategy.appendStart(locator, this, buffer);
             appendFields(locator, buffer, strategy);
             strategy.appendEnd(locator, this, buffer);
             return buffer;
         }
 
-        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             {
                 List<OutputDescriptionType> theOutput;
-                theOutput = (this.isSetOutput() ? this.getOutput() : null);
+                theOutput = (this.isSetOutput()?this.getOutput():null);
                 strategy.appendField(locator, this, "output", buffer, theOutput, this.isSetOutput());
             }
             return buffer;
@@ -444,7 +524,7 @@ public class ProcessDescriptionType extends ProcessBriefType implements ToString
 
         public void setOutput(List<OutputDescriptionType> value) {
             this.output = null;
-            if (value != null) {
+            if (value!= null) {
                 List<OutputDescriptionType> draftl = this.getOutput();
                 draftl.addAll(value);
             }

@@ -35,16 +35,19 @@
  */
 package org.geosdi.geoplatform.connector.server.v130;
 
-import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 
-import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJAXBContextV130.WMS_CONTEXT_KEY_V130;
+import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJakartaContextV130.WMS_CONTEXT_KEY_V130;
 
 /**
+ * Contesto JAXB delle richieste WMS 1.3.0: dal passaggio dei binding a {@code jakarta.xml.bind} è un
+ * {@link GPBaseJakartaContext}, preso dal {@link JakartaContextConnectorRepository}.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPWMSJAXBContextV130 {
 
-    GPBaseJAXBContext WMS_JAXB_CONTEXT_V130 = JAXBContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V130);
+    GPBaseJakartaContext WMS_JAXB_CONTEXT_V130 = JakartaContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V130);
 }

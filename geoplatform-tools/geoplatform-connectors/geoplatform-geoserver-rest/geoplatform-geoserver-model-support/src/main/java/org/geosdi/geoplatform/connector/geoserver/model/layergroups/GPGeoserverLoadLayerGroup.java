@@ -35,6 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -44,11 +49,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.IGPGeoserverLayerGroupPublishables;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 
 /**

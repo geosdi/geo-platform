@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layers;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.resource.GeoserverLayerResource;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

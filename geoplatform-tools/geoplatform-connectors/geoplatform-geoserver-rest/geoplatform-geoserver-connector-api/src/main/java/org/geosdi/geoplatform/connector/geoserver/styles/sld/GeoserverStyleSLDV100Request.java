@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
 import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.jakarta.GPJacksonJAXBJakartaXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.jakarta.JacksonJAXBJakartaXmlSupport;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  */
 public interface GeoserverStyleSLDV100Request extends GeoserverBaseStyleRequest<StyledLayerDescriptor, GeoserverStyleSLDV100Request> {
 
-    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
+    JacksonJAXBJakartaXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBJakartaXmlSupport();
 
     /**
      * @param theStyleName

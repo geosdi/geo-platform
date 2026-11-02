@@ -38,12 +38,12 @@ package org.geosdi.geoplatform.connector.geoserver.model.extensions.uniquevalues
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 
 /**

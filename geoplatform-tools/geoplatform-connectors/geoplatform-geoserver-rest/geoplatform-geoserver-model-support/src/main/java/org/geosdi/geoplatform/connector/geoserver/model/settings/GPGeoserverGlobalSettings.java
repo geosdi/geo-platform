@@ -37,13 +37,12 @@ package org.geosdi.geoplatform.connector.geoserver.model.settings;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.coverage.IGPGeoserverCoverageAccessSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.jai.IGPGeoserverJaiSettings;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

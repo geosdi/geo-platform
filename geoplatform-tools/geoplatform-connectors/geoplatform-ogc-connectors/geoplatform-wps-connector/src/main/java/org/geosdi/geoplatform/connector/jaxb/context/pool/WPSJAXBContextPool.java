@@ -35,19 +35,19 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.context.pool;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.jaxb.repository.WPSConnectorJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+import org.geosdi.geoplatform.jakarta.pool.GeoPlatformJakartaContextPool;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WPSJAXBContextPool extends GeoPlatformJAXBContextPool {
+public class WPSJAXBContextPool extends GeoPlatformJakartaContextPool {
 
     /**
      * @param contextPath
@@ -91,7 +91,7 @@ public class WPSJAXBContextPool extends GeoPlatformJAXBContextPool {
         super(theJaxbContext);
     }
 
-    public static class WPSJAXBContextPoolKey extends GeoPlatformJAXBContextKey {
+    public static class WPSJAXBContextPoolKey extends GeoPlatformJakartaContextKey {
 
         public WPSJAXBContextPoolKey() {
             super(WPSConnectorJAXBContextPool.class);

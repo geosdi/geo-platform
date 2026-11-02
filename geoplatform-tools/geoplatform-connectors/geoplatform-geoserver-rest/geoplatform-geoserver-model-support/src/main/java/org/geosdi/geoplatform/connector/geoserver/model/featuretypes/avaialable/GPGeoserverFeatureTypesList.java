@@ -38,14 +38,14 @@ package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.avaialable
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**

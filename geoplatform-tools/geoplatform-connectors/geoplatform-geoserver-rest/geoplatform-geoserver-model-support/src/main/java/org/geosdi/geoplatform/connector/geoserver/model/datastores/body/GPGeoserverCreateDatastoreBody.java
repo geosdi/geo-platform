@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.connector.geoserver.model.datastores.body;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.IGPGeoserverConnectionParam;
@@ -44,18 +46,16 @@ import org.geosdi.geoplatform.connector.geoserver.model.connection.adapter.GPGeo
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

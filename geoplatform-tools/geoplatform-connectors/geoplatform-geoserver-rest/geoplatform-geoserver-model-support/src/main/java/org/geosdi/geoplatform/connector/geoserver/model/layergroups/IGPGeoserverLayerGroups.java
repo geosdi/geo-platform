@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import tools.jackson.databind.annotation.JsonDeserialize;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.List;
 

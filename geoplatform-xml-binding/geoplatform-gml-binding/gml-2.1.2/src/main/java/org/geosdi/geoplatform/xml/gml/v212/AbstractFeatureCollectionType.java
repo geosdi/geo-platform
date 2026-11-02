@@ -34,46 +34,43 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
+ * A feature collection contains zero or more featureMember elements.
  * 
- *         A feature collection contains zero or more featureMember elements.
- *       
+ * <p>Classe Java per AbstractFeatureCollectionType complex type.</p>
  * 
- * <p>Classe Java per AbstractFeatureCollectionType complex type.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * 
- * <pre>
- * &lt;complexType name="AbstractFeatureCollectionType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractFeatureCollectionBaseType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}featureMember" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractFeatureCollectionType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractFeatureCollectionBaseType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}featureMember" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -91,28 +88,31 @@ public abstract class AbstractFeatureCollectionType
     /**
      * Gets the value of the featureMember property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the featureMember property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the featureMember property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getFeatureMember().add(newItem);
+     * getFeatureMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link FeatureAssociationType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the featureMember property.
      */
     public List<FeatureAssociationType> getFeatureMember() {
         if (featureMember == null) {
-            featureMember = new ArrayList<FeatureAssociationType>();
+            featureMember = new ArrayList<>();
         }
         return this.featureMember;
     }
@@ -125,13 +125,15 @@ public abstract class AbstractFeatureCollectionType
         this.featureMember = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -139,20 +141,23 @@ public abstract class AbstractFeatureCollectionType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<FeatureAssociationType> theFeatureMember;
             theFeatureMember = (this.isSetFeatureMember()?this.getFeatureMember():null);
-            strategy.appendField(locator, this, "featureMember", buffer, theFeatureMember);
+            strategy.appendField(locator, this, "featureMember", buffer, theFeatureMember, this.isSetFeatureMember());
         }
         return buffer;
     }
 
     public void setFeatureMember(List<FeatureAssociationType> value) {
         this.featureMember = null;
-        List<FeatureAssociationType> draftl = this.getFeatureMember();
-        draftl.addAll(value);
+        if (value!= null) {
+            List<FeatureAssociationType> draftl = this.getFeatureMember();
+            draftl.addAll(value);
+        }
     }
 
 }

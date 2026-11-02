@@ -34,71 +34,87 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="Default"&gt;
- *           &lt;complexType&gt;
- *             &lt;complexContent&gt;
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *                 &lt;sequence&gt;
- *                   &lt;element ref="{http://www.opengis.net/ows/1.1}Language"/&gt;
- *                 &lt;/sequence&gt;
- *               &lt;/restriction&gt;
- *             &lt;/complexContent&gt;
- *           &lt;/complexType&gt;
- *         &lt;/element&gt;
- *         &lt;element name="Supported" type="{http://www.opengis.net/wps/1.0.0}LanguagesType"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <p>Classe Java per anonymous complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="Default">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <sequence>
+ *                   <element ref="{http://www.opengis.net/ows/1.1}Language"/>
+ *                 </sequence>
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
+ *         <element name="Supported" type="{http://www.opengis.net/wps/1.0.0}LanguagesType"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "_default",
-        "supported"
+    "_default",
+    "supported"
 })
 @XmlRootElement(name = "Languages")
-public class Languages implements ToString2 {
+public class Languages implements ToString
+{
 
+    /**
+     * Identifies the default language that will be used unless the operation request specifies another supported language.
+     * 
+     */
     @XmlElement(name = "Default", required = true)
     protected Languages.Default _default;
+    /**
+     * Unordered list of references to all of the languages supported by this service. The default language shall be included in this list.
+     * 
+     */
     @XmlElement(name = "Supported", required = true)
     protected LanguagesType supported;
 
     /**
-     * Recupera il valore della proprietà default.
-     *
-     * @return possible object is
-     * {@link Languages.Default }
+     * Identifies the default language that will be used unless the operation request specifies another supported language.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Languages.Default }
+     *     
      */
     public Languages.Default getDefault() {
         return _default;
@@ -106,23 +122,28 @@ public class Languages implements ToString2 {
 
     /**
      * Imposta il valore della proprietà default.
-     *
-     * @param value allowed object is
-     *              {@link Languages.Default }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Languages.Default }
+     *     
+     * @see #getDefault()
      */
     public void setDefault(Languages.Default value) {
         this._default = value;
     }
 
     public boolean isSetDefault() {
-        return (this._default != null);
+        return (this._default!= null);
     }
 
     /**
-     * Recupera il valore della proprietà supported.
-     *
-     * @return possible object is
-     * {@link LanguagesType }
+     * Unordered list of references to all of the languages supported by this service. The default language shall be included in this list.
+     * 
+     * @return
+     *     possible object is
+     *     {@link LanguagesType }
+     *     
      */
     public LanguagesType getSupported() {
         return supported;
@@ -130,33 +151,39 @@ public class Languages implements ToString2 {
 
     /**
      * Imposta il valore della proprietà supported.
-     *
-     * @param value allowed object is
-     *              {@link LanguagesType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link LanguagesType }
+     *     
+     * @see #getSupported()
      */
     public void setSupported(LanguagesType value) {
         this.supported = value;
     }
 
     public boolean isSetSupported() {
-        return (this.supported != null);
+        return (this.supported!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             Languages.Default theDefault;
             theDefault = this.getDefault();
@@ -172,28 +199,35 @@ public class Languages implements ToString2 {
 
 
     /**
-     * <p>Classe Java per anonymous complex type.
-     * <p>
-     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
-     * <p>
-     * <pre>
-     * &lt;complexType&gt;
-     *   &lt;complexContent&gt;
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
-     *       &lt;sequence&gt;
-     *         &lt;element ref="{http://www.opengis.net/ows/1.1}Language"/&gt;
-     *       &lt;/sequence&gt;
-     *     &lt;/restriction&gt;
-     *   &lt;/complexContent&gt;
-     * &lt;/complexType&gt;
-     * </pre>
+     * <p>Classe Java per anonymous complex type.</p>
+     * 
+     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+     * 
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <sequence>
+     *         <element ref="{http://www.opengis.net/ows/1.1}Language"/>
+     *       </sequence>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "language"
+        "language"
     })
-    public static class Default implements ToString2 {
+    public static class Default implements ToString
+    {
 
+        /**
+         * Identifier of the default language supported by the service.  This language identifier shall be as specified in IETF RFC 4646.
+         * 
+         */
         @XmlElement(name = "Language", namespace = "http://www.opengis.net/ows/1.1", required = true)
         @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
         @XmlSchemaType(name = "language")
@@ -201,9 +235,11 @@ public class Languages implements ToString2 {
 
         /**
          * Identifier of the default language supported by the service.  This language identifier shall be as specified in IETF RFC 4646.
-         *
-         * @return possible object is
-         * {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getLanguage() {
             return language;
@@ -211,33 +247,39 @@ public class Languages implements ToString2 {
 
         /**
          * Imposta il valore della proprietà language.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         * @see #getLanguage()
          */
         public void setLanguage(String value) {
             this.language = value;
         }
 
         public boolean isSetLanguage() {
-            return (this.language != null);
+            return (this.language!= null);
         }
 
+        @Override
         public String toString() {
-            final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+            final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
             final StringBuilder buffer = new StringBuilder();
             append(null, buffer, strategy);
             return buffer.toString();
         }
 
-        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             strategy.appendStart(locator, this, buffer);
             appendFields(locator, buffer, strategy);
             strategy.appendEnd(locator, this, buffer);
             return buffer;
         }
 
-        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        @Override
+        public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             {
                 String theLanguage;
                 theLanguage = this.getLanguage();

@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.geoserver.styles;
 
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.jakarta.GPJacksonJAXBJakartaXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.jakarta.JacksonJAXBJakartaXmlSupport;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -65,7 +65,7 @@ public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorStylesTest.class);
     //
-    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
+    JacksonJAXBJakartaXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBJakartaXmlSupport();
 
     @Test
     public void a_existStyle() throws Exception {

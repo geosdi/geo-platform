@@ -34,62 +34,65 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 10:30:08 PM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:49:13 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v212;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
  * Encapsulates a MultiGeometry element.
- *
- * <p>Classe Java per MultiGeometryPropertyType complex type.
- *
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- *
- * <pre>
- * &lt;complexType name="MultiGeometryPropertyType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.opengis.net/gml}GeometryAssociationType">
- *       &lt;sequence minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}MultiGeometry"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/>
- *       &lt;attribute ref="{http://www.opengis.net/gml}remoteSchema"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- *
- *
+ * 
+ * <p>Classe Java per MultiGeometryPropertyType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="MultiGeometryPropertyType">
+ *   <complexContent>
+ *     <restriction base="{http://www.opengis.net/gml}GeometryAssociationType">
+ *       <sequence minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}MultiGeometry"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.w3.org/1999/xlink}simpleAttrs"/>
+ *       <attribute ref="{http://www.opengis.net/gml}remoteSchema"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiGeometryPropertyType")
 @XmlRootElement(name = "MultiGeometry")
-public class MultiGeometryPropertyType extends GeometryAssociationType implements ToString {
+public class MultiGeometryPropertyType
+    extends GeometryAssociationType
+    implements ToString
+{
 
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -97,6 +100,7 @@ public class MultiGeometryPropertyType extends GeometryAssociationType implement
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         return buffer;

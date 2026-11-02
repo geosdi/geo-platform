@@ -191,11 +191,20 @@
                             <arg>-Xwildcard</arg>
                             <arg>-Xinject-code</arg>
                             <arg>-Xinheritance</arg>
+                            <!-- Le modifiche fatte a mano alle classi generate stanno nei .xjb, così una
+                                 rigenerazione le riproduce. -Xnamespace-prefix si attiva solo nei moduli che lo usano:
+                                 senza personalizzazioni aggiunge un prefisso vuoto a ogni namespace. -->
+                            <arg>-Xannotate</arg>
                         </args>
                         <plugins>
                             <plugin>
                                 <groupId>org.jvnet.jaxb</groupId>
                                 <artifactId>jaxb-plugins</artifactId>
+                                <version>${jaxb-tools-version}</version>
+                            </plugin>
+                            <plugin>
+                                <groupId>org.jvnet.jaxb</groupId>
+                                <artifactId>jaxb-plugin-annotate</artifactId>
                                 <version>${jaxb-tools-version}</version>
                             </plugin>
                         </plugins>

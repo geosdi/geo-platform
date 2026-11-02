@@ -34,26 +34,25 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:50:57 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.sld.v100;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
-import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlElementDecl;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.geosdi.geoplatform.xml.sld.v100 package. 
- * <p>An ObjectFactory allows you to programatically 
+ * <p>An ObjectFactory allows you to programmatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
@@ -66,42 +65,42 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Name_QNAME = new QName("http://www.opengis.net/sld", "Name");
-    private final static QName _Title_QNAME = new QName("http://www.opengis.net/sld", "Title");
-    private final static QName _Abstract_QNAME = new QName("http://www.opengis.net/sld", "Abstract");
-    private final static QName _FeatureTypeName_QNAME = new QName("http://www.opengis.net/sld", "FeatureTypeName");
-    private final static QName _Value_QNAME = new QName("http://www.opengis.net/sld", "Value");
-    private final static QName _IsDefault_QNAME = new QName("http://www.opengis.net/sld", "IsDefault");
-    private final static QName _SemanticTypeIdentifier_QNAME = new QName("http://www.opengis.net/sld", "SemanticTypeIdentifier");
-    private final static QName _Format_QNAME = new QName("http://www.opengis.net/sld", "Format");
-    private final static QName _WellKnownName_QNAME = new QName("http://www.opengis.net/sld", "WellKnownName");
-    private final static QName _Opacity_QNAME = new QName("http://www.opengis.net/sld", "Opacity");
-    private final static QName _Size_QNAME = new QName("http://www.opengis.net/sld", "Size");
-    private final static QName _Rotation_QNAME = new QName("http://www.opengis.net/sld", "Rotation");
-    private final static QName _MinScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MinScaleDenominator");
-    private final static QName _MaxScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MaxScaleDenominator");
-    private final static QName _Symbolizer_QNAME = new QName("http://www.opengis.net/sld", "Symbolizer");
-    private final static QName _Service_QNAME = new QName("http://www.opengis.net/sld", "Service");
-    private final static QName _LineSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "LineSymbolizer");
-    private final static QName _PolygonSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PolygonSymbolizer");
-    private final static QName _PointSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PointSymbolizer");
-    private final static QName _TextSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "TextSymbolizer");
-    private final static QName _Label_QNAME = new QName("http://www.opengis.net/sld", "Label");
-    private final static QName _AnchorPointX_QNAME = new QName("http://www.opengis.net/sld", "AnchorPointX");
-    private final static QName _AnchorPointY_QNAME = new QName("http://www.opengis.net/sld", "AnchorPointY");
-    private final static QName _DisplacementX_QNAME = new QName("http://www.opengis.net/sld", "DisplacementX");
-    private final static QName _DisplacementY_QNAME = new QName("http://www.opengis.net/sld", "DisplacementY");
-    private final static QName _PerpendicularOffset_QNAME = new QName("http://www.opengis.net/sld", "PerpendicularOffset");
-    private final static QName _Radius_QNAME = new QName("http://www.opengis.net/sld", "Radius");
-    private final static QName _RasterSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "RasterSymbolizer");
-    private final static QName _RedChannel_QNAME = new QName("http://www.opengis.net/sld", "RedChannel");
-    private final static QName _GreenChannel_QNAME = new QName("http://www.opengis.net/sld", "GreenChannel");
-    private final static QName _BlueChannel_QNAME = new QName("http://www.opengis.net/sld", "BlueChannel");
-    private final static QName _GrayChannel_QNAME = new QName("http://www.opengis.net/sld", "GrayChannel");
-    private final static QName _SourceChannelName_QNAME = new QName("http://www.opengis.net/sld", "SourceChannelName");
-    private final static QName _GammaValue_QNAME = new QName("http://www.opengis.net/sld", "GammaValue");
-    private final static QName _BrightnessOnly_QNAME = new QName("http://www.opengis.net/sld", "BrightnessOnly");
-    private final static QName _ReliefFactor_QNAME = new QName("http://www.opengis.net/sld", "ReliefFactor");
+    private static final QName _Name_QNAME = new QName("http://www.opengis.net/sld", "Name");
+    private static final QName _Title_QNAME = new QName("http://www.opengis.net/sld", "Title");
+    private static final QName _Abstract_QNAME = new QName("http://www.opengis.net/sld", "Abstract");
+    private static final QName _FeatureTypeName_QNAME = new QName("http://www.opengis.net/sld", "FeatureTypeName");
+    private static final QName _Value_QNAME = new QName("http://www.opengis.net/sld", "Value");
+    private static final QName _IsDefault_QNAME = new QName("http://www.opengis.net/sld", "IsDefault");
+    private static final QName _SemanticTypeIdentifier_QNAME = new QName("http://www.opengis.net/sld", "SemanticTypeIdentifier");
+    private static final QName _Format_QNAME = new QName("http://www.opengis.net/sld", "Format");
+    private static final QName _WellKnownName_QNAME = new QName("http://www.opengis.net/sld", "WellKnownName");
+    private static final QName _Opacity_QNAME = new QName("http://www.opengis.net/sld", "Opacity");
+    private static final QName _Size_QNAME = new QName("http://www.opengis.net/sld", "Size");
+    private static final QName _Rotation_QNAME = new QName("http://www.opengis.net/sld", "Rotation");
+    private static final QName _MinScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MinScaleDenominator");
+    private static final QName _MaxScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MaxScaleDenominator");
+    private static final QName _Symbolizer_QNAME = new QName("http://www.opengis.net/sld", "Symbolizer");
+    private static final QName _Service_QNAME = new QName("http://www.opengis.net/sld", "Service");
+    private static final QName _LineSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "LineSymbolizer");
+    private static final QName _PolygonSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PolygonSymbolizer");
+    private static final QName _PointSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PointSymbolizer");
+    private static final QName _TextSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "TextSymbolizer");
+    private static final QName _Label_QNAME = new QName("http://www.opengis.net/sld", "Label");
+    private static final QName _AnchorPointX_QNAME = new QName("http://www.opengis.net/sld", "AnchorPointX");
+    private static final QName _AnchorPointY_QNAME = new QName("http://www.opengis.net/sld", "AnchorPointY");
+    private static final QName _DisplacementX_QNAME = new QName("http://www.opengis.net/sld", "DisplacementX");
+    private static final QName _DisplacementY_QNAME = new QName("http://www.opengis.net/sld", "DisplacementY");
+    private static final QName _PerpendicularOffset_QNAME = new QName("http://www.opengis.net/sld", "PerpendicularOffset");
+    private static final QName _Radius_QNAME = new QName("http://www.opengis.net/sld", "Radius");
+    private static final QName _RasterSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "RasterSymbolizer");
+    private static final QName _RedChannel_QNAME = new QName("http://www.opengis.net/sld", "RedChannel");
+    private static final QName _GreenChannel_QNAME = new QName("http://www.opengis.net/sld", "GreenChannel");
+    private static final QName _BlueChannel_QNAME = new QName("http://www.opengis.net/sld", "BlueChannel");
+    private static final QName _GrayChannel_QNAME = new QName("http://www.opengis.net/sld", "GrayChannel");
+    private static final QName _SourceChannelName_QNAME = new QName("http://www.opengis.net/sld", "SourceChannelName");
+    private static final QName _GammaValue_QNAME = new QName("http://www.opengis.net/sld", "GammaValue");
+    private static final QName _BrightnessOnly_QNAME = new QName("http://www.opengis.net/sld", "BrightnessOnly");
+    private static final QName _ReliefFactor_QNAME = new QName("http://www.opengis.net/sld", "ReliefFactor");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.sld.v100
@@ -113,6 +112,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link StyledLayerDescriptor }
      * 
+     * @return
+     *     the new instance of {@link StyledLayerDescriptor }
      */
     public StyledLayerDescriptor createStyledLayerDescriptor() {
         return new StyledLayerDescriptor();
@@ -121,6 +122,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link NamedLayer }
      * 
+     * @return
+     *     the new instance of {@link NamedLayer }
      */
     public NamedLayer createNamedLayer() {
         return new NamedLayer();
@@ -129,6 +132,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link LayerFeatureConstraints }
      * 
+     * @return
+     *     the new instance of {@link LayerFeatureConstraints }
      */
     public LayerFeatureConstraints createLayerFeatureConstraints() {
         return new LayerFeatureConstraints();
@@ -137,6 +142,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link FeatureTypeConstraint }
      * 
+     * @return
+     *     the new instance of {@link FeatureTypeConstraint }
      */
     public FeatureTypeConstraint createFeatureTypeConstraint() {
         return new FeatureTypeConstraint();
@@ -145,6 +152,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Extent }
      * 
+     * @return
+     *     the new instance of {@link Extent }
      */
     public Extent createExtent() {
         return new Extent();
@@ -153,6 +162,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link NamedStyle }
      * 
+     * @return
+     *     the new instance of {@link NamedStyle }
      */
     public NamedStyle createNamedStyle() {
         return new NamedStyle();
@@ -161,6 +172,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link UserStyle }
      * 
+     * @return
+     *     the new instance of {@link UserStyle }
      */
     public UserStyle createUserStyle() {
         return new UserStyle();
@@ -169,6 +182,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link FeatureTypeStyle }
      * 
+     * @return
+     *     the new instance of {@link FeatureTypeStyle }
      */
     public FeatureTypeStyle createFeatureTypeStyle() {
         return new FeatureTypeStyle();
@@ -177,6 +192,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Rule }
      * 
+     * @return
+     *     the new instance of {@link Rule }
      */
     public Rule createRule() {
         return new Rule();
@@ -185,6 +202,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link LegendGraphic }
      * 
+     * @return
+     *     the new instance of {@link LegendGraphic }
      */
     public LegendGraphic createLegendGraphic() {
         return new LegendGraphic();
@@ -193,6 +212,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Graphic }
      * 
+     * @return
+     *     the new instance of {@link Graphic }
      */
     public Graphic createGraphic() {
         return new Graphic();
@@ -201,6 +222,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ExternalGraphic }
      * 
+     * @return
+     *     the new instance of {@link ExternalGraphic }
      */
     public ExternalGraphic createExternalGraphic() {
         return new ExternalGraphic();
@@ -209,6 +232,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link OnlineResource }
      * 
+     * @return
+     *     the new instance of {@link OnlineResource }
      */
     public OnlineResource createOnlineResource() {
         return new OnlineResource();
@@ -217,6 +242,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Mark }
      * 
+     * @return
+     *     the new instance of {@link Mark }
      */
     public Mark createMark() {
         return new Mark();
@@ -225,6 +252,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Fill }
      * 
+     * @return
+     *     the new instance of {@link Fill }
      */
     public Fill createFill() {
         return new Fill();
@@ -233,6 +262,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link GraphicFill }
      * 
+     * @return
+     *     the new instance of {@link GraphicFill }
      */
     public GraphicFill createGraphicFill() {
         return new GraphicFill();
@@ -241,6 +272,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link CssParameter }
      * 
+     * @return
+     *     the new instance of {@link CssParameter }
      */
     public CssParameter createCssParameter() {
         return new CssParameter();
@@ -249,6 +282,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ParameterValueType }
      * 
+     * @return
+     *     the new instance of {@link ParameterValueType }
      */
     public ParameterValueType createParameterValueType() {
         return new ParameterValueType();
@@ -257,6 +292,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Stroke }
      * 
+     * @return
+     *     the new instance of {@link Stroke }
      */
     public Stroke createStroke() {
         return new Stroke();
@@ -265,6 +302,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link GraphicStroke }
      * 
+     * @return
+     *     the new instance of {@link GraphicStroke }
      */
     public GraphicStroke createGraphicStroke() {
         return new GraphicStroke();
@@ -273,6 +312,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ElseFilter }
      * 
+     * @return
+     *     the new instance of {@link ElseFilter }
      */
     public ElseFilter createElseFilter() {
         return new ElseFilter();
@@ -281,6 +322,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link UserLayer }
      * 
+     * @return
+     *     the new instance of {@link UserLayer }
      */
     public UserLayer createUserLayer() {
         return new UserLayer();
@@ -289,6 +332,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link RemoteOWS }
      * 
+     * @return
+     *     the new instance of {@link RemoteOWS }
      */
     public RemoteOWS createRemoteOWS() {
         return new RemoteOWS();
@@ -297,6 +342,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link LineSymbolizer }
      * 
+     * @return
+     *     the new instance of {@link LineSymbolizer }
      */
     public LineSymbolizer createLineSymbolizer() {
         return new LineSymbolizer();
@@ -305,6 +352,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Geometry }
      * 
+     * @return
+     *     the new instance of {@link Geometry }
      */
     public Geometry createGeometry() {
         return new Geometry();
@@ -313,6 +362,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link PolygonSymbolizer }
      * 
+     * @return
+     *     the new instance of {@link PolygonSymbolizer }
      */
     public PolygonSymbolizer createPolygonSymbolizer() {
         return new PolygonSymbolizer();
@@ -321,6 +372,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link PointSymbolizer }
      * 
+     * @return
+     *     the new instance of {@link PointSymbolizer }
      */
     public PointSymbolizer createPointSymbolizer() {
         return new PointSymbolizer();
@@ -329,6 +382,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TextSymbolizer }
      * 
+     * @return
+     *     the new instance of {@link TextSymbolizer }
      */
     public TextSymbolizer createTextSymbolizer() {
         return new TextSymbolizer();
@@ -337,6 +392,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Font }
      * 
+     * @return
+     *     the new instance of {@link Font }
      */
     public Font createFont() {
         return new Font();
@@ -345,6 +402,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link LabelPlacement }
      * 
+     * @return
+     *     the new instance of {@link LabelPlacement }
      */
     public LabelPlacement createLabelPlacement() {
         return new LabelPlacement();
@@ -353,6 +412,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link PointPlacement }
      * 
+     * @return
+     *     the new instance of {@link PointPlacement }
      */
     public PointPlacement createPointPlacement() {
         return new PointPlacement();
@@ -361,6 +422,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link AnchorPoint }
      * 
+     * @return
+     *     the new instance of {@link AnchorPoint }
      */
     public AnchorPoint createAnchorPoint() {
         return new AnchorPoint();
@@ -369,6 +432,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Displacement }
      * 
+     * @return
+     *     the new instance of {@link Displacement }
      */
     public Displacement createDisplacement() {
         return new Displacement();
@@ -377,6 +442,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link LinePlacement }
      * 
+     * @return
+     *     the new instance of {@link LinePlacement }
      */
     public LinePlacement createLinePlacement() {
         return new LinePlacement();
@@ -385,6 +452,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Halo }
      * 
+     * @return
+     *     the new instance of {@link Halo }
      */
     public Halo createHalo() {
         return new Halo();
@@ -393,6 +462,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link RasterSymbolizer }
      * 
+     * @return
+     *     the new instance of {@link RasterSymbolizer }
      */
     public RasterSymbolizer createRasterSymbolizer() {
         return new RasterSymbolizer();
@@ -401,6 +472,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ChannelSelection }
      * 
+     * @return
+     *     the new instance of {@link ChannelSelection }
      */
     public ChannelSelection createChannelSelection() {
         return new ChannelSelection();
@@ -409,6 +482,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link SelectedChannelType }
      * 
+     * @return
+     *     the new instance of {@link SelectedChannelType }
      */
     public SelectedChannelType createSelectedChannelType() {
         return new SelectedChannelType();
@@ -417,6 +492,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link OverlapBehavior }
      * 
+     * @return
+     *     the new instance of {@link OverlapBehavior }
      */
     public OverlapBehavior createOverlapBehavior() {
         return new OverlapBehavior();
@@ -425,6 +502,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link LATESTONTOP }
      * 
+     * @return
+     *     the new instance of {@link LATESTONTOP }
      */
     public LATESTONTOP createLATESTONTOP() {
         return new LATESTONTOP();
@@ -433,6 +512,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link EARLIESTONTOP }
      * 
+     * @return
+     *     the new instance of {@link EARLIESTONTOP }
      */
     public EARLIESTONTOP createEARLIESTONTOP() {
         return new EARLIESTONTOP();
@@ -441,6 +522,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link AVERAGE }
      * 
+     * @return
+     *     the new instance of {@link AVERAGE }
      */
     public AVERAGE createAVERAGE() {
         return new AVERAGE();
@@ -449,6 +532,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link RANDOM }
      * 
+     * @return
+     *     the new instance of {@link RANDOM }
      */
     public RANDOM createRANDOM() {
         return new RANDOM();
@@ -457,6 +542,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ColorMap }
      * 
+     * @return
+     *     the new instance of {@link ColorMap }
      */
     public ColorMap createColorMap() {
         return new ColorMap();
@@ -465,6 +552,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ColorMapEntry }
      * 
+     * @return
+     *     the new instance of {@link ColorMapEntry }
      */
     public ColorMapEntry createColorMapEntry() {
         return new ColorMapEntry();
@@ -473,6 +562,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ContrastEnhancement }
      * 
+     * @return
+     *     the new instance of {@link ContrastEnhancement }
      */
     public ContrastEnhancement createContrastEnhancement() {
         return new ContrastEnhancement();
@@ -481,6 +572,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Normalize }
      * 
+     * @return
+     *     the new instance of {@link Normalize }
      */
     public Normalize createNormalize() {
         return new Normalize();
@@ -489,6 +582,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Histogram }
      * 
+     * @return
+     *     the new instance of {@link Histogram }
      */
     public Histogram createHistogram() {
         return new Histogram();
@@ -497,6 +592,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ShadedRelief }
      * 
+     * @return
+     *     the new instance of {@link ShadedRelief }
      */
     public ShadedRelief createShadedRelief() {
         return new ShadedRelief();
@@ -505,6 +602,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ImageOutline }
      * 
+     * @return
+     *     the new instance of {@link ImageOutline }
      */
     public ImageOutline createImageOutline() {
         return new ImageOutline();
@@ -520,7 +619,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Name")
     public JAXBElement<String> createName(String value) {
-        return new JAXBElement<String>(_Name_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Name_QNAME, String.class, null, value);
     }
 
     /**
@@ -533,7 +632,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Title")
     public JAXBElement<String> createTitle(String value) {
-        return new JAXBElement<String>(_Title_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Title_QNAME, String.class, null, value);
     }
 
     /**
@@ -546,7 +645,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Abstract")
     public JAXBElement<String> createAbstract(String value) {
-        return new JAXBElement<String>(_Abstract_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Abstract_QNAME, String.class, null, value);
     }
 
     /**
@@ -559,7 +658,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "FeatureTypeName")
     public JAXBElement<String> createFeatureTypeName(String value) {
-        return new JAXBElement<String>(_FeatureTypeName_QNAME, String.class, null, value);
+        return new JAXBElement<>(_FeatureTypeName_QNAME, String.class, null, value);
     }
 
     /**
@@ -572,7 +671,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Value")
     public JAXBElement<String> createValue(String value) {
-        return new JAXBElement<String>(_Value_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Value_QNAME, String.class, null, value);
     }
 
     /**
@@ -585,7 +684,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "IsDefault")
     public JAXBElement<Boolean> createIsDefault(Boolean value) {
-        return new JAXBElement<Boolean>(_IsDefault_QNAME, Boolean.class, null, value);
+        return new JAXBElement<>(_IsDefault_QNAME, Boolean.class, null, value);
     }
 
     /**
@@ -598,7 +697,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "SemanticTypeIdentifier")
     public JAXBElement<String> createSemanticTypeIdentifier(String value) {
-        return new JAXBElement<String>(_SemanticTypeIdentifier_QNAME, String.class, null, value);
+        return new JAXBElement<>(_SemanticTypeIdentifier_QNAME, String.class, null, value);
     }
 
     /**
@@ -611,7 +710,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Format")
     public JAXBElement<String> createFormat(String value) {
-        return new JAXBElement<String>(_Format_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Format_QNAME, String.class, null, value);
     }
 
     /**
@@ -624,7 +723,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "WellKnownName")
     public JAXBElement<String> createWellKnownName(String value) {
-        return new JAXBElement<String>(_WellKnownName_QNAME, String.class, null, value);
+        return new JAXBElement<>(_WellKnownName_QNAME, String.class, null, value);
     }
 
     /**
@@ -637,7 +736,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Opacity")
     public JAXBElement<ParameterValueType> createOpacity(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Opacity_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_Opacity_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -650,7 +749,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Size")
     public JAXBElement<ParameterValueType> createSize(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Size_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_Size_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -663,7 +762,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Rotation")
     public JAXBElement<ParameterValueType> createRotation(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Rotation_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_Rotation_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -676,7 +775,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "MinScaleDenominator")
     public JAXBElement<Double> createMinScaleDenominator(Double value) {
-        return new JAXBElement<Double>(_MinScaleDenominator_QNAME, Double.class, null, value);
+        return new JAXBElement<>(_MinScaleDenominator_QNAME, Double.class, null, value);
     }
 
     /**
@@ -689,7 +788,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "MaxScaleDenominator")
     public JAXBElement<Double> createMaxScaleDenominator(Double value) {
-        return new JAXBElement<Double>(_MaxScaleDenominator_QNAME, Double.class, null, value);
+        return new JAXBElement<>(_MaxScaleDenominator_QNAME, Double.class, null, value);
     }
 
     /**
@@ -702,7 +801,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Symbolizer")
     public JAXBElement<SymbolizerType> createSymbolizer(SymbolizerType value) {
-        return new JAXBElement<SymbolizerType>(_Symbolizer_QNAME, SymbolizerType.class, null, value);
+        return new JAXBElement<>(_Symbolizer_QNAME, SymbolizerType.class, null, value);
     }
 
     /**
@@ -715,7 +814,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Service")
     public JAXBElement<String> createService(String value) {
-        return new JAXBElement<String>(_Service_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Service_QNAME, String.class, null, value);
     }
 
     /**
@@ -728,7 +827,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "LineSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
     public JAXBElement<LineSymbolizer> createLineSymbolizer(LineSymbolizer value) {
-        return new JAXBElement<LineSymbolizer>(_LineSymbolizer_QNAME, LineSymbolizer.class, null, value);
+        return new JAXBElement<>(_LineSymbolizer_QNAME, LineSymbolizer.class, null, value);
     }
 
     /**
@@ -741,7 +840,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PolygonSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
     public JAXBElement<PolygonSymbolizer> createPolygonSymbolizer(PolygonSymbolizer value) {
-        return new JAXBElement<PolygonSymbolizer>(_PolygonSymbolizer_QNAME, PolygonSymbolizer.class, null, value);
+        return new JAXBElement<>(_PolygonSymbolizer_QNAME, PolygonSymbolizer.class, null, value);
     }
 
     /**
@@ -754,7 +853,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PointSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
     public JAXBElement<PointSymbolizer> createPointSymbolizer(PointSymbolizer value) {
-        return new JAXBElement<PointSymbolizer>(_PointSymbolizer_QNAME, PointSymbolizer.class, null, value);
+        return new JAXBElement<>(_PointSymbolizer_QNAME, PointSymbolizer.class, null, value);
     }
 
     /**
@@ -767,7 +866,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "TextSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
     public JAXBElement<TextSymbolizer> createTextSymbolizer(TextSymbolizer value) {
-        return new JAXBElement<TextSymbolizer>(_TextSymbolizer_QNAME, TextSymbolizer.class, null, value);
+        return new JAXBElement<>(_TextSymbolizer_QNAME, TextSymbolizer.class, null, value);
     }
 
     /**
@@ -780,7 +879,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Label")
     public JAXBElement<ParameterValueType> createLabel(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Label_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_Label_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -793,7 +892,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "AnchorPointX")
     public JAXBElement<ParameterValueType> createAnchorPointX(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_AnchorPointX_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_AnchorPointX_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -806,7 +905,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "AnchorPointY")
     public JAXBElement<ParameterValueType> createAnchorPointY(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_AnchorPointY_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_AnchorPointY_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -819,7 +918,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "DisplacementX")
     public JAXBElement<ParameterValueType> createDisplacementX(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_DisplacementX_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_DisplacementX_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -832,7 +931,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "DisplacementY")
     public JAXBElement<ParameterValueType> createDisplacementY(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_DisplacementY_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_DisplacementY_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -845,7 +944,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PerpendicularOffset")
     public JAXBElement<ParameterValueType> createPerpendicularOffset(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_PerpendicularOffset_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_PerpendicularOffset_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -858,7 +957,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Radius")
     public JAXBElement<ParameterValueType> createRadius(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Radius_QNAME, ParameterValueType.class, null, value);
+        return new JAXBElement<>(_Radius_QNAME, ParameterValueType.class, null, value);
     }
 
     /**
@@ -871,7 +970,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "RasterSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
     public JAXBElement<RasterSymbolizer> createRasterSymbolizer(RasterSymbolizer value) {
-        return new JAXBElement<RasterSymbolizer>(_RasterSymbolizer_QNAME, RasterSymbolizer.class, null, value);
+        return new JAXBElement<>(_RasterSymbolizer_QNAME, RasterSymbolizer.class, null, value);
     }
 
     /**
@@ -884,7 +983,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "RedChannel")
     public JAXBElement<SelectedChannelType> createRedChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_RedChannel_QNAME, SelectedChannelType.class, null, value);
+        return new JAXBElement<>(_RedChannel_QNAME, SelectedChannelType.class, null, value);
     }
 
     /**
@@ -897,7 +996,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GreenChannel")
     public JAXBElement<SelectedChannelType> createGreenChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_GreenChannel_QNAME, SelectedChannelType.class, null, value);
+        return new JAXBElement<>(_GreenChannel_QNAME, SelectedChannelType.class, null, value);
     }
 
     /**
@@ -910,7 +1009,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "BlueChannel")
     public JAXBElement<SelectedChannelType> createBlueChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_BlueChannel_QNAME, SelectedChannelType.class, null, value);
+        return new JAXBElement<>(_BlueChannel_QNAME, SelectedChannelType.class, null, value);
     }
 
     /**
@@ -923,7 +1022,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GrayChannel")
     public JAXBElement<SelectedChannelType> createGrayChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_GrayChannel_QNAME, SelectedChannelType.class, null, value);
+        return new JAXBElement<>(_GrayChannel_QNAME, SelectedChannelType.class, null, value);
     }
 
     /**
@@ -936,7 +1035,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "SourceChannelName")
     public JAXBElement<String> createSourceChannelName(String value) {
-        return new JAXBElement<String>(_SourceChannelName_QNAME, String.class, null, value);
+        return new JAXBElement<>(_SourceChannelName_QNAME, String.class, null, value);
     }
 
     /**
@@ -949,7 +1048,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GammaValue")
     public JAXBElement<Double> createGammaValue(Double value) {
-        return new JAXBElement<Double>(_GammaValue_QNAME, Double.class, null, value);
+        return new JAXBElement<>(_GammaValue_QNAME, Double.class, null, value);
     }
 
     /**
@@ -962,7 +1061,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "BrightnessOnly")
     public JAXBElement<Boolean> createBrightnessOnly(Boolean value) {
-        return new JAXBElement<Boolean>(_BrightnessOnly_QNAME, Boolean.class, null, value);
+        return new JAXBElement<>(_BrightnessOnly_QNAME, Boolean.class, null, value);
     }
 
     /**
@@ -975,7 +1074,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "ReliefFactor")
     public JAXBElement<Double> createReliefFactor(Double value) {
-        return new JAXBElement<Double>(_ReliefFactor_QNAME, Double.class, null, value);
+        return new JAXBElement<>(_ReliefFactor_QNAME, Double.class, null, value);
     }
 
 }

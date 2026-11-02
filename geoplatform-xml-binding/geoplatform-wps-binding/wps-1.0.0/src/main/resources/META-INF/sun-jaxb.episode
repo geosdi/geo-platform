@@ -1,151 +1,151 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
   <!--
 
-Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-Generato il: 2017.12.01 alle 08:55:18 AM CET 
-
+Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+Generato il: 2026.11.02 alle 02:51:17 PM CET
   -->
-  <bindings xmlns:tns="http://www.opengis.net/wps/1.0.0" if-exists="true" scd="x-schema::tns">
+  <bindings scd="x-schema::tns" if-exists="true" auto-acknowledge="true" xmlns:tns="http://www.opengis.net/wps/1.0.0">
     <schemaBindings map="false">
       <package name="org.geosdi.geoplatform.xml.wps.v100"/>
     </schemaBindings>
-    <bindings if-exists="true" scd="tns:ExecuteResponse">
+    <bindings scd="tns:ExecuteResponse" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ExecuteResponse"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Languages">
+    <bindings scd="tns:Languages" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.Languages"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:InputReferenceType">
+    <bindings scd="~tns:InputReferenceType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.InputReferenceType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:SupportedCRSsType">
+    <bindings scd="~tns:SupportedCRSsType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedCRSsType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:SupportedUOMsType">
+    <bindings scd="~tns:SupportedUOMsType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedUOMsType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ProcessDescriptionType">
+    <bindings scd="~tns:ProcessDescriptionType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessDescriptionType"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:DescribeProcess">
+    <bindings scd="tns:DescribeProcess" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.DescribeProcess"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:RequestBaseType">
+    <bindings scd="~tns:RequestBaseType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.RequestBaseType"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:WSDL">
+    <bindings scd="tns:WSDL" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.WSDL"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:ProcessDescriptions">
+    <bindings scd="tns:ProcessDescriptions" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessDescriptions"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ResponseBaseType">
+    <bindings scd="~tns:ResponseBaseType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ResponseBaseType"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:Execute">
+    <bindings scd="tns:Execute" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.Execute"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:DataInputsType">
+    <bindings scd="~tns:DataInputsType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.DataInputsType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ResponseFormType">
+    <bindings scd="~tns:ResponseFormType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ResponseFormType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ProcessBriefType">
+    <bindings scd="~tns:ProcessBriefType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessBriefType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:StatusType">
+    <bindings scd="~tns:StatusType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.StatusType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:OutputDefinitionsType">
+    <bindings scd="~tns:OutputDefinitionsType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDefinitionsType"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:GetCapabilities">
+    <bindings scd="tns:GetCapabilities" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.GetCapabilities"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:WPSCapabilitiesType">
+    <bindings scd="~tns:WPSCapabilitiesType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.WPSCapabilitiesType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:LanguagesType">
+    <bindings scd="~tns:LanguagesType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.LanguagesType"/>
     </bindings>
-    <bindings if-exists="true" scd="tns:ProcessOfferings">
+    <bindings scd="tns:ProcessOfferings" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessOfferings"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:DescriptionType">
+    <bindings scd="~tns:DescriptionType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.DescriptionType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:InputDescriptionType">
+    <bindings scd="~tns:InputDescriptionType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.InputDescriptionType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:LiteralInputType">
+    <bindings scd="~tns:LiteralInputType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.LiteralInputType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ValuesReferenceType">
+    <bindings scd="~tns:ValuesReferenceType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ValuesReferenceType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:SupportedComplexDataInputType">
+    <bindings scd="~tns:SupportedComplexDataInputType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedComplexDataInputType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:UOMsType">
+    <bindings scd="~tns:UOMsType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.UOMsType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:CRSsType">
+    <bindings scd="~tns:CRSsType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.CRSsType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:SupportedComplexDataType">
+    <bindings scd="~tns:SupportedComplexDataType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.SupportedComplexDataType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ComplexDataCombinationType">
+    <bindings scd="~tns:ComplexDataCombinationType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataCombinationType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ComplexDataCombinationsType">
+    <bindings scd="~tns:ComplexDataCombinationsType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataCombinationsType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ComplexDataDescriptionType">
+    <bindings scd="~tns:ComplexDataDescriptionType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataDescriptionType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:OutputDescriptionType">
+    <bindings scd="~tns:OutputDescriptionType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDescriptionType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:LiteralOutputType">
+    <bindings scd="~tns:LiteralOutputType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.LiteralOutputType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ResponseDocumentType">
+    <bindings scd="~tns:ResponseDocumentType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ResponseDocumentType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:DocumentOutputDefinitionType">
+    <bindings scd="~tns:DocumentOutputDefinitionType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.DocumentOutputDefinitionType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:OutputDefinitionType">
+    <bindings scd="~tns:OutputDefinitionType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDefinitionType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:InputType">
+    <bindings scd="~tns:InputType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.InputType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:DataType">
+    <bindings scd="~tns:DataType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.DataType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ComplexDataType">
+    <bindings scd="~tns:ComplexDataType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ComplexDataType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:LiteralDataType">
+    <bindings scd="~tns:LiteralDataType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.LiteralDataType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:OutputDataType">
+    <bindings scd="~tns:OutputDataType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputDataType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:OutputReferenceType">
+    <bindings scd="~tns:OutputReferenceType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.OutputReferenceType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ProcessStartedType">
+    <bindings scd="~tns:ProcessStartedType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessStartedType"/>
     </bindings>
-    <bindings if-exists="true" scd="~tns:ProcessFailedType">
+    <bindings scd="~tns:ProcessFailedType" if-exists="true" auto-acknowledge="true">
       <class ref="org.geosdi.geoplatform.xml.wps.v100.ProcessFailedType"/>
     </bindings>
   </bindings>
 </bindings>
+

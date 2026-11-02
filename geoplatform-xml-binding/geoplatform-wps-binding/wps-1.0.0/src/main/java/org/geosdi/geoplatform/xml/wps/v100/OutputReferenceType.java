@@ -34,62 +34,85 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
  * Reference to an output value that is a web accessible resource.
- * <p>
- * <p>Classe Java per OutputReferenceType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="OutputReferenceType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attGroup ref="{http://www.opengis.net/wps/1.0.0}ComplexDataEncoding"/&gt;
- *       &lt;attribute name="href" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per OutputReferenceType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="OutputReferenceType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attGroup ref="{http://www.opengis.net/wps/1.0.0}ComplexDataEncoding"/>
+ *       <attribute name="href" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OutputReferenceType")
-public class OutputReferenceType implements ToString2 {
+public class OutputReferenceType implements ToString
+{
 
+    /**
+     * Reference to a web-accessible resource that is provided by the process as output. This attribute shall contain a URL from which this output can be electronically retrieved.
+     * 
+     */
     @XmlAttribute(name = "href", required = true)
     @XmlSchemaType(name = "anyURI")
     protected String href;
+    /**
+     * The Format of this input or requested for this output (e.g., text/xml). This element shall be omitted when the Format is indicated in the http header of the output. When included, this format shall be one published for this output or input in the Process full description.
+     * 
+     */
     @XmlAttribute(name = "mimeType")
     protected String mimeType;
+    /**
+     * The encoding of this input or requested for this output (e.g., UTF-8). This "encoding" shall be included whenever the encoding required is not the default encoding indicated in the Process full description. When included, this encoding shall be one published for this output or input in the Process full description.
+     * 
+     */
     @XmlAttribute(name = "encoding")
     @XmlSchemaType(name = "anyURI")
     protected String encoding;
+    /**
+     * PS I changed the name of this attribute to be consistent with the ProcessDescription.  The original was giving me validation troubles in XMLSpy.
+     * 
+     */
     @XmlAttribute(name = "schema")
     @XmlSchemaType(name = "anyURI")
     protected String schema;
 
     /**
-     * Recupera il valore della proprietà href.
-     *
-     * @return possible object is
-     * {@link String }
+     * Reference to a web-accessible resource that is provided by the process as output. This attribute shall contain a URL from which this output can be electronically retrieved.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getHref() {
         return href;
@@ -97,23 +120,28 @@ public class OutputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà href.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getHref()
      */
     public void setHref(String value) {
         this.href = value;
     }
 
     public boolean isSetHref() {
-        return (this.href != null);
+        return (this.href!= null);
     }
 
     /**
-     * Recupera il valore della proprietà mimeType.
-     *
-     * @return possible object is
-     * {@link String }
+     * The Format of this input or requested for this output (e.g., text/xml). This element shall be omitted when the Format is indicated in the http header of the output. When included, this format shall be one published for this output or input in the Process full description.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMimeType() {
         return mimeType;
@@ -121,23 +149,28 @@ public class OutputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà mimeType.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getMimeType()
      */
     public void setMimeType(String value) {
         this.mimeType = value;
     }
 
     public boolean isSetMimeType() {
-        return (this.mimeType != null);
+        return (this.mimeType!= null);
     }
 
     /**
-     * Recupera il valore della proprietà encoding.
-     *
-     * @return possible object is
-     * {@link String }
+     * The encoding of this input or requested for this output (e.g., UTF-8). This "encoding" shall be included whenever the encoding required is not the default encoding indicated in the Process full description. When included, this encoding shall be one published for this output or input in the Process full description.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEncoding() {
         return encoding;
@@ -145,23 +178,28 @@ public class OutputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà encoding.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getEncoding()
      */
     public void setEncoding(String value) {
         this.encoding = value;
     }
 
     public boolean isSetEncoding() {
-        return (this.encoding != null);
+        return (this.encoding!= null);
     }
 
     /**
-     * Recupera il valore della proprietà schema.
-     *
-     * @return possible object is
-     * {@link String }
+     * PS I changed the name of this attribute to be consistent with the ProcessDescription.  The original was giving me validation troubles in XMLSpy.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSchema() {
         return schema;
@@ -169,33 +207,39 @@ public class OutputReferenceType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà schema.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     * @see #getSchema()
      */
     public void setSchema(String value) {
         this.schema = value;
     }
 
     public boolean isSetSchema() {
-        return (this.schema != null);
+        return (this.schema!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theHref;
             theHref = this.getHref();

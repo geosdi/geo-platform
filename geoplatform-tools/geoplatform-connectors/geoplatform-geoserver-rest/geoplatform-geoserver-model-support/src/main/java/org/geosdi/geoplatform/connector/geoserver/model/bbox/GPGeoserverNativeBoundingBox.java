@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.bbox;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -43,7 +44,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRSDeseri
 import tools.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
-import javax.xml.bind.annotation.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;

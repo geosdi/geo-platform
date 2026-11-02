@@ -34,50 +34,49 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * Location of the responsible individual or organization. 
+ * Location of the responsible individual or organization.
  * 
- * <p>Classe Java per AddressType complex type.
+ * <p>Classe Java per AddressType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AddressType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="DeliveryPoint" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="City" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="AdministrativeArea" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="PostalCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="Country" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="ElectronicMailAddress" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="AddressType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="DeliveryPoint" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="City" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="AdministrativeArea" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="PostalCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="Country" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="ElectronicMailAddress" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -90,53 +89,82 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "country",
     "electronicMailAddress"
 })
-public class AddressType implements ToString2
+public class AddressType implements ToString
 {
 
+    /**
+     * Address line for the location.
+     * 
+     */
     @XmlElement(name = "DeliveryPoint")
     protected List<String> deliveryPoint;
+    /**
+     * City of the location.
+     * 
+     */
     @XmlElement(name = "City")
     protected String city;
+    /**
+     * State or province of the location.
+     * 
+     */
     @XmlElement(name = "AdministrativeArea")
     protected String administrativeArea;
+    /**
+     * ZIP or other postal code.
+     * 
+     */
     @XmlElement(name = "PostalCode")
     protected String postalCode;
+    /**
+     * Country of the physical address.
+     * 
+     */
     @XmlElement(name = "Country")
     protected String country;
+    /**
+     * Address of the electronic mailbox of the responsible organization or individual.
+     * 
+     */
     @XmlElement(name = "ElectronicMailAddress")
     protected List<String> electronicMailAddress;
 
     /**
+     * Address line for the location.
+     * 
      * Gets the value of the deliveryPoint property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deliveryPoint property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the deliveryPoint property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDeliveryPoint().add(newItem);
+     * getDeliveryPoint().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the deliveryPoint property.
      */
     public List<String> getDeliveryPoint() {
         if (deliveryPoint == null) {
-            deliveryPoint = new ArrayList<String>();
+            deliveryPoint = new ArrayList<>();
         }
         return this.deliveryPoint;
     }
 
     /**
-     * Recupera il valore della proprietà city.
+     * City of the location.
      * 
      * @return
      *     possible object is
@@ -154,13 +182,14 @@ public class AddressType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getCity()
      */
     public void setCity(String value) {
         this.city = value;
     }
 
     /**
-     * Recupera il valore della proprietà administrativeArea.
+     * State or province of the location.
      * 
      * @return
      *     possible object is
@@ -178,13 +207,14 @@ public class AddressType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getAdministrativeArea()
      */
     public void setAdministrativeArea(String value) {
         this.administrativeArea = value;
     }
 
     /**
-     * Recupera il valore della proprietà postalCode.
+     * ZIP or other postal code.
      * 
      * @return
      *     possible object is
@@ -202,13 +232,14 @@ public class AddressType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getPostalCode()
      */
     public void setPostalCode(String value) {
         this.postalCode = value;
     }
 
     /**
-     * Recupera il valore della proprietà country.
+     * Country of the physical address.
      * 
      * @return
      *     possible object is
@@ -226,55 +257,64 @@ public class AddressType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getCountry()
      */
     public void setCountry(String value) {
         this.country = value;
     }
 
     /**
+     * Address of the electronic mailbox of the responsible organization or individual.
+     * 
      * Gets the value of the electronicMailAddress property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the electronicMailAddress property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the electronicMailAddress property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getElectronicMailAddress().add(newItem);
+     * getElectronicMailAddress().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the electronicMailAddress property.
      */
     public List<String> getElectronicMailAddress() {
         if (electronicMailAddress == null) {
-            electronicMailAddress = new ArrayList<String>();
+            electronicMailAddress = new ArrayList<>();
         }
         return this.electronicMailAddress;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<String> theDeliveryPoint;
             theDeliveryPoint = (((this.deliveryPoint!= null)&&(!this.deliveryPoint.isEmpty()))?this.getDeliveryPoint():null);

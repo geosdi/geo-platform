@@ -34,53 +34,52 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 09:03:56 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.ows.v110;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * This type is adapted from the EnvelopeType of GML 3.1, with modified contents and documentation for encoding a MINIMUM size box SURROUNDING all associated data. 
+ * This type is adapted from the EnvelopeType of GML 3.1, with modified contents and documentation for encoding a MINIMUM size box SURROUNDING all associated data.
  * 
- * <p>Classe Java per BoundingBoxType complex type.
+ * <p>Classe Java per BoundingBoxType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="BoundingBoxType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="LowerCorner" type="{http://www.opengis.net/ows/1.1}PositionType"/&gt;
- *         &lt;element name="UpperCorner" type="{http://www.opengis.net/ows/1.1}PositionType"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="crs" type="{http://www.w3.org/2001/XMLSchema}anyURI" /&gt;
- *       &lt;attribute name="dimensions" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType name="BoundingBoxType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="LowerCorner" type="{http://www.opengis.net/ows/1.1}PositionType"/>
+ *         <element name="UpperCorner" type="{http://www.opengis.net/ows/1.1}PositionType"/>
+ *       </sequence>
+ *       <attribute name="crs" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
+ *       <attribute name="dimensions" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -92,84 +91,112 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlSeeAlso({
     WGS84BoundingBoxType.class
 })
-public class BoundingBoxType implements ToString2
+public class BoundingBoxType implements ToString
 {
 
+    /**
+     * Position of the bounding box corner at which the value of each coordinate normally is the algebraic minimum within this bounding box. In some cases, this position is normally displayed at the top, such as the top left for some image coordinates. For more information, see Subclauses 10.2.5 and C.13.
+     * 
+     */
     @XmlList
     @XmlElement(name = "LowerCorner", type = Double.class)
-    @XmlSchemaType(name = "anySimpleType")
     protected List<Double> lowerCorner;
+    /**
+     * Position of the bounding box corner at which the value of each coordinate normally is the algebraic maximum within this bounding box. In some cases, this position is normally displayed at the bottom, such as the bottom right for some image coordinates. For more information, see Subclauses 10.2.5 and C.13.
+     * 
+     */
     @XmlList
     @XmlElement(name = "UpperCorner", type = Double.class)
-    @XmlSchemaType(name = "anySimpleType")
     protected List<Double> upperCorner;
+    /**
+     * Usually references the definition of a CRS, as specified in [OGC Topic 2]. Such a CRS definition can be XML encoded using the gml:CoordinateReferenceSystemType in [GML 3.1]. For well known references, it is not required that a CRS definition exist at the location the URI points to. If no anyURI value is included, the applicable CRS must be either:
+     * a)	Specified outside the bounding box, but inside a data structure that includes this bounding box, as specified for a specific OWS use of this bounding box type.
+     * b)	Fixed and specified in the Implementation Specification for a specific OWS use of the bounding box type.
+     * 
+     */
     @XmlAttribute(name = "crs")
     @XmlSchemaType(name = "anyURI")
     protected String crs;
+    /**
+     * The number of dimensions in this CRS (the length of a coordinate sequence in this use of the PositionType). This number is specified by the CRS definition, but can also be specified here.
+     * 
+     */
     @XmlAttribute(name = "dimensions")
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger dimensions;
 
     /**
+     * Position of the bounding box corner at which the value of each coordinate normally is the algebraic minimum within this bounding box. In some cases, this position is normally displayed at the top, such as the top left for some image coordinates. For more information, see Subclauses 10.2.5 and C.13.
+     * 
      * Gets the value of the lowerCorner property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the lowerCorner property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the lowerCorner property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getLowerCorner().add(newItem);
+     * getLowerCorner().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Double }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the lowerCorner property.
      */
     public List<Double> getLowerCorner() {
         if (lowerCorner == null) {
-            lowerCorner = new ArrayList<Double>();
+            lowerCorner = new ArrayList<>();
         }
         return this.lowerCorner;
     }
 
     /**
+     * Position of the bounding box corner at which the value of each coordinate normally is the algebraic maximum within this bounding box. In some cases, this position is normally displayed at the bottom, such as the bottom right for some image coordinates. For more information, see Subclauses 10.2.5 and C.13.
+     * 
      * Gets the value of the upperCorner property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the upperCorner property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the upperCorner property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getUpperCorner().add(newItem);
+     * getUpperCorner().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Double }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the upperCorner property.
      */
     public List<Double> getUpperCorner() {
         if (upperCorner == null) {
-            upperCorner = new ArrayList<Double>();
+            upperCorner = new ArrayList<>();
         }
         return this.upperCorner;
     }
 
     /**
-     * Recupera il valore della proprietà crs.
+     * Usually references the definition of a CRS, as specified in [OGC Topic 2]. Such a CRS definition can be XML encoded using the gml:CoordinateReferenceSystemType in [GML 3.1]. For well known references, it is not required that a CRS definition exist at the location the URI points to. If no anyURI value is included, the applicable CRS must be either:
+     * a)	Specified outside the bounding box, but inside a data structure that includes this bounding box, as specified for a specific OWS use of this bounding box type.
+     * b)	Fixed and specified in the Implementation Specification for a specific OWS use of the bounding box type.
      * 
      * @return
      *     possible object is
@@ -187,13 +214,14 @@ public class BoundingBoxType implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getCrs()
      */
     public void setCrs(String value) {
         this.crs = value;
     }
 
     /**
-     * Recupera il valore della proprietà dimensions.
+     * The number of dimensions in this CRS (the length of a coordinate sequence in this use of the PositionType). This number is specified by the CRS definition, but can also be specified here.
      * 
      * @return
      *     possible object is
@@ -211,26 +239,30 @@ public class BoundingBoxType implements ToString2
      *     allowed object is
      *     {@link BigInteger }
      *     
+     * @see #getDimensions()
      */
     public void setDimensions(BigInteger value) {
         this.dimensions = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<Double> theLowerCorner;
             theLowerCorner = (((this.lowerCorner!= null)&&(!this.lowerCorner.isEmpty()))?this.getLowerCorner():null);

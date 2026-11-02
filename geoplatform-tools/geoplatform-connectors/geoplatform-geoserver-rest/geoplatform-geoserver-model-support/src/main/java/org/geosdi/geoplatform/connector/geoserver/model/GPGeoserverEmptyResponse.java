@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.geoserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 /**

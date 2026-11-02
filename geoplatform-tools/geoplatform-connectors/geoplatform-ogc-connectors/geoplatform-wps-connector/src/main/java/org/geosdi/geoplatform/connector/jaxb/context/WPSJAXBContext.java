@@ -35,21 +35,21 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.context;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.connector.jaxb.repository.WPSConnectorJAXBContext;
-import org.geosdi.geoplatform.jaxb.GeoPlatformJAXBContext;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+import org.geosdi.geoplatform.jakarta.GeoPlatformJakartaContext;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WPSJAXBContext extends GeoPlatformJAXBContext {
+public class WPSJAXBContext extends GeoPlatformJakartaContext {
 
     /**
      * @param contextPath
@@ -111,7 +111,7 @@ public class WPSJAXBContext extends GeoPlatformJAXBContext {
         return super.createUnmarshaller();
     }
 
-    public static class WPSJAXBContextKey extends GeoPlatformJAXBContextKey {
+    public static class WPSJAXBContextKey extends GeoPlatformJakartaContextKey {
 
         public WPSJAXBContextKey() {
             super(WPSConnectorJAXBContext.class);

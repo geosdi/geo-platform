@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.layergroups;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.base.GeoserverBaseLayerGroup;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.IGPGeoserverLayerGroupPublishables;
 import tools.jackson.databind.annotation.JsonDeserialize;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Map;
 
 /**

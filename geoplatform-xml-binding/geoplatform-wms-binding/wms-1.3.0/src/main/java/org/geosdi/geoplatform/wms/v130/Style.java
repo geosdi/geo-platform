@@ -34,49 +34,48 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2019.01.25 alle 11:53:13 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:45 PM CET
 //
-
 
 package org.geosdi.geoplatform.wms.v130;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}Name"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}Title"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}Abstract" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}LegendURL" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}StyleSheetURL" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/wms}StyleURL" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/wms}Name"/>
+ *         <element ref="{http://www.opengis.net/wms}Title"/>
+ *         <element ref="{http://www.opengis.net/wms}Abstract" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}LegendURL" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}StyleSheetURL" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/wms}StyleURL" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -90,24 +89,57 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "styleURL"
 })
 @XmlRootElement(name = "Style")
-public class Style implements ToString2
+public class Style implements ToString
 {
 
+    /**
+     * The Name is typically for machine-to-machine communication.
+     * 
+     */
     @XmlElement(name = "Name", required = true)
     protected String name;
+    /**
+     * The Title is for informative display to a human.
+     * 
+     */
     @XmlElement(name = "Title", required = true)
     protected String title;
+    /**
+     * The abstract is a longer narrative description of an object.
+     * 
+     */
     @XmlElement(name = "Abstract")
     protected String _abstract;
+    /**
+     * A Map Server may use zero or more LegendURL elements to provide an
+     *         image(s) of a legend relevant to each Style of a Layer.  The Format
+     *         element indicates the MIME type of the legend. Width and height
+     *         attributes may be provided to assist client applications in laying out
+     *         space to display the legend.
+     * 
+     */
     @XmlElement(name = "LegendURL")
     protected List<LegendURL> legendURL;
+    /**
+     * StyleSheeetURL provides symbology information for each Style of a Layer.
+     * 
+     */
     @XmlElement(name = "StyleSheetURL")
     protected StyleSheetURL styleSheetURL;
+    /**
+     * A Map Server may use StyleURL to offer more information about the
+     *         data or symbology underlying a particular Style. While the semantics
+     *         are not well-defined, as long as the results of an HTTP GET request
+     *         against the StyleURL are properly MIME-typed, Viewer Clients and
+     *         Cascading Map Servers can make use of this. A possible use could be
+     *         to allow a Map Server to provide legend information.
+     * 
+     */
     @XmlElement(name = "StyleURL")
     protected StyleURL styleURL;
 
     /**
-     * Recupera il valore della proprietà name.
+     * The Name is typically for machine-to-machine communication.
      * 
      * @return
      *     possible object is
@@ -125,13 +157,14 @@ public class Style implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getName()
      */
     public void setName(String value) {
         this.name = value;
     }
 
     /**
-     * Recupera il valore della proprietà title.
+     * The Title is for informative display to a human.
      * 
      * @return
      *     possible object is
@@ -149,13 +182,14 @@ public class Style implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getTitle()
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     /**
-     * Recupera il valore della proprietà abstract.
+     * The abstract is a longer narrative description of an object.
      * 
      * @return
      *     possible object is
@@ -173,42 +207,52 @@ public class Style implements ToString2
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getAbstract()
      */
     public void setAbstract(String value) {
         this._abstract = value;
     }
 
     /**
+     * A Map Server may use zero or more LegendURL elements to provide an
+     *         image(s) of a legend relevant to each Style of a Layer.  The Format
+     *         element indicates the MIME type of the legend. Width and height
+     *         attributes may be provided to assist client applications in laying out
+     *         space to display the legend.
+     * 
      * Gets the value of the legendURL property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the legendURL property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the legendURL property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getLegendURL().add(newItem);
+     * getLegendURL().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link LegendURL }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the legendURL property.
      */
     public List<LegendURL> getLegendURL() {
         if (legendURL == null) {
-            legendURL = new ArrayList<LegendURL>();
+            legendURL = new ArrayList<>();
         }
         return this.legendURL;
     }
 
     /**
-     * Recupera il valore della proprietà styleSheetURL.
+     * StyleSheeetURL provides symbology information for each Style of a Layer.
      * 
      * @return
      *     possible object is
@@ -226,13 +270,19 @@ public class Style implements ToString2
      *     allowed object is
      *     {@link StyleSheetURL }
      *     
+     * @see #getStyleSheetURL()
      */
     public void setStyleSheetURL(StyleSheetURL value) {
         this.styleSheetURL = value;
     }
 
     /**
-     * Recupera il valore della proprietà styleURL.
+     * A Map Server may use StyleURL to offer more information about the
+     *         data or symbology underlying a particular Style. While the semantics
+     *         are not well-defined, as long as the results of an HTTP GET request
+     *         against the StyleURL are properly MIME-typed, Viewer Clients and
+     *         Cascading Map Servers can make use of this. A possible use could be
+     *         to allow a Map Server to provide legend information.
      * 
      * @return
      *     possible object is
@@ -250,26 +300,30 @@ public class Style implements ToString2
      *     allowed object is
      *     {@link StyleURL }
      *     
+     * @see #getStyleURL()
      */
     public void setStyleURL(StyleURL value) {
         this.styleURL = value;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theName;
             theName = this.getName();

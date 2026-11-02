@@ -35,22 +35,22 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.*;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.GPGeoserverConnectionParam;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.adapter.GPGeoserverConnectionMapParamAdapter;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPBaseJacksonXmlMapper;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPJacksonXmlMapper;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.jakarta.GPJacksonJAXBJakartaXmlSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.File;
 import java.io.Serializable;
 import java.io.StringReader;
@@ -73,7 +73,7 @@ public class GPGeoserverConnectionParamJacksonTest {
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverConnectionParamJacksonTest.class);
     //
     private static final GPJacksonXmlMapper<GPGeoserverConnectionParam> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(GPGeoserverConnectionParam.class,
-            new GPJacksonJAXBXmlSupport());
+            new GPJacksonJAXBJakartaXmlSupport());
 
     @Test
     public void a_marshalConnecctionParamAsXmlStringTest() throws Exception {

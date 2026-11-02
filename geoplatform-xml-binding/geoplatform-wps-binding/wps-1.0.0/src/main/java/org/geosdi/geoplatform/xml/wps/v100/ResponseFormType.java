@@ -34,63 +34,74 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2017.12.01 alle 08:55:18 AM CET 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:51:17 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.wps.v100;
 
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
  * Defines the response type of the WPS, either raw data or XML document
- * <p>
- * <p>Classe Java per ResponseFormType complex type.
- * <p>
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;complexType name="ResponseFormType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;choice&gt;
- *         &lt;element name="ResponseDocument" type="{http://www.opengis.net/wps/1.0.0}ResponseDocumentType"/&gt;
- *         &lt;element name="RawDataOutput" type="{http://www.opengis.net/wps/1.0.0}OutputDefinitionType"/&gt;
- *       &lt;/choice&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * 
+ * <p>Classe Java per ResponseFormType complex type.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="ResponseFormType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <element name="ResponseDocument" type="{http://www.opengis.net/wps/1.0.0}ResponseDocumentType"/>
+ *         <element name="RawDataOutput" type="{http://www.opengis.net/wps/1.0.0}OutputDefinitionType"/>
+ *       </choice>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResponseFormType", propOrder = {
-        "responseDocument",
-        "rawDataOutput"
+    "responseDocument",
+    "rawDataOutput"
 })
-public class ResponseFormType implements ToString2 {
+public class ResponseFormType implements ToString
+{
 
+    /**
+     * Indicates that the outputs shall be returned as part of a WPS response document.
+     * 
+     */
     @XmlElement(name = "ResponseDocument")
     protected ResponseDocumentType responseDocument;
+    /**
+     * Indicates that the output shall be returned directly as raw data, without a WPS response document.
+     * 
+     */
     @XmlElement(name = "RawDataOutput")
     protected OutputDefinitionType rawDataOutput;
 
     /**
-     * Recupera il valore della proprietà responseDocument.
-     *
-     * @return possible object is
-     * {@link ResponseDocumentType }
+     * Indicates that the outputs shall be returned as part of a WPS response document.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ResponseDocumentType }
+     *     
      */
     public ResponseDocumentType getResponseDocument() {
         return responseDocument;
@@ -98,23 +109,28 @@ public class ResponseFormType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà responseDocument.
-     *
-     * @param value allowed object is
-     *              {@link ResponseDocumentType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ResponseDocumentType }
+     *     
+     * @see #getResponseDocument()
      */
     public void setResponseDocument(ResponseDocumentType value) {
         this.responseDocument = value;
     }
 
     public boolean isSetResponseDocument() {
-        return (this.responseDocument != null);
+        return (this.responseDocument!= null);
     }
 
     /**
-     * Recupera il valore della proprietà rawDataOutput.
-     *
-     * @return possible object is
-     * {@link OutputDefinitionType }
+     * Indicates that the output shall be returned directly as raw data, without a WPS response document.
+     * 
+     * @return
+     *     possible object is
+     *     {@link OutputDefinitionType }
+     *     
      */
     public OutputDefinitionType getRawDataOutput() {
         return rawDataOutput;
@@ -122,33 +138,39 @@ public class ResponseFormType implements ToString2 {
 
     /**
      * Imposta il valore della proprietà rawDataOutput.
-     *
-     * @param value allowed object is
-     *              {@link OutputDefinitionType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link OutputDefinitionType }
+     *     
+     * @see #getRawDataOutput()
      */
     public void setRawDataOutput(OutputDefinitionType value) {
         this.rawDataOutput = value;
     }
 
     public boolean isSetRawDataOutput() {
-        return (this.rawDataOutput != null);
+        return (this.rawDataOutput!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             ResponseDocumentType theResponseDocument;
             theResponseDocument = this.getResponseDocument();

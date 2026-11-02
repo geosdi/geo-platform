@@ -33,8 +33,8 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-@javax.xml.bind.annotation.XmlSchema(
-        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+@jakarta.xml.bind.annotation.XmlSchema(
+        elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED,
         xmlns ={@XmlNs(prefix="sld", namespaceURI="http://www.opengis.net/sld"),
                 @XmlNs(prefix="xlink", namespaceURI="http://www.w3.org/1999/xlink"),
                 @XmlNs(prefix="gml", namespaceURI="http://www.opengis.net/gml"),
@@ -42,4 +42,5 @@
 
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.classify;
 
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;
+

@@ -52,8 +52,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Contesto JAXB {@code jakarta.xml.bind} di una versione WMS: è la versione jakarta di {@link WMSJAXBContext},
- * per i binding già rigenerati per jakarta.
+ * Contesto JAXB {@code jakarta.xml.bind} di una versione WMS: ha preso il posto di {@code WMSJAXBContext}, la
+ * versione javax tolta con il passaggio di WMS 1.3.0 a jakarta, per i binding già rigenerati per jakarta.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

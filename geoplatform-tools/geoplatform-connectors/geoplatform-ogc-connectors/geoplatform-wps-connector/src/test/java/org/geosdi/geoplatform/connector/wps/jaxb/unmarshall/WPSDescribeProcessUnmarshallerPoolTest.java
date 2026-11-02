@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.wps.jaxb.unmarshall;
 
 import org.geosdi.geoplatform.connector.jaxb.context.pool.WPSJAXBContextPool;
-import org.geosdi.geoplatform.jaxb.pool.GeoPlatformJAXBContextPool;
+import org.geosdi.geoplatform.jakarta.pool.GeoPlatformJakartaContextPool;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
@@ -70,7 +70,7 @@ public class WPSDescribeProcessUnmarshallerPoolTest {
         }
     }
 
-    private static GeoPlatformJAXBContextPool wpsJAXBContextPool;
+    private static GeoPlatformJakartaContextPool wpsJAXBContextPool;
     private static String dirFiles;
 
     @BeforeClass

@@ -35,21 +35,21 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues;
 
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layergroups.GPGeoserverLayerGroupsConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.uniquevalue.GeoserverLoadUniqueValuesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
-import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 
 import java.net.URL;
 
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -58,7 +58,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerGroupsConnector implements IGPGeoserverUniqueValuesConnector {
 
-    protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+    protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,

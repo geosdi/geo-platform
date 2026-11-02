@@ -34,48 +34,47 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
-// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 02:50:57 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.sld.v100;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.opengis.net/sld}SymbolizerType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}Opacity" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}ChannelSelection" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}OverlapBehavior" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}ColorMap" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}ContrastEnhancement" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}ShadedRelief" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.opengis.net/sld}ImageOutline" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/sld}SymbolizerType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}Opacity" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}ChannelSelection" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}OverlapBehavior" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}ColorMap" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}ContrastEnhancement" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}ShadedRelief" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/sld}ImageOutline" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -92,28 +91,70 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class RasterSymbolizer
     extends SymbolizerType
-    implements ToString2
+    implements ToString
 {
 
+    /**
+     * A Geometry gives reference to a (the) geometry property of a
+     *         feature to be used for rendering.
+     * 
+     */
     @XmlElement(name = "Geometry")
     protected Geometry geometry;
     @XmlElement(name = "Opacity")
     protected ParameterValueType opacity;
+    /**
+     * "ChannelSelection" specifies the false-color channel selection
+     *         for a multi-spectral raster source.
+     * 
+     */
     @XmlElement(name = "ChannelSelection")
     protected ChannelSelection channelSelection;
+    /**
+     * "OverlapBehavior" tells a system how to behave when multiple
+     *         raster images in a layer overlap each other, for example with
+     *         satellite-image scenes.
+     * 
+     */
     @XmlElement(name = "OverlapBehavior")
     protected OverlapBehavior overlapBehavior;
+    /**
+     * A "ColorMap" defines either the colors of a pallet-type raster
+     *         source or the mapping of numeric pixel values to colors.
+     * 
+     */
     @XmlElement(name = "ColorMap")
     protected ColorMap colorMap;
+    /**
+     * "ContrastEnhancement" defines the 'stretching' of contrast for a
+     *         channel of a false-color image or for a whole grey/color image.
+     *         Contrast enhancement is used to make ground features in images
+     *         more visible.
+     * 
+     */
     @XmlElement(name = "ContrastEnhancement")
     protected ContrastEnhancement contrastEnhancement;
+    /**
+     * "ShadedRelief" specifies the application of relief shading
+     *         (or "hill shading") to a DEM raster to give it somewhat of a
+     *         three-dimensional effect and to make elevation changes more
+     *         visible.
+     * 
+     */
     @XmlElement(name = "ShadedRelief")
     protected ShadedRelief shadedRelief;
+    /**
+     * "ImageOutline" specifies how individual source rasters in
+     *         a multi-raster set (such as a set of satellite-image scenes)
+     *         should be outlined to make the individual-image locations visible.
+     * 
+     */
     @XmlElement(name = "ImageOutline")
     protected ImageOutline imageOutline;
 
     /**
-     * Recupera il valore della proprietà geometry.
+     * A Geometry gives reference to a (the) geometry property of a
+     *         feature to be used for rendering.
      * 
      * @return
      *     possible object is
@@ -131,6 +172,7 @@ public class RasterSymbolizer
      *     allowed object is
      *     {@link Geometry }
      *     
+     * @see #getGeometry()
      */
     public void setGeometry(Geometry value) {
         this.geometry = value;
@@ -169,7 +211,8 @@ public class RasterSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà channelSelection.
+     * "ChannelSelection" specifies the false-color channel selection
+     *         for a multi-spectral raster source.
      * 
      * @return
      *     possible object is
@@ -187,6 +230,7 @@ public class RasterSymbolizer
      *     allowed object is
      *     {@link ChannelSelection }
      *     
+     * @see #getChannelSelection()
      */
     public void setChannelSelection(ChannelSelection value) {
         this.channelSelection = value;
@@ -197,7 +241,9 @@ public class RasterSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà overlapBehavior.
+     * "OverlapBehavior" tells a system how to behave when multiple
+     *         raster images in a layer overlap each other, for example with
+     *         satellite-image scenes.
      * 
      * @return
      *     possible object is
@@ -215,6 +261,7 @@ public class RasterSymbolizer
      *     allowed object is
      *     {@link OverlapBehavior }
      *     
+     * @see #getOverlapBehavior()
      */
     public void setOverlapBehavior(OverlapBehavior value) {
         this.overlapBehavior = value;
@@ -225,7 +272,8 @@ public class RasterSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà colorMap.
+     * A "ColorMap" defines either the colors of a pallet-type raster
+     *         source or the mapping of numeric pixel values to colors.
      * 
      * @return
      *     possible object is
@@ -243,6 +291,7 @@ public class RasterSymbolizer
      *     allowed object is
      *     {@link ColorMap }
      *     
+     * @see #getColorMap()
      */
     public void setColorMap(ColorMap value) {
         this.colorMap = value;
@@ -253,7 +302,10 @@ public class RasterSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà contrastEnhancement.
+     * "ContrastEnhancement" defines the 'stretching' of contrast for a
+     *         channel of a false-color image or for a whole grey/color image.
+     *         Contrast enhancement is used to make ground features in images
+     *         more visible.
      * 
      * @return
      *     possible object is
@@ -271,6 +323,7 @@ public class RasterSymbolizer
      *     allowed object is
      *     {@link ContrastEnhancement }
      *     
+     * @see #getContrastEnhancement()
      */
     public void setContrastEnhancement(ContrastEnhancement value) {
         this.contrastEnhancement = value;
@@ -281,7 +334,10 @@ public class RasterSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà shadedRelief.
+     * "ShadedRelief" specifies the application of relief shading
+     *         (or "hill shading") to a DEM raster to give it somewhat of a
+     *         three-dimensional effect and to make elevation changes more
+     *         visible.
      * 
      * @return
      *     possible object is
@@ -299,6 +355,7 @@ public class RasterSymbolizer
      *     allowed object is
      *     {@link ShadedRelief }
      *     
+     * @see #getShadedRelief()
      */
     public void setShadedRelief(ShadedRelief value) {
         this.shadedRelief = value;
@@ -309,7 +366,9 @@ public class RasterSymbolizer
     }
 
     /**
-     * Recupera il valore della proprietà imageOutline.
+     * "ImageOutline" specifies how individual source rasters in
+     *         a multi-raster set (such as a set of satellite-image scenes)
+     *         should be outlined to make the individual-image locations visible.
      * 
      * @return
      *     possible object is
@@ -327,6 +386,7 @@ public class RasterSymbolizer
      *     allowed object is
      *     {@link ImageOutline }
      *     
+     * @see #getImageOutline()
      */
     public void setImageOutline(ImageOutline value) {
         this.imageOutline = value;
@@ -336,21 +396,24 @@ public class RasterSymbolizer
         return (this.imageOutline!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             Geometry theGeometry;

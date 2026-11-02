@@ -35,43 +35,32 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.WMSVersion;
-import org.geosdi.geoplatform.connector.server.GPWMSServerConnector;
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;
 
 import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Richiesta POST con JAXB {@code jakarta.xml.bind}: è la versione jakarta di {@link GPPostConnectorRequest}.
+ *
+ * @param <T> il tipo della risposta
+ * @param <Request> il tipo dell'oggetto inviato al server
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseWMSGetCapabilitiesRequest<T> extends GPWMSBaseGetRequest<T> implements GPWMSGetCapabilitiesRequest<T> {
-
-    private final WMSVersion version;
+public abstract class GPPostJakartaConnectorRequest<T, Request> extends PostJakartaConnectorRequest<T> implements IGPostJakartaConnectorRequest<T> {
 
     /**
-     * @param server
+     * @param theServer il connettore del server
      */
-    protected GPBaseWMSGetCapabilitiesRequest(@Nonnull(when = NEVER) GPWMSServerConnector server, @Nonnull(when = NEVER) GPBaseJAXBContext theWMSJAXBContext) {
-        super(server, theWMSJAXBContext);
-        this.version = server.getVersion();
+    protected GPPostJakartaConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        super(theServer);
     }
 
     /**
-     * @return {@link String}
+     * @return {@link Request}
+     * @throws Exception se non è possibile creare l'oggetto della richiesta
      */
-    @Override
-    protected String createUriPath() throws Exception {
-        return this.buildGetCapabilitiesURL(this.serverURI.toString());
-    }
-
-    /**
-     * @return {@link WMSVersion}
-     */
-    @Override
-    public WMSVersion getVersion() {
-        return this.version;
-    }
+    protected abstract Request createRequest() throws Exception;
 }

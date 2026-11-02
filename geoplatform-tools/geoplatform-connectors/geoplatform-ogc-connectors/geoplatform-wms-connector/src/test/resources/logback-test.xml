@@ -33,4 +33,9 @@
     <logger name="org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Gml3Reader" level="info"/>
     <logger name="org.geosdi.geoplatform.connector.server.v111.GPWMSServerConnectorV111" level="info"/>
 
+    <!-- I test dei reader StAX e StAX2 stampano a INFO intere feature collection: oltre 300 MB a ogni lancio,
+         che rallentano Maven quando l'output va su file o in CI. Per vederle, riportare questi due logger a info. -->
+    <logger name="org.geosdi.geoplatform.connector.wms.stax" level="warn"/>
+    <logger name="org.geosdi.geoplatform.connector.wms.stax2" level="warn"/>
+
 </configuration>

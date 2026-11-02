@@ -33,25 +33,22 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.jaxb.pool.factory;
+package org.geosdi.geoplatform.connector.jaxb.repository;
 
-import javax.xml.bind.JAXBContext;
+import org.geosdi.geoplatform.connector.WMSVersion;
+import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
 
 /**
+ * Fornisce il contesto JAXB {@code jakarta.xml.bind} di una versione WMS.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPJAXBContextCachePool {
+public interface GPWMSConnectorJAXBContext extends GeoPlatformJakartaContextProvider {
 
     /**
-     * @return {@link JAXBContext}
+     * @param <Version> il tipo della versione
+     * @return la versione WMS del contesto
      */
-    JAXBContext getContext() throws Exception;
-
-    /**
-     * @return {@link Class}
-     */
-    Class getType();
-
-    void dispose();
+    <Version extends WMSVersion> Version getVersion();
 }

@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.jaxb.model;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -54,8 +54,6 @@ import java.util.List;
 @ToString
 @XmlRootElement(name = "Car")
 @XmlAccessorType(XmlAccessType.FIELD)
-@jakarta.xml.bind.annotation.XmlRootElement(name = "Car")
-@jakarta.xml.bind.annotation.XmlAccessorType(jakarta.xml.bind.annotation.XmlAccessType.FIELD)
 public class Car implements Serializable {
 
     private static final long serialVersionUID = -3674922047430621165L;
@@ -64,7 +62,5 @@ public class Car implements Serializable {
     private String model;
     @XmlElementWrapper(name = "carParts")
     @XmlElement(name = "carPart")
-    @jakarta.xml.bind.annotation.XmlElementWrapper(name = "carParts")
-    @jakarta.xml.bind.annotation.XmlElement(name = "carPart")
     private List<CarPart> carParts;
 }

@@ -53,15 +53,14 @@ import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Base delle richieste GetFeatureInfo per le versioni WMS con binding {@code jakarta.xml.bind}: ha preso il
- * posto di {@code GPWMSBaseGetFeatureInfoRequest}, la versione javax tolta con il passaggio di WMS 1.3.0 a
- * jakarta. La risposta si legge con i reader del {@code store}, non con JAXB.
+ * Base delle richieste GetFeatureInfo per le versioni WMS con binding {@code jakarta.xml.bind}. La risposta si
+ * legge con i reader del {@code store}, non con JAXB.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public abstract class GPWMSBaseGetFeatureInfoJakartaRequest<T, R extends GPWMSGetFeatureInfoRequest> extends GPWMSBaseGetJakartaRequest<T> implements GPWMSGetFeatureInfoRequest<T, R> {
+public abstract class GPWMSBaseGetFeatureInfoRequest<T, R extends GPWMSGetFeatureInfoRequest> extends GPWMSBaseGetRequest<T> implements GPWMSGetFeatureInfoRequest<T, R> {
 
     protected static final WMSGetFeatureInfoReaderStore store = new GPWMSGetFeatureInfoReaderStore();
     //
@@ -77,7 +76,7 @@ public abstract class GPWMSBaseGetFeatureInfoJakartaRequest<T, R extends GPWMSGe
      * @param server
      * @param theWmsJAXBContext
      */
-    protected GPWMSBaseGetFeatureInfoJakartaRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) GPBaseJakartaContext theWmsJAXBContext) {
+    protected GPWMSBaseGetFeatureInfoRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) GPBaseJakartaContext theWmsJAXBContext) {
         super(server, theWmsJAXBContext);
         this.version = server.getVersion();
         this.wmsGetMapBaseRequest = withInitial(() -> null);

@@ -57,7 +57,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.AttivitaJacksonXmlMapperTest.toAttivita;
 
 /**
@@ -69,7 +69,7 @@ public class LavoroJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(LavoroJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Lavoro> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Lavoro.class, new GPJacksonXmlSupport(JAXB));
+    private static final GPJacksonXmlMapper<Lavoro> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Lavoro.class, new GPJacksonXmlSupport(JAKARTA));
 
     @Test
     @Order(value = 0)

@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.support.jackson.model;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.ToString;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

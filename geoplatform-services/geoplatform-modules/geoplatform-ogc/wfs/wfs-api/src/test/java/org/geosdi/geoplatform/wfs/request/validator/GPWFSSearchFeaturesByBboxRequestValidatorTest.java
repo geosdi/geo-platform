@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.wfs.request.validator;
 
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
+import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxAndQueryRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.junit.Assert;
@@ -192,7 +193,7 @@ public class GPWFSSearchFeaturesByBboxRequestValidatorTest extends GPWFSRequestV
                 super.setServerURL("http://150.145.141.92/geoserver/wfs");
                 super.setTypeName("topp:states");
                 super.setMaxFeatures(50);
-                super.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                super.setQueryDTO(GPJAXBJakartaContextBuilder.jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +

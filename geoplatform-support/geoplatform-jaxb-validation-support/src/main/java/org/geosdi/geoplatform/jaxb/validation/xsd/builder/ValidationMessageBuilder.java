@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.xsd.builder;
 
+import jakarta.xml.bind.ValidationEvent;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ValidationMessage;
 import org.geosdi.geoplatform.jaxb.validation.xsd.message.XSDValidationMessage;
-
-import javax.xml.bind.ValidationEvent;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.jaxb.validation.configuration.GPSeverityMessage.fromValue;

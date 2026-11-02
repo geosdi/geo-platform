@@ -54,7 +54,7 @@ class WFSJAXBContextConfigurator {
     @Bean(name = "WFSConnectorJAXBContext")
     public WFSConnectorJAXBContext WFSConnectorJAXBContext() {
         WFSConnectorJAXBContext wfsJAXBContext = new WFSConnectorJAXBContext();
-        JakartaContextConnectorRepository.registerProvider(wfsJAXBContext.getKeyProvider(), wfsJAXBContext.getJakartaProvider());
+        JAXBContextConnectorRepository.registerProvider(wfsJAXBContext.getKeyProvider(), wfsJAXBContext.getJakartaProvider());
         return wfsJAXBContext;
     }
 }

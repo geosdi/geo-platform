@@ -35,47 +35,62 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.apache.hc.client5.http.classic.methods.HttpPost;
-import org.apache.hc.core5.http.HttpEntity;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Base delle richieste POST con JAXB {@code jakarta.xml.bind}: è la versione jakarta di
- * {@link PostConnectorRequest}.
+ * Base delle richieste WMS GET con JAXB {@code jakarta.xml.bind}.
  *
- * @param <T> il tipo della risposta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class PostJakartaConnectorRequest<T> extends GPBaseJakartaConnectorRequest<T, HttpPost> {
+abstract class GPWMSBaseGetRequest<T> extends GPGetConnectorRequest<T> {
+
+    private final GPBaseJakartaContext wmsJAXBContext;
 
     /**
-     * @param theServer il connettore del server
+     * @param server
+     * @param theWmsJAXBContext
      */
-    protected PostJakartaConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServer) {
-        super(theServer);
+    protected GPWMSBaseGetRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) GPBaseJakartaContext theWmsJAXBContext) {
+        super(server);
+        checkArgument(theWmsJAXBContext != null, "The Parameter wmsJAXBContext must not be null.");
+        this.wmsJAXBContext = theWmsJAXBContext;
     }
 
     /**
-     * @return {@link HttpPost}
-     * @throws Exception se non è possibile preparare il corpo della richiesta
+     * @return Marshaller
+     * @throws Exception
      */
     @Override
-    protected HttpPost prepareHttpMethod() throws Exception {
-        HttpPost postMethod = new HttpPost(super.serverURI);
-        postMethod.setConfig(this.prepareRequestConfig());
-        HttpEntity httpEntity = this.preparePostEntity();
-        postMethod.setEntity(httpEntity);
-        return postMethod;
+    public Marshaller getMarshaller() throws Exception {
+        return this.wmsJAXBContext.acquireMarshaller();
     }
 
     /**
-     * @return il corpo della richiesta POST
-     * @throws Exception se non è possibile prepararlo
+     * @return Unmarshaller
+     * @throws Exception
      */
-    protected abstract HttpEntity preparePostEntity() throws Exception;
+    @Override
+    public Unmarshaller getUnmarshaller() throws Exception {
+        return this.wmsJAXBContext.acquireUnmarshaller();
+    }
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * @throws Exception
+     */
+    @Override
+    public String showRequestAsString() throws Exception {
+        return this.createUriPath();
+    }
 }

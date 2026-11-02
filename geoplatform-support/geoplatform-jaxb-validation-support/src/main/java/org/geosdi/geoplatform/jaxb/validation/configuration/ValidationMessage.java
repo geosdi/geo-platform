@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.jaxb.validation.configuration;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ISeverityType.SeverityType;
 import org.geosdi.geoplatform.jaxb.validation.configuration.adapter.ValidationMessageAdapter;
 import org.geosdi.geoplatform.jaxb.validation.configuration.severity.ErrorSeverityMessage;
@@ -44,10 +46,7 @@ import org.geosdi.geoplatform.jaxb.validation.configuration.severity.FatalErrorS
 import org.geosdi.geoplatform.jaxb.validation.configuration.severity.WarningSeverityMessage;
 import org.geosdi.geoplatform.jaxb.validation.xsd.message.IXSDValidationMessage;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
-
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

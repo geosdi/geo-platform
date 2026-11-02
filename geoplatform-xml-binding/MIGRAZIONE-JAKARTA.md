@@ -90,10 +90,13 @@ Note sui plugin:
    `META-INF/sun-jaxb.episode`. Non copiare l'`ObjectFactory` dei package da cui il modulo dipende, che la generazione
    produce per via degli episodi.
 
-## Classi jakarta parallele
+## Classi jakarta parallele (tolte)
 
-Finché ci sono binding javax, accanto alle classi javax condivise ci sono le versioni jakarta, che restano dopo la
-migrazione:
+Durante la migrazione accanto alle classi javax condivise c'erano le versioni jakarta. Alla chiusura le javax sono state
+tolte e le versioni create per la migrazione hanno preso il loro nome (per esempio `GPGetJakartaConnectorRequest` è
+diventata `GPGetConnectorRequest`, `WMSJakartaContext` è diventata `WMSJAXBContext`); le classi jakarta che esistevano già
+prima (`GPJAXBJakartaContextBuilder`, `GPBaseJakartaContext`, `GPJacksonJAXBJakartaXmlSupport`...) hanno mantenuto il
+nome. Erano:
 - `geoplatform-connector-api`: `GPJakartaConnectorRequest`, `GPGetJakartaConnectorRequest`,
   `GPPostJakartaConnectorRequest`, `IGPostJakartaConnectorRequest` e le basi, `JakartaContextConnectorRepository`;
 - `geoplatform-wms-connector`: `WMSJakartaContext`, `WMSConnectorJakartaContextV111` e `V130`, le basi

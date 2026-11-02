@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.jaxb.spatial.adapter;
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
 import org.locationtech.jts.io.WKTWriter;
-
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  *

@@ -65,7 +65,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface WFSStatefulRequest<T, SELF extends WFSStatefulRequest<T, SELF>> extends IGPostJakartaConnectorRequest<T> {
+public interface WFSStatefulRequest<T, SELF extends WFSStatefulRequest<T, SELF>> extends IGPostConnectorRequest<T> {
 
     /**
      * Releases the per-thread configuration held in the {@code ThreadLocal} state of this request. This is an

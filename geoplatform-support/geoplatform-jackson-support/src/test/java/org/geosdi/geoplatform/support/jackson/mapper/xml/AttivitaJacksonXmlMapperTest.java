@@ -57,7 +57,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.MaterialeJacksonXmlMapperTest.toMateriale;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.PrestazioneJacksonXmlMapperTest.toPrestazioni;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -71,7 +71,7 @@ public class AttivitaJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(AttivitaJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Attivita> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Attivita.class, new GPJacksonXmlSupport(JAXB));
+    private static final GPJacksonXmlMapper<Attivita> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Attivita.class, new GPJacksonXmlSupport(JAKARTA));
 
     @Test
     @Order(value = 0)

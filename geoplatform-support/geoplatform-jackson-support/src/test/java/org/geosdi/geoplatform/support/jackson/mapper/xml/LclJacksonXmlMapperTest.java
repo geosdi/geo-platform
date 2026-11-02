@@ -52,7 +52,7 @@ import static java.time.LocalDate.now;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.ContrattoJacksonXmlMapperTest.toContratto;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.EmittenteFatturaJacksonXmlMapperTest.toEmittenteFattura;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.IntestatarioContrattoJacksonXmlMapperTest.toIntestatarioContratto;
@@ -69,7 +69,7 @@ public class LclJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(LclJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Lcl> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Lcl.class, new GPJacksonXmlSupport(JAXB));
+    private static final GPJacksonXmlMapper<Lcl> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Lcl.class, new GPJacksonXmlSupport(JAKARTA));
 
     @Test
     @Order(value = 0)

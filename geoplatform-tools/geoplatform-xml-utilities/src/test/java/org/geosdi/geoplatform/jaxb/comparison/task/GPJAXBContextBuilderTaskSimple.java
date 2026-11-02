@@ -48,8 +48,8 @@ import java.util.concurrent.Callable;
 import static java.io.File.separator;
 import static java.lang.String.join;
 import static java.lang.System.currentTimeMillis;
-import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createAttributes;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,7 +59,7 @@ public class GPJAXBContextBuilderTaskSimple implements Callable<Long> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBContextBuilderTaskSimple.class);
     //
-    private static final IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER = newInstance();
+    private static final IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER = jakartaContextBuilder();
     private static final String pathFile = join(separator, ".", "src", "test", "resources", "Car.xml");
 
     /**

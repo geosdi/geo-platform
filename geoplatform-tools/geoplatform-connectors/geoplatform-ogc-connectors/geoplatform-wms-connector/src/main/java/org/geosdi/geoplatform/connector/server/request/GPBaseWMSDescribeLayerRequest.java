@@ -51,14 +51,13 @@ import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Base delle richieste DescribeLayer con JAXB {@code jakarta.xml.bind}: ha preso il posto di
- * {@code GPBaseWMSDescribeLayerRequest}, la versione javax tolta con il passaggio di WMS 1.3.0 a jakarta.
+ * Base delle richieste DescribeLayer con JAXB {@code jakarta.xml.bind}.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public abstract class GPBaseWMSDescribeLayerJakartaRequest<T> extends GPWMSBaseGetJakartaRequest<T> implements GPWMSDescribeLayerRequest<T> {
+public abstract class GPBaseWMSDescribeLayerRequest<T> extends GPWMSBaseGetRequest<T> implements GPWMSDescribeLayerRequest<T> {
 
     private final WMSVersion version;
     private final ThreadLocal<String[]> layers;
@@ -67,7 +66,7 @@ public abstract class GPBaseWMSDescribeLayerJakartaRequest<T> extends GPWMSBaseG
      * @param server
      * @param theWmsJAXBContext
      */
-    protected GPBaseWMSDescribeLayerJakartaRequest(@Nonnull(when = NEVER) GPWMSServerConnector server, @Nonnull(when = NEVER) GPBaseJakartaContext theWmsJAXBContext) {
+    protected GPBaseWMSDescribeLayerRequest(@Nonnull(when = NEVER) GPWMSServerConnector server, @Nonnull(when = NEVER) GPBaseJakartaContext theWmsJAXBContext) {
         super(server, theWmsJAXBContext);
         this.version = server.getVersion();
         this.layers = withInitial(() -> null);

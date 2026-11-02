@@ -44,7 +44,7 @@ import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.connector.GeowebcacheVersion.fromString;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -100,7 +100,7 @@ public final class GPGeowebcacheConnectorStoreBuilder extends AbstractConnectorB
      */
     ObjectMapper toJacksonSupport() {
         this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : builder(FALSE)
-                .withIntespectorBuilder(JAXB)
+                .withIntespectorBuilder(JAKARTA)
                 .configure(NON_NULL).build());
         return this.jacksonSupport.getDefaultMapper();
     }

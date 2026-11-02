@@ -49,7 +49,7 @@ import static java.io.File.separator;
 import static java.lang.String.join;
 import static java.lang.System.currentTimeMillis;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createAttributes;
-import static org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool.jaxbContextBuilderPool;
+import static org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool.jaxbJakartaContextBuilderPool;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,7 +59,7 @@ public class GPJAXBContextBuilderTaskPooled implements Callable<Long> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBContextBuilderTaskPooled.class);
     //
-    private final static IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER_POOL = jaxbContextBuilderPool();
+    private final static IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER_POOL = jaxbJakartaContextBuilderPool();
     private static final String pathFile = join(separator, ".", "src", "test", "resources", "Car.xml");
 
     /**

@@ -48,7 +48,7 @@ import java.io.StringReader;
 
 import static java.io.File.separator;
 import static java.lang.String.join;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.CatalogJacksonXmlMapperTest.catalogBean;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -63,7 +63,7 @@ public class CatalogJacksonMapperTest {
     private static final Logger logger = LoggerFactory.getLogger(CatalogJacksonMapperTest.class);
     //
     private static final GPJacksonMapper<Catalog> GP_JACKSON_MAPPER = new GPBaseJacksonMapper<>(Catalog.class,
-            new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                     ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE));
 
     @Test

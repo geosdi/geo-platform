@@ -33,72 +33,47 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.jaxb.pool.factory;
+package org.geosdi.geoplatform.connector.server.request;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.WMSVersion;
+import org.geosdi.geoplatform.connector.server.GPWMSServerConnector;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBContext;
 
-import java.util.Objects;
-
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Base delle richieste GetCapabilities con JAXB {@code jakarta.xml.bind}.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPJAXBContextCachePool implements IGPJAXBContextCachePool {
+public abstract class GPBaseWMSGetCapabilitiesRequest<T> extends GPWMSBaseGetRequest<T> implements GPWMSGetCapabilitiesRequest<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPJAXBContextCachePool.class);
-    //
-    private final Class type;
-    private JAXBContext context;
+    private final WMSVersion version;
 
     /**
-     * @param theType
+     * @param server
      */
-    public GPJAXBContextCachePool(@Nonnull(when = NEVER) Class theType) {
-        checkArgument(theType != null, "The Parameter classType must not be null.");
-        this.type = theType;
+    protected GPBaseWMSGetCapabilitiesRequest(@Nonnull(when = NEVER) GPWMSServerConnector server, @Nonnull(when = NEVER) GPBaseJakartaContext theWMSJAXBContext) {
+        super(server, theWMSJAXBContext);
+        this.version = server.getVersion();
     }
 
     /**
-     * @return {@link JAXBContext}
+     * @return {@link String}
      */
-    public JAXBContext getContext() throws Exception {
-        return (this.context = (this.context != null) ? this.context : JAXBContext.newInstance(this.type));
+    @Override
+    protected String createUriPath() throws Exception {
+        return this.buildGetCapabilitiesURL(this.serverURI.toString());
     }
 
     /**
-     * @return {@link Class}
+     * @return {@link WMSVersion}
      */
-    public Class getType() {
-        return this.type;
-    }
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof GPJAXBContextCachePool)) return false;
-        GPJAXBContextCachePool that = (GPJAXBContextCachePool) o;
-        return Objects.equals(type, that.type);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type);
-    }
-
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
-
-    @Override
-    public void dispose() {
-        logger.debug("#########################CALLED {}#dispose for ----------> class : {}\n", this, this.type);
+    public WMSVersion getVersion() {
+        return this.version;
     }
 }

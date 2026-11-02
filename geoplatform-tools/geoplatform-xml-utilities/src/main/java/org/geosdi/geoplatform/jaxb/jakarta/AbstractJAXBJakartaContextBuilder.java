@@ -397,7 +397,7 @@ public abstract class AbstractJAXBJakartaContextBuilder implements IGPJAXBJakart
      * @param type
      * @param <T>
      * @return {@link JAXBContext}
-     * @throws javax.xml.bind.JAXBException
+     * @throws JAXBException
      */
     protected abstract <T> JAXBContext getContext(Class<T> type) throws JAXBException;
 

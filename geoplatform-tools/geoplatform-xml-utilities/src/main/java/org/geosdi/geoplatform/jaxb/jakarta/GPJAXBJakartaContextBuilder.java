@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.jaxb.jakarta;
 
 import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 
-import javax.xml.bind.JAXBException;
 import java.lang.ref.WeakReference;
 
 /**
@@ -64,7 +64,7 @@ public final class GPJAXBJakartaContextBuilder extends AbstractJAXBJakartaContex
      * @throws JAXBException
      */
     @Override
-    protected <T> JAXBContext getContext(Class<T> type) throws jakarta.xml.bind.JAXBException {
+    protected <T> JAXBContext getContext(Class<T> type) throws JAXBException {
         WeakReference<GPJAXBJakartaContextCache> c = cache;
         if (c != null) {
             GPJAXBJakartaContextCache d = c.get();

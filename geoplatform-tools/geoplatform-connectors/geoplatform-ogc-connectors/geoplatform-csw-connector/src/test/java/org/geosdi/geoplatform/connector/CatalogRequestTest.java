@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.Marshaller;
 import org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.geosdi.geoplatform.xml.filter.v110.*;
@@ -63,7 +63,7 @@ public class CatalogRequestTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private final GPBaseJakartaContext cswContext = JakartaContextConnectorRepository.getProvider(
+    private final GPBaseJakartaContext cswContext = JAXBContextConnectorRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     private org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
     private org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.stax.reader;
 
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
@@ -94,15 +93,6 @@ public class GPSecureXmlReaderTest {
     @jakarta.xml.bind.annotation.XmlRootElement(name = "r")
     @jakarta.xml.bind.annotation.XmlAccessorType(jakarta.xml.bind.annotation.XmlAccessType.FIELD)
     public static class JakartaRoot {
-        public String v;
-    }
-
-    /**
-     * Elemento radice dei documenti di prova per JAXB javax.
-     */
-    @javax.xml.bind.annotation.XmlRootElement(name = "r")
-    @javax.xml.bind.annotation.XmlAccessorType(javax.xml.bind.annotation.XmlAccessType.FIELD)
-    public static class JavaxRoot {
         public String v;
     }
 
@@ -229,21 +219,6 @@ public class GPSecureXmlReaderTest {
                 file -> jakarta().unmarshal(new StreamSource(file.toURI().toString()), JakartaRoot.class).v);
         readers.put("jakarta unmarshal(StreamSource percorso)",
                 file -> jakarta().unmarshal(new StreamSource(file.getAbsolutePath()), JakartaRoot.class).v);
-        readers.put("javax unmarshal(StreamSource percorso)",
-                file -> GPJAXBContextBuilder.newInstance().unmarshal(new StreamSource(file.getAbsolutePath()), JavaxRoot.class).v);
-        readers.put("javax unmarshal(File)", file -> GPJAXBContextBuilder.newInstance().unmarshal(file, JavaxRoot.class).v);
-        readers.put("javax unmarshal(URL)",
-                file -> GPJAXBContextBuilder.newInstance().unmarshal(file.toURI().toURL(), JavaxRoot.class).v);
-        readers.put("javax unmarshal(InputStream)", file -> {
-            try (InputStream stream = new FileInputStream(file)) {
-                return GPJAXBContextBuilder.newInstance().unmarshal(stream, JavaxRoot.class).v;
-            }
-        });
-        readers.put("javax unmarshal(Reader)", file -> {
-            try (FileReader reader = new FileReader(file, UTF_8)) {
-                return GPJAXBContextBuilder.newInstance().unmarshal(reader, JavaxRoot.class).v;
-            }
-        });
         return readers;
     }
 

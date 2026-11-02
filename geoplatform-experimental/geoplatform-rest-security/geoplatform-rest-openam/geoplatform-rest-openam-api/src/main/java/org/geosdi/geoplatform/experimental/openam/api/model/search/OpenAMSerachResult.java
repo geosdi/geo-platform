@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.experimental.openam.api.model.search;
 
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.geosdi.geoplatform.experimental.openam.api.model.users.search.OpenAMSearchUsersResult;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.List;
 

@@ -54,7 +54,7 @@ class CatalogJAXBContextConfigurator {
     @Bean(name = "cswConnectorJAXBContext")
     public CSWConnectorJAXBContext cswConnectorJAXBContext() {
         CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
-        JakartaContextConnectorRepository.registerProvider(cswJAXBContext.getKeyProvider(), cswJAXBContext.getJakartaProvider());
+        JAXBContextConnectorRepository.registerProvider(cswJAXBContext.getKeyProvider(), cswJAXBContext.getJakartaProvider());
         return cswJAXBContext;
     }
 }

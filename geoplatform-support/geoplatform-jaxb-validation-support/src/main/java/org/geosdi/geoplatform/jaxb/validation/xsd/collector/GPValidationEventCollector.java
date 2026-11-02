@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.xsd.collector;
 
+import jakarta.xml.bind.ValidationEvent;
 import org.geosdi.geoplatform.jaxb.validation.configuration.store.GPValidationMessageStore;
 import org.geosdi.geoplatform.jaxb.validation.configuration.store.ValidationMessageStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.xml.bind.ValidationEvent;
 
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.jaxb.validation.xsd.builder.ValidationMessageBuilder.GPValidationMessageBuilder.validationMessageBuilder;

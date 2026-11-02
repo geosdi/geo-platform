@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.wms.unmarshall;
 
-import org.geosdi.geoplatform.connector.jaxb.context.WMSJakartaContext;
-import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.context.WMSJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 import org.geosdi.geoplatform.wms.v111.WMSDescribeLayerResponse;
 import org.geosdi.geoplatform.wms.v111.WMTMSCapabilities;
@@ -59,7 +59,7 @@ import static java.lang.Boolean.FALSE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WMSVersion.V111;
-import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJakartaContextV111.WMS_CONTEXT_KEY_V111;
+import static org.geosdi.geoplatform.connector.jaxb.repository.WMSConnectorJAXBContextV111.WMS_CONTEXT_KEY_V111;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -74,7 +74,7 @@ public class WMSV111UnmarshallTest {
     private static final Logger logger = LoggerFactory.getLogger(WMSV111UnmarshallTest.class);
 
     static {
-        wmsContext = JakartaContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V111);
+        wmsContext = JAXBContextConnectorRepository.getProvider(WMS_CONTEXT_KEY_V111);
     }
 
     private static final SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -84,8 +84,8 @@ public class WMSV111UnmarshallTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         assertNotNull(wmsContext);
-        assertTrue(wmsContext instanceof WMSJakartaContext);
-        assertTrue(((WMSJakartaContext) wmsContext).getVersion() == V111);
+        assertTrue(wmsContext instanceof WMSJAXBContext);
+        assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V111);
         basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);

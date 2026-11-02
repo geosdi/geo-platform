@@ -39,7 +39,7 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.jaxb.repository.WPSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
@@ -52,10 +52,10 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WPSRequest<T, Request> extends GPPostJakartaConnectorRequest<T, Request> {
+public abstract class WPSRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
 
     static {
-        wpsContext = JakartaContextConnectorRepository.getProvider(WPSConnectorJAXBContext.WPS_CONTEXT_KEY);
+        wpsContext = JAXBContextConnectorRepository.getProvider(WPSConnectorJAXBContext.WPS_CONTEXT_KEY);
     }
 
     //

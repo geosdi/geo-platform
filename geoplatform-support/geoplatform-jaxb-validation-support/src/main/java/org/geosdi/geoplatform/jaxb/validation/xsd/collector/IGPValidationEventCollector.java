@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.xsd.collector;
 
+import jakarta.xml.bind.ValidationEventHandler;
 import org.geosdi.geoplatform.jaxb.validation.configuration.store.ValidationMessageStore;
-
-import javax.xml.bind.ValidationEventHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

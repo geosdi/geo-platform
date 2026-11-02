@@ -48,7 +48,7 @@ import java.net.URI;
 
 import static java.io.File.separator;
 import static java.lang.String.join;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertEquals;
@@ -64,7 +64,7 @@ public class SimpleBeanJacksonReaderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleBeanJacksonReaderTest.class);
     //
-    private static final GPJacksonReaderSupport<SimpleBean> JACKSON_READER_SUPPORT = new GPBaseJacksonReaderSupport<>(new GPJacksonSupport(JAXB,
+    private static final GPJacksonReaderSupport<SimpleBean> JACKSON_READER_SUPPORT = new GPBaseJacksonReaderSupport<>(new GPJacksonSupport(JAKARTA,
             UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE)
             .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)

@@ -36,16 +36,17 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 /**
+ * Richiesta POST con JAXB {@code jakarta.xml.bind}.
+ *
+ * @param <T> il tipo della risposta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IGPostConnectorRequest<T> extends GPJAXBConnectorRequest<T> {
 
     /**
-     * Show the XML Object created for the Request to send to Server
-     *
-     * @return Request as a String
-     * @throws Exception
+     * @return l'XML della richiesta da inviare al server
+     * @throws Exception se non è possibile scriverlo
      */
     String showRequestAsString() throws Exception;
 }

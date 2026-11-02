@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.support.jackson.annotation;
 
 import tools.jackson.databind.AnnotationIntrospector;
 import tools.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationIntrospector;
-import tools.jackson.module.jaxb.JaxbAnnotationIntrospector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,15 +44,6 @@ import tools.jackson.module.jaxb.JaxbAnnotationIntrospector;
  */
 public enum JacksonXmlAnnotationIntrospectorBuilder implements GPJacksonXmlAnnotationIntrospectorBuilder {
 
-    JAXB {
-        /**
-         * @return {@link AnnotationIntrospector}
-         */
-        @Override
-        public AnnotationIntrospector build() {
-            return new JaxbAnnotationIntrospector();
-        }
-    },
     JAKARTA {
         /**
          * @return {@link AnnotationIntrospector}

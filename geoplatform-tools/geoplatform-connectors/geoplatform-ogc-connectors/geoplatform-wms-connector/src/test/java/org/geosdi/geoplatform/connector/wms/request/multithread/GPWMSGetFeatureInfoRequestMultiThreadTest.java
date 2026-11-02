@@ -73,7 +73,7 @@ import static org.junit.Assert.assertTrue;
  * Verifies the thread-safety contract of {@link GPWMSGetFeatureInfoV111Request} : a <b>single, shared</b> request
  * instance can be configured with different parameters (query layers, x, y, featureCount, ...) concurrently from many
  * threads, and each thread always reads back its own configuration. This is exactly what the {@code ThreadLocal} state
- * inside {@code GPWMSBaseGetFeatureInfoJakartaRequest} guarantees : if that state were kept in plain instance fields, threads
+ * inside {@code GPWMSBaseGetFeatureInfoRequest} guarantees : if that state were kept in plain instance fields, threads
  * would clobber each other and the per-thread assertions below would fail non-deterministically.
  * <p>
  * The test is deterministic and does <b>not</b> perform any network call : it relies on

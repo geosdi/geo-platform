@@ -35,38 +35,39 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.repository;
 
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository.GeoPlatformJakartaContextKey;
 
 /**
+ * Accesso statico al repository dei contesti JAXB {@code jakarta.xml.bind} dei connettori.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public final class JAXBContextConnectorRepository {
 
-    static {
-        INSTANCE = new ConnectorJAXBContextRepository();
-    }
+    private static final ConnectorJAXBContextRepository INSTANCE = new ConnectorJAXBContextRepository();
 
-    //
-    private static final ConnectorJAXBContextRepository INSTANCE;
-
+    /**
+     * Classe di sole funzioni statiche.
+     */
     private JAXBContextConnectorRepository() {
     }
 
     /**
-     * @param key
-     * @param provider
+     * @param key la chiave del contesto
+     * @param provider il contesto da registrare
      */
-    public static void registerProvider(ConnectorJAXBContextRepository.GeoPlatformJAXBContextKey key, Object provider) {
+    public static void registerProvider(GeoPlatformJakartaContextKey key, Object provider) {
         INSTANCE.registerProvider(key, provider);
     }
 
     /**
-     * @param key
-     * @param <P>
-     * @return {@link P}
+     * @param key la chiave del contesto
+     * @param <P> il tipo del contesto
+     * @return il contesto registrato per la chiave, creato alla prima richiesta
      */
-    public static <P extends GPBaseJAXBContext> P getProvider(ConnectorJAXBContextRepository.GeoPlatformJAXBContextKey key) {
+    public static <P extends GPBaseJakartaContext> P getProvider(GeoPlatformJakartaContextKey key) {
         return INSTANCE.getProvider(key);
     }
 }

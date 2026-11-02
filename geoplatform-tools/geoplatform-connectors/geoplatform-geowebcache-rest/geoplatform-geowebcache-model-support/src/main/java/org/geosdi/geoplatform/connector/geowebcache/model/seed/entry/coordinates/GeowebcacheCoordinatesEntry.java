@@ -36,12 +36,12 @@
 package org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.coordinates;
 
 import com.google.common.collect.Lists;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.coordinates.GPGeowebcacheCoordinatesEntry;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 import static java.util.Arrays.asList;

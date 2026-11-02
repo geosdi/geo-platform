@@ -53,7 +53,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createAttributes;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createCarParts;
-import static org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool.jaxbContextBuilderPool;
+import static org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool.jaxbJakartaContextBuilderPool;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -64,7 +64,7 @@ public class GPJAXBContextBuilderPoolTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBContextBuilderPoolTest.class);
     //
-    private final static IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER_POOL = jaxbContextBuilderPool();
+    private final static IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER_POOL = jaxbJakartaContextBuilderPool();
 
     @Test
     public void a_writeCarAsStringPoolTest() throws Exception {

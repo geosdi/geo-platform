@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.jaxb;
 
 import org.geosdi.geoplatform.jaxb.function.AttributeFunction;
 import org.geosdi.geoplatform.jaxb.function.CarPartFunction;
+import org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder;
 import org.geosdi.geoplatform.jaxb.model.Attribute;
 import org.geosdi.geoplatform.jaxb.model.AttributeStore;
 import org.geosdi.geoplatform.jaxb.model.Car;
@@ -69,7 +70,7 @@ public class GPJAXBContextBuilderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBContextBuilderTest.class);
     //
-    private static final IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER = GPJAXBContextBuilder.newInstance();
+    private static final IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER = GPJAXBJakartaContextBuilder.jakartaContextBuilder();
 
     @Test
     public void a_writeCarAsStringTest() throws Exception {

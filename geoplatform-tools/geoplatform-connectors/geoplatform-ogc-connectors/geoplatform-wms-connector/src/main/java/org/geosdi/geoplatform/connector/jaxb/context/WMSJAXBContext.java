@@ -52,13 +52,12 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * Contesto JAXB {@code jakarta.xml.bind} di una versione WMS: ha preso il posto di {@code WMSJAXBContext}, la
- * versione javax tolta con il passaggio di WMS 1.3.0 a jakarta, per i binding già rigenerati per jakarta.
+ * Contesto JAXB {@code jakarta.xml.bind} di una versione WMS, per i binding già rigenerati per jakarta.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WMSJakartaContext extends GeoPlatformJakartaContext {
+public class WMSJAXBContext extends GeoPlatformJakartaContext {
 
     @Getter
     private final WMSVersion version;
@@ -68,7 +67,7 @@ public class WMSJakartaContext extends GeoPlatformJakartaContext {
      * @param theVersion la versione WMS
      * @throws JAXBException se non è possibile creare il contesto
      */
-    public WMSJakartaContext(String theContextPath, @Nonnull(when = NEVER) WMSVersion theVersion) throws JAXBException {
+    public WMSJAXBContext(String theContextPath, @Nonnull(when = NEVER) WMSVersion theVersion) throws JAXBException {
         super(theContextPath);
         checkArgument(theVersion != null, "Il parametro theVersion non deve essere null.");
         this.version = theVersion;
@@ -80,7 +79,7 @@ public class WMSJakartaContext extends GeoPlatformJakartaContext {
      * @param theVersion la versione WMS
      * @throws JAXBException se non è possibile creare il contesto
      */
-    public WMSJakartaContext(String theContextPath, ClassLoader theClassLoader, @Nonnull(when = NEVER) WMSVersion theVersion) throws JAXBException {
+    public WMSJAXBContext(String theContextPath, ClassLoader theClassLoader, @Nonnull(when = NEVER) WMSVersion theVersion) throws JAXBException {
         super(theContextPath, theClassLoader);
         checkArgument(theVersion != null, "Il parametro theVersion non deve essere null.");
         this.version = theVersion;
@@ -93,7 +92,7 @@ public class WMSJakartaContext extends GeoPlatformJakartaContext {
      * @param theVersion la versione WMS
      * @throws JAXBException se non è possibile creare il contesto
      */
-    public WMSJakartaContext(String theContextPath, ClassLoader theClassLoader, Map<String, ?> theProperties,
+    public WMSJAXBContext(String theContextPath, ClassLoader theClassLoader, Map<String, ?> theProperties,
             @Nonnull(when = NEVER) WMSVersion theVersion) throws JAXBException {
         super(theContextPath, theClassLoader, theProperties);
         checkArgument(theVersion != null, "Il parametro theVersion non deve essere null.");
@@ -105,7 +104,7 @@ public class WMSJakartaContext extends GeoPlatformJakartaContext {
      * @param theClassToBeBound le classi da legare al contesto
      * @throws JAXBException se non è possibile creare il contesto
      */
-    public WMSJakartaContext(@Nonnull(when = NEVER) WMSVersion theVersion, Class... theClassToBeBound) throws JAXBException {
+    public WMSJAXBContext(@Nonnull(when = NEVER) WMSVersion theVersion, Class... theClassToBeBound) throws JAXBException {
         super(theClassToBeBound);
         checkArgument(theVersion != null, "Il parametro theVersion non deve essere null.");
         this.version = theVersion;
@@ -115,7 +114,7 @@ public class WMSJakartaContext extends GeoPlatformJakartaContext {
      * @param theJaxbContext il contesto già creato
      * @param theVersion la versione WMS
      */
-    public WMSJakartaContext(JAXBContext theJaxbContext, @Nonnull(when = NEVER) WMSVersion theVersion) {
+    public WMSJAXBContext(JAXBContext theJaxbContext, @Nonnull(when = NEVER) WMSVersion theVersion) {
         super(theJaxbContext);
         checkArgument(theVersion != null, "Il parametro theVersion non deve essere null.");
         this.version = theVersion;
@@ -140,24 +139,24 @@ public class WMSJakartaContext extends GeoPlatformJakartaContext {
     }
 
     /**
-     * Chiave dei contesti {@link WMSJakartaContext} nel repository dei connettori.
+     * Chiave dei contesti {@link WMSJAXBContext} nel repository dei connettori.
      */
-    public static class WMSJakartaContextKey extends GeoPlatformJakartaContextKey {
+    public static class WMSJAXBContextKey extends GeoPlatformJakartaContextKey {
 
         /**
          * @param theJakartaContextClass la classe che fornisce il contesto
          */
-        public WMSJakartaContextKey(@Nonnull(when = NEVER) Class<? extends GeoPlatformJakartaContextProvider> theJakartaContextClass) {
+        public WMSJAXBContextKey(@Nonnull(when = NEVER) Class<? extends GeoPlatformJakartaContextProvider> theJakartaContextClass) {
             super(theJakartaContextClass);
         }
 
         /**
          * @param val il valore da registrare con questa chiave
-         * @return true se il valore è un {@link WMSJakartaContext}
+         * @return true se il valore è un {@link WMSJAXBContext}
          */
         @Override
         public boolean isCompatibleValue(Object val) {
-            return (val instanceof WMSJakartaContext);
+            return (val instanceof WMSJAXBContext);
         }
     }
 }

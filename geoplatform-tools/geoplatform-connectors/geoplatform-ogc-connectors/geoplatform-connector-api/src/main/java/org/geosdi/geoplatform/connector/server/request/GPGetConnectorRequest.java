@@ -44,20 +44,24 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Richiesta GET con JAXB {@code jakarta.xml.bind}.
+ *
+ * @param <T> il tipo della risposta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPGetConnectorRequest<T> extends GetConnectorRequest<T> {
 
     /**
-     * @param server
+     * @param theServer il connettore del server
      */
-    protected GPGetConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server) {
-        super(server);
+    protected GPGetConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        super(theServer);
     }
 
     /**
      * @return {@link HttpGet}
+     * @throws Exception se il percorso della richiesta non è valido
      */
     @Override
     protected HttpGet prepareHttpMethod() throws Exception {

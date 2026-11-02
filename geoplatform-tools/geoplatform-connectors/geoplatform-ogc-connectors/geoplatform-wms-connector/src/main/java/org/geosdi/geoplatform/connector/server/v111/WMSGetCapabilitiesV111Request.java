@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.server.v111;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPWMSServerConnector;
-import org.geosdi.geoplatform.connector.server.request.GPBaseWMSGetCapabilitiesJakartaRequest;
+import org.geosdi.geoplatform.connector.server.request.GPBaseWMSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.wms.v111.WMTMSCapabilities;
 
 import javax.annotation.Nonnull;
@@ -50,7 +50,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class WMSGetCapabilitiesV111Request extends GPBaseWMSGetCapabilitiesJakartaRequest<WMTMSCapabilities> implements GPWMSGetCapabilitiesV111Request {
+class WMSGetCapabilitiesV111Request extends GPBaseWMSGetCapabilitiesRequest<WMTMSCapabilities> implements GPWMSGetCapabilitiesV111Request {
 
     /**
      * @param server

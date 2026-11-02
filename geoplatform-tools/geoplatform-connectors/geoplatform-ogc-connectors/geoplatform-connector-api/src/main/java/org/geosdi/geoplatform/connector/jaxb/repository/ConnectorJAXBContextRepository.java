@@ -35,41 +35,45 @@
  */
 package org.geosdi.geoplatform.connector.jaxb.repository;
 
-import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
-import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.jaxb.repository.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
+import org.geosdi.geoplatform.jakarta.provider.GeoPlatformJakartaContextProvider;
+import org.geosdi.geoplatform.jakarta.repository.GeoPlatformJakartaContextRepository;
 
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.String.format;
 import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Repository dei contesti JAXB {@code jakarta.xml.bind} dei connettori. Crea il contesto alla prima richiesta e
+ * lo tiene per le successive.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class ConnectorJAXBContextRepository extends GeoPlatformJAXBContextRepository {
+public class ConnectorJAXBContextRepository extends GeoPlatformJakartaContextRepository {
 
     /**
-     * @param key
-     * @param <P>
+     * Crea il provider indicato dalla chiave, lo registra e ne restituisce il contesto.
+     *
+     * @param key la chiave del contesto
+     * @param <P> il tipo del contesto
      * @return {@link P}
      */
     @Override
-    public <P extends GPBaseJAXBContext> P lookUpJAXBContext(@Nonnull(when = NEVER) GeoPlatformJAXBContextKey key) {
+    public <P extends GPBaseJakartaContext> P lookUpJakartaContext(@Nonnull(when = NEVER) GeoPlatformJakartaContextKey key) {
         checkArgument(key != null, "The Parameter key must not be null.");
-        logger.debug("##############################CALLED lookUpJAXBContext with Key : {}\n", key);
+        logger.debug("##############################CALLED lookUpJakartaContext with Key : {}\n", key);
         try {
-            Class<?> classe = key.getJAXBContextClass();
-            Object jaxbContext = classe.getDeclaredConstructor().newInstance();
-            if (!(jaxbContext instanceof GeoPlatformJAXBContextProvider)) {
-                throw new IllegalArgumentException("The class : " + jaxbContext.getClass().getName() + " is not an instance of GeoPlatformJAXBContextProvider");
+            Object provider = key.getJakartaContextClass().getDeclaredConstructor().newInstance();
+            if (!(provider instanceof GeoPlatformJakartaContextProvider)) {
+                throw new IllegalArgumentException("The class : " + provider.getClass().getName() + " is not an instance of GeoPlatformJakartaContextProvider");
             }
-            super.registerProvider(key, ((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
-            return (((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
+            P jakartaContext = ((GeoPlatformJakartaContextProvider) provider).getJakartaProvider();
+            super.registerProvider(key, jakartaContext);
+            return jakartaContext;
         } catch (Exception ex) {
-            logger.error(format("Failed to Initialize JAXBContext for Class %s: @@@@@@@@@@@@@@@@@ %s", ConnectorJAXBContextRepository.class.getName(), ex));
+            logger.error("Impossibile creare il contesto jakarta per la chiave {}", key, ex);
             throw new IllegalStateException(ex);
         }
     }

@@ -44,21 +44,24 @@ import javax.annotation.Nonnull;
 import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Base delle richieste POST con JAXB {@code jakarta.xml.bind}.
+ *
+ * @param <T> il tipo della risposta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 abstract class PostConnectorRequest<T> extends GPBaseConnectorRequest<T, HttpPost> {
 
     /**
-     * @param server
+     * @param theServer il connettore del server
      */
-    protected PostConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server) {
-        super(server);
+    protected PostConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        super(theServer);
     }
 
     /**
      * @return {@link HttpPost}
-     * @throws Exception
+     * @throws Exception se non è possibile preparare il corpo della richiesta
      */
     @Override
     protected HttpPost prepareHttpMethod() throws Exception {
@@ -70,8 +73,8 @@ abstract class PostConnectorRequest<T> extends GPBaseConnectorRequest<T, HttpPos
     }
 
     /**
-     * @return {@link HttpEntity}
-     * @throws Exception
+     * @return il corpo della richiesta POST
+     * @throws Exception se non è possibile prepararlo
      */
     protected abstract HttpEntity preparePostEntity() throws Exception;
 }

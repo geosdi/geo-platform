@@ -54,7 +54,7 @@ import static java.lang.Boolean.TRUE;
 import static java.util.Locale.*;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.DEFAULT;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.builder.JacksonSupportBuilder.GPJacksonSupportBuilder.builder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -85,7 +85,7 @@ public class GPJacksonSupportBuilderTest {
                 .withLocale(FRANCE)
                 .withTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Paris")))
                 .withDateFormat(new SimpleDateFormat("yyyy/MM/dd", FRANCE))
-                .withIntespectorBuilder(JAXB)
+                .withIntespectorBuilder(JAKARTA)
                 .configure(ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE, UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE)
                 .build();
 
@@ -115,7 +115,7 @@ public class GPJacksonSupportBuilderTest {
                 .withLocale(CHINA)
                 .withTimeZone(TimeZone.getTimeZone(ZoneId.of("Asia/Shanghai")))
                 .withDateFormat(new SimpleDateFormat("yyyy/MM/dd", CHINA))
-                .withIntespectorBuilder(JAXB)
+                .withIntespectorBuilder(JAKARTA)
                 .configure(FAIL_ON_NULL_FOR_PRIMITIVES_DISABLE, UNWRAP_ROOT_VALUE_DISABLE);
 
         try (ExecutorService executor = newFixedThreadPool(2)) {

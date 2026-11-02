@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.jaxb.model;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -54,15 +54,11 @@ import java.util.List;
 @ToString
 @XmlRootElement(name = "AttributeStore")
 @XmlAccessorType(XmlAccessType.FIELD)
-@jakarta.xml.bind.annotation.XmlRootElement(name = "AttributeStore")
-@jakarta.xml.bind.annotation.XmlAccessorType(jakarta.xml.bind.annotation.XmlAccessType.FIELD)
 public class AttributeStore implements Serializable {
 
     private static final long serialVersionUID = -2601597403686322914L;
     //
     @XmlElementWrapper(name = "attributes")
     @XmlElement(name = "attribute")
-    @jakarta.xml.bind.annotation.XmlElementWrapper(name = "attributes")
-    @jakarta.xml.bind.annotation.XmlElement(name = "attribute")
     private List<Attribute> attributes;
 }

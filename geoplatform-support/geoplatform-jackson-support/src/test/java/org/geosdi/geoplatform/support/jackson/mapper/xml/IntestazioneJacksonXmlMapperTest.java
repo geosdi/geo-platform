@@ -51,7 +51,7 @@ import static java.io.File.separator;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,7 +62,7 @@ public class IntestazioneJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(IntestazioneJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Intestazione> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Intestazione.class, new GPJacksonXmlSupport(JAXB));
+    private static final GPJacksonXmlMapper<Intestazione> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Intestazione.class, new GPJacksonXmlSupport(JAKARTA));
 
     @Test
     @Order(value = 0)

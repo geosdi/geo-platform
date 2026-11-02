@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.jaxb.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -56,16 +56,12 @@ import java.io.Serializable;
 @ToString
 @XmlRootElement(name = "Attribute")
 @XmlAccessorType(XmlAccessType.FIELD)
-@jakarta.xml.bind.annotation.XmlRootElement(name = "Attribute")
-@jakarta.xml.bind.annotation.XmlAccessorType(jakarta.xml.bind.annotation.XmlAccessType.FIELD)
 public class Attribute implements Serializable {
 
     private static final long serialVersionUID = -5201486007919812553L;
     //
     @XmlElement(name = "name")
-    @jakarta.xml.bind.annotation.XmlElement(name = "mame")
     private String attributeName;
     @XmlElement(name = "type")
-    @jakarta.xml.bind.annotation.XmlElement(name = "type")
     private String attributeType;
 }

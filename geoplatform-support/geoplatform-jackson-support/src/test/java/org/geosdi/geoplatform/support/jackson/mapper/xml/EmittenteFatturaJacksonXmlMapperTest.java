@@ -50,7 +50,7 @@ import java.io.StringReader;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,7 +61,7 @@ public class EmittenteFatturaJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(EmittenteFatturaJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<EmittenteFattura> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(EmittenteFattura.class, new GPJacksonXmlSupport(JAXB));
+    private static final GPJacksonXmlMapper<EmittenteFattura> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(EmittenteFattura.class, new GPJacksonXmlSupport(JAKARTA));
 
     @Test
     @Order(value = 0)

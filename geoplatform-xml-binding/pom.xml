@@ -124,12 +124,6 @@
                 <version>${project.version}</version>
             </dependency>
             
-            <dependency>
-                <groupId>org.jvnet.jaxb2_commons</groupId>
-                <artifactId>jaxb2-basics-runtime</artifactId>
-                <version>${jaxb2-basics-version}</version>
-            </dependency>
-
             <!-- Runtime di jaxb-plugins (ToString2 e strategie in org.jvnet.jaxb.lang) per i binding jakarta. -->
             <dependency>
                 <groupId>org.jvnet.jaxb</groupId>
@@ -142,42 +136,8 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- mvn jaxb2:generate -X -->
-                <plugin>
-                    <groupId>org.jvnet.jaxb2.maven2</groupId>
-                    <artifactId>maven-jaxb2-plugin</artifactId>
-                    <version>0.15.3</version>
-                    
-                    <configuration>
-                        <strict>false</strict>
-                        <extension>true</extension>
-                        <!--<forceRegenerate>true</forceRegenerate>-->
-                        <args>
-                            <arg>-XtoString</arg>
-
-                            <!--<arg>-Xequals</arg>-->
-                            <!--<arg>-XhashCode</arg>-->
-                            <!--<arg>-Xcopyable</arg>-->
-                            <!--<arg>-Xmergeable</arg>-->
-
-                            <arg>-Xsetters</arg>
-
-                            <arg>-Xwildcard</arg>
-                            <arg>-Xinject-code</arg>
-                            <arg>-Xinheritance</arg>
-                        </args>
-                        <plugins>
-                            <plugin>
-                                <groupId>org.jvnet.jaxb2_commons</groupId>
-                                <artifactId>jaxb2-basics</artifactId>
-                                <version>${jaxb2-basics-version}</version>
-                            </plugin>
-                        </plugins>
-                    </configuration>
-                </plugin>
-
-                <!-- Plugin per i binding jakarta (JAXB 4), con jaxb-plugins al posto di jaxb2-basics: stessi
-                     argomenti del plugin javax. I binding passano qui un gruppo alla volta (vedi CLAUDE.md, punto C). -->
+                <!-- Plugin dei binding jakarta (JAXB 4) con jaxb-plugins. Le classi generate stanno in src/main/java: per
+                     rigenerarle vedi MIGRAZIONE-JAKARTA.md. -->
                 <plugin>
                     <groupId>org.jvnet.jaxb</groupId>
                     <artifactId>jaxb-maven-plugin</artifactId>
@@ -215,7 +175,6 @@
     </build>
     
     <properties>
-        <jaxb2-basics-version>1.11.1</jaxb2-basics-version>
         <jaxb-tools-version>4.0.16</jaxb-tools-version>
     </properties>
 

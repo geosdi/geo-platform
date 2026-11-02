@@ -36,12 +36,12 @@
 package org.geosdi.geoplatform.support.jackson.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,13 +54,11 @@ import java.util.List;
 @Setter
 @ToString
 @XmlRootElement(name = "CATALOG")
-@jakarta.xml.bind.annotation.XmlRootElement(name = "CATALOG")
 public class Catalog implements Serializable {
 
     private static final long serialVersionUID = -4441811146261378605L;
     //
     @XmlElement(name = "CD")
-    @jakarta.xml.bind.annotation.XmlElement(name = "CD")
     @JsonProperty(value = "CD")
     private List<Cd> cd = new ArrayList<>();
 }

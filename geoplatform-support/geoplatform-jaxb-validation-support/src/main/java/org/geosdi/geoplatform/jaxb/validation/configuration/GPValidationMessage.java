@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.configuration;
 
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import org.geosdi.geoplatform.jaxb.validation.xsd.message.XSDValidationMessage;
-
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

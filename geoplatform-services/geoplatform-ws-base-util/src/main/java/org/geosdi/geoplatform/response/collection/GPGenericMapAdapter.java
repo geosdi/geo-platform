@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.response.collection;
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -45,6 +46,8 @@ import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
 
 /**
+ * Adapter JAXB {@code jakarta.xml.bind} da una mappa al suo {@link GPGenericMapType}.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -55,7 +58,7 @@ public abstract class GPGenericMapAdapter<K, V, Entry extends GPGenericEntryType
      *
      * @param mapType The value to be converted. Can be null.
      * @throws Exception if there's an error during the conversion. The caller is responsible for
-     *                   reporting the error to the user through {@link javax.xml.bind.ValidationEventHandler}.
+     *                   reporting the error to the user through {@link jakarta.xml.bind.ValidationEventHandler}.
      */
     @Override
     public Map<K, V> unmarshal(@Nonnull(when = NEVER) MapType mapType) throws Exception {

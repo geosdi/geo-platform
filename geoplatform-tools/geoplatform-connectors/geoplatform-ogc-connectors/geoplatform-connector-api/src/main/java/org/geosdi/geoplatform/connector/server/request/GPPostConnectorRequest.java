@@ -42,21 +42,25 @@ import javax.annotation.Nonnull;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * Richiesta POST con JAXB {@code jakarta.xml.bind}.
+ *
+ * @param <T> il tipo della risposta
+ * @param <Request> il tipo dell'oggetto inviato al server
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPPostConnectorRequest<T, Request> extends PostConnectorRequest<T> implements IGPostConnectorRequest<T> {
 
     /**
-     * @param server
+     * @param theServer il connettore del server
      */
-    protected GPPostConnectorRequest(@Nonnull(when = NEVER) GPServerConnector server) {
-        super(server);
+    protected GPPostConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        super(theServer);
     }
 
     /**
      * @return {@link Request}
-     * @throws Exception
+     * @throws Exception se non è possibile creare l'oggetto della richiesta
      */
     protected abstract Request createRequest() throws Exception;
 }

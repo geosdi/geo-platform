@@ -66,12 +66,6 @@
             <artifactId>guava</artifactId>
         </dependency>
 
-        <!-- Support for JAX-B annotations as additional configuration -->
-        <dependency>
-            <groupId>tools.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-        </dependency>
-
         <!-- Support for JAXB JAKARTA annotations as additional configuration -->
         <dependency>
             <groupId>tools.jackson.module</groupId>

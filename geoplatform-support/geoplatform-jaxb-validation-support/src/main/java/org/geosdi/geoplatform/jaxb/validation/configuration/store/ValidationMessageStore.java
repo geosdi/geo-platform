@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.configuration.store;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ValidationMessage;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**

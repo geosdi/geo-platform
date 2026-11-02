@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.response.collection;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.Nullable;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +50,8 @@ import static java.util.Collections.EMPTY_LIST;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * Mappa scritta come elenco di {@link GPGenericEntryType} per JAXB {@code jakarta.xml.bind}.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

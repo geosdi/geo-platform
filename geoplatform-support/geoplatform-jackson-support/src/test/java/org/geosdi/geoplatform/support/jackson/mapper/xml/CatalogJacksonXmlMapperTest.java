@@ -56,7 +56,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -69,7 +69,7 @@ public class CatalogJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(CatalogJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Catalog> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Catalog.class, new GPJacksonXmlSupport(JAXB));
+    private static final GPJacksonXmlMapper<Catalog> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Catalog.class, new GPJacksonXmlSupport(JAKARTA));
 
     @Test
     public void a_writeCatalogXmlTest() throws Exception {

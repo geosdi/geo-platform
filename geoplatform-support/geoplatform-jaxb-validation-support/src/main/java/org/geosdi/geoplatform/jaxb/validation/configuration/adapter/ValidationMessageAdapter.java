@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.configuration.adapter;
 
+import jakarta.xml.bind.ValidationEventHandler;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.geosdi.geoplatform.jaxb.validation.configuration.GPValidationMessage;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ValidationMessage;
-
-import javax.xml.bind.ValidationEventHandler;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

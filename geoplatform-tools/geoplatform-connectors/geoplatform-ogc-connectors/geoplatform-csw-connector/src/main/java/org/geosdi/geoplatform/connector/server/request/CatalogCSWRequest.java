@@ -39,7 +39,7 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.jakarta.GPBaseJakartaContext;
 
@@ -52,10 +52,10 @@ import static org.geosdi.geoplatform.connector.jaxb.repository.CSWConnectorJAXBC
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class CatalogCSWRequest<T, Request> extends GPPostJakartaConnectorRequest<T, Request> {
+public abstract class CatalogCSWRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
 
     static {
-        cswContext = JakartaContextConnectorRepository.getProvider(CSW_CONTEXT_KEY);
+        cswContext = JAXBContextConnectorRepository.getProvider(CSW_CONTEXT_KEY);
     }
 
     //

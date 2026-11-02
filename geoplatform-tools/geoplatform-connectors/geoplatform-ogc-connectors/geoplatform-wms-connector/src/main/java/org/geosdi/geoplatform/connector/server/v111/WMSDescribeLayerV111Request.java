@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.server.v111;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPWMSServerConnector;
-import org.geosdi.geoplatform.connector.server.request.GPBaseWMSDescribeLayerJakartaRequest;
+import org.geosdi.geoplatform.connector.server.request.GPBaseWMSDescribeLayerRequest;
 import org.geosdi.geoplatform.wms.v111.WMSDescribeLayerResponse;
 
 import javax.annotation.Nonnull;
@@ -52,7 +52,7 @@ import static org.geosdi.geoplatform.connector.server.v111.GPWMSJAXBContextV111.
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class WMSDescribeLayerV111Request extends GPBaseWMSDescribeLayerJakartaRequest<WMSDescribeLayerResponse> implements GPWMSDescribeLayerV111Request {
+class WMSDescribeLayerV111Request extends GPBaseWMSDescribeLayerRequest<WMSDescribeLayerResponse> implements GPWMSDescribeLayerV111Request {
 
     /**
      * @param server

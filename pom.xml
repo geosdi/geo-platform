@@ -809,44 +809,18 @@
             <!-- =========================================================== -->
             <!-- ========================== JAXB =========================== -->
             <!-- =========================================================== -->
-            <!-- javax activation: si usa solo com.sun.activation:javax.activation (API e implementazione),
-                 non anche javax.activation-api, che ha le stesse classi javax.activation. -->
+            <!-- Solo la versione: geo-platform non usa più JAXB javax, ma csv-api-support (gp_advanced_extensions)
+                 dichiara jaxb-api senza versione. Da togliere quando gp_advanced_extensions passa a jakarta. -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>2.3.1</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.activation</groupId>
-                        <artifactId>javax.activation-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- jaxb-impl 2.3.6 (javax) porta com.sun.activation:jakarta.activation, che duplica
-                 jakarta.activation-api: il runtime javax usa javax.activation. -->
-            <dependency>
-                <groupId>com.sun.xml.bind</groupId>
-                <artifactId>jaxb-impl</artifactId>
-                <version>2.3.6</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.sun.activation</groupId>
-                        <artifactId>jakarta.activation</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
                 <version>1.3.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.sun.activation</groupId>
-                <artifactId>javax.activation</artifactId>
-                <version>1.2.0</version>
             </dependency>
 
             <dependency>

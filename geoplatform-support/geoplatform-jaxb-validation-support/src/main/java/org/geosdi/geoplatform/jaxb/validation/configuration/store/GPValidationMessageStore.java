@@ -36,16 +36,16 @@
 package org.geosdi.geoplatform.jaxb.validation.configuration.store;
 
 import com.google.common.collect.Lists;
+import jakarta.xml.bind.annotation.*;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ValidationMessage;
 
-import javax.xml.bind.annotation.*;
 import java.util.List;
 
+import static jakarta.xml.bind.annotation.XmlAccessType.PUBLIC_MEMBER;
 import static java.lang.Boolean.FALSE;
 import static java.util.Collections.sort;
 import static java.util.Comparator.naturalOrder;
 import static java.util.stream.StreamSupport.stream;
-import static javax.xml.bind.annotation.XmlAccessType.PUBLIC_MEMBER;
 import static org.geosdi.geoplatform.jaxb.validation.configuration.store.predicate.logic.ErrorWarningPredicate.toLogicErrorPredicate;
 import static org.geosdi.geoplatform.jaxb.validation.configuration.store.predicate.logic.LogicWarningPredicate.toLogicWarningPredicate;
 import static org.geosdi.geoplatform.jaxb.validation.configuration.store.predicate.xsd.XSDErrorPredicate.toXSDErrorPredicate;

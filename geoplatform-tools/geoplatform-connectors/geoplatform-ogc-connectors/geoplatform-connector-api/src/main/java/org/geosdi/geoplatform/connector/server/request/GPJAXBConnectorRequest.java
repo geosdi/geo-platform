@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -50,15 +50,21 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 
 /**
+ * Richiesta di un connettore che legge e scrive la risposta con JAXB {@code jakarta.xml.bind}, usata dai binding
+ * già rigenerati per jakarta.
+ *
+ * @param <T> il tipo della risposta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPJAXBConnectorRequest<T> extends GPConnectorRequest<T> {
 
     /**
-     * @param indent
+     * Restituisce la risposta del server come XML indentato.
+     *
+     * @param indent il numero di spazi per livello
      * @return {@link String}
-     * @throws Exception
+     * @throws Exception se la richiesta o la lettura dell'XML non riescono
      */
     default String formatResponseAsString(int indent) throws Exception {
         return getResponseAsStream(stream -> {
@@ -78,14 +84,14 @@ public interface GPJAXBConnectorRequest<T> extends GPConnectorRequest<T> {
     }
 
     /**
-     * @return Marshaller
-     * @throws Exception
+     * @return il {@link Marshaller} jakarta della richiesta
+     * @throws Exception se non è possibile ottenerlo
      */
     Marshaller getMarshaller() throws Exception;
 
     /**
-     * @return Unmarshaller
-     * @throws Exception
+     * @return l'{@link Unmarshaller} jakarta della richiesta
+     * @throws Exception se non è possibile ottenerlo
      */
     Unmarshaller getUnmarshaller() throws Exception;
 }

@@ -47,14 +47,14 @@ import java.io.StringWriter;
 
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
-import static org.geosdi.geoplatform.connector.jaxb.repository.JakartaContextConnectorRepository.getProvider;
+import static org.geosdi.geoplatform.connector.jaxb.repository.JAXBContextConnectorRepository.getProvider;
 import static org.geosdi.geoplatform.connector.jaxb.repository.WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class WFSRequest<T, Request> extends GPPostJakartaConnectorRequest<T, Request> {
+public abstract class WFSRequest<T, Request> extends GPPostConnectorRequest<T, Request> {
 
     static {
         wfsContext = getProvider(WFS_CONTEXT_KEY);

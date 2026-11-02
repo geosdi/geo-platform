@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.server.v130;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.GPWMSBaseGetFeatureInfoJakartaRequest;
+import org.geosdi.geoplatform.connector.server.request.GPWMSBaseGetFeatureInfoRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
@@ -51,7 +51,7 @@ import static org.geosdi.geoplatform.connector.server.v130.GPWMSJAXBContextV130.
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class WMSGetFeatureInfoV130Request extends GPWMSBaseGetFeatureInfoJakartaRequest<Object, GPWMSGetFeatureInfoV130Request<Object>> implements GPWMSGetFeatureInfoV130Request<Object> {
+class WMSGetFeatureInfoV130Request extends GPWMSBaseGetFeatureInfoRequest<Object, GPWMSGetFeatureInfoV130Request<Object>> implements GPWMSGetFeatureInfoV130Request<Object> {
 
     /**
      * @param server

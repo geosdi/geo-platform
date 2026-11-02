@@ -34,59 +34,58 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * Direction vectors are specified by providing components of a vector.
  * 
- * <p>Classe Java per DirectionVectorType complex type.
+ * <p>Classe Java per DirectionVectorType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DirectionVectorType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element ref="{http://www.opengis.net/gml}vector"/>
- *         &lt;sequence>
- *           &lt;element name="horizontalAngle" type="{http://www.opengis.net/gml}AngleType"/>
- *           &lt;element name="verticalAngle" type="{http://www.opengis.net/gml}AngleType"/>
- *         &lt;/sequence>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DirectionVectorType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <element ref="{http://www.opengis.net/gml}vector"/>
+ *         <sequence>
+ *           <element name="horizontalAngle" type="{http://www.opengis.net/gml}AngleType"/>
+ *           <element name="verticalAngle" type="{http://www.opengis.net/gml}AngleType"/>
+ *         </sequence>
+ *       </choice>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -96,8 +95,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "horizontalAngle",
     "verticalAngle"
 })
-public class DirectionVectorType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class DirectionVectorType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     protected VectorType vector;
@@ -188,13 +186,15 @@ public class DirectionVectorType
         return (this.verticalAngle!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -202,27 +202,29 @@ public class DirectionVectorType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             VectorType theVector;
             theVector = this.getVector();
-            strategy.appendField(locator, this, "vector", buffer, theVector);
+            strategy.appendField(locator, this, "vector", buffer, theVector, this.isSetVector());
         }
         {
             AngleType theHorizontalAngle;
             theHorizontalAngle = this.getHorizontalAngle();
-            strategy.appendField(locator, this, "horizontalAngle", buffer, theHorizontalAngle);
+            strategy.appendField(locator, this, "horizontalAngle", buffer, theHorizontalAngle, this.isSetHorizontalAngle());
         }
         {
             AngleType theVerticalAngle;
             theVerticalAngle = this.getVerticalAngle();
-            strategy.appendField(locator, this, "verticalAngle", buffer, theVerticalAngle);
+            strategy.appendField(locator, this, "verticalAngle", buffer, theVerticalAngle, this.isSetVerticalAngle());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DirectionVectorType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -234,7 +236,7 @@ public class DirectionVectorType
             lhsVector = this.getVector();
             VectorType rhsVector;
             rhsVector = that.getVector();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "vector", lhsVector), LocatorUtils.property(thatLocator, "vector", rhsVector), lhsVector, rhsVector)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "vector", lhsVector), LocatorUtils.property(thatLocator, "vector", rhsVector), lhsVector, rhsVector, this.isSetVector(), that.isSetVector())) {
                 return false;
             }
         }
@@ -243,7 +245,7 @@ public class DirectionVectorType
             lhsHorizontalAngle = this.getHorizontalAngle();
             AngleType rhsHorizontalAngle;
             rhsHorizontalAngle = that.getHorizontalAngle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "horizontalAngle", lhsHorizontalAngle), LocatorUtils.property(thatLocator, "horizontalAngle", rhsHorizontalAngle), lhsHorizontalAngle, rhsHorizontalAngle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "horizontalAngle", lhsHorizontalAngle), LocatorUtils.property(thatLocator, "horizontalAngle", rhsHorizontalAngle), lhsHorizontalAngle, rhsHorizontalAngle, this.isSetHorizontalAngle(), that.isSetHorizontalAngle())) {
                 return false;
             }
         }
@@ -252,135 +254,168 @@ public class DirectionVectorType
             lhsVerticalAngle = this.getVerticalAngle();
             AngleType rhsVerticalAngle;
             rhsVerticalAngle = that.getVerticalAngle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "verticalAngle", lhsVerticalAngle), LocatorUtils.property(thatLocator, "verticalAngle", rhsVerticalAngle), lhsVerticalAngle, rhsVerticalAngle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "verticalAngle", lhsVerticalAngle), LocatorUtils.property(thatLocator, "verticalAngle", rhsVerticalAngle), lhsVerticalAngle, rhsVerticalAngle, this.isSetVerticalAngle(), that.isSetVerticalAngle())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             VectorType theVector;
             theVector = this.getVector();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "vector", theVector), currentHashCode, theVector);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "vector", theVector), currentHashCode, theVector, this.isSetVector());
         }
         {
             AngleType theHorizontalAngle;
             theHorizontalAngle = this.getHorizontalAngle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "horizontalAngle", theHorizontalAngle), currentHashCode, theHorizontalAngle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "horizontalAngle", theHorizontalAngle), currentHashCode, theHorizontalAngle, this.isSetHorizontalAngle());
         }
         {
             AngleType theVerticalAngle;
             theVerticalAngle = this.getVerticalAngle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "verticalAngle", theVerticalAngle), currentHashCode, theVerticalAngle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "verticalAngle", theVerticalAngle), currentHashCode, theVerticalAngle, this.isSetVerticalAngle());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof DirectionVectorType) {
             final DirectionVectorType copy = ((DirectionVectorType) draftCopy);
-            if (this.isSetVector()) {
-                VectorType sourceVector;
-                sourceVector = this.getVector();
-                VectorType copyVector = ((VectorType) strategy.copy(LocatorUtils.property(locator, "vector", sourceVector), sourceVector));
-                copy.setVector(copyVector);
-            } else {
-                copy.vector = null;
+            {
+                java.lang.Boolean vectorShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetVector());
+                if (vectorShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    VectorType sourceVector;
+                    sourceVector = this.getVector();
+                    VectorType copyVector = ((VectorType) strategy.copy(LocatorUtils.property(locator, "vector", sourceVector), sourceVector, this.isSetVector()));
+                    copy.setVector(copyVector);
+                } else {
+                    if (vectorShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.vector = null;
+                    }
+                }
             }
-            if (this.isSetHorizontalAngle()) {
-                AngleType sourceHorizontalAngle;
-                sourceHorizontalAngle = this.getHorizontalAngle();
-                AngleType copyHorizontalAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "horizontalAngle", sourceHorizontalAngle), sourceHorizontalAngle));
-                copy.setHorizontalAngle(copyHorizontalAngle);
-            } else {
-                copy.horizontalAngle = null;
+            {
+                java.lang.Boolean horizontalAngleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetHorizontalAngle());
+                if (horizontalAngleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType sourceHorizontalAngle;
+                    sourceHorizontalAngle = this.getHorizontalAngle();
+                    AngleType copyHorizontalAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "horizontalAngle", sourceHorizontalAngle), sourceHorizontalAngle, this.isSetHorizontalAngle()));
+                    copy.setHorizontalAngle(copyHorizontalAngle);
+                } else {
+                    if (horizontalAngleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.horizontalAngle = null;
+                    }
+                }
             }
-            if (this.isSetVerticalAngle()) {
-                AngleType sourceVerticalAngle;
-                sourceVerticalAngle = this.getVerticalAngle();
-                AngleType copyVerticalAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "verticalAngle", sourceVerticalAngle), sourceVerticalAngle));
-                copy.setVerticalAngle(copyVerticalAngle);
-            } else {
-                copy.verticalAngle = null;
+            {
+                java.lang.Boolean verticalAngleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetVerticalAngle());
+                if (verticalAngleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType sourceVerticalAngle;
+                    sourceVerticalAngle = this.getVerticalAngle();
+                    AngleType copyVerticalAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "verticalAngle", sourceVerticalAngle), sourceVerticalAngle, this.isSetVerticalAngle()));
+                    copy.setVerticalAngle(copyVerticalAngle);
+                } else {
+                    if (verticalAngleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.verticalAngle = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DirectionVectorType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof DirectionVectorType) {
             final DirectionVectorType target = this;
             final DirectionVectorType leftObject = ((DirectionVectorType) left);
             final DirectionVectorType rightObject = ((DirectionVectorType) right);
             {
-                VectorType lhsVector;
-                lhsVector = leftObject.getVector();
-                VectorType rhsVector;
-                rhsVector = rightObject.getVector();
-                target.setVector(((VectorType) strategy.merge(LocatorUtils.property(leftLocator, "vector", lhsVector), LocatorUtils.property(rightLocator, "vector", rhsVector), lhsVector, rhsVector)));
+                java.lang.Boolean vectorShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetVector(), rightObject.isSetVector());
+                if (vectorShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    VectorType lhsVector;
+                    lhsVector = leftObject.getVector();
+                    VectorType rhsVector;
+                    rhsVector = rightObject.getVector();
+                    VectorType mergedVector = ((VectorType) strategy.merge(LocatorUtils.property(leftLocator, "vector", lhsVector), LocatorUtils.property(rightLocator, "vector", rhsVector), lhsVector, rhsVector, leftObject.isSetVector(), rightObject.isSetVector()));
+                    target.setVector(mergedVector);
+                } else {
+                    if (vectorShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.vector = null;
+                    }
+                }
             }
             {
-                AngleType lhsHorizontalAngle;
-                lhsHorizontalAngle = leftObject.getHorizontalAngle();
-                AngleType rhsHorizontalAngle;
-                rhsHorizontalAngle = rightObject.getHorizontalAngle();
-                target.setHorizontalAngle(((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "horizontalAngle", lhsHorizontalAngle), LocatorUtils.property(rightLocator, "horizontalAngle", rhsHorizontalAngle), lhsHorizontalAngle, rhsHorizontalAngle)));
+                java.lang.Boolean horizontalAngleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetHorizontalAngle(), rightObject.isSetHorizontalAngle());
+                if (horizontalAngleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType lhsHorizontalAngle;
+                    lhsHorizontalAngle = leftObject.getHorizontalAngle();
+                    AngleType rhsHorizontalAngle;
+                    rhsHorizontalAngle = rightObject.getHorizontalAngle();
+                    AngleType mergedHorizontalAngle = ((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "horizontalAngle", lhsHorizontalAngle), LocatorUtils.property(rightLocator, "horizontalAngle", rhsHorizontalAngle), lhsHorizontalAngle, rhsHorizontalAngle, leftObject.isSetHorizontalAngle(), rightObject.isSetHorizontalAngle()));
+                    target.setHorizontalAngle(mergedHorizontalAngle);
+                } else {
+                    if (horizontalAngleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.horizontalAngle = null;
+                    }
+                }
             }
             {
-                AngleType lhsVerticalAngle;
-                lhsVerticalAngle = leftObject.getVerticalAngle();
-                AngleType rhsVerticalAngle;
-                rhsVerticalAngle = rightObject.getVerticalAngle();
-                target.setVerticalAngle(((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "verticalAngle", lhsVerticalAngle), LocatorUtils.property(rightLocator, "verticalAngle", rhsVerticalAngle), lhsVerticalAngle, rhsVerticalAngle)));
+                java.lang.Boolean verticalAngleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetVerticalAngle(), rightObject.isSetVerticalAngle());
+                if (verticalAngleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType lhsVerticalAngle;
+                    lhsVerticalAngle = leftObject.getVerticalAngle();
+                    AngleType rhsVerticalAngle;
+                    rhsVerticalAngle = rightObject.getVerticalAngle();
+                    AngleType mergedVerticalAngle = ((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "verticalAngle", lhsVerticalAngle), LocatorUtils.property(rightLocator, "verticalAngle", rhsVerticalAngle), lhsVerticalAngle, rhsVerticalAngle, leftObject.isSetVerticalAngle(), rightObject.isSetVerticalAngle()));
+                    target.setVerticalAngle(mergedVerticalAngle);
+                } else {
+                    if (verticalAngleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.verticalAngle = null;
+                    }
+                }
             }
         }
-    }
-
-    public DirectionVectorType withVector(VectorType value) {
-        setVector(value);
-        return this;
-    }
-
-    public DirectionVectorType withHorizontalAngle(AngleType value) {
-        setHorizontalAngle(value);
-        return this;
-    }
-
-    public DirectionVectorType withVerticalAngle(AngleType value) {
-        setVerticalAngle(value);
-        return this;
     }
 
 }

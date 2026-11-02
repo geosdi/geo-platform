@@ -34,62 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per DictionaryType complex type.
+ * <p>Classe Java per DictionaryType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DictionaryType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}DefinitionType">
- *       &lt;choice maxOccurs="unbounded" minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}dictionaryEntry"/>
- *         &lt;element ref="{http://www.opengis.net/gml}indirectEntry"/>
- *       &lt;/choice>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DictionaryType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}DefinitionType">
+ *       <choice maxOccurs="unbounded" minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}dictionaryEntry"/>
+ *         <element ref="{http://www.opengis.net/gml}indirectEntry"/>
+ *       </choice>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -113,30 +111,33 @@ public class DictionaryType
     /**
      * Gets the value of the dictionaryEntryOrIndirectEntry property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dictionaryEntryOrIndirectEntry property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the dictionaryEntryOrIndirectEntry property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDictionaryEntryOrIndirectEntry().add(newItem);
+     * getDictionaryEntryOrIndirectEntry().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link DictionaryEntryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link IndirectEntryType }{@code >}
      * {@link JAXBElement }{@code <}{@link DictionaryEntryType }{@code >}
+     * {@link JAXBElement }{@code <}{@link IndirectEntryType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the dictionaryEntryOrIndirectEntry property.
      */
     public List<JAXBElement<?>> getDictionaryEntryOrIndirectEntry() {
         if (dictionaryEntryOrIndirectEntry == null) {
-            dictionaryEntryOrIndirectEntry = new ArrayList<JAXBElement<?>>();
+            dictionaryEntryOrIndirectEntry = new ArrayList<>();
         }
         return this.dictionaryEntryOrIndirectEntry;
     }
@@ -177,13 +178,15 @@ public class DictionaryType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -191,23 +194,33 @@ public class DictionaryType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<JAXBElement<?>> theDictionaryEntryOrIndirectEntry;
-            theDictionaryEntryOrIndirectEntry = this.getDictionaryEntryOrIndirectEntry();
-            strategy.appendField(locator, this, "dictionaryEntryOrIndirectEntry", buffer, theDictionaryEntryOrIndirectEntry);
+            theDictionaryEntryOrIndirectEntry = (this.isSetDictionaryEntryOrIndirectEntry()?this.getDictionaryEntryOrIndirectEntry():null);
+            strategy.appendField(locator, this, "dictionaryEntryOrIndirectEntry", buffer, theDictionaryEntryOrIndirectEntry, this.isSetDictionaryEntryOrIndirectEntry());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setDictionaryEntryOrIndirectEntry(List<JAXBElement<?>> value) {
+        this.dictionaryEntryOrIndirectEntry = null;
+        if (value!= null) {
+            List<JAXBElement<?>> draftl = this.getDictionaryEntryOrIndirectEntry();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DictionaryType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -219,10 +232,10 @@ public class DictionaryType
         final DictionaryType that = ((DictionaryType) object);
         {
             List<JAXBElement<?>> lhsDictionaryEntryOrIndirectEntry;
-            lhsDictionaryEntryOrIndirectEntry = this.getDictionaryEntryOrIndirectEntry();
+            lhsDictionaryEntryOrIndirectEntry = (this.isSetDictionaryEntryOrIndirectEntry()?this.getDictionaryEntryOrIndirectEntry():null);
             List<JAXBElement<?>> rhsDictionaryEntryOrIndirectEntry;
-            rhsDictionaryEntryOrIndirectEntry = that.getDictionaryEntryOrIndirectEntry();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "dictionaryEntryOrIndirectEntry", lhsDictionaryEntryOrIndirectEntry), LocatorUtils.property(thatLocator, "dictionaryEntryOrIndirectEntry", rhsDictionaryEntryOrIndirectEntry), lhsDictionaryEntryOrIndirectEntry, rhsDictionaryEntryOrIndirectEntry)) {
+            rhsDictionaryEntryOrIndirectEntry = (that.isSetDictionaryEntryOrIndirectEntry()?that.getDictionaryEntryOrIndirectEntry():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "dictionaryEntryOrIndirectEntry", lhsDictionaryEntryOrIndirectEntry), LocatorUtils.property(thatLocator, "dictionaryEntryOrIndirectEntry", rhsDictionaryEntryOrIndirectEntry), lhsDictionaryEntryOrIndirectEntry, rhsDictionaryEntryOrIndirectEntry, this.isSetDictionaryEntryOrIndirectEntry(), that.isSetDictionaryEntryOrIndirectEntry())) {
                 return false;
             }
         }
@@ -231,84 +244,101 @@ public class DictionaryType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<JAXBElement<?>> theDictionaryEntryOrIndirectEntry;
-            theDictionaryEntryOrIndirectEntry = this.getDictionaryEntryOrIndirectEntry();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dictionaryEntryOrIndirectEntry", theDictionaryEntryOrIndirectEntry), currentHashCode, theDictionaryEntryOrIndirectEntry);
+            theDictionaryEntryOrIndirectEntry = (this.isSetDictionaryEntryOrIndirectEntry()?this.getDictionaryEntryOrIndirectEntry():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dictionaryEntryOrIndirectEntry", theDictionaryEntryOrIndirectEntry), currentHashCode, theDictionaryEntryOrIndirectEntry, this.isSetDictionaryEntryOrIndirectEntry());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof DictionaryType) {
             final DictionaryType copy = ((DictionaryType) draftCopy);
-            if (this.isSetDictionaryEntryOrIndirectEntry()) {
-                List<JAXBElement<?>> sourceDictionaryEntryOrIndirectEntry;
-                sourceDictionaryEntryOrIndirectEntry = this.getDictionaryEntryOrIndirectEntry();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<?>> copyDictionaryEntryOrIndirectEntry = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "dictionaryEntryOrIndirectEntry", sourceDictionaryEntryOrIndirectEntry), sourceDictionaryEntryOrIndirectEntry));
-                copy.unsetDictionaryEntryOrIndirectEntry();
-                List<JAXBElement<?>> uniqueDictionaryEntryOrIndirectEntryl = copy.getDictionaryEntryOrIndirectEntry();
-                uniqueDictionaryEntryOrIndirectEntryl.addAll(copyDictionaryEntryOrIndirectEntry);
-            } else {
-                copy.unsetDictionaryEntryOrIndirectEntry();
+            {
+                java.lang.Boolean dictionaryEntryOrIndirectEntryShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDictionaryEntryOrIndirectEntry());
+                if (dictionaryEntryOrIndirectEntryShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> sourceDictionaryEntryOrIndirectEntry;
+                    sourceDictionaryEntryOrIndirectEntry = (this.isSetDictionaryEntryOrIndirectEntry()?this.getDictionaryEntryOrIndirectEntry():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<?>> copyDictionaryEntryOrIndirectEntry = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "dictionaryEntryOrIndirectEntry", sourceDictionaryEntryOrIndirectEntry), sourceDictionaryEntryOrIndirectEntry, this.isSetDictionaryEntryOrIndirectEntry()));
+                    copy.setDictionaryEntryOrIndirectEntry(copyDictionaryEntryOrIndirectEntry);
+                } else {
+                    if (dictionaryEntryOrIndirectEntryShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetDictionaryEntryOrIndirectEntry();
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DictionaryType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof DictionaryType) {
@@ -316,131 +346,36 @@ public class DictionaryType
             final DictionaryType leftObject = ((DictionaryType) left);
             final DictionaryType rightObject = ((DictionaryType) right);
             {
-                List<JAXBElement<?>> lhsDictionaryEntryOrIndirectEntry;
-                lhsDictionaryEntryOrIndirectEntry = leftObject.getDictionaryEntryOrIndirectEntry();
-                List<JAXBElement<?>> rhsDictionaryEntryOrIndirectEntry;
-                rhsDictionaryEntryOrIndirectEntry = rightObject.getDictionaryEntryOrIndirectEntry();
-                target.unsetDictionaryEntryOrIndirectEntry();
-                List<JAXBElement<?>> uniqueDictionaryEntryOrIndirectEntryl = target.getDictionaryEntryOrIndirectEntry();
-                uniqueDictionaryEntryOrIndirectEntryl.addAll(((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "dictionaryEntryOrIndirectEntry", lhsDictionaryEntryOrIndirectEntry), LocatorUtils.property(rightLocator, "dictionaryEntryOrIndirectEntry", rhsDictionaryEntryOrIndirectEntry), lhsDictionaryEntryOrIndirectEntry, rhsDictionaryEntryOrIndirectEntry)));
+                java.lang.Boolean dictionaryEntryOrIndirectEntryShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDictionaryEntryOrIndirectEntry(), rightObject.isSetDictionaryEntryOrIndirectEntry());
+                if (dictionaryEntryOrIndirectEntryShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> lhsDictionaryEntryOrIndirectEntry;
+                    lhsDictionaryEntryOrIndirectEntry = (leftObject.isSetDictionaryEntryOrIndirectEntry()?leftObject.getDictionaryEntryOrIndirectEntry():null);
+                    List<JAXBElement<?>> rhsDictionaryEntryOrIndirectEntry;
+                    rhsDictionaryEntryOrIndirectEntry = (rightObject.isSetDictionaryEntryOrIndirectEntry()?rightObject.getDictionaryEntryOrIndirectEntry():null);
+                    List<JAXBElement<?>> mergedDictionaryEntryOrIndirectEntry = ((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "dictionaryEntryOrIndirectEntry", lhsDictionaryEntryOrIndirectEntry), LocatorUtils.property(rightLocator, "dictionaryEntryOrIndirectEntry", rhsDictionaryEntryOrIndirectEntry), lhsDictionaryEntryOrIndirectEntry, rhsDictionaryEntryOrIndirectEntry, leftObject.isSetDictionaryEntryOrIndirectEntry(), rightObject.isSetDictionaryEntryOrIndirectEntry()));
+                    target.setDictionaryEntryOrIndirectEntry(mergedDictionaryEntryOrIndirectEntry);
+                } else {
+                    if (dictionaryEntryOrIndirectEntryShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetDictionaryEntryOrIndirectEntry();
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setDictionaryEntryOrIndirectEntry(List<JAXBElement<?>> value) {
-        List<JAXBElement<?>> draftl = this.getDictionaryEntryOrIndirectEntry();
-        draftl.addAll(value);
-    }
-
-    public DictionaryType withDictionaryEntryOrIndirectEntry(JAXBElement<?> ... values) {
-        if (values!= null) {
-            for (JAXBElement<?> value: values) {
-                getDictionaryEntryOrIndirectEntry().add(value);
-            }
-        }
-        return this;
-    }
-
-    public DictionaryType withDictionaryEntryOrIndirectEntry(Collection<JAXBElement<?>> values) {
-        if (values!= null) {
-            getDictionaryEntryOrIndirectEntry().addAll(values);
-        }
-        return this;
-    }
-
-    public DictionaryType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public DictionaryType withDictionaryEntryOrIndirectEntry(List<JAXBElement<?>> value) {
-        setDictionaryEntryOrIndirectEntry(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public DictionaryType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public DictionaryType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public DictionaryType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public DictionaryType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

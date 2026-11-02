@@ -34,56 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per CoverageFunctionType complex type.
+ * <p>Classe Java per CoverageFunctionType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CoverageFunctionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element ref="{http://www.opengis.net/gml}MappingRule"/>
- *         &lt;element ref="{http://www.opengis.net/gml}CoverageMappingRule"/>
- *         &lt;element ref="{http://www.opengis.net/gml}GridFunction"/>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CoverageFunctionType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <element ref="{http://www.opengis.net/gml}MappingRule"/>
+ *         <element ref="{http://www.opengis.net/gml}CoverageMappingRule"/>
+ *         <element ref="{http://www.opengis.net/gml}GridFunction"/>
+ *       </choice>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -98,8 +97,19 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
 
     @XmlElement(name = "MappingRule")
     protected StringOrRefType mappingRule;
+    /**
+     * gml:CoverageMappingRule provides a formal or informal description of the coverage function.
+     * The mapping rule may be defined as an in-line string (gml:ruleDefinition) or via a remote reference through xlink:href (gml:ruleReference).  
+     * If no rule name is specified, the default is ‘Linear’ with respect to members of the domain in document order.
+     * 
+     */
     @XmlElement(name = "CoverageMappingRule")
     protected MappingRuleType coverageMappingRule;
+    /**
+     * gml:GridFunction provides an explicit mapping rule for grid geometries, i.e. the domain shall be a geometry of type grid.  It describes the mapping of grid posts (discrete point grid coverage) or grid cells (discrete surface coverage) to the values in the range set.
+     * The gml:startPoint is the index position of a point in the grid that is mapped to the first point in the range set (this is also the index position of the first grid post).  If the gml:startPoint property is omitted the gml:startPoint is assumed to be equal to the value of gml:low in the gml:Grid geometry. Subsequent points in the mapping are determined by the value of the gml:sequenceRule.
+     * 
+     */
     @XmlElement(name = "GridFunction")
     protected GridFunctionType gridFunction;
 
@@ -132,7 +142,9 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
     }
 
     /**
-     * Recupera il valore della proprietà coverageMappingRule.
+     * gml:CoverageMappingRule provides a formal or informal description of the coverage function.
+     * The mapping rule may be defined as an in-line string (gml:ruleDefinition) or via a remote reference through xlink:href (gml:ruleReference).  
+     * If no rule name is specified, the default is ‘Linear’ with respect to members of the domain in document order.
      * 
      * @return
      *     possible object is
@@ -150,6 +162,7 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
      *     allowed object is
      *     {@link MappingRuleType }
      *     
+     * @see #getCoverageMappingRule()
      */
     public void setCoverageMappingRule(MappingRuleType value) {
         this.coverageMappingRule = value;
@@ -160,7 +173,8 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
     }
 
     /**
-     * Recupera il valore della proprietà gridFunction.
+     * gml:GridFunction provides an explicit mapping rule for grid geometries, i.e. the domain shall be a geometry of type grid.  It describes the mapping of grid posts (discrete point grid coverage) or grid cells (discrete surface coverage) to the values in the range set.
+     * The gml:startPoint is the index position of a point in the grid that is mapped to the first point in the range set (this is also the index position of the first grid post).  If the gml:startPoint property is omitted the gml:startPoint is assumed to be equal to the value of gml:low in the gml:Grid geometry. Subsequent points in the mapping are determined by the value of the gml:sequenceRule.
      * 
      * @return
      *     possible object is
@@ -178,6 +192,7 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
      *     allowed object is
      *     {@link GridFunctionType }
      *     
+     * @see #getGridFunction()
      */
     public void setGridFunction(GridFunctionType value) {
         this.gridFunction = value;
@@ -187,13 +202,15 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
         return (this.gridFunction!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -201,27 +218,29 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             StringOrRefType theMappingRule;
             theMappingRule = this.getMappingRule();
-            strategy.appendField(locator, this, "mappingRule", buffer, theMappingRule);
+            strategy.appendField(locator, this, "mappingRule", buffer, theMappingRule, this.isSetMappingRule());
         }
         {
             MappingRuleType theCoverageMappingRule;
             theCoverageMappingRule = this.getCoverageMappingRule();
-            strategy.appendField(locator, this, "coverageMappingRule", buffer, theCoverageMappingRule);
+            strategy.appendField(locator, this, "coverageMappingRule", buffer, theCoverageMappingRule, this.isSetCoverageMappingRule());
         }
         {
             GridFunctionType theGridFunction;
             theGridFunction = this.getGridFunction();
-            strategy.appendField(locator, this, "gridFunction", buffer, theGridFunction);
+            strategy.appendField(locator, this, "gridFunction", buffer, theGridFunction, this.isSetGridFunction());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CoverageFunctionType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -233,7 +252,7 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
             lhsMappingRule = this.getMappingRule();
             StringOrRefType rhsMappingRule;
             rhsMappingRule = that.getMappingRule();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "mappingRule", lhsMappingRule), LocatorUtils.property(thatLocator, "mappingRule", rhsMappingRule), lhsMappingRule, rhsMappingRule)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "mappingRule", lhsMappingRule), LocatorUtils.property(thatLocator, "mappingRule", rhsMappingRule), lhsMappingRule, rhsMappingRule, this.isSetMappingRule(), that.isSetMappingRule())) {
                 return false;
             }
         }
@@ -242,7 +261,7 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
             lhsCoverageMappingRule = this.getCoverageMappingRule();
             MappingRuleType rhsCoverageMappingRule;
             rhsCoverageMappingRule = that.getCoverageMappingRule();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "coverageMappingRule", lhsCoverageMappingRule), LocatorUtils.property(thatLocator, "coverageMappingRule", rhsCoverageMappingRule), lhsCoverageMappingRule, rhsCoverageMappingRule)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "coverageMappingRule", lhsCoverageMappingRule), LocatorUtils.property(thatLocator, "coverageMappingRule", rhsCoverageMappingRule), lhsCoverageMappingRule, rhsCoverageMappingRule, this.isSetCoverageMappingRule(), that.isSetCoverageMappingRule())) {
                 return false;
             }
         }
@@ -251,135 +270,168 @@ public class CoverageFunctionType implements Cloneable, CopyTo, Equals, HashCode
             lhsGridFunction = this.getGridFunction();
             GridFunctionType rhsGridFunction;
             rhsGridFunction = that.getGridFunction();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "gridFunction", lhsGridFunction), LocatorUtils.property(thatLocator, "gridFunction", rhsGridFunction), lhsGridFunction, rhsGridFunction)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "gridFunction", lhsGridFunction), LocatorUtils.property(thatLocator, "gridFunction", rhsGridFunction), lhsGridFunction, rhsGridFunction, this.isSetGridFunction(), that.isSetGridFunction())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             StringOrRefType theMappingRule;
             theMappingRule = this.getMappingRule();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "mappingRule", theMappingRule), currentHashCode, theMappingRule);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "mappingRule", theMappingRule), currentHashCode, theMappingRule, this.isSetMappingRule());
         }
         {
             MappingRuleType theCoverageMappingRule;
             theCoverageMappingRule = this.getCoverageMappingRule();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coverageMappingRule", theCoverageMappingRule), currentHashCode, theCoverageMappingRule);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coverageMappingRule", theCoverageMappingRule), currentHashCode, theCoverageMappingRule, this.isSetCoverageMappingRule());
         }
         {
             GridFunctionType theGridFunction;
             theGridFunction = this.getGridFunction();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "gridFunction", theGridFunction), currentHashCode, theGridFunction);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "gridFunction", theGridFunction), currentHashCode, theGridFunction, this.isSetGridFunction());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof CoverageFunctionType) {
             final CoverageFunctionType copy = ((CoverageFunctionType) draftCopy);
-            if (this.isSetMappingRule()) {
-                StringOrRefType sourceMappingRule;
-                sourceMappingRule = this.getMappingRule();
-                StringOrRefType copyMappingRule = ((StringOrRefType) strategy.copy(LocatorUtils.property(locator, "mappingRule", sourceMappingRule), sourceMappingRule));
-                copy.setMappingRule(copyMappingRule);
-            } else {
-                copy.mappingRule = null;
+            {
+                java.lang.Boolean mappingRuleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMappingRule());
+                if (mappingRuleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    StringOrRefType sourceMappingRule;
+                    sourceMappingRule = this.getMappingRule();
+                    StringOrRefType copyMappingRule = ((StringOrRefType) strategy.copy(LocatorUtils.property(locator, "mappingRule", sourceMappingRule), sourceMappingRule, this.isSetMappingRule()));
+                    copy.setMappingRule(copyMappingRule);
+                } else {
+                    if (mappingRuleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.mappingRule = null;
+                    }
+                }
             }
-            if (this.isSetCoverageMappingRule()) {
-                MappingRuleType sourceCoverageMappingRule;
-                sourceCoverageMappingRule = this.getCoverageMappingRule();
-                MappingRuleType copyCoverageMappingRule = ((MappingRuleType) strategy.copy(LocatorUtils.property(locator, "coverageMappingRule", sourceCoverageMappingRule), sourceCoverageMappingRule));
-                copy.setCoverageMappingRule(copyCoverageMappingRule);
-            } else {
-                copy.coverageMappingRule = null;
+            {
+                java.lang.Boolean coverageMappingRuleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCoverageMappingRule());
+                if (coverageMappingRuleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    MappingRuleType sourceCoverageMappingRule;
+                    sourceCoverageMappingRule = this.getCoverageMappingRule();
+                    MappingRuleType copyCoverageMappingRule = ((MappingRuleType) strategy.copy(LocatorUtils.property(locator, "coverageMappingRule", sourceCoverageMappingRule), sourceCoverageMappingRule, this.isSetCoverageMappingRule()));
+                    copy.setCoverageMappingRule(copyCoverageMappingRule);
+                } else {
+                    if (coverageMappingRuleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.coverageMappingRule = null;
+                    }
+                }
             }
-            if (this.isSetGridFunction()) {
-                GridFunctionType sourceGridFunction;
-                sourceGridFunction = this.getGridFunction();
-                GridFunctionType copyGridFunction = ((GridFunctionType) strategy.copy(LocatorUtils.property(locator, "gridFunction", sourceGridFunction), sourceGridFunction));
-                copy.setGridFunction(copyGridFunction);
-            } else {
-                copy.gridFunction = null;
+            {
+                java.lang.Boolean gridFunctionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGridFunction());
+                if (gridFunctionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    GridFunctionType sourceGridFunction;
+                    sourceGridFunction = this.getGridFunction();
+                    GridFunctionType copyGridFunction = ((GridFunctionType) strategy.copy(LocatorUtils.property(locator, "gridFunction", sourceGridFunction), sourceGridFunction, this.isSetGridFunction()));
+                    copy.setGridFunction(copyGridFunction);
+                } else {
+                    if (gridFunctionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.gridFunction = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CoverageFunctionType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof CoverageFunctionType) {
             final CoverageFunctionType target = this;
             final CoverageFunctionType leftObject = ((CoverageFunctionType) left);
             final CoverageFunctionType rightObject = ((CoverageFunctionType) right);
             {
-                StringOrRefType lhsMappingRule;
-                lhsMappingRule = leftObject.getMappingRule();
-                StringOrRefType rhsMappingRule;
-                rhsMappingRule = rightObject.getMappingRule();
-                target.setMappingRule(((StringOrRefType) strategy.merge(LocatorUtils.property(leftLocator, "mappingRule", lhsMappingRule), LocatorUtils.property(rightLocator, "mappingRule", rhsMappingRule), lhsMappingRule, rhsMappingRule)));
+                java.lang.Boolean mappingRuleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMappingRule(), rightObject.isSetMappingRule());
+                if (mappingRuleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    StringOrRefType lhsMappingRule;
+                    lhsMappingRule = leftObject.getMappingRule();
+                    StringOrRefType rhsMappingRule;
+                    rhsMappingRule = rightObject.getMappingRule();
+                    StringOrRefType mergedMappingRule = ((StringOrRefType) strategy.merge(LocatorUtils.property(leftLocator, "mappingRule", lhsMappingRule), LocatorUtils.property(rightLocator, "mappingRule", rhsMappingRule), lhsMappingRule, rhsMappingRule, leftObject.isSetMappingRule(), rightObject.isSetMappingRule()));
+                    target.setMappingRule(mergedMappingRule);
+                } else {
+                    if (mappingRuleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.mappingRule = null;
+                    }
+                }
             }
             {
-                MappingRuleType lhsCoverageMappingRule;
-                lhsCoverageMappingRule = leftObject.getCoverageMappingRule();
-                MappingRuleType rhsCoverageMappingRule;
-                rhsCoverageMappingRule = rightObject.getCoverageMappingRule();
-                target.setCoverageMappingRule(((MappingRuleType) strategy.merge(LocatorUtils.property(leftLocator, "coverageMappingRule", lhsCoverageMappingRule), LocatorUtils.property(rightLocator, "coverageMappingRule", rhsCoverageMappingRule), lhsCoverageMappingRule, rhsCoverageMappingRule)));
+                java.lang.Boolean coverageMappingRuleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCoverageMappingRule(), rightObject.isSetCoverageMappingRule());
+                if (coverageMappingRuleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    MappingRuleType lhsCoverageMappingRule;
+                    lhsCoverageMappingRule = leftObject.getCoverageMappingRule();
+                    MappingRuleType rhsCoverageMappingRule;
+                    rhsCoverageMappingRule = rightObject.getCoverageMappingRule();
+                    MappingRuleType mergedCoverageMappingRule = ((MappingRuleType) strategy.merge(LocatorUtils.property(leftLocator, "coverageMappingRule", lhsCoverageMappingRule), LocatorUtils.property(rightLocator, "coverageMappingRule", rhsCoverageMappingRule), lhsCoverageMappingRule, rhsCoverageMappingRule, leftObject.isSetCoverageMappingRule(), rightObject.isSetCoverageMappingRule()));
+                    target.setCoverageMappingRule(mergedCoverageMappingRule);
+                } else {
+                    if (coverageMappingRuleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.coverageMappingRule = null;
+                    }
+                }
             }
             {
-                GridFunctionType lhsGridFunction;
-                lhsGridFunction = leftObject.getGridFunction();
-                GridFunctionType rhsGridFunction;
-                rhsGridFunction = rightObject.getGridFunction();
-                target.setGridFunction(((GridFunctionType) strategy.merge(LocatorUtils.property(leftLocator, "gridFunction", lhsGridFunction), LocatorUtils.property(rightLocator, "gridFunction", rhsGridFunction), lhsGridFunction, rhsGridFunction)));
+                java.lang.Boolean gridFunctionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGridFunction(), rightObject.isSetGridFunction());
+                if (gridFunctionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    GridFunctionType lhsGridFunction;
+                    lhsGridFunction = leftObject.getGridFunction();
+                    GridFunctionType rhsGridFunction;
+                    rhsGridFunction = rightObject.getGridFunction();
+                    GridFunctionType mergedGridFunction = ((GridFunctionType) strategy.merge(LocatorUtils.property(leftLocator, "gridFunction", lhsGridFunction), LocatorUtils.property(rightLocator, "gridFunction", rhsGridFunction), lhsGridFunction, rhsGridFunction, leftObject.isSetGridFunction(), rightObject.isSetGridFunction()));
+                    target.setGridFunction(mergedGridFunction);
+                } else {
+                    if (gridFunctionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.gridFunction = null;
+                    }
+                }
             }
         }
-    }
-
-    public CoverageFunctionType withMappingRule(StringOrRefType value) {
-        setMappingRule(value);
-        return this;
-    }
-
-    public CoverageFunctionType withCoverageMappingRule(MappingRuleType value) {
-        setCoverageMappingRule(value);
-        return this;
-    }
-
-    public CoverageFunctionType withGridFunction(GridFunctionType value) {
-        setGridFunction(value);
-        return this;
     }
 
 }

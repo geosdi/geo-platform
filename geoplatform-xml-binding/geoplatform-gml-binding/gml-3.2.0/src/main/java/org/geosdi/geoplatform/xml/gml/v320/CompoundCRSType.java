@@ -34,60 +34,58 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per CompoundCRSType complex type.
+ * <p>Classe Java per CompoundCRSType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CompoundCRSType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractCRSType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}componentReferenceSystem" maxOccurs="unbounded" minOccurs="2"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CompoundCRSType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractCRSType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}componentReferenceSystem" maxOccurs="unbounded" minOccurs="2"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,24 +98,30 @@ public class CompoundCRSType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The gml:componentReferenceSystem elements are an ordered sequence of associations to all the component coordinate reference systems included in this compound coordinate reference system. The gml:AggregationAttributeGroup should be used to specify that the gml:componentReferenceSystem properties are ordered.
+     * 
+     */
     @XmlElementRef(name = "componentReferenceSystem", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected List<JAXBElement<SingleCRSPropertyType>> componentReferenceSystem;
     @XmlAttribute(name = "aggregationType")
     protected AggregationType aggregationType;
 
     /**
+     * The gml:componentReferenceSystem elements are an ordered sequence of associations to all the component coordinate reference systems included in this compound coordinate reference system. The gml:AggregationAttributeGroup should be used to specify that the gml:componentReferenceSystem properties are ordered.
+     * 
      * Gets the value of the componentReferenceSystem property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the componentReferenceSystem property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the componentReferenceSystem property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getComponentReferenceSystem().add(newItem);
+     * getComponentReferenceSystem().add(newItem);
      * </pre>
      * 
      * 
@@ -125,12 +129,15 @@ public class CompoundCRSType
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link SingleCRSPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link SingleCRSPropertyType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the componentReferenceSystem property.
      */
     public List<JAXBElement<SingleCRSPropertyType>> getComponentReferenceSystem() {
         if (componentReferenceSystem == null) {
-            componentReferenceSystem = new ArrayList<JAXBElement<SingleCRSPropertyType>>();
+            componentReferenceSystem = new ArrayList<>();
         }
         return this.componentReferenceSystem;
     }
@@ -171,13 +178,15 @@ public class CompoundCRSType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -185,23 +194,33 @@ public class CompoundCRSType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<JAXBElement<SingleCRSPropertyType>> theComponentReferenceSystem;
-            theComponentReferenceSystem = this.getComponentReferenceSystem();
-            strategy.appendField(locator, this, "componentReferenceSystem", buffer, theComponentReferenceSystem);
+            theComponentReferenceSystem = (this.isSetComponentReferenceSystem()?this.getComponentReferenceSystem():null);
+            strategy.appendField(locator, this, "componentReferenceSystem", buffer, theComponentReferenceSystem, this.isSetComponentReferenceSystem());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setComponentReferenceSystem(List<JAXBElement<SingleCRSPropertyType>> value) {
+        this.componentReferenceSystem = null;
+        if (value!= null) {
+            List<JAXBElement<SingleCRSPropertyType>> draftl = this.getComponentReferenceSystem();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CompoundCRSType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -213,10 +232,10 @@ public class CompoundCRSType
         final CompoundCRSType that = ((CompoundCRSType) object);
         {
             List<JAXBElement<SingleCRSPropertyType>> lhsComponentReferenceSystem;
-            lhsComponentReferenceSystem = this.getComponentReferenceSystem();
+            lhsComponentReferenceSystem = (this.isSetComponentReferenceSystem()?this.getComponentReferenceSystem():null);
             List<JAXBElement<SingleCRSPropertyType>> rhsComponentReferenceSystem;
-            rhsComponentReferenceSystem = that.getComponentReferenceSystem();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "componentReferenceSystem", lhsComponentReferenceSystem), LocatorUtils.property(thatLocator, "componentReferenceSystem", rhsComponentReferenceSystem), lhsComponentReferenceSystem, rhsComponentReferenceSystem)) {
+            rhsComponentReferenceSystem = (that.isSetComponentReferenceSystem()?that.getComponentReferenceSystem():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "componentReferenceSystem", lhsComponentReferenceSystem), LocatorUtils.property(thatLocator, "componentReferenceSystem", rhsComponentReferenceSystem), lhsComponentReferenceSystem, rhsComponentReferenceSystem, this.isSetComponentReferenceSystem(), that.isSetComponentReferenceSystem())) {
                 return false;
             }
         }
@@ -225,84 +244,101 @@ public class CompoundCRSType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<JAXBElement<SingleCRSPropertyType>> theComponentReferenceSystem;
-            theComponentReferenceSystem = this.getComponentReferenceSystem();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "componentReferenceSystem", theComponentReferenceSystem), currentHashCode, theComponentReferenceSystem);
+            theComponentReferenceSystem = (this.isSetComponentReferenceSystem()?this.getComponentReferenceSystem():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "componentReferenceSystem", theComponentReferenceSystem), currentHashCode, theComponentReferenceSystem, this.isSetComponentReferenceSystem());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof CompoundCRSType) {
             final CompoundCRSType copy = ((CompoundCRSType) draftCopy);
-            if (this.isSetComponentReferenceSystem()) {
-                List<JAXBElement<SingleCRSPropertyType>> sourceComponentReferenceSystem;
-                sourceComponentReferenceSystem = this.getComponentReferenceSystem();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<SingleCRSPropertyType>> copyComponentReferenceSystem = ((List<JAXBElement<SingleCRSPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "componentReferenceSystem", sourceComponentReferenceSystem), sourceComponentReferenceSystem));
-                copy.unsetComponentReferenceSystem();
-                List<JAXBElement<SingleCRSPropertyType>> uniqueComponentReferenceSysteml = copy.getComponentReferenceSystem();
-                uniqueComponentReferenceSysteml.addAll(copyComponentReferenceSystem);
-            } else {
-                copy.unsetComponentReferenceSystem();
+            {
+                java.lang.Boolean componentReferenceSystemShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetComponentReferenceSystem());
+                if (componentReferenceSystemShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<SingleCRSPropertyType>> sourceComponentReferenceSystem;
+                    sourceComponentReferenceSystem = (this.isSetComponentReferenceSystem()?this.getComponentReferenceSystem():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<SingleCRSPropertyType>> copyComponentReferenceSystem = ((List<JAXBElement<SingleCRSPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "componentReferenceSystem", sourceComponentReferenceSystem), sourceComponentReferenceSystem, this.isSetComponentReferenceSystem()));
+                    copy.setComponentReferenceSystem(copyComponentReferenceSystem);
+                } else {
+                    if (componentReferenceSystemShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetComponentReferenceSystem();
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CompoundCRSType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof CompoundCRSType) {
@@ -310,179 +346,36 @@ public class CompoundCRSType
             final CompoundCRSType leftObject = ((CompoundCRSType) left);
             final CompoundCRSType rightObject = ((CompoundCRSType) right);
             {
-                List<JAXBElement<SingleCRSPropertyType>> lhsComponentReferenceSystem;
-                lhsComponentReferenceSystem = leftObject.getComponentReferenceSystem();
-                List<JAXBElement<SingleCRSPropertyType>> rhsComponentReferenceSystem;
-                rhsComponentReferenceSystem = rightObject.getComponentReferenceSystem();
-                target.unsetComponentReferenceSystem();
-                List<JAXBElement<SingleCRSPropertyType>> uniqueComponentReferenceSysteml = target.getComponentReferenceSystem();
-                uniqueComponentReferenceSysteml.addAll(((List<JAXBElement<SingleCRSPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "componentReferenceSystem", lhsComponentReferenceSystem), LocatorUtils.property(rightLocator, "componentReferenceSystem", rhsComponentReferenceSystem), lhsComponentReferenceSystem, rhsComponentReferenceSystem)));
+                java.lang.Boolean componentReferenceSystemShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetComponentReferenceSystem(), rightObject.isSetComponentReferenceSystem());
+                if (componentReferenceSystemShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<SingleCRSPropertyType>> lhsComponentReferenceSystem;
+                    lhsComponentReferenceSystem = (leftObject.isSetComponentReferenceSystem()?leftObject.getComponentReferenceSystem():null);
+                    List<JAXBElement<SingleCRSPropertyType>> rhsComponentReferenceSystem;
+                    rhsComponentReferenceSystem = (rightObject.isSetComponentReferenceSystem()?rightObject.getComponentReferenceSystem():null);
+                    List<JAXBElement<SingleCRSPropertyType>> mergedComponentReferenceSystem = ((List<JAXBElement<SingleCRSPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "componentReferenceSystem", lhsComponentReferenceSystem), LocatorUtils.property(rightLocator, "componentReferenceSystem", rhsComponentReferenceSystem), lhsComponentReferenceSystem, rhsComponentReferenceSystem, leftObject.isSetComponentReferenceSystem(), rightObject.isSetComponentReferenceSystem()));
+                    target.setComponentReferenceSystem(mergedComponentReferenceSystem);
+                } else {
+                    if (componentReferenceSystemShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetComponentReferenceSystem();
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setComponentReferenceSystem(List<JAXBElement<SingleCRSPropertyType>> value) {
-        List<JAXBElement<SingleCRSPropertyType>> draftl = this.getComponentReferenceSystem();
-        draftl.addAll(value);
-    }
-
-    public CompoundCRSType withComponentReferenceSystem(JAXBElement<SingleCRSPropertyType> ... values) {
-        if (values!= null) {
-            for (JAXBElement<SingleCRSPropertyType> value: values) {
-                getComponentReferenceSystem().add(value);
-            }
-        }
-        return this;
-    }
-
-    public CompoundCRSType withComponentReferenceSystem(Collection<JAXBElement<SingleCRSPropertyType>> values) {
-        if (values!= null) {
-            getComponentReferenceSystem().addAll(values);
-        }
-        return this;
-    }
-
-    public CompoundCRSType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public CompoundCRSType withComponentReferenceSystem(List<JAXBElement<SingleCRSPropertyType>> value) {
-        setComponentReferenceSystem(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withDomainOfValidity(DomainOfValidityElement... values) {
-        if (values!= null) {
-            for (DomainOfValidityElement value: values) {
-                getDomainOfValidity().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withDomainOfValidity(Collection<DomainOfValidityElement> values) {
-        if (values!= null) {
-            getDomainOfValidity().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withScope(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getScope().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withScope(Collection<String> values) {
-        if (values!= null) {
-            getScope().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withDomainOfValidity(List<DomainOfValidityElement> value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withScope(List<String> value) {
-        setScope(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public CompoundCRSType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

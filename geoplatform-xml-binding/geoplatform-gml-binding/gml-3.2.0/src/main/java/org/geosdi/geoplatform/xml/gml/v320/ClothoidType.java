@@ -34,71 +34,69 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per ClothoidType complex type.
+ * <p>Classe Java per ClothoidType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ClothoidType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
- *       &lt;sequence>
- *         &lt;element name="refLocation">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element ref="{http://www.opengis.net/gml}AffinePlacement"/>
- *                 &lt;/sequence>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="scaleFactor" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
- *         &lt;element name="startParameter" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="endParameter" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *       &lt;/sequence>
- *       &lt;attribute name="interpolation" type="{http://www.opengis.net/gml}CurveInterpolationType" fixed="clothoid" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="ClothoidType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
+ *       <sequence>
+ *         <element name="refLocation">
+ *           <complexType>
+ *             <complexContent>
+ *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 <sequence>
+ *                   <element ref="{http://www.opengis.net/gml}AffinePlacement"/>
+ *                 </sequence>
+ *               </restriction>
+ *             </complexContent>
+ *           </complexType>
+ *         </element>
+ *         <element name="scaleFactor" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
+ *         <element name="startParameter" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         <element name="endParameter" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *       </sequence>
+ *       <attribute name="interpolation" type="{http://www.opengis.net/gml}CurveInterpolationType" fixed="clothoid" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -120,12 +118,8 @@ public class ClothoidType
     protected BigDecimal scaleFactor;
     protected double startParameter;
     protected double endParameter;
-    /**
-     * 
-     * 
-     */
     @XmlAttribute(name = "interpolation")
-    public final static CurveInterpolationType INTERPOLATION = CurveInterpolationType.CLOTHOID;
+    public static final CurveInterpolationType INTERPOLATION = CurveInterpolationType.CLOTHOID;
 
     /**
      * Recupera il valore della proprietà refLocation.
@@ -223,13 +217,15 @@ public class ClothoidType
         return true;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -237,38 +233,40 @@ public class ClothoidType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             ClothoidType.RefLocation theRefLocation;
             theRefLocation = this.getRefLocation();
-            strategy.appendField(locator, this, "refLocation", buffer, theRefLocation);
+            strategy.appendField(locator, this, "refLocation", buffer, theRefLocation, this.isSetRefLocation());
         }
         {
             BigDecimal theScaleFactor;
             theScaleFactor = this.getScaleFactor();
-            strategy.appendField(locator, this, "scaleFactor", buffer, theScaleFactor);
+            strategy.appendField(locator, this, "scaleFactor", buffer, theScaleFactor, this.isSetScaleFactor());
         }
         {
             double theStartParameter;
             theStartParameter = this.getStartParameter();
-            strategy.appendField(locator, this, "startParameter", buffer, theStartParameter);
+            strategy.appendField(locator, this, "startParameter", buffer, theStartParameter, true);
         }
         {
             double theEndParameter;
             theEndParameter = this.getEndParameter();
-            strategy.appendField(locator, this, "endParameter", buffer, theEndParameter);
+            strategy.appendField(locator, this, "endParameter", buffer, theEndParameter, true);
         }
         {
             CurveInterpolationType theINTERPOLATION;
             theINTERPOLATION = ClothoidType.INTERPOLATION;
-            strategy.appendField(locator, this, "interpolation", buffer, theINTERPOLATION);
+            strategy.appendField(locator, this, "interpolation", buffer, theINTERPOLATION, true);
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof ClothoidType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -283,7 +281,7 @@ public class ClothoidType
             lhsRefLocation = this.getRefLocation();
             ClothoidType.RefLocation rhsRefLocation;
             rhsRefLocation = that.getRefLocation();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "refLocation", lhsRefLocation), LocatorUtils.property(thatLocator, "refLocation", rhsRefLocation), lhsRefLocation, rhsRefLocation)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "refLocation", lhsRefLocation), LocatorUtils.property(thatLocator, "refLocation", rhsRefLocation), lhsRefLocation, rhsRefLocation, this.isSetRefLocation(), that.isSetRefLocation())) {
                 return false;
             }
         }
@@ -292,7 +290,7 @@ public class ClothoidType
             lhsScaleFactor = this.getScaleFactor();
             BigDecimal rhsScaleFactor;
             rhsScaleFactor = that.getScaleFactor();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "scaleFactor", lhsScaleFactor), LocatorUtils.property(thatLocator, "scaleFactor", rhsScaleFactor), lhsScaleFactor, rhsScaleFactor)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "scaleFactor", lhsScaleFactor), LocatorUtils.property(thatLocator, "scaleFactor", rhsScaleFactor), lhsScaleFactor, rhsScaleFactor, this.isSetScaleFactor(), that.isSetScaleFactor())) {
                 return false;
             }
         }
@@ -301,7 +299,7 @@ public class ClothoidType
             lhsStartParameter = this.getStartParameter();
             double rhsStartParameter;
             rhsStartParameter = that.getStartParameter();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "startParameter", lhsStartParameter), LocatorUtils.property(thatLocator, "startParameter", rhsStartParameter), lhsStartParameter, rhsStartParameter)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "startParameter", lhsStartParameter), LocatorUtils.property(thatLocator, "startParameter", rhsStartParameter), lhsStartParameter, rhsStartParameter, true, true)) {
                 return false;
             }
         }
@@ -310,105 +308,134 @@ public class ClothoidType
             lhsEndParameter = this.getEndParameter();
             double rhsEndParameter;
             rhsEndParameter = that.getEndParameter();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "endParameter", lhsEndParameter), LocatorUtils.property(thatLocator, "endParameter", rhsEndParameter), lhsEndParameter, rhsEndParameter)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "endParameter", lhsEndParameter), LocatorUtils.property(thatLocator, "endParameter", rhsEndParameter), lhsEndParameter, rhsEndParameter, true, true)) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             ClothoidType.RefLocation theRefLocation;
             theRefLocation = this.getRefLocation();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "refLocation", theRefLocation), currentHashCode, theRefLocation);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "refLocation", theRefLocation), currentHashCode, theRefLocation, this.isSetRefLocation());
         }
         {
             BigDecimal theScaleFactor;
             theScaleFactor = this.getScaleFactor();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "scaleFactor", theScaleFactor), currentHashCode, theScaleFactor);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "scaleFactor", theScaleFactor), currentHashCode, theScaleFactor, this.isSetScaleFactor());
         }
         {
             double theStartParameter;
             theStartParameter = this.getStartParameter();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "startParameter", theStartParameter), currentHashCode, theStartParameter);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "startParameter", theStartParameter), currentHashCode, theStartParameter, true);
         }
         {
             double theEndParameter;
             theEndParameter = this.getEndParameter();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "endParameter", theEndParameter), currentHashCode, theEndParameter);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "endParameter", theEndParameter), currentHashCode, theEndParameter, true);
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof ClothoidType) {
             final ClothoidType copy = ((ClothoidType) draftCopy);
-            if (this.isSetRefLocation()) {
-                ClothoidType.RefLocation sourceRefLocation;
-                sourceRefLocation = this.getRefLocation();
-                ClothoidType.RefLocation copyRefLocation = ((ClothoidType.RefLocation) strategy.copy(LocatorUtils.property(locator, "refLocation", sourceRefLocation), sourceRefLocation));
-                copy.setRefLocation(copyRefLocation);
-            } else {
-                copy.refLocation = null;
+            {
+                java.lang.Boolean refLocationShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRefLocation());
+                if (refLocationShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ClothoidType.RefLocation sourceRefLocation;
+                    sourceRefLocation = this.getRefLocation();
+                    ClothoidType.RefLocation copyRefLocation = ((ClothoidType.RefLocation) strategy.copy(LocatorUtils.property(locator, "refLocation", sourceRefLocation), sourceRefLocation, this.isSetRefLocation()));
+                    copy.setRefLocation(copyRefLocation);
+                } else {
+                    if (refLocationShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.refLocation = null;
+                    }
+                }
             }
-            if (this.isSetScaleFactor()) {
-                BigDecimal sourceScaleFactor;
-                sourceScaleFactor = this.getScaleFactor();
-                BigDecimal copyScaleFactor = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "scaleFactor", sourceScaleFactor), sourceScaleFactor));
-                copy.setScaleFactor(copyScaleFactor);
-            } else {
-                copy.scaleFactor = null;
+            {
+                java.lang.Boolean scaleFactorShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetScaleFactor());
+                if (scaleFactorShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal sourceScaleFactor;
+                    sourceScaleFactor = this.getScaleFactor();
+                    BigDecimal copyScaleFactor = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "scaleFactor", sourceScaleFactor), sourceScaleFactor, this.isSetScaleFactor()));
+                    copy.setScaleFactor(copyScaleFactor);
+                } else {
+                    if (scaleFactorShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.scaleFactor = null;
+                    }
+                }
             }
-            if (this.isSetStartParameter()) {
-                double sourceStartParameter;
-                sourceStartParameter = this.getStartParameter();
-                double copyStartParameter = strategy.copy(LocatorUtils.property(locator, "startParameter", sourceStartParameter), sourceStartParameter);
-                copy.setStartParameter(copyStartParameter);
-            } else {
+            {
+                java.lang.Boolean startParameterShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, true);
+                if (startParameterShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    double sourceStartParameter;
+                    sourceStartParameter = this.getStartParameter();
+                    double copyStartParameter = strategy.copy(LocatorUtils.property(locator, "startParameter", sourceStartParameter), sourceStartParameter, true);
+                    copy.setStartParameter(copyStartParameter);
+                } else {
+                    if (startParameterShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
-            if (this.isSetEndParameter()) {
-                double sourceEndParameter;
-                sourceEndParameter = this.getEndParameter();
-                double copyEndParameter = strategy.copy(LocatorUtils.property(locator, "endParameter", sourceEndParameter), sourceEndParameter);
-                copy.setEndParameter(copyEndParameter);
-            } else {
+            {
+                java.lang.Boolean endParameterShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, true);
+                if (endParameterShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    double sourceEndParameter;
+                    sourceEndParameter = this.getEndParameter();
+                    double copyEndParameter = strategy.copy(LocatorUtils.property(locator, "endParameter", sourceEndParameter), sourceEndParameter, true);
+                    copy.setEndParameter(copyEndParameter);
+                } else {
+                    if (endParameterShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new ClothoidType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof ClothoidType) {
@@ -416,91 +443,83 @@ public class ClothoidType
             final ClothoidType leftObject = ((ClothoidType) left);
             final ClothoidType rightObject = ((ClothoidType) right);
             {
-                ClothoidType.RefLocation lhsRefLocation;
-                lhsRefLocation = leftObject.getRefLocation();
-                ClothoidType.RefLocation rhsRefLocation;
-                rhsRefLocation = rightObject.getRefLocation();
-                target.setRefLocation(((ClothoidType.RefLocation) strategy.merge(LocatorUtils.property(leftLocator, "refLocation", lhsRefLocation), LocatorUtils.property(rightLocator, "refLocation", rhsRefLocation), lhsRefLocation, rhsRefLocation)));
+                java.lang.Boolean refLocationShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRefLocation(), rightObject.isSetRefLocation());
+                if (refLocationShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ClothoidType.RefLocation lhsRefLocation;
+                    lhsRefLocation = leftObject.getRefLocation();
+                    ClothoidType.RefLocation rhsRefLocation;
+                    rhsRefLocation = rightObject.getRefLocation();
+                    ClothoidType.RefLocation mergedRefLocation = ((ClothoidType.RefLocation) strategy.merge(LocatorUtils.property(leftLocator, "refLocation", lhsRefLocation), LocatorUtils.property(rightLocator, "refLocation", rhsRefLocation), lhsRefLocation, rhsRefLocation, leftObject.isSetRefLocation(), rightObject.isSetRefLocation()));
+                    target.setRefLocation(mergedRefLocation);
+                } else {
+                    if (refLocationShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.refLocation = null;
+                    }
+                }
             }
             {
-                BigDecimal lhsScaleFactor;
-                lhsScaleFactor = leftObject.getScaleFactor();
-                BigDecimal rhsScaleFactor;
-                rhsScaleFactor = rightObject.getScaleFactor();
-                target.setScaleFactor(((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "scaleFactor", lhsScaleFactor), LocatorUtils.property(rightLocator, "scaleFactor", rhsScaleFactor), lhsScaleFactor, rhsScaleFactor)));
+                java.lang.Boolean scaleFactorShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetScaleFactor(), rightObject.isSetScaleFactor());
+                if (scaleFactorShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal lhsScaleFactor;
+                    lhsScaleFactor = leftObject.getScaleFactor();
+                    BigDecimal rhsScaleFactor;
+                    rhsScaleFactor = rightObject.getScaleFactor();
+                    BigDecimal mergedScaleFactor = ((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "scaleFactor", lhsScaleFactor), LocatorUtils.property(rightLocator, "scaleFactor", rhsScaleFactor), lhsScaleFactor, rhsScaleFactor, leftObject.isSetScaleFactor(), rightObject.isSetScaleFactor()));
+                    target.setScaleFactor(mergedScaleFactor);
+                } else {
+                    if (scaleFactorShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.scaleFactor = null;
+                    }
+                }
             }
             {
-                double lhsStartParameter;
-                lhsStartParameter = leftObject.getStartParameter();
-                double rhsStartParameter;
-                rhsStartParameter = rightObject.getStartParameter();
-                target.setStartParameter(((double) strategy.merge(LocatorUtils.property(leftLocator, "startParameter", lhsStartParameter), LocatorUtils.property(rightLocator, "startParameter", rhsStartParameter), lhsStartParameter, rhsStartParameter)));
+                java.lang.Boolean startParameterShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, true, true);
+                if (startParameterShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    double lhsStartParameter;
+                    lhsStartParameter = leftObject.getStartParameter();
+                    double rhsStartParameter;
+                    rhsStartParameter = rightObject.getStartParameter();
+                    double mergedStartParameter = ((double) strategy.merge(LocatorUtils.property(leftLocator, "startParameter", lhsStartParameter), LocatorUtils.property(rightLocator, "startParameter", rhsStartParameter), lhsStartParameter, rhsStartParameter, true, true));
+                    target.setStartParameter(mergedStartParameter);
+                } else {
+                    if (startParameterShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
             {
-                double lhsEndParameter;
-                lhsEndParameter = leftObject.getEndParameter();
-                double rhsEndParameter;
-                rhsEndParameter = rightObject.getEndParameter();
-                target.setEndParameter(((double) strategy.merge(LocatorUtils.property(leftLocator, "endParameter", lhsEndParameter), LocatorUtils.property(rightLocator, "endParameter", rhsEndParameter), lhsEndParameter, rhsEndParameter)));
+                java.lang.Boolean endParameterShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, true, true);
+                if (endParameterShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    double lhsEndParameter;
+                    lhsEndParameter = leftObject.getEndParameter();
+                    double rhsEndParameter;
+                    rhsEndParameter = rightObject.getEndParameter();
+                    double mergedEndParameter = ((double) strategy.merge(LocatorUtils.property(leftLocator, "endParameter", lhsEndParameter), LocatorUtils.property(rightLocator, "endParameter", rhsEndParameter), lhsEndParameter, rhsEndParameter, true, true));
+                    target.setEndParameter(mergedEndParameter);
+                } else {
+                    if (endParameterShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
         }
     }
 
-    public ClothoidType withRefLocation(ClothoidType.RefLocation value) {
-        setRefLocation(value);
-        return this;
-    }
-
-    public ClothoidType withScaleFactor(BigDecimal value) {
-        setScaleFactor(value);
-        return this;
-    }
-
-    public ClothoidType withStartParameter(double value) {
-        setStartParameter(value);
-        return this;
-    }
-
-    public ClothoidType withEndParameter(double value) {
-        setEndParameter(value);
-        return this;
-    }
-
-    @Override
-    public ClothoidType withNumDerivativesAtStart(BigInteger value) {
-        setNumDerivativesAtStart(value);
-        return this;
-    }
-
-    @Override
-    public ClothoidType withNumDerivativesAtEnd(BigInteger value) {
-        setNumDerivativesAtEnd(value);
-        return this;
-    }
-
-    @Override
-    public ClothoidType withNumDerivativeInterior(BigInteger value) {
-        setNumDerivativeInterior(value);
-        return this;
-    }
-
 
     /**
-     * <p>Classe Java per anonymous complex type.
+     * <p>Classe Java per anonymous complex type.</p>
      * 
-     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
      * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element ref="{http://www.opengis.net/gml}AffinePlacement"/>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <sequence>
+     *         <element ref="{http://www.opengis.net/gml}AffinePlacement"/>
+     *       </sequence>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
      * 
      * 
      */
@@ -508,15 +527,18 @@ public class ClothoidType
     @XmlType(name = "", propOrder = {
         "affinePlacement"
     })
-    public static class RefLocation
-        implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+    public static class RefLocation implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
     {
 
+        /**
+         * location, refDirection, inDimension and outDimension have the same meaning as specified in ISO 19107:2003, 6.4.21.
+         * 
+         */
         @XmlElement(name = "AffinePlacement", required = true)
         protected AffinePlacementType affinePlacement;
 
         /**
-         * Recupera il valore della proprietà affinePlacement.
+         * location, refDirection, inDimension and outDimension have the same meaning as specified in ISO 19107:2003, 6.4.21.
          * 
          * @return
          *     possible object is
@@ -534,6 +556,7 @@ public class ClothoidType
          *     allowed object is
          *     {@link AffinePlacementType }
          *     
+         * @see #getAffinePlacement()
          */
         public void setAffinePlacement(AffinePlacementType value) {
             this.affinePlacement = value;
@@ -543,13 +566,15 @@ public class ClothoidType
             return (this.affinePlacement!= null);
         }
 
+        @Override
         public String toString() {
-            final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+            final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
             final StringBuilder buffer = new StringBuilder();
             append(null, buffer, strategy);
             return buffer.toString();
         }
 
+        @Override
         public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             strategy.appendStart(locator, this, buffer);
             appendFields(locator, buffer, strategy);
@@ -557,17 +582,19 @@ public class ClothoidType
             return buffer;
         }
 
+        @Override
         public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             {
                 AffinePlacementType theAffinePlacement;
                 theAffinePlacement = this.getAffinePlacement();
-                strategy.appendField(locator, this, "affinePlacement", buffer, theAffinePlacement);
+                strategy.appendField(locator, this, "affinePlacement", buffer, theAffinePlacement, this.isSetAffinePlacement());
             }
             return buffer;
         }
 
+        @Override
         public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-            if (!(object instanceof ClothoidType.RefLocation)) {
+            if ((object == null)||(this.getClass()!= object.getClass())) {
                 return false;
             }
             if (this == object) {
@@ -579,85 +606,102 @@ public class ClothoidType
                 lhsAffinePlacement = this.getAffinePlacement();
                 AffinePlacementType rhsAffinePlacement;
                 rhsAffinePlacement = that.getAffinePlacement();
-                if (!strategy.equals(LocatorUtils.property(thisLocator, "affinePlacement", lhsAffinePlacement), LocatorUtils.property(thatLocator, "affinePlacement", rhsAffinePlacement), lhsAffinePlacement, rhsAffinePlacement)) {
+                if (!strategy.equals(LocatorUtils.property(thisLocator, "affinePlacement", lhsAffinePlacement), LocatorUtils.property(thatLocator, "affinePlacement", rhsAffinePlacement), lhsAffinePlacement, rhsAffinePlacement, this.isSetAffinePlacement(), that.isSetAffinePlacement())) {
                     return false;
                 }
             }
             return true;
         }
 
+        @Override
         public boolean equals(Object object) {
-            final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+            final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
             return equals(null, null, object, strategy);
         }
 
+        @Override
         public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
             int currentHashCode = 1;
             {
                 AffinePlacementType theAffinePlacement;
                 theAffinePlacement = this.getAffinePlacement();
-                currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "affinePlacement", theAffinePlacement), currentHashCode, theAffinePlacement);
+                currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "affinePlacement", theAffinePlacement), currentHashCode, theAffinePlacement, this.isSetAffinePlacement());
             }
             return currentHashCode;
         }
 
+        @Override
         public int hashCode() {
-            final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+            final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
             return this.hashCode(null, strategy);
         }
 
+        @Override
         public Object clone() {
             return copyTo(createNewInstance());
         }
 
+        @Override
         public Object copyTo(Object target) {
-            final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+            final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
             return copyTo(null, target, strategy);
         }
 
+        @Override
         public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
             final Object draftCopy = ((target == null)?createNewInstance():target);
             if (draftCopy instanceof ClothoidType.RefLocation) {
                 final ClothoidType.RefLocation copy = ((ClothoidType.RefLocation) draftCopy);
-                if (this.isSetAffinePlacement()) {
-                    AffinePlacementType sourceAffinePlacement;
-                    sourceAffinePlacement = this.getAffinePlacement();
-                    AffinePlacementType copyAffinePlacement = ((AffinePlacementType) strategy.copy(LocatorUtils.property(locator, "affinePlacement", sourceAffinePlacement), sourceAffinePlacement));
-                    copy.setAffinePlacement(copyAffinePlacement);
-                } else {
-                    copy.affinePlacement = null;
+                {
+                    java.lang.Boolean affinePlacementShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAffinePlacement());
+                    if (affinePlacementShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                        AffinePlacementType sourceAffinePlacement;
+                        sourceAffinePlacement = this.getAffinePlacement();
+                        AffinePlacementType copyAffinePlacement = ((AffinePlacementType) strategy.copy(LocatorUtils.property(locator, "affinePlacement", sourceAffinePlacement), sourceAffinePlacement, this.isSetAffinePlacement()));
+                        copy.setAffinePlacement(copyAffinePlacement);
+                    } else {
+                        if (affinePlacementShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                            copy.affinePlacement = null;
+                        }
+                    }
                 }
             }
             return draftCopy;
         }
 
+        @Override
         public Object createNewInstance() {
             return new ClothoidType.RefLocation();
         }
 
+        @Override
         public void mergeFrom(Object left, Object right) {
-            final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+            final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
             mergeFrom(null, null, left, right, strategy);
         }
 
+        @Override
         public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
             if (right instanceof ClothoidType.RefLocation) {
                 final ClothoidType.RefLocation target = this;
                 final ClothoidType.RefLocation leftObject = ((ClothoidType.RefLocation) left);
                 final ClothoidType.RefLocation rightObject = ((ClothoidType.RefLocation) right);
                 {
-                    AffinePlacementType lhsAffinePlacement;
-                    lhsAffinePlacement = leftObject.getAffinePlacement();
-                    AffinePlacementType rhsAffinePlacement;
-                    rhsAffinePlacement = rightObject.getAffinePlacement();
-                    target.setAffinePlacement(((AffinePlacementType) strategy.merge(LocatorUtils.property(leftLocator, "affinePlacement", lhsAffinePlacement), LocatorUtils.property(rightLocator, "affinePlacement", rhsAffinePlacement), lhsAffinePlacement, rhsAffinePlacement)));
+                    java.lang.Boolean affinePlacementShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAffinePlacement(), rightObject.isSetAffinePlacement());
+                    if (affinePlacementShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                        AffinePlacementType lhsAffinePlacement;
+                        lhsAffinePlacement = leftObject.getAffinePlacement();
+                        AffinePlacementType rhsAffinePlacement;
+                        rhsAffinePlacement = rightObject.getAffinePlacement();
+                        AffinePlacementType mergedAffinePlacement = ((AffinePlacementType) strategy.merge(LocatorUtils.property(leftLocator, "affinePlacement", lhsAffinePlacement), LocatorUtils.property(rightLocator, "affinePlacement", rhsAffinePlacement), lhsAffinePlacement, rhsAffinePlacement, leftObject.isSetAffinePlacement(), rightObject.isSetAffinePlacement()));
+                        target.setAffinePlacement(mergedAffinePlacement);
+                    } else {
+                        if (affinePlacementShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                            target.affinePlacement = null;
+                        }
+                    }
                 }
             }
-        }
-
-        public ClothoidType.RefLocation withAffinePlacement(AffinePlacementType value) {
-            setAffinePlacement(value);
-            return this;
         }
 
     }

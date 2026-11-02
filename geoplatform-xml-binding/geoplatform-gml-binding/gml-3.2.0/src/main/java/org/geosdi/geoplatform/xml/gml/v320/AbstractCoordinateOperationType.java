@@ -34,63 +34,61 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AbstractCoordinateOperationType complex type.
+ * <p>Classe Java per AbstractCoordinateOperationType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractCoordinateOperationType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}domainOfValidity" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}scope" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.opengis.net/gml}operationVersion" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}coordinateOperationAccuracy" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}sourceCRS" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}targetCRS" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractCoordinateOperationType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}domainOfValidity" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}scope" maxOccurs="unbounded"/>
+ *         <element ref="{http://www.opengis.net/gml}operationVersion" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}coordinateOperationAccuracy" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}sourceCRS" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}targetCRS" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -104,26 +102,50 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "targetCRS"
 })
 @XmlSeeAlso({
+    ConcatenatedOperationType.class,
     PassThroughOperationType.class,
-    AbstractGeneralTransformationType.class,
     AbstractGeneralConversionType.class,
-    ConcatenatedOperationType.class
+    AbstractGeneralTransformationType.class
 })
 public abstract class AbstractCoordinateOperationType
     extends IdentifiedObjectType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The gml:domainOfValidity property implements an association role to an EX_Extent object as encoded in ISO/TS 19139, either referencing or containing the definition of that extent.
+     * 
+     */
     protected DomainOfValidityElement domainOfValidity;
+    /**
+     * The gml:scope property provides a description of the usage, or limitations of usage, for which this CRS-related object is valid. If unknown, enter "not known".
+     * 
+     */
     @XmlElement(required = true)
     protected List<String> scope;
+    /**
+     * gml:operationVersion is the version of the coordinate transformation (i.e., instantiation due to the stochastic nature of the parameters). Mandatory when describing a transformation, and should not be supplied for a conversion.
+     * 
+     */
     protected String operationVersion;
+    /**
+     * gml:coordinateOperationAccuracy is an association role to a DQ_PositionalAccuracy object as encoded in ISO/TS 19139, either referencing or containing the definition of that positional accuracy. That object contains an estimate of the impact of this coordinate operation on point accuracy. That is, it gives position error estimates for the target coordinates of this coordinate operation, assuming no errors in the source coordinates.
+     * 
+     */
     protected List<CoordinateOperationAccuracyElement> coordinateOperationAccuracy;
+    /**
+     * gml:sourceCRS is an association role to the source CRS (coordinate reference system) of this coordinate operation.
+     * 
+     */
     protected CRSPropertyType sourceCRS;
+    /**
+     * gml:targetCRS is an association role to the target CRS (coordinate reference system) of this coordinate operation.
+     * 
+     */
     protected CRSPropertyType targetCRS;
 
     /**
-     * Recupera il valore della proprietà domainOfValidity.
+     * The gml:domainOfValidity property implements an association role to an EX_Extent object as encoded in ISO/TS 19139, either referencing or containing the definition of that extent.
      * 
      * @return
      *     possible object is
@@ -141,6 +163,7 @@ public abstract class AbstractCoordinateOperationType
      *     allowed object is
      *     {@link DomainOfValidityElement }
      *     
+     * @see #getDomainOfValidity()
      */
     public void setDomainOfValidity(DomainOfValidityElement value) {
         this.domainOfValidity = value;
@@ -151,30 +174,35 @@ public abstract class AbstractCoordinateOperationType
     }
 
     /**
+     * The gml:scope property provides a description of the usage, or limitations of usage, for which this CRS-related object is valid. If unknown, enter "not known".
+     * 
      * Gets the value of the scope property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scope property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the scope property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getScope().add(newItem);
+     * getScope().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the scope property.
      */
     public List<String> getScope() {
         if (scope == null) {
-            scope = new ArrayList<String>();
+            scope = new ArrayList<>();
         }
         return this.scope;
     }
@@ -188,7 +216,7 @@ public abstract class AbstractCoordinateOperationType
     }
 
     /**
-     * Recupera il valore della proprietà operationVersion.
+     * gml:operationVersion is the version of the coordinate transformation (i.e., instantiation due to the stochastic nature of the parameters). Mandatory when describing a transformation, and should not be supplied for a conversion.
      * 
      * @return
      *     possible object is
@@ -206,6 +234,7 @@ public abstract class AbstractCoordinateOperationType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getOperationVersion()
      */
     public void setOperationVersion(String value) {
         this.operationVersion = value;
@@ -216,30 +245,35 @@ public abstract class AbstractCoordinateOperationType
     }
 
     /**
+     * gml:coordinateOperationAccuracy is an association role to a DQ_PositionalAccuracy object as encoded in ISO/TS 19139, either referencing or containing the definition of that positional accuracy. That object contains an estimate of the impact of this coordinate operation on point accuracy. That is, it gives position error estimates for the target coordinates of this coordinate operation, assuming no errors in the source coordinates.
+     * 
      * Gets the value of the coordinateOperationAccuracy property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the coordinateOperationAccuracy property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the coordinateOperationAccuracy property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getCoordinateOperationAccuracy().add(newItem);
+     * getCoordinateOperationAccuracy().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CoordinateOperationAccuracyElement }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the coordinateOperationAccuracy property.
      */
     public List<CoordinateOperationAccuracyElement> getCoordinateOperationAccuracy() {
         if (coordinateOperationAccuracy == null) {
-            coordinateOperationAccuracy = new ArrayList<CoordinateOperationAccuracyElement>();
+            coordinateOperationAccuracy = new ArrayList<>();
         }
         return this.coordinateOperationAccuracy;
     }
@@ -253,7 +287,7 @@ public abstract class AbstractCoordinateOperationType
     }
 
     /**
-     * Recupera il valore della proprietà sourceCRS.
+     * gml:sourceCRS is an association role to the source CRS (coordinate reference system) of this coordinate operation.
      * 
      * @return
      *     possible object is
@@ -271,6 +305,7 @@ public abstract class AbstractCoordinateOperationType
      *     allowed object is
      *     {@link CRSPropertyType }
      *     
+     * @see #getSourceCRS()
      */
     public void setSourceCRS(CRSPropertyType value) {
         this.sourceCRS = value;
@@ -281,7 +316,7 @@ public abstract class AbstractCoordinateOperationType
     }
 
     /**
-     * Recupera il valore della proprietà targetCRS.
+     * gml:targetCRS is an association role to the target CRS (coordinate reference system) of this coordinate operation.
      * 
      * @return
      *     possible object is
@@ -299,6 +334,7 @@ public abstract class AbstractCoordinateOperationType
      *     allowed object is
      *     {@link CRSPropertyType }
      *     
+     * @see #getTargetCRS()
      */
     public void setTargetCRS(CRSPropertyType value) {
         this.targetCRS = value;
@@ -308,13 +344,15 @@ public abstract class AbstractCoordinateOperationType
         return (this.targetCRS!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -322,43 +360,61 @@ public abstract class AbstractCoordinateOperationType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             DomainOfValidityElement theDomainOfValidity;
             theDomainOfValidity = this.getDomainOfValidity();
-            strategy.appendField(locator, this, "domainOfValidity", buffer, theDomainOfValidity);
+            strategy.appendField(locator, this, "domainOfValidity", buffer, theDomainOfValidity, this.isSetDomainOfValidity());
         }
         {
             List<String> theScope;
-            theScope = this.getScope();
-            strategy.appendField(locator, this, "scope", buffer, theScope);
+            theScope = (this.isSetScope()?this.getScope():null);
+            strategy.appendField(locator, this, "scope", buffer, theScope, this.isSetScope());
         }
         {
             String theOperationVersion;
             theOperationVersion = this.getOperationVersion();
-            strategy.appendField(locator, this, "operationVersion", buffer, theOperationVersion);
+            strategy.appendField(locator, this, "operationVersion", buffer, theOperationVersion, this.isSetOperationVersion());
         }
         {
             List<CoordinateOperationAccuracyElement> theCoordinateOperationAccuracy;
-            theCoordinateOperationAccuracy = this.getCoordinateOperationAccuracy();
-            strategy.appendField(locator, this, "coordinateOperationAccuracy", buffer, theCoordinateOperationAccuracy);
+            theCoordinateOperationAccuracy = (this.isSetCoordinateOperationAccuracy()?this.getCoordinateOperationAccuracy():null);
+            strategy.appendField(locator, this, "coordinateOperationAccuracy", buffer, theCoordinateOperationAccuracy, this.isSetCoordinateOperationAccuracy());
         }
         {
             CRSPropertyType theSourceCRS;
             theSourceCRS = this.getSourceCRS();
-            strategy.appendField(locator, this, "sourceCRS", buffer, theSourceCRS);
+            strategy.appendField(locator, this, "sourceCRS", buffer, theSourceCRS, this.isSetSourceCRS());
         }
         {
             CRSPropertyType theTargetCRS;
             theTargetCRS = this.getTargetCRS();
-            strategy.appendField(locator, this, "targetCRS", buffer, theTargetCRS);
+            strategy.appendField(locator, this, "targetCRS", buffer, theTargetCRS, this.isSetTargetCRS());
         }
         return buffer;
     }
 
+    public void setScope(List<String> value) {
+        this.scope = null;
+        if (value!= null) {
+            List<String> draftl = this.getScope();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setCoordinateOperationAccuracy(List<CoordinateOperationAccuracyElement> value) {
+        this.coordinateOperationAccuracy = null;
+        if (value!= null) {
+            List<CoordinateOperationAccuracyElement> draftl = this.getCoordinateOperationAccuracy();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractCoordinateOperationType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -373,16 +429,16 @@ public abstract class AbstractCoordinateOperationType
             lhsDomainOfValidity = this.getDomainOfValidity();
             DomainOfValidityElement rhsDomainOfValidity;
             rhsDomainOfValidity = that.getDomainOfValidity();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(thatLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(thatLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity, this.isSetDomainOfValidity(), that.isSetDomainOfValidity())) {
                 return false;
             }
         }
         {
             List<String> lhsScope;
-            lhsScope = this.getScope();
+            lhsScope = (this.isSetScope()?this.getScope():null);
             List<String> rhsScope;
-            rhsScope = that.getScope();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "scope", lhsScope), LocatorUtils.property(thatLocator, "scope", rhsScope), lhsScope, rhsScope)) {
+            rhsScope = (that.isSetScope()?that.getScope():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "scope", lhsScope), LocatorUtils.property(thatLocator, "scope", rhsScope), lhsScope, rhsScope, this.isSetScope(), that.isSetScope())) {
                 return false;
             }
         }
@@ -391,16 +447,16 @@ public abstract class AbstractCoordinateOperationType
             lhsOperationVersion = this.getOperationVersion();
             String rhsOperationVersion;
             rhsOperationVersion = that.getOperationVersion();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "operationVersion", lhsOperationVersion), LocatorUtils.property(thatLocator, "operationVersion", rhsOperationVersion), lhsOperationVersion, rhsOperationVersion)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "operationVersion", lhsOperationVersion), LocatorUtils.property(thatLocator, "operationVersion", rhsOperationVersion), lhsOperationVersion, rhsOperationVersion, this.isSetOperationVersion(), that.isSetOperationVersion())) {
                 return false;
             }
         }
         {
             List<CoordinateOperationAccuracyElement> lhsCoordinateOperationAccuracy;
-            lhsCoordinateOperationAccuracy = this.getCoordinateOperationAccuracy();
+            lhsCoordinateOperationAccuracy = (this.isSetCoordinateOperationAccuracy()?this.getCoordinateOperationAccuracy():null);
             List<CoordinateOperationAccuracyElement> rhsCoordinateOperationAccuracy;
-            rhsCoordinateOperationAccuracy = that.getCoordinateOperationAccuracy();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinateOperationAccuracy", lhsCoordinateOperationAccuracy), LocatorUtils.property(thatLocator, "coordinateOperationAccuracy", rhsCoordinateOperationAccuracy), lhsCoordinateOperationAccuracy, rhsCoordinateOperationAccuracy)) {
+            rhsCoordinateOperationAccuracy = (that.isSetCoordinateOperationAccuracy()?that.getCoordinateOperationAccuracy():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinateOperationAccuracy", lhsCoordinateOperationAccuracy), LocatorUtils.property(thatLocator, "coordinateOperationAccuracy", rhsCoordinateOperationAccuracy), lhsCoordinateOperationAccuracy, rhsCoordinateOperationAccuracy, this.isSetCoordinateOperationAccuracy(), that.isSetCoordinateOperationAccuracy())) {
                 return false;
             }
         }
@@ -409,7 +465,7 @@ public abstract class AbstractCoordinateOperationType
             lhsSourceCRS = this.getSourceCRS();
             CRSPropertyType rhsSourceCRS;
             rhsSourceCRS = that.getSourceCRS();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "sourceCRS", lhsSourceCRS), LocatorUtils.property(thatLocator, "sourceCRS", rhsSourceCRS), lhsSourceCRS, rhsSourceCRS)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "sourceCRS", lhsSourceCRS), LocatorUtils.property(thatLocator, "sourceCRS", rhsSourceCRS), lhsSourceCRS, rhsSourceCRS, this.isSetSourceCRS(), that.isSetSourceCRS())) {
                 return false;
             }
         }
@@ -418,67 +474,73 @@ public abstract class AbstractCoordinateOperationType
             lhsTargetCRS = this.getTargetCRS();
             CRSPropertyType rhsTargetCRS;
             rhsTargetCRS = that.getTargetCRS();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "targetCRS", lhsTargetCRS), LocatorUtils.property(thatLocator, "targetCRS", rhsTargetCRS), lhsTargetCRS, rhsTargetCRS)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "targetCRS", lhsTargetCRS), LocatorUtils.property(thatLocator, "targetCRS", rhsTargetCRS), lhsTargetCRS, rhsTargetCRS, this.isSetTargetCRS(), that.isSetTargetCRS())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             DomainOfValidityElement theDomainOfValidity;
             theDomainOfValidity = this.getDomainOfValidity();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainOfValidity", theDomainOfValidity), currentHashCode, theDomainOfValidity);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainOfValidity", theDomainOfValidity), currentHashCode, theDomainOfValidity, this.isSetDomainOfValidity());
         }
         {
             List<String> theScope;
-            theScope = this.getScope();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "scope", theScope), currentHashCode, theScope);
+            theScope = (this.isSetScope()?this.getScope():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "scope", theScope), currentHashCode, theScope, this.isSetScope());
         }
         {
             String theOperationVersion;
             theOperationVersion = this.getOperationVersion();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "operationVersion", theOperationVersion), currentHashCode, theOperationVersion);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "operationVersion", theOperationVersion), currentHashCode, theOperationVersion, this.isSetOperationVersion());
         }
         {
             List<CoordinateOperationAccuracyElement> theCoordinateOperationAccuracy;
-            theCoordinateOperationAccuracy = this.getCoordinateOperationAccuracy();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinateOperationAccuracy", theCoordinateOperationAccuracy), currentHashCode, theCoordinateOperationAccuracy);
+            theCoordinateOperationAccuracy = (this.isSetCoordinateOperationAccuracy()?this.getCoordinateOperationAccuracy():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinateOperationAccuracy", theCoordinateOperationAccuracy), currentHashCode, theCoordinateOperationAccuracy, this.isSetCoordinateOperationAccuracy());
         }
         {
             CRSPropertyType theSourceCRS;
             theSourceCRS = this.getSourceCRS();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "sourceCRS", theSourceCRS), currentHashCode, theSourceCRS);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "sourceCRS", theSourceCRS), currentHashCode, theSourceCRS, this.isSetSourceCRS());
         }
         {
             CRSPropertyType theTargetCRS;
             theTargetCRS = this.getTargetCRS();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "targetCRS", theTargetCRS), currentHashCode, theTargetCRS);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "targetCRS", theTargetCRS), currentHashCode, theTargetCRS, this.isSetTargetCRS());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -486,69 +548,97 @@ public abstract class AbstractCoordinateOperationType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractCoordinateOperationType) {
             final AbstractCoordinateOperationType copy = ((AbstractCoordinateOperationType) target);
-            if (this.isSetDomainOfValidity()) {
-                DomainOfValidityElement sourceDomainOfValidity;
-                sourceDomainOfValidity = this.getDomainOfValidity();
-                DomainOfValidityElement copyDomainOfValidity = ((DomainOfValidityElement) strategy.copy(LocatorUtils.property(locator, "domainOfValidity", sourceDomainOfValidity), sourceDomainOfValidity));
-                copy.setDomainOfValidity(copyDomainOfValidity);
-            } else {
-                copy.domainOfValidity = null;
+            {
+                java.lang.Boolean domainOfValidityShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDomainOfValidity());
+                if (domainOfValidityShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DomainOfValidityElement sourceDomainOfValidity;
+                    sourceDomainOfValidity = this.getDomainOfValidity();
+                    DomainOfValidityElement copyDomainOfValidity = ((DomainOfValidityElement) strategy.copy(LocatorUtils.property(locator, "domainOfValidity", sourceDomainOfValidity), sourceDomainOfValidity, this.isSetDomainOfValidity()));
+                    copy.setDomainOfValidity(copyDomainOfValidity);
+                } else {
+                    if (domainOfValidityShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.domainOfValidity = null;
+                    }
+                }
             }
-            if (this.isSetScope()) {
-                List<String> sourceScope;
-                sourceScope = this.getScope();
-                @SuppressWarnings("unchecked")
-                List<String> copyScope = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "scope", sourceScope), sourceScope));
-                copy.unsetScope();
-                List<String> uniqueScopel = copy.getScope();
-                uniqueScopel.addAll(copyScope);
-            } else {
-                copy.unsetScope();
+            {
+                java.lang.Boolean scopeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetScope());
+                if (scopeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceScope;
+                    sourceScope = (this.isSetScope()?this.getScope():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyScope = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "scope", sourceScope), sourceScope, this.isSetScope()));
+                    copy.setScope(copyScope);
+                } else {
+                    if (scopeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetScope();
+                    }
+                }
             }
-            if (this.isSetOperationVersion()) {
-                String sourceOperationVersion;
-                sourceOperationVersion = this.getOperationVersion();
-                String copyOperationVersion = ((String) strategy.copy(LocatorUtils.property(locator, "operationVersion", sourceOperationVersion), sourceOperationVersion));
-                copy.setOperationVersion(copyOperationVersion);
-            } else {
-                copy.operationVersion = null;
+            {
+                java.lang.Boolean operationVersionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetOperationVersion());
+                if (operationVersionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceOperationVersion;
+                    sourceOperationVersion = this.getOperationVersion();
+                    String copyOperationVersion = ((String) strategy.copy(LocatorUtils.property(locator, "operationVersion", sourceOperationVersion), sourceOperationVersion, this.isSetOperationVersion()));
+                    copy.setOperationVersion(copyOperationVersion);
+                } else {
+                    if (operationVersionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.operationVersion = null;
+                    }
+                }
             }
-            if (this.isSetCoordinateOperationAccuracy()) {
-                List<CoordinateOperationAccuracyElement> sourceCoordinateOperationAccuracy;
-                sourceCoordinateOperationAccuracy = this.getCoordinateOperationAccuracy();
-                @SuppressWarnings("unchecked")
-                List<CoordinateOperationAccuracyElement> copyCoordinateOperationAccuracy = ((List<CoordinateOperationAccuracyElement> ) strategy.copy(LocatorUtils.property(locator, "coordinateOperationAccuracy", sourceCoordinateOperationAccuracy), sourceCoordinateOperationAccuracy));
-                copy.unsetCoordinateOperationAccuracy();
-                List<CoordinateOperationAccuracyElement> uniqueCoordinateOperationAccuracyl = copy.getCoordinateOperationAccuracy();
-                uniqueCoordinateOperationAccuracyl.addAll(copyCoordinateOperationAccuracy);
-            } else {
-                copy.unsetCoordinateOperationAccuracy();
+            {
+                java.lang.Boolean coordinateOperationAccuracyShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCoordinateOperationAccuracy());
+                if (coordinateOperationAccuracyShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<CoordinateOperationAccuracyElement> sourceCoordinateOperationAccuracy;
+                    sourceCoordinateOperationAccuracy = (this.isSetCoordinateOperationAccuracy()?this.getCoordinateOperationAccuracy():null);
+                    @SuppressWarnings("unchecked")
+                    List<CoordinateOperationAccuracyElement> copyCoordinateOperationAccuracy = ((List<CoordinateOperationAccuracyElement> ) strategy.copy(LocatorUtils.property(locator, "coordinateOperationAccuracy", sourceCoordinateOperationAccuracy), sourceCoordinateOperationAccuracy, this.isSetCoordinateOperationAccuracy()));
+                    copy.setCoordinateOperationAccuracy(copyCoordinateOperationAccuracy);
+                } else {
+                    if (coordinateOperationAccuracyShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetCoordinateOperationAccuracy();
+                    }
+                }
             }
-            if (this.isSetSourceCRS()) {
-                CRSPropertyType sourceSourceCRS;
-                sourceSourceCRS = this.getSourceCRS();
-                CRSPropertyType copySourceCRS = ((CRSPropertyType) strategy.copy(LocatorUtils.property(locator, "sourceCRS", sourceSourceCRS), sourceSourceCRS));
-                copy.setSourceCRS(copySourceCRS);
-            } else {
-                copy.sourceCRS = null;
+            {
+                java.lang.Boolean sourceCRSShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSourceCRS());
+                if (sourceCRSShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CRSPropertyType sourceSourceCRS;
+                    sourceSourceCRS = this.getSourceCRS();
+                    CRSPropertyType copySourceCRS = ((CRSPropertyType) strategy.copy(LocatorUtils.property(locator, "sourceCRS", sourceSourceCRS), sourceSourceCRS, this.isSetSourceCRS()));
+                    copy.setSourceCRS(copySourceCRS);
+                } else {
+                    if (sourceCRSShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.sourceCRS = null;
+                    }
+                }
             }
-            if (this.isSetTargetCRS()) {
-                CRSPropertyType sourceTargetCRS;
-                sourceTargetCRS = this.getTargetCRS();
-                CRSPropertyType copyTargetCRS = ((CRSPropertyType) strategy.copy(LocatorUtils.property(locator, "targetCRS", sourceTargetCRS), sourceTargetCRS));
-                copy.setTargetCRS(copyTargetCRS);
-            } else {
-                copy.targetCRS = null;
+            {
+                java.lang.Boolean targetCRSShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTargetCRS());
+                if (targetCRSShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CRSPropertyType sourceTargetCRS;
+                    sourceTargetCRS = this.getTargetCRS();
+                    CRSPropertyType copyTargetCRS = ((CRSPropertyType) strategy.copy(LocatorUtils.property(locator, "targetCRS", sourceTargetCRS), sourceTargetCRS, this.isSetTargetCRS()));
+                    copy.setTargetCRS(copyTargetCRS);
+                } else {
+                    if (targetCRSShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.targetCRS = null;
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractCoordinateOperationType) {
@@ -556,202 +646,96 @@ public abstract class AbstractCoordinateOperationType
             final AbstractCoordinateOperationType leftObject = ((AbstractCoordinateOperationType) left);
             final AbstractCoordinateOperationType rightObject = ((AbstractCoordinateOperationType) right);
             {
-                DomainOfValidityElement lhsDomainOfValidity;
-                lhsDomainOfValidity = leftObject.getDomainOfValidity();
-                DomainOfValidityElement rhsDomainOfValidity;
-                rhsDomainOfValidity = rightObject.getDomainOfValidity();
-                target.setDomainOfValidity(((DomainOfValidityElement) strategy.merge(LocatorUtils.property(leftLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(rightLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity)));
+                java.lang.Boolean domainOfValidityShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDomainOfValidity(), rightObject.isSetDomainOfValidity());
+                if (domainOfValidityShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DomainOfValidityElement lhsDomainOfValidity;
+                    lhsDomainOfValidity = leftObject.getDomainOfValidity();
+                    DomainOfValidityElement rhsDomainOfValidity;
+                    rhsDomainOfValidity = rightObject.getDomainOfValidity();
+                    DomainOfValidityElement mergedDomainOfValidity = ((DomainOfValidityElement) strategy.merge(LocatorUtils.property(leftLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(rightLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity, leftObject.isSetDomainOfValidity(), rightObject.isSetDomainOfValidity()));
+                    target.setDomainOfValidity(mergedDomainOfValidity);
+                } else {
+                    if (domainOfValidityShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.domainOfValidity = null;
+                    }
+                }
             }
             {
-                List<String> lhsScope;
-                lhsScope = leftObject.getScope();
-                List<String> rhsScope;
-                rhsScope = rightObject.getScope();
-                target.unsetScope();
-                List<String> uniqueScopel = target.getScope();
-                uniqueScopel.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "scope", lhsScope), LocatorUtils.property(rightLocator, "scope", rhsScope), lhsScope, rhsScope)));
+                java.lang.Boolean scopeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetScope(), rightObject.isSetScope());
+                if (scopeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsScope;
+                    lhsScope = (leftObject.isSetScope()?leftObject.getScope():null);
+                    List<String> rhsScope;
+                    rhsScope = (rightObject.isSetScope()?rightObject.getScope():null);
+                    List<String> mergedScope = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "scope", lhsScope), LocatorUtils.property(rightLocator, "scope", rhsScope), lhsScope, rhsScope, leftObject.isSetScope(), rightObject.isSetScope()));
+                    target.setScope(mergedScope);
+                } else {
+                    if (scopeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetScope();
+                    }
+                }
             }
             {
-                String lhsOperationVersion;
-                lhsOperationVersion = leftObject.getOperationVersion();
-                String rhsOperationVersion;
-                rhsOperationVersion = rightObject.getOperationVersion();
-                target.setOperationVersion(((String) strategy.merge(LocatorUtils.property(leftLocator, "operationVersion", lhsOperationVersion), LocatorUtils.property(rightLocator, "operationVersion", rhsOperationVersion), lhsOperationVersion, rhsOperationVersion)));
+                java.lang.Boolean operationVersionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetOperationVersion(), rightObject.isSetOperationVersion());
+                if (operationVersionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsOperationVersion;
+                    lhsOperationVersion = leftObject.getOperationVersion();
+                    String rhsOperationVersion;
+                    rhsOperationVersion = rightObject.getOperationVersion();
+                    String mergedOperationVersion = ((String) strategy.merge(LocatorUtils.property(leftLocator, "operationVersion", lhsOperationVersion), LocatorUtils.property(rightLocator, "operationVersion", rhsOperationVersion), lhsOperationVersion, rhsOperationVersion, leftObject.isSetOperationVersion(), rightObject.isSetOperationVersion()));
+                    target.setOperationVersion(mergedOperationVersion);
+                } else {
+                    if (operationVersionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.operationVersion = null;
+                    }
+                }
             }
             {
-                List<CoordinateOperationAccuracyElement> lhsCoordinateOperationAccuracy;
-                lhsCoordinateOperationAccuracy = leftObject.getCoordinateOperationAccuracy();
-                List<CoordinateOperationAccuracyElement> rhsCoordinateOperationAccuracy;
-                rhsCoordinateOperationAccuracy = rightObject.getCoordinateOperationAccuracy();
-                target.unsetCoordinateOperationAccuracy();
-                List<CoordinateOperationAccuracyElement> uniqueCoordinateOperationAccuracyl = target.getCoordinateOperationAccuracy();
-                uniqueCoordinateOperationAccuracyl.addAll(((List<CoordinateOperationAccuracyElement> ) strategy.merge(LocatorUtils.property(leftLocator, "coordinateOperationAccuracy", lhsCoordinateOperationAccuracy), LocatorUtils.property(rightLocator, "coordinateOperationAccuracy", rhsCoordinateOperationAccuracy), lhsCoordinateOperationAccuracy, rhsCoordinateOperationAccuracy)));
+                java.lang.Boolean coordinateOperationAccuracyShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCoordinateOperationAccuracy(), rightObject.isSetCoordinateOperationAccuracy());
+                if (coordinateOperationAccuracyShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<CoordinateOperationAccuracyElement> lhsCoordinateOperationAccuracy;
+                    lhsCoordinateOperationAccuracy = (leftObject.isSetCoordinateOperationAccuracy()?leftObject.getCoordinateOperationAccuracy():null);
+                    List<CoordinateOperationAccuracyElement> rhsCoordinateOperationAccuracy;
+                    rhsCoordinateOperationAccuracy = (rightObject.isSetCoordinateOperationAccuracy()?rightObject.getCoordinateOperationAccuracy():null);
+                    List<CoordinateOperationAccuracyElement> mergedCoordinateOperationAccuracy = ((List<CoordinateOperationAccuracyElement> ) strategy.merge(LocatorUtils.property(leftLocator, "coordinateOperationAccuracy", lhsCoordinateOperationAccuracy), LocatorUtils.property(rightLocator, "coordinateOperationAccuracy", rhsCoordinateOperationAccuracy), lhsCoordinateOperationAccuracy, rhsCoordinateOperationAccuracy, leftObject.isSetCoordinateOperationAccuracy(), rightObject.isSetCoordinateOperationAccuracy()));
+                    target.setCoordinateOperationAccuracy(mergedCoordinateOperationAccuracy);
+                } else {
+                    if (coordinateOperationAccuracyShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetCoordinateOperationAccuracy();
+                    }
+                }
             }
             {
-                CRSPropertyType lhsSourceCRS;
-                lhsSourceCRS = leftObject.getSourceCRS();
-                CRSPropertyType rhsSourceCRS;
-                rhsSourceCRS = rightObject.getSourceCRS();
-                target.setSourceCRS(((CRSPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "sourceCRS", lhsSourceCRS), LocatorUtils.property(rightLocator, "sourceCRS", rhsSourceCRS), lhsSourceCRS, rhsSourceCRS)));
+                java.lang.Boolean sourceCRSShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSourceCRS(), rightObject.isSetSourceCRS());
+                if (sourceCRSShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CRSPropertyType lhsSourceCRS;
+                    lhsSourceCRS = leftObject.getSourceCRS();
+                    CRSPropertyType rhsSourceCRS;
+                    rhsSourceCRS = rightObject.getSourceCRS();
+                    CRSPropertyType mergedSourceCRS = ((CRSPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "sourceCRS", lhsSourceCRS), LocatorUtils.property(rightLocator, "sourceCRS", rhsSourceCRS), lhsSourceCRS, rhsSourceCRS, leftObject.isSetSourceCRS(), rightObject.isSetSourceCRS()));
+                    target.setSourceCRS(mergedSourceCRS);
+                } else {
+                    if (sourceCRSShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.sourceCRS = null;
+                    }
+                }
             }
             {
-                CRSPropertyType lhsTargetCRS;
-                lhsTargetCRS = leftObject.getTargetCRS();
-                CRSPropertyType rhsTargetCRS;
-                rhsTargetCRS = rightObject.getTargetCRS();
-                target.setTargetCRS(((CRSPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "targetCRS", lhsTargetCRS), LocatorUtils.property(rightLocator, "targetCRS", rhsTargetCRS), lhsTargetCRS, rhsTargetCRS)));
+                java.lang.Boolean targetCRSShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTargetCRS(), rightObject.isSetTargetCRS());
+                if (targetCRSShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CRSPropertyType lhsTargetCRS;
+                    lhsTargetCRS = leftObject.getTargetCRS();
+                    CRSPropertyType rhsTargetCRS;
+                    rhsTargetCRS = rightObject.getTargetCRS();
+                    CRSPropertyType mergedTargetCRS = ((CRSPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "targetCRS", lhsTargetCRS), LocatorUtils.property(rightLocator, "targetCRS", rhsTargetCRS), lhsTargetCRS, rhsTargetCRS, leftObject.isSetTargetCRS(), rightObject.isSetTargetCRS()));
+                    target.setTargetCRS(mergedTargetCRS);
+                } else {
+                    if (targetCRSShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.targetCRS = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setScope(List<String> value) {
-        List<String> draftl = this.getScope();
-        draftl.addAll(value);
-    }
-
-    public void setCoordinateOperationAccuracy(List<CoordinateOperationAccuracyElement> value) {
-        List<CoordinateOperationAccuracyElement> draftl = this.getCoordinateOperationAccuracy();
-        draftl.addAll(value);
-    }
-
-    public AbstractCoordinateOperationType withDomainOfValidity(DomainOfValidityElement value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withScope(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getScope().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withScope(Collection<String> values) {
-        if (values!= null) {
-            getScope().addAll(values);
-        }
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withOperationVersion(String value) {
-        setOperationVersion(value);
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withCoordinateOperationAccuracy(CoordinateOperationAccuracyElement... values) {
-        if (values!= null) {
-            for (CoordinateOperationAccuracyElement value: values) {
-                getCoordinateOperationAccuracy().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withCoordinateOperationAccuracy(Collection<CoordinateOperationAccuracyElement> values) {
-        if (values!= null) {
-            getCoordinateOperationAccuracy().addAll(values);
-        }
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withSourceCRS(CRSPropertyType value) {
-        setSourceCRS(value);
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withTargetCRS(CRSPropertyType value) {
-        setTargetCRS(value);
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withScope(List<String> value) {
-        setScope(value);
-        return this;
-    }
-
-    public AbstractCoordinateOperationType withCoordinateOperationAccuracy(List<CoordinateOperationAccuracyElement> value) {
-        setCoordinateOperationAccuracy(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateOperationType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

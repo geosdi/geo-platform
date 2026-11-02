@@ -34,60 +34,58 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per ArrayAssociationType complex type.
+ * <p>Classe Java per ArrayAssociationType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ArrayAssociationType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}AbstractObject" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}OwnershipAttributeGroup"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="ArrayAssociationType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}AbstractObject" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}OwnershipAttributeGroup"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -95,218 +93,226 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "ArrayAssociationType", propOrder = {
     "abstractObject"
 })
-public class ArrayAssociationType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class ArrayAssociationType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * This element has no type defined, and is therefore implicitly (according to the rules of W3C XML Schema) an XML Schema anyType. It is used as the head of an XML Schema substitution group which unifies complex content and certain simple content elements used for datatypes in GML, including the gml:AbstractGML substitution group.
+     * 
+     */
     @XmlElementRef(name = "AbstractObject", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected List<JAXBElement<?>> abstractObject;
     @XmlAttribute(name = "owns")
     protected java.lang.Boolean owns;
 
     /**
+     * This element has no type defined, and is therefore implicitly (according to the rules of W3C XML Schema) an XML Schema anyType. It is used as the head of an XML Schema substitution group which unifies complex content and certain simple content elements used for datatypes in GML, including the gml:AbstractGML substitution group.
+     * 
      * Gets the value of the abstractObject property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the abstractObject property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the abstractObject property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAbstractObject().add(newItem);
+     * getAbstractObject().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ClothoidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OperationParameterType }{@code >}
-     * {@link JAXBElement }{@code <}{@link QuantityExtentType }{@code >}
-     * {@link JAXBElement }{@code <}{@link EnvelopeWithTimePeriodType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeometricAggregateType }{@code >}
-     * {@link JAXBElement }{@code <}{@link EnvelopeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GenericMetaDataType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeneralParameterValueType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TopoSolidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeOrdinalReferenceSystemType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiGeometryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArcByCenterPointType }{@code >}
+     * {@link JAXBElement }{@code <}{@link Object }{@code >}
+     * {@link JAXBElement }{@code <}{@link Object }{@code >}
+     * {@link JAXBElement }{@code <}{@link Object }{@code >}
+     * {@link JAXBElement }{@code <}{@link Object }{@code >}
      * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OrientableSurfaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link DefinitionProxyType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeodeticDatumType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeInstantType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeometricComplexType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CircleType }{@code >}
-     * {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractMetaDataType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractSolidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Quantity }{@code >}
-     * {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ObservationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TemporalCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ConventionalUnitType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiCurveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeneralConversionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CompositeSolidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TemporalDatumType }{@code >}
-     * {@link JAXBElement }{@code <}{@link UnitDefinitionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractDiscreteCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link DataBlockType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TopoComplexType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeCoordinateSystemType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RingType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link DirectedObservationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link DefinitionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CartesianCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiSolidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArcStringByBulgeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link DerivedUnitType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractDatumType }{@code >}
-     * {@link JAXBElement }{@code <}{@link UserDefinedCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Object }{@code >}
-     * {@link JAXBElement }{@code <}{@link TransformationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ObliqueCartesianCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractTopoPrimitiveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PolyhedralSurfaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PolarCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractSurfaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RectifiedGridType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArrayType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MovingObjectStatusType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PassThroughOperationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeEdgeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link LinearCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Object }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractTimeGeometricPrimitiveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CylindricalCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArcType }{@code >}
-     * {@link JAXBElement }{@code <}{@link FaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeTopologyComplexType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CubicSplineType }{@code >}
-     * {@link JAXBElement }{@code <}{@link FileType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ConcatenatedOperationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link EllipsoidalCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractTimePrimitiveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GridType }{@code >}
+     * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
+     * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractContinuousCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CircleByCenterPointType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeNodeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CompoundCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiCurveCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link FeatureCollectionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Object }{@code >}
-     * {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArcStringType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Object }{@code >}
-     * {@link JAXBElement }{@code <}{@link SurfaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GridCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AffinePlacementType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiSurfaceCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractCoordinateSystemType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCurveSegmentType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractCurveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractDatumType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractDiscreteCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractFeatureCollectionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractFeatureType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGMLType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeneralConversionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeneralParameterValueType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeneralTransformationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeometricAggregateType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeometricPrimitiveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractMetaDataType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractRingType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractSolidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractSurfaceType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractTimeComplexType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimePeriodType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CurveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link VerticalDatumType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractTimeGeometricPrimitiveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractTimeObjectType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractTimePrimitiveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractTimeSliceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractTimeTopologyPrimitiveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractTopoPrimitiveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AbstractTopologyType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AffineCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link AffinePlacementType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArcByBulgeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArcByCenterPointType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArcStringByBulgeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArcStringType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArcType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArrayType }{@code >}
+     * {@link JAXBElement }{@code <}{@link BSplineType }{@code >}
+     * {@link JAXBElement }{@code <}{@link BagType }{@code >}
+     * {@link JAXBElement }{@code <}{@link BaseUnitType }{@code >}
+     * {@link JAXBElement }{@code <}{@link BezierType }{@code >}
+     * {@link JAXBElement }{@code <}{@link org.geosdi.geoplatform.xml.gml.v320.Boolean }{@code >}
+     * {@link JAXBElement }{@code <}{@link CartesianCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link Category }{@code >}
+     * {@link JAXBElement }{@code <}{@link CategoryExtentType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CircleByCenterPointType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CircleType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClothoidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CodeOrNilReasonListType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CompositeCurveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CompositeSolidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CompositeSurfaceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CompositeValueType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CompoundCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ConcatenatedOperationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ConventionalUnitType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ConversionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CoordinateSystemAxisType }{@code >}
      * {@link JAXBElement }{@code <}{@link Count }{@code >}
      * {@link JAXBElement }{@code <}{@link CoverageFunctionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeneralTransformationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link BagType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractFeatureType }{@code >}
-     * {@link JAXBElement }{@code <}{@link DynamicFeatureCollectionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CubicSplineType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CurveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CylindricalCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DataBlockType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DefinitionProxyType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DefinitionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DerivedUnitType }{@code >}
      * {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link NodeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link BaseUnitType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
      * {@link JAXBElement }{@code <}{@link DirectedObservationAtDistanceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OperationMethodType }{@code >}
-     * {@link JAXBElement }{@code <}{@link VerticalCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractTimeObjectType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OffsetCurveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PrimeMeridianType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PolygonType }{@code >}
-     * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
-     * {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeodesicStringType }{@code >}
-     * {@link JAXBElement }{@code <}{@link EngineeringDatumType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCurveSegmentType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OperationParameterGroupType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RectifiedGridCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeCalendarType }{@code >}
-     * {@link JAXBElement }{@code <}{@link org.geosdi.geoplatform.xml.gml.v320.Boolean }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCurveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiPointType }{@code >}
-     * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
-     * {@link JAXBElement }{@code <}{@link EllipsoidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeReferenceSystemType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ParameterValueGroupType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CompositeValueType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractRingType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiSurfaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GridFunctionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MappingRuleType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiPointCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link PointType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CodeOrNilReasonListType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ShellType }{@code >}
-     * {@link JAXBElement }{@code <}{@link LineStringSegmentType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MeasureOrNilReasonListType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TinType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Category }{@code >}
-     * {@link JAXBElement }{@code <}{@link TriangulatedSurfaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CompositeSurfaceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link SphericalCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractTopologyType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractTimeTopologyPrimitiveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGMLType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ImageDatumType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DirectedObservationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link DynamicFeatureCollectionType }{@code >}
      * {@link JAXBElement }{@code <}{@link DynamicFeatureType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link SolidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractTimeSliceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link BezierType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link BSplineType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ConversionType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ValueArrayType }{@code >}
      * {@link JAXBElement }{@code <}{@link EdgeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link TimeClockType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OrientableCurveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractGeometricPrimitiveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MultiSolidCoverageType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CoordinateSystemAxisType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AffineCSType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArcByBulgeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CategoryExtentType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractFeatureCollectionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link EllipsoidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link EllipsoidalCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link EngineeringDatumType }{@code >}
+     * {@link JAXBElement }{@code <}{@link EnvelopeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link EnvelopeWithTimePeriodType }{@code >}
+     * {@link JAXBElement }{@code <}{@link FaceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link FeatureCollectionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link FileType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GenericMetaDataType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeodesicStringType }{@code >}
      * {@link JAXBElement }{@code <}{@link GeodesicType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CompositeCurveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeodeticDatumType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeometricComplexType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GridCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GridFunctionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GridType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ImageDatumType }{@code >}
+     * {@link JAXBElement }{@code <}{@link LineStringSegmentType }{@code >}
+     * {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     * {@link JAXBElement }{@code <}{@link LinearCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MappingRuleType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MeasureOrNilReasonListType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MovingObjectStatusType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiCurveCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiCurveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiGeometryType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiPointCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiPointType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiSolidCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiSolidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiSurfaceCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MultiSurfaceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link NodeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ObliqueCartesianCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ObservationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OffsetCurveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OperationMethodType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OperationParameterGroupType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OperationParameterType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OrientableCurveType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OrientableSurfaceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ParameterValueGroupType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PassThroughOperationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PointType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PolarCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PolygonType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PolyhedralSurfaceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link PrimeMeridianType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link Quantity }{@code >}
+     * {@link JAXBElement }{@code <}{@link QuantityExtentType }{@code >}
+     * {@link JAXBElement }{@code <}{@link RectifiedGridCoverageType }{@code >}
+     * {@link JAXBElement }{@code <}{@link RectifiedGridType }{@code >}
+     * {@link JAXBElement }{@code <}{@link RingType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ShellType }{@code >}
+     * {@link JAXBElement }{@code <}{@link SolidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link SphericalCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link SurfaceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TemporalCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TemporalDatumType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeCalendarType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeClockType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeCoordinateSystemType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeEdgeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeInstantType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeNodeType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeOrdinalReferenceSystemType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimePeriodType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeReferenceSystemType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TimeTopologyComplexType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TinType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TopoComplexType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TopoSolidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TransformationType }{@code >}
+     * {@link JAXBElement }{@code <}{@link TriangulatedSurfaceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link UnitDefinitionType }{@code >}
+     * {@link JAXBElement }{@code <}{@link UserDefinedCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ValueArrayType }{@code >}
+     * {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link VerticalCSType }{@code >}
+     * {@link JAXBElement }{@code <}{@link VerticalDatumType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the abstractObject property.
      */
     public List<JAXBElement<?>> getAbstractObject() {
         if (abstractObject == null) {
-            abstractObject = new ArrayList<JAXBElement<?>>();
+            abstractObject = new ArrayList<>();
         }
         return this.abstractObject;
     }
@@ -355,13 +361,15 @@ public class ArrayAssociationType
         this.owns = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -369,22 +377,32 @@ public class ArrayAssociationType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<JAXBElement<?>> theAbstractObject;
-            theAbstractObject = this.getAbstractObject();
-            strategy.appendField(locator, this, "abstractObject", buffer, theAbstractObject);
+            theAbstractObject = (this.isSetAbstractObject()?this.getAbstractObject():null);
+            strategy.appendField(locator, this, "abstractObject", buffer, theAbstractObject, this.isSetAbstractObject());
         }
         {
             boolean theOwns;
-            theOwns = this.isOwns();
-            strategy.appendField(locator, this, "owns", buffer, theOwns);
+            theOwns = (this.isSetOwns()?this.isOwns():false);
+            strategy.appendField(locator, this, "owns", buffer, theOwns, this.isSetOwns());
         }
         return buffer;
     }
 
+    public void setAbstractObject(List<JAXBElement<?>> value) {
+        this.abstractObject = null;
+        if (value!= null) {
+            List<JAXBElement<?>> draftl = this.getAbstractObject();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof ArrayAssociationType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -393,148 +411,148 @@ public class ArrayAssociationType
         final ArrayAssociationType that = ((ArrayAssociationType) object);
         {
             List<JAXBElement<?>> lhsAbstractObject;
-            lhsAbstractObject = this.getAbstractObject();
+            lhsAbstractObject = (this.isSetAbstractObject()?this.getAbstractObject():null);
             List<JAXBElement<?>> rhsAbstractObject;
-            rhsAbstractObject = that.getAbstractObject();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractObject", lhsAbstractObject), LocatorUtils.property(thatLocator, "abstractObject", rhsAbstractObject), lhsAbstractObject, rhsAbstractObject)) {
+            rhsAbstractObject = (that.isSetAbstractObject()?that.getAbstractObject():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractObject", lhsAbstractObject), LocatorUtils.property(thatLocator, "abstractObject", rhsAbstractObject), lhsAbstractObject, rhsAbstractObject, this.isSetAbstractObject(), that.isSetAbstractObject())) {
                 return false;
             }
         }
         {
             boolean lhsOwns;
-            lhsOwns = this.isOwns();
+            lhsOwns = (this.isSetOwns()?this.isOwns():false);
             boolean rhsOwns;
-            rhsOwns = that.isOwns();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "owns", lhsOwns), LocatorUtils.property(thatLocator, "owns", rhsOwns), lhsOwns, rhsOwns)) {
+            rhsOwns = (that.isSetOwns()?that.isOwns():false);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "owns", lhsOwns), LocatorUtils.property(thatLocator, "owns", rhsOwns), lhsOwns, rhsOwns, this.isSetOwns(), that.isSetOwns())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             List<JAXBElement<?>> theAbstractObject;
-            theAbstractObject = this.getAbstractObject();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractObject", theAbstractObject), currentHashCode, theAbstractObject);
+            theAbstractObject = (this.isSetAbstractObject()?this.getAbstractObject():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractObject", theAbstractObject), currentHashCode, theAbstractObject, this.isSetAbstractObject());
         }
         {
             boolean theOwns;
-            theOwns = this.isOwns();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "owns", theOwns), currentHashCode, theOwns);
+            theOwns = (this.isSetOwns()?this.isOwns():false);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "owns", theOwns), currentHashCode, theOwns, this.isSetOwns());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof ArrayAssociationType) {
             final ArrayAssociationType copy = ((ArrayAssociationType) draftCopy);
-            if (this.isSetAbstractObject()) {
-                List<JAXBElement<?>> sourceAbstractObject;
-                sourceAbstractObject = this.getAbstractObject();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<?>> copyAbstractObject = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "abstractObject", sourceAbstractObject), sourceAbstractObject));
-                copy.unsetAbstractObject();
-                List<JAXBElement<?>> uniqueAbstractObjectl = copy.getAbstractObject();
-                uniqueAbstractObjectl.addAll(copyAbstractObject);
-            } else {
-                copy.unsetAbstractObject();
+            {
+                java.lang.Boolean abstractObjectShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAbstractObject());
+                if (abstractObjectShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> sourceAbstractObject;
+                    sourceAbstractObject = (this.isSetAbstractObject()?this.getAbstractObject():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<?>> copyAbstractObject = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "abstractObject", sourceAbstractObject), sourceAbstractObject, this.isSetAbstractObject()));
+                    copy.setAbstractObject(copyAbstractObject);
+                } else {
+                    if (abstractObjectShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetAbstractObject();
+                    }
+                }
             }
-            if (this.isSetOwns()) {
-                boolean sourceOwns;
-                sourceOwns = this.isOwns();
-                boolean copyOwns = strategy.copy(LocatorUtils.property(locator, "owns", sourceOwns), sourceOwns);
-                copy.setOwns(copyOwns);
-            } else {
-                copy.unsetOwns();
+            {
+                java.lang.Boolean ownsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetOwns());
+                if (ownsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    boolean sourceOwns;
+                    sourceOwns = (this.isSetOwns()?this.isOwns():false);
+                    boolean copyOwns = strategy.copy(LocatorUtils.property(locator, "owns", sourceOwns), sourceOwns, this.isSetOwns());
+                    copy.setOwns(copyOwns);
+                } else {
+                    if (ownsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetOwns();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new ArrayAssociationType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof ArrayAssociationType) {
             final ArrayAssociationType target = this;
             final ArrayAssociationType leftObject = ((ArrayAssociationType) left);
             final ArrayAssociationType rightObject = ((ArrayAssociationType) right);
             {
-                List<JAXBElement<?>> lhsAbstractObject;
-                lhsAbstractObject = leftObject.getAbstractObject();
-                List<JAXBElement<?>> rhsAbstractObject;
-                rhsAbstractObject = rightObject.getAbstractObject();
-                target.unsetAbstractObject();
-                List<JAXBElement<?>> uniqueAbstractObjectl = target.getAbstractObject();
-                uniqueAbstractObjectl.addAll(((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractObject", lhsAbstractObject), LocatorUtils.property(rightLocator, "abstractObject", rhsAbstractObject), lhsAbstractObject, rhsAbstractObject)));
+                java.lang.Boolean abstractObjectShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAbstractObject(), rightObject.isSetAbstractObject());
+                if (abstractObjectShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> lhsAbstractObject;
+                    lhsAbstractObject = (leftObject.isSetAbstractObject()?leftObject.getAbstractObject():null);
+                    List<JAXBElement<?>> rhsAbstractObject;
+                    rhsAbstractObject = (rightObject.isSetAbstractObject()?rightObject.getAbstractObject():null);
+                    List<JAXBElement<?>> mergedAbstractObject = ((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractObject", lhsAbstractObject), LocatorUtils.property(rightLocator, "abstractObject", rhsAbstractObject), lhsAbstractObject, rhsAbstractObject, leftObject.isSetAbstractObject(), rightObject.isSetAbstractObject()));
+                    target.setAbstractObject(mergedAbstractObject);
+                } else {
+                    if (abstractObjectShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetAbstractObject();
+                    }
+                }
             }
             {
-                boolean lhsOwns;
-                lhsOwns = leftObject.isOwns();
-                boolean rhsOwns;
-                rhsOwns = rightObject.isOwns();
-                target.setOwns(((boolean) strategy.merge(LocatorUtils.property(leftLocator, "owns", lhsOwns), LocatorUtils.property(rightLocator, "owns", rhsOwns), lhsOwns, rhsOwns)));
+                java.lang.Boolean ownsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetOwns(), rightObject.isSetOwns());
+                if (ownsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    boolean lhsOwns;
+                    lhsOwns = (leftObject.isSetOwns()?leftObject.isOwns():false);
+                    boolean rhsOwns;
+                    rhsOwns = (rightObject.isSetOwns()?rightObject.isOwns():false);
+                    boolean mergedOwns = ((boolean) strategy.merge(LocatorUtils.property(leftLocator, "owns", lhsOwns), LocatorUtils.property(rightLocator, "owns", rhsOwns), lhsOwns, rhsOwns, leftObject.isSetOwns(), rightObject.isSetOwns()));
+                    target.setOwns(mergedOwns);
+                } else {
+                    if (ownsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetOwns();
+                    }
+                }
             }
         }
-    }
-
-    public void setAbstractObject(List<JAXBElement<?>> value) {
-        List<JAXBElement<?>> draftl = this.getAbstractObject();
-        draftl.addAll(value);
-    }
-
-    public ArrayAssociationType withAbstractObject(JAXBElement<?> ... values) {
-        if (values!= null) {
-            for (JAXBElement<?> value: values) {
-                getAbstractObject().add(value);
-            }
-        }
-        return this;
-    }
-
-    public ArrayAssociationType withAbstractObject(Collection<JAXBElement<?>> values) {
-        if (values!= null) {
-            getAbstractObject().addAll(values);
-        }
-        return this;
-    }
-
-    public ArrayAssociationType withOwns(boolean value) {
-        setOwns(value);
-        return this;
-    }
-
-    public ArrayAssociationType withAbstractObject(List<JAXBElement<?>> value) {
-        setAbstractObject(value);
-        return this;
     }
 
 }

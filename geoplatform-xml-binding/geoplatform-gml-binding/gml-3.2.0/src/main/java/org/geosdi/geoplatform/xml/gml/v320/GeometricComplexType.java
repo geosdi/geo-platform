@@ -34,60 +34,57 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per GeometricComplexType complex type.
+ * <p>Classe Java per GeometricComplexType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="GeometricComplexType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometryType">
- *       &lt;sequence>
- *         &lt;element name="element" type="{http://www.opengis.net/gml}GeometricPrimitivePropertyType" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="GeometricComplexType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometryType">
+ *       <sequence>
+ *         <element name="element" type="{http://www.opengis.net/gml}GeometricPrimitivePropertyType" maxOccurs="unbounded"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -108,28 +105,31 @@ public class GeometricComplexType
     /**
      * Gets the value of the element property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the element property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the element property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getElement().add(newItem);
+     * getElement().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GeometricPrimitivePropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the element property.
      */
     public List<GeometricPrimitivePropertyType> getElement() {
         if (element == null) {
-            element = new ArrayList<GeometricPrimitivePropertyType>();
+            element = new ArrayList<>();
         }
         return this.element;
     }
@@ -170,13 +170,15 @@ public class GeometricComplexType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -184,23 +186,33 @@ public class GeometricComplexType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<GeometricPrimitivePropertyType> theElement;
-            theElement = this.getElement();
-            strategy.appendField(locator, this, "element", buffer, theElement);
+            theElement = (this.isSetElement()?this.getElement():null);
+            strategy.appendField(locator, this, "element", buffer, theElement, this.isSetElement());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setElement(List<GeometricPrimitivePropertyType> value) {
+        this.element = null;
+        if (value!= null) {
+            List<GeometricPrimitivePropertyType> draftl = this.getElement();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof GeometricComplexType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -212,10 +224,10 @@ public class GeometricComplexType
         final GeometricComplexType that = ((GeometricComplexType) object);
         {
             List<GeometricPrimitivePropertyType> lhsElement;
-            lhsElement = this.getElement();
+            lhsElement = (this.isSetElement()?this.getElement():null);
             List<GeometricPrimitivePropertyType> rhsElement;
-            rhsElement = that.getElement();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "element", lhsElement), LocatorUtils.property(thatLocator, "element", rhsElement), lhsElement, rhsElement)) {
+            rhsElement = (that.isSetElement()?that.getElement():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "element", lhsElement), LocatorUtils.property(thatLocator, "element", rhsElement), lhsElement, rhsElement, this.isSetElement(), that.isSetElement())) {
                 return false;
             }
         }
@@ -224,84 +236,101 @@ public class GeometricComplexType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<GeometricPrimitivePropertyType> theElement;
-            theElement = this.getElement();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "element", theElement), currentHashCode, theElement);
+            theElement = (this.isSetElement()?this.getElement():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "element", theElement), currentHashCode, theElement, this.isSetElement());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof GeometricComplexType) {
             final GeometricComplexType copy = ((GeometricComplexType) draftCopy);
-            if (this.isSetElement()) {
-                List<GeometricPrimitivePropertyType> sourceElement;
-                sourceElement = this.getElement();
-                @SuppressWarnings("unchecked")
-                List<GeometricPrimitivePropertyType> copyElement = ((List<GeometricPrimitivePropertyType> ) strategy.copy(LocatorUtils.property(locator, "element", sourceElement), sourceElement));
-                copy.unsetElement();
-                List<GeometricPrimitivePropertyType> uniqueElementl = copy.getElement();
-                uniqueElementl.addAll(copyElement);
-            } else {
-                copy.unsetElement();
+            {
+                java.lang.Boolean elementShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetElement());
+                if (elementShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<GeometricPrimitivePropertyType> sourceElement;
+                    sourceElement = (this.isSetElement()?this.getElement():null);
+                    @SuppressWarnings("unchecked")
+                    List<GeometricPrimitivePropertyType> copyElement = ((List<GeometricPrimitivePropertyType> ) strategy.copy(LocatorUtils.property(locator, "element", sourceElement), sourceElement, this.isSetElement()));
+                    copy.setElement(copyElement);
+                } else {
+                    if (elementShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetElement();
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new GeometricComplexType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof GeometricComplexType) {
@@ -309,185 +338,36 @@ public class GeometricComplexType
             final GeometricComplexType leftObject = ((GeometricComplexType) left);
             final GeometricComplexType rightObject = ((GeometricComplexType) right);
             {
-                List<GeometricPrimitivePropertyType> lhsElement;
-                lhsElement = leftObject.getElement();
-                List<GeometricPrimitivePropertyType> rhsElement;
-                rhsElement = rightObject.getElement();
-                target.unsetElement();
-                List<GeometricPrimitivePropertyType> uniqueElementl = target.getElement();
-                uniqueElementl.addAll(((List<GeometricPrimitivePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "element", lhsElement), LocatorUtils.property(rightLocator, "element", rhsElement), lhsElement, rhsElement)));
+                java.lang.Boolean elementShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetElement(), rightObject.isSetElement());
+                if (elementShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<GeometricPrimitivePropertyType> lhsElement;
+                    lhsElement = (leftObject.isSetElement()?leftObject.getElement():null);
+                    List<GeometricPrimitivePropertyType> rhsElement;
+                    rhsElement = (rightObject.isSetElement()?rightObject.getElement():null);
+                    List<GeometricPrimitivePropertyType> mergedElement = ((List<GeometricPrimitivePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "element", lhsElement), LocatorUtils.property(rightLocator, "element", rhsElement), lhsElement, rhsElement, leftObject.isSetElement(), rightObject.isSetElement()));
+                    target.setElement(mergedElement);
+                } else {
+                    if (elementShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetElement();
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setElement(List<GeometricPrimitivePropertyType> value) {
-        List<GeometricPrimitivePropertyType> draftl = this.getElement();
-        draftl.addAll(value);
-    }
-
-    public GeometricComplexType withElement(GeometricPrimitivePropertyType... values) {
-        if (values!= null) {
-            for (GeometricPrimitivePropertyType value: values) {
-                getElement().add(value);
-            }
-        }
-        return this;
-    }
-
-    public GeometricComplexType withElement(Collection<GeometricPrimitivePropertyType> values) {
-        if (values!= null) {
-            getElement().addAll(values);
-        }
-        return this;
-    }
-
-    public GeometricComplexType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public GeometricComplexType withElement(List<GeometricPrimitivePropertyType> value) {
-        setElement(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public GeometricComplexType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

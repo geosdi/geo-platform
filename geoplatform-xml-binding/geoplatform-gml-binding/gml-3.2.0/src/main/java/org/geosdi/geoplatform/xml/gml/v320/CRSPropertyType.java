@@ -34,63 +34,61 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * gml:CRSPropertyType is a property type for association roles to a CRS abstract coordinate reference system, either referencing or containing the definition of that CRS.
  * 
- * <p>Classe Java per CRSPropertyType complex type.
+ * <p>Classe Java per CRSPropertyType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CRSPropertyType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}AbstractCRS"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AssociationAttributeGroup"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CRSPropertyType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}AbstractCRS"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AssociationAttributeGroup"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -98,10 +96,13 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "CRSPropertyType", propOrder = {
     "abstractCRS"
 })
-public class CRSPropertyType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class CRSPropertyType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:AbstractCRS specifies a coordinate reference system which is usually single but may be compound. This abstract complex type shall not be used, extended, or restricted, in a GML Application Schema, to define a concrete subtype with a meaning equivalent to a concrete subtype specified in this document.
+     * 
+     */
     @XmlElementRef(name = "AbstractCRS", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected JAXBElement<? extends AbstractCRSType> abstractCRS;
     @XmlAttribute(name = "nilReason")
@@ -109,12 +110,8 @@ public class CRSPropertyType
     @XmlAttribute(name = "remoteSchema", namespace = "http://www.opengis.net/gml")
     @XmlSchemaType(name = "anyURI")
     protected String remoteSchema;
-    /**
-     * 
-     * 
-     */
     @XmlAttribute(name = "type", namespace = "http://www.w3.org/1999/xlink")
-    public final static String TYPE = "simple";
+    public static final String TYPE = "simple";
     @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink")
     @XmlSchemaType(name = "anyURI")
     protected String href;
@@ -126,29 +123,58 @@ public class CRSPropertyType
     protected String arcrole;
     @XmlAttribute(name = "title", namespace = "http://www.w3.org/1999/xlink")
     protected String title;
+    /**
+     * The 'show' attribute is used to communicate the desired presentation 
+     *         of the ending resource on traversal from the starting resource; it's 
+     *         value should be treated as follows: 
+     *         new - load ending resource in a new window, frame, pane, or other 
+     *               presentation context
+     *         replace - load the resource in the same window, frame, pane, or 
+     *                   other presentation context
+     *         embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *         other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *         none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "show", namespace = "http://www.w3.org/1999/xlink")
     protected String show;
+    /**
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *         of traversal from the starting resource to the ending resource; 
+     *         it's value should be treated as follows:
+     *         onLoad - traverse to the ending resource immediately on loading 
+     *                  the starting resource 
+     *         onRequest - traverse from the starting resource to the ending 
+     *                     resource only on a post-loading event triggered for 
+     *                     this purpose 
+     *         other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *         none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
     protected String actuate;
 
     /**
-     * Recupera il valore della proprietà abstractCRS.
+     * gml:AbstractCRS specifies a coordinate reference system which is usually single but may be compound. This abstract complex type shall not be used, extended, or restricted, in a GML Application Schema, to define a concrete subtype with a meaning equivalent to a concrete subtype specified in this document.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link CompoundCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
      *     
      */
     public JAXBElement<? extends AbstractCRSType> getAbstractCRS() {
@@ -161,19 +187,20 @@ public class CRSPropertyType
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link CompoundCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
      *     
+     * @see #getAbstractCRS()
      */
     public void setAbstractCRS(JAXBElement<? extends AbstractCRSType> value) {
         this.abstractCRS = value;
@@ -186,28 +213,31 @@ public class CRSPropertyType
     /**
      * Gets the value of the nilReason property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the nilReason property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the nilReason property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getNilReason().add(newItem);
+     * getNilReason().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the nilReason property.
      */
     public List<String> getNilReason() {
         if (nilReason == null) {
-            nilReason = new ArrayList<String>();
+            nilReason = new ArrayList<>();
         }
         return this.nilReason;
     }
@@ -361,7 +391,18 @@ public class CRSPropertyType
     }
 
     /**
-     * Recupera il valore della proprietà show.
+     * The 'show' attribute is used to communicate the desired presentation 
+     *         of the ending resource on traversal from the starting resource; it's 
+     *         value should be treated as follows: 
+     *         new - load ending resource in a new window, frame, pane, or other 
+     *               presentation context
+     *         replace - load the resource in the same window, frame, pane, or 
+     *                   other presentation context
+     *         embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *         other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *         none - behavior is unconstrained
      * 
      * @return
      *     possible object is
@@ -379,6 +420,7 @@ public class CRSPropertyType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getShow()
      */
     public void setShow(String value) {
         this.show = value;
@@ -389,7 +431,17 @@ public class CRSPropertyType
     }
 
     /**
-     * Recupera il valore della proprietà actuate.
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *         of traversal from the starting resource to the ending resource; 
+     *         it's value should be treated as follows:
+     *         onLoad - traverse to the ending resource immediately on loading 
+     *                  the starting resource 
+     *         onRequest - traverse from the starting resource to the ending 
+     *                     resource only on a post-loading event triggered for 
+     *                     this purpose 
+     *         other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *         none - behavior is unconstrained
      * 
      * @return
      *     possible object is
@@ -407,6 +459,7 @@ public class CRSPropertyType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getActuate()
      */
     public void setActuate(String value) {
         this.actuate = value;
@@ -416,13 +469,15 @@ public class CRSPropertyType
         return (this.actuate!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -430,62 +485,72 @@ public class CRSPropertyType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             JAXBElement<? extends AbstractCRSType> theAbstractCRS;
             theAbstractCRS = this.getAbstractCRS();
-            strategy.appendField(locator, this, "abstractCRS", buffer, theAbstractCRS);
+            strategy.appendField(locator, this, "abstractCRS", buffer, theAbstractCRS, this.isSetAbstractCRS());
         }
         {
             List<String> theNilReason;
-            theNilReason = this.getNilReason();
-            strategy.appendField(locator, this, "nilReason", buffer, theNilReason);
+            theNilReason = (this.isSetNilReason()?this.getNilReason():null);
+            strategy.appendField(locator, this, "nilReason", buffer, theNilReason, this.isSetNilReason());
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema, this.isSetRemoteSchema());
         }
         {
             String theTYPE;
             theTYPE = CRSPropertyType.TYPE;
-            strategy.appendField(locator, this, "type", buffer, theTYPE);
+            strategy.appendField(locator, this, "type", buffer, theTYPE, true);
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, this.isSetHref());
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, this.isSetRole());
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, this.isSetArcrole());
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, this.isSetTitle());
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, this.isSetShow());
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, this.isSetActuate());
         }
         return buffer;
     }
 
+    public void setNilReason(List<String> value) {
+        this.nilReason = null;
+        if (value!= null) {
+            List<String> draftl = this.getNilReason();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CRSPropertyType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -497,16 +562,16 @@ public class CRSPropertyType
             lhsAbstractCRS = this.getAbstractCRS();
             JAXBElement<? extends AbstractCRSType> rhsAbstractCRS;
             rhsAbstractCRS = that.getAbstractCRS();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractCRS", lhsAbstractCRS), LocatorUtils.property(thatLocator, "abstractCRS", rhsAbstractCRS), lhsAbstractCRS, rhsAbstractCRS)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractCRS", lhsAbstractCRS), LocatorUtils.property(thatLocator, "abstractCRS", rhsAbstractCRS), lhsAbstractCRS, rhsAbstractCRS, this.isSetAbstractCRS(), that.isSetAbstractCRS())) {
                 return false;
             }
         }
         {
             List<String> lhsNilReason;
-            lhsNilReason = this.getNilReason();
+            lhsNilReason = (this.isSetNilReason()?this.getNilReason():null);
             List<String> rhsNilReason;
-            rhsNilReason = that.getNilReason();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "nilReason", lhsNilReason), LocatorUtils.property(thatLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason)) {
+            rhsNilReason = (that.isSetNilReason()?that.getNilReason():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "nilReason", lhsNilReason), LocatorUtils.property(thatLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason, this.isSetNilReason(), that.isSetNilReason())) {
                 return false;
             }
         }
@@ -515,7 +580,7 @@ public class CRSPropertyType
             lhsRemoteSchema = this.getRemoteSchema();
             String rhsRemoteSchema;
             rhsRemoteSchema = that.getRemoteSchema();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(thatLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(thatLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema, this.isSetRemoteSchema(), that.isSetRemoteSchema())) {
                 return false;
             }
         }
@@ -524,7 +589,7 @@ public class CRSPropertyType
             lhsHref = this.getHref();
             String rhsHref;
             rhsHref = that.getHref();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "href", lhsHref), LocatorUtils.property(thatLocator, "href", rhsHref), lhsHref, rhsHref)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "href", lhsHref), LocatorUtils.property(thatLocator, "href", rhsHref), lhsHref, rhsHref, this.isSetHref(), that.isSetHref())) {
                 return false;
             }
         }
@@ -533,7 +598,7 @@ public class CRSPropertyType
             lhsRole = this.getRole();
             String rhsRole;
             rhsRole = that.getRole();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "role", lhsRole), LocatorUtils.property(thatLocator, "role", rhsRole), lhsRole, rhsRole)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "role", lhsRole), LocatorUtils.property(thatLocator, "role", rhsRole), lhsRole, rhsRole, this.isSetRole(), that.isSetRole())) {
                 return false;
             }
         }
@@ -542,7 +607,7 @@ public class CRSPropertyType
             lhsArcrole = this.getArcrole();
             String rhsArcrole;
             rhsArcrole = that.getArcrole();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "arcrole", lhsArcrole), LocatorUtils.property(thatLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "arcrole", lhsArcrole), LocatorUtils.property(thatLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole, this.isSetArcrole(), that.isSetArcrole())) {
                 return false;
             }
         }
@@ -551,7 +616,7 @@ public class CRSPropertyType
             lhsTitle = this.getTitle();
             String rhsTitle;
             rhsTitle = that.getTitle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "title", lhsTitle), LocatorUtils.property(thatLocator, "title", rhsTitle), lhsTitle, rhsTitle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "title", lhsTitle), LocatorUtils.property(thatLocator, "title", rhsTitle), lhsTitle, rhsTitle, this.isSetTitle(), that.isSetTitle())) {
                 return false;
             }
         }
@@ -560,7 +625,7 @@ public class CRSPropertyType
             lhsShow = this.getShow();
             String rhsShow;
             rhsShow = that.getShow();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "show", lhsShow), LocatorUtils.property(thatLocator, "show", rhsShow), lhsShow, rhsShow)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "show", lhsShow), LocatorUtils.property(thatLocator, "show", rhsShow), lhsShow, rhsShow, this.isSetShow(), that.isSetShow())) {
                 return false;
             }
         }
@@ -569,312 +634,368 @@ public class CRSPropertyType
             lhsActuate = this.getActuate();
             String rhsActuate;
             rhsActuate = that.getActuate();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "actuate", lhsActuate), LocatorUtils.property(thatLocator, "actuate", rhsActuate), lhsActuate, rhsActuate)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "actuate", lhsActuate), LocatorUtils.property(thatLocator, "actuate", rhsActuate), lhsActuate, rhsActuate, this.isSetActuate(), that.isSetActuate())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             JAXBElement<? extends AbstractCRSType> theAbstractCRS;
             theAbstractCRS = this.getAbstractCRS();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractCRS", theAbstractCRS), currentHashCode, theAbstractCRS);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractCRS", theAbstractCRS), currentHashCode, theAbstractCRS, this.isSetAbstractCRS());
         }
         {
             List<String> theNilReason;
-            theNilReason = this.getNilReason();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "nilReason", theNilReason), currentHashCode, theNilReason);
+            theNilReason = (this.isSetNilReason()?this.getNilReason():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "nilReason", theNilReason), currentHashCode, theNilReason, this.isSetNilReason());
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "remoteSchema", theRemoteSchema), currentHashCode, theRemoteSchema);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "remoteSchema", theRemoteSchema), currentHashCode, theRemoteSchema, this.isSetRemoteSchema());
         }
         {
             String theHref;
             theHref = this.getHref();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "href", theHref), currentHashCode, theHref);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "href", theHref), currentHashCode, theHref, this.isSetHref());
         }
         {
             String theRole;
             theRole = this.getRole();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "role", theRole), currentHashCode, theRole);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "role", theRole), currentHashCode, theRole, this.isSetRole());
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "arcrole", theArcrole), currentHashCode, theArcrole);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "arcrole", theArcrole), currentHashCode, theArcrole, this.isSetArcrole());
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "title", theTitle), currentHashCode, theTitle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "title", theTitle), currentHashCode, theTitle, this.isSetTitle());
         }
         {
             String theShow;
             theShow = this.getShow();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "show", theShow), currentHashCode, theShow);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "show", theShow), currentHashCode, theShow, this.isSetShow());
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "actuate", theActuate), currentHashCode, theActuate);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "actuate", theActuate), currentHashCode, theActuate, this.isSetActuate());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof CRSPropertyType) {
             final CRSPropertyType copy = ((CRSPropertyType) draftCopy);
-            if (this.isSetAbstractCRS()) {
-                JAXBElement<? extends AbstractCRSType> sourceAbstractCRS;
-                sourceAbstractCRS = this.getAbstractCRS();
-                @SuppressWarnings("unchecked")
-                JAXBElement<? extends AbstractCRSType> copyAbstractCRS = ((JAXBElement<? extends AbstractCRSType> ) strategy.copy(LocatorUtils.property(locator, "abstractCRS", sourceAbstractCRS), sourceAbstractCRS));
-                copy.setAbstractCRS(copyAbstractCRS);
-            } else {
-                copy.abstractCRS = null;
+            {
+                java.lang.Boolean abstractCRSShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAbstractCRS());
+                if (abstractCRSShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends AbstractCRSType> sourceAbstractCRS;
+                    sourceAbstractCRS = this.getAbstractCRS();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<? extends AbstractCRSType> copyAbstractCRS = ((JAXBElement<? extends AbstractCRSType> ) strategy.copy(LocatorUtils.property(locator, "abstractCRS", sourceAbstractCRS), sourceAbstractCRS, this.isSetAbstractCRS()));
+                    copy.setAbstractCRS(copyAbstractCRS);
+                } else {
+                    if (abstractCRSShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.abstractCRS = null;
+                    }
+                }
             }
-            if (this.isSetNilReason()) {
-                List<String> sourceNilReason;
-                sourceNilReason = this.getNilReason();
-                @SuppressWarnings("unchecked")
-                List<String> copyNilReason = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "nilReason", sourceNilReason), sourceNilReason));
-                copy.unsetNilReason();
-                List<String> uniqueNilReasonl = copy.getNilReason();
-                uniqueNilReasonl.addAll(copyNilReason);
-            } else {
-                copy.unsetNilReason();
+            {
+                java.lang.Boolean nilReasonShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetNilReason());
+                if (nilReasonShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceNilReason;
+                    sourceNilReason = (this.isSetNilReason()?this.getNilReason():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyNilReason = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "nilReason", sourceNilReason), sourceNilReason, this.isSetNilReason()));
+                    copy.setNilReason(copyNilReason);
+                } else {
+                    if (nilReasonShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetNilReason();
+                    }
+                }
             }
-            if (this.isSetRemoteSchema()) {
-                String sourceRemoteSchema;
-                sourceRemoteSchema = this.getRemoteSchema();
-                String copyRemoteSchema = ((String) strategy.copy(LocatorUtils.property(locator, "remoteSchema", sourceRemoteSchema), sourceRemoteSchema));
-                copy.setRemoteSchema(copyRemoteSchema);
-            } else {
-                copy.remoteSchema = null;
+            {
+                java.lang.Boolean remoteSchemaShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRemoteSchema());
+                if (remoteSchemaShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceRemoteSchema;
+                    sourceRemoteSchema = this.getRemoteSchema();
+                    String copyRemoteSchema = ((String) strategy.copy(LocatorUtils.property(locator, "remoteSchema", sourceRemoteSchema), sourceRemoteSchema, this.isSetRemoteSchema()));
+                    copy.setRemoteSchema(copyRemoteSchema);
+                } else {
+                    if (remoteSchemaShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.remoteSchema = null;
+                    }
+                }
             }
-            if (this.isSetHref()) {
-                String sourceHref;
-                sourceHref = this.getHref();
-                String copyHref = ((String) strategy.copy(LocatorUtils.property(locator, "href", sourceHref), sourceHref));
-                copy.setHref(copyHref);
-            } else {
-                copy.href = null;
+            {
+                java.lang.Boolean hrefShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetHref());
+                if (hrefShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceHref;
+                    sourceHref = this.getHref();
+                    String copyHref = ((String) strategy.copy(LocatorUtils.property(locator, "href", sourceHref), sourceHref, this.isSetHref()));
+                    copy.setHref(copyHref);
+                } else {
+                    if (hrefShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.href = null;
+                    }
+                }
             }
-            if (this.isSetRole()) {
-                String sourceRole;
-                sourceRole = this.getRole();
-                String copyRole = ((String) strategy.copy(LocatorUtils.property(locator, "role", sourceRole), sourceRole));
-                copy.setRole(copyRole);
-            } else {
-                copy.role = null;
+            {
+                java.lang.Boolean roleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRole());
+                if (roleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceRole;
+                    sourceRole = this.getRole();
+                    String copyRole = ((String) strategy.copy(LocatorUtils.property(locator, "role", sourceRole), sourceRole, this.isSetRole()));
+                    copy.setRole(copyRole);
+                } else {
+                    if (roleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.role = null;
+                    }
+                }
             }
-            if (this.isSetArcrole()) {
-                String sourceArcrole;
-                sourceArcrole = this.getArcrole();
-                String copyArcrole = ((String) strategy.copy(LocatorUtils.property(locator, "arcrole", sourceArcrole), sourceArcrole));
-                copy.setArcrole(copyArcrole);
-            } else {
-                copy.arcrole = null;
+            {
+                java.lang.Boolean arcroleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetArcrole());
+                if (arcroleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceArcrole;
+                    sourceArcrole = this.getArcrole();
+                    String copyArcrole = ((String) strategy.copy(LocatorUtils.property(locator, "arcrole", sourceArcrole), sourceArcrole, this.isSetArcrole()));
+                    copy.setArcrole(copyArcrole);
+                } else {
+                    if (arcroleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.arcrole = null;
+                    }
+                }
             }
-            if (this.isSetTitle()) {
-                String sourceTitle;
-                sourceTitle = this.getTitle();
-                String copyTitle = ((String) strategy.copy(LocatorUtils.property(locator, "title", sourceTitle), sourceTitle));
-                copy.setTitle(copyTitle);
-            } else {
-                copy.title = null;
+            {
+                java.lang.Boolean titleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTitle());
+                if (titleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceTitle;
+                    sourceTitle = this.getTitle();
+                    String copyTitle = ((String) strategy.copy(LocatorUtils.property(locator, "title", sourceTitle), sourceTitle, this.isSetTitle()));
+                    copy.setTitle(copyTitle);
+                } else {
+                    if (titleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.title = null;
+                    }
+                }
             }
-            if (this.isSetShow()) {
-                String sourceShow;
-                sourceShow = this.getShow();
-                String copyShow = ((String) strategy.copy(LocatorUtils.property(locator, "show", sourceShow), sourceShow));
-                copy.setShow(copyShow);
-            } else {
-                copy.show = null;
+            {
+                java.lang.Boolean showShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetShow());
+                if (showShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceShow;
+                    sourceShow = this.getShow();
+                    String copyShow = ((String) strategy.copy(LocatorUtils.property(locator, "show", sourceShow), sourceShow, this.isSetShow()));
+                    copy.setShow(copyShow);
+                } else {
+                    if (showShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.show = null;
+                    }
+                }
             }
-            if (this.isSetActuate()) {
-                String sourceActuate;
-                sourceActuate = this.getActuate();
-                String copyActuate = ((String) strategy.copy(LocatorUtils.property(locator, "actuate", sourceActuate), sourceActuate));
-                copy.setActuate(copyActuate);
-            } else {
-                copy.actuate = null;
+            {
+                java.lang.Boolean actuateShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetActuate());
+                if (actuateShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceActuate;
+                    sourceActuate = this.getActuate();
+                    String copyActuate = ((String) strategy.copy(LocatorUtils.property(locator, "actuate", sourceActuate), sourceActuate, this.isSetActuate()));
+                    copy.setActuate(copyActuate);
+                } else {
+                    if (actuateShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.actuate = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CRSPropertyType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof CRSPropertyType) {
             final CRSPropertyType target = this;
             final CRSPropertyType leftObject = ((CRSPropertyType) left);
             final CRSPropertyType rightObject = ((CRSPropertyType) right);
             {
-                JAXBElement<? extends AbstractCRSType> lhsAbstractCRS;
-                lhsAbstractCRS = leftObject.getAbstractCRS();
-                JAXBElement<? extends AbstractCRSType> rhsAbstractCRS;
-                rhsAbstractCRS = rightObject.getAbstractCRS();
-                target.setAbstractCRS(((JAXBElement<? extends AbstractCRSType> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractCRS", lhsAbstractCRS), LocatorUtils.property(rightLocator, "abstractCRS", rhsAbstractCRS), lhsAbstractCRS, rhsAbstractCRS)));
+                java.lang.Boolean abstractCRSShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAbstractCRS(), rightObject.isSetAbstractCRS());
+                if (abstractCRSShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends AbstractCRSType> lhsAbstractCRS;
+                    lhsAbstractCRS = leftObject.getAbstractCRS();
+                    JAXBElement<? extends AbstractCRSType> rhsAbstractCRS;
+                    rhsAbstractCRS = rightObject.getAbstractCRS();
+                    JAXBElement<? extends AbstractCRSType> mergedAbstractCRS = ((JAXBElement<? extends AbstractCRSType> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractCRS", lhsAbstractCRS), LocatorUtils.property(rightLocator, "abstractCRS", rhsAbstractCRS), lhsAbstractCRS, rhsAbstractCRS, leftObject.isSetAbstractCRS(), rightObject.isSetAbstractCRS()));
+                    target.setAbstractCRS(mergedAbstractCRS);
+                } else {
+                    if (abstractCRSShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.abstractCRS = null;
+                    }
+                }
             }
             {
-                List<String> lhsNilReason;
-                lhsNilReason = leftObject.getNilReason();
-                List<String> rhsNilReason;
-                rhsNilReason = rightObject.getNilReason();
-                target.unsetNilReason();
-                List<String> uniqueNilReasonl = target.getNilReason();
-                uniqueNilReasonl.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "nilReason", lhsNilReason), LocatorUtils.property(rightLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason)));
+                java.lang.Boolean nilReasonShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetNilReason(), rightObject.isSetNilReason());
+                if (nilReasonShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsNilReason;
+                    lhsNilReason = (leftObject.isSetNilReason()?leftObject.getNilReason():null);
+                    List<String> rhsNilReason;
+                    rhsNilReason = (rightObject.isSetNilReason()?rightObject.getNilReason():null);
+                    List<String> mergedNilReason = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "nilReason", lhsNilReason), LocatorUtils.property(rightLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason, leftObject.isSetNilReason(), rightObject.isSetNilReason()));
+                    target.setNilReason(mergedNilReason);
+                } else {
+                    if (nilReasonShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetNilReason();
+                    }
+                }
             }
             {
-                String lhsRemoteSchema;
-                lhsRemoteSchema = leftObject.getRemoteSchema();
-                String rhsRemoteSchema;
-                rhsRemoteSchema = rightObject.getRemoteSchema();
-                target.setRemoteSchema(((String) strategy.merge(LocatorUtils.property(leftLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(rightLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema)));
+                java.lang.Boolean remoteSchemaShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRemoteSchema(), rightObject.isSetRemoteSchema());
+                if (remoteSchemaShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsRemoteSchema;
+                    lhsRemoteSchema = leftObject.getRemoteSchema();
+                    String rhsRemoteSchema;
+                    rhsRemoteSchema = rightObject.getRemoteSchema();
+                    String mergedRemoteSchema = ((String) strategy.merge(LocatorUtils.property(leftLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(rightLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema, leftObject.isSetRemoteSchema(), rightObject.isSetRemoteSchema()));
+                    target.setRemoteSchema(mergedRemoteSchema);
+                } else {
+                    if (remoteSchemaShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.remoteSchema = null;
+                    }
+                }
             }
             {
-                String lhsHref;
-                lhsHref = leftObject.getHref();
-                String rhsHref;
-                rhsHref = rightObject.getHref();
-                target.setHref(((String) strategy.merge(LocatorUtils.property(leftLocator, "href", lhsHref), LocatorUtils.property(rightLocator, "href", rhsHref), lhsHref, rhsHref)));
+                java.lang.Boolean hrefShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetHref(), rightObject.isSetHref());
+                if (hrefShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsHref;
+                    lhsHref = leftObject.getHref();
+                    String rhsHref;
+                    rhsHref = rightObject.getHref();
+                    String mergedHref = ((String) strategy.merge(LocatorUtils.property(leftLocator, "href", lhsHref), LocatorUtils.property(rightLocator, "href", rhsHref), lhsHref, rhsHref, leftObject.isSetHref(), rightObject.isSetHref()));
+                    target.setHref(mergedHref);
+                } else {
+                    if (hrefShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.href = null;
+                    }
+                }
             }
             {
-                String lhsRole;
-                lhsRole = leftObject.getRole();
-                String rhsRole;
-                rhsRole = rightObject.getRole();
-                target.setRole(((String) strategy.merge(LocatorUtils.property(leftLocator, "role", lhsRole), LocatorUtils.property(rightLocator, "role", rhsRole), lhsRole, rhsRole)));
+                java.lang.Boolean roleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRole(), rightObject.isSetRole());
+                if (roleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsRole;
+                    lhsRole = leftObject.getRole();
+                    String rhsRole;
+                    rhsRole = rightObject.getRole();
+                    String mergedRole = ((String) strategy.merge(LocatorUtils.property(leftLocator, "role", lhsRole), LocatorUtils.property(rightLocator, "role", rhsRole), lhsRole, rhsRole, leftObject.isSetRole(), rightObject.isSetRole()));
+                    target.setRole(mergedRole);
+                } else {
+                    if (roleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.role = null;
+                    }
+                }
             }
             {
-                String lhsArcrole;
-                lhsArcrole = leftObject.getArcrole();
-                String rhsArcrole;
-                rhsArcrole = rightObject.getArcrole();
-                target.setArcrole(((String) strategy.merge(LocatorUtils.property(leftLocator, "arcrole", lhsArcrole), LocatorUtils.property(rightLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole)));
+                java.lang.Boolean arcroleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetArcrole(), rightObject.isSetArcrole());
+                if (arcroleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsArcrole;
+                    lhsArcrole = leftObject.getArcrole();
+                    String rhsArcrole;
+                    rhsArcrole = rightObject.getArcrole();
+                    String mergedArcrole = ((String) strategy.merge(LocatorUtils.property(leftLocator, "arcrole", lhsArcrole), LocatorUtils.property(rightLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole, leftObject.isSetArcrole(), rightObject.isSetArcrole()));
+                    target.setArcrole(mergedArcrole);
+                } else {
+                    if (arcroleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.arcrole = null;
+                    }
+                }
             }
             {
-                String lhsTitle;
-                lhsTitle = leftObject.getTitle();
-                String rhsTitle;
-                rhsTitle = rightObject.getTitle();
-                target.setTitle(((String) strategy.merge(LocatorUtils.property(leftLocator, "title", lhsTitle), LocatorUtils.property(rightLocator, "title", rhsTitle), lhsTitle, rhsTitle)));
+                java.lang.Boolean titleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTitle(), rightObject.isSetTitle());
+                if (titleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsTitle;
+                    lhsTitle = leftObject.getTitle();
+                    String rhsTitle;
+                    rhsTitle = rightObject.getTitle();
+                    String mergedTitle = ((String) strategy.merge(LocatorUtils.property(leftLocator, "title", lhsTitle), LocatorUtils.property(rightLocator, "title", rhsTitle), lhsTitle, rhsTitle, leftObject.isSetTitle(), rightObject.isSetTitle()));
+                    target.setTitle(mergedTitle);
+                } else {
+                    if (titleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.title = null;
+                    }
+                }
             }
             {
-                String lhsShow;
-                lhsShow = leftObject.getShow();
-                String rhsShow;
-                rhsShow = rightObject.getShow();
-                target.setShow(((String) strategy.merge(LocatorUtils.property(leftLocator, "show", lhsShow), LocatorUtils.property(rightLocator, "show", rhsShow), lhsShow, rhsShow)));
+                java.lang.Boolean showShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetShow(), rightObject.isSetShow());
+                if (showShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsShow;
+                    lhsShow = leftObject.getShow();
+                    String rhsShow;
+                    rhsShow = rightObject.getShow();
+                    String mergedShow = ((String) strategy.merge(LocatorUtils.property(leftLocator, "show", lhsShow), LocatorUtils.property(rightLocator, "show", rhsShow), lhsShow, rhsShow, leftObject.isSetShow(), rightObject.isSetShow()));
+                    target.setShow(mergedShow);
+                } else {
+                    if (showShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.show = null;
+                    }
+                }
             }
             {
-                String lhsActuate;
-                lhsActuate = leftObject.getActuate();
-                String rhsActuate;
-                rhsActuate = rightObject.getActuate();
-                target.setActuate(((String) strategy.merge(LocatorUtils.property(leftLocator, "actuate", lhsActuate), LocatorUtils.property(rightLocator, "actuate", rhsActuate), lhsActuate, rhsActuate)));
+                java.lang.Boolean actuateShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetActuate(), rightObject.isSetActuate());
+                if (actuateShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsActuate;
+                    lhsActuate = leftObject.getActuate();
+                    String rhsActuate;
+                    rhsActuate = rightObject.getActuate();
+                    String mergedActuate = ((String) strategy.merge(LocatorUtils.property(leftLocator, "actuate", lhsActuate), LocatorUtils.property(rightLocator, "actuate", rhsActuate), lhsActuate, rhsActuate, leftObject.isSetActuate(), rightObject.isSetActuate()));
+                    target.setActuate(mergedActuate);
+                } else {
+                    if (actuateShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.actuate = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setNilReason(List<String> value) {
-        List<String> draftl = this.getNilReason();
-        draftl.addAll(value);
-    }
-
-    public CRSPropertyType withAbstractCRS(JAXBElement<? extends AbstractCRSType> value) {
-        setAbstractCRS(value);
-        return this;
-    }
-
-    public CRSPropertyType withNilReason(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getNilReason().add(value);
-            }
-        }
-        return this;
-    }
-
-    public CRSPropertyType withNilReason(Collection<String> values) {
-        if (values!= null) {
-            getNilReason().addAll(values);
-        }
-        return this;
-    }
-
-    public CRSPropertyType withRemoteSchema(String value) {
-        setRemoteSchema(value);
-        return this;
-    }
-
-    public CRSPropertyType withHref(String value) {
-        setHref(value);
-        return this;
-    }
-
-    public CRSPropertyType withRole(String value) {
-        setRole(value);
-        return this;
-    }
-
-    public CRSPropertyType withArcrole(String value) {
-        setArcrole(value);
-        return this;
-    }
-
-    public CRSPropertyType withTitle(String value) {
-        setTitle(value);
-        return this;
-    }
-
-    public CRSPropertyType withShow(String value) {
-        setShow(value);
-        return this;
-    }
-
-    public CRSPropertyType withActuate(String value) {
-        setActuate(value);
-        return this;
-    }
-
-    public CRSPropertyType withNilReason(List<String> value) {
-        setNilReason(value);
-        return this;
     }
 
 }

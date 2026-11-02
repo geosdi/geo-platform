@@ -34,58 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per PolygonType complex type.
+ * <p>Classe Java per PolygonType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="PolygonType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractSurfaceType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}exterior" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}interior" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="PolygonType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractSurfaceType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}exterior" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}interior" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -99,11 +96,19 @@ public class PolygonType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * A boundary of a surface consists of a number of rings. In the normal 2D case, one of these rings is distinguished as being the exterior boundary. In a general manifold this is not always possible, in which case all boundaries shall be listed as interior boundaries, and the exterior will be empty.
+     * 
+     */
     protected AbstractRingPropertyType exterior;
+    /**
+     * A boundary of a surface consists of a number of rings. The "interior" rings separate the surface / surface patch from the area enclosed by the rings.
+     * 
+     */
     protected List<AbstractRingPropertyType> interior;
 
     /**
-     * Recupera il valore della proprietà exterior.
+     * A boundary of a surface consists of a number of rings. In the normal 2D case, one of these rings is distinguished as being the exterior boundary. In a general manifold this is not always possible, in which case all boundaries shall be listed as interior boundaries, and the exterior will be empty.
      * 
      * @return
      *     possible object is
@@ -121,6 +126,7 @@ public class PolygonType
      *     allowed object is
      *     {@link AbstractRingPropertyType }
      *     
+     * @see #getExterior()
      */
     public void setExterior(AbstractRingPropertyType value) {
         this.exterior = value;
@@ -131,30 +137,35 @@ public class PolygonType
     }
 
     /**
+     * A boundary of a surface consists of a number of rings. The "interior" rings separate the surface / surface patch from the area enclosed by the rings.
+     * 
      * Gets the value of the interior property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the interior property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the interior property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getInterior().add(newItem);
+     * getInterior().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link AbstractRingPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the interior property.
      */
     public List<AbstractRingPropertyType> getInterior() {
         if (interior == null) {
-            interior = new ArrayList<AbstractRingPropertyType>();
+            interior = new ArrayList<>();
         }
         return this.interior;
     }
@@ -167,13 +178,15 @@ public class PolygonType
         this.interior = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -181,23 +194,33 @@ public class PolygonType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             AbstractRingPropertyType theExterior;
             theExterior = this.getExterior();
-            strategy.appendField(locator, this, "exterior", buffer, theExterior);
+            strategy.appendField(locator, this, "exterior", buffer, theExterior, this.isSetExterior());
         }
         {
             List<AbstractRingPropertyType> theInterior;
-            theInterior = this.getInterior();
-            strategy.appendField(locator, this, "interior", buffer, theInterior);
+            theInterior = (this.isSetInterior()?this.getInterior():null);
+            strategy.appendField(locator, this, "interior", buffer, theInterior, this.isSetInterior());
         }
         return buffer;
     }
 
+    public void setInterior(List<AbstractRingPropertyType> value) {
+        this.interior = null;
+        if (value!= null) {
+            List<AbstractRingPropertyType> draftl = this.getInterior();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof PolygonType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -212,93 +235,110 @@ public class PolygonType
             lhsExterior = this.getExterior();
             AbstractRingPropertyType rhsExterior;
             rhsExterior = that.getExterior();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "exterior", lhsExterior), LocatorUtils.property(thatLocator, "exterior", rhsExterior), lhsExterior, rhsExterior)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "exterior", lhsExterior), LocatorUtils.property(thatLocator, "exterior", rhsExterior), lhsExterior, rhsExterior, this.isSetExterior(), that.isSetExterior())) {
                 return false;
             }
         }
         {
             List<AbstractRingPropertyType> lhsInterior;
-            lhsInterior = this.getInterior();
+            lhsInterior = (this.isSetInterior()?this.getInterior():null);
             List<AbstractRingPropertyType> rhsInterior;
-            rhsInterior = that.getInterior();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "interior", lhsInterior), LocatorUtils.property(thatLocator, "interior", rhsInterior), lhsInterior, rhsInterior)) {
+            rhsInterior = (that.isSetInterior()?that.getInterior():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "interior", lhsInterior), LocatorUtils.property(thatLocator, "interior", rhsInterior), lhsInterior, rhsInterior, this.isSetInterior(), that.isSetInterior())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             AbstractRingPropertyType theExterior;
             theExterior = this.getExterior();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "exterior", theExterior), currentHashCode, theExterior);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "exterior", theExterior), currentHashCode, theExterior, this.isSetExterior());
         }
         {
             List<AbstractRingPropertyType> theInterior;
-            theInterior = this.getInterior();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "interior", theInterior), currentHashCode, theInterior);
+            theInterior = (this.isSetInterior()?this.getInterior():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "interior", theInterior), currentHashCode, theInterior, this.isSetInterior());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof PolygonType) {
             final PolygonType copy = ((PolygonType) draftCopy);
-            if (this.isSetExterior()) {
-                AbstractRingPropertyType sourceExterior;
-                sourceExterior = this.getExterior();
-                AbstractRingPropertyType copyExterior = ((AbstractRingPropertyType) strategy.copy(LocatorUtils.property(locator, "exterior", sourceExterior), sourceExterior));
-                copy.setExterior(copyExterior);
-            } else {
-                copy.exterior = null;
+            {
+                java.lang.Boolean exteriorShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetExterior());
+                if (exteriorShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AbstractRingPropertyType sourceExterior;
+                    sourceExterior = this.getExterior();
+                    AbstractRingPropertyType copyExterior = ((AbstractRingPropertyType) strategy.copy(LocatorUtils.property(locator, "exterior", sourceExterior), sourceExterior, this.isSetExterior()));
+                    copy.setExterior(copyExterior);
+                } else {
+                    if (exteriorShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.exterior = null;
+                    }
+                }
             }
-            if (this.isSetInterior()) {
-                List<AbstractRingPropertyType> sourceInterior;
-                sourceInterior = this.getInterior();
-                @SuppressWarnings("unchecked")
-                List<AbstractRingPropertyType> copyInterior = ((List<AbstractRingPropertyType> ) strategy.copy(LocatorUtils.property(locator, "interior", sourceInterior), sourceInterior));
-                copy.unsetInterior();
-                List<AbstractRingPropertyType> uniqueInteriorl = copy.getInterior();
-                uniqueInteriorl.addAll(copyInterior);
-            } else {
-                copy.unsetInterior();
+            {
+                java.lang.Boolean interiorShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetInterior());
+                if (interiorShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<AbstractRingPropertyType> sourceInterior;
+                    sourceInterior = (this.isSetInterior()?this.getInterior():null);
+                    @SuppressWarnings("unchecked")
+                    List<AbstractRingPropertyType> copyInterior = ((List<AbstractRingPropertyType> ) strategy.copy(LocatorUtils.property(locator, "interior", sourceInterior), sourceInterior, this.isSetInterior()));
+                    copy.setInterior(copyInterior);
+                } else {
+                    if (interiorShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetInterior();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new PolygonType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof PolygonType) {
@@ -306,185 +346,36 @@ public class PolygonType
             final PolygonType leftObject = ((PolygonType) left);
             final PolygonType rightObject = ((PolygonType) right);
             {
-                AbstractRingPropertyType lhsExterior;
-                lhsExterior = leftObject.getExterior();
-                AbstractRingPropertyType rhsExterior;
-                rhsExterior = rightObject.getExterior();
-                target.setExterior(((AbstractRingPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "exterior", lhsExterior), LocatorUtils.property(rightLocator, "exterior", rhsExterior), lhsExterior, rhsExterior)));
+                java.lang.Boolean exteriorShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetExterior(), rightObject.isSetExterior());
+                if (exteriorShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AbstractRingPropertyType lhsExterior;
+                    lhsExterior = leftObject.getExterior();
+                    AbstractRingPropertyType rhsExterior;
+                    rhsExterior = rightObject.getExterior();
+                    AbstractRingPropertyType mergedExterior = ((AbstractRingPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "exterior", lhsExterior), LocatorUtils.property(rightLocator, "exterior", rhsExterior), lhsExterior, rhsExterior, leftObject.isSetExterior(), rightObject.isSetExterior()));
+                    target.setExterior(mergedExterior);
+                } else {
+                    if (exteriorShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.exterior = null;
+                    }
+                }
             }
             {
-                List<AbstractRingPropertyType> lhsInterior;
-                lhsInterior = leftObject.getInterior();
-                List<AbstractRingPropertyType> rhsInterior;
-                rhsInterior = rightObject.getInterior();
-                target.unsetInterior();
-                List<AbstractRingPropertyType> uniqueInteriorl = target.getInterior();
-                uniqueInteriorl.addAll(((List<AbstractRingPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "interior", lhsInterior), LocatorUtils.property(rightLocator, "interior", rhsInterior), lhsInterior, rhsInterior)));
+                java.lang.Boolean interiorShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetInterior(), rightObject.isSetInterior());
+                if (interiorShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<AbstractRingPropertyType> lhsInterior;
+                    lhsInterior = (leftObject.isSetInterior()?leftObject.getInterior():null);
+                    List<AbstractRingPropertyType> rhsInterior;
+                    rhsInterior = (rightObject.isSetInterior()?rightObject.getInterior():null);
+                    List<AbstractRingPropertyType> mergedInterior = ((List<AbstractRingPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "interior", lhsInterior), LocatorUtils.property(rightLocator, "interior", rhsInterior), lhsInterior, rhsInterior, leftObject.isSetInterior(), rightObject.isSetInterior()));
+                    target.setInterior(mergedInterior);
+                } else {
+                    if (interiorShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetInterior();
+                    }
+                }
             }
         }
-    }
-
-    public void setInterior(List<AbstractRingPropertyType> value) {
-        List<AbstractRingPropertyType> draftl = this.getInterior();
-        draftl.addAll(value);
-    }
-
-    public PolygonType withExterior(AbstractRingPropertyType value) {
-        setExterior(value);
-        return this;
-    }
-
-    public PolygonType withInterior(AbstractRingPropertyType... values) {
-        if (values!= null) {
-            for (AbstractRingPropertyType value: values) {
-                getInterior().add(value);
-            }
-        }
-        return this;
-    }
-
-    public PolygonType withInterior(Collection<AbstractRingPropertyType> values) {
-        if (values!= null) {
-            getInterior().addAll(values);
-        }
-        return this;
-    }
-
-    public PolygonType withInterior(List<AbstractRingPropertyType> value) {
-        setInterior(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public PolygonType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public PolygonType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

@@ -34,35 +34,35 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
@@ -72,24 +72,24 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  * If the direction is specified using a term from a list, gml:keyword should be used, and the list indicated using the value of the codeSpace attribute. 
  * if the direction is decribed in prose, gml:direction or gml:reference should be used, allowing the value to be included inline or by reference.
  * 
- * <p>Classe Java per DirectionDescriptionType complex type.
+ * <p>Classe Java per DirectionDescriptionType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DirectionDescriptionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element name="compassPoint" type="{http://www.opengis.net/gml}CompassPointEnumeration"/>
- *         &lt;element name="keyword" type="{http://www.opengis.net/gml}CodeType"/>
- *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="reference" type="{http://www.opengis.net/gml}ReferenceType"/>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DirectionDescriptionType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <element name="compassPoint" type="{http://www.opengis.net/gml}CompassPointEnumeration"/>
+ *         <element name="keyword" type="{http://www.opengis.net/gml}CodeType"/>
+ *         <element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="reference" type="{http://www.opengis.net/gml}ReferenceType"/>
+ *       </choice>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,10 +100,10 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "description",
     "reference"
 })
-public class DirectionDescriptionType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class DirectionDescriptionType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    @XmlSchemaType(name = "string")
     protected CompassPointEnumeration compassPoint;
     protected CodeType keyword;
     protected String description;
@@ -221,13 +221,15 @@ public class DirectionDescriptionType
         return (this.reference!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -235,32 +237,34 @@ public class DirectionDescriptionType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             CompassPointEnumeration theCompassPoint;
             theCompassPoint = this.getCompassPoint();
-            strategy.appendField(locator, this, "compassPoint", buffer, theCompassPoint);
+            strategy.appendField(locator, this, "compassPoint", buffer, theCompassPoint, this.isSetCompassPoint());
         }
         {
             CodeType theKeyword;
             theKeyword = this.getKeyword();
-            strategy.appendField(locator, this, "keyword", buffer, theKeyword);
+            strategy.appendField(locator, this, "keyword", buffer, theKeyword, this.isSetKeyword());
         }
         {
             String theDescription;
             theDescription = this.getDescription();
-            strategy.appendField(locator, this, "description", buffer, theDescription);
+            strategy.appendField(locator, this, "description", buffer, theDescription, this.isSetDescription());
         }
         {
             ReferenceType theReference;
             theReference = this.getReference();
-            strategy.appendField(locator, this, "reference", buffer, theReference);
+            strategy.appendField(locator, this, "reference", buffer, theReference, this.isSetReference());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DirectionDescriptionType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -272,7 +276,7 @@ public class DirectionDescriptionType
             lhsCompassPoint = this.getCompassPoint();
             CompassPointEnumeration rhsCompassPoint;
             rhsCompassPoint = that.getCompassPoint();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "compassPoint", lhsCompassPoint), LocatorUtils.property(thatLocator, "compassPoint", rhsCompassPoint), lhsCompassPoint, rhsCompassPoint)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "compassPoint", lhsCompassPoint), LocatorUtils.property(thatLocator, "compassPoint", rhsCompassPoint), lhsCompassPoint, rhsCompassPoint, this.isSetCompassPoint(), that.isSetCompassPoint())) {
                 return false;
             }
         }
@@ -281,7 +285,7 @@ public class DirectionDescriptionType
             lhsKeyword = this.getKeyword();
             CodeType rhsKeyword;
             rhsKeyword = that.getKeyword();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "keyword", lhsKeyword), LocatorUtils.property(thatLocator, "keyword", rhsKeyword), lhsKeyword, rhsKeyword)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "keyword", lhsKeyword), LocatorUtils.property(thatLocator, "keyword", rhsKeyword), lhsKeyword, rhsKeyword, this.isSetKeyword(), that.isSetKeyword())) {
                 return false;
             }
         }
@@ -290,7 +294,7 @@ public class DirectionDescriptionType
             lhsDescription = this.getDescription();
             String rhsDescription;
             rhsDescription = that.getDescription();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "description", lhsDescription), LocatorUtils.property(thatLocator, "description", rhsDescription), lhsDescription, rhsDescription)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "description", lhsDescription), LocatorUtils.property(thatLocator, "description", rhsDescription), lhsDescription, rhsDescription, this.isSetDescription(), that.isSetDescription())) {
                 return false;
             }
         }
@@ -299,160 +303,201 @@ public class DirectionDescriptionType
             lhsReference = this.getReference();
             ReferenceType rhsReference;
             rhsReference = that.getReference();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "reference", lhsReference), LocatorUtils.property(thatLocator, "reference", rhsReference), lhsReference, rhsReference)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "reference", lhsReference), LocatorUtils.property(thatLocator, "reference", rhsReference), lhsReference, rhsReference, this.isSetReference(), that.isSetReference())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             CompassPointEnumeration theCompassPoint;
             theCompassPoint = this.getCompassPoint();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "compassPoint", theCompassPoint), currentHashCode, theCompassPoint);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "compassPoint", theCompassPoint), currentHashCode, theCompassPoint, this.isSetCompassPoint());
         }
         {
             CodeType theKeyword;
             theKeyword = this.getKeyword();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "keyword", theKeyword), currentHashCode, theKeyword);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "keyword", theKeyword), currentHashCode, theKeyword, this.isSetKeyword());
         }
         {
             String theDescription;
             theDescription = this.getDescription();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "description", theDescription), currentHashCode, theDescription);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "description", theDescription), currentHashCode, theDescription, this.isSetDescription());
         }
         {
             ReferenceType theReference;
             theReference = this.getReference();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "reference", theReference), currentHashCode, theReference);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "reference", theReference), currentHashCode, theReference, this.isSetReference());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof DirectionDescriptionType) {
             final DirectionDescriptionType copy = ((DirectionDescriptionType) draftCopy);
-            if (this.isSetCompassPoint()) {
-                CompassPointEnumeration sourceCompassPoint;
-                sourceCompassPoint = this.getCompassPoint();
-                CompassPointEnumeration copyCompassPoint = ((CompassPointEnumeration) strategy.copy(LocatorUtils.property(locator, "compassPoint", sourceCompassPoint), sourceCompassPoint));
-                copy.setCompassPoint(copyCompassPoint);
-            } else {
-                copy.compassPoint = null;
+            {
+                java.lang.Boolean compassPointShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCompassPoint());
+                if (compassPointShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CompassPointEnumeration sourceCompassPoint;
+                    sourceCompassPoint = this.getCompassPoint();
+                    CompassPointEnumeration copyCompassPoint = ((CompassPointEnumeration) strategy.copy(LocatorUtils.property(locator, "compassPoint", sourceCompassPoint), sourceCompassPoint, this.isSetCompassPoint()));
+                    copy.setCompassPoint(copyCompassPoint);
+                } else {
+                    if (compassPointShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.compassPoint = null;
+                    }
+                }
             }
-            if (this.isSetKeyword()) {
-                CodeType sourceKeyword;
-                sourceKeyword = this.getKeyword();
-                CodeType copyKeyword = ((CodeType) strategy.copy(LocatorUtils.property(locator, "keyword", sourceKeyword), sourceKeyword));
-                copy.setKeyword(copyKeyword);
-            } else {
-                copy.keyword = null;
+            {
+                java.lang.Boolean keywordShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetKeyword());
+                if (keywordShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CodeType sourceKeyword;
+                    sourceKeyword = this.getKeyword();
+                    CodeType copyKeyword = ((CodeType) strategy.copy(LocatorUtils.property(locator, "keyword", sourceKeyword), sourceKeyword, this.isSetKeyword()));
+                    copy.setKeyword(copyKeyword);
+                } else {
+                    if (keywordShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.keyword = null;
+                    }
+                }
             }
-            if (this.isSetDescription()) {
-                String sourceDescription;
-                sourceDescription = this.getDescription();
-                String copyDescription = ((String) strategy.copy(LocatorUtils.property(locator, "description", sourceDescription), sourceDescription));
-                copy.setDescription(copyDescription);
-            } else {
-                copy.description = null;
+            {
+                java.lang.Boolean descriptionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDescription());
+                if (descriptionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceDescription;
+                    sourceDescription = this.getDescription();
+                    String copyDescription = ((String) strategy.copy(LocatorUtils.property(locator, "description", sourceDescription), sourceDescription, this.isSetDescription()));
+                    copy.setDescription(copyDescription);
+                } else {
+                    if (descriptionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.description = null;
+                    }
+                }
             }
-            if (this.isSetReference()) {
-                ReferenceType sourceReference;
-                sourceReference = this.getReference();
-                ReferenceType copyReference = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "reference", sourceReference), sourceReference));
-                copy.setReference(copyReference);
-            } else {
-                copy.reference = null;
+            {
+                java.lang.Boolean referenceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetReference());
+                if (referenceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType sourceReference;
+                    sourceReference = this.getReference();
+                    ReferenceType copyReference = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "reference", sourceReference), sourceReference, this.isSetReference()));
+                    copy.setReference(copyReference);
+                } else {
+                    if (referenceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.reference = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DirectionDescriptionType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof DirectionDescriptionType) {
             final DirectionDescriptionType target = this;
             final DirectionDescriptionType leftObject = ((DirectionDescriptionType) left);
             final DirectionDescriptionType rightObject = ((DirectionDescriptionType) right);
             {
-                CompassPointEnumeration lhsCompassPoint;
-                lhsCompassPoint = leftObject.getCompassPoint();
-                CompassPointEnumeration rhsCompassPoint;
-                rhsCompassPoint = rightObject.getCompassPoint();
-                target.setCompassPoint(((CompassPointEnumeration) strategy.merge(LocatorUtils.property(leftLocator, "compassPoint", lhsCompassPoint), LocatorUtils.property(rightLocator, "compassPoint", rhsCompassPoint), lhsCompassPoint, rhsCompassPoint)));
+                java.lang.Boolean compassPointShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCompassPoint(), rightObject.isSetCompassPoint());
+                if (compassPointShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CompassPointEnumeration lhsCompassPoint;
+                    lhsCompassPoint = leftObject.getCompassPoint();
+                    CompassPointEnumeration rhsCompassPoint;
+                    rhsCompassPoint = rightObject.getCompassPoint();
+                    CompassPointEnumeration mergedCompassPoint = ((CompassPointEnumeration) strategy.merge(LocatorUtils.property(leftLocator, "compassPoint", lhsCompassPoint), LocatorUtils.property(rightLocator, "compassPoint", rhsCompassPoint), lhsCompassPoint, rhsCompassPoint, leftObject.isSetCompassPoint(), rightObject.isSetCompassPoint()));
+                    target.setCompassPoint(mergedCompassPoint);
+                } else {
+                    if (compassPointShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.compassPoint = null;
+                    }
+                }
             }
             {
-                CodeType lhsKeyword;
-                lhsKeyword = leftObject.getKeyword();
-                CodeType rhsKeyword;
-                rhsKeyword = rightObject.getKeyword();
-                target.setKeyword(((CodeType) strategy.merge(LocatorUtils.property(leftLocator, "keyword", lhsKeyword), LocatorUtils.property(rightLocator, "keyword", rhsKeyword), lhsKeyword, rhsKeyword)));
+                java.lang.Boolean keywordShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetKeyword(), rightObject.isSetKeyword());
+                if (keywordShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CodeType lhsKeyword;
+                    lhsKeyword = leftObject.getKeyword();
+                    CodeType rhsKeyword;
+                    rhsKeyword = rightObject.getKeyword();
+                    CodeType mergedKeyword = ((CodeType) strategy.merge(LocatorUtils.property(leftLocator, "keyword", lhsKeyword), LocatorUtils.property(rightLocator, "keyword", rhsKeyword), lhsKeyword, rhsKeyword, leftObject.isSetKeyword(), rightObject.isSetKeyword()));
+                    target.setKeyword(mergedKeyword);
+                } else {
+                    if (keywordShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.keyword = null;
+                    }
+                }
             }
             {
-                String lhsDescription;
-                lhsDescription = leftObject.getDescription();
-                String rhsDescription;
-                rhsDescription = rightObject.getDescription();
-                target.setDescription(((String) strategy.merge(LocatorUtils.property(leftLocator, "description", lhsDescription), LocatorUtils.property(rightLocator, "description", rhsDescription), lhsDescription, rhsDescription)));
+                java.lang.Boolean descriptionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDescription(), rightObject.isSetDescription());
+                if (descriptionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsDescription;
+                    lhsDescription = leftObject.getDescription();
+                    String rhsDescription;
+                    rhsDescription = rightObject.getDescription();
+                    String mergedDescription = ((String) strategy.merge(LocatorUtils.property(leftLocator, "description", lhsDescription), LocatorUtils.property(rightLocator, "description", rhsDescription), lhsDescription, rhsDescription, leftObject.isSetDescription(), rightObject.isSetDescription()));
+                    target.setDescription(mergedDescription);
+                } else {
+                    if (descriptionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.description = null;
+                    }
+                }
             }
             {
-                ReferenceType lhsReference;
-                lhsReference = leftObject.getReference();
-                ReferenceType rhsReference;
-                rhsReference = rightObject.getReference();
-                target.setReference(((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "reference", lhsReference), LocatorUtils.property(rightLocator, "reference", rhsReference), lhsReference, rhsReference)));
+                java.lang.Boolean referenceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetReference(), rightObject.isSetReference());
+                if (referenceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType lhsReference;
+                    lhsReference = leftObject.getReference();
+                    ReferenceType rhsReference;
+                    rhsReference = rightObject.getReference();
+                    ReferenceType mergedReference = ((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "reference", lhsReference), LocatorUtils.property(rightLocator, "reference", rhsReference), lhsReference, rhsReference, leftObject.isSetReference(), rightObject.isSetReference()));
+                    target.setReference(mergedReference);
+                } else {
+                    if (referenceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.reference = null;
+                    }
+                }
             }
         }
-    }
-
-    public DirectionDescriptionType withCompassPoint(CompassPointEnumeration value) {
-        setCompassPoint(value);
-        return this;
-    }
-
-    public DirectionDescriptionType withKeyword(CodeType value) {
-        setKeyword(value);
-        return this;
-    }
-
-    public DirectionDescriptionType withDescription(String value) {
-        setDescription(value);
-        return this;
-    }
-
-    public DirectionDescriptionType withReference(ReferenceType value) {
-        setReference(value);
-        return this;
     }
 
 }

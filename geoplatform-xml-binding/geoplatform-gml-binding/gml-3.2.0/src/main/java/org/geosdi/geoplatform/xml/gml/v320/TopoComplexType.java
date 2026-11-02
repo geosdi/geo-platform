@@ -34,64 +34,62 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TopoComplexType complex type.
+ * <p>Classe Java per TopoComplexType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TopoComplexType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTopologyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}maximalComplex"/>
- *         &lt;element ref="{http://www.opengis.net/gml}superComplex" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}subComplex" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}topoPrimitiveMember" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}topoPrimitiveMembers" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *       &lt;attribute name="isMaximal" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TopoComplexType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTopologyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}maximalComplex"/>
+ *         <element ref="{http://www.opengis.net/gml}superComplex" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}subComplex" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}topoPrimitiveMember" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}topoPrimitiveMembers" minOccurs="0"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *       <attribute name="isMaximal" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -108,11 +106,31 @@ public class TopoComplexType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The property elements gml:subComplex, gml:superComplex and gml:maximalComplex provide an encoding for relationships between topology complexes as described for gml:TopoComplex above.
+     * 
+     */
     @XmlElement(required = true)
     protected TopoComplexMemberType maximalComplex;
+    /**
+     * The property elements gml:subComplex, gml:superComplex and gml:maximalComplex provide an encoding for relationships between topology complexes as described for gml:TopoComplex above.
+     * 
+     */
     protected List<TopoComplexMemberType> superComplex;
+    /**
+     * The property elements gml:subComplex, gml:superComplex and gml:maximalComplex provide an encoding for relationships between topology complexes as described for gml:TopoComplex above.
+     * 
+     */
     protected List<TopoComplexMemberType> subComplex;
+    /**
+     * The gml:topoPrimitiveMember property element encodes for the relationship between a topology complex and a single topology primitive.
+     * 
+     */
     protected List<TopoPrimitiveMemberType> topoPrimitiveMember;
+    /**
+     * The gml:topoPrimitiveMembers property element encodes the relationship between a topology complex and an arbitrary number of topology primitives.
+     * 
+     */
     protected TopoPrimitiveArrayAssociationType topoPrimitiveMembers;
     @XmlAttribute(name = "isMaximal")
     protected java.lang.Boolean isMaximal;
@@ -120,7 +138,7 @@ public class TopoComplexType
     protected AggregationType aggregationType;
 
     /**
-     * Recupera il valore della proprietà maximalComplex.
+     * The property elements gml:subComplex, gml:superComplex and gml:maximalComplex provide an encoding for relationships between topology complexes as described for gml:TopoComplex above.
      * 
      * @return
      *     possible object is
@@ -138,6 +156,7 @@ public class TopoComplexType
      *     allowed object is
      *     {@link TopoComplexMemberType }
      *     
+     * @see #getMaximalComplex()
      */
     public void setMaximalComplex(TopoComplexMemberType value) {
         this.maximalComplex = value;
@@ -148,30 +167,35 @@ public class TopoComplexType
     }
 
     /**
+     * The property elements gml:subComplex, gml:superComplex and gml:maximalComplex provide an encoding for relationships between topology complexes as described for gml:TopoComplex above.
+     * 
      * Gets the value of the superComplex property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the superComplex property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the superComplex property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getSuperComplex().add(newItem);
+     * getSuperComplex().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TopoComplexMemberType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the superComplex property.
      */
     public List<TopoComplexMemberType> getSuperComplex() {
         if (superComplex == null) {
-            superComplex = new ArrayList<TopoComplexMemberType>();
+            superComplex = new ArrayList<>();
         }
         return this.superComplex;
     }
@@ -185,30 +209,35 @@ public class TopoComplexType
     }
 
     /**
+     * The property elements gml:subComplex, gml:superComplex and gml:maximalComplex provide an encoding for relationships between topology complexes as described for gml:TopoComplex above.
+     * 
      * Gets the value of the subComplex property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the subComplex property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the subComplex property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getSubComplex().add(newItem);
+     * getSubComplex().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TopoComplexMemberType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the subComplex property.
      */
     public List<TopoComplexMemberType> getSubComplex() {
         if (subComplex == null) {
-            subComplex = new ArrayList<TopoComplexMemberType>();
+            subComplex = new ArrayList<>();
         }
         return this.subComplex;
     }
@@ -222,30 +251,35 @@ public class TopoComplexType
     }
 
     /**
+     * The gml:topoPrimitiveMember property element encodes for the relationship between a topology complex and a single topology primitive.
+     * 
      * Gets the value of the topoPrimitiveMember property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the topoPrimitiveMember property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the topoPrimitiveMember property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getTopoPrimitiveMember().add(newItem);
+     * getTopoPrimitiveMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TopoPrimitiveMemberType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the topoPrimitiveMember property.
      */
     public List<TopoPrimitiveMemberType> getTopoPrimitiveMember() {
         if (topoPrimitiveMember == null) {
-            topoPrimitiveMember = new ArrayList<TopoPrimitiveMemberType>();
+            topoPrimitiveMember = new ArrayList<>();
         }
         return this.topoPrimitiveMember;
     }
@@ -259,7 +293,7 @@ public class TopoComplexType
     }
 
     /**
-     * Recupera il valore della proprietà topoPrimitiveMembers.
+     * The gml:topoPrimitiveMembers property element encodes the relationship between a topology complex and an arbitrary number of topology primitives.
      * 
      * @return
      *     possible object is
@@ -277,6 +311,7 @@ public class TopoComplexType
      *     allowed object is
      *     {@link TopoPrimitiveArrayAssociationType }
      *     
+     * @see #getTopoPrimitiveMembers()
      */
     public void setTopoPrimitiveMembers(TopoPrimitiveArrayAssociationType value) {
         this.topoPrimitiveMembers = value;
@@ -350,13 +385,15 @@ public class TopoComplexType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -364,48 +401,74 @@ public class TopoComplexType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             TopoComplexMemberType theMaximalComplex;
             theMaximalComplex = this.getMaximalComplex();
-            strategy.appendField(locator, this, "maximalComplex", buffer, theMaximalComplex);
+            strategy.appendField(locator, this, "maximalComplex", buffer, theMaximalComplex, this.isSetMaximalComplex());
         }
         {
             List<TopoComplexMemberType> theSuperComplex;
-            theSuperComplex = this.getSuperComplex();
-            strategy.appendField(locator, this, "superComplex", buffer, theSuperComplex);
+            theSuperComplex = (this.isSetSuperComplex()?this.getSuperComplex():null);
+            strategy.appendField(locator, this, "superComplex", buffer, theSuperComplex, this.isSetSuperComplex());
         }
         {
             List<TopoComplexMemberType> theSubComplex;
-            theSubComplex = this.getSubComplex();
-            strategy.appendField(locator, this, "subComplex", buffer, theSubComplex);
+            theSubComplex = (this.isSetSubComplex()?this.getSubComplex():null);
+            strategy.appendField(locator, this, "subComplex", buffer, theSubComplex, this.isSetSubComplex());
         }
         {
             List<TopoPrimitiveMemberType> theTopoPrimitiveMember;
-            theTopoPrimitiveMember = this.getTopoPrimitiveMember();
-            strategy.appendField(locator, this, "topoPrimitiveMember", buffer, theTopoPrimitiveMember);
+            theTopoPrimitiveMember = (this.isSetTopoPrimitiveMember()?this.getTopoPrimitiveMember():null);
+            strategy.appendField(locator, this, "topoPrimitiveMember", buffer, theTopoPrimitiveMember, this.isSetTopoPrimitiveMember());
         }
         {
             TopoPrimitiveArrayAssociationType theTopoPrimitiveMembers;
             theTopoPrimitiveMembers = this.getTopoPrimitiveMembers();
-            strategy.appendField(locator, this, "topoPrimitiveMembers", buffer, theTopoPrimitiveMembers);
+            strategy.appendField(locator, this, "topoPrimitiveMembers", buffer, theTopoPrimitiveMembers, this.isSetTopoPrimitiveMembers());
         }
         {
             boolean theIsMaximal;
-            theIsMaximal = this.isIsMaximal();
-            strategy.appendField(locator, this, "isMaximal", buffer, theIsMaximal);
+            theIsMaximal = (this.isSetIsMaximal()?this.isIsMaximal():false);
+            strategy.appendField(locator, this, "isMaximal", buffer, theIsMaximal, this.isSetIsMaximal());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setSuperComplex(List<TopoComplexMemberType> value) {
+        this.superComplex = null;
+        if (value!= null) {
+            List<TopoComplexMemberType> draftl = this.getSuperComplex();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setSubComplex(List<TopoComplexMemberType> value) {
+        this.subComplex = null;
+        if (value!= null) {
+            List<TopoComplexMemberType> draftl = this.getSubComplex();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setTopoPrimitiveMember(List<TopoPrimitiveMemberType> value) {
+        this.topoPrimitiveMember = null;
+        if (value!= null) {
+            List<TopoPrimitiveMemberType> draftl = this.getTopoPrimitiveMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TopoComplexType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -420,34 +483,34 @@ public class TopoComplexType
             lhsMaximalComplex = this.getMaximalComplex();
             TopoComplexMemberType rhsMaximalComplex;
             rhsMaximalComplex = that.getMaximalComplex();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "maximalComplex", lhsMaximalComplex), LocatorUtils.property(thatLocator, "maximalComplex", rhsMaximalComplex), lhsMaximalComplex, rhsMaximalComplex)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "maximalComplex", lhsMaximalComplex), LocatorUtils.property(thatLocator, "maximalComplex", rhsMaximalComplex), lhsMaximalComplex, rhsMaximalComplex, this.isSetMaximalComplex(), that.isSetMaximalComplex())) {
                 return false;
             }
         }
         {
             List<TopoComplexMemberType> lhsSuperComplex;
-            lhsSuperComplex = this.getSuperComplex();
+            lhsSuperComplex = (this.isSetSuperComplex()?this.getSuperComplex():null);
             List<TopoComplexMemberType> rhsSuperComplex;
-            rhsSuperComplex = that.getSuperComplex();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "superComplex", lhsSuperComplex), LocatorUtils.property(thatLocator, "superComplex", rhsSuperComplex), lhsSuperComplex, rhsSuperComplex)) {
+            rhsSuperComplex = (that.isSetSuperComplex()?that.getSuperComplex():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "superComplex", lhsSuperComplex), LocatorUtils.property(thatLocator, "superComplex", rhsSuperComplex), lhsSuperComplex, rhsSuperComplex, this.isSetSuperComplex(), that.isSetSuperComplex())) {
                 return false;
             }
         }
         {
             List<TopoComplexMemberType> lhsSubComplex;
-            lhsSubComplex = this.getSubComplex();
+            lhsSubComplex = (this.isSetSubComplex()?this.getSubComplex():null);
             List<TopoComplexMemberType> rhsSubComplex;
-            rhsSubComplex = that.getSubComplex();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "subComplex", lhsSubComplex), LocatorUtils.property(thatLocator, "subComplex", rhsSubComplex), lhsSubComplex, rhsSubComplex)) {
+            rhsSubComplex = (that.isSetSubComplex()?that.getSubComplex():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "subComplex", lhsSubComplex), LocatorUtils.property(thatLocator, "subComplex", rhsSubComplex), lhsSubComplex, rhsSubComplex, this.isSetSubComplex(), that.isSetSubComplex())) {
                 return false;
             }
         }
         {
             List<TopoPrimitiveMemberType> lhsTopoPrimitiveMember;
-            lhsTopoPrimitiveMember = this.getTopoPrimitiveMember();
+            lhsTopoPrimitiveMember = (this.isSetTopoPrimitiveMember()?this.getTopoPrimitiveMember():null);
             List<TopoPrimitiveMemberType> rhsTopoPrimitiveMember;
-            rhsTopoPrimitiveMember = that.getTopoPrimitiveMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "topoPrimitiveMember", lhsTopoPrimitiveMember), LocatorUtils.property(thatLocator, "topoPrimitiveMember", rhsTopoPrimitiveMember), lhsTopoPrimitiveMember, rhsTopoPrimitiveMember)) {
+            rhsTopoPrimitiveMember = (that.isSetTopoPrimitiveMember()?that.getTopoPrimitiveMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "topoPrimitiveMember", lhsTopoPrimitiveMember), LocatorUtils.property(thatLocator, "topoPrimitiveMember", rhsTopoPrimitiveMember), lhsTopoPrimitiveMember, rhsTopoPrimitiveMember, this.isSetTopoPrimitiveMember(), that.isSetTopoPrimitiveMember())) {
                 return false;
             }
         }
@@ -456,16 +519,16 @@ public class TopoComplexType
             lhsTopoPrimitiveMembers = this.getTopoPrimitiveMembers();
             TopoPrimitiveArrayAssociationType rhsTopoPrimitiveMembers;
             rhsTopoPrimitiveMembers = that.getTopoPrimitiveMembers();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "topoPrimitiveMembers", lhsTopoPrimitiveMembers), LocatorUtils.property(thatLocator, "topoPrimitiveMembers", rhsTopoPrimitiveMembers), lhsTopoPrimitiveMembers, rhsTopoPrimitiveMembers)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "topoPrimitiveMembers", lhsTopoPrimitiveMembers), LocatorUtils.property(thatLocator, "topoPrimitiveMembers", rhsTopoPrimitiveMembers), lhsTopoPrimitiveMembers, rhsTopoPrimitiveMembers, this.isSetTopoPrimitiveMembers(), that.isSetTopoPrimitiveMembers())) {
                 return false;
             }
         }
         {
             boolean lhsIsMaximal;
-            lhsIsMaximal = this.isIsMaximal();
+            lhsIsMaximal = (this.isSetIsMaximal()?this.isIsMaximal():false);
             boolean rhsIsMaximal;
-            rhsIsMaximal = that.isIsMaximal();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "isMaximal", lhsIsMaximal), LocatorUtils.property(thatLocator, "isMaximal", rhsIsMaximal), lhsIsMaximal, rhsIsMaximal)) {
+            rhsIsMaximal = (that.isSetIsMaximal()?that.isIsMaximal():false);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "isMaximal", lhsIsMaximal), LocatorUtils.property(thatLocator, "isMaximal", rhsIsMaximal), lhsIsMaximal, rhsIsMaximal, this.isSetIsMaximal(), that.isSetIsMaximal())) {
                 return false;
             }
         }
@@ -474,155 +537,193 @@ public class TopoComplexType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             TopoComplexMemberType theMaximalComplex;
             theMaximalComplex = this.getMaximalComplex();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "maximalComplex", theMaximalComplex), currentHashCode, theMaximalComplex);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "maximalComplex", theMaximalComplex), currentHashCode, theMaximalComplex, this.isSetMaximalComplex());
         }
         {
             List<TopoComplexMemberType> theSuperComplex;
-            theSuperComplex = this.getSuperComplex();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "superComplex", theSuperComplex), currentHashCode, theSuperComplex);
+            theSuperComplex = (this.isSetSuperComplex()?this.getSuperComplex():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "superComplex", theSuperComplex), currentHashCode, theSuperComplex, this.isSetSuperComplex());
         }
         {
             List<TopoComplexMemberType> theSubComplex;
-            theSubComplex = this.getSubComplex();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "subComplex", theSubComplex), currentHashCode, theSubComplex);
+            theSubComplex = (this.isSetSubComplex()?this.getSubComplex():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "subComplex", theSubComplex), currentHashCode, theSubComplex, this.isSetSubComplex());
         }
         {
             List<TopoPrimitiveMemberType> theTopoPrimitiveMember;
-            theTopoPrimitiveMember = this.getTopoPrimitiveMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "topoPrimitiveMember", theTopoPrimitiveMember), currentHashCode, theTopoPrimitiveMember);
+            theTopoPrimitiveMember = (this.isSetTopoPrimitiveMember()?this.getTopoPrimitiveMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "topoPrimitiveMember", theTopoPrimitiveMember), currentHashCode, theTopoPrimitiveMember, this.isSetTopoPrimitiveMember());
         }
         {
             TopoPrimitiveArrayAssociationType theTopoPrimitiveMembers;
             theTopoPrimitiveMembers = this.getTopoPrimitiveMembers();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "topoPrimitiveMembers", theTopoPrimitiveMembers), currentHashCode, theTopoPrimitiveMembers);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "topoPrimitiveMembers", theTopoPrimitiveMembers), currentHashCode, theTopoPrimitiveMembers, this.isSetTopoPrimitiveMembers());
         }
         {
             boolean theIsMaximal;
-            theIsMaximal = this.isIsMaximal();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "isMaximal", theIsMaximal), currentHashCode, theIsMaximal);
+            theIsMaximal = (this.isSetIsMaximal()?this.isIsMaximal():false);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "isMaximal", theIsMaximal), currentHashCode, theIsMaximal, this.isSetIsMaximal());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TopoComplexType) {
             final TopoComplexType copy = ((TopoComplexType) draftCopy);
-            if (this.isSetMaximalComplex()) {
-                TopoComplexMemberType sourceMaximalComplex;
-                sourceMaximalComplex = this.getMaximalComplex();
-                TopoComplexMemberType copyMaximalComplex = ((TopoComplexMemberType) strategy.copy(LocatorUtils.property(locator, "maximalComplex", sourceMaximalComplex), sourceMaximalComplex));
-                copy.setMaximalComplex(copyMaximalComplex);
-            } else {
-                copy.maximalComplex = null;
+            {
+                java.lang.Boolean maximalComplexShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMaximalComplex());
+                if (maximalComplexShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TopoComplexMemberType sourceMaximalComplex;
+                    sourceMaximalComplex = this.getMaximalComplex();
+                    TopoComplexMemberType copyMaximalComplex = ((TopoComplexMemberType) strategy.copy(LocatorUtils.property(locator, "maximalComplex", sourceMaximalComplex), sourceMaximalComplex, this.isSetMaximalComplex()));
+                    copy.setMaximalComplex(copyMaximalComplex);
+                } else {
+                    if (maximalComplexShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.maximalComplex = null;
+                    }
+                }
             }
-            if (this.isSetSuperComplex()) {
-                List<TopoComplexMemberType> sourceSuperComplex;
-                sourceSuperComplex = this.getSuperComplex();
-                @SuppressWarnings("unchecked")
-                List<TopoComplexMemberType> copySuperComplex = ((List<TopoComplexMemberType> ) strategy.copy(LocatorUtils.property(locator, "superComplex", sourceSuperComplex), sourceSuperComplex));
-                copy.unsetSuperComplex();
-                List<TopoComplexMemberType> uniqueSuperComplexl = copy.getSuperComplex();
-                uniqueSuperComplexl.addAll(copySuperComplex);
-            } else {
-                copy.unsetSuperComplex();
+            {
+                java.lang.Boolean superComplexShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSuperComplex());
+                if (superComplexShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<TopoComplexMemberType> sourceSuperComplex;
+                    sourceSuperComplex = (this.isSetSuperComplex()?this.getSuperComplex():null);
+                    @SuppressWarnings("unchecked")
+                    List<TopoComplexMemberType> copySuperComplex = ((List<TopoComplexMemberType> ) strategy.copy(LocatorUtils.property(locator, "superComplex", sourceSuperComplex), sourceSuperComplex, this.isSetSuperComplex()));
+                    copy.setSuperComplex(copySuperComplex);
+                } else {
+                    if (superComplexShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetSuperComplex();
+                    }
+                }
             }
-            if (this.isSetSubComplex()) {
-                List<TopoComplexMemberType> sourceSubComplex;
-                sourceSubComplex = this.getSubComplex();
-                @SuppressWarnings("unchecked")
-                List<TopoComplexMemberType> copySubComplex = ((List<TopoComplexMemberType> ) strategy.copy(LocatorUtils.property(locator, "subComplex", sourceSubComplex), sourceSubComplex));
-                copy.unsetSubComplex();
-                List<TopoComplexMemberType> uniqueSubComplexl = copy.getSubComplex();
-                uniqueSubComplexl.addAll(copySubComplex);
-            } else {
-                copy.unsetSubComplex();
+            {
+                java.lang.Boolean subComplexShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSubComplex());
+                if (subComplexShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<TopoComplexMemberType> sourceSubComplex;
+                    sourceSubComplex = (this.isSetSubComplex()?this.getSubComplex():null);
+                    @SuppressWarnings("unchecked")
+                    List<TopoComplexMemberType> copySubComplex = ((List<TopoComplexMemberType> ) strategy.copy(LocatorUtils.property(locator, "subComplex", sourceSubComplex), sourceSubComplex, this.isSetSubComplex()));
+                    copy.setSubComplex(copySubComplex);
+                } else {
+                    if (subComplexShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetSubComplex();
+                    }
+                }
             }
-            if (this.isSetTopoPrimitiveMember()) {
-                List<TopoPrimitiveMemberType> sourceTopoPrimitiveMember;
-                sourceTopoPrimitiveMember = this.getTopoPrimitiveMember();
-                @SuppressWarnings("unchecked")
-                List<TopoPrimitiveMemberType> copyTopoPrimitiveMember = ((List<TopoPrimitiveMemberType> ) strategy.copy(LocatorUtils.property(locator, "topoPrimitiveMember", sourceTopoPrimitiveMember), sourceTopoPrimitiveMember));
-                copy.unsetTopoPrimitiveMember();
-                List<TopoPrimitiveMemberType> uniqueTopoPrimitiveMemberl = copy.getTopoPrimitiveMember();
-                uniqueTopoPrimitiveMemberl.addAll(copyTopoPrimitiveMember);
-            } else {
-                copy.unsetTopoPrimitiveMember();
+            {
+                java.lang.Boolean topoPrimitiveMemberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTopoPrimitiveMember());
+                if (topoPrimitiveMemberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<TopoPrimitiveMemberType> sourceTopoPrimitiveMember;
+                    sourceTopoPrimitiveMember = (this.isSetTopoPrimitiveMember()?this.getTopoPrimitiveMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<TopoPrimitiveMemberType> copyTopoPrimitiveMember = ((List<TopoPrimitiveMemberType> ) strategy.copy(LocatorUtils.property(locator, "topoPrimitiveMember", sourceTopoPrimitiveMember), sourceTopoPrimitiveMember, this.isSetTopoPrimitiveMember()));
+                    copy.setTopoPrimitiveMember(copyTopoPrimitiveMember);
+                } else {
+                    if (topoPrimitiveMemberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetTopoPrimitiveMember();
+                    }
+                }
             }
-            if (this.isSetTopoPrimitiveMembers()) {
-                TopoPrimitiveArrayAssociationType sourceTopoPrimitiveMembers;
-                sourceTopoPrimitiveMembers = this.getTopoPrimitiveMembers();
-                TopoPrimitiveArrayAssociationType copyTopoPrimitiveMembers = ((TopoPrimitiveArrayAssociationType) strategy.copy(LocatorUtils.property(locator, "topoPrimitiveMembers", sourceTopoPrimitiveMembers), sourceTopoPrimitiveMembers));
-                copy.setTopoPrimitiveMembers(copyTopoPrimitiveMembers);
-            } else {
-                copy.topoPrimitiveMembers = null;
+            {
+                java.lang.Boolean topoPrimitiveMembersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTopoPrimitiveMembers());
+                if (topoPrimitiveMembersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TopoPrimitiveArrayAssociationType sourceTopoPrimitiveMembers;
+                    sourceTopoPrimitiveMembers = this.getTopoPrimitiveMembers();
+                    TopoPrimitiveArrayAssociationType copyTopoPrimitiveMembers = ((TopoPrimitiveArrayAssociationType) strategy.copy(LocatorUtils.property(locator, "topoPrimitiveMembers", sourceTopoPrimitiveMembers), sourceTopoPrimitiveMembers, this.isSetTopoPrimitiveMembers()));
+                    copy.setTopoPrimitiveMembers(copyTopoPrimitiveMembers);
+                } else {
+                    if (topoPrimitiveMembersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.topoPrimitiveMembers = null;
+                    }
+                }
             }
-            if (this.isSetIsMaximal()) {
-                boolean sourceIsMaximal;
-                sourceIsMaximal = this.isIsMaximal();
-                boolean copyIsMaximal = strategy.copy(LocatorUtils.property(locator, "isMaximal", sourceIsMaximal), sourceIsMaximal);
-                copy.setIsMaximal(copyIsMaximal);
-            } else {
-                copy.unsetIsMaximal();
+            {
+                java.lang.Boolean isMaximalShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetIsMaximal());
+                if (isMaximalShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    boolean sourceIsMaximal;
+                    sourceIsMaximal = (this.isSetIsMaximal()?this.isIsMaximal():false);
+                    boolean copyIsMaximal = strategy.copy(LocatorUtils.property(locator, "isMaximal", sourceIsMaximal), sourceIsMaximal, this.isSetIsMaximal());
+                    copy.setIsMaximal(copyIsMaximal);
+                } else {
+                    if (isMaximalShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetIsMaximal();
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TopoComplexType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TopoComplexType) {
@@ -630,231 +731,111 @@ public class TopoComplexType
             final TopoComplexType leftObject = ((TopoComplexType) left);
             final TopoComplexType rightObject = ((TopoComplexType) right);
             {
-                TopoComplexMemberType lhsMaximalComplex;
-                lhsMaximalComplex = leftObject.getMaximalComplex();
-                TopoComplexMemberType rhsMaximalComplex;
-                rhsMaximalComplex = rightObject.getMaximalComplex();
-                target.setMaximalComplex(((TopoComplexMemberType) strategy.merge(LocatorUtils.property(leftLocator, "maximalComplex", lhsMaximalComplex), LocatorUtils.property(rightLocator, "maximalComplex", rhsMaximalComplex), lhsMaximalComplex, rhsMaximalComplex)));
+                java.lang.Boolean maximalComplexShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMaximalComplex(), rightObject.isSetMaximalComplex());
+                if (maximalComplexShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TopoComplexMemberType lhsMaximalComplex;
+                    lhsMaximalComplex = leftObject.getMaximalComplex();
+                    TopoComplexMemberType rhsMaximalComplex;
+                    rhsMaximalComplex = rightObject.getMaximalComplex();
+                    TopoComplexMemberType mergedMaximalComplex = ((TopoComplexMemberType) strategy.merge(LocatorUtils.property(leftLocator, "maximalComplex", lhsMaximalComplex), LocatorUtils.property(rightLocator, "maximalComplex", rhsMaximalComplex), lhsMaximalComplex, rhsMaximalComplex, leftObject.isSetMaximalComplex(), rightObject.isSetMaximalComplex()));
+                    target.setMaximalComplex(mergedMaximalComplex);
+                } else {
+                    if (maximalComplexShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.maximalComplex = null;
+                    }
+                }
             }
             {
-                List<TopoComplexMemberType> lhsSuperComplex;
-                lhsSuperComplex = leftObject.getSuperComplex();
-                List<TopoComplexMemberType> rhsSuperComplex;
-                rhsSuperComplex = rightObject.getSuperComplex();
-                target.unsetSuperComplex();
-                List<TopoComplexMemberType> uniqueSuperComplexl = target.getSuperComplex();
-                uniqueSuperComplexl.addAll(((List<TopoComplexMemberType> ) strategy.merge(LocatorUtils.property(leftLocator, "superComplex", lhsSuperComplex), LocatorUtils.property(rightLocator, "superComplex", rhsSuperComplex), lhsSuperComplex, rhsSuperComplex)));
+                java.lang.Boolean superComplexShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSuperComplex(), rightObject.isSetSuperComplex());
+                if (superComplexShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<TopoComplexMemberType> lhsSuperComplex;
+                    lhsSuperComplex = (leftObject.isSetSuperComplex()?leftObject.getSuperComplex():null);
+                    List<TopoComplexMemberType> rhsSuperComplex;
+                    rhsSuperComplex = (rightObject.isSetSuperComplex()?rightObject.getSuperComplex():null);
+                    List<TopoComplexMemberType> mergedSuperComplex = ((List<TopoComplexMemberType> ) strategy.merge(LocatorUtils.property(leftLocator, "superComplex", lhsSuperComplex), LocatorUtils.property(rightLocator, "superComplex", rhsSuperComplex), lhsSuperComplex, rhsSuperComplex, leftObject.isSetSuperComplex(), rightObject.isSetSuperComplex()));
+                    target.setSuperComplex(mergedSuperComplex);
+                } else {
+                    if (superComplexShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetSuperComplex();
+                    }
+                }
             }
             {
-                List<TopoComplexMemberType> lhsSubComplex;
-                lhsSubComplex = leftObject.getSubComplex();
-                List<TopoComplexMemberType> rhsSubComplex;
-                rhsSubComplex = rightObject.getSubComplex();
-                target.unsetSubComplex();
-                List<TopoComplexMemberType> uniqueSubComplexl = target.getSubComplex();
-                uniqueSubComplexl.addAll(((List<TopoComplexMemberType> ) strategy.merge(LocatorUtils.property(leftLocator, "subComplex", lhsSubComplex), LocatorUtils.property(rightLocator, "subComplex", rhsSubComplex), lhsSubComplex, rhsSubComplex)));
+                java.lang.Boolean subComplexShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSubComplex(), rightObject.isSetSubComplex());
+                if (subComplexShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<TopoComplexMemberType> lhsSubComplex;
+                    lhsSubComplex = (leftObject.isSetSubComplex()?leftObject.getSubComplex():null);
+                    List<TopoComplexMemberType> rhsSubComplex;
+                    rhsSubComplex = (rightObject.isSetSubComplex()?rightObject.getSubComplex():null);
+                    List<TopoComplexMemberType> mergedSubComplex = ((List<TopoComplexMemberType> ) strategy.merge(LocatorUtils.property(leftLocator, "subComplex", lhsSubComplex), LocatorUtils.property(rightLocator, "subComplex", rhsSubComplex), lhsSubComplex, rhsSubComplex, leftObject.isSetSubComplex(), rightObject.isSetSubComplex()));
+                    target.setSubComplex(mergedSubComplex);
+                } else {
+                    if (subComplexShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetSubComplex();
+                    }
+                }
             }
             {
-                List<TopoPrimitiveMemberType> lhsTopoPrimitiveMember;
-                lhsTopoPrimitiveMember = leftObject.getTopoPrimitiveMember();
-                List<TopoPrimitiveMemberType> rhsTopoPrimitiveMember;
-                rhsTopoPrimitiveMember = rightObject.getTopoPrimitiveMember();
-                target.unsetTopoPrimitiveMember();
-                List<TopoPrimitiveMemberType> uniqueTopoPrimitiveMemberl = target.getTopoPrimitiveMember();
-                uniqueTopoPrimitiveMemberl.addAll(((List<TopoPrimitiveMemberType> ) strategy.merge(LocatorUtils.property(leftLocator, "topoPrimitiveMember", lhsTopoPrimitiveMember), LocatorUtils.property(rightLocator, "topoPrimitiveMember", rhsTopoPrimitiveMember), lhsTopoPrimitiveMember, rhsTopoPrimitiveMember)));
+                java.lang.Boolean topoPrimitiveMemberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTopoPrimitiveMember(), rightObject.isSetTopoPrimitiveMember());
+                if (topoPrimitiveMemberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<TopoPrimitiveMemberType> lhsTopoPrimitiveMember;
+                    lhsTopoPrimitiveMember = (leftObject.isSetTopoPrimitiveMember()?leftObject.getTopoPrimitiveMember():null);
+                    List<TopoPrimitiveMemberType> rhsTopoPrimitiveMember;
+                    rhsTopoPrimitiveMember = (rightObject.isSetTopoPrimitiveMember()?rightObject.getTopoPrimitiveMember():null);
+                    List<TopoPrimitiveMemberType> mergedTopoPrimitiveMember = ((List<TopoPrimitiveMemberType> ) strategy.merge(LocatorUtils.property(leftLocator, "topoPrimitiveMember", lhsTopoPrimitiveMember), LocatorUtils.property(rightLocator, "topoPrimitiveMember", rhsTopoPrimitiveMember), lhsTopoPrimitiveMember, rhsTopoPrimitiveMember, leftObject.isSetTopoPrimitiveMember(), rightObject.isSetTopoPrimitiveMember()));
+                    target.setTopoPrimitiveMember(mergedTopoPrimitiveMember);
+                } else {
+                    if (topoPrimitiveMemberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetTopoPrimitiveMember();
+                    }
+                }
             }
             {
-                TopoPrimitiveArrayAssociationType lhsTopoPrimitiveMembers;
-                lhsTopoPrimitiveMembers = leftObject.getTopoPrimitiveMembers();
-                TopoPrimitiveArrayAssociationType rhsTopoPrimitiveMembers;
-                rhsTopoPrimitiveMembers = rightObject.getTopoPrimitiveMembers();
-                target.setTopoPrimitiveMembers(((TopoPrimitiveArrayAssociationType) strategy.merge(LocatorUtils.property(leftLocator, "topoPrimitiveMembers", lhsTopoPrimitiveMembers), LocatorUtils.property(rightLocator, "topoPrimitiveMembers", rhsTopoPrimitiveMembers), lhsTopoPrimitiveMembers, rhsTopoPrimitiveMembers)));
+                java.lang.Boolean topoPrimitiveMembersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTopoPrimitiveMembers(), rightObject.isSetTopoPrimitiveMembers());
+                if (topoPrimitiveMembersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TopoPrimitiveArrayAssociationType lhsTopoPrimitiveMembers;
+                    lhsTopoPrimitiveMembers = leftObject.getTopoPrimitiveMembers();
+                    TopoPrimitiveArrayAssociationType rhsTopoPrimitiveMembers;
+                    rhsTopoPrimitiveMembers = rightObject.getTopoPrimitiveMembers();
+                    TopoPrimitiveArrayAssociationType mergedTopoPrimitiveMembers = ((TopoPrimitiveArrayAssociationType) strategy.merge(LocatorUtils.property(leftLocator, "topoPrimitiveMembers", lhsTopoPrimitiveMembers), LocatorUtils.property(rightLocator, "topoPrimitiveMembers", rhsTopoPrimitiveMembers), lhsTopoPrimitiveMembers, rhsTopoPrimitiveMembers, leftObject.isSetTopoPrimitiveMembers(), rightObject.isSetTopoPrimitiveMembers()));
+                    target.setTopoPrimitiveMembers(mergedTopoPrimitiveMembers);
+                } else {
+                    if (topoPrimitiveMembersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.topoPrimitiveMembers = null;
+                    }
+                }
             }
             {
-                boolean lhsIsMaximal;
-                lhsIsMaximal = leftObject.isIsMaximal();
-                boolean rhsIsMaximal;
-                rhsIsMaximal = rightObject.isIsMaximal();
-                target.setIsMaximal(((boolean) strategy.merge(LocatorUtils.property(leftLocator, "isMaximal", lhsIsMaximal), LocatorUtils.property(rightLocator, "isMaximal", rhsIsMaximal), lhsIsMaximal, rhsIsMaximal)));
+                java.lang.Boolean isMaximalShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetIsMaximal(), rightObject.isSetIsMaximal());
+                if (isMaximalShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    boolean lhsIsMaximal;
+                    lhsIsMaximal = (leftObject.isSetIsMaximal()?leftObject.isIsMaximal():false);
+                    boolean rhsIsMaximal;
+                    rhsIsMaximal = (rightObject.isSetIsMaximal()?rightObject.isIsMaximal():false);
+                    boolean mergedIsMaximal = ((boolean) strategy.merge(LocatorUtils.property(leftLocator, "isMaximal", lhsIsMaximal), LocatorUtils.property(rightLocator, "isMaximal", rhsIsMaximal), lhsIsMaximal, rhsIsMaximal, leftObject.isSetIsMaximal(), rightObject.isSetIsMaximal()));
+                    target.setIsMaximal(mergedIsMaximal);
+                } else {
+                    if (isMaximalShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetIsMaximal();
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setSuperComplex(List<TopoComplexMemberType> value) {
-        List<TopoComplexMemberType> draftl = this.getSuperComplex();
-        draftl.addAll(value);
-    }
-
-    public void setSubComplex(List<TopoComplexMemberType> value) {
-        List<TopoComplexMemberType> draftl = this.getSubComplex();
-        draftl.addAll(value);
-    }
-
-    public void setTopoPrimitiveMember(List<TopoPrimitiveMemberType> value) {
-        List<TopoPrimitiveMemberType> draftl = this.getTopoPrimitiveMember();
-        draftl.addAll(value);
-    }
-
-    public TopoComplexType withMaximalComplex(TopoComplexMemberType value) {
-        setMaximalComplex(value);
-        return this;
-    }
-
-    public TopoComplexType withSuperComplex(TopoComplexMemberType... values) {
-        if (values!= null) {
-            for (TopoComplexMemberType value: values) {
-                getSuperComplex().add(value);
-            }
-        }
-        return this;
-    }
-
-    public TopoComplexType withSuperComplex(Collection<TopoComplexMemberType> values) {
-        if (values!= null) {
-            getSuperComplex().addAll(values);
-        }
-        return this;
-    }
-
-    public TopoComplexType withSubComplex(TopoComplexMemberType... values) {
-        if (values!= null) {
-            for (TopoComplexMemberType value: values) {
-                getSubComplex().add(value);
-            }
-        }
-        return this;
-    }
-
-    public TopoComplexType withSubComplex(Collection<TopoComplexMemberType> values) {
-        if (values!= null) {
-            getSubComplex().addAll(values);
-        }
-        return this;
-    }
-
-    public TopoComplexType withTopoPrimitiveMember(TopoPrimitiveMemberType... values) {
-        if (values!= null) {
-            for (TopoPrimitiveMemberType value: values) {
-                getTopoPrimitiveMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public TopoComplexType withTopoPrimitiveMember(Collection<TopoPrimitiveMemberType> values) {
-        if (values!= null) {
-            getTopoPrimitiveMember().addAll(values);
-        }
-        return this;
-    }
-
-    public TopoComplexType withTopoPrimitiveMembers(TopoPrimitiveArrayAssociationType value) {
-        setTopoPrimitiveMembers(value);
-        return this;
-    }
-
-    public TopoComplexType withIsMaximal(boolean value) {
-        setIsMaximal(value);
-        return this;
-    }
-
-    public TopoComplexType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public TopoComplexType withSuperComplex(List<TopoComplexMemberType> value) {
-        setSuperComplex(value);
-        return this;
-    }
-
-    public TopoComplexType withSubComplex(List<TopoComplexMemberType> value) {
-        setSubComplex(value);
-        return this;
-    }
-
-    public TopoComplexType withTopoPrimitiveMember(List<TopoPrimitiveMemberType> value) {
-        setTopoPrimitiveMember(value);
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TopoComplexType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

@@ -34,62 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimeClockType complex type.
+ * <p>Classe Java per TimeClockType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimeClockType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}TimeReferenceSystemType">
- *       &lt;sequence>
- *         &lt;element name="referenceEvent" type="{http://www.opengis.net/gml}StringOrRefType"/>
- *         &lt;element name="referenceTime" type="{http://www.w3.org/2001/XMLSchema}time"/>
- *         &lt;element name="utcReference" type="{http://www.w3.org/2001/XMLSchema}time"/>
- *         &lt;element name="dateBasis" type="{http://www.opengis.net/gml}TimeCalendarPropertyType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimeClockType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}TimeReferenceSystemType">
+ *       <sequence>
+ *         <element name="referenceEvent" type="{http://www.opengis.net/gml}StringOrRefType"/>
+ *         <element name="referenceTime" type="{http://www.w3.org/2001/XMLSchema}time"/>
+ *         <element name="utcReference" type="{http://www.w3.org/2001/XMLSchema}time"/>
+ *         <element name="dateBasis" type="{http://www.opengis.net/gml}TimeCalendarPropertyType" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -202,28 +200,31 @@ public class TimeClockType
     /**
      * Gets the value of the dateBasis property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dateBasis property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the dateBasis property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDateBasis().add(newItem);
+     * getDateBasis().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TimeCalendarPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the dateBasis property.
      */
     public List<TimeCalendarPropertyType> getDateBasis() {
         if (dateBasis == null) {
-            dateBasis = new ArrayList<TimeCalendarPropertyType>();
+            dateBasis = new ArrayList<>();
         }
         return this.dateBasis;
     }
@@ -236,13 +237,15 @@ public class TimeClockType
         this.dateBasis = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -250,33 +253,43 @@ public class TimeClockType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             StringOrRefType theReferenceEvent;
             theReferenceEvent = this.getReferenceEvent();
-            strategy.appendField(locator, this, "referenceEvent", buffer, theReferenceEvent);
+            strategy.appendField(locator, this, "referenceEvent", buffer, theReferenceEvent, this.isSetReferenceEvent());
         }
         {
             XMLGregorianCalendar theReferenceTime;
             theReferenceTime = this.getReferenceTime();
-            strategy.appendField(locator, this, "referenceTime", buffer, theReferenceTime);
+            strategy.appendField(locator, this, "referenceTime", buffer, theReferenceTime, this.isSetReferenceTime());
         }
         {
             XMLGregorianCalendar theUtcReference;
             theUtcReference = this.getUtcReference();
-            strategy.appendField(locator, this, "utcReference", buffer, theUtcReference);
+            strategy.appendField(locator, this, "utcReference", buffer, theUtcReference, this.isSetUtcReference());
         }
         {
             List<TimeCalendarPropertyType> theDateBasis;
-            theDateBasis = this.getDateBasis();
-            strategy.appendField(locator, this, "dateBasis", buffer, theDateBasis);
+            theDateBasis = (this.isSetDateBasis()?this.getDateBasis():null);
+            strategy.appendField(locator, this, "dateBasis", buffer, theDateBasis, this.isSetDateBasis());
         }
         return buffer;
     }
 
+    public void setDateBasis(List<TimeCalendarPropertyType> value) {
+        this.dateBasis = null;
+        if (value!= null) {
+            List<TimeCalendarPropertyType> draftl = this.getDateBasis();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimeClockType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -291,7 +304,7 @@ public class TimeClockType
             lhsReferenceEvent = this.getReferenceEvent();
             StringOrRefType rhsReferenceEvent;
             rhsReferenceEvent = that.getReferenceEvent();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "referenceEvent", lhsReferenceEvent), LocatorUtils.property(thatLocator, "referenceEvent", rhsReferenceEvent), lhsReferenceEvent, rhsReferenceEvent)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "referenceEvent", lhsReferenceEvent), LocatorUtils.property(thatLocator, "referenceEvent", rhsReferenceEvent), lhsReferenceEvent, rhsReferenceEvent, this.isSetReferenceEvent(), that.isSetReferenceEvent())) {
                 return false;
             }
         }
@@ -300,7 +313,7 @@ public class TimeClockType
             lhsReferenceTime = this.getReferenceTime();
             XMLGregorianCalendar rhsReferenceTime;
             rhsReferenceTime = that.getReferenceTime();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "referenceTime", lhsReferenceTime), LocatorUtils.property(thatLocator, "referenceTime", rhsReferenceTime), lhsReferenceTime, rhsReferenceTime)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "referenceTime", lhsReferenceTime), LocatorUtils.property(thatLocator, "referenceTime", rhsReferenceTime), lhsReferenceTime, rhsReferenceTime, this.isSetReferenceTime(), that.isSetReferenceTime())) {
                 return false;
             }
         }
@@ -309,119 +322,146 @@ public class TimeClockType
             lhsUtcReference = this.getUtcReference();
             XMLGregorianCalendar rhsUtcReference;
             rhsUtcReference = that.getUtcReference();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "utcReference", lhsUtcReference), LocatorUtils.property(thatLocator, "utcReference", rhsUtcReference), lhsUtcReference, rhsUtcReference)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "utcReference", lhsUtcReference), LocatorUtils.property(thatLocator, "utcReference", rhsUtcReference), lhsUtcReference, rhsUtcReference, this.isSetUtcReference(), that.isSetUtcReference())) {
                 return false;
             }
         }
         {
             List<TimeCalendarPropertyType> lhsDateBasis;
-            lhsDateBasis = this.getDateBasis();
+            lhsDateBasis = (this.isSetDateBasis()?this.getDateBasis():null);
             List<TimeCalendarPropertyType> rhsDateBasis;
-            rhsDateBasis = that.getDateBasis();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "dateBasis", lhsDateBasis), LocatorUtils.property(thatLocator, "dateBasis", rhsDateBasis), lhsDateBasis, rhsDateBasis)) {
+            rhsDateBasis = (that.isSetDateBasis()?that.getDateBasis():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "dateBasis", lhsDateBasis), LocatorUtils.property(thatLocator, "dateBasis", rhsDateBasis), lhsDateBasis, rhsDateBasis, this.isSetDateBasis(), that.isSetDateBasis())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             StringOrRefType theReferenceEvent;
             theReferenceEvent = this.getReferenceEvent();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "referenceEvent", theReferenceEvent), currentHashCode, theReferenceEvent);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "referenceEvent", theReferenceEvent), currentHashCode, theReferenceEvent, this.isSetReferenceEvent());
         }
         {
             XMLGregorianCalendar theReferenceTime;
             theReferenceTime = this.getReferenceTime();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "referenceTime", theReferenceTime), currentHashCode, theReferenceTime);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "referenceTime", theReferenceTime), currentHashCode, theReferenceTime, this.isSetReferenceTime());
         }
         {
             XMLGregorianCalendar theUtcReference;
             theUtcReference = this.getUtcReference();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "utcReference", theUtcReference), currentHashCode, theUtcReference);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "utcReference", theUtcReference), currentHashCode, theUtcReference, this.isSetUtcReference());
         }
         {
             List<TimeCalendarPropertyType> theDateBasis;
-            theDateBasis = this.getDateBasis();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dateBasis", theDateBasis), currentHashCode, theDateBasis);
+            theDateBasis = (this.isSetDateBasis()?this.getDateBasis():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dateBasis", theDateBasis), currentHashCode, theDateBasis, this.isSetDateBasis());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TimeClockType) {
             final TimeClockType copy = ((TimeClockType) draftCopy);
-            if (this.isSetReferenceEvent()) {
-                StringOrRefType sourceReferenceEvent;
-                sourceReferenceEvent = this.getReferenceEvent();
-                StringOrRefType copyReferenceEvent = ((StringOrRefType) strategy.copy(LocatorUtils.property(locator, "referenceEvent", sourceReferenceEvent), sourceReferenceEvent));
-                copy.setReferenceEvent(copyReferenceEvent);
-            } else {
-                copy.referenceEvent = null;
+            {
+                java.lang.Boolean referenceEventShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetReferenceEvent());
+                if (referenceEventShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    StringOrRefType sourceReferenceEvent;
+                    sourceReferenceEvent = this.getReferenceEvent();
+                    StringOrRefType copyReferenceEvent = ((StringOrRefType) strategy.copy(LocatorUtils.property(locator, "referenceEvent", sourceReferenceEvent), sourceReferenceEvent, this.isSetReferenceEvent()));
+                    copy.setReferenceEvent(copyReferenceEvent);
+                } else {
+                    if (referenceEventShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.referenceEvent = null;
+                    }
+                }
             }
-            if (this.isSetReferenceTime()) {
-                XMLGregorianCalendar sourceReferenceTime;
-                sourceReferenceTime = this.getReferenceTime();
-                XMLGregorianCalendar copyReferenceTime = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "referenceTime", sourceReferenceTime), sourceReferenceTime));
-                copy.setReferenceTime(copyReferenceTime);
-            } else {
-                copy.referenceTime = null;
+            {
+                java.lang.Boolean referenceTimeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetReferenceTime());
+                if (referenceTimeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar sourceReferenceTime;
+                    sourceReferenceTime = this.getReferenceTime();
+                    XMLGregorianCalendar copyReferenceTime = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "referenceTime", sourceReferenceTime), sourceReferenceTime, this.isSetReferenceTime()));
+                    copy.setReferenceTime(copyReferenceTime);
+                } else {
+                    if (referenceTimeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.referenceTime = null;
+                    }
+                }
             }
-            if (this.isSetUtcReference()) {
-                XMLGregorianCalendar sourceUtcReference;
-                sourceUtcReference = this.getUtcReference();
-                XMLGregorianCalendar copyUtcReference = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "utcReference", sourceUtcReference), sourceUtcReference));
-                copy.setUtcReference(copyUtcReference);
-            } else {
-                copy.utcReference = null;
+            {
+                java.lang.Boolean utcReferenceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUtcReference());
+                if (utcReferenceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar sourceUtcReference;
+                    sourceUtcReference = this.getUtcReference();
+                    XMLGregorianCalendar copyUtcReference = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "utcReference", sourceUtcReference), sourceUtcReference, this.isSetUtcReference()));
+                    copy.setUtcReference(copyUtcReference);
+                } else {
+                    if (utcReferenceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.utcReference = null;
+                    }
+                }
             }
-            if (this.isSetDateBasis()) {
-                List<TimeCalendarPropertyType> sourceDateBasis;
-                sourceDateBasis = this.getDateBasis();
-                @SuppressWarnings("unchecked")
-                List<TimeCalendarPropertyType> copyDateBasis = ((List<TimeCalendarPropertyType> ) strategy.copy(LocatorUtils.property(locator, "dateBasis", sourceDateBasis), sourceDateBasis));
-                copy.unsetDateBasis();
-                List<TimeCalendarPropertyType> uniqueDateBasisl = copy.getDateBasis();
-                uniqueDateBasisl.addAll(copyDateBasis);
-            } else {
-                copy.unsetDateBasis();
+            {
+                java.lang.Boolean dateBasisShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDateBasis());
+                if (dateBasisShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<TimeCalendarPropertyType> sourceDateBasis;
+                    sourceDateBasis = (this.isSetDateBasis()?this.getDateBasis():null);
+                    @SuppressWarnings("unchecked")
+                    List<TimeCalendarPropertyType> copyDateBasis = ((List<TimeCalendarPropertyType> ) strategy.copy(LocatorUtils.property(locator, "dateBasis", sourceDateBasis), sourceDateBasis, this.isSetDateBasis()));
+                    copy.setDateBasis(copyDateBasis);
+                } else {
+                    if (dateBasisShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetDateBasis();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TimeClockType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TimeClockType) {
@@ -429,161 +469,66 @@ public class TimeClockType
             final TimeClockType leftObject = ((TimeClockType) left);
             final TimeClockType rightObject = ((TimeClockType) right);
             {
-                StringOrRefType lhsReferenceEvent;
-                lhsReferenceEvent = leftObject.getReferenceEvent();
-                StringOrRefType rhsReferenceEvent;
-                rhsReferenceEvent = rightObject.getReferenceEvent();
-                target.setReferenceEvent(((StringOrRefType) strategy.merge(LocatorUtils.property(leftLocator, "referenceEvent", lhsReferenceEvent), LocatorUtils.property(rightLocator, "referenceEvent", rhsReferenceEvent), lhsReferenceEvent, rhsReferenceEvent)));
+                java.lang.Boolean referenceEventShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetReferenceEvent(), rightObject.isSetReferenceEvent());
+                if (referenceEventShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    StringOrRefType lhsReferenceEvent;
+                    lhsReferenceEvent = leftObject.getReferenceEvent();
+                    StringOrRefType rhsReferenceEvent;
+                    rhsReferenceEvent = rightObject.getReferenceEvent();
+                    StringOrRefType mergedReferenceEvent = ((StringOrRefType) strategy.merge(LocatorUtils.property(leftLocator, "referenceEvent", lhsReferenceEvent), LocatorUtils.property(rightLocator, "referenceEvent", rhsReferenceEvent), lhsReferenceEvent, rhsReferenceEvent, leftObject.isSetReferenceEvent(), rightObject.isSetReferenceEvent()));
+                    target.setReferenceEvent(mergedReferenceEvent);
+                } else {
+                    if (referenceEventShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.referenceEvent = null;
+                    }
+                }
             }
             {
-                XMLGregorianCalendar lhsReferenceTime;
-                lhsReferenceTime = leftObject.getReferenceTime();
-                XMLGregorianCalendar rhsReferenceTime;
-                rhsReferenceTime = rightObject.getReferenceTime();
-                target.setReferenceTime(((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "referenceTime", lhsReferenceTime), LocatorUtils.property(rightLocator, "referenceTime", rhsReferenceTime), lhsReferenceTime, rhsReferenceTime)));
+                java.lang.Boolean referenceTimeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetReferenceTime(), rightObject.isSetReferenceTime());
+                if (referenceTimeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar lhsReferenceTime;
+                    lhsReferenceTime = leftObject.getReferenceTime();
+                    XMLGregorianCalendar rhsReferenceTime;
+                    rhsReferenceTime = rightObject.getReferenceTime();
+                    XMLGregorianCalendar mergedReferenceTime = ((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "referenceTime", lhsReferenceTime), LocatorUtils.property(rightLocator, "referenceTime", rhsReferenceTime), lhsReferenceTime, rhsReferenceTime, leftObject.isSetReferenceTime(), rightObject.isSetReferenceTime()));
+                    target.setReferenceTime(mergedReferenceTime);
+                } else {
+                    if (referenceTimeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.referenceTime = null;
+                    }
+                }
             }
             {
-                XMLGregorianCalendar lhsUtcReference;
-                lhsUtcReference = leftObject.getUtcReference();
-                XMLGregorianCalendar rhsUtcReference;
-                rhsUtcReference = rightObject.getUtcReference();
-                target.setUtcReference(((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "utcReference", lhsUtcReference), LocatorUtils.property(rightLocator, "utcReference", rhsUtcReference), lhsUtcReference, rhsUtcReference)));
+                java.lang.Boolean utcReferenceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUtcReference(), rightObject.isSetUtcReference());
+                if (utcReferenceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar lhsUtcReference;
+                    lhsUtcReference = leftObject.getUtcReference();
+                    XMLGregorianCalendar rhsUtcReference;
+                    rhsUtcReference = rightObject.getUtcReference();
+                    XMLGregorianCalendar mergedUtcReference = ((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "utcReference", lhsUtcReference), LocatorUtils.property(rightLocator, "utcReference", rhsUtcReference), lhsUtcReference, rhsUtcReference, leftObject.isSetUtcReference(), rightObject.isSetUtcReference()));
+                    target.setUtcReference(mergedUtcReference);
+                } else {
+                    if (utcReferenceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.utcReference = null;
+                    }
+                }
             }
             {
-                List<TimeCalendarPropertyType> lhsDateBasis;
-                lhsDateBasis = leftObject.getDateBasis();
-                List<TimeCalendarPropertyType> rhsDateBasis;
-                rhsDateBasis = rightObject.getDateBasis();
-                target.unsetDateBasis();
-                List<TimeCalendarPropertyType> uniqueDateBasisl = target.getDateBasis();
-                uniqueDateBasisl.addAll(((List<TimeCalendarPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "dateBasis", lhsDateBasis), LocatorUtils.property(rightLocator, "dateBasis", rhsDateBasis), lhsDateBasis, rhsDateBasis)));
+                java.lang.Boolean dateBasisShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDateBasis(), rightObject.isSetDateBasis());
+                if (dateBasisShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<TimeCalendarPropertyType> lhsDateBasis;
+                    lhsDateBasis = (leftObject.isSetDateBasis()?leftObject.getDateBasis():null);
+                    List<TimeCalendarPropertyType> rhsDateBasis;
+                    rhsDateBasis = (rightObject.isSetDateBasis()?rightObject.getDateBasis():null);
+                    List<TimeCalendarPropertyType> mergedDateBasis = ((List<TimeCalendarPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "dateBasis", lhsDateBasis), LocatorUtils.property(rightLocator, "dateBasis", rhsDateBasis), lhsDateBasis, rhsDateBasis, leftObject.isSetDateBasis(), rightObject.isSetDateBasis()));
+                    target.setDateBasis(mergedDateBasis);
+                } else {
+                    if (dateBasisShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetDateBasis();
+                    }
+                }
             }
         }
-    }
-
-    public void setDateBasis(List<TimeCalendarPropertyType> value) {
-        List<TimeCalendarPropertyType> draftl = this.getDateBasis();
-        draftl.addAll(value);
-    }
-
-    public TimeClockType withReferenceEvent(StringOrRefType value) {
-        setReferenceEvent(value);
-        return this;
-    }
-
-    public TimeClockType withReferenceTime(XMLGregorianCalendar value) {
-        setReferenceTime(value);
-        return this;
-    }
-
-    public TimeClockType withUtcReference(XMLGregorianCalendar value) {
-        setUtcReference(value);
-        return this;
-    }
-
-    public TimeClockType withDateBasis(TimeCalendarPropertyType... values) {
-        if (values!= null) {
-            for (TimeCalendarPropertyType value: values) {
-                getDateBasis().add(value);
-            }
-        }
-        return this;
-    }
-
-    public TimeClockType withDateBasis(Collection<TimeCalendarPropertyType> values) {
-        if (values!= null) {
-            getDateBasis().addAll(values);
-        }
-        return this;
-    }
-
-    public TimeClockType withDateBasis(List<TimeCalendarPropertyType> value) {
-        setDateBasis(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withDomainOfValidity(String value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeClockType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeClockType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeClockType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeClockType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TimeClockType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

@@ -34,66 +34,64 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per EnvelopeType complex type.
+ * <p>Classe Java per EnvelopeType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="EnvelopeType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;sequence>
- *           &lt;element name="lowerCorner" type="{http://www.opengis.net/gml}DirectPositionType"/>
- *           &lt;element name="upperCorner" type="{http://www.opengis.net/gml}DirectPositionType"/>
- *         &lt;/sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}pos" maxOccurs="2" minOccurs="2"/>
- *         &lt;element ref="{http://www.opengis.net/gml}coordinates"/>
- *       &lt;/choice>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}SRSReferenceGroup"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="EnvelopeType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <sequence>
+ *           <element name="lowerCorner" type="{http://www.opengis.net/gml}DirectPositionType"/>
+ *           <element name="upperCorner" type="{http://www.opengis.net/gml}DirectPositionType"/>
+ *         </sequence>
+ *         <element ref="{http://www.opengis.net/gml}pos" maxOccurs="2" minOccurs="2"/>
+ *         <element ref="{http://www.opengis.net/gml}coordinates"/>
+ *       </choice>
+ *       <attGroup ref="{http://www.opengis.net/gml}SRSReferenceGroup"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -184,28 +182,31 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
     /**
      * Gets the value of the pos property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pos property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the pos property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getPos().add(newItem);
+     * getPos().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DirectPositionType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the pos property.
      */
     public List<DirectPositionType> getPos() {
         if (pos == null) {
-            pos = new ArrayList<DirectPositionType>();
+            pos = new ArrayList<>();
         }
         return this.pos;
     }
@@ -305,28 +306,31 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
     /**
      * Gets the value of the axisLabels property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the axisLabels property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the axisLabels property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAxisLabels().add(newItem);
+     * getAxisLabels().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the axisLabels property.
      */
     public List<String> getAxisLabels() {
         if (axisLabels == null) {
-            axisLabels = new ArrayList<String>();
+            axisLabels = new ArrayList<>();
         }
         return this.axisLabels;
     }
@@ -342,28 +346,31 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
     /**
      * Gets the value of the uomLabels property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the uomLabels property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the uomLabels property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getUomLabels().add(newItem);
+     * getUomLabels().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the uomLabels property.
      */
     public List<String> getUomLabels() {
         if (uomLabels == null) {
-            uomLabels = new ArrayList<String>();
+            uomLabels = new ArrayList<>();
         }
         return this.uomLabels;
     }
@@ -376,13 +383,15 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
         this.uomLabels = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -390,52 +399,78 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             DirectPositionType theLowerCorner;
             theLowerCorner = this.getLowerCorner();
-            strategy.appendField(locator, this, "lowerCorner", buffer, theLowerCorner);
+            strategy.appendField(locator, this, "lowerCorner", buffer, theLowerCorner, this.isSetLowerCorner());
         }
         {
             DirectPositionType theUpperCorner;
             theUpperCorner = this.getUpperCorner();
-            strategy.appendField(locator, this, "upperCorner", buffer, theUpperCorner);
+            strategy.appendField(locator, this, "upperCorner", buffer, theUpperCorner, this.isSetUpperCorner());
         }
         {
             List<DirectPositionType> thePos;
-            thePos = this.getPos();
-            strategy.appendField(locator, this, "pos", buffer, thePos);
+            thePos = (this.isSetPos()?this.getPos():null);
+            strategy.appendField(locator, this, "pos", buffer, thePos, this.isSetPos());
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, this.isSetCoordinates());
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            strategy.appendField(locator, this, "srsName", buffer, theSrsName);
+            strategy.appendField(locator, this, "srsName", buffer, theSrsName, this.isSetSrsName());
         }
         {
             BigInteger theSrsDimension;
             theSrsDimension = this.getSrsDimension();
-            strategy.appendField(locator, this, "srsDimension", buffer, theSrsDimension);
+            strategy.appendField(locator, this, "srsDimension", buffer, theSrsDimension, this.isSetSrsDimension());
         }
         {
             List<String> theAxisLabels;
-            theAxisLabels = this.getAxisLabels();
-            strategy.appendField(locator, this, "axisLabels", buffer, theAxisLabels);
+            theAxisLabels = (this.isSetAxisLabels()?this.getAxisLabels():null);
+            strategy.appendField(locator, this, "axisLabels", buffer, theAxisLabels, this.isSetAxisLabels());
         }
         {
             List<String> theUomLabels;
-            theUomLabels = this.getUomLabels();
-            strategy.appendField(locator, this, "uomLabels", buffer, theUomLabels);
+            theUomLabels = (this.isSetUomLabels()?this.getUomLabels():null);
+            strategy.appendField(locator, this, "uomLabels", buffer, theUomLabels, this.isSetUomLabels());
         }
         return buffer;
     }
 
+    public void setPos(List<DirectPositionType> value) {
+        this.pos = null;
+        if (value!= null) {
+            List<DirectPositionType> draftl = this.getPos();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setAxisLabels(List<String> value) {
+        this.axisLabels = null;
+        if (value!= null) {
+            List<String> draftl = this.getAxisLabels();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setUomLabels(List<String> value) {
+        this.uomLabels = null;
+        if (value!= null) {
+            List<String> draftl = this.getUomLabels();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof EnvelopeType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -447,7 +482,7 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
             lhsLowerCorner = this.getLowerCorner();
             DirectPositionType rhsLowerCorner;
             rhsLowerCorner = that.getLowerCorner();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "lowerCorner", lhsLowerCorner), LocatorUtils.property(thatLocator, "lowerCorner", rhsLowerCorner), lhsLowerCorner, rhsLowerCorner)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "lowerCorner", lhsLowerCorner), LocatorUtils.property(thatLocator, "lowerCorner", rhsLowerCorner), lhsLowerCorner, rhsLowerCorner, this.isSetLowerCorner(), that.isSetLowerCorner())) {
                 return false;
             }
         }
@@ -456,16 +491,16 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
             lhsUpperCorner = this.getUpperCorner();
             DirectPositionType rhsUpperCorner;
             rhsUpperCorner = that.getUpperCorner();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "upperCorner", lhsUpperCorner), LocatorUtils.property(thatLocator, "upperCorner", rhsUpperCorner), lhsUpperCorner, rhsUpperCorner)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "upperCorner", lhsUpperCorner), LocatorUtils.property(thatLocator, "upperCorner", rhsUpperCorner), lhsUpperCorner, rhsUpperCorner, this.isSetUpperCorner(), that.isSetUpperCorner())) {
                 return false;
             }
         }
         {
             List<DirectPositionType> lhsPos;
-            lhsPos = this.getPos();
+            lhsPos = (this.isSetPos()?this.getPos():null);
             List<DirectPositionType> rhsPos;
-            rhsPos = that.getPos();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "pos", lhsPos), LocatorUtils.property(thatLocator, "pos", rhsPos), lhsPos, rhsPos)) {
+            rhsPos = (that.isSetPos()?that.getPos():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pos", lhsPos), LocatorUtils.property(thatLocator, "pos", rhsPos), lhsPos, rhsPos, this.isSetPos(), that.isSetPos())) {
                 return false;
             }
         }
@@ -474,7 +509,7 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
             lhsCoordinates = this.getCoordinates();
             CoordinatesType rhsCoordinates;
             rhsCoordinates = that.getCoordinates();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinates", lhsCoordinates), LocatorUtils.property(thatLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinates", lhsCoordinates), LocatorUtils.property(thatLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates, this.isSetCoordinates(), that.isSetCoordinates())) {
                 return false;
             }
         }
@@ -483,7 +518,7 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
             lhsSrsName = this.getSrsName();
             String rhsSrsName;
             rhsSrsName = that.getSrsName();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "srsName", lhsSrsName), LocatorUtils.property(thatLocator, "srsName", rhsSrsName), lhsSrsName, rhsSrsName)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "srsName", lhsSrsName), LocatorUtils.property(thatLocator, "srsName", rhsSrsName), lhsSrsName, rhsSrsName, this.isSetSrsName(), that.isSetSrsName())) {
                 return false;
             }
         }
@@ -492,356 +527,354 @@ public class EnvelopeType implements Cloneable, CopyTo, Equals, HashCode, MergeF
             lhsSrsDimension = this.getSrsDimension();
             BigInteger rhsSrsDimension;
             rhsSrsDimension = that.getSrsDimension();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "srsDimension", lhsSrsDimension), LocatorUtils.property(thatLocator, "srsDimension", rhsSrsDimension), lhsSrsDimension, rhsSrsDimension)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "srsDimension", lhsSrsDimension), LocatorUtils.property(thatLocator, "srsDimension", rhsSrsDimension), lhsSrsDimension, rhsSrsDimension, this.isSetSrsDimension(), that.isSetSrsDimension())) {
                 return false;
             }
         }
         {
             List<String> lhsAxisLabels;
-            lhsAxisLabels = this.getAxisLabels();
+            lhsAxisLabels = (this.isSetAxisLabels()?this.getAxisLabels():null);
             List<String> rhsAxisLabels;
-            rhsAxisLabels = that.getAxisLabels();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "axisLabels", lhsAxisLabels), LocatorUtils.property(thatLocator, "axisLabels", rhsAxisLabels), lhsAxisLabels, rhsAxisLabels)) {
+            rhsAxisLabels = (that.isSetAxisLabels()?that.getAxisLabels():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "axisLabels", lhsAxisLabels), LocatorUtils.property(thatLocator, "axisLabels", rhsAxisLabels), lhsAxisLabels, rhsAxisLabels, this.isSetAxisLabels(), that.isSetAxisLabels())) {
                 return false;
             }
         }
         {
             List<String> lhsUomLabels;
-            lhsUomLabels = this.getUomLabels();
+            lhsUomLabels = (this.isSetUomLabels()?this.getUomLabels():null);
             List<String> rhsUomLabels;
-            rhsUomLabels = that.getUomLabels();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "uomLabels", lhsUomLabels), LocatorUtils.property(thatLocator, "uomLabels", rhsUomLabels), lhsUomLabels, rhsUomLabels)) {
+            rhsUomLabels = (that.isSetUomLabels()?that.getUomLabels():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "uomLabels", lhsUomLabels), LocatorUtils.property(thatLocator, "uomLabels", rhsUomLabels), lhsUomLabels, rhsUomLabels, this.isSetUomLabels(), that.isSetUomLabels())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             DirectPositionType theLowerCorner;
             theLowerCorner = this.getLowerCorner();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "lowerCorner", theLowerCorner), currentHashCode, theLowerCorner);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "lowerCorner", theLowerCorner), currentHashCode, theLowerCorner, this.isSetLowerCorner());
         }
         {
             DirectPositionType theUpperCorner;
             theUpperCorner = this.getUpperCorner();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "upperCorner", theUpperCorner), currentHashCode, theUpperCorner);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "upperCorner", theUpperCorner), currentHashCode, theUpperCorner, this.isSetUpperCorner());
         }
         {
             List<DirectPositionType> thePos;
-            thePos = this.getPos();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pos", thePos), currentHashCode, thePos);
+            thePos = (this.isSetPos()?this.getPos():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pos", thePos), currentHashCode, thePos, this.isSetPos());
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinates", theCoordinates), currentHashCode, theCoordinates);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinates", theCoordinates), currentHashCode, theCoordinates, this.isSetCoordinates());
         }
         {
             String theSrsName;
             theSrsName = this.getSrsName();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "srsName", theSrsName), currentHashCode, theSrsName);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "srsName", theSrsName), currentHashCode, theSrsName, this.isSetSrsName());
         }
         {
             BigInteger theSrsDimension;
             theSrsDimension = this.getSrsDimension();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "srsDimension", theSrsDimension), currentHashCode, theSrsDimension);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "srsDimension", theSrsDimension), currentHashCode, theSrsDimension, this.isSetSrsDimension());
         }
         {
             List<String> theAxisLabels;
-            theAxisLabels = this.getAxisLabels();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axisLabels", theAxisLabels), currentHashCode, theAxisLabels);
+            theAxisLabels = (this.isSetAxisLabels()?this.getAxisLabels():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axisLabels", theAxisLabels), currentHashCode, theAxisLabels, this.isSetAxisLabels());
         }
         {
             List<String> theUomLabels;
-            theUomLabels = this.getUomLabels();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "uomLabels", theUomLabels), currentHashCode, theUomLabels);
+            theUomLabels = (this.isSetUomLabels()?this.getUomLabels():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "uomLabels", theUomLabels), currentHashCode, theUomLabels, this.isSetUomLabels());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof EnvelopeType) {
             final EnvelopeType copy = ((EnvelopeType) draftCopy);
-            if (this.isSetLowerCorner()) {
-                DirectPositionType sourceLowerCorner;
-                sourceLowerCorner = this.getLowerCorner();
-                DirectPositionType copyLowerCorner = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "lowerCorner", sourceLowerCorner), sourceLowerCorner));
-                copy.setLowerCorner(copyLowerCorner);
-            } else {
-                copy.lowerCorner = null;
+            {
+                java.lang.Boolean lowerCornerShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetLowerCorner());
+                if (lowerCornerShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType sourceLowerCorner;
+                    sourceLowerCorner = this.getLowerCorner();
+                    DirectPositionType copyLowerCorner = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "lowerCorner", sourceLowerCorner), sourceLowerCorner, this.isSetLowerCorner()));
+                    copy.setLowerCorner(copyLowerCorner);
+                } else {
+                    if (lowerCornerShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.lowerCorner = null;
+                    }
+                }
             }
-            if (this.isSetUpperCorner()) {
-                DirectPositionType sourceUpperCorner;
-                sourceUpperCorner = this.getUpperCorner();
-                DirectPositionType copyUpperCorner = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "upperCorner", sourceUpperCorner), sourceUpperCorner));
-                copy.setUpperCorner(copyUpperCorner);
-            } else {
-                copy.upperCorner = null;
+            {
+                java.lang.Boolean upperCornerShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUpperCorner());
+                if (upperCornerShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType sourceUpperCorner;
+                    sourceUpperCorner = this.getUpperCorner();
+                    DirectPositionType copyUpperCorner = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "upperCorner", sourceUpperCorner), sourceUpperCorner, this.isSetUpperCorner()));
+                    copy.setUpperCorner(copyUpperCorner);
+                } else {
+                    if (upperCornerShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.upperCorner = null;
+                    }
+                }
             }
-            if (this.isSetPos()) {
-                List<DirectPositionType> sourcePos;
-                sourcePos = this.getPos();
-                @SuppressWarnings("unchecked")
-                List<DirectPositionType> copyPos = ((List<DirectPositionType> ) strategy.copy(LocatorUtils.property(locator, "pos", sourcePos), sourcePos));
-                copy.unsetPos();
-                List<DirectPositionType> uniquePosl = copy.getPos();
-                uniquePosl.addAll(copyPos);
-            } else {
-                copy.unsetPos();
+            {
+                java.lang.Boolean posShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPos());
+                if (posShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<DirectPositionType> sourcePos;
+                    sourcePos = (this.isSetPos()?this.getPos():null);
+                    @SuppressWarnings("unchecked")
+                    List<DirectPositionType> copyPos = ((List<DirectPositionType> ) strategy.copy(LocatorUtils.property(locator, "pos", sourcePos), sourcePos, this.isSetPos()));
+                    copy.setPos(copyPos);
+                } else {
+                    if (posShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetPos();
+                    }
+                }
             }
-            if (this.isSetCoordinates()) {
-                CoordinatesType sourceCoordinates;
-                sourceCoordinates = this.getCoordinates();
-                CoordinatesType copyCoordinates = ((CoordinatesType) strategy.copy(LocatorUtils.property(locator, "coordinates", sourceCoordinates), sourceCoordinates));
-                copy.setCoordinates(copyCoordinates);
-            } else {
-                copy.coordinates = null;
+            {
+                java.lang.Boolean coordinatesShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCoordinates());
+                if (coordinatesShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CoordinatesType sourceCoordinates;
+                    sourceCoordinates = this.getCoordinates();
+                    CoordinatesType copyCoordinates = ((CoordinatesType) strategy.copy(LocatorUtils.property(locator, "coordinates", sourceCoordinates), sourceCoordinates, this.isSetCoordinates()));
+                    copy.setCoordinates(copyCoordinates);
+                } else {
+                    if (coordinatesShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.coordinates = null;
+                    }
+                }
             }
-            if (this.isSetSrsName()) {
-                String sourceSrsName;
-                sourceSrsName = this.getSrsName();
-                String copySrsName = ((String) strategy.copy(LocatorUtils.property(locator, "srsName", sourceSrsName), sourceSrsName));
-                copy.setSrsName(copySrsName);
-            } else {
-                copy.srsName = null;
+            {
+                java.lang.Boolean srsNameShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSrsName());
+                if (srsNameShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceSrsName;
+                    sourceSrsName = this.getSrsName();
+                    String copySrsName = ((String) strategy.copy(LocatorUtils.property(locator, "srsName", sourceSrsName), sourceSrsName, this.isSetSrsName()));
+                    copy.setSrsName(copySrsName);
+                } else {
+                    if (srsNameShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.srsName = null;
+                    }
+                }
             }
-            if (this.isSetSrsDimension()) {
-                BigInteger sourceSrsDimension;
-                sourceSrsDimension = this.getSrsDimension();
-                BigInteger copySrsDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "srsDimension", sourceSrsDimension), sourceSrsDimension));
-                copy.setSrsDimension(copySrsDimension);
-            } else {
-                copy.srsDimension = null;
+            {
+                java.lang.Boolean srsDimensionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSrsDimension());
+                if (srsDimensionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceSrsDimension;
+                    sourceSrsDimension = this.getSrsDimension();
+                    BigInteger copySrsDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "srsDimension", sourceSrsDimension), sourceSrsDimension, this.isSetSrsDimension()));
+                    copy.setSrsDimension(copySrsDimension);
+                } else {
+                    if (srsDimensionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.srsDimension = null;
+                    }
+                }
             }
-            if (this.isSetAxisLabels()) {
-                List<String> sourceAxisLabels;
-                sourceAxisLabels = this.getAxisLabels();
-                @SuppressWarnings("unchecked")
-                List<String> copyAxisLabels = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "axisLabels", sourceAxisLabels), sourceAxisLabels));
-                copy.unsetAxisLabels();
-                List<String> uniqueAxisLabelsl = copy.getAxisLabels();
-                uniqueAxisLabelsl.addAll(copyAxisLabels);
-            } else {
-                copy.unsetAxisLabels();
+            {
+                java.lang.Boolean axisLabelsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAxisLabels());
+                if (axisLabelsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceAxisLabels;
+                    sourceAxisLabels = (this.isSetAxisLabels()?this.getAxisLabels():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyAxisLabels = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "axisLabels", sourceAxisLabels), sourceAxisLabels, this.isSetAxisLabels()));
+                    copy.setAxisLabels(copyAxisLabels);
+                } else {
+                    if (axisLabelsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetAxisLabels();
+                    }
+                }
             }
-            if (this.isSetUomLabels()) {
-                List<String> sourceUomLabels;
-                sourceUomLabels = this.getUomLabels();
-                @SuppressWarnings("unchecked")
-                List<String> copyUomLabels = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "uomLabels", sourceUomLabels), sourceUomLabels));
-                copy.unsetUomLabels();
-                List<String> uniqueUomLabelsl = copy.getUomLabels();
-                uniqueUomLabelsl.addAll(copyUomLabels);
-            } else {
-                copy.unsetUomLabels();
+            {
+                java.lang.Boolean uomLabelsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUomLabels());
+                if (uomLabelsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceUomLabels;
+                    sourceUomLabels = (this.isSetUomLabels()?this.getUomLabels():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyUomLabels = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "uomLabels", sourceUomLabels), sourceUomLabels, this.isSetUomLabels()));
+                    copy.setUomLabels(copyUomLabels);
+                } else {
+                    if (uomLabelsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetUomLabels();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new EnvelopeType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof EnvelopeType) {
             final EnvelopeType target = this;
             final EnvelopeType leftObject = ((EnvelopeType) left);
             final EnvelopeType rightObject = ((EnvelopeType) right);
             {
-                DirectPositionType lhsLowerCorner;
-                lhsLowerCorner = leftObject.getLowerCorner();
-                DirectPositionType rhsLowerCorner;
-                rhsLowerCorner = rightObject.getLowerCorner();
-                target.setLowerCorner(((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "lowerCorner", lhsLowerCorner), LocatorUtils.property(rightLocator, "lowerCorner", rhsLowerCorner), lhsLowerCorner, rhsLowerCorner)));
+                java.lang.Boolean lowerCornerShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetLowerCorner(), rightObject.isSetLowerCorner());
+                if (lowerCornerShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType lhsLowerCorner;
+                    lhsLowerCorner = leftObject.getLowerCorner();
+                    DirectPositionType rhsLowerCorner;
+                    rhsLowerCorner = rightObject.getLowerCorner();
+                    DirectPositionType mergedLowerCorner = ((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "lowerCorner", lhsLowerCorner), LocatorUtils.property(rightLocator, "lowerCorner", rhsLowerCorner), lhsLowerCorner, rhsLowerCorner, leftObject.isSetLowerCorner(), rightObject.isSetLowerCorner()));
+                    target.setLowerCorner(mergedLowerCorner);
+                } else {
+                    if (lowerCornerShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.lowerCorner = null;
+                    }
+                }
             }
             {
-                DirectPositionType lhsUpperCorner;
-                lhsUpperCorner = leftObject.getUpperCorner();
-                DirectPositionType rhsUpperCorner;
-                rhsUpperCorner = rightObject.getUpperCorner();
-                target.setUpperCorner(((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "upperCorner", lhsUpperCorner), LocatorUtils.property(rightLocator, "upperCorner", rhsUpperCorner), lhsUpperCorner, rhsUpperCorner)));
+                java.lang.Boolean upperCornerShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUpperCorner(), rightObject.isSetUpperCorner());
+                if (upperCornerShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType lhsUpperCorner;
+                    lhsUpperCorner = leftObject.getUpperCorner();
+                    DirectPositionType rhsUpperCorner;
+                    rhsUpperCorner = rightObject.getUpperCorner();
+                    DirectPositionType mergedUpperCorner = ((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "upperCorner", lhsUpperCorner), LocatorUtils.property(rightLocator, "upperCorner", rhsUpperCorner), lhsUpperCorner, rhsUpperCorner, leftObject.isSetUpperCorner(), rightObject.isSetUpperCorner()));
+                    target.setUpperCorner(mergedUpperCorner);
+                } else {
+                    if (upperCornerShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.upperCorner = null;
+                    }
+                }
             }
             {
-                List<DirectPositionType> lhsPos;
-                lhsPos = leftObject.getPos();
-                List<DirectPositionType> rhsPos;
-                rhsPos = rightObject.getPos();
-                target.unsetPos();
-                List<DirectPositionType> uniquePosl = target.getPos();
-                uniquePosl.addAll(((List<DirectPositionType> ) strategy.merge(LocatorUtils.property(leftLocator, "pos", lhsPos), LocatorUtils.property(rightLocator, "pos", rhsPos), lhsPos, rhsPos)));
+                java.lang.Boolean posShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPos(), rightObject.isSetPos());
+                if (posShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<DirectPositionType> lhsPos;
+                    lhsPos = (leftObject.isSetPos()?leftObject.getPos():null);
+                    List<DirectPositionType> rhsPos;
+                    rhsPos = (rightObject.isSetPos()?rightObject.getPos():null);
+                    List<DirectPositionType> mergedPos = ((List<DirectPositionType> ) strategy.merge(LocatorUtils.property(leftLocator, "pos", lhsPos), LocatorUtils.property(rightLocator, "pos", rhsPos), lhsPos, rhsPos, leftObject.isSetPos(), rightObject.isSetPos()));
+                    target.setPos(mergedPos);
+                } else {
+                    if (posShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetPos();
+                    }
+                }
             }
             {
-                CoordinatesType lhsCoordinates;
-                lhsCoordinates = leftObject.getCoordinates();
-                CoordinatesType rhsCoordinates;
-                rhsCoordinates = rightObject.getCoordinates();
-                target.setCoordinates(((CoordinatesType) strategy.merge(LocatorUtils.property(leftLocator, "coordinates", lhsCoordinates), LocatorUtils.property(rightLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates)));
+                java.lang.Boolean coordinatesShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCoordinates(), rightObject.isSetCoordinates());
+                if (coordinatesShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CoordinatesType lhsCoordinates;
+                    lhsCoordinates = leftObject.getCoordinates();
+                    CoordinatesType rhsCoordinates;
+                    rhsCoordinates = rightObject.getCoordinates();
+                    CoordinatesType mergedCoordinates = ((CoordinatesType) strategy.merge(LocatorUtils.property(leftLocator, "coordinates", lhsCoordinates), LocatorUtils.property(rightLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates, leftObject.isSetCoordinates(), rightObject.isSetCoordinates()));
+                    target.setCoordinates(mergedCoordinates);
+                } else {
+                    if (coordinatesShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.coordinates = null;
+                    }
+                }
             }
             {
-                String lhsSrsName;
-                lhsSrsName = leftObject.getSrsName();
-                String rhsSrsName;
-                rhsSrsName = rightObject.getSrsName();
-                target.setSrsName(((String) strategy.merge(LocatorUtils.property(leftLocator, "srsName", lhsSrsName), LocatorUtils.property(rightLocator, "srsName", rhsSrsName), lhsSrsName, rhsSrsName)));
+                java.lang.Boolean srsNameShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSrsName(), rightObject.isSetSrsName());
+                if (srsNameShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsSrsName;
+                    lhsSrsName = leftObject.getSrsName();
+                    String rhsSrsName;
+                    rhsSrsName = rightObject.getSrsName();
+                    String mergedSrsName = ((String) strategy.merge(LocatorUtils.property(leftLocator, "srsName", lhsSrsName), LocatorUtils.property(rightLocator, "srsName", rhsSrsName), lhsSrsName, rhsSrsName, leftObject.isSetSrsName(), rightObject.isSetSrsName()));
+                    target.setSrsName(mergedSrsName);
+                } else {
+                    if (srsNameShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.srsName = null;
+                    }
+                }
             }
             {
-                BigInteger lhsSrsDimension;
-                lhsSrsDimension = leftObject.getSrsDimension();
-                BigInteger rhsSrsDimension;
-                rhsSrsDimension = rightObject.getSrsDimension();
-                target.setSrsDimension(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "srsDimension", lhsSrsDimension), LocatorUtils.property(rightLocator, "srsDimension", rhsSrsDimension), lhsSrsDimension, rhsSrsDimension)));
+                java.lang.Boolean srsDimensionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSrsDimension(), rightObject.isSetSrsDimension());
+                if (srsDimensionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsSrsDimension;
+                    lhsSrsDimension = leftObject.getSrsDimension();
+                    BigInteger rhsSrsDimension;
+                    rhsSrsDimension = rightObject.getSrsDimension();
+                    BigInteger mergedSrsDimension = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "srsDimension", lhsSrsDimension), LocatorUtils.property(rightLocator, "srsDimension", rhsSrsDimension), lhsSrsDimension, rhsSrsDimension, leftObject.isSetSrsDimension(), rightObject.isSetSrsDimension()));
+                    target.setSrsDimension(mergedSrsDimension);
+                } else {
+                    if (srsDimensionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.srsDimension = null;
+                    }
+                }
             }
             {
-                List<String> lhsAxisLabels;
-                lhsAxisLabels = leftObject.getAxisLabels();
-                List<String> rhsAxisLabels;
-                rhsAxisLabels = rightObject.getAxisLabels();
-                target.unsetAxisLabels();
-                List<String> uniqueAxisLabelsl = target.getAxisLabels();
-                uniqueAxisLabelsl.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "axisLabels", lhsAxisLabels), LocatorUtils.property(rightLocator, "axisLabels", rhsAxisLabels), lhsAxisLabels, rhsAxisLabels)));
+                java.lang.Boolean axisLabelsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAxisLabels(), rightObject.isSetAxisLabels());
+                if (axisLabelsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsAxisLabels;
+                    lhsAxisLabels = (leftObject.isSetAxisLabels()?leftObject.getAxisLabels():null);
+                    List<String> rhsAxisLabels;
+                    rhsAxisLabels = (rightObject.isSetAxisLabels()?rightObject.getAxisLabels():null);
+                    List<String> mergedAxisLabels = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "axisLabels", lhsAxisLabels), LocatorUtils.property(rightLocator, "axisLabels", rhsAxisLabels), lhsAxisLabels, rhsAxisLabels, leftObject.isSetAxisLabels(), rightObject.isSetAxisLabels()));
+                    target.setAxisLabels(mergedAxisLabels);
+                } else {
+                    if (axisLabelsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetAxisLabels();
+                    }
+                }
             }
             {
-                List<String> lhsUomLabels;
-                lhsUomLabels = leftObject.getUomLabels();
-                List<String> rhsUomLabels;
-                rhsUomLabels = rightObject.getUomLabels();
-                target.unsetUomLabels();
-                List<String> uniqueUomLabelsl = target.getUomLabels();
-                uniqueUomLabelsl.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "uomLabels", lhsUomLabels), LocatorUtils.property(rightLocator, "uomLabels", rhsUomLabels), lhsUomLabels, rhsUomLabels)));
+                java.lang.Boolean uomLabelsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUomLabels(), rightObject.isSetUomLabels());
+                if (uomLabelsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsUomLabels;
+                    lhsUomLabels = (leftObject.isSetUomLabels()?leftObject.getUomLabels():null);
+                    List<String> rhsUomLabels;
+                    rhsUomLabels = (rightObject.isSetUomLabels()?rightObject.getUomLabels():null);
+                    List<String> mergedUomLabels = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "uomLabels", lhsUomLabels), LocatorUtils.property(rightLocator, "uomLabels", rhsUomLabels), lhsUomLabels, rhsUomLabels, leftObject.isSetUomLabels(), rightObject.isSetUomLabels()));
+                    target.setUomLabels(mergedUomLabels);
+                } else {
+                    if (uomLabelsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetUomLabels();
+                    }
+                }
             }
         }
-    }
-
-    public void setPos(List<DirectPositionType> value) {
-        List<DirectPositionType> draftl = this.getPos();
-        draftl.addAll(value);
-    }
-
-    public void setAxisLabels(List<String> value) {
-        List<String> draftl = this.getAxisLabels();
-        draftl.addAll(value);
-    }
-
-    public void setUomLabels(List<String> value) {
-        List<String> draftl = this.getUomLabels();
-        draftl.addAll(value);
-    }
-
-    public EnvelopeType withLowerCorner(DirectPositionType value) {
-        setLowerCorner(value);
-        return this;
-    }
-
-    public EnvelopeType withUpperCorner(DirectPositionType value) {
-        setUpperCorner(value);
-        return this;
-    }
-
-    public EnvelopeType withPos(DirectPositionType... values) {
-        if (values!= null) {
-            for (DirectPositionType value: values) {
-                getPos().add(value);
-            }
-        }
-        return this;
-    }
-
-    public EnvelopeType withPos(Collection<DirectPositionType> values) {
-        if (values!= null) {
-            getPos().addAll(values);
-        }
-        return this;
-    }
-
-    public EnvelopeType withCoordinates(CoordinatesType value) {
-        setCoordinates(value);
-        return this;
-    }
-
-    public EnvelopeType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    public EnvelopeType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    public EnvelopeType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    public EnvelopeType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    public EnvelopeType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    public EnvelopeType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    public EnvelopeType withPos(List<DirectPositionType> value) {
-        setPos(value);
-        return this;
-    }
-
-    public EnvelopeType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    public EnvelopeType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
     }
 
 }

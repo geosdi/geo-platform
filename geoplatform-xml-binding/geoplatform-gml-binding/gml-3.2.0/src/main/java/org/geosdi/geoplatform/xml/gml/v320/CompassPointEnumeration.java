@@ -34,46 +34,46 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per CompassPointEnumeration.
+ * These directions are necessarily approximate, giving direction with a precision of 22.5°. It is thus generally unnecessary to specify the reference frame, though this may be detailed in the definition of a GML application language.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
- * <p>
- * <pre>
- * &lt;simpleType name="CompassPointEnumeration">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="N"/>
- *     &lt;enumeration value="NNE"/>
- *     &lt;enumeration value="NE"/>
- *     &lt;enumeration value="ENE"/>
- *     &lt;enumeration value="E"/>
- *     &lt;enumeration value="ESE"/>
- *     &lt;enumeration value="SE"/>
- *     &lt;enumeration value="SSE"/>
- *     &lt;enumeration value="S"/>
- *     &lt;enumeration value="SSW"/>
- *     &lt;enumeration value="SW"/>
- *     &lt;enumeration value="WSW"/>
- *     &lt;enumeration value="W"/>
- *     &lt;enumeration value="WNW"/>
- *     &lt;enumeration value="NW"/>
- *     &lt;enumeration value="NNW"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
+ * <p>Classe Java per CompassPointEnumeration.</p>
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
+ * <pre>{@code
+ * <simpleType name="CompassPointEnumeration">
+ *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     <enumeration value="N"/>
+ *     <enumeration value="NNE"/>
+ *     <enumeration value="NE"/>
+ *     <enumeration value="ENE"/>
+ *     <enumeration value="E"/>
+ *     <enumeration value="ESE"/>
+ *     <enumeration value="SE"/>
+ *     <enumeration value="SSE"/>
+ *     <enumeration value="S"/>
+ *     <enumeration value="SSW"/>
+ *     <enumeration value="SW"/>
+ *     <enumeration value="WSW"/>
+ *     <enumeration value="W"/>
+ *     <enumeration value="WNW"/>
+ *     <enumeration value="NW"/>
+ *     <enumeration value="NNW"/>
+ *   </restriction>
+ * </simpleType>
+ * }</pre>
  * 
  */
 @XmlType(name = "CompassPointEnumeration")

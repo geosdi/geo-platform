@@ -34,59 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per GeodeticDatumType complex type.
+ * <p>Classe Java per GeodeticDatumType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="GeodeticDatumType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractDatumType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}primeMeridian"/>
- *         &lt;element ref="{http://www.opengis.net/gml}ellipsoid"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="GeodeticDatumType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractDatumType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}primeMeridian"/>
+ *         <element ref="{http://www.opengis.net/gml}ellipsoid"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,13 +96,21 @@ public class GeodeticDatumType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:primeMeridian is an association role to the prime meridian used by this geodetic datum.
+     * 
+     */
     @XmlElementRef(name = "primeMeridian", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected JAXBElement<PrimeMeridianPropertyType> primeMeridian;
+    /**
+     * gml:ellipsoid is an association role to the ellipsoid used by this geodetic datum.
+     * 
+     */
     @XmlElementRef(name = "ellipsoid", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected JAXBElement<EllipsoidPropertyType> ellipsoid;
 
     /**
-     * Recupera il valore della proprietà primeMeridian.
+     * gml:primeMeridian is an association role to the prime meridian used by this geodetic datum.
      * 
      * @return
      *     possible object is
@@ -126,6 +130,7 @@ public class GeodeticDatumType
      *     {@link JAXBElement }{@code <}{@link PrimeMeridianPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PrimeMeridianPropertyType }{@code >}
      *     
+     * @see #getPrimeMeridian()
      */
     public void setPrimeMeridian(JAXBElement<PrimeMeridianPropertyType> value) {
         this.primeMeridian = value;
@@ -136,7 +141,7 @@ public class GeodeticDatumType
     }
 
     /**
-     * Recupera il valore della proprietà ellipsoid.
+     * gml:ellipsoid is an association role to the ellipsoid used by this geodetic datum.
      * 
      * @return
      *     possible object is
@@ -156,6 +161,7 @@ public class GeodeticDatumType
      *     {@link JAXBElement }{@code <}{@link EllipsoidPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link EllipsoidPropertyType }{@code >}
      *     
+     * @see #getEllipsoid()
      */
     public void setEllipsoid(JAXBElement<EllipsoidPropertyType> value) {
         this.ellipsoid = value;
@@ -165,13 +171,15 @@ public class GeodeticDatumType
         return (this.ellipsoid!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -179,23 +187,25 @@ public class GeodeticDatumType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             JAXBElement<PrimeMeridianPropertyType> thePrimeMeridian;
             thePrimeMeridian = this.getPrimeMeridian();
-            strategy.appendField(locator, this, "primeMeridian", buffer, thePrimeMeridian);
+            strategy.appendField(locator, this, "primeMeridian", buffer, thePrimeMeridian, this.isSetPrimeMeridian());
         }
         {
             JAXBElement<EllipsoidPropertyType> theEllipsoid;
             theEllipsoid = this.getEllipsoid();
-            strategy.appendField(locator, this, "ellipsoid", buffer, theEllipsoid);
+            strategy.appendField(locator, this, "ellipsoid", buffer, theEllipsoid, this.isSetEllipsoid());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof GeodeticDatumType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -210,7 +220,7 @@ public class GeodeticDatumType
             lhsPrimeMeridian = this.getPrimeMeridian();
             JAXBElement<PrimeMeridianPropertyType> rhsPrimeMeridian;
             rhsPrimeMeridian = that.getPrimeMeridian();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "primeMeridian", lhsPrimeMeridian), LocatorUtils.property(thatLocator, "primeMeridian", rhsPrimeMeridian), lhsPrimeMeridian, rhsPrimeMeridian)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "primeMeridian", lhsPrimeMeridian), LocatorUtils.property(thatLocator, "primeMeridian", rhsPrimeMeridian), lhsPrimeMeridian, rhsPrimeMeridian, this.isSetPrimeMeridian(), that.isSetPrimeMeridian())) {
                 return false;
             }
         }
@@ -219,83 +229,102 @@ public class GeodeticDatumType
             lhsEllipsoid = this.getEllipsoid();
             JAXBElement<EllipsoidPropertyType> rhsEllipsoid;
             rhsEllipsoid = that.getEllipsoid();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "ellipsoid", lhsEllipsoid), LocatorUtils.property(thatLocator, "ellipsoid", rhsEllipsoid), lhsEllipsoid, rhsEllipsoid)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "ellipsoid", lhsEllipsoid), LocatorUtils.property(thatLocator, "ellipsoid", rhsEllipsoid), lhsEllipsoid, rhsEllipsoid, this.isSetEllipsoid(), that.isSetEllipsoid())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             JAXBElement<PrimeMeridianPropertyType> thePrimeMeridian;
             thePrimeMeridian = this.getPrimeMeridian();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "primeMeridian", thePrimeMeridian), currentHashCode, thePrimeMeridian);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "primeMeridian", thePrimeMeridian), currentHashCode, thePrimeMeridian, this.isSetPrimeMeridian());
         }
         {
             JAXBElement<EllipsoidPropertyType> theEllipsoid;
             theEllipsoid = this.getEllipsoid();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "ellipsoid", theEllipsoid), currentHashCode, theEllipsoid);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "ellipsoid", theEllipsoid), currentHashCode, theEllipsoid, this.isSetEllipsoid());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof GeodeticDatumType) {
             final GeodeticDatumType copy = ((GeodeticDatumType) draftCopy);
-            if (this.isSetPrimeMeridian()) {
-                JAXBElement<PrimeMeridianPropertyType> sourcePrimeMeridian;
-                sourcePrimeMeridian = this.getPrimeMeridian();
-                @SuppressWarnings("unchecked")
-                JAXBElement<PrimeMeridianPropertyType> copyPrimeMeridian = ((JAXBElement<PrimeMeridianPropertyType> ) strategy.copy(LocatorUtils.property(locator, "primeMeridian", sourcePrimeMeridian), sourcePrimeMeridian));
-                copy.setPrimeMeridian(copyPrimeMeridian);
-            } else {
-                copy.primeMeridian = null;
+            {
+                java.lang.Boolean primeMeridianShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPrimeMeridian());
+                if (primeMeridianShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<PrimeMeridianPropertyType> sourcePrimeMeridian;
+                    sourcePrimeMeridian = this.getPrimeMeridian();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<PrimeMeridianPropertyType> copyPrimeMeridian = ((JAXBElement<PrimeMeridianPropertyType> ) strategy.copy(LocatorUtils.property(locator, "primeMeridian", sourcePrimeMeridian), sourcePrimeMeridian, this.isSetPrimeMeridian()));
+                    copy.setPrimeMeridian(copyPrimeMeridian);
+                } else {
+                    if (primeMeridianShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.primeMeridian = null;
+                    }
+                }
             }
-            if (this.isSetEllipsoid()) {
-                JAXBElement<EllipsoidPropertyType> sourceEllipsoid;
-                sourceEllipsoid = this.getEllipsoid();
-                @SuppressWarnings("unchecked")
-                JAXBElement<EllipsoidPropertyType> copyEllipsoid = ((JAXBElement<EllipsoidPropertyType> ) strategy.copy(LocatorUtils.property(locator, "ellipsoid", sourceEllipsoid), sourceEllipsoid));
-                copy.setEllipsoid(copyEllipsoid);
-            } else {
-                copy.ellipsoid = null;
+            {
+                java.lang.Boolean ellipsoidShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetEllipsoid());
+                if (ellipsoidShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<EllipsoidPropertyType> sourceEllipsoid;
+                    sourceEllipsoid = this.getEllipsoid();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<EllipsoidPropertyType> copyEllipsoid = ((JAXBElement<EllipsoidPropertyType> ) strategy.copy(LocatorUtils.property(locator, "ellipsoid", sourceEllipsoid), sourceEllipsoid, this.isSetEllipsoid()));
+                    copy.setEllipsoid(copyEllipsoid);
+                } else {
+                    if (ellipsoidShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.ellipsoid = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new GeodeticDatumType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof GeodeticDatumType) {
@@ -303,150 +332,36 @@ public class GeodeticDatumType
             final GeodeticDatumType leftObject = ((GeodeticDatumType) left);
             final GeodeticDatumType rightObject = ((GeodeticDatumType) right);
             {
-                JAXBElement<PrimeMeridianPropertyType> lhsPrimeMeridian;
-                lhsPrimeMeridian = leftObject.getPrimeMeridian();
-                JAXBElement<PrimeMeridianPropertyType> rhsPrimeMeridian;
-                rhsPrimeMeridian = rightObject.getPrimeMeridian();
-                target.setPrimeMeridian(((JAXBElement<PrimeMeridianPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "primeMeridian", lhsPrimeMeridian), LocatorUtils.property(rightLocator, "primeMeridian", rhsPrimeMeridian), lhsPrimeMeridian, rhsPrimeMeridian)));
+                java.lang.Boolean primeMeridianShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPrimeMeridian(), rightObject.isSetPrimeMeridian());
+                if (primeMeridianShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<PrimeMeridianPropertyType> lhsPrimeMeridian;
+                    lhsPrimeMeridian = leftObject.getPrimeMeridian();
+                    JAXBElement<PrimeMeridianPropertyType> rhsPrimeMeridian;
+                    rhsPrimeMeridian = rightObject.getPrimeMeridian();
+                    JAXBElement<PrimeMeridianPropertyType> mergedPrimeMeridian = ((JAXBElement<PrimeMeridianPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "primeMeridian", lhsPrimeMeridian), LocatorUtils.property(rightLocator, "primeMeridian", rhsPrimeMeridian), lhsPrimeMeridian, rhsPrimeMeridian, leftObject.isSetPrimeMeridian(), rightObject.isSetPrimeMeridian()));
+                    target.setPrimeMeridian(mergedPrimeMeridian);
+                } else {
+                    if (primeMeridianShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.primeMeridian = null;
+                    }
+                }
             }
             {
-                JAXBElement<EllipsoidPropertyType> lhsEllipsoid;
-                lhsEllipsoid = leftObject.getEllipsoid();
-                JAXBElement<EllipsoidPropertyType> rhsEllipsoid;
-                rhsEllipsoid = rightObject.getEllipsoid();
-                target.setEllipsoid(((JAXBElement<EllipsoidPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "ellipsoid", lhsEllipsoid), LocatorUtils.property(rightLocator, "ellipsoid", rhsEllipsoid), lhsEllipsoid, rhsEllipsoid)));
+                java.lang.Boolean ellipsoidShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetEllipsoid(), rightObject.isSetEllipsoid());
+                if (ellipsoidShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<EllipsoidPropertyType> lhsEllipsoid;
+                    lhsEllipsoid = leftObject.getEllipsoid();
+                    JAXBElement<EllipsoidPropertyType> rhsEllipsoid;
+                    rhsEllipsoid = rightObject.getEllipsoid();
+                    JAXBElement<EllipsoidPropertyType> mergedEllipsoid = ((JAXBElement<EllipsoidPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "ellipsoid", lhsEllipsoid), LocatorUtils.property(rightLocator, "ellipsoid", rhsEllipsoid), lhsEllipsoid, rhsEllipsoid, leftObject.isSetEllipsoid(), rightObject.isSetEllipsoid()));
+                    target.setEllipsoid(mergedEllipsoid);
+                } else {
+                    if (ellipsoidShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.ellipsoid = null;
+                    }
+                }
             }
         }
-    }
-
-    public GeodeticDatumType withPrimeMeridian(JAXBElement<PrimeMeridianPropertyType> value) {
-        setPrimeMeridian(value);
-        return this;
-    }
-
-    public GeodeticDatumType withEllipsoid(JAXBElement<EllipsoidPropertyType> value) {
-        setEllipsoid(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withDomainOfValidity(DomainOfValidityElement value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withScope(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getScope().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withScope(Collection<String> values) {
-        if (values!= null) {
-            getScope().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withAnchorDefinition(JAXBElement<CodeType> value) {
-        setAnchorDefinition(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withRealizationEpoch(XMLGregorianCalendar value) {
-        setRealizationEpoch(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withScope(List<String> value) {
-        setScope(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public GeodeticDatumType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

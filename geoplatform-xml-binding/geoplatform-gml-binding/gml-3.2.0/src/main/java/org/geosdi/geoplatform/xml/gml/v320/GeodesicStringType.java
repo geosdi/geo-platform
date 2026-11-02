@@ -34,63 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per GeodesicStringType complex type.
+ * <p>Classe Java per GeodesicStringType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="GeodesicStringType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
- *       &lt;choice>
- *         &lt;element ref="{http://www.opengis.net/gml}posList"/>
- *         &lt;group ref="{http://www.opengis.net/gml}geometricPositionGroup" maxOccurs="unbounded" minOccurs="2"/>
- *       &lt;/choice>
- *       &lt;attribute name="interpolation" type="{http://www.opengis.net/gml}CurveInterpolationType" fixed="geodesic" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="GeodesicStringType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
+ *       <choice>
+ *         <element ref="{http://www.opengis.net/gml}posList"/>
+ *         <group ref="{http://www.opengis.net/gml}geometricPositionGroup" maxOccurs="unbounded" minOccurs="2"/>
+ *       </choice>
+ *       <attribute name="interpolation" type="{http://www.opengis.net/gml}CurveInterpolationType" fixed="geodesic" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -108,17 +105,19 @@ public class GeodesicStringType
 {
 
     protected DirectPositionListType posList;
+    /**
+     * GML supports two different ways to specify a geometric position: either by a direct position (a data type) or a point (a geometric object).
+     * pos elements are positions that are “owned” by the geometric primitive encapsulating this geometric position.
+     * pointProperty elements contain a point that may be referenced from other geometry elements or reference another point defined elsewhere (reuse of existing points).
+     * 
+     */
     @XmlElements({
         @XmlElement(name = "pos", type = DirectPositionType.class),
         @XmlElement(name = "pointProperty", type = PointPropertyType.class)
     })
     protected List<Object> geometricPositionGroup;
-    /**
-     * 
-     * 
-     */
     @XmlAttribute(name = "interpolation")
-    public final static CurveInterpolationType INTERPOLATION = CurveInterpolationType.GEODESIC;
+    public static final CurveInterpolationType INTERPOLATION = CurveInterpolationType.GEODESIC;
 
     /**
      * Recupera il valore della proprietà posList.
@@ -149,18 +148,22 @@ public class GeodesicStringType
     }
 
     /**
+     * GML supports two different ways to specify a geometric position: either by a direct position (a data type) or a point (a geometric object).
+     * pos elements are positions that are “owned” by the geometric primitive encapsulating this geometric position.
+     * pointProperty elements contain a point that may be referenced from other geometry elements or reference another point defined elsewhere (reuse of existing points).
+     * 
      * Gets the value of the geometricPositionGroup property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the geometricPositionGroup property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the geometricPositionGroup property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getGeometricPositionGroup().add(newItem);
+     * getGeometricPositionGroup().add(newItem);
      * </pre>
      * 
      * 
@@ -168,12 +171,15 @@ public class GeodesicStringType
      * Objects of the following type(s) are allowed in the list
      * {@link DirectPositionType }
      * {@link PointPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the geometricPositionGroup property.
      */
     public List<Object> getGeometricPositionGroup() {
         if (geometricPositionGroup == null) {
-            geometricPositionGroup = new ArrayList<Object>();
+            geometricPositionGroup = new ArrayList<>();
         }
         return this.geometricPositionGroup;
     }
@@ -186,13 +192,15 @@ public class GeodesicStringType
         this.geometricPositionGroup = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -200,28 +208,38 @@ public class GeodesicStringType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, this.isSetPosList());
         }
         {
             List<Object> theGeometricPositionGroup;
-            theGeometricPositionGroup = this.getGeometricPositionGroup();
-            strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup);
+            theGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
+            strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup, this.isSetGeometricPositionGroup());
         }
         {
             CurveInterpolationType theINTERPOLATION;
             theINTERPOLATION = GeodesicStringType.INTERPOLATION;
-            strategy.appendField(locator, this, "interpolation", buffer, theINTERPOLATION);
+            strategy.appendField(locator, this, "interpolation", buffer, theINTERPOLATION, true);
         }
         return buffer;
     }
 
+    public void setGeometricPositionGroup(List<Object> value) {
+        this.geometricPositionGroup = null;
+        if (value!= null) {
+            List<Object> draftl = this.getGeometricPositionGroup();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof GeodesicStringType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -236,93 +254,110 @@ public class GeodesicStringType
             lhsPosList = this.getPosList();
             DirectPositionListType rhsPosList;
             rhsPosList = that.getPosList();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "posList", lhsPosList), LocatorUtils.property(thatLocator, "posList", rhsPosList), lhsPosList, rhsPosList)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "posList", lhsPosList), LocatorUtils.property(thatLocator, "posList", rhsPosList), lhsPosList, rhsPosList, this.isSetPosList(), that.isSetPosList())) {
                 return false;
             }
         }
         {
             List<Object> lhsGeometricPositionGroup;
-            lhsGeometricPositionGroup = this.getGeometricPositionGroup();
+            lhsGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
             List<Object> rhsGeometricPositionGroup;
-            rhsGeometricPositionGroup = that.getGeometricPositionGroup();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(thatLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup)) {
+            rhsGeometricPositionGroup = (that.isSetGeometricPositionGroup()?that.getGeometricPositionGroup():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(thatLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup, this.isSetGeometricPositionGroup(), that.isSetGeometricPositionGroup())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "posList", thePosList), currentHashCode, thePosList);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "posList", thePosList), currentHashCode, thePosList, this.isSetPosList());
         }
         {
             List<Object> theGeometricPositionGroup;
-            theGeometricPositionGroup = this.getGeometricPositionGroup();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometricPositionGroup", theGeometricPositionGroup), currentHashCode, theGeometricPositionGroup);
+            theGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometricPositionGroup", theGeometricPositionGroup), currentHashCode, theGeometricPositionGroup, this.isSetGeometricPositionGroup());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof GeodesicStringType) {
             final GeodesicStringType copy = ((GeodesicStringType) draftCopy);
-            if (this.isSetPosList()) {
-                DirectPositionListType sourcePosList;
-                sourcePosList = this.getPosList();
-                DirectPositionListType copyPosList = ((DirectPositionListType) strategy.copy(LocatorUtils.property(locator, "posList", sourcePosList), sourcePosList));
-                copy.setPosList(copyPosList);
-            } else {
-                copy.posList = null;
+            {
+                java.lang.Boolean posListShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPosList());
+                if (posListShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionListType sourcePosList;
+                    sourcePosList = this.getPosList();
+                    DirectPositionListType copyPosList = ((DirectPositionListType) strategy.copy(LocatorUtils.property(locator, "posList", sourcePosList), sourcePosList, this.isSetPosList()));
+                    copy.setPosList(copyPosList);
+                } else {
+                    if (posListShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.posList = null;
+                    }
+                }
             }
-            if (this.isSetGeometricPositionGroup()) {
-                List<Object> sourceGeometricPositionGroup;
-                sourceGeometricPositionGroup = this.getGeometricPositionGroup();
-                @SuppressWarnings("unchecked")
-                List<Object> copyGeometricPositionGroup = ((List<Object> ) strategy.copy(LocatorUtils.property(locator, "geometricPositionGroup", sourceGeometricPositionGroup), sourceGeometricPositionGroup));
-                copy.unsetGeometricPositionGroup();
-                List<Object> uniqueGeometricPositionGroupl = copy.getGeometricPositionGroup();
-                uniqueGeometricPositionGroupl.addAll(copyGeometricPositionGroup);
-            } else {
-                copy.unsetGeometricPositionGroup();
+            {
+                java.lang.Boolean geometricPositionGroupShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGeometricPositionGroup());
+                if (geometricPositionGroupShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<Object> sourceGeometricPositionGroup;
+                    sourceGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
+                    @SuppressWarnings("unchecked")
+                    List<Object> copyGeometricPositionGroup = ((List<Object> ) strategy.copy(LocatorUtils.property(locator, "geometricPositionGroup", sourceGeometricPositionGroup), sourceGeometricPositionGroup, this.isSetGeometricPositionGroup()));
+                    copy.setGeometricPositionGroup(copyGeometricPositionGroup);
+                } else {
+                    if (geometricPositionGroupShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetGeometricPositionGroup();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new GeodesicStringType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof GeodesicStringType) {
@@ -330,71 +365,36 @@ public class GeodesicStringType
             final GeodesicStringType leftObject = ((GeodesicStringType) left);
             final GeodesicStringType rightObject = ((GeodesicStringType) right);
             {
-                DirectPositionListType lhsPosList;
-                lhsPosList = leftObject.getPosList();
-                DirectPositionListType rhsPosList;
-                rhsPosList = rightObject.getPosList();
-                target.setPosList(((DirectPositionListType) strategy.merge(LocatorUtils.property(leftLocator, "posList", lhsPosList), LocatorUtils.property(rightLocator, "posList", rhsPosList), lhsPosList, rhsPosList)));
+                java.lang.Boolean posListShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPosList(), rightObject.isSetPosList());
+                if (posListShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionListType lhsPosList;
+                    lhsPosList = leftObject.getPosList();
+                    DirectPositionListType rhsPosList;
+                    rhsPosList = rightObject.getPosList();
+                    DirectPositionListType mergedPosList = ((DirectPositionListType) strategy.merge(LocatorUtils.property(leftLocator, "posList", lhsPosList), LocatorUtils.property(rightLocator, "posList", rhsPosList), lhsPosList, rhsPosList, leftObject.isSetPosList(), rightObject.isSetPosList()));
+                    target.setPosList(mergedPosList);
+                } else {
+                    if (posListShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.posList = null;
+                    }
+                }
             }
             {
-                List<Object> lhsGeometricPositionGroup;
-                lhsGeometricPositionGroup = leftObject.getGeometricPositionGroup();
-                List<Object> rhsGeometricPositionGroup;
-                rhsGeometricPositionGroup = rightObject.getGeometricPositionGroup();
-                target.unsetGeometricPositionGroup();
-                List<Object> uniqueGeometricPositionGroupl = target.getGeometricPositionGroup();
-                uniqueGeometricPositionGroupl.addAll(((List<Object> ) strategy.merge(LocatorUtils.property(leftLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(rightLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup)));
+                java.lang.Boolean geometricPositionGroupShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGeometricPositionGroup(), rightObject.isSetGeometricPositionGroup());
+                if (geometricPositionGroupShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<Object> lhsGeometricPositionGroup;
+                    lhsGeometricPositionGroup = (leftObject.isSetGeometricPositionGroup()?leftObject.getGeometricPositionGroup():null);
+                    List<Object> rhsGeometricPositionGroup;
+                    rhsGeometricPositionGroup = (rightObject.isSetGeometricPositionGroup()?rightObject.getGeometricPositionGroup():null);
+                    List<Object> mergedGeometricPositionGroup = ((List<Object> ) strategy.merge(LocatorUtils.property(leftLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(rightLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup, leftObject.isSetGeometricPositionGroup(), rightObject.isSetGeometricPositionGroup()));
+                    target.setGeometricPositionGroup(mergedGeometricPositionGroup);
+                } else {
+                    if (geometricPositionGroupShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetGeometricPositionGroup();
+                    }
+                }
             }
         }
-    }
-
-    public void setGeometricPositionGroup(List<Object> value) {
-        List<Object> draftl = this.getGeometricPositionGroup();
-        draftl.addAll(value);
-    }
-
-    public GeodesicStringType withPosList(DirectPositionListType value) {
-        setPosList(value);
-        return this;
-    }
-
-    public GeodesicStringType withGeometricPositionGroup(Object... values) {
-        if (values!= null) {
-            for (Object value: values) {
-                getGeometricPositionGroup().add(value);
-            }
-        }
-        return this;
-    }
-
-    public GeodesicStringType withGeometricPositionGroup(Collection<Object> values) {
-        if (values!= null) {
-            getGeometricPositionGroup().addAll(values);
-        }
-        return this;
-    }
-
-    public GeodesicStringType withGeometricPositionGroup(List<Object> value) {
-        setGeometricPositionGroup(value);
-        return this;
-    }
-
-    @Override
-    public GeodesicStringType withNumDerivativesAtStart(BigInteger value) {
-        setNumDerivativesAtStart(value);
-        return this;
-    }
-
-    @Override
-    public GeodesicStringType withNumDerivativesAtEnd(BigInteger value) {
-        setNumDerivativesAtEnd(value);
-        return this;
-    }
-
-    @Override
-    public GeodesicStringType withNumDerivativeInterior(BigInteger value) {
-        setNumDerivativeInterior(value);
-        return this;
     }
 
 }

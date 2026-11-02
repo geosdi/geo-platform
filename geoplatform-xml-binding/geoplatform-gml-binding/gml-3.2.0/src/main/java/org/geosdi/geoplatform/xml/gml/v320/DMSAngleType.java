@@ -34,62 +34,62 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per DMSAngleType complex type.
+ * <p>Classe Java per DMSAngleType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DMSAngleType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}degrees"/>
- *         &lt;choice minOccurs="0">
- *           &lt;element ref="{http://www.opengis.net/gml}decimalMinutes"/>
- *           &lt;sequence>
- *             &lt;element ref="{http://www.opengis.net/gml}minutes"/>
- *             &lt;element ref="{http://www.opengis.net/gml}seconds" minOccurs="0"/>
- *           &lt;/sequence>
- *         &lt;/choice>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DMSAngleType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}degrees"/>
+ *         <choice minOccurs="0">
+ *           <element ref="{http://www.opengis.net/gml}decimalMinutes"/>
+ *           <sequence>
+ *             <element ref="{http://www.opengis.net/gml}minutes"/>
+ *             <element ref="{http://www.opengis.net/gml}seconds" minOccurs="0"/>
+ *           </sequence>
+ *         </choice>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,13 +100,13 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "minutes",
     "seconds"
 })
-public class DMSAngleType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class DMSAngleType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     @XmlElement(required = true)
     protected DegreesType degrees;
     protected BigDecimal decimalMinutes;
+    @XmlSchemaType(name = "nonNegativeInteger")
     protected Integer minutes;
     protected BigDecimal seconds;
 
@@ -222,13 +222,15 @@ public class DMSAngleType
         return (this.seconds!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -236,32 +238,34 @@ public class DMSAngleType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             DegreesType theDegrees;
             theDegrees = this.getDegrees();
-            strategy.appendField(locator, this, "degrees", buffer, theDegrees);
+            strategy.appendField(locator, this, "degrees", buffer, theDegrees, this.isSetDegrees());
         }
         {
             BigDecimal theDecimalMinutes;
             theDecimalMinutes = this.getDecimalMinutes();
-            strategy.appendField(locator, this, "decimalMinutes", buffer, theDecimalMinutes);
+            strategy.appendField(locator, this, "decimalMinutes", buffer, theDecimalMinutes, this.isSetDecimalMinutes());
         }
         {
             Integer theMinutes;
             theMinutes = this.getMinutes();
-            strategy.appendField(locator, this, "minutes", buffer, theMinutes);
+            strategy.appendField(locator, this, "minutes", buffer, theMinutes, this.isSetMinutes());
         }
         {
             BigDecimal theSeconds;
             theSeconds = this.getSeconds();
-            strategy.appendField(locator, this, "seconds", buffer, theSeconds);
+            strategy.appendField(locator, this, "seconds", buffer, theSeconds, this.isSetSeconds());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DMSAngleType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -273,7 +277,7 @@ public class DMSAngleType
             lhsDegrees = this.getDegrees();
             DegreesType rhsDegrees;
             rhsDegrees = that.getDegrees();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "degrees", lhsDegrees), LocatorUtils.property(thatLocator, "degrees", rhsDegrees), lhsDegrees, rhsDegrees)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "degrees", lhsDegrees), LocatorUtils.property(thatLocator, "degrees", rhsDegrees), lhsDegrees, rhsDegrees, this.isSetDegrees(), that.isSetDegrees())) {
                 return false;
             }
         }
@@ -282,7 +286,7 @@ public class DMSAngleType
             lhsDecimalMinutes = this.getDecimalMinutes();
             BigDecimal rhsDecimalMinutes;
             rhsDecimalMinutes = that.getDecimalMinutes();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "decimalMinutes", lhsDecimalMinutes), LocatorUtils.property(thatLocator, "decimalMinutes", rhsDecimalMinutes), lhsDecimalMinutes, rhsDecimalMinutes)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "decimalMinutes", lhsDecimalMinutes), LocatorUtils.property(thatLocator, "decimalMinutes", rhsDecimalMinutes), lhsDecimalMinutes, rhsDecimalMinutes, this.isSetDecimalMinutes(), that.isSetDecimalMinutes())) {
                 return false;
             }
         }
@@ -291,7 +295,7 @@ public class DMSAngleType
             lhsMinutes = this.getMinutes();
             Integer rhsMinutes;
             rhsMinutes = that.getMinutes();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "minutes", lhsMinutes), LocatorUtils.property(thatLocator, "minutes", rhsMinutes), lhsMinutes, rhsMinutes)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "minutes", lhsMinutes), LocatorUtils.property(thatLocator, "minutes", rhsMinutes), lhsMinutes, rhsMinutes, this.isSetMinutes(), that.isSetMinutes())) {
                 return false;
             }
         }
@@ -300,160 +304,201 @@ public class DMSAngleType
             lhsSeconds = this.getSeconds();
             BigDecimal rhsSeconds;
             rhsSeconds = that.getSeconds();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "seconds", lhsSeconds), LocatorUtils.property(thatLocator, "seconds", rhsSeconds), lhsSeconds, rhsSeconds)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "seconds", lhsSeconds), LocatorUtils.property(thatLocator, "seconds", rhsSeconds), lhsSeconds, rhsSeconds, this.isSetSeconds(), that.isSetSeconds())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             DegreesType theDegrees;
             theDegrees = this.getDegrees();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "degrees", theDegrees), currentHashCode, theDegrees);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "degrees", theDegrees), currentHashCode, theDegrees, this.isSetDegrees());
         }
         {
             BigDecimal theDecimalMinutes;
             theDecimalMinutes = this.getDecimalMinutes();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "decimalMinutes", theDecimalMinutes), currentHashCode, theDecimalMinutes);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "decimalMinutes", theDecimalMinutes), currentHashCode, theDecimalMinutes, this.isSetDecimalMinutes());
         }
         {
             Integer theMinutes;
             theMinutes = this.getMinutes();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "minutes", theMinutes), currentHashCode, theMinutes);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "minutes", theMinutes), currentHashCode, theMinutes, this.isSetMinutes());
         }
         {
             BigDecimal theSeconds;
             theSeconds = this.getSeconds();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "seconds", theSeconds), currentHashCode, theSeconds);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "seconds", theSeconds), currentHashCode, theSeconds, this.isSetSeconds());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof DMSAngleType) {
             final DMSAngleType copy = ((DMSAngleType) draftCopy);
-            if (this.isSetDegrees()) {
-                DegreesType sourceDegrees;
-                sourceDegrees = this.getDegrees();
-                DegreesType copyDegrees = ((DegreesType) strategy.copy(LocatorUtils.property(locator, "degrees", sourceDegrees), sourceDegrees));
-                copy.setDegrees(copyDegrees);
-            } else {
-                copy.degrees = null;
+            {
+                java.lang.Boolean degreesShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDegrees());
+                if (degreesShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DegreesType sourceDegrees;
+                    sourceDegrees = this.getDegrees();
+                    DegreesType copyDegrees = ((DegreesType) strategy.copy(LocatorUtils.property(locator, "degrees", sourceDegrees), sourceDegrees, this.isSetDegrees()));
+                    copy.setDegrees(copyDegrees);
+                } else {
+                    if (degreesShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.degrees = null;
+                    }
+                }
             }
-            if (this.isSetDecimalMinutes()) {
-                BigDecimal sourceDecimalMinutes;
-                sourceDecimalMinutes = this.getDecimalMinutes();
-                BigDecimal copyDecimalMinutes = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "decimalMinutes", sourceDecimalMinutes), sourceDecimalMinutes));
-                copy.setDecimalMinutes(copyDecimalMinutes);
-            } else {
-                copy.decimalMinutes = null;
+            {
+                java.lang.Boolean decimalMinutesShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDecimalMinutes());
+                if (decimalMinutesShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal sourceDecimalMinutes;
+                    sourceDecimalMinutes = this.getDecimalMinutes();
+                    BigDecimal copyDecimalMinutes = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "decimalMinutes", sourceDecimalMinutes), sourceDecimalMinutes, this.isSetDecimalMinutes()));
+                    copy.setDecimalMinutes(copyDecimalMinutes);
+                } else {
+                    if (decimalMinutesShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.decimalMinutes = null;
+                    }
+                }
             }
-            if (this.isSetMinutes()) {
-                Integer sourceMinutes;
-                sourceMinutes = this.getMinutes();
-                Integer copyMinutes = ((Integer) strategy.copy(LocatorUtils.property(locator, "minutes", sourceMinutes), sourceMinutes));
-                copy.setMinutes(copyMinutes);
-            } else {
-                copy.minutes = null;
+            {
+                java.lang.Boolean minutesShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMinutes());
+                if (minutesShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    Integer sourceMinutes;
+                    sourceMinutes = this.getMinutes();
+                    Integer copyMinutes = ((Integer) strategy.copy(LocatorUtils.property(locator, "minutes", sourceMinutes), sourceMinutes, this.isSetMinutes()));
+                    copy.setMinutes(copyMinutes);
+                } else {
+                    if (minutesShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.minutes = null;
+                    }
+                }
             }
-            if (this.isSetSeconds()) {
-                BigDecimal sourceSeconds;
-                sourceSeconds = this.getSeconds();
-                BigDecimal copySeconds = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "seconds", sourceSeconds), sourceSeconds));
-                copy.setSeconds(copySeconds);
-            } else {
-                copy.seconds = null;
+            {
+                java.lang.Boolean secondsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSeconds());
+                if (secondsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal sourceSeconds;
+                    sourceSeconds = this.getSeconds();
+                    BigDecimal copySeconds = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "seconds", sourceSeconds), sourceSeconds, this.isSetSeconds()));
+                    copy.setSeconds(copySeconds);
+                } else {
+                    if (secondsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.seconds = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DMSAngleType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof DMSAngleType) {
             final DMSAngleType target = this;
             final DMSAngleType leftObject = ((DMSAngleType) left);
             final DMSAngleType rightObject = ((DMSAngleType) right);
             {
-                DegreesType lhsDegrees;
-                lhsDegrees = leftObject.getDegrees();
-                DegreesType rhsDegrees;
-                rhsDegrees = rightObject.getDegrees();
-                target.setDegrees(((DegreesType) strategy.merge(LocatorUtils.property(leftLocator, "degrees", lhsDegrees), LocatorUtils.property(rightLocator, "degrees", rhsDegrees), lhsDegrees, rhsDegrees)));
+                java.lang.Boolean degreesShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDegrees(), rightObject.isSetDegrees());
+                if (degreesShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DegreesType lhsDegrees;
+                    lhsDegrees = leftObject.getDegrees();
+                    DegreesType rhsDegrees;
+                    rhsDegrees = rightObject.getDegrees();
+                    DegreesType mergedDegrees = ((DegreesType) strategy.merge(LocatorUtils.property(leftLocator, "degrees", lhsDegrees), LocatorUtils.property(rightLocator, "degrees", rhsDegrees), lhsDegrees, rhsDegrees, leftObject.isSetDegrees(), rightObject.isSetDegrees()));
+                    target.setDegrees(mergedDegrees);
+                } else {
+                    if (degreesShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.degrees = null;
+                    }
+                }
             }
             {
-                BigDecimal lhsDecimalMinutes;
-                lhsDecimalMinutes = leftObject.getDecimalMinutes();
-                BigDecimal rhsDecimalMinutes;
-                rhsDecimalMinutes = rightObject.getDecimalMinutes();
-                target.setDecimalMinutes(((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "decimalMinutes", lhsDecimalMinutes), LocatorUtils.property(rightLocator, "decimalMinutes", rhsDecimalMinutes), lhsDecimalMinutes, rhsDecimalMinutes)));
+                java.lang.Boolean decimalMinutesShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDecimalMinutes(), rightObject.isSetDecimalMinutes());
+                if (decimalMinutesShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal lhsDecimalMinutes;
+                    lhsDecimalMinutes = leftObject.getDecimalMinutes();
+                    BigDecimal rhsDecimalMinutes;
+                    rhsDecimalMinutes = rightObject.getDecimalMinutes();
+                    BigDecimal mergedDecimalMinutes = ((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "decimalMinutes", lhsDecimalMinutes), LocatorUtils.property(rightLocator, "decimalMinutes", rhsDecimalMinutes), lhsDecimalMinutes, rhsDecimalMinutes, leftObject.isSetDecimalMinutes(), rightObject.isSetDecimalMinutes()));
+                    target.setDecimalMinutes(mergedDecimalMinutes);
+                } else {
+                    if (decimalMinutesShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.decimalMinutes = null;
+                    }
+                }
             }
             {
-                Integer lhsMinutes;
-                lhsMinutes = leftObject.getMinutes();
-                Integer rhsMinutes;
-                rhsMinutes = rightObject.getMinutes();
-                target.setMinutes(((Integer) strategy.merge(LocatorUtils.property(leftLocator, "minutes", lhsMinutes), LocatorUtils.property(rightLocator, "minutes", rhsMinutes), lhsMinutes, rhsMinutes)));
+                java.lang.Boolean minutesShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMinutes(), rightObject.isSetMinutes());
+                if (minutesShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    Integer lhsMinutes;
+                    lhsMinutes = leftObject.getMinutes();
+                    Integer rhsMinutes;
+                    rhsMinutes = rightObject.getMinutes();
+                    Integer mergedMinutes = ((Integer) strategy.merge(LocatorUtils.property(leftLocator, "minutes", lhsMinutes), LocatorUtils.property(rightLocator, "minutes", rhsMinutes), lhsMinutes, rhsMinutes, leftObject.isSetMinutes(), rightObject.isSetMinutes()));
+                    target.setMinutes(mergedMinutes);
+                } else {
+                    if (minutesShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.minutes = null;
+                    }
+                }
             }
             {
-                BigDecimal lhsSeconds;
-                lhsSeconds = leftObject.getSeconds();
-                BigDecimal rhsSeconds;
-                rhsSeconds = rightObject.getSeconds();
-                target.setSeconds(((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "seconds", lhsSeconds), LocatorUtils.property(rightLocator, "seconds", rhsSeconds), lhsSeconds, rhsSeconds)));
+                java.lang.Boolean secondsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSeconds(), rightObject.isSetSeconds());
+                if (secondsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal lhsSeconds;
+                    lhsSeconds = leftObject.getSeconds();
+                    BigDecimal rhsSeconds;
+                    rhsSeconds = rightObject.getSeconds();
+                    BigDecimal mergedSeconds = ((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "seconds", lhsSeconds), LocatorUtils.property(rightLocator, "seconds", rhsSeconds), lhsSeconds, rhsSeconds, leftObject.isSetSeconds(), rightObject.isSetSeconds()));
+                    target.setSeconds(mergedSeconds);
+                } else {
+                    if (secondsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.seconds = null;
+                    }
+                }
             }
         }
-    }
-
-    public DMSAngleType withDegrees(DegreesType value) {
-        setDegrees(value);
-        return this;
-    }
-
-    public DMSAngleType withDecimalMinutes(BigDecimal value) {
-        setDecimalMinutes(value);
-        return this;
-    }
-
-    public DMSAngleType withMinutes(Integer value) {
-        setMinutes(value);
-        return this;
-    }
-
-    public DMSAngleType withSeconds(BigDecimal value) {
-        setSeconds(value);
-        return this;
     }
 
 }

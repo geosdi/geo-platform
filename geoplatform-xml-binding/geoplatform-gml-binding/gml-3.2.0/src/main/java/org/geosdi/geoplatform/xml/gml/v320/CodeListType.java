@@ -34,59 +34,57 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * gml:CodeListType provides for lists of terms. The values in an instance element shall all be valid according to the rules of the dictionary, classification scheme, or authority identified by the value of its codeSpace attribute.
  * 
- * <p>Classe Java per CodeListType complex type.
+ * <p>Classe Java per CodeListType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CodeListType">
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.opengis.net/gml>NameList">
- *       &lt;attribute name="codeSpace" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *     &lt;/extension>
- *   &lt;/simpleContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CodeListType">
+ *   <simpleContent>
+ *     <extension base="<http://www.opengis.net/gml>NameList">
+ *       <attribute name="codeSpace" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
+ *     </extension>
+ *   </simpleContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -94,10 +92,13 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "CodeListType", propOrder = {
     "value"
 })
-public class CodeListType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class CodeListType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * A type for a list of values of the respective simple type.
+     * 
+     */
     @XmlValue
     protected List<String> value;
     @XmlAttribute(name = "codeSpace")
@@ -105,30 +106,35 @@ public class CodeListType
     protected String codeSpace;
 
     /**
-     * A type for a list of values of the respective simple type.Gets the value of the value property.
+     * A type for a list of values of the respective simple type.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * Gets the value of the value property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the value property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getValue().add(newItem);
+     * getValue().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the value property.
      */
     public List<String> getValue() {
         if (value == null) {
-            value = new ArrayList<String>();
+            value = new ArrayList<>();
         }
         return this.value;
     }
@@ -169,13 +175,15 @@ public class CodeListType
         return (this.codeSpace!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -183,22 +191,32 @@ public class CodeListType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<String> theValue;
-            theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            theValue = (this.isSetValue()?this.getValue():null);
+            strategy.appendField(locator, this, "value", buffer, theValue, this.isSetValue());
         }
         {
             String theCodeSpace;
             theCodeSpace = this.getCodeSpace();
-            strategy.appendField(locator, this, "codeSpace", buffer, theCodeSpace);
+            strategy.appendField(locator, this, "codeSpace", buffer, theCodeSpace, this.isSetCodeSpace());
         }
         return buffer;
     }
 
+    public void setValue(List<String> value) {
+        this.value = null;
+        if (value!= null) {
+            List<String> draftl = this.getValue();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CodeListType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -207,10 +225,10 @@ public class CodeListType
         final CodeListType that = ((CodeListType) object);
         {
             List<String> lhsValue;
-            lhsValue = this.getValue();
+            lhsValue = (this.isSetValue()?this.getValue():null);
             List<String> rhsValue;
-            rhsValue = that.getValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue)) {
+            rhsValue = (that.isSetValue()?that.getValue():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue, this.isSetValue(), that.isSetValue())) {
                 return false;
             }
         }
@@ -219,136 +237,136 @@ public class CodeListType
             lhsCodeSpace = this.getCodeSpace();
             String rhsCodeSpace;
             rhsCodeSpace = that.getCodeSpace();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "codeSpace", lhsCodeSpace), LocatorUtils.property(thatLocator, "codeSpace", rhsCodeSpace), lhsCodeSpace, rhsCodeSpace)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "codeSpace", lhsCodeSpace), LocatorUtils.property(thatLocator, "codeSpace", rhsCodeSpace), lhsCodeSpace, rhsCodeSpace, this.isSetCodeSpace(), that.isSetCodeSpace())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             List<String> theValue;
-            theValue = this.getValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue);
+            theValue = (this.isSetValue()?this.getValue():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue, this.isSetValue());
         }
         {
             String theCodeSpace;
             theCodeSpace = this.getCodeSpace();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "codeSpace", theCodeSpace), currentHashCode, theCodeSpace);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "codeSpace", theCodeSpace), currentHashCode, theCodeSpace, this.isSetCodeSpace());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof CodeListType) {
             final CodeListType copy = ((CodeListType) draftCopy);
-            if (this.isSetValue()) {
-                List<String> sourceValue;
-                sourceValue = this.getValue();
-                @SuppressWarnings("unchecked")
-                List<String> copyValue = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue));
-                copy.unsetValue();
-                List<String> uniqueValuel = copy.getValue();
-                uniqueValuel.addAll(copyValue);
-            } else {
-                copy.unsetValue();
+            {
+                java.lang.Boolean valueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValue());
+                if (valueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceValue;
+                    sourceValue = (this.isSetValue()?this.getValue():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyValue = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue, this.isSetValue()));
+                    copy.setValue(copyValue);
+                } else {
+                    if (valueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetValue();
+                    }
+                }
             }
-            if (this.isSetCodeSpace()) {
-                String sourceCodeSpace;
-                sourceCodeSpace = this.getCodeSpace();
-                String copyCodeSpace = ((String) strategy.copy(LocatorUtils.property(locator, "codeSpace", sourceCodeSpace), sourceCodeSpace));
-                copy.setCodeSpace(copyCodeSpace);
-            } else {
-                copy.codeSpace = null;
+            {
+                java.lang.Boolean codeSpaceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCodeSpace());
+                if (codeSpaceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceCodeSpace;
+                    sourceCodeSpace = this.getCodeSpace();
+                    String copyCodeSpace = ((String) strategy.copy(LocatorUtils.property(locator, "codeSpace", sourceCodeSpace), sourceCodeSpace, this.isSetCodeSpace()));
+                    copy.setCodeSpace(copyCodeSpace);
+                } else {
+                    if (codeSpaceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.codeSpace = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CodeListType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof CodeListType) {
             final CodeListType target = this;
             final CodeListType leftObject = ((CodeListType) left);
             final CodeListType rightObject = ((CodeListType) right);
             {
-                List<String> lhsValue;
-                lhsValue = leftObject.getValue();
-                List<String> rhsValue;
-                rhsValue = rightObject.getValue();
-                target.unsetValue();
-                List<String> uniqueValuel = target.getValue();
-                uniqueValuel.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue)));
+                java.lang.Boolean valueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValue(), rightObject.isSetValue());
+                if (valueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsValue;
+                    lhsValue = (leftObject.isSetValue()?leftObject.getValue():null);
+                    List<String> rhsValue;
+                    rhsValue = (rightObject.isSetValue()?rightObject.getValue():null);
+                    List<String> mergedValue = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue, leftObject.isSetValue(), rightObject.isSetValue()));
+                    target.setValue(mergedValue);
+                } else {
+                    if (valueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetValue();
+                    }
+                }
             }
             {
-                String lhsCodeSpace;
-                lhsCodeSpace = leftObject.getCodeSpace();
-                String rhsCodeSpace;
-                rhsCodeSpace = rightObject.getCodeSpace();
-                target.setCodeSpace(((String) strategy.merge(LocatorUtils.property(leftLocator, "codeSpace", lhsCodeSpace), LocatorUtils.property(rightLocator, "codeSpace", rhsCodeSpace), lhsCodeSpace, rhsCodeSpace)));
+                java.lang.Boolean codeSpaceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCodeSpace(), rightObject.isSetCodeSpace());
+                if (codeSpaceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsCodeSpace;
+                    lhsCodeSpace = leftObject.getCodeSpace();
+                    String rhsCodeSpace;
+                    rhsCodeSpace = rightObject.getCodeSpace();
+                    String mergedCodeSpace = ((String) strategy.merge(LocatorUtils.property(leftLocator, "codeSpace", lhsCodeSpace), LocatorUtils.property(rightLocator, "codeSpace", rhsCodeSpace), lhsCodeSpace, rhsCodeSpace, leftObject.isSetCodeSpace(), rightObject.isSetCodeSpace()));
+                    target.setCodeSpace(mergedCodeSpace);
+                } else {
+                    if (codeSpaceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.codeSpace = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setValue(List<String> value) {
-        List<String> draftl = this.getValue();
-        draftl.addAll(value);
-    }
-
-    public CodeListType withValue(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getValue().add(value);
-            }
-        }
-        return this;
-    }
-
-    public CodeListType withValue(Collection<String> values) {
-        if (values!= null) {
-            getValue().addAll(values);
-        }
-        return this;
-    }
-
-    public CodeListType withCodeSpace(String value) {
-        setCodeSpace(value);
-        return this;
-    }
-
-    public CodeListType withValue(List<String> value) {
-        setValue(value);
-        return this;
     }
 
 }

@@ -34,58 +34,57 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimeIntervalLengthType complex type.
+ * <p>Classe Java per TimeIntervalLengthType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimeIntervalLengthType">
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>decimal">
- *       &lt;attribute name="unit" use="required" type="{http://www.opengis.net/gml}TimeUnitType" />
- *       &lt;attribute name="radix" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
- *       &lt;attribute name="factor" type="{http://www.w3.org/2001/XMLSchema}integer" />
- *     &lt;/extension>
- *   &lt;/simpleContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimeIntervalLengthType">
+ *   <simpleContent>
+ *     <extension base="<http://www.w3.org/2001/XMLSchema>decimal">
+ *       <attribute name="unit" use="required" type="{http://www.opengis.net/gml}TimeUnitType" />
+ *       <attribute name="radix" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
+ *       <attribute name="factor" type="{http://www.w3.org/2001/XMLSchema}integer" />
+ *     </extension>
+ *   </simpleContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -93,8 +92,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "TimeIntervalLengthType", propOrder = {
     "value"
 })
-public class TimeIntervalLengthType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class TimeIntervalLengthType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     @XmlValue
@@ -219,13 +217,15 @@ public class TimeIntervalLengthType
         return (this.factor!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -233,32 +233,34 @@ public class TimeIntervalLengthType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             BigDecimal theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, this.isSetValue());
         }
         {
             String theUnit;
             theUnit = this.getUnit();
-            strategy.appendField(locator, this, "unit", buffer, theUnit);
+            strategy.appendField(locator, this, "unit", buffer, theUnit, this.isSetUnit());
         }
         {
             BigInteger theRadix;
             theRadix = this.getRadix();
-            strategy.appendField(locator, this, "radix", buffer, theRadix);
+            strategy.appendField(locator, this, "radix", buffer, theRadix, this.isSetRadix());
         }
         {
             BigInteger theFactor;
             theFactor = this.getFactor();
-            strategy.appendField(locator, this, "factor", buffer, theFactor);
+            strategy.appendField(locator, this, "factor", buffer, theFactor, this.isSetFactor());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimeIntervalLengthType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -270,7 +272,7 @@ public class TimeIntervalLengthType
             lhsValue = this.getValue();
             BigDecimal rhsValue;
             rhsValue = that.getValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue, this.isSetValue(), that.isSetValue())) {
                 return false;
             }
         }
@@ -279,7 +281,7 @@ public class TimeIntervalLengthType
             lhsUnit = this.getUnit();
             String rhsUnit;
             rhsUnit = that.getUnit();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "unit", lhsUnit), LocatorUtils.property(thatLocator, "unit", rhsUnit), lhsUnit, rhsUnit)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "unit", lhsUnit), LocatorUtils.property(thatLocator, "unit", rhsUnit), lhsUnit, rhsUnit, this.isSetUnit(), that.isSetUnit())) {
                 return false;
             }
         }
@@ -288,7 +290,7 @@ public class TimeIntervalLengthType
             lhsRadix = this.getRadix();
             BigInteger rhsRadix;
             rhsRadix = that.getRadix();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "radix", lhsRadix), LocatorUtils.property(thatLocator, "radix", rhsRadix), lhsRadix, rhsRadix)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "radix", lhsRadix), LocatorUtils.property(thatLocator, "radix", rhsRadix), lhsRadix, rhsRadix, this.isSetRadix(), that.isSetRadix())) {
                 return false;
             }
         }
@@ -297,160 +299,201 @@ public class TimeIntervalLengthType
             lhsFactor = this.getFactor();
             BigInteger rhsFactor;
             rhsFactor = that.getFactor();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "factor", lhsFactor), LocatorUtils.property(thatLocator, "factor", rhsFactor), lhsFactor, rhsFactor)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "factor", lhsFactor), LocatorUtils.property(thatLocator, "factor", rhsFactor), lhsFactor, rhsFactor, this.isSetFactor(), that.isSetFactor())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             BigDecimal theValue;
             theValue = this.getValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue, this.isSetValue());
         }
         {
             String theUnit;
             theUnit = this.getUnit();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "unit", theUnit), currentHashCode, theUnit);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "unit", theUnit), currentHashCode, theUnit, this.isSetUnit());
         }
         {
             BigInteger theRadix;
             theRadix = this.getRadix();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "radix", theRadix), currentHashCode, theRadix);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "radix", theRadix), currentHashCode, theRadix, this.isSetRadix());
         }
         {
             BigInteger theFactor;
             theFactor = this.getFactor();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "factor", theFactor), currentHashCode, theFactor);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "factor", theFactor), currentHashCode, theFactor, this.isSetFactor());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof TimeIntervalLengthType) {
             final TimeIntervalLengthType copy = ((TimeIntervalLengthType) draftCopy);
-            if (this.isSetValue()) {
-                BigDecimal sourceValue;
-                sourceValue = this.getValue();
-                BigDecimal copyValue = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue));
-                copy.setValue(copyValue);
-            } else {
-                copy.value = null;
+            {
+                java.lang.Boolean valueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValue());
+                if (valueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal sourceValue;
+                    sourceValue = this.getValue();
+                    BigDecimal copyValue = ((BigDecimal) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue, this.isSetValue()));
+                    copy.setValue(copyValue);
+                } else {
+                    if (valueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.value = null;
+                    }
+                }
             }
-            if (this.isSetUnit()) {
-                String sourceUnit;
-                sourceUnit = this.getUnit();
-                String copyUnit = ((String) strategy.copy(LocatorUtils.property(locator, "unit", sourceUnit), sourceUnit));
-                copy.setUnit(copyUnit);
-            } else {
-                copy.unit = null;
+            {
+                java.lang.Boolean unitShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUnit());
+                if (unitShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceUnit;
+                    sourceUnit = this.getUnit();
+                    String copyUnit = ((String) strategy.copy(LocatorUtils.property(locator, "unit", sourceUnit), sourceUnit, this.isSetUnit()));
+                    copy.setUnit(copyUnit);
+                } else {
+                    if (unitShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unit = null;
+                    }
+                }
             }
-            if (this.isSetRadix()) {
-                BigInteger sourceRadix;
-                sourceRadix = this.getRadix();
-                BigInteger copyRadix = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "radix", sourceRadix), sourceRadix));
-                copy.setRadix(copyRadix);
-            } else {
-                copy.radix = null;
+            {
+                java.lang.Boolean radixShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRadix());
+                if (radixShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceRadix;
+                    sourceRadix = this.getRadix();
+                    BigInteger copyRadix = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "radix", sourceRadix), sourceRadix, this.isSetRadix()));
+                    copy.setRadix(copyRadix);
+                } else {
+                    if (radixShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.radix = null;
+                    }
+                }
             }
-            if (this.isSetFactor()) {
-                BigInteger sourceFactor;
-                sourceFactor = this.getFactor();
-                BigInteger copyFactor = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "factor", sourceFactor), sourceFactor));
-                copy.setFactor(copyFactor);
-            } else {
-                copy.factor = null;
+            {
+                java.lang.Boolean factorShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFactor());
+                if (factorShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceFactor;
+                    sourceFactor = this.getFactor();
+                    BigInteger copyFactor = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "factor", sourceFactor), sourceFactor, this.isSetFactor()));
+                    copy.setFactor(copyFactor);
+                } else {
+                    if (factorShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.factor = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TimeIntervalLengthType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof TimeIntervalLengthType) {
             final TimeIntervalLengthType target = this;
             final TimeIntervalLengthType leftObject = ((TimeIntervalLengthType) left);
             final TimeIntervalLengthType rightObject = ((TimeIntervalLengthType) right);
             {
-                BigDecimal lhsValue;
-                lhsValue = leftObject.getValue();
-                BigDecimal rhsValue;
-                rhsValue = rightObject.getValue();
-                target.setValue(((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue)));
+                java.lang.Boolean valueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValue(), rightObject.isSetValue());
+                if (valueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigDecimal lhsValue;
+                    lhsValue = leftObject.getValue();
+                    BigDecimal rhsValue;
+                    rhsValue = rightObject.getValue();
+                    BigDecimal mergedValue = ((BigDecimal) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue, leftObject.isSetValue(), rightObject.isSetValue()));
+                    target.setValue(mergedValue);
+                } else {
+                    if (valueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.value = null;
+                    }
+                }
             }
             {
-                String lhsUnit;
-                lhsUnit = leftObject.getUnit();
-                String rhsUnit;
-                rhsUnit = rightObject.getUnit();
-                target.setUnit(((String) strategy.merge(LocatorUtils.property(leftLocator, "unit", lhsUnit), LocatorUtils.property(rightLocator, "unit", rhsUnit), lhsUnit, rhsUnit)));
+                java.lang.Boolean unitShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUnit(), rightObject.isSetUnit());
+                if (unitShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsUnit;
+                    lhsUnit = leftObject.getUnit();
+                    String rhsUnit;
+                    rhsUnit = rightObject.getUnit();
+                    String mergedUnit = ((String) strategy.merge(LocatorUtils.property(leftLocator, "unit", lhsUnit), LocatorUtils.property(rightLocator, "unit", rhsUnit), lhsUnit, rhsUnit, leftObject.isSetUnit(), rightObject.isSetUnit()));
+                    target.setUnit(mergedUnit);
+                } else {
+                    if (unitShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unit = null;
+                    }
+                }
             }
             {
-                BigInteger lhsRadix;
-                lhsRadix = leftObject.getRadix();
-                BigInteger rhsRadix;
-                rhsRadix = rightObject.getRadix();
-                target.setRadix(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "radix", lhsRadix), LocatorUtils.property(rightLocator, "radix", rhsRadix), lhsRadix, rhsRadix)));
+                java.lang.Boolean radixShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRadix(), rightObject.isSetRadix());
+                if (radixShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsRadix;
+                    lhsRadix = leftObject.getRadix();
+                    BigInteger rhsRadix;
+                    rhsRadix = rightObject.getRadix();
+                    BigInteger mergedRadix = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "radix", lhsRadix), LocatorUtils.property(rightLocator, "radix", rhsRadix), lhsRadix, rhsRadix, leftObject.isSetRadix(), rightObject.isSetRadix()));
+                    target.setRadix(mergedRadix);
+                } else {
+                    if (radixShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.radix = null;
+                    }
+                }
             }
             {
-                BigInteger lhsFactor;
-                lhsFactor = leftObject.getFactor();
-                BigInteger rhsFactor;
-                rhsFactor = rightObject.getFactor();
-                target.setFactor(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "factor", lhsFactor), LocatorUtils.property(rightLocator, "factor", rhsFactor), lhsFactor, rhsFactor)));
+                java.lang.Boolean factorShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFactor(), rightObject.isSetFactor());
+                if (factorShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsFactor;
+                    lhsFactor = leftObject.getFactor();
+                    BigInteger rhsFactor;
+                    rhsFactor = rightObject.getFactor();
+                    BigInteger mergedFactor = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "factor", lhsFactor), LocatorUtils.property(rightLocator, "factor", rhsFactor), lhsFactor, rhsFactor, leftObject.isSetFactor(), rightObject.isSetFactor()));
+                    target.setFactor(mergedFactor);
+                } else {
+                    if (factorShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.factor = null;
+                    }
+                }
             }
         }
-    }
-
-    public TimeIntervalLengthType withValue(BigDecimal value) {
-        setValue(value);
-        return this;
-    }
-
-    public TimeIntervalLengthType withUnit(String value) {
-        setUnit(value);
-        return this;
-    }
-
-    public TimeIntervalLengthType withRadix(BigInteger value) {
-        setRadix(value);
-        return this;
-    }
-
-    public TimeIntervalLengthType withFactor(BigInteger value) {
-        setFactor(value);
-        return this;
     }
 
 }

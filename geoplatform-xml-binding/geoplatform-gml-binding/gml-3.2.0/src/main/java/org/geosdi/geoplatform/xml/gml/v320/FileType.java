@@ -34,62 +34,61 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per FileType complex type.
+ * <p>Classe Java per FileType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="FileType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}rangeParameters"/>
- *         &lt;choice>
- *           &lt;element name="fileName" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
- *           &lt;element name="fileReference" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
- *         &lt;/choice>
- *         &lt;element name="fileStructure" type="{http://www.opengis.net/gml}FileValueModelType"/>
- *         &lt;element name="mimeType" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="compression" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="FileType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}rangeParameters"/>
+ *         <choice>
+ *           <element name="fileName" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
+ *           <element name="fileReference" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
+ *         </choice>
+ *         <element name="fileStructure" type="{http://www.opengis.net/gml}FileValueModelType"/>
+ *         <element name="mimeType" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         <element name="compression" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -112,6 +111,7 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
     @XmlSchemaType(name = "anyURI")
     protected String fileReference;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected FileValueModelType fileStructure;
     @XmlSchemaType(name = "anyURI")
     protected String mimeType;
@@ -286,13 +286,15 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
         return (this.compression!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -300,42 +302,44 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             RangeParametersType theRangeParameters;
             theRangeParameters = this.getRangeParameters();
-            strategy.appendField(locator, this, "rangeParameters", buffer, theRangeParameters);
+            strategy.appendField(locator, this, "rangeParameters", buffer, theRangeParameters, this.isSetRangeParameters());
         }
         {
             String theFileName;
             theFileName = this.getFileName();
-            strategy.appendField(locator, this, "fileName", buffer, theFileName);
+            strategy.appendField(locator, this, "fileName", buffer, theFileName, this.isSetFileName());
         }
         {
             String theFileReference;
             theFileReference = this.getFileReference();
-            strategy.appendField(locator, this, "fileReference", buffer, theFileReference);
+            strategy.appendField(locator, this, "fileReference", buffer, theFileReference, this.isSetFileReference());
         }
         {
             FileValueModelType theFileStructure;
             theFileStructure = this.getFileStructure();
-            strategy.appendField(locator, this, "fileStructure", buffer, theFileStructure);
+            strategy.appendField(locator, this, "fileStructure", buffer, theFileStructure, this.isSetFileStructure());
         }
         {
             String theMimeType;
             theMimeType = this.getMimeType();
-            strategy.appendField(locator, this, "mimeType", buffer, theMimeType);
+            strategy.appendField(locator, this, "mimeType", buffer, theMimeType, this.isSetMimeType());
         }
         {
             String theCompression;
             theCompression = this.getCompression();
-            strategy.appendField(locator, this, "compression", buffer, theCompression);
+            strategy.appendField(locator, this, "compression", buffer, theCompression, this.isSetCompression());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof FileType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -347,7 +351,7 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
             lhsRangeParameters = this.getRangeParameters();
             RangeParametersType rhsRangeParameters;
             rhsRangeParameters = that.getRangeParameters();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(thatLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(thatLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters, this.isSetRangeParameters(), that.isSetRangeParameters())) {
                 return false;
             }
         }
@@ -356,7 +360,7 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
             lhsFileName = this.getFileName();
             String rhsFileName;
             rhsFileName = that.getFileName();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "fileName", lhsFileName), LocatorUtils.property(thatLocator, "fileName", rhsFileName), lhsFileName, rhsFileName)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "fileName", lhsFileName), LocatorUtils.property(thatLocator, "fileName", rhsFileName), lhsFileName, rhsFileName, this.isSetFileName(), that.isSetFileName())) {
                 return false;
             }
         }
@@ -365,7 +369,7 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
             lhsFileReference = this.getFileReference();
             String rhsFileReference;
             rhsFileReference = that.getFileReference();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "fileReference", lhsFileReference), LocatorUtils.property(thatLocator, "fileReference", rhsFileReference), lhsFileReference, rhsFileReference)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "fileReference", lhsFileReference), LocatorUtils.property(thatLocator, "fileReference", rhsFileReference), lhsFileReference, rhsFileReference, this.isSetFileReference(), that.isSetFileReference())) {
                 return false;
             }
         }
@@ -374,7 +378,7 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
             lhsFileStructure = this.getFileStructure();
             FileValueModelType rhsFileStructure;
             rhsFileStructure = that.getFileStructure();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "fileStructure", lhsFileStructure), LocatorUtils.property(thatLocator, "fileStructure", rhsFileStructure), lhsFileStructure, rhsFileStructure)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "fileStructure", lhsFileStructure), LocatorUtils.property(thatLocator, "fileStructure", rhsFileStructure), lhsFileStructure, rhsFileStructure, this.isSetFileStructure(), that.isSetFileStructure())) {
                 return false;
             }
         }
@@ -383,7 +387,7 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
             lhsMimeType = this.getMimeType();
             String rhsMimeType;
             rhsMimeType = that.getMimeType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "mimeType", lhsMimeType), LocatorUtils.property(thatLocator, "mimeType", rhsMimeType), lhsMimeType, rhsMimeType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "mimeType", lhsMimeType), LocatorUtils.property(thatLocator, "mimeType", rhsMimeType), lhsMimeType, rhsMimeType, this.isSetMimeType(), that.isSetMimeType())) {
                 return false;
             }
         }
@@ -392,210 +396,267 @@ public class FileType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom,
             lhsCompression = this.getCompression();
             String rhsCompression;
             rhsCompression = that.getCompression();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "compression", lhsCompression), LocatorUtils.property(thatLocator, "compression", rhsCompression), lhsCompression, rhsCompression)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "compression", lhsCompression), LocatorUtils.property(thatLocator, "compression", rhsCompression), lhsCompression, rhsCompression, this.isSetCompression(), that.isSetCompression())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             RangeParametersType theRangeParameters;
             theRangeParameters = this.getRangeParameters();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeParameters", theRangeParameters), currentHashCode, theRangeParameters);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeParameters", theRangeParameters), currentHashCode, theRangeParameters, this.isSetRangeParameters());
         }
         {
             String theFileName;
             theFileName = this.getFileName();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "fileName", theFileName), currentHashCode, theFileName);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "fileName", theFileName), currentHashCode, theFileName, this.isSetFileName());
         }
         {
             String theFileReference;
             theFileReference = this.getFileReference();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "fileReference", theFileReference), currentHashCode, theFileReference);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "fileReference", theFileReference), currentHashCode, theFileReference, this.isSetFileReference());
         }
         {
             FileValueModelType theFileStructure;
             theFileStructure = this.getFileStructure();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "fileStructure", theFileStructure), currentHashCode, theFileStructure);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "fileStructure", theFileStructure), currentHashCode, theFileStructure, this.isSetFileStructure());
         }
         {
             String theMimeType;
             theMimeType = this.getMimeType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "mimeType", theMimeType), currentHashCode, theMimeType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "mimeType", theMimeType), currentHashCode, theMimeType, this.isSetMimeType());
         }
         {
             String theCompression;
             theCompression = this.getCompression();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "compression", theCompression), currentHashCode, theCompression);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "compression", theCompression), currentHashCode, theCompression, this.isSetCompression());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof FileType) {
             final FileType copy = ((FileType) draftCopy);
-            if (this.isSetRangeParameters()) {
-                RangeParametersType sourceRangeParameters;
-                sourceRangeParameters = this.getRangeParameters();
-                RangeParametersType copyRangeParameters = ((RangeParametersType) strategy.copy(LocatorUtils.property(locator, "rangeParameters", sourceRangeParameters), sourceRangeParameters));
-                copy.setRangeParameters(copyRangeParameters);
-            } else {
-                copy.rangeParameters = null;
+            {
+                java.lang.Boolean rangeParametersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRangeParameters());
+                if (rangeParametersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    RangeParametersType sourceRangeParameters;
+                    sourceRangeParameters = this.getRangeParameters();
+                    RangeParametersType copyRangeParameters = ((RangeParametersType) strategy.copy(LocatorUtils.property(locator, "rangeParameters", sourceRangeParameters), sourceRangeParameters, this.isSetRangeParameters()));
+                    copy.setRangeParameters(copyRangeParameters);
+                } else {
+                    if (rangeParametersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.rangeParameters = null;
+                    }
+                }
             }
-            if (this.isSetFileName()) {
-                String sourceFileName;
-                sourceFileName = this.getFileName();
-                String copyFileName = ((String) strategy.copy(LocatorUtils.property(locator, "fileName", sourceFileName), sourceFileName));
-                copy.setFileName(copyFileName);
-            } else {
-                copy.fileName = null;
+            {
+                java.lang.Boolean fileNameShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFileName());
+                if (fileNameShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceFileName;
+                    sourceFileName = this.getFileName();
+                    String copyFileName = ((String) strategy.copy(LocatorUtils.property(locator, "fileName", sourceFileName), sourceFileName, this.isSetFileName()));
+                    copy.setFileName(copyFileName);
+                } else {
+                    if (fileNameShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.fileName = null;
+                    }
+                }
             }
-            if (this.isSetFileReference()) {
-                String sourceFileReference;
-                sourceFileReference = this.getFileReference();
-                String copyFileReference = ((String) strategy.copy(LocatorUtils.property(locator, "fileReference", sourceFileReference), sourceFileReference));
-                copy.setFileReference(copyFileReference);
-            } else {
-                copy.fileReference = null;
+            {
+                java.lang.Boolean fileReferenceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFileReference());
+                if (fileReferenceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceFileReference;
+                    sourceFileReference = this.getFileReference();
+                    String copyFileReference = ((String) strategy.copy(LocatorUtils.property(locator, "fileReference", sourceFileReference), sourceFileReference, this.isSetFileReference()));
+                    copy.setFileReference(copyFileReference);
+                } else {
+                    if (fileReferenceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.fileReference = null;
+                    }
+                }
             }
-            if (this.isSetFileStructure()) {
-                FileValueModelType sourceFileStructure;
-                sourceFileStructure = this.getFileStructure();
-                FileValueModelType copyFileStructure = ((FileValueModelType) strategy.copy(LocatorUtils.property(locator, "fileStructure", sourceFileStructure), sourceFileStructure));
-                copy.setFileStructure(copyFileStructure);
-            } else {
-                copy.fileStructure = null;
+            {
+                java.lang.Boolean fileStructureShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFileStructure());
+                if (fileStructureShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    FileValueModelType sourceFileStructure;
+                    sourceFileStructure = this.getFileStructure();
+                    FileValueModelType copyFileStructure = ((FileValueModelType) strategy.copy(LocatorUtils.property(locator, "fileStructure", sourceFileStructure), sourceFileStructure, this.isSetFileStructure()));
+                    copy.setFileStructure(copyFileStructure);
+                } else {
+                    if (fileStructureShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.fileStructure = null;
+                    }
+                }
             }
-            if (this.isSetMimeType()) {
-                String sourceMimeType;
-                sourceMimeType = this.getMimeType();
-                String copyMimeType = ((String) strategy.copy(LocatorUtils.property(locator, "mimeType", sourceMimeType), sourceMimeType));
-                copy.setMimeType(copyMimeType);
-            } else {
-                copy.mimeType = null;
+            {
+                java.lang.Boolean mimeTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMimeType());
+                if (mimeTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceMimeType;
+                    sourceMimeType = this.getMimeType();
+                    String copyMimeType = ((String) strategy.copy(LocatorUtils.property(locator, "mimeType", sourceMimeType), sourceMimeType, this.isSetMimeType()));
+                    copy.setMimeType(copyMimeType);
+                } else {
+                    if (mimeTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.mimeType = null;
+                    }
+                }
             }
-            if (this.isSetCompression()) {
-                String sourceCompression;
-                sourceCompression = this.getCompression();
-                String copyCompression = ((String) strategy.copy(LocatorUtils.property(locator, "compression", sourceCompression), sourceCompression));
-                copy.setCompression(copyCompression);
-            } else {
-                copy.compression = null;
+            {
+                java.lang.Boolean compressionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCompression());
+                if (compressionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceCompression;
+                    sourceCompression = this.getCompression();
+                    String copyCompression = ((String) strategy.copy(LocatorUtils.property(locator, "compression", sourceCompression), sourceCompression, this.isSetCompression()));
+                    copy.setCompression(copyCompression);
+                } else {
+                    if (compressionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.compression = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new FileType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof FileType) {
             final FileType target = this;
             final FileType leftObject = ((FileType) left);
             final FileType rightObject = ((FileType) right);
             {
-                RangeParametersType lhsRangeParameters;
-                lhsRangeParameters = leftObject.getRangeParameters();
-                RangeParametersType rhsRangeParameters;
-                rhsRangeParameters = rightObject.getRangeParameters();
-                target.setRangeParameters(((RangeParametersType) strategy.merge(LocatorUtils.property(leftLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(rightLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters)));
+                java.lang.Boolean rangeParametersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRangeParameters(), rightObject.isSetRangeParameters());
+                if (rangeParametersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    RangeParametersType lhsRangeParameters;
+                    lhsRangeParameters = leftObject.getRangeParameters();
+                    RangeParametersType rhsRangeParameters;
+                    rhsRangeParameters = rightObject.getRangeParameters();
+                    RangeParametersType mergedRangeParameters = ((RangeParametersType) strategy.merge(LocatorUtils.property(leftLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(rightLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters, leftObject.isSetRangeParameters(), rightObject.isSetRangeParameters()));
+                    target.setRangeParameters(mergedRangeParameters);
+                } else {
+                    if (rangeParametersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.rangeParameters = null;
+                    }
+                }
             }
             {
-                String lhsFileName;
-                lhsFileName = leftObject.getFileName();
-                String rhsFileName;
-                rhsFileName = rightObject.getFileName();
-                target.setFileName(((String) strategy.merge(LocatorUtils.property(leftLocator, "fileName", lhsFileName), LocatorUtils.property(rightLocator, "fileName", rhsFileName), lhsFileName, rhsFileName)));
+                java.lang.Boolean fileNameShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFileName(), rightObject.isSetFileName());
+                if (fileNameShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsFileName;
+                    lhsFileName = leftObject.getFileName();
+                    String rhsFileName;
+                    rhsFileName = rightObject.getFileName();
+                    String mergedFileName = ((String) strategy.merge(LocatorUtils.property(leftLocator, "fileName", lhsFileName), LocatorUtils.property(rightLocator, "fileName", rhsFileName), lhsFileName, rhsFileName, leftObject.isSetFileName(), rightObject.isSetFileName()));
+                    target.setFileName(mergedFileName);
+                } else {
+                    if (fileNameShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.fileName = null;
+                    }
+                }
             }
             {
-                String lhsFileReference;
-                lhsFileReference = leftObject.getFileReference();
-                String rhsFileReference;
-                rhsFileReference = rightObject.getFileReference();
-                target.setFileReference(((String) strategy.merge(LocatorUtils.property(leftLocator, "fileReference", lhsFileReference), LocatorUtils.property(rightLocator, "fileReference", rhsFileReference), lhsFileReference, rhsFileReference)));
+                java.lang.Boolean fileReferenceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFileReference(), rightObject.isSetFileReference());
+                if (fileReferenceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsFileReference;
+                    lhsFileReference = leftObject.getFileReference();
+                    String rhsFileReference;
+                    rhsFileReference = rightObject.getFileReference();
+                    String mergedFileReference = ((String) strategy.merge(LocatorUtils.property(leftLocator, "fileReference", lhsFileReference), LocatorUtils.property(rightLocator, "fileReference", rhsFileReference), lhsFileReference, rhsFileReference, leftObject.isSetFileReference(), rightObject.isSetFileReference()));
+                    target.setFileReference(mergedFileReference);
+                } else {
+                    if (fileReferenceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.fileReference = null;
+                    }
+                }
             }
             {
-                FileValueModelType lhsFileStructure;
-                lhsFileStructure = leftObject.getFileStructure();
-                FileValueModelType rhsFileStructure;
-                rhsFileStructure = rightObject.getFileStructure();
-                target.setFileStructure(((FileValueModelType) strategy.merge(LocatorUtils.property(leftLocator, "fileStructure", lhsFileStructure), LocatorUtils.property(rightLocator, "fileStructure", rhsFileStructure), lhsFileStructure, rhsFileStructure)));
+                java.lang.Boolean fileStructureShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFileStructure(), rightObject.isSetFileStructure());
+                if (fileStructureShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    FileValueModelType lhsFileStructure;
+                    lhsFileStructure = leftObject.getFileStructure();
+                    FileValueModelType rhsFileStructure;
+                    rhsFileStructure = rightObject.getFileStructure();
+                    FileValueModelType mergedFileStructure = ((FileValueModelType) strategy.merge(LocatorUtils.property(leftLocator, "fileStructure", lhsFileStructure), LocatorUtils.property(rightLocator, "fileStructure", rhsFileStructure), lhsFileStructure, rhsFileStructure, leftObject.isSetFileStructure(), rightObject.isSetFileStructure()));
+                    target.setFileStructure(mergedFileStructure);
+                } else {
+                    if (fileStructureShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.fileStructure = null;
+                    }
+                }
             }
             {
-                String lhsMimeType;
-                lhsMimeType = leftObject.getMimeType();
-                String rhsMimeType;
-                rhsMimeType = rightObject.getMimeType();
-                target.setMimeType(((String) strategy.merge(LocatorUtils.property(leftLocator, "mimeType", lhsMimeType), LocatorUtils.property(rightLocator, "mimeType", rhsMimeType), lhsMimeType, rhsMimeType)));
+                java.lang.Boolean mimeTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMimeType(), rightObject.isSetMimeType());
+                if (mimeTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsMimeType;
+                    lhsMimeType = leftObject.getMimeType();
+                    String rhsMimeType;
+                    rhsMimeType = rightObject.getMimeType();
+                    String mergedMimeType = ((String) strategy.merge(LocatorUtils.property(leftLocator, "mimeType", lhsMimeType), LocatorUtils.property(rightLocator, "mimeType", rhsMimeType), lhsMimeType, rhsMimeType, leftObject.isSetMimeType(), rightObject.isSetMimeType()));
+                    target.setMimeType(mergedMimeType);
+                } else {
+                    if (mimeTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.mimeType = null;
+                    }
+                }
             }
             {
-                String lhsCompression;
-                lhsCompression = leftObject.getCompression();
-                String rhsCompression;
-                rhsCompression = rightObject.getCompression();
-                target.setCompression(((String) strategy.merge(LocatorUtils.property(leftLocator, "compression", lhsCompression), LocatorUtils.property(rightLocator, "compression", rhsCompression), lhsCompression, rhsCompression)));
+                java.lang.Boolean compressionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCompression(), rightObject.isSetCompression());
+                if (compressionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsCompression;
+                    lhsCompression = leftObject.getCompression();
+                    String rhsCompression;
+                    rhsCompression = rightObject.getCompression();
+                    String mergedCompression = ((String) strategy.merge(LocatorUtils.property(leftLocator, "compression", lhsCompression), LocatorUtils.property(rightLocator, "compression", rhsCompression), lhsCompression, rhsCompression, leftObject.isSetCompression(), rightObject.isSetCompression()));
+                    target.setCompression(mergedCompression);
+                } else {
+                    if (compressionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.compression = null;
+                    }
+                }
             }
         }
-    }
-
-    public FileType withRangeParameters(RangeParametersType value) {
-        setRangeParameters(value);
-        return this;
-    }
-
-    public FileType withFileName(String value) {
-        setFileName(value);
-        return this;
-    }
-
-    public FileType withFileReference(String value) {
-        setFileReference(value);
-        return this;
-    }
-
-    public FileType withFileStructure(FileValueModelType value) {
-        setFileStructure(value);
-        return this;
-    }
-
-    public FileType withMimeType(String value) {
-        setMimeType(value);
-        return this;
-    }
-
-    public FileType withCompression(String value) {
-        setCompression(value);
-        return this;
     }
 
 }

@@ -34,63 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
 
 
 /**
- * <p>Classe Java per GridDomainType complex type.
+ * <p>Classe Java per GridDomainType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="GridDomainType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.opengis.net/gml}DomainSetType">
- *       &lt;sequence minOccurs="0">
- *         &lt;choice>
- *           &lt;choice>
- *             &lt;element ref="{http://www.opengis.net/gml}Grid"/>
- *           &lt;/choice>
- *           &lt;choice>
- *           &lt;/choice>
- *         &lt;/choice>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AssociationAttributeGroup"/>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}OwnershipAttributeGroup"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="GridDomainType">
+ *   <complexContent>
+ *     <restriction base="{http://www.opengis.net/gml}DomainSetType">
+ *       <sequence minOccurs="0">
+ *         <choice>
+ *           <choice>
+ *             <element ref="{http://www.opengis.net/gml}Grid"/>
+ *           </choice>
+ *           <choice>
+ *           </choice>
+ *         </choice>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AssociationAttributeGroup"/>
+ *       <attGroup ref="{http://www.opengis.net/gml}OwnershipAttributeGroup"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -102,13 +98,15 @@ public class GridDomainType
 {
 
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -116,13 +114,15 @@ public class GridDomainType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof GridDomainType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -134,131 +134,56 @@ public class GridDomainType
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new GridDomainType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
-    }
-
-    @Override
-    public GridDomainType withAbstractGeometry(JAXBElement<? extends AbstractGeometryType> value) {
-        setAbstractGeometry(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withAbstractTimeObject(JAXBElement<? extends AbstractTimeObjectType> value) {
-        setAbstractTimeObject(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withNilReason(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getNilReason().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GridDomainType withNilReason(Collection<String> values) {
-        if (values!= null) {
-            getNilReason().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GridDomainType withRemoteSchema(String value) {
-        setRemoteSchema(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withHref(String value) {
-        setHref(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withRole(String value) {
-        setRole(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withArcrole(String value) {
-        setArcrole(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withTitle(String value) {
-        setTitle(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withShow(String value) {
-        setShow(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withActuate(String value) {
-        setActuate(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withOwns(boolean value) {
-        setOwns(value);
-        return this;
-    }
-
-    @Override
-    public GridDomainType withNilReason(List<String> value) {
-        setNilReason(value);
-        return this;
     }
 
 }

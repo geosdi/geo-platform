@@ -34,57 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimeTopologyComplexType complex type.
+ * <p>Classe Java per TimeTopologyComplexType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimeTopologyComplexType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTimeComplexType">
- *       &lt;sequence>
- *         &lt;element name="primitive" type="{http://www.opengis.net/gml}TimeTopologyPrimitivePropertyType" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimeTopologyComplexType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTimeComplexType">
+ *       <sequence>
+ *         <element name="primitive" type="{http://www.opengis.net/gml}TimeTopologyPrimitivePropertyType" maxOccurs="unbounded"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -103,28 +101,31 @@ public abstract class TimeTopologyComplexType
     /**
      * Gets the value of the primitive property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the primitive property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the primitive property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getPrimitive().add(newItem);
+     * getPrimitive().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TimeTopologyPrimitivePropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the primitive property.
      */
     public List<TimeTopologyPrimitivePropertyType> getPrimitive() {
         if (primitive == null) {
-            primitive = new ArrayList<TimeTopologyPrimitivePropertyType>();
+            primitive = new ArrayList<>();
         }
         return this.primitive;
     }
@@ -137,13 +138,15 @@ public abstract class TimeTopologyComplexType
         this.primitive = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -151,18 +154,28 @@ public abstract class TimeTopologyComplexType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<TimeTopologyPrimitivePropertyType> thePrimitive;
-            thePrimitive = this.getPrimitive();
-            strategy.appendField(locator, this, "primitive", buffer, thePrimitive);
+            thePrimitive = (this.isSetPrimitive()?this.getPrimitive():null);
+            strategy.appendField(locator, this, "primitive", buffer, thePrimitive, this.isSetPrimitive());
         }
         return buffer;
     }
 
+    public void setPrimitive(List<TimeTopologyPrimitivePropertyType> value) {
+        this.primitive = null;
+        if (value!= null) {
+            List<TimeTopologyPrimitivePropertyType> draftl = this.getPrimitive();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimeTopologyComplexType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -174,45 +187,51 @@ public abstract class TimeTopologyComplexType
         final TimeTopologyComplexType that = ((TimeTopologyComplexType) object);
         {
             List<TimeTopologyPrimitivePropertyType> lhsPrimitive;
-            lhsPrimitive = this.getPrimitive();
+            lhsPrimitive = (this.isSetPrimitive()?this.getPrimitive():null);
             List<TimeTopologyPrimitivePropertyType> rhsPrimitive;
-            rhsPrimitive = that.getPrimitive();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "primitive", lhsPrimitive), LocatorUtils.property(thatLocator, "primitive", rhsPrimitive), lhsPrimitive, rhsPrimitive)) {
+            rhsPrimitive = (that.isSetPrimitive()?that.getPrimitive():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "primitive", lhsPrimitive), LocatorUtils.property(thatLocator, "primitive", rhsPrimitive), lhsPrimitive, rhsPrimitive, this.isSetPrimitive(), that.isSetPrimitive())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<TimeTopologyPrimitivePropertyType> thePrimitive;
-            thePrimitive = this.getPrimitive();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "primitive", thePrimitive), currentHashCode, thePrimitive);
+            thePrimitive = (this.isSetPrimitive()?this.getPrimitive():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "primitive", thePrimitive), currentHashCode, thePrimitive, this.isSetPrimitive());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -220,26 +239,31 @@ public abstract class TimeTopologyComplexType
         super.copyTo(locator, target, strategy);
         if (target instanceof TimeTopologyComplexType) {
             final TimeTopologyComplexType copy = ((TimeTopologyComplexType) target);
-            if (this.isSetPrimitive()) {
-                List<TimeTopologyPrimitivePropertyType> sourcePrimitive;
-                sourcePrimitive = this.getPrimitive();
-                @SuppressWarnings("unchecked")
-                List<TimeTopologyPrimitivePropertyType> copyPrimitive = ((List<TimeTopologyPrimitivePropertyType> ) strategy.copy(LocatorUtils.property(locator, "primitive", sourcePrimitive), sourcePrimitive));
-                copy.unsetPrimitive();
-                List<TimeTopologyPrimitivePropertyType> uniquePrimitivel = copy.getPrimitive();
-                uniquePrimitivel.addAll(copyPrimitive);
-            } else {
-                copy.unsetPrimitive();
+            {
+                java.lang.Boolean primitiveShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPrimitive());
+                if (primitiveShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<TimeTopologyPrimitivePropertyType> sourcePrimitive;
+                    sourcePrimitive = (this.isSetPrimitive()?this.getPrimitive():null);
+                    @SuppressWarnings("unchecked")
+                    List<TimeTopologyPrimitivePropertyType> copyPrimitive = ((List<TimeTopologyPrimitivePropertyType> ) strategy.copy(LocatorUtils.property(locator, "primitive", sourcePrimitive), sourcePrimitive, this.isSetPrimitive()));
+                    copy.setPrimitive(copyPrimitive);
+                } else {
+                    if (primitiveShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetPrimitive();
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TimeTopologyComplexType) {
@@ -247,113 +271,21 @@ public abstract class TimeTopologyComplexType
             final TimeTopologyComplexType leftObject = ((TimeTopologyComplexType) left);
             final TimeTopologyComplexType rightObject = ((TimeTopologyComplexType) right);
             {
-                List<TimeTopologyPrimitivePropertyType> lhsPrimitive;
-                lhsPrimitive = leftObject.getPrimitive();
-                List<TimeTopologyPrimitivePropertyType> rhsPrimitive;
-                rhsPrimitive = rightObject.getPrimitive();
-                target.unsetPrimitive();
-                List<TimeTopologyPrimitivePropertyType> uniquePrimitivel = target.getPrimitive();
-                uniquePrimitivel.addAll(((List<TimeTopologyPrimitivePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "primitive", lhsPrimitive), LocatorUtils.property(rightLocator, "primitive", rhsPrimitive), lhsPrimitive, rhsPrimitive)));
+                java.lang.Boolean primitiveShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPrimitive(), rightObject.isSetPrimitive());
+                if (primitiveShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<TimeTopologyPrimitivePropertyType> lhsPrimitive;
+                    lhsPrimitive = (leftObject.isSetPrimitive()?leftObject.getPrimitive():null);
+                    List<TimeTopologyPrimitivePropertyType> rhsPrimitive;
+                    rhsPrimitive = (rightObject.isSetPrimitive()?rightObject.getPrimitive():null);
+                    List<TimeTopologyPrimitivePropertyType> mergedPrimitive = ((List<TimeTopologyPrimitivePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "primitive", lhsPrimitive), LocatorUtils.property(rightLocator, "primitive", rhsPrimitive), lhsPrimitive, rhsPrimitive, leftObject.isSetPrimitive(), rightObject.isSetPrimitive()));
+                    target.setPrimitive(mergedPrimitive);
+                } else {
+                    if (primitiveShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetPrimitive();
+                    }
+                }
             }
         }
-    }
-
-    public void setPrimitive(List<TimeTopologyPrimitivePropertyType> value) {
-        List<TimeTopologyPrimitivePropertyType> draftl = this.getPrimitive();
-        draftl.addAll(value);
-    }
-
-    public TimeTopologyComplexType withPrimitive(TimeTopologyPrimitivePropertyType... values) {
-        if (values!= null) {
-            for (TimeTopologyPrimitivePropertyType value: values) {
-                getPrimitive().add(value);
-            }
-        }
-        return this;
-    }
-
-    public TimeTopologyComplexType withPrimitive(Collection<TimeTopologyPrimitivePropertyType> values) {
-        if (values!= null) {
-            getPrimitive().addAll(values);
-        }
-        return this;
-    }
-
-    public TimeTopologyComplexType withPrimitive(List<TimeTopologyPrimitivePropertyType> value) {
-        setPrimitive(value);
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TimeTopologyComplexType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

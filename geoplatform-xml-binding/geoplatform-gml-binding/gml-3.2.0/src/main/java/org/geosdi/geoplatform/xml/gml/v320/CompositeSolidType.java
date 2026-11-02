@@ -34,60 +34,57 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per CompositeSolidType complex type.
+ * <p>Classe Java per CompositeSolidType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CompositeSolidType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractSolidType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}solidMember" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CompositeSolidType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractSolidType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}solidMember" maxOccurs="unbounded"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,36 +97,45 @@ public class CompositeSolidType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * This property element either references a solid via the XLink-attributes or contains the solid element. A solid element is any element, which is substitutable for gml:AbstractSolid.
+     * 
+     */
     @XmlElement(required = true)
     protected List<SolidPropertyType> solidMember;
     @XmlAttribute(name = "aggregationType")
     protected AggregationType aggregationType;
 
     /**
+     * This property element either references a solid via the XLink-attributes or contains the solid element. A solid element is any element, which is substitutable for gml:AbstractSolid.
+     * 
      * Gets the value of the solidMember property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the solidMember property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the solidMember property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getSolidMember().add(newItem);
+     * getSolidMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link SolidPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the solidMember property.
      */
     public List<SolidPropertyType> getSolidMember() {
         if (solidMember == null) {
-            solidMember = new ArrayList<SolidPropertyType>();
+            solidMember = new ArrayList<>();
         }
         return this.solidMember;
     }
@@ -170,13 +176,15 @@ public class CompositeSolidType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -184,23 +192,33 @@ public class CompositeSolidType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<SolidPropertyType> theSolidMember;
-            theSolidMember = this.getSolidMember();
-            strategy.appendField(locator, this, "solidMember", buffer, theSolidMember);
+            theSolidMember = (this.isSetSolidMember()?this.getSolidMember():null);
+            strategy.appendField(locator, this, "solidMember", buffer, theSolidMember, this.isSetSolidMember());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setSolidMember(List<SolidPropertyType> value) {
+        this.solidMember = null;
+        if (value!= null) {
+            List<SolidPropertyType> draftl = this.getSolidMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CompositeSolidType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -212,10 +230,10 @@ public class CompositeSolidType
         final CompositeSolidType that = ((CompositeSolidType) object);
         {
             List<SolidPropertyType> lhsSolidMember;
-            lhsSolidMember = this.getSolidMember();
+            lhsSolidMember = (this.isSetSolidMember()?this.getSolidMember():null);
             List<SolidPropertyType> rhsSolidMember;
-            rhsSolidMember = that.getSolidMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "solidMember", lhsSolidMember), LocatorUtils.property(thatLocator, "solidMember", rhsSolidMember), lhsSolidMember, rhsSolidMember)) {
+            rhsSolidMember = (that.isSetSolidMember()?that.getSolidMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "solidMember", lhsSolidMember), LocatorUtils.property(thatLocator, "solidMember", rhsSolidMember), lhsSolidMember, rhsSolidMember, this.isSetSolidMember(), that.isSetSolidMember())) {
                 return false;
             }
         }
@@ -224,84 +242,101 @@ public class CompositeSolidType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<SolidPropertyType> theSolidMember;
-            theSolidMember = this.getSolidMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "solidMember", theSolidMember), currentHashCode, theSolidMember);
+            theSolidMember = (this.isSetSolidMember()?this.getSolidMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "solidMember", theSolidMember), currentHashCode, theSolidMember, this.isSetSolidMember());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof CompositeSolidType) {
             final CompositeSolidType copy = ((CompositeSolidType) draftCopy);
-            if (this.isSetSolidMember()) {
-                List<SolidPropertyType> sourceSolidMember;
-                sourceSolidMember = this.getSolidMember();
-                @SuppressWarnings("unchecked")
-                List<SolidPropertyType> copySolidMember = ((List<SolidPropertyType> ) strategy.copy(LocatorUtils.property(locator, "solidMember", sourceSolidMember), sourceSolidMember));
-                copy.unsetSolidMember();
-                List<SolidPropertyType> uniqueSolidMemberl = copy.getSolidMember();
-                uniqueSolidMemberl.addAll(copySolidMember);
-            } else {
-                copy.unsetSolidMember();
+            {
+                java.lang.Boolean solidMemberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSolidMember());
+                if (solidMemberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<SolidPropertyType> sourceSolidMember;
+                    sourceSolidMember = (this.isSetSolidMember()?this.getSolidMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<SolidPropertyType> copySolidMember = ((List<SolidPropertyType> ) strategy.copy(LocatorUtils.property(locator, "solidMember", sourceSolidMember), sourceSolidMember, this.isSetSolidMember()));
+                    copy.setSolidMember(copySolidMember);
+                } else {
+                    if (solidMemberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetSolidMember();
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CompositeSolidType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof CompositeSolidType) {
@@ -309,185 +344,36 @@ public class CompositeSolidType
             final CompositeSolidType leftObject = ((CompositeSolidType) left);
             final CompositeSolidType rightObject = ((CompositeSolidType) right);
             {
-                List<SolidPropertyType> lhsSolidMember;
-                lhsSolidMember = leftObject.getSolidMember();
-                List<SolidPropertyType> rhsSolidMember;
-                rhsSolidMember = rightObject.getSolidMember();
-                target.unsetSolidMember();
-                List<SolidPropertyType> uniqueSolidMemberl = target.getSolidMember();
-                uniqueSolidMemberl.addAll(((List<SolidPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "solidMember", lhsSolidMember), LocatorUtils.property(rightLocator, "solidMember", rhsSolidMember), lhsSolidMember, rhsSolidMember)));
+                java.lang.Boolean solidMemberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSolidMember(), rightObject.isSetSolidMember());
+                if (solidMemberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<SolidPropertyType> lhsSolidMember;
+                    lhsSolidMember = (leftObject.isSetSolidMember()?leftObject.getSolidMember():null);
+                    List<SolidPropertyType> rhsSolidMember;
+                    rhsSolidMember = (rightObject.isSetSolidMember()?rightObject.getSolidMember():null);
+                    List<SolidPropertyType> mergedSolidMember = ((List<SolidPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "solidMember", lhsSolidMember), LocatorUtils.property(rightLocator, "solidMember", rhsSolidMember), lhsSolidMember, rhsSolidMember, leftObject.isSetSolidMember(), rightObject.isSetSolidMember()));
+                    target.setSolidMember(mergedSolidMember);
+                } else {
+                    if (solidMemberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetSolidMember();
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setSolidMember(List<SolidPropertyType> value) {
-        List<SolidPropertyType> draftl = this.getSolidMember();
-        draftl.addAll(value);
-    }
-
-    public CompositeSolidType withSolidMember(SolidPropertyType... values) {
-        if (values!= null) {
-            for (SolidPropertyType value: values) {
-                getSolidMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public CompositeSolidType withSolidMember(Collection<SolidPropertyType> values) {
-        if (values!= null) {
-            getSolidMember().addAll(values);
-        }
-        return this;
-    }
-
-    public CompositeSolidType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public CompositeSolidType withSolidMember(List<SolidPropertyType> value) {
-        setSolidMember(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public CompositeSolidType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

@@ -34,53 +34,52 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per DerivationUnitTermType complex type.
+ * <p>Classe Java per DerivationUnitTermType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DerivationUnitTermType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}UnitOfMeasureType">
- *       &lt;attribute name="exponent" type="{http://www.w3.org/2001/XMLSchema}integer" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DerivationUnitTermType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}UnitOfMeasureType">
+ *       <attribute name="exponent" type="{http://www.w3.org/2001/XMLSchema}integer" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -122,13 +121,15 @@ public class DerivationUnitTermType
         return (this.exponent!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -136,18 +137,20 @@ public class DerivationUnitTermType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             BigInteger theExponent;
             theExponent = this.getExponent();
-            strategy.appendField(locator, this, "exponent", buffer, theExponent);
+            strategy.appendField(locator, this, "exponent", buffer, theExponent, this.isSetExponent());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DerivationUnitTermType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -162,68 +165,82 @@ public class DerivationUnitTermType
             lhsExponent = this.getExponent();
             BigInteger rhsExponent;
             rhsExponent = that.getExponent();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "exponent", lhsExponent), LocatorUtils.property(thatLocator, "exponent", rhsExponent), lhsExponent, rhsExponent)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "exponent", lhsExponent), LocatorUtils.property(thatLocator, "exponent", rhsExponent), lhsExponent, rhsExponent, this.isSetExponent(), that.isSetExponent())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             BigInteger theExponent;
             theExponent = this.getExponent();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "exponent", theExponent), currentHashCode, theExponent);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "exponent", theExponent), currentHashCode, theExponent, this.isSetExponent());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof DerivationUnitTermType) {
             final DerivationUnitTermType copy = ((DerivationUnitTermType) draftCopy);
-            if (this.isSetExponent()) {
-                BigInteger sourceExponent;
-                sourceExponent = this.getExponent();
-                BigInteger copyExponent = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "exponent", sourceExponent), sourceExponent));
-                copy.setExponent(copyExponent);
-            } else {
-                copy.exponent = null;
+            {
+                java.lang.Boolean exponentShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetExponent());
+                if (exponentShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceExponent;
+                    sourceExponent = this.getExponent();
+                    BigInteger copyExponent = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "exponent", sourceExponent), sourceExponent, this.isSetExponent()));
+                    copy.setExponent(copyExponent);
+                } else {
+                    if (exponentShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.exponent = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DerivationUnitTermType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof DerivationUnitTermType) {
@@ -231,24 +248,21 @@ public class DerivationUnitTermType
             final DerivationUnitTermType leftObject = ((DerivationUnitTermType) left);
             final DerivationUnitTermType rightObject = ((DerivationUnitTermType) right);
             {
-                BigInteger lhsExponent;
-                lhsExponent = leftObject.getExponent();
-                BigInteger rhsExponent;
-                rhsExponent = rightObject.getExponent();
-                target.setExponent(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "exponent", lhsExponent), LocatorUtils.property(rightLocator, "exponent", rhsExponent), lhsExponent, rhsExponent)));
+                java.lang.Boolean exponentShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetExponent(), rightObject.isSetExponent());
+                if (exponentShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsExponent;
+                    lhsExponent = leftObject.getExponent();
+                    BigInteger rhsExponent;
+                    rhsExponent = rightObject.getExponent();
+                    BigInteger mergedExponent = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "exponent", lhsExponent), LocatorUtils.property(rightLocator, "exponent", rhsExponent), lhsExponent, rhsExponent, leftObject.isSetExponent(), rightObject.isSetExponent()));
+                    target.setExponent(mergedExponent);
+                } else {
+                    if (exponentShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.exponent = null;
+                    }
+                }
             }
         }
-    }
-
-    public DerivationUnitTermType withExponent(BigInteger value) {
-        setExponent(value);
-        return this;
-    }
-
-    @Override
-    public DerivationUnitTermType withUom(String value) {
-        setUom(value);
-        return this;
     }
 
 }

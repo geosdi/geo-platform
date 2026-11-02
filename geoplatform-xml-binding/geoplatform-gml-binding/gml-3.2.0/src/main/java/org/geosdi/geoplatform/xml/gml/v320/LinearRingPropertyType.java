@@ -34,56 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * A property with the content model of gml:LinearRingPropertyType encapsulates a linear ring to represent a component of a surface boundary.
  * 
- * <p>Classe Java per LinearRingPropertyType complex type.
+ * <p>Classe Java per LinearRingPropertyType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="LinearRingPropertyType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}LinearRing"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="LinearRingPropertyType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}LinearRing"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -91,15 +90,18 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "LinearRingPropertyType", propOrder = {
     "linearRing"
 })
-public class LinearRingPropertyType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class LinearRingPropertyType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * A LinearRing is defined by four or more coordinate tuples, with linear interpolation between them; the first and last coordinates shall be coincident. The number of direct positions in the list shall be at least four.
+     * 
+     */
     @XmlElement(name = "LinearRing", required = true)
     protected LinearRingType linearRing;
 
     /**
-     * Recupera il valore della proprietà linearRing.
+     * A LinearRing is defined by four or more coordinate tuples, with linear interpolation between them; the first and last coordinates shall be coincident. The number of direct positions in the list shall be at least four.
      * 
      * @return
      *     possible object is
@@ -117,6 +119,7 @@ public class LinearRingPropertyType
      *     allowed object is
      *     {@link LinearRingType }
      *     
+     * @see #getLinearRing()
      */
     public void setLinearRing(LinearRingType value) {
         this.linearRing = value;
@@ -126,13 +129,15 @@ public class LinearRingPropertyType
         return (this.linearRing!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -140,17 +145,19 @@ public class LinearRingPropertyType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             LinearRingType theLinearRing;
             theLinearRing = this.getLinearRing();
-            strategy.appendField(locator, this, "linearRing", buffer, theLinearRing);
+            strategy.appendField(locator, this, "linearRing", buffer, theLinearRing, this.isSetLinearRing());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof LinearRingPropertyType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -162,85 +169,102 @@ public class LinearRingPropertyType
             lhsLinearRing = this.getLinearRing();
             LinearRingType rhsLinearRing;
             rhsLinearRing = that.getLinearRing();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "linearRing", lhsLinearRing), LocatorUtils.property(thatLocator, "linearRing", rhsLinearRing), lhsLinearRing, rhsLinearRing)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "linearRing", lhsLinearRing), LocatorUtils.property(thatLocator, "linearRing", rhsLinearRing), lhsLinearRing, rhsLinearRing, this.isSetLinearRing(), that.isSetLinearRing())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             LinearRingType theLinearRing;
             theLinearRing = this.getLinearRing();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "linearRing", theLinearRing), currentHashCode, theLinearRing);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "linearRing", theLinearRing), currentHashCode, theLinearRing, this.isSetLinearRing());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof LinearRingPropertyType) {
             final LinearRingPropertyType copy = ((LinearRingPropertyType) draftCopy);
-            if (this.isSetLinearRing()) {
-                LinearRingType sourceLinearRing;
-                sourceLinearRing = this.getLinearRing();
-                LinearRingType copyLinearRing = ((LinearRingType) strategy.copy(LocatorUtils.property(locator, "linearRing", sourceLinearRing), sourceLinearRing));
-                copy.setLinearRing(copyLinearRing);
-            } else {
-                copy.linearRing = null;
+            {
+                java.lang.Boolean linearRingShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetLinearRing());
+                if (linearRingShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    LinearRingType sourceLinearRing;
+                    sourceLinearRing = this.getLinearRing();
+                    LinearRingType copyLinearRing = ((LinearRingType) strategy.copy(LocatorUtils.property(locator, "linearRing", sourceLinearRing), sourceLinearRing, this.isSetLinearRing()));
+                    copy.setLinearRing(copyLinearRing);
+                } else {
+                    if (linearRingShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.linearRing = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new LinearRingPropertyType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof LinearRingPropertyType) {
             final LinearRingPropertyType target = this;
             final LinearRingPropertyType leftObject = ((LinearRingPropertyType) left);
             final LinearRingPropertyType rightObject = ((LinearRingPropertyType) right);
             {
-                LinearRingType lhsLinearRing;
-                lhsLinearRing = leftObject.getLinearRing();
-                LinearRingType rhsLinearRing;
-                rhsLinearRing = rightObject.getLinearRing();
-                target.setLinearRing(((LinearRingType) strategy.merge(LocatorUtils.property(leftLocator, "linearRing", lhsLinearRing), LocatorUtils.property(rightLocator, "linearRing", rhsLinearRing), lhsLinearRing, rhsLinearRing)));
+                java.lang.Boolean linearRingShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetLinearRing(), rightObject.isSetLinearRing());
+                if (linearRingShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    LinearRingType lhsLinearRing;
+                    lhsLinearRing = leftObject.getLinearRing();
+                    LinearRingType rhsLinearRing;
+                    rhsLinearRing = rightObject.getLinearRing();
+                    LinearRingType mergedLinearRing = ((LinearRingType) strategy.merge(LocatorUtils.property(leftLocator, "linearRing", lhsLinearRing), LocatorUtils.property(rightLocator, "linearRing", rhsLinearRing), lhsLinearRing, rhsLinearRing, leftObject.isSetLinearRing(), rightObject.isSetLinearRing()));
+                    target.setLinearRing(mergedLinearRing);
+                } else {
+                    if (linearRingShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.linearRing = null;
+                    }
+                }
             }
         }
-    }
-
-    public LinearRingPropertyType withLinearRing(LinearRingType value) {
-        setLinearRing(value);
-        return this;
     }
 
 }

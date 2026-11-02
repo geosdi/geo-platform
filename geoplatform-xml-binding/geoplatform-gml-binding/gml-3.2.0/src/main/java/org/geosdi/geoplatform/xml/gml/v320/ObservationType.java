@@ -34,62 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per ObservationType complex type.
+ * <p>Classe Java per ObservationType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ObservationType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractFeatureType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}validTime"/>
- *         &lt;element ref="{http://www.opengis.net/gml}using" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}target" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}resultOf"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="ObservationType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractFeatureType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}validTime"/>
+ *         <element ref="{http://www.opengis.net/gml}using" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}target" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}resultOf"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -108,6 +105,10 @@ public class ObservationType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:validTime is a convenience property element.
+     * 
+     */
     @XmlElement(required = true)
     protected TimePrimitivePropertyType validTime;
     protected ProcedurePropertyType using;
@@ -117,7 +118,7 @@ public class ObservationType
     protected ResultType resultOf;
 
     /**
-     * Recupera il valore della proprietà validTime.
+     * gml:validTime is a convenience property element.
      * 
      * @return
      *     possible object is
@@ -135,6 +136,7 @@ public class ObservationType
      *     allowed object is
      *     {@link TimePrimitivePropertyType }
      *     
+     * @see #getValidTime()
      */
     public void setValidTime(TimePrimitivePropertyType value) {
         this.validTime = value;
@@ -230,13 +232,15 @@ public class ObservationType
         return (this.resultOf!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -244,33 +248,35 @@ public class ObservationType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             TimePrimitivePropertyType theValidTime;
             theValidTime = this.getValidTime();
-            strategy.appendField(locator, this, "validTime", buffer, theValidTime);
+            strategy.appendField(locator, this, "validTime", buffer, theValidTime, this.isSetValidTime());
         }
         {
             ProcedurePropertyType theUsing;
             theUsing = this.getUsing();
-            strategy.appendField(locator, this, "using", buffer, theUsing);
+            strategy.appendField(locator, this, "using", buffer, theUsing, this.isSetUsing());
         }
         {
             JAXBElement<TargetPropertyType> theTarget;
             theTarget = this.getTarget();
-            strategy.appendField(locator, this, "target", buffer, theTarget);
+            strategy.appendField(locator, this, "target", buffer, theTarget, this.isSetTarget());
         }
         {
             ResultType theResultOf;
             theResultOf = this.getResultOf();
-            strategy.appendField(locator, this, "resultOf", buffer, theResultOf);
+            strategy.appendField(locator, this, "resultOf", buffer, theResultOf, this.isSetResultOf());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof ObservationType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -285,7 +291,7 @@ public class ObservationType
             lhsValidTime = this.getValidTime();
             TimePrimitivePropertyType rhsValidTime;
             rhsValidTime = that.getValidTime();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "validTime", lhsValidTime), LocatorUtils.property(thatLocator, "validTime", rhsValidTime), lhsValidTime, rhsValidTime)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "validTime", lhsValidTime), LocatorUtils.property(thatLocator, "validTime", rhsValidTime), lhsValidTime, rhsValidTime, this.isSetValidTime(), that.isSetValidTime())) {
                 return false;
             }
         }
@@ -294,7 +300,7 @@ public class ObservationType
             lhsUsing = this.getUsing();
             ProcedurePropertyType rhsUsing;
             rhsUsing = that.getUsing();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "using", lhsUsing), LocatorUtils.property(thatLocator, "using", rhsUsing), lhsUsing, rhsUsing)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "using", lhsUsing), LocatorUtils.property(thatLocator, "using", rhsUsing), lhsUsing, rhsUsing, this.isSetUsing(), that.isSetUsing())) {
                 return false;
             }
         }
@@ -303,7 +309,7 @@ public class ObservationType
             lhsTarget = this.getTarget();
             JAXBElement<TargetPropertyType> rhsTarget;
             rhsTarget = that.getTarget();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "target", lhsTarget), LocatorUtils.property(thatLocator, "target", rhsTarget), lhsTarget, rhsTarget)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "target", lhsTarget), LocatorUtils.property(thatLocator, "target", rhsTarget), lhsTarget, rhsTarget, this.isSetTarget(), that.isSetTarget())) {
                 return false;
             }
         }
@@ -312,108 +318,137 @@ public class ObservationType
             lhsResultOf = this.getResultOf();
             ResultType rhsResultOf;
             rhsResultOf = that.getResultOf();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "resultOf", lhsResultOf), LocatorUtils.property(thatLocator, "resultOf", rhsResultOf), lhsResultOf, rhsResultOf)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "resultOf", lhsResultOf), LocatorUtils.property(thatLocator, "resultOf", rhsResultOf), lhsResultOf, rhsResultOf, this.isSetResultOf(), that.isSetResultOf())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             TimePrimitivePropertyType theValidTime;
             theValidTime = this.getValidTime();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "validTime", theValidTime), currentHashCode, theValidTime);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "validTime", theValidTime), currentHashCode, theValidTime, this.isSetValidTime());
         }
         {
             ProcedurePropertyType theUsing;
             theUsing = this.getUsing();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "using", theUsing), currentHashCode, theUsing);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "using", theUsing), currentHashCode, theUsing, this.isSetUsing());
         }
         {
             JAXBElement<TargetPropertyType> theTarget;
             theTarget = this.getTarget();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "target", theTarget), currentHashCode, theTarget);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "target", theTarget), currentHashCode, theTarget, this.isSetTarget());
         }
         {
             ResultType theResultOf;
             theResultOf = this.getResultOf();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "resultOf", theResultOf), currentHashCode, theResultOf);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "resultOf", theResultOf), currentHashCode, theResultOf, this.isSetResultOf());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof ObservationType) {
             final ObservationType copy = ((ObservationType) draftCopy);
-            if (this.isSetValidTime()) {
-                TimePrimitivePropertyType sourceValidTime;
-                sourceValidTime = this.getValidTime();
-                TimePrimitivePropertyType copyValidTime = ((TimePrimitivePropertyType) strategy.copy(LocatorUtils.property(locator, "validTime", sourceValidTime), sourceValidTime));
-                copy.setValidTime(copyValidTime);
-            } else {
-                copy.validTime = null;
+            {
+                java.lang.Boolean validTimeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValidTime());
+                if (validTimeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimePrimitivePropertyType sourceValidTime;
+                    sourceValidTime = this.getValidTime();
+                    TimePrimitivePropertyType copyValidTime = ((TimePrimitivePropertyType) strategy.copy(LocatorUtils.property(locator, "validTime", sourceValidTime), sourceValidTime, this.isSetValidTime()));
+                    copy.setValidTime(copyValidTime);
+                } else {
+                    if (validTimeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.validTime = null;
+                    }
+                }
             }
-            if (this.isSetUsing()) {
-                ProcedurePropertyType sourceUsing;
-                sourceUsing = this.getUsing();
-                ProcedurePropertyType copyUsing = ((ProcedurePropertyType) strategy.copy(LocatorUtils.property(locator, "using", sourceUsing), sourceUsing));
-                copy.setUsing(copyUsing);
-            } else {
-                copy.using = null;
+            {
+                java.lang.Boolean usingShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUsing());
+                if (usingShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ProcedurePropertyType sourceUsing;
+                    sourceUsing = this.getUsing();
+                    ProcedurePropertyType copyUsing = ((ProcedurePropertyType) strategy.copy(LocatorUtils.property(locator, "using", sourceUsing), sourceUsing, this.isSetUsing()));
+                    copy.setUsing(copyUsing);
+                } else {
+                    if (usingShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.using = null;
+                    }
+                }
             }
-            if (this.isSetTarget()) {
-                JAXBElement<TargetPropertyType> sourceTarget;
-                sourceTarget = this.getTarget();
-                @SuppressWarnings("unchecked")
-                JAXBElement<TargetPropertyType> copyTarget = ((JAXBElement<TargetPropertyType> ) strategy.copy(LocatorUtils.property(locator, "target", sourceTarget), sourceTarget));
-                copy.setTarget(copyTarget);
-            } else {
-                copy.target = null;
+            {
+                java.lang.Boolean targetShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTarget());
+                if (targetShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<TargetPropertyType> sourceTarget;
+                    sourceTarget = this.getTarget();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<TargetPropertyType> copyTarget = ((JAXBElement<TargetPropertyType> ) strategy.copy(LocatorUtils.property(locator, "target", sourceTarget), sourceTarget, this.isSetTarget()));
+                    copy.setTarget(copyTarget);
+                } else {
+                    if (targetShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.target = null;
+                    }
+                }
             }
-            if (this.isSetResultOf()) {
-                ResultType sourceResultOf;
-                sourceResultOf = this.getResultOf();
-                ResultType copyResultOf = ((ResultType) strategy.copy(LocatorUtils.property(locator, "resultOf", sourceResultOf), sourceResultOf));
-                copy.setResultOf(copyResultOf);
-            } else {
-                copy.resultOf = null;
+            {
+                java.lang.Boolean resultOfShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetResultOf());
+                if (resultOfShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ResultType sourceResultOf;
+                    sourceResultOf = this.getResultOf();
+                    ResultType copyResultOf = ((ResultType) strategy.copy(LocatorUtils.property(locator, "resultOf", sourceResultOf), sourceResultOf, this.isSetResultOf()));
+                    copy.setResultOf(copyResultOf);
+                } else {
+                    if (resultOfShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.resultOf = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new ObservationType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof ObservationType) {
@@ -421,138 +456,66 @@ public class ObservationType
             final ObservationType leftObject = ((ObservationType) left);
             final ObservationType rightObject = ((ObservationType) right);
             {
-                TimePrimitivePropertyType lhsValidTime;
-                lhsValidTime = leftObject.getValidTime();
-                TimePrimitivePropertyType rhsValidTime;
-                rhsValidTime = rightObject.getValidTime();
-                target.setValidTime(((TimePrimitivePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "validTime", lhsValidTime), LocatorUtils.property(rightLocator, "validTime", rhsValidTime), lhsValidTime, rhsValidTime)));
+                java.lang.Boolean validTimeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValidTime(), rightObject.isSetValidTime());
+                if (validTimeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimePrimitivePropertyType lhsValidTime;
+                    lhsValidTime = leftObject.getValidTime();
+                    TimePrimitivePropertyType rhsValidTime;
+                    rhsValidTime = rightObject.getValidTime();
+                    TimePrimitivePropertyType mergedValidTime = ((TimePrimitivePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "validTime", lhsValidTime), LocatorUtils.property(rightLocator, "validTime", rhsValidTime), lhsValidTime, rhsValidTime, leftObject.isSetValidTime(), rightObject.isSetValidTime()));
+                    target.setValidTime(mergedValidTime);
+                } else {
+                    if (validTimeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.validTime = null;
+                    }
+                }
             }
             {
-                ProcedurePropertyType lhsUsing;
-                lhsUsing = leftObject.getUsing();
-                ProcedurePropertyType rhsUsing;
-                rhsUsing = rightObject.getUsing();
-                target.setUsing(((ProcedurePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "using", lhsUsing), LocatorUtils.property(rightLocator, "using", rhsUsing), lhsUsing, rhsUsing)));
+                java.lang.Boolean usingShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUsing(), rightObject.isSetUsing());
+                if (usingShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ProcedurePropertyType lhsUsing;
+                    lhsUsing = leftObject.getUsing();
+                    ProcedurePropertyType rhsUsing;
+                    rhsUsing = rightObject.getUsing();
+                    ProcedurePropertyType mergedUsing = ((ProcedurePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "using", lhsUsing), LocatorUtils.property(rightLocator, "using", rhsUsing), lhsUsing, rhsUsing, leftObject.isSetUsing(), rightObject.isSetUsing()));
+                    target.setUsing(mergedUsing);
+                } else {
+                    if (usingShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.using = null;
+                    }
+                }
             }
             {
-                JAXBElement<TargetPropertyType> lhsTarget;
-                lhsTarget = leftObject.getTarget();
-                JAXBElement<TargetPropertyType> rhsTarget;
-                rhsTarget = rightObject.getTarget();
-                target.setTarget(((JAXBElement<TargetPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "target", lhsTarget), LocatorUtils.property(rightLocator, "target", rhsTarget), lhsTarget, rhsTarget)));
+                java.lang.Boolean targetShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTarget(), rightObject.isSetTarget());
+                if (targetShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<TargetPropertyType> lhsTarget;
+                    lhsTarget = leftObject.getTarget();
+                    JAXBElement<TargetPropertyType> rhsTarget;
+                    rhsTarget = rightObject.getTarget();
+                    JAXBElement<TargetPropertyType> mergedTarget = ((JAXBElement<TargetPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "target", lhsTarget), LocatorUtils.property(rightLocator, "target", rhsTarget), lhsTarget, rhsTarget, leftObject.isSetTarget(), rightObject.isSetTarget()));
+                    target.setTarget(mergedTarget);
+                } else {
+                    if (targetShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.target = null;
+                    }
+                }
             }
             {
-                ResultType lhsResultOf;
-                lhsResultOf = leftObject.getResultOf();
-                ResultType rhsResultOf;
-                rhsResultOf = rightObject.getResultOf();
-                target.setResultOf(((ResultType) strategy.merge(LocatorUtils.property(leftLocator, "resultOf", lhsResultOf), LocatorUtils.property(rightLocator, "resultOf", rhsResultOf), lhsResultOf, rhsResultOf)));
+                java.lang.Boolean resultOfShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetResultOf(), rightObject.isSetResultOf());
+                if (resultOfShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ResultType lhsResultOf;
+                    lhsResultOf = leftObject.getResultOf();
+                    ResultType rhsResultOf;
+                    rhsResultOf = rightObject.getResultOf();
+                    ResultType mergedResultOf = ((ResultType) strategy.merge(LocatorUtils.property(leftLocator, "resultOf", lhsResultOf), LocatorUtils.property(rightLocator, "resultOf", rhsResultOf), lhsResultOf, rhsResultOf, leftObject.isSetResultOf(), rightObject.isSetResultOf()));
+                    target.setResultOf(mergedResultOf);
+                } else {
+                    if (resultOfShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.resultOf = null;
+                    }
+                }
             }
         }
-    }
-
-    public ObservationType withValidTime(TimePrimitivePropertyType value) {
-        setValidTime(value);
-        return this;
-    }
-
-    public ObservationType withUsing(ProcedurePropertyType value) {
-        setUsing(value);
-        return this;
-    }
-
-    public ObservationType withTarget(JAXBElement<TargetPropertyType> value) {
-        setTarget(value);
-        return this;
-    }
-
-    public ObservationType withResultOf(ResultType value) {
-        setResultOf(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withBoundedBy(BoundingShapeType value) {
-        setBoundedBy(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withLocation(JAXBElement<? extends LocationPropertyType> value) {
-        setLocation(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public ObservationType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public ObservationType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public ObservationType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public ObservationType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public ObservationType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

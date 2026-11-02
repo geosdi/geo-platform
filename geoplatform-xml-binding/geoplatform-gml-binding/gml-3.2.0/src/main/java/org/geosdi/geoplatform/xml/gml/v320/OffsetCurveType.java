@@ -34,57 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per OffsetCurveType complex type.
+ * <p>Classe Java per OffsetCurveType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="OffsetCurveType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
- *       &lt;sequence>
- *         &lt;element name="offsetBase" type="{http://www.opengis.net/gml}CurvePropertyType"/>
- *         &lt;element name="distance" type="{http://www.opengis.net/gml}LengthType"/>
- *         &lt;element name="refDirection" type="{http://www.opengis.net/gml}VectorType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="OffsetCurveType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
+ *       <sequence>
+ *         <element name="offsetBase" type="{http://www.opengis.net/gml}CurvePropertyType"/>
+ *         <element name="distance" type="{http://www.opengis.net/gml}LengthType"/>
+ *         <element name="refDirection" type="{http://www.opengis.net/gml}VectorType" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -189,13 +187,15 @@ public class OffsetCurveType
         return (this.refDirection!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -203,28 +203,30 @@ public class OffsetCurveType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             CurvePropertyType theOffsetBase;
             theOffsetBase = this.getOffsetBase();
-            strategy.appendField(locator, this, "offsetBase", buffer, theOffsetBase);
+            strategy.appendField(locator, this, "offsetBase", buffer, theOffsetBase, this.isSetOffsetBase());
         }
         {
             LengthType theDistance;
             theDistance = this.getDistance();
-            strategy.appendField(locator, this, "distance", buffer, theDistance);
+            strategy.appendField(locator, this, "distance", buffer, theDistance, this.isSetDistance());
         }
         {
             VectorType theRefDirection;
             theRefDirection = this.getRefDirection();
-            strategy.appendField(locator, this, "refDirection", buffer, theRefDirection);
+            strategy.appendField(locator, this, "refDirection", buffer, theRefDirection, this.isSetRefDirection());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof OffsetCurveType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -239,7 +241,7 @@ public class OffsetCurveType
             lhsOffsetBase = this.getOffsetBase();
             CurvePropertyType rhsOffsetBase;
             rhsOffsetBase = that.getOffsetBase();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "offsetBase", lhsOffsetBase), LocatorUtils.property(thatLocator, "offsetBase", rhsOffsetBase), lhsOffsetBase, rhsOffsetBase)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "offsetBase", lhsOffsetBase), LocatorUtils.property(thatLocator, "offsetBase", rhsOffsetBase), lhsOffsetBase, rhsOffsetBase, this.isSetOffsetBase(), that.isSetOffsetBase())) {
                 return false;
             }
         }
@@ -248,7 +250,7 @@ public class OffsetCurveType
             lhsDistance = this.getDistance();
             LengthType rhsDistance;
             rhsDistance = that.getDistance();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "distance", lhsDistance), LocatorUtils.property(thatLocator, "distance", rhsDistance), lhsDistance, rhsDistance)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "distance", lhsDistance), LocatorUtils.property(thatLocator, "distance", rhsDistance), lhsDistance, rhsDistance, this.isSetDistance(), that.isSetDistance())) {
                 return false;
             }
         }
@@ -257,94 +259,118 @@ public class OffsetCurveType
             lhsRefDirection = this.getRefDirection();
             VectorType rhsRefDirection;
             rhsRefDirection = that.getRefDirection();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "refDirection", lhsRefDirection), LocatorUtils.property(thatLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "refDirection", lhsRefDirection), LocatorUtils.property(thatLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection, this.isSetRefDirection(), that.isSetRefDirection())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             CurvePropertyType theOffsetBase;
             theOffsetBase = this.getOffsetBase();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "offsetBase", theOffsetBase), currentHashCode, theOffsetBase);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "offsetBase", theOffsetBase), currentHashCode, theOffsetBase, this.isSetOffsetBase());
         }
         {
             LengthType theDistance;
             theDistance = this.getDistance();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "distance", theDistance), currentHashCode, theDistance);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "distance", theDistance), currentHashCode, theDistance, this.isSetDistance());
         }
         {
             VectorType theRefDirection;
             theRefDirection = this.getRefDirection();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "refDirection", theRefDirection), currentHashCode, theRefDirection);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "refDirection", theRefDirection), currentHashCode, theRefDirection, this.isSetRefDirection());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof OffsetCurveType) {
             final OffsetCurveType copy = ((OffsetCurveType) draftCopy);
-            if (this.isSetOffsetBase()) {
-                CurvePropertyType sourceOffsetBase;
-                sourceOffsetBase = this.getOffsetBase();
-                CurvePropertyType copyOffsetBase = ((CurvePropertyType) strategy.copy(LocatorUtils.property(locator, "offsetBase", sourceOffsetBase), sourceOffsetBase));
-                copy.setOffsetBase(copyOffsetBase);
-            } else {
-                copy.offsetBase = null;
+            {
+                java.lang.Boolean offsetBaseShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetOffsetBase());
+                if (offsetBaseShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CurvePropertyType sourceOffsetBase;
+                    sourceOffsetBase = this.getOffsetBase();
+                    CurvePropertyType copyOffsetBase = ((CurvePropertyType) strategy.copy(LocatorUtils.property(locator, "offsetBase", sourceOffsetBase), sourceOffsetBase, this.isSetOffsetBase()));
+                    copy.setOffsetBase(copyOffsetBase);
+                } else {
+                    if (offsetBaseShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.offsetBase = null;
+                    }
+                }
             }
-            if (this.isSetDistance()) {
-                LengthType sourceDistance;
-                sourceDistance = this.getDistance();
-                LengthType copyDistance = ((LengthType) strategy.copy(LocatorUtils.property(locator, "distance", sourceDistance), sourceDistance));
-                copy.setDistance(copyDistance);
-            } else {
-                copy.distance = null;
+            {
+                java.lang.Boolean distanceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDistance());
+                if (distanceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    LengthType sourceDistance;
+                    sourceDistance = this.getDistance();
+                    LengthType copyDistance = ((LengthType) strategy.copy(LocatorUtils.property(locator, "distance", sourceDistance), sourceDistance, this.isSetDistance()));
+                    copy.setDistance(copyDistance);
+                } else {
+                    if (distanceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.distance = null;
+                    }
+                }
             }
-            if (this.isSetRefDirection()) {
-                VectorType sourceRefDirection;
-                sourceRefDirection = this.getRefDirection();
-                VectorType copyRefDirection = ((VectorType) strategy.copy(LocatorUtils.property(locator, "refDirection", sourceRefDirection), sourceRefDirection));
-                copy.setRefDirection(copyRefDirection);
-            } else {
-                copy.refDirection = null;
+            {
+                java.lang.Boolean refDirectionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRefDirection());
+                if (refDirectionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    VectorType sourceRefDirection;
+                    sourceRefDirection = this.getRefDirection();
+                    VectorType copyRefDirection = ((VectorType) strategy.copy(LocatorUtils.property(locator, "refDirection", sourceRefDirection), sourceRefDirection, this.isSetRefDirection()));
+                    copy.setRefDirection(copyRefDirection);
+                } else {
+                    if (refDirectionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.refDirection = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new OffsetCurveType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof OffsetCurveType) {
@@ -352,60 +378,51 @@ public class OffsetCurveType
             final OffsetCurveType leftObject = ((OffsetCurveType) left);
             final OffsetCurveType rightObject = ((OffsetCurveType) right);
             {
-                CurvePropertyType lhsOffsetBase;
-                lhsOffsetBase = leftObject.getOffsetBase();
-                CurvePropertyType rhsOffsetBase;
-                rhsOffsetBase = rightObject.getOffsetBase();
-                target.setOffsetBase(((CurvePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "offsetBase", lhsOffsetBase), LocatorUtils.property(rightLocator, "offsetBase", rhsOffsetBase), lhsOffsetBase, rhsOffsetBase)));
+                java.lang.Boolean offsetBaseShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetOffsetBase(), rightObject.isSetOffsetBase());
+                if (offsetBaseShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CurvePropertyType lhsOffsetBase;
+                    lhsOffsetBase = leftObject.getOffsetBase();
+                    CurvePropertyType rhsOffsetBase;
+                    rhsOffsetBase = rightObject.getOffsetBase();
+                    CurvePropertyType mergedOffsetBase = ((CurvePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "offsetBase", lhsOffsetBase), LocatorUtils.property(rightLocator, "offsetBase", rhsOffsetBase), lhsOffsetBase, rhsOffsetBase, leftObject.isSetOffsetBase(), rightObject.isSetOffsetBase()));
+                    target.setOffsetBase(mergedOffsetBase);
+                } else {
+                    if (offsetBaseShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.offsetBase = null;
+                    }
+                }
             }
             {
-                LengthType lhsDistance;
-                lhsDistance = leftObject.getDistance();
-                LengthType rhsDistance;
-                rhsDistance = rightObject.getDistance();
-                target.setDistance(((LengthType) strategy.merge(LocatorUtils.property(leftLocator, "distance", lhsDistance), LocatorUtils.property(rightLocator, "distance", rhsDistance), lhsDistance, rhsDistance)));
+                java.lang.Boolean distanceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDistance(), rightObject.isSetDistance());
+                if (distanceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    LengthType lhsDistance;
+                    lhsDistance = leftObject.getDistance();
+                    LengthType rhsDistance;
+                    rhsDistance = rightObject.getDistance();
+                    LengthType mergedDistance = ((LengthType) strategy.merge(LocatorUtils.property(leftLocator, "distance", lhsDistance), LocatorUtils.property(rightLocator, "distance", rhsDistance), lhsDistance, rhsDistance, leftObject.isSetDistance(), rightObject.isSetDistance()));
+                    target.setDistance(mergedDistance);
+                } else {
+                    if (distanceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.distance = null;
+                    }
+                }
             }
             {
-                VectorType lhsRefDirection;
-                lhsRefDirection = leftObject.getRefDirection();
-                VectorType rhsRefDirection;
-                rhsRefDirection = rightObject.getRefDirection();
-                target.setRefDirection(((VectorType) strategy.merge(LocatorUtils.property(leftLocator, "refDirection", lhsRefDirection), LocatorUtils.property(rightLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection)));
+                java.lang.Boolean refDirectionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRefDirection(), rightObject.isSetRefDirection());
+                if (refDirectionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    VectorType lhsRefDirection;
+                    lhsRefDirection = leftObject.getRefDirection();
+                    VectorType rhsRefDirection;
+                    rhsRefDirection = rightObject.getRefDirection();
+                    VectorType mergedRefDirection = ((VectorType) strategy.merge(LocatorUtils.property(leftLocator, "refDirection", lhsRefDirection), LocatorUtils.property(rightLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection, leftObject.isSetRefDirection(), rightObject.isSetRefDirection()));
+                    target.setRefDirection(mergedRefDirection);
+                } else {
+                    if (refDirectionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.refDirection = null;
+                    }
+                }
             }
         }
-    }
-
-    public OffsetCurveType withOffsetBase(CurvePropertyType value) {
-        setOffsetBase(value);
-        return this;
-    }
-
-    public OffsetCurveType withDistance(LengthType value) {
-        setDistance(value);
-        return this;
-    }
-
-    public OffsetCurveType withRefDirection(VectorType value) {
-        setRefDirection(value);
-        return this;
-    }
-
-    @Override
-    public OffsetCurveType withNumDerivativesAtStart(BigInteger value) {
-        setNumDerivativesAtStart(value);
-        return this;
-    }
-
-    @Override
-    public OffsetCurveType withNumDerivativesAtEnd(BigInteger value) {
-        setNumDerivativesAtEnd(value);
-        return this;
-    }
-
-    @Override
-    public OffsetCurveType withNumDerivativeInterior(BigInteger value) {
-        setNumDerivativeInterior(value);
-        return this;
     }
 
 }

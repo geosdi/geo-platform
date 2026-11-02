@@ -34,70 +34,69 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per ArcByCenterPointType complex type.
+ * <p>Classe Java per ArcByCenterPointType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ArcByCenterPointType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
- *       &lt;sequence>
- *         &lt;choice>
- *           &lt;choice>
- *             &lt;element ref="{http://www.opengis.net/gml}pos"/>
- *             &lt;element ref="{http://www.opengis.net/gml}pointProperty"/>
- *             &lt;element ref="{http://www.opengis.net/gml}pointRep"/>
- *           &lt;/choice>
- *           &lt;element ref="{http://www.opengis.net/gml}posList"/>
- *           &lt;element ref="{http://www.opengis.net/gml}coordinates"/>
- *         &lt;/choice>
- *         &lt;element name="radius" type="{http://www.opengis.net/gml}LengthType"/>
- *         &lt;element name="startAngle" type="{http://www.opengis.net/gml}AngleType" minOccurs="0"/>
- *         &lt;element name="endAngle" type="{http://www.opengis.net/gml}AngleType" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="interpolation" type="{http://www.opengis.net/gml}CurveInterpolationType" fixed="circularArcCenterPointWithRadius" />
- *       &lt;attribute name="numArc" use="required" type="{http://www.w3.org/2001/XMLSchema}integer" fixed="1" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="ArcByCenterPointType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractCurveSegmentType">
+ *       <sequence>
+ *         <choice>
+ *           <choice>
+ *             <element ref="{http://www.opengis.net/gml}pos"/>
+ *             <element ref="{http://www.opengis.net/gml}pointProperty"/>
+ *             <element ref="{http://www.opengis.net/gml}pointRep"/>
+ *           </choice>
+ *           <element ref="{http://www.opengis.net/gml}posList"/>
+ *           <element ref="{http://www.opengis.net/gml}coordinates"/>
+ *         </choice>
+ *         <element name="radius" type="{http://www.opengis.net/gml}LengthType"/>
+ *         <element name="startAngle" type="{http://www.opengis.net/gml}AngleType" minOccurs="0"/>
+ *         <element name="endAngle" type="{http://www.opengis.net/gml}AngleType" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="interpolation" type="{http://www.opengis.net/gml}CurveInterpolationType" fixed="circularArcCenterPointWithRadius" />
+ *       <attribute name="numArc" use="required" type="{http://www.w3.org/2001/XMLSchema}integer" fixed="1" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -121,6 +120,10 @@ public class ArcByCenterPointType
 {
 
     protected DirectPositionType pos;
+    /**
+     * This property element either references a point via the XLink-attributes or contains the point element. pointProperty is the predefined property which may be used by GML Application Schemas whenever a GML feature has a property with a value that is substitutable for Point.
+     * 
+     */
     protected PointPropertyType pointProperty;
     protected PointPropertyType pointRep;
     protected DirectPositionListType posList;
@@ -129,18 +132,10 @@ public class ArcByCenterPointType
     protected LengthType radius;
     protected AngleType startAngle;
     protected AngleType endAngle;
-    /**
-     * 
-     * 
-     */
     @XmlAttribute(name = "interpolation")
-    public final static CurveInterpolationType INTERPOLATION = CurveInterpolationType.CIRCULAR_ARC_CENTER_POINT_WITH_RADIUS;
-    /**
-     * 
-     * 
-     */
+    public static final CurveInterpolationType INTERPOLATION = CurveInterpolationType.CIRCULAR_ARC_CENTER_POINT_WITH_RADIUS;
     @XmlAttribute(name = "numArc", required = true)
-    public final static BigInteger NUM_ARC = new BigInteger("1");
+    public static final BigInteger NUM_ARC = new BigInteger("1");
 
     /**
      * Recupera il valore della proprietà pos.
@@ -171,7 +166,7 @@ public class ArcByCenterPointType
     }
 
     /**
-     * Recupera il valore della proprietà pointProperty.
+     * This property element either references a point via the XLink-attributes or contains the point element. pointProperty is the predefined property which may be used by GML Application Schemas whenever a GML feature has a property with a value that is substitutable for Point.
      * 
      * @return
      *     possible object is
@@ -189,6 +184,7 @@ public class ArcByCenterPointType
      *     allowed object is
      *     {@link PointPropertyType }
      *     
+     * @see #getPointProperty()
      */
     public void setPointProperty(PointPropertyType value) {
         this.pointProperty = value;
@@ -366,13 +362,15 @@ public class ArcByCenterPointType
         return (this.endAngle!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -380,63 +378,65 @@ public class ArcByCenterPointType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             DirectPositionType thePos;
             thePos = this.getPos();
-            strategy.appendField(locator, this, "pos", buffer, thePos);
+            strategy.appendField(locator, this, "pos", buffer, thePos, this.isSetPos());
         }
         {
             PointPropertyType thePointProperty;
             thePointProperty = this.getPointProperty();
-            strategy.appendField(locator, this, "pointProperty", buffer, thePointProperty);
+            strategy.appendField(locator, this, "pointProperty", buffer, thePointProperty, this.isSetPointProperty());
         }
         {
             PointPropertyType thePointRep;
             thePointRep = this.getPointRep();
-            strategy.appendField(locator, this, "pointRep", buffer, thePointRep);
+            strategy.appendField(locator, this, "pointRep", buffer, thePointRep, this.isSetPointRep());
         }
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            strategy.appendField(locator, this, "posList", buffer, thePosList);
+            strategy.appendField(locator, this, "posList", buffer, thePosList, this.isSetPosList());
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates, this.isSetCoordinates());
         }
         {
             LengthType theRadius;
             theRadius = this.getRadius();
-            strategy.appendField(locator, this, "radius", buffer, theRadius);
+            strategy.appendField(locator, this, "radius", buffer, theRadius, this.isSetRadius());
         }
         {
             AngleType theStartAngle;
             theStartAngle = this.getStartAngle();
-            strategy.appendField(locator, this, "startAngle", buffer, theStartAngle);
+            strategy.appendField(locator, this, "startAngle", buffer, theStartAngle, this.isSetStartAngle());
         }
         {
             AngleType theEndAngle;
             theEndAngle = this.getEndAngle();
-            strategy.appendField(locator, this, "endAngle", buffer, theEndAngle);
+            strategy.appendField(locator, this, "endAngle", buffer, theEndAngle, this.isSetEndAngle());
         }
         {
             CurveInterpolationType theINTERPOLATION;
             theINTERPOLATION = ArcByCenterPointType.INTERPOLATION;
-            strategy.appendField(locator, this, "interpolation", buffer, theINTERPOLATION);
+            strategy.appendField(locator, this, "interpolation", buffer, theINTERPOLATION, true);
         }
         {
             BigInteger theNUM_ARC;
             theNUM_ARC = ArcByCenterPointType.NUM_ARC;
-            strategy.appendField(locator, this, "numARC", buffer, theNUM_ARC);
+            strategy.appendField(locator, this, "numARC", buffer, theNUM_ARC, true);
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof ArcByCenterPointType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -451,7 +451,7 @@ public class ArcByCenterPointType
             lhsPos = this.getPos();
             DirectPositionType rhsPos;
             rhsPos = that.getPos();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "pos", lhsPos), LocatorUtils.property(thatLocator, "pos", rhsPos), lhsPos, rhsPos)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pos", lhsPos), LocatorUtils.property(thatLocator, "pos", rhsPos), lhsPos, rhsPos, this.isSetPos(), that.isSetPos())) {
                 return false;
             }
         }
@@ -460,7 +460,7 @@ public class ArcByCenterPointType
             lhsPointProperty = this.getPointProperty();
             PointPropertyType rhsPointProperty;
             rhsPointProperty = that.getPointProperty();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointProperty", lhsPointProperty), LocatorUtils.property(thatLocator, "pointProperty", rhsPointProperty), lhsPointProperty, rhsPointProperty)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointProperty", lhsPointProperty), LocatorUtils.property(thatLocator, "pointProperty", rhsPointProperty), lhsPointProperty, rhsPointProperty, this.isSetPointProperty(), that.isSetPointProperty())) {
                 return false;
             }
         }
@@ -469,7 +469,7 @@ public class ArcByCenterPointType
             lhsPointRep = this.getPointRep();
             PointPropertyType rhsPointRep;
             rhsPointRep = that.getPointRep();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointRep", lhsPointRep), LocatorUtils.property(thatLocator, "pointRep", rhsPointRep), lhsPointRep, rhsPointRep)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointRep", lhsPointRep), LocatorUtils.property(thatLocator, "pointRep", rhsPointRep), lhsPointRep, rhsPointRep, this.isSetPointRep(), that.isSetPointRep())) {
                 return false;
             }
         }
@@ -478,7 +478,7 @@ public class ArcByCenterPointType
             lhsPosList = this.getPosList();
             DirectPositionListType rhsPosList;
             rhsPosList = that.getPosList();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "posList", lhsPosList), LocatorUtils.property(thatLocator, "posList", rhsPosList), lhsPosList, rhsPosList)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "posList", lhsPosList), LocatorUtils.property(thatLocator, "posList", rhsPosList), lhsPosList, rhsPosList, this.isSetPosList(), that.isSetPosList())) {
                 return false;
             }
         }
@@ -487,7 +487,7 @@ public class ArcByCenterPointType
             lhsCoordinates = this.getCoordinates();
             CoordinatesType rhsCoordinates;
             rhsCoordinates = that.getCoordinates();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinates", lhsCoordinates), LocatorUtils.property(thatLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinates", lhsCoordinates), LocatorUtils.property(thatLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates, this.isSetCoordinates(), that.isSetCoordinates())) {
                 return false;
             }
         }
@@ -496,7 +496,7 @@ public class ArcByCenterPointType
             lhsRadius = this.getRadius();
             LengthType rhsRadius;
             rhsRadius = that.getRadius();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "radius", lhsRadius), LocatorUtils.property(thatLocator, "radius", rhsRadius), lhsRadius, rhsRadius)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "radius", lhsRadius), LocatorUtils.property(thatLocator, "radius", rhsRadius), lhsRadius, rhsRadius, this.isSetRadius(), that.isSetRadius())) {
                 return false;
             }
         }
@@ -505,7 +505,7 @@ public class ArcByCenterPointType
             lhsStartAngle = this.getStartAngle();
             AngleType rhsStartAngle;
             rhsStartAngle = that.getStartAngle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "startAngle", lhsStartAngle), LocatorUtils.property(thatLocator, "startAngle", rhsStartAngle), lhsStartAngle, rhsStartAngle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "startAngle", lhsStartAngle), LocatorUtils.property(thatLocator, "startAngle", rhsStartAngle), lhsStartAngle, rhsStartAngle, this.isSetStartAngle(), that.isSetStartAngle())) {
                 return false;
             }
         }
@@ -514,159 +514,208 @@ public class ArcByCenterPointType
             lhsEndAngle = this.getEndAngle();
             AngleType rhsEndAngle;
             rhsEndAngle = that.getEndAngle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "endAngle", lhsEndAngle), LocatorUtils.property(thatLocator, "endAngle", rhsEndAngle), lhsEndAngle, rhsEndAngle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "endAngle", lhsEndAngle), LocatorUtils.property(thatLocator, "endAngle", rhsEndAngle), lhsEndAngle, rhsEndAngle, this.isSetEndAngle(), that.isSetEndAngle())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             DirectPositionType thePos;
             thePos = this.getPos();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pos", thePos), currentHashCode, thePos);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pos", thePos), currentHashCode, thePos, this.isSetPos());
         }
         {
             PointPropertyType thePointProperty;
             thePointProperty = this.getPointProperty();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointProperty", thePointProperty), currentHashCode, thePointProperty);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointProperty", thePointProperty), currentHashCode, thePointProperty, this.isSetPointProperty());
         }
         {
             PointPropertyType thePointRep;
             thePointRep = this.getPointRep();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointRep", thePointRep), currentHashCode, thePointRep);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointRep", thePointRep), currentHashCode, thePointRep, this.isSetPointRep());
         }
         {
             DirectPositionListType thePosList;
             thePosList = this.getPosList();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "posList", thePosList), currentHashCode, thePosList);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "posList", thePosList), currentHashCode, thePosList, this.isSetPosList());
         }
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinates", theCoordinates), currentHashCode, theCoordinates);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinates", theCoordinates), currentHashCode, theCoordinates, this.isSetCoordinates());
         }
         {
             LengthType theRadius;
             theRadius = this.getRadius();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "radius", theRadius), currentHashCode, theRadius);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "radius", theRadius), currentHashCode, theRadius, this.isSetRadius());
         }
         {
             AngleType theStartAngle;
             theStartAngle = this.getStartAngle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "startAngle", theStartAngle), currentHashCode, theStartAngle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "startAngle", theStartAngle), currentHashCode, theStartAngle, this.isSetStartAngle());
         }
         {
             AngleType theEndAngle;
             theEndAngle = this.getEndAngle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "endAngle", theEndAngle), currentHashCode, theEndAngle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "endAngle", theEndAngle), currentHashCode, theEndAngle, this.isSetEndAngle());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof ArcByCenterPointType) {
             final ArcByCenterPointType copy = ((ArcByCenterPointType) draftCopy);
-            if (this.isSetPos()) {
-                DirectPositionType sourcePos;
-                sourcePos = this.getPos();
-                DirectPositionType copyPos = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "pos", sourcePos), sourcePos));
-                copy.setPos(copyPos);
-            } else {
-                copy.pos = null;
+            {
+                java.lang.Boolean posShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPos());
+                if (posShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType sourcePos;
+                    sourcePos = this.getPos();
+                    DirectPositionType copyPos = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "pos", sourcePos), sourcePos, this.isSetPos()));
+                    copy.setPos(copyPos);
+                } else {
+                    if (posShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.pos = null;
+                    }
+                }
             }
-            if (this.isSetPointProperty()) {
-                PointPropertyType sourcePointProperty;
-                sourcePointProperty = this.getPointProperty();
-                PointPropertyType copyPointProperty = ((PointPropertyType) strategy.copy(LocatorUtils.property(locator, "pointProperty", sourcePointProperty), sourcePointProperty));
-                copy.setPointProperty(copyPointProperty);
-            } else {
-                copy.pointProperty = null;
+            {
+                java.lang.Boolean pointPropertyShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPointProperty());
+                if (pointPropertyShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    PointPropertyType sourcePointProperty;
+                    sourcePointProperty = this.getPointProperty();
+                    PointPropertyType copyPointProperty = ((PointPropertyType) strategy.copy(LocatorUtils.property(locator, "pointProperty", sourcePointProperty), sourcePointProperty, this.isSetPointProperty()));
+                    copy.setPointProperty(copyPointProperty);
+                } else {
+                    if (pointPropertyShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.pointProperty = null;
+                    }
+                }
             }
-            if (this.isSetPointRep()) {
-                PointPropertyType sourcePointRep;
-                sourcePointRep = this.getPointRep();
-                PointPropertyType copyPointRep = ((PointPropertyType) strategy.copy(LocatorUtils.property(locator, "pointRep", sourcePointRep), sourcePointRep));
-                copy.setPointRep(copyPointRep);
-            } else {
-                copy.pointRep = null;
+            {
+                java.lang.Boolean pointRepShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPointRep());
+                if (pointRepShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    PointPropertyType sourcePointRep;
+                    sourcePointRep = this.getPointRep();
+                    PointPropertyType copyPointRep = ((PointPropertyType) strategy.copy(LocatorUtils.property(locator, "pointRep", sourcePointRep), sourcePointRep, this.isSetPointRep()));
+                    copy.setPointRep(copyPointRep);
+                } else {
+                    if (pointRepShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.pointRep = null;
+                    }
+                }
             }
-            if (this.isSetPosList()) {
-                DirectPositionListType sourcePosList;
-                sourcePosList = this.getPosList();
-                DirectPositionListType copyPosList = ((DirectPositionListType) strategy.copy(LocatorUtils.property(locator, "posList", sourcePosList), sourcePosList));
-                copy.setPosList(copyPosList);
-            } else {
-                copy.posList = null;
+            {
+                java.lang.Boolean posListShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPosList());
+                if (posListShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionListType sourcePosList;
+                    sourcePosList = this.getPosList();
+                    DirectPositionListType copyPosList = ((DirectPositionListType) strategy.copy(LocatorUtils.property(locator, "posList", sourcePosList), sourcePosList, this.isSetPosList()));
+                    copy.setPosList(copyPosList);
+                } else {
+                    if (posListShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.posList = null;
+                    }
+                }
             }
-            if (this.isSetCoordinates()) {
-                CoordinatesType sourceCoordinates;
-                sourceCoordinates = this.getCoordinates();
-                CoordinatesType copyCoordinates = ((CoordinatesType) strategy.copy(LocatorUtils.property(locator, "coordinates", sourceCoordinates), sourceCoordinates));
-                copy.setCoordinates(copyCoordinates);
-            } else {
-                copy.coordinates = null;
+            {
+                java.lang.Boolean coordinatesShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCoordinates());
+                if (coordinatesShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CoordinatesType sourceCoordinates;
+                    sourceCoordinates = this.getCoordinates();
+                    CoordinatesType copyCoordinates = ((CoordinatesType) strategy.copy(LocatorUtils.property(locator, "coordinates", sourceCoordinates), sourceCoordinates, this.isSetCoordinates()));
+                    copy.setCoordinates(copyCoordinates);
+                } else {
+                    if (coordinatesShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.coordinates = null;
+                    }
+                }
             }
-            if (this.isSetRadius()) {
-                LengthType sourceRadius;
-                sourceRadius = this.getRadius();
-                LengthType copyRadius = ((LengthType) strategy.copy(LocatorUtils.property(locator, "radius", sourceRadius), sourceRadius));
-                copy.setRadius(copyRadius);
-            } else {
-                copy.radius = null;
+            {
+                java.lang.Boolean radiusShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRadius());
+                if (radiusShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    LengthType sourceRadius;
+                    sourceRadius = this.getRadius();
+                    LengthType copyRadius = ((LengthType) strategy.copy(LocatorUtils.property(locator, "radius", sourceRadius), sourceRadius, this.isSetRadius()));
+                    copy.setRadius(copyRadius);
+                } else {
+                    if (radiusShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.radius = null;
+                    }
+                }
             }
-            if (this.isSetStartAngle()) {
-                AngleType sourceStartAngle;
-                sourceStartAngle = this.getStartAngle();
-                AngleType copyStartAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "startAngle", sourceStartAngle), sourceStartAngle));
-                copy.setStartAngle(copyStartAngle);
-            } else {
-                copy.startAngle = null;
+            {
+                java.lang.Boolean startAngleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetStartAngle());
+                if (startAngleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType sourceStartAngle;
+                    sourceStartAngle = this.getStartAngle();
+                    AngleType copyStartAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "startAngle", sourceStartAngle), sourceStartAngle, this.isSetStartAngle()));
+                    copy.setStartAngle(copyStartAngle);
+                } else {
+                    if (startAngleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.startAngle = null;
+                    }
+                }
             }
-            if (this.isSetEndAngle()) {
-                AngleType sourceEndAngle;
-                sourceEndAngle = this.getEndAngle();
-                AngleType copyEndAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "endAngle", sourceEndAngle), sourceEndAngle));
-                copy.setEndAngle(copyEndAngle);
-            } else {
-                copy.endAngle = null;
+            {
+                java.lang.Boolean endAngleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetEndAngle());
+                if (endAngleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType sourceEndAngle;
+                    sourceEndAngle = this.getEndAngle();
+                    AngleType copyEndAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "endAngle", sourceEndAngle), sourceEndAngle, this.isSetEndAngle()));
+                    copy.setEndAngle(copyEndAngle);
+                } else {
+                    if (endAngleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.endAngle = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new ArcByCenterPointType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof ArcByCenterPointType) {
@@ -674,120 +723,126 @@ public class ArcByCenterPointType
             final ArcByCenterPointType leftObject = ((ArcByCenterPointType) left);
             final ArcByCenterPointType rightObject = ((ArcByCenterPointType) right);
             {
-                DirectPositionType lhsPos;
-                lhsPos = leftObject.getPos();
-                DirectPositionType rhsPos;
-                rhsPos = rightObject.getPos();
-                target.setPos(((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "pos", lhsPos), LocatorUtils.property(rightLocator, "pos", rhsPos), lhsPos, rhsPos)));
+                java.lang.Boolean posShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPos(), rightObject.isSetPos());
+                if (posShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType lhsPos;
+                    lhsPos = leftObject.getPos();
+                    DirectPositionType rhsPos;
+                    rhsPos = rightObject.getPos();
+                    DirectPositionType mergedPos = ((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "pos", lhsPos), LocatorUtils.property(rightLocator, "pos", rhsPos), lhsPos, rhsPos, leftObject.isSetPos(), rightObject.isSetPos()));
+                    target.setPos(mergedPos);
+                } else {
+                    if (posShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.pos = null;
+                    }
+                }
             }
             {
-                PointPropertyType lhsPointProperty;
-                lhsPointProperty = leftObject.getPointProperty();
-                PointPropertyType rhsPointProperty;
-                rhsPointProperty = rightObject.getPointProperty();
-                target.setPointProperty(((PointPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "pointProperty", lhsPointProperty), LocatorUtils.property(rightLocator, "pointProperty", rhsPointProperty), lhsPointProperty, rhsPointProperty)));
+                java.lang.Boolean pointPropertyShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPointProperty(), rightObject.isSetPointProperty());
+                if (pointPropertyShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    PointPropertyType lhsPointProperty;
+                    lhsPointProperty = leftObject.getPointProperty();
+                    PointPropertyType rhsPointProperty;
+                    rhsPointProperty = rightObject.getPointProperty();
+                    PointPropertyType mergedPointProperty = ((PointPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "pointProperty", lhsPointProperty), LocatorUtils.property(rightLocator, "pointProperty", rhsPointProperty), lhsPointProperty, rhsPointProperty, leftObject.isSetPointProperty(), rightObject.isSetPointProperty()));
+                    target.setPointProperty(mergedPointProperty);
+                } else {
+                    if (pointPropertyShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.pointProperty = null;
+                    }
+                }
             }
             {
-                PointPropertyType lhsPointRep;
-                lhsPointRep = leftObject.getPointRep();
-                PointPropertyType rhsPointRep;
-                rhsPointRep = rightObject.getPointRep();
-                target.setPointRep(((PointPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "pointRep", lhsPointRep), LocatorUtils.property(rightLocator, "pointRep", rhsPointRep), lhsPointRep, rhsPointRep)));
+                java.lang.Boolean pointRepShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPointRep(), rightObject.isSetPointRep());
+                if (pointRepShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    PointPropertyType lhsPointRep;
+                    lhsPointRep = leftObject.getPointRep();
+                    PointPropertyType rhsPointRep;
+                    rhsPointRep = rightObject.getPointRep();
+                    PointPropertyType mergedPointRep = ((PointPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "pointRep", lhsPointRep), LocatorUtils.property(rightLocator, "pointRep", rhsPointRep), lhsPointRep, rhsPointRep, leftObject.isSetPointRep(), rightObject.isSetPointRep()));
+                    target.setPointRep(mergedPointRep);
+                } else {
+                    if (pointRepShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.pointRep = null;
+                    }
+                }
             }
             {
-                DirectPositionListType lhsPosList;
-                lhsPosList = leftObject.getPosList();
-                DirectPositionListType rhsPosList;
-                rhsPosList = rightObject.getPosList();
-                target.setPosList(((DirectPositionListType) strategy.merge(LocatorUtils.property(leftLocator, "posList", lhsPosList), LocatorUtils.property(rightLocator, "posList", rhsPosList), lhsPosList, rhsPosList)));
+                java.lang.Boolean posListShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPosList(), rightObject.isSetPosList());
+                if (posListShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionListType lhsPosList;
+                    lhsPosList = leftObject.getPosList();
+                    DirectPositionListType rhsPosList;
+                    rhsPosList = rightObject.getPosList();
+                    DirectPositionListType mergedPosList = ((DirectPositionListType) strategy.merge(LocatorUtils.property(leftLocator, "posList", lhsPosList), LocatorUtils.property(rightLocator, "posList", rhsPosList), lhsPosList, rhsPosList, leftObject.isSetPosList(), rightObject.isSetPosList()));
+                    target.setPosList(mergedPosList);
+                } else {
+                    if (posListShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.posList = null;
+                    }
+                }
             }
             {
-                CoordinatesType lhsCoordinates;
-                lhsCoordinates = leftObject.getCoordinates();
-                CoordinatesType rhsCoordinates;
-                rhsCoordinates = rightObject.getCoordinates();
-                target.setCoordinates(((CoordinatesType) strategy.merge(LocatorUtils.property(leftLocator, "coordinates", lhsCoordinates), LocatorUtils.property(rightLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates)));
+                java.lang.Boolean coordinatesShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCoordinates(), rightObject.isSetCoordinates());
+                if (coordinatesShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CoordinatesType lhsCoordinates;
+                    lhsCoordinates = leftObject.getCoordinates();
+                    CoordinatesType rhsCoordinates;
+                    rhsCoordinates = rightObject.getCoordinates();
+                    CoordinatesType mergedCoordinates = ((CoordinatesType) strategy.merge(LocatorUtils.property(leftLocator, "coordinates", lhsCoordinates), LocatorUtils.property(rightLocator, "coordinates", rhsCoordinates), lhsCoordinates, rhsCoordinates, leftObject.isSetCoordinates(), rightObject.isSetCoordinates()));
+                    target.setCoordinates(mergedCoordinates);
+                } else {
+                    if (coordinatesShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.coordinates = null;
+                    }
+                }
             }
             {
-                LengthType lhsRadius;
-                lhsRadius = leftObject.getRadius();
-                LengthType rhsRadius;
-                rhsRadius = rightObject.getRadius();
-                target.setRadius(((LengthType) strategy.merge(LocatorUtils.property(leftLocator, "radius", lhsRadius), LocatorUtils.property(rightLocator, "radius", rhsRadius), lhsRadius, rhsRadius)));
+                java.lang.Boolean radiusShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRadius(), rightObject.isSetRadius());
+                if (radiusShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    LengthType lhsRadius;
+                    lhsRadius = leftObject.getRadius();
+                    LengthType rhsRadius;
+                    rhsRadius = rightObject.getRadius();
+                    LengthType mergedRadius = ((LengthType) strategy.merge(LocatorUtils.property(leftLocator, "radius", lhsRadius), LocatorUtils.property(rightLocator, "radius", rhsRadius), lhsRadius, rhsRadius, leftObject.isSetRadius(), rightObject.isSetRadius()));
+                    target.setRadius(mergedRadius);
+                } else {
+                    if (radiusShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.radius = null;
+                    }
+                }
             }
             {
-                AngleType lhsStartAngle;
-                lhsStartAngle = leftObject.getStartAngle();
-                AngleType rhsStartAngle;
-                rhsStartAngle = rightObject.getStartAngle();
-                target.setStartAngle(((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "startAngle", lhsStartAngle), LocatorUtils.property(rightLocator, "startAngle", rhsStartAngle), lhsStartAngle, rhsStartAngle)));
+                java.lang.Boolean startAngleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetStartAngle(), rightObject.isSetStartAngle());
+                if (startAngleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType lhsStartAngle;
+                    lhsStartAngle = leftObject.getStartAngle();
+                    AngleType rhsStartAngle;
+                    rhsStartAngle = rightObject.getStartAngle();
+                    AngleType mergedStartAngle = ((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "startAngle", lhsStartAngle), LocatorUtils.property(rightLocator, "startAngle", rhsStartAngle), lhsStartAngle, rhsStartAngle, leftObject.isSetStartAngle(), rightObject.isSetStartAngle()));
+                    target.setStartAngle(mergedStartAngle);
+                } else {
+                    if (startAngleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.startAngle = null;
+                    }
+                }
             }
             {
-                AngleType lhsEndAngle;
-                lhsEndAngle = leftObject.getEndAngle();
-                AngleType rhsEndAngle;
-                rhsEndAngle = rightObject.getEndAngle();
-                target.setEndAngle(((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "endAngle", lhsEndAngle), LocatorUtils.property(rightLocator, "endAngle", rhsEndAngle), lhsEndAngle, rhsEndAngle)));
+                java.lang.Boolean endAngleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetEndAngle(), rightObject.isSetEndAngle());
+                if (endAngleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType lhsEndAngle;
+                    lhsEndAngle = leftObject.getEndAngle();
+                    AngleType rhsEndAngle;
+                    rhsEndAngle = rightObject.getEndAngle();
+                    AngleType mergedEndAngle = ((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "endAngle", lhsEndAngle), LocatorUtils.property(rightLocator, "endAngle", rhsEndAngle), lhsEndAngle, rhsEndAngle, leftObject.isSetEndAngle(), rightObject.isSetEndAngle()));
+                    target.setEndAngle(mergedEndAngle);
+                } else {
+                    if (endAngleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.endAngle = null;
+                    }
+                }
             }
         }
-    }
-
-    public ArcByCenterPointType withPos(DirectPositionType value) {
-        setPos(value);
-        return this;
-    }
-
-    public ArcByCenterPointType withPointProperty(PointPropertyType value) {
-        setPointProperty(value);
-        return this;
-    }
-
-    public ArcByCenterPointType withPointRep(PointPropertyType value) {
-        setPointRep(value);
-        return this;
-    }
-
-    public ArcByCenterPointType withPosList(DirectPositionListType value) {
-        setPosList(value);
-        return this;
-    }
-
-    public ArcByCenterPointType withCoordinates(CoordinatesType value) {
-        setCoordinates(value);
-        return this;
-    }
-
-    public ArcByCenterPointType withRadius(LengthType value) {
-        setRadius(value);
-        return this;
-    }
-
-    public ArcByCenterPointType withStartAngle(AngleType value) {
-        setStartAngle(value);
-        return this;
-    }
-
-    public ArcByCenterPointType withEndAngle(AngleType value) {
-        setEndAngle(value);
-        return this;
-    }
-
-    @Override
-    public ArcByCenterPointType withNumDerivativesAtStart(BigInteger value) {
-        setNumDerivativesAtStart(value);
-        return this;
-    }
-
-    @Override
-    public ArcByCenterPointType withNumDerivativesAtEnd(BigInteger value) {
-        setNumDerivativesAtEnd(value);
-        return this;
-    }
-
-    @Override
-    public ArcByCenterPointType withNumDerivativeInterior(BigInteger value) {
-        setNumDerivativeInterior(value);
-        return this;
     }
 
 }

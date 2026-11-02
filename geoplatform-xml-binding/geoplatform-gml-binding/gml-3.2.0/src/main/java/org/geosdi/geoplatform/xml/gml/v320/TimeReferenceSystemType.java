@@ -34,57 +34,54 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimeReferenceSystemType complex type.
+ * <p>Classe Java per TimeReferenceSystemType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimeReferenceSystemType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}DefinitionType">
- *       &lt;sequence>
- *         &lt;element name="domainOfValidity" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimeReferenceSystemType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}DefinitionType">
+ *       <sequence>
+ *         <element name="domainOfValidity" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -93,9 +90,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "domainOfValidity"
 })
 @XmlSeeAlso({
-    TimeClockType.class,
-    TimeCalendarType.class,
     TimeCoordinateSystemType.class,
+    TimeCalendarType.class,
+    TimeClockType.class,
     TimeOrdinalReferenceSystemType.class
 })
 public class TimeReferenceSystemType
@@ -134,13 +131,15 @@ public class TimeReferenceSystemType
         return (this.domainOfValidity!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -148,18 +147,20 @@ public class TimeReferenceSystemType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             String theDomainOfValidity;
             theDomainOfValidity = this.getDomainOfValidity();
-            strategy.appendField(locator, this, "domainOfValidity", buffer, theDomainOfValidity);
+            strategy.appendField(locator, this, "domainOfValidity", buffer, theDomainOfValidity, this.isSetDomainOfValidity());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimeReferenceSystemType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -174,68 +175,82 @@ public class TimeReferenceSystemType
             lhsDomainOfValidity = this.getDomainOfValidity();
             String rhsDomainOfValidity;
             rhsDomainOfValidity = that.getDomainOfValidity();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(thatLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(thatLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity, this.isSetDomainOfValidity(), that.isSetDomainOfValidity())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             String theDomainOfValidity;
             theDomainOfValidity = this.getDomainOfValidity();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainOfValidity", theDomainOfValidity), currentHashCode, theDomainOfValidity);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainOfValidity", theDomainOfValidity), currentHashCode, theDomainOfValidity, this.isSetDomainOfValidity());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TimeReferenceSystemType) {
             final TimeReferenceSystemType copy = ((TimeReferenceSystemType) draftCopy);
-            if (this.isSetDomainOfValidity()) {
-                String sourceDomainOfValidity;
-                sourceDomainOfValidity = this.getDomainOfValidity();
-                String copyDomainOfValidity = ((String) strategy.copy(LocatorUtils.property(locator, "domainOfValidity", sourceDomainOfValidity), sourceDomainOfValidity));
-                copy.setDomainOfValidity(copyDomainOfValidity);
-            } else {
-                copy.domainOfValidity = null;
+            {
+                java.lang.Boolean domainOfValidityShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDomainOfValidity());
+                if (domainOfValidityShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceDomainOfValidity;
+                    sourceDomainOfValidity = this.getDomainOfValidity();
+                    String copyDomainOfValidity = ((String) strategy.copy(LocatorUtils.property(locator, "domainOfValidity", sourceDomainOfValidity), sourceDomainOfValidity, this.isSetDomainOfValidity()));
+                    copy.setDomainOfValidity(copyDomainOfValidity);
+                } else {
+                    if (domainOfValidityShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.domainOfValidity = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TimeReferenceSystemType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TimeReferenceSystemType) {
@@ -243,96 +258,21 @@ public class TimeReferenceSystemType
             final TimeReferenceSystemType leftObject = ((TimeReferenceSystemType) left);
             final TimeReferenceSystemType rightObject = ((TimeReferenceSystemType) right);
             {
-                String lhsDomainOfValidity;
-                lhsDomainOfValidity = leftObject.getDomainOfValidity();
-                String rhsDomainOfValidity;
-                rhsDomainOfValidity = rightObject.getDomainOfValidity();
-                target.setDomainOfValidity(((String) strategy.merge(LocatorUtils.property(leftLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(rightLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity)));
+                java.lang.Boolean domainOfValidityShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDomainOfValidity(), rightObject.isSetDomainOfValidity());
+                if (domainOfValidityShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsDomainOfValidity;
+                    lhsDomainOfValidity = leftObject.getDomainOfValidity();
+                    String rhsDomainOfValidity;
+                    rhsDomainOfValidity = rightObject.getDomainOfValidity();
+                    String mergedDomainOfValidity = ((String) strategy.merge(LocatorUtils.property(leftLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(rightLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity, leftObject.isSetDomainOfValidity(), rightObject.isSetDomainOfValidity()));
+                    target.setDomainOfValidity(mergedDomainOfValidity);
+                } else {
+                    if (domainOfValidityShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.domainOfValidity = null;
+                    }
+                }
             }
         }
-    }
-
-    public TimeReferenceSystemType withDomainOfValidity(String value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TimeReferenceSystemType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

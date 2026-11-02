@@ -34,62 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per RangeSetType complex type.
+ * <p>Classe Java per RangeSetType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="RangeSetType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element ref="{http://www.opengis.net/gml}ValueArray" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.opengis.net/gml}AbstractScalarValueList" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.opengis.net/gml}DataBlock"/>
- *         &lt;element ref="{http://www.opengis.net/gml}File"/>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="RangeSetType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <element ref="{http://www.opengis.net/gml}ValueArray" maxOccurs="unbounded"/>
+ *         <element ref="{http://www.opengis.net/gml}AbstractScalarValueList" maxOccurs="unbounded"/>
+ *         <element ref="{http://www.opengis.net/gml}DataBlock"/>
+ *         <element ref="{http://www.opengis.net/gml}File"/>
+ *       </choice>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,44 +98,76 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "dataBlock",
     "file"
 })
-public class RangeSetType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class RangeSetType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * A Value Array is used for homogeneous arrays of primitive and aggregate values.  
+     * The member values may be scalars, composites, arrays or lists.
+     * ValueArray has the same content model as CompositeValue, but the member values shall be homogeneous.  The element declaration contains a Schematron constraint which expresses this restriction precisely.  Since the members are homogeneous, the gml:referenceSystem (uom, codeSpace) may be specified on the gml:ValueArray itself and inherited by all the members if desired.
+     * 
+     */
     @XmlElement(name = "ValueArray")
     protected List<ValueArrayType> valueArray;
+    /**
+     * gml:AbstractScalarValueList is an abstract element which acts as the head of a substitution group which contains gml:BooleanList, gml:CategoryList, gml:CountList and gml:QuantityList, and (transitively) the elements in their substitution groups.
+     * 
+     */
     @XmlElementRef(name = "AbstractScalarValueList", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected List<JAXBElement<?>> abstractScalarValueList;
+    /**
+     * gml:DataBlock describes the Range as a block of text encoded values similar to a Common Separated Value (CSV) representation.
+     * The range set parameterization is described by the property gml:rangeParameters.
+     * 
+     */
     @XmlElement(name = "DataBlock")
     protected DataBlockType dataBlock;
+    /**
+     * for efficiency reasons, GML also provides a means of encoding the range set in an arbitrary external encoding, such as a binary file.  This encoding may be “well-known” but this is not required. This mode uses the gml:File element.
+     * The values of the coverage (attribute values in the range set) are transmitted in a external file that is referenced from the XML structure described by gml:FileType.  The external file is referenced by the gml:fileReference property that is an anyURI (the gml:fileName property has been deprecated).  This means that the external file may be located remotely from the referencing GML instance. 
+     * The gml:compression property points to a definition of a compression algorithm through an anyURI.  This may be a retrievable, computable definition or simply a reference to an unambiguous name for the compression method.
+     * The gml:mimeType property points to a definition of the file mime type.
+     * The gml:fileStructure property is defined by the gml:FileValueModelType.  This is simple enumerated type restriction on string.  The only value supported in GML is “Record Interleaved”.  Additional values may be supported in future releases of GML.  Note further that all values shall be enclosed in a single file. Multi-file structures for values are not supported in GML.
+     * The semantics of the range set is described as above using the gml:rangeParameters property.
+     * Note that if any compression algorithm is applied, the structure above applies only to the pre-compression or post-decompression structure of the file.
+     * Note that the fields within a record match the gml:valueComponents of the gml:CompositeValue in document order.
+     * 
+     */
     @XmlElement(name = "File")
     protected FileType file;
 
     /**
+     * A Value Array is used for homogeneous arrays of primitive and aggregate values.  
+     * The member values may be scalars, composites, arrays or lists.
+     * ValueArray has the same content model as CompositeValue, but the member values shall be homogeneous.  The element declaration contains a Schematron constraint which expresses this restriction precisely.  Since the members are homogeneous, the gml:referenceSystem (uom, codeSpace) may be specified on the gml:ValueArray itself and inherited by all the members if desired.
+     * 
      * Gets the value of the valueArray property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueArray property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the valueArray property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getValueArray().add(newItem);
+     * getValueArray().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ValueArrayType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the valueArray property.
      */
     public List<ValueArrayType> getValueArray() {
         if (valueArray == null) {
-            valueArray = new ArrayList<ValueArrayType>();
+            valueArray = new ArrayList<>();
         }
         return this.valueArray;
     }
@@ -151,34 +181,39 @@ public class RangeSetType
     }
 
     /**
+     * gml:AbstractScalarValueList is an abstract element which acts as the head of a substitution group which contains gml:BooleanList, gml:CategoryList, gml:CountList and gml:QuantityList, and (transitively) the elements in their substitution groups.
+     * 
      * Gets the value of the abstractScalarValueList property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the abstractScalarValueList property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the abstractScalarValueList property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAbstractScalarValueList().add(newItem);
+     * getAbstractScalarValueList().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link MeasureOrNilReasonListType }{@code >}
      * {@link JAXBElement }{@code <}{@link Object }{@code >}
      * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
      * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
      * {@link JAXBElement }{@code <}{@link CodeOrNilReasonListType }{@code >}
+     * {@link JAXBElement }{@code <}{@link MeasureOrNilReasonListType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the abstractScalarValueList property.
      */
     public List<JAXBElement<?>> getAbstractScalarValueList() {
         if (abstractScalarValueList == null) {
-            abstractScalarValueList = new ArrayList<JAXBElement<?>>();
+            abstractScalarValueList = new ArrayList<>();
         }
         return this.abstractScalarValueList;
     }
@@ -192,7 +227,8 @@ public class RangeSetType
     }
 
     /**
-     * Recupera il valore della proprietà dataBlock.
+     * gml:DataBlock describes the Range as a block of text encoded values similar to a Common Separated Value (CSV) representation.
+     * The range set parameterization is described by the property gml:rangeParameters.
      * 
      * @return
      *     possible object is
@@ -210,6 +246,7 @@ public class RangeSetType
      *     allowed object is
      *     {@link DataBlockType }
      *     
+     * @see #getDataBlock()
      */
     public void setDataBlock(DataBlockType value) {
         this.dataBlock = value;
@@ -220,7 +257,14 @@ public class RangeSetType
     }
 
     /**
-     * Recupera il valore della proprietà file.
+     * for efficiency reasons, GML also provides a means of encoding the range set in an arbitrary external encoding, such as a binary file.  This encoding may be “well-known” but this is not required. This mode uses the gml:File element.
+     * The values of the coverage (attribute values in the range set) are transmitted in a external file that is referenced from the XML structure described by gml:FileType.  The external file is referenced by the gml:fileReference property that is an anyURI (the gml:fileName property has been deprecated).  This means that the external file may be located remotely from the referencing GML instance. 
+     * The gml:compression property points to a definition of a compression algorithm through an anyURI.  This may be a retrievable, computable definition or simply a reference to an unambiguous name for the compression method.
+     * The gml:mimeType property points to a definition of the file mime type.
+     * The gml:fileStructure property is defined by the gml:FileValueModelType.  This is simple enumerated type restriction on string.  The only value supported in GML is “Record Interleaved”.  Additional values may be supported in future releases of GML.  Note further that all values shall be enclosed in a single file. Multi-file structures for values are not supported in GML.
+     * The semantics of the range set is described as above using the gml:rangeParameters property.
+     * Note that if any compression algorithm is applied, the structure above applies only to the pre-compression or post-decompression structure of the file.
+     * Note that the fields within a record match the gml:valueComponents of the gml:CompositeValue in document order.
      * 
      * @return
      *     possible object is
@@ -238,6 +282,7 @@ public class RangeSetType
      *     allowed object is
      *     {@link FileType }
      *     
+     * @see #getFile()
      */
     public void setFile(FileType value) {
         this.file = value;
@@ -247,13 +292,15 @@ public class RangeSetType
         return (this.file!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -261,32 +308,50 @@ public class RangeSetType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<ValueArrayType> theValueArray;
-            theValueArray = this.getValueArray();
-            strategy.appendField(locator, this, "valueArray", buffer, theValueArray);
+            theValueArray = (this.isSetValueArray()?this.getValueArray():null);
+            strategy.appendField(locator, this, "valueArray", buffer, theValueArray, this.isSetValueArray());
         }
         {
             List<JAXBElement<?>> theAbstractScalarValueList;
-            theAbstractScalarValueList = this.getAbstractScalarValueList();
-            strategy.appendField(locator, this, "abstractScalarValueList", buffer, theAbstractScalarValueList);
+            theAbstractScalarValueList = (this.isSetAbstractScalarValueList()?this.getAbstractScalarValueList():null);
+            strategy.appendField(locator, this, "abstractScalarValueList", buffer, theAbstractScalarValueList, this.isSetAbstractScalarValueList());
         }
         {
             DataBlockType theDataBlock;
             theDataBlock = this.getDataBlock();
-            strategy.appendField(locator, this, "dataBlock", buffer, theDataBlock);
+            strategy.appendField(locator, this, "dataBlock", buffer, theDataBlock, this.isSetDataBlock());
         }
         {
             FileType theFile;
             theFile = this.getFile();
-            strategy.appendField(locator, this, "file", buffer, theFile);
+            strategy.appendField(locator, this, "file", buffer, theFile, this.isSetFile());
         }
         return buffer;
     }
 
+    public void setValueArray(List<ValueArrayType> value) {
+        this.valueArray = null;
+        if (value!= null) {
+            List<ValueArrayType> draftl = this.getValueArray();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setAbstractScalarValueList(List<JAXBElement<?>> value) {
+        this.abstractScalarValueList = null;
+        if (value!= null) {
+            List<JAXBElement<?>> draftl = this.getAbstractScalarValueList();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof RangeSetType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -295,19 +360,19 @@ public class RangeSetType
         final RangeSetType that = ((RangeSetType) object);
         {
             List<ValueArrayType> lhsValueArray;
-            lhsValueArray = this.getValueArray();
+            lhsValueArray = (this.isSetValueArray()?this.getValueArray():null);
             List<ValueArrayType> rhsValueArray;
-            rhsValueArray = that.getValueArray();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "valueArray", lhsValueArray), LocatorUtils.property(thatLocator, "valueArray", rhsValueArray), lhsValueArray, rhsValueArray)) {
+            rhsValueArray = (that.isSetValueArray()?that.getValueArray():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "valueArray", lhsValueArray), LocatorUtils.property(thatLocator, "valueArray", rhsValueArray), lhsValueArray, rhsValueArray, this.isSetValueArray(), that.isSetValueArray())) {
                 return false;
             }
         }
         {
             List<JAXBElement<?>> lhsAbstractScalarValueList;
-            lhsAbstractScalarValueList = this.getAbstractScalarValueList();
+            lhsAbstractScalarValueList = (this.isSetAbstractScalarValueList()?this.getAbstractScalarValueList():null);
             List<JAXBElement<?>> rhsAbstractScalarValueList;
-            rhsAbstractScalarValueList = that.getAbstractScalarValueList();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractScalarValueList", lhsAbstractScalarValueList), LocatorUtils.property(thatLocator, "abstractScalarValueList", rhsAbstractScalarValueList), lhsAbstractScalarValueList, rhsAbstractScalarValueList)) {
+            rhsAbstractScalarValueList = (that.isSetAbstractScalarValueList()?that.getAbstractScalarValueList():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractScalarValueList", lhsAbstractScalarValueList), LocatorUtils.property(thatLocator, "abstractScalarValueList", rhsAbstractScalarValueList), lhsAbstractScalarValueList, rhsAbstractScalarValueList, this.isSetAbstractScalarValueList(), that.isSetAbstractScalarValueList())) {
                 return false;
             }
         }
@@ -316,7 +381,7 @@ public class RangeSetType
             lhsDataBlock = this.getDataBlock();
             DataBlockType rhsDataBlock;
             rhsDataBlock = that.getDataBlock();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "dataBlock", lhsDataBlock), LocatorUtils.property(thatLocator, "dataBlock", rhsDataBlock), lhsDataBlock, rhsDataBlock)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "dataBlock", lhsDataBlock), LocatorUtils.property(thatLocator, "dataBlock", rhsDataBlock), lhsDataBlock, rhsDataBlock, this.isSetDataBlock(), that.isSetDataBlock())) {
                 return false;
             }
         }
@@ -325,212 +390,203 @@ public class RangeSetType
             lhsFile = this.getFile();
             FileType rhsFile;
             rhsFile = that.getFile();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "file", lhsFile), LocatorUtils.property(thatLocator, "file", rhsFile), lhsFile, rhsFile)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "file", lhsFile), LocatorUtils.property(thatLocator, "file", rhsFile), lhsFile, rhsFile, this.isSetFile(), that.isSetFile())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             List<ValueArrayType> theValueArray;
-            theValueArray = this.getValueArray();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "valueArray", theValueArray), currentHashCode, theValueArray);
+            theValueArray = (this.isSetValueArray()?this.getValueArray():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "valueArray", theValueArray), currentHashCode, theValueArray, this.isSetValueArray());
         }
         {
             List<JAXBElement<?>> theAbstractScalarValueList;
-            theAbstractScalarValueList = this.getAbstractScalarValueList();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractScalarValueList", theAbstractScalarValueList), currentHashCode, theAbstractScalarValueList);
+            theAbstractScalarValueList = (this.isSetAbstractScalarValueList()?this.getAbstractScalarValueList():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractScalarValueList", theAbstractScalarValueList), currentHashCode, theAbstractScalarValueList, this.isSetAbstractScalarValueList());
         }
         {
             DataBlockType theDataBlock;
             theDataBlock = this.getDataBlock();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dataBlock", theDataBlock), currentHashCode, theDataBlock);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dataBlock", theDataBlock), currentHashCode, theDataBlock, this.isSetDataBlock());
         }
         {
             FileType theFile;
             theFile = this.getFile();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "file", theFile), currentHashCode, theFile);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "file", theFile), currentHashCode, theFile, this.isSetFile());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof RangeSetType) {
             final RangeSetType copy = ((RangeSetType) draftCopy);
-            if (this.isSetValueArray()) {
-                List<ValueArrayType> sourceValueArray;
-                sourceValueArray = this.getValueArray();
-                @SuppressWarnings("unchecked")
-                List<ValueArrayType> copyValueArray = ((List<ValueArrayType> ) strategy.copy(LocatorUtils.property(locator, "valueArray", sourceValueArray), sourceValueArray));
-                copy.unsetValueArray();
-                List<ValueArrayType> uniqueValueArrayl = copy.getValueArray();
-                uniqueValueArrayl.addAll(copyValueArray);
-            } else {
-                copy.unsetValueArray();
+            {
+                java.lang.Boolean valueArrayShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValueArray());
+                if (valueArrayShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<ValueArrayType> sourceValueArray;
+                    sourceValueArray = (this.isSetValueArray()?this.getValueArray():null);
+                    @SuppressWarnings("unchecked")
+                    List<ValueArrayType> copyValueArray = ((List<ValueArrayType> ) strategy.copy(LocatorUtils.property(locator, "valueArray", sourceValueArray), sourceValueArray, this.isSetValueArray()));
+                    copy.setValueArray(copyValueArray);
+                } else {
+                    if (valueArrayShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetValueArray();
+                    }
+                }
             }
-            if (this.isSetAbstractScalarValueList()) {
-                List<JAXBElement<?>> sourceAbstractScalarValueList;
-                sourceAbstractScalarValueList = this.getAbstractScalarValueList();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<?>> copyAbstractScalarValueList = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "abstractScalarValueList", sourceAbstractScalarValueList), sourceAbstractScalarValueList));
-                copy.unsetAbstractScalarValueList();
-                List<JAXBElement<?>> uniqueAbstractScalarValueListl = copy.getAbstractScalarValueList();
-                uniqueAbstractScalarValueListl.addAll(copyAbstractScalarValueList);
-            } else {
-                copy.unsetAbstractScalarValueList();
+            {
+                java.lang.Boolean abstractScalarValueListShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAbstractScalarValueList());
+                if (abstractScalarValueListShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> sourceAbstractScalarValueList;
+                    sourceAbstractScalarValueList = (this.isSetAbstractScalarValueList()?this.getAbstractScalarValueList():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<?>> copyAbstractScalarValueList = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "abstractScalarValueList", sourceAbstractScalarValueList), sourceAbstractScalarValueList, this.isSetAbstractScalarValueList()));
+                    copy.setAbstractScalarValueList(copyAbstractScalarValueList);
+                } else {
+                    if (abstractScalarValueListShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetAbstractScalarValueList();
+                    }
+                }
             }
-            if (this.isSetDataBlock()) {
-                DataBlockType sourceDataBlock;
-                sourceDataBlock = this.getDataBlock();
-                DataBlockType copyDataBlock = ((DataBlockType) strategy.copy(LocatorUtils.property(locator, "dataBlock", sourceDataBlock), sourceDataBlock));
-                copy.setDataBlock(copyDataBlock);
-            } else {
-                copy.dataBlock = null;
+            {
+                java.lang.Boolean dataBlockShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDataBlock());
+                if (dataBlockShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DataBlockType sourceDataBlock;
+                    sourceDataBlock = this.getDataBlock();
+                    DataBlockType copyDataBlock = ((DataBlockType) strategy.copy(LocatorUtils.property(locator, "dataBlock", sourceDataBlock), sourceDataBlock, this.isSetDataBlock()));
+                    copy.setDataBlock(copyDataBlock);
+                } else {
+                    if (dataBlockShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.dataBlock = null;
+                    }
+                }
             }
-            if (this.isSetFile()) {
-                FileType sourceFile;
-                sourceFile = this.getFile();
-                FileType copyFile = ((FileType) strategy.copy(LocatorUtils.property(locator, "file", sourceFile), sourceFile));
-                copy.setFile(copyFile);
-            } else {
-                copy.file = null;
+            {
+                java.lang.Boolean fileShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFile());
+                if (fileShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    FileType sourceFile;
+                    sourceFile = this.getFile();
+                    FileType copyFile = ((FileType) strategy.copy(LocatorUtils.property(locator, "file", sourceFile), sourceFile, this.isSetFile()));
+                    copy.setFile(copyFile);
+                } else {
+                    if (fileShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.file = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new RangeSetType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof RangeSetType) {
             final RangeSetType target = this;
             final RangeSetType leftObject = ((RangeSetType) left);
             final RangeSetType rightObject = ((RangeSetType) right);
             {
-                List<ValueArrayType> lhsValueArray;
-                lhsValueArray = leftObject.getValueArray();
-                List<ValueArrayType> rhsValueArray;
-                rhsValueArray = rightObject.getValueArray();
-                target.unsetValueArray();
-                List<ValueArrayType> uniqueValueArrayl = target.getValueArray();
-                uniqueValueArrayl.addAll(((List<ValueArrayType> ) strategy.merge(LocatorUtils.property(leftLocator, "valueArray", lhsValueArray), LocatorUtils.property(rightLocator, "valueArray", rhsValueArray), lhsValueArray, rhsValueArray)));
+                java.lang.Boolean valueArrayShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValueArray(), rightObject.isSetValueArray());
+                if (valueArrayShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<ValueArrayType> lhsValueArray;
+                    lhsValueArray = (leftObject.isSetValueArray()?leftObject.getValueArray():null);
+                    List<ValueArrayType> rhsValueArray;
+                    rhsValueArray = (rightObject.isSetValueArray()?rightObject.getValueArray():null);
+                    List<ValueArrayType> mergedValueArray = ((List<ValueArrayType> ) strategy.merge(LocatorUtils.property(leftLocator, "valueArray", lhsValueArray), LocatorUtils.property(rightLocator, "valueArray", rhsValueArray), lhsValueArray, rhsValueArray, leftObject.isSetValueArray(), rightObject.isSetValueArray()));
+                    target.setValueArray(mergedValueArray);
+                } else {
+                    if (valueArrayShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetValueArray();
+                    }
+                }
             }
             {
-                List<JAXBElement<?>> lhsAbstractScalarValueList;
-                lhsAbstractScalarValueList = leftObject.getAbstractScalarValueList();
-                List<JAXBElement<?>> rhsAbstractScalarValueList;
-                rhsAbstractScalarValueList = rightObject.getAbstractScalarValueList();
-                target.unsetAbstractScalarValueList();
-                List<JAXBElement<?>> uniqueAbstractScalarValueListl = target.getAbstractScalarValueList();
-                uniqueAbstractScalarValueListl.addAll(((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractScalarValueList", lhsAbstractScalarValueList), LocatorUtils.property(rightLocator, "abstractScalarValueList", rhsAbstractScalarValueList), lhsAbstractScalarValueList, rhsAbstractScalarValueList)));
+                java.lang.Boolean abstractScalarValueListShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAbstractScalarValueList(), rightObject.isSetAbstractScalarValueList());
+                if (abstractScalarValueListShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> lhsAbstractScalarValueList;
+                    lhsAbstractScalarValueList = (leftObject.isSetAbstractScalarValueList()?leftObject.getAbstractScalarValueList():null);
+                    List<JAXBElement<?>> rhsAbstractScalarValueList;
+                    rhsAbstractScalarValueList = (rightObject.isSetAbstractScalarValueList()?rightObject.getAbstractScalarValueList():null);
+                    List<JAXBElement<?>> mergedAbstractScalarValueList = ((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractScalarValueList", lhsAbstractScalarValueList), LocatorUtils.property(rightLocator, "abstractScalarValueList", rhsAbstractScalarValueList), lhsAbstractScalarValueList, rhsAbstractScalarValueList, leftObject.isSetAbstractScalarValueList(), rightObject.isSetAbstractScalarValueList()));
+                    target.setAbstractScalarValueList(mergedAbstractScalarValueList);
+                } else {
+                    if (abstractScalarValueListShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetAbstractScalarValueList();
+                    }
+                }
             }
             {
-                DataBlockType lhsDataBlock;
-                lhsDataBlock = leftObject.getDataBlock();
-                DataBlockType rhsDataBlock;
-                rhsDataBlock = rightObject.getDataBlock();
-                target.setDataBlock(((DataBlockType) strategy.merge(LocatorUtils.property(leftLocator, "dataBlock", lhsDataBlock), LocatorUtils.property(rightLocator, "dataBlock", rhsDataBlock), lhsDataBlock, rhsDataBlock)));
+                java.lang.Boolean dataBlockShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDataBlock(), rightObject.isSetDataBlock());
+                if (dataBlockShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DataBlockType lhsDataBlock;
+                    lhsDataBlock = leftObject.getDataBlock();
+                    DataBlockType rhsDataBlock;
+                    rhsDataBlock = rightObject.getDataBlock();
+                    DataBlockType mergedDataBlock = ((DataBlockType) strategy.merge(LocatorUtils.property(leftLocator, "dataBlock", lhsDataBlock), LocatorUtils.property(rightLocator, "dataBlock", rhsDataBlock), lhsDataBlock, rhsDataBlock, leftObject.isSetDataBlock(), rightObject.isSetDataBlock()));
+                    target.setDataBlock(mergedDataBlock);
+                } else {
+                    if (dataBlockShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.dataBlock = null;
+                    }
+                }
             }
             {
-                FileType lhsFile;
-                lhsFile = leftObject.getFile();
-                FileType rhsFile;
-                rhsFile = rightObject.getFile();
-                target.setFile(((FileType) strategy.merge(LocatorUtils.property(leftLocator, "file", lhsFile), LocatorUtils.property(rightLocator, "file", rhsFile), lhsFile, rhsFile)));
+                java.lang.Boolean fileShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFile(), rightObject.isSetFile());
+                if (fileShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    FileType lhsFile;
+                    lhsFile = leftObject.getFile();
+                    FileType rhsFile;
+                    rhsFile = rightObject.getFile();
+                    FileType mergedFile = ((FileType) strategy.merge(LocatorUtils.property(leftLocator, "file", lhsFile), LocatorUtils.property(rightLocator, "file", rhsFile), lhsFile, rhsFile, leftObject.isSetFile(), rightObject.isSetFile()));
+                    target.setFile(mergedFile);
+                } else {
+                    if (fileShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.file = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setValueArray(List<ValueArrayType> value) {
-        List<ValueArrayType> draftl = this.getValueArray();
-        draftl.addAll(value);
-    }
-
-    public void setAbstractScalarValueList(List<JAXBElement<?>> value) {
-        List<JAXBElement<?>> draftl = this.getAbstractScalarValueList();
-        draftl.addAll(value);
-    }
-
-    public RangeSetType withValueArray(ValueArrayType... values) {
-        if (values!= null) {
-            for (ValueArrayType value: values) {
-                getValueArray().add(value);
-            }
-        }
-        return this;
-    }
-
-    public RangeSetType withValueArray(Collection<ValueArrayType> values) {
-        if (values!= null) {
-            getValueArray().addAll(values);
-        }
-        return this;
-    }
-
-    public RangeSetType withAbstractScalarValueList(JAXBElement<?> ... values) {
-        if (values!= null) {
-            for (JAXBElement<?> value: values) {
-                getAbstractScalarValueList().add(value);
-            }
-        }
-        return this;
-    }
-
-    public RangeSetType withAbstractScalarValueList(Collection<JAXBElement<?>> values) {
-        if (values!= null) {
-            getAbstractScalarValueList().addAll(values);
-        }
-        return this;
-    }
-
-    public RangeSetType withDataBlock(DataBlockType value) {
-        setDataBlock(value);
-        return this;
-    }
-
-    public RangeSetType withFile(FileType value) {
-        setFile(value);
-        return this;
-    }
-
-    public RangeSetType withValueArray(List<ValueArrayType> value) {
-        setValueArray(value);
-        return this;
-    }
-
-    public RangeSetType withAbstractScalarValueList(List<JAXBElement<?>> value) {
-        setAbstractScalarValueList(value);
-        return this;
     }
 
 }

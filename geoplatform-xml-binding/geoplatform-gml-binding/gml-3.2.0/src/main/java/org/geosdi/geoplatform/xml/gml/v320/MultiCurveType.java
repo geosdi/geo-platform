@@ -34,58 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per MultiCurveType complex type.
+ * <p>Classe Java per MultiCurveType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="MultiCurveType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometricAggregateType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}curveMember" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}curveMembers" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="MultiCurveType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometricAggregateType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}curveMember" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}curveMembers" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,33 +97,40 @@ public class MultiCurveType
 {
 
     protected List<CurvePropertyType> curveMember;
+    /**
+     * This property element contains a list of curves. The order of the elements is significant and shall be preserved when processing the array.
+     * 
+     */
     protected CurveArrayPropertyType curveMembers;
 
     /**
      * Gets the value of the curveMember property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the curveMember property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the curveMember property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getCurveMember().add(newItem);
+     * getCurveMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CurvePropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the curveMember property.
      */
     public List<CurvePropertyType> getCurveMember() {
         if (curveMember == null) {
-            curveMember = new ArrayList<CurvePropertyType>();
+            curveMember = new ArrayList<>();
         }
         return this.curveMember;
     }
@@ -140,7 +144,7 @@ public class MultiCurveType
     }
 
     /**
-     * Recupera il valore della proprietà curveMembers.
+     * This property element contains a list of curves. The order of the elements is significant and shall be preserved when processing the array.
      * 
      * @return
      *     possible object is
@@ -158,6 +162,7 @@ public class MultiCurveType
      *     allowed object is
      *     {@link CurveArrayPropertyType }
      *     
+     * @see #getCurveMembers()
      */
     public void setCurveMembers(CurveArrayPropertyType value) {
         this.curveMembers = value;
@@ -167,13 +172,15 @@ public class MultiCurveType
         return (this.curveMembers!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -181,23 +188,33 @@ public class MultiCurveType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<CurvePropertyType> theCurveMember;
-            theCurveMember = this.getCurveMember();
-            strategy.appendField(locator, this, "curveMember", buffer, theCurveMember);
+            theCurveMember = (this.isSetCurveMember()?this.getCurveMember():null);
+            strategy.appendField(locator, this, "curveMember", buffer, theCurveMember, this.isSetCurveMember());
         }
         {
             CurveArrayPropertyType theCurveMembers;
             theCurveMembers = this.getCurveMembers();
-            strategy.appendField(locator, this, "curveMembers", buffer, theCurveMembers);
+            strategy.appendField(locator, this, "curveMembers", buffer, theCurveMembers, this.isSetCurveMembers());
         }
         return buffer;
     }
 
+    public void setCurveMember(List<CurvePropertyType> value) {
+        this.curveMember = null;
+        if (value!= null) {
+            List<CurvePropertyType> draftl = this.getCurveMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof MultiCurveType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -209,10 +226,10 @@ public class MultiCurveType
         final MultiCurveType that = ((MultiCurveType) object);
         {
             List<CurvePropertyType> lhsCurveMember;
-            lhsCurveMember = this.getCurveMember();
+            lhsCurveMember = (this.isSetCurveMember()?this.getCurveMember():null);
             List<CurvePropertyType> rhsCurveMember;
-            rhsCurveMember = that.getCurveMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "curveMember", lhsCurveMember), LocatorUtils.property(thatLocator, "curveMember", rhsCurveMember), lhsCurveMember, rhsCurveMember)) {
+            rhsCurveMember = (that.isSetCurveMember()?that.getCurveMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "curveMember", lhsCurveMember), LocatorUtils.property(thatLocator, "curveMember", rhsCurveMember), lhsCurveMember, rhsCurveMember, this.isSetCurveMember(), that.isSetCurveMember())) {
                 return false;
             }
         }
@@ -221,84 +238,101 @@ public class MultiCurveType
             lhsCurveMembers = this.getCurveMembers();
             CurveArrayPropertyType rhsCurveMembers;
             rhsCurveMembers = that.getCurveMembers();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "curveMembers", lhsCurveMembers), LocatorUtils.property(thatLocator, "curveMembers", rhsCurveMembers), lhsCurveMembers, rhsCurveMembers)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "curveMembers", lhsCurveMembers), LocatorUtils.property(thatLocator, "curveMembers", rhsCurveMembers), lhsCurveMembers, rhsCurveMembers, this.isSetCurveMembers(), that.isSetCurveMembers())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<CurvePropertyType> theCurveMember;
-            theCurveMember = this.getCurveMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "curveMember", theCurveMember), currentHashCode, theCurveMember);
+            theCurveMember = (this.isSetCurveMember()?this.getCurveMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "curveMember", theCurveMember), currentHashCode, theCurveMember, this.isSetCurveMember());
         }
         {
             CurveArrayPropertyType theCurveMembers;
             theCurveMembers = this.getCurveMembers();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "curveMembers", theCurveMembers), currentHashCode, theCurveMembers);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "curveMembers", theCurveMembers), currentHashCode, theCurveMembers, this.isSetCurveMembers());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof MultiCurveType) {
             final MultiCurveType copy = ((MultiCurveType) draftCopy);
-            if (this.isSetCurveMember()) {
-                List<CurvePropertyType> sourceCurveMember;
-                sourceCurveMember = this.getCurveMember();
-                @SuppressWarnings("unchecked")
-                List<CurvePropertyType> copyCurveMember = ((List<CurvePropertyType> ) strategy.copy(LocatorUtils.property(locator, "curveMember", sourceCurveMember), sourceCurveMember));
-                copy.unsetCurveMember();
-                List<CurvePropertyType> uniqueCurveMemberl = copy.getCurveMember();
-                uniqueCurveMemberl.addAll(copyCurveMember);
-            } else {
-                copy.unsetCurveMember();
+            {
+                java.lang.Boolean curveMemberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCurveMember());
+                if (curveMemberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<CurvePropertyType> sourceCurveMember;
+                    sourceCurveMember = (this.isSetCurveMember()?this.getCurveMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<CurvePropertyType> copyCurveMember = ((List<CurvePropertyType> ) strategy.copy(LocatorUtils.property(locator, "curveMember", sourceCurveMember), sourceCurveMember, this.isSetCurveMember()));
+                    copy.setCurveMember(copyCurveMember);
+                } else {
+                    if (curveMemberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetCurveMember();
+                    }
+                }
             }
-            if (this.isSetCurveMembers()) {
-                CurveArrayPropertyType sourceCurveMembers;
-                sourceCurveMembers = this.getCurveMembers();
-                CurveArrayPropertyType copyCurveMembers = ((CurveArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "curveMembers", sourceCurveMembers), sourceCurveMembers));
-                copy.setCurveMembers(copyCurveMembers);
-            } else {
-                copy.curveMembers = null;
+            {
+                java.lang.Boolean curveMembersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCurveMembers());
+                if (curveMembersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CurveArrayPropertyType sourceCurveMembers;
+                    sourceCurveMembers = this.getCurveMembers();
+                    CurveArrayPropertyType copyCurveMembers = ((CurveArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "curveMembers", sourceCurveMembers), sourceCurveMembers, this.isSetCurveMembers()));
+                    copy.setCurveMembers(copyCurveMembers);
+                } else {
+                    if (curveMembersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.curveMembers = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new MultiCurveType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof MultiCurveType) {
@@ -306,191 +340,36 @@ public class MultiCurveType
             final MultiCurveType leftObject = ((MultiCurveType) left);
             final MultiCurveType rightObject = ((MultiCurveType) right);
             {
-                List<CurvePropertyType> lhsCurveMember;
-                lhsCurveMember = leftObject.getCurveMember();
-                List<CurvePropertyType> rhsCurveMember;
-                rhsCurveMember = rightObject.getCurveMember();
-                target.unsetCurveMember();
-                List<CurvePropertyType> uniqueCurveMemberl = target.getCurveMember();
-                uniqueCurveMemberl.addAll(((List<CurvePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "curveMember", lhsCurveMember), LocatorUtils.property(rightLocator, "curveMember", rhsCurveMember), lhsCurveMember, rhsCurveMember)));
+                java.lang.Boolean curveMemberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCurveMember(), rightObject.isSetCurveMember());
+                if (curveMemberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<CurvePropertyType> lhsCurveMember;
+                    lhsCurveMember = (leftObject.isSetCurveMember()?leftObject.getCurveMember():null);
+                    List<CurvePropertyType> rhsCurveMember;
+                    rhsCurveMember = (rightObject.isSetCurveMember()?rightObject.getCurveMember():null);
+                    List<CurvePropertyType> mergedCurveMember = ((List<CurvePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "curveMember", lhsCurveMember), LocatorUtils.property(rightLocator, "curveMember", rhsCurveMember), lhsCurveMember, rhsCurveMember, leftObject.isSetCurveMember(), rightObject.isSetCurveMember()));
+                    target.setCurveMember(mergedCurveMember);
+                } else {
+                    if (curveMemberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetCurveMember();
+                    }
+                }
             }
             {
-                CurveArrayPropertyType lhsCurveMembers;
-                lhsCurveMembers = leftObject.getCurveMembers();
-                CurveArrayPropertyType rhsCurveMembers;
-                rhsCurveMembers = rightObject.getCurveMembers();
-                target.setCurveMembers(((CurveArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "curveMembers", lhsCurveMembers), LocatorUtils.property(rightLocator, "curveMembers", rhsCurveMembers), lhsCurveMembers, rhsCurveMembers)));
+                java.lang.Boolean curveMembersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCurveMembers(), rightObject.isSetCurveMembers());
+                if (curveMembersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CurveArrayPropertyType lhsCurveMembers;
+                    lhsCurveMembers = leftObject.getCurveMembers();
+                    CurveArrayPropertyType rhsCurveMembers;
+                    rhsCurveMembers = rightObject.getCurveMembers();
+                    CurveArrayPropertyType mergedCurveMembers = ((CurveArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "curveMembers", lhsCurveMembers), LocatorUtils.property(rightLocator, "curveMembers", rhsCurveMembers), lhsCurveMembers, rhsCurveMembers, leftObject.isSetCurveMembers(), rightObject.isSetCurveMembers()));
+                    target.setCurveMembers(mergedCurveMembers);
+                } else {
+                    if (curveMembersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.curveMembers = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setCurveMember(List<CurvePropertyType> value) {
-        List<CurvePropertyType> draftl = this.getCurveMember();
-        draftl.addAll(value);
-    }
-
-    public MultiCurveType withCurveMember(CurvePropertyType... values) {
-        if (values!= null) {
-            for (CurvePropertyType value: values) {
-                getCurveMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public MultiCurveType withCurveMember(Collection<CurvePropertyType> values) {
-        if (values!= null) {
-            getCurveMember().addAll(values);
-        }
-        return this;
-    }
-
-    public MultiCurveType withCurveMembers(CurveArrayPropertyType value) {
-        setCurveMembers(value);
-        return this;
-    }
-
-    public MultiCurveType withCurveMember(List<CurvePropertyType> value) {
-        setCurveMember(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public MultiCurveType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

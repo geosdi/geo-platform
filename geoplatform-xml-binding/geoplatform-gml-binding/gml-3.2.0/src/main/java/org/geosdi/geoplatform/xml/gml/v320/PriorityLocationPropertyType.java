@@ -34,55 +34,51 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per PriorityLocationPropertyType complex type.
+ * <p>Classe Java per PriorityLocationPropertyType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="PriorityLocationPropertyType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}LocationPropertyType">
- *       &lt;attribute name="priority" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="PriorityLocationPropertyType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}LocationPropertyType">
+ *       <attribute name="priority" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -124,13 +120,15 @@ public class PriorityLocationPropertyType
         return (this.priority!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -138,18 +136,20 @@ public class PriorityLocationPropertyType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             String thePriority;
             thePriority = this.getPriority();
-            strategy.appendField(locator, this, "priority", buffer, thePriority);
+            strategy.appendField(locator, this, "priority", buffer, thePriority, this.isSetPriority());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof PriorityLocationPropertyType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -164,68 +164,82 @@ public class PriorityLocationPropertyType
             lhsPriority = this.getPriority();
             String rhsPriority;
             rhsPriority = that.getPriority();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "priority", lhsPriority), LocatorUtils.property(thatLocator, "priority", rhsPriority), lhsPriority, rhsPriority)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "priority", lhsPriority), LocatorUtils.property(thatLocator, "priority", rhsPriority), lhsPriority, rhsPriority, this.isSetPriority(), that.isSetPriority())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             String thePriority;
             thePriority = this.getPriority();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "priority", thePriority), currentHashCode, thePriority);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "priority", thePriority), currentHashCode, thePriority, this.isSetPriority());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof PriorityLocationPropertyType) {
             final PriorityLocationPropertyType copy = ((PriorityLocationPropertyType) draftCopy);
-            if (this.isSetPriority()) {
-                String sourcePriority;
-                sourcePriority = this.getPriority();
-                String copyPriority = ((String) strategy.copy(LocatorUtils.property(locator, "priority", sourcePriority), sourcePriority));
-                copy.setPriority(copyPriority);
-            } else {
-                copy.priority = null;
+            {
+                java.lang.Boolean priorityShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPriority());
+                if (priorityShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourcePriority;
+                    sourcePriority = this.getPriority();
+                    String copyPriority = ((String) strategy.copy(LocatorUtils.property(locator, "priority", sourcePriority), sourcePriority, this.isSetPriority()));
+                    copy.setPriority(copyPriority);
+                } else {
+                    if (priorityShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.priority = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new PriorityLocationPropertyType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof PriorityLocationPropertyType) {
@@ -233,126 +247,21 @@ public class PriorityLocationPropertyType
             final PriorityLocationPropertyType leftObject = ((PriorityLocationPropertyType) left);
             final PriorityLocationPropertyType rightObject = ((PriorityLocationPropertyType) right);
             {
-                String lhsPriority;
-                lhsPriority = leftObject.getPriority();
-                String rhsPriority;
-                rhsPriority = rightObject.getPriority();
-                target.setPriority(((String) strategy.merge(LocatorUtils.property(leftLocator, "priority", lhsPriority), LocatorUtils.property(rightLocator, "priority", rhsPriority), lhsPriority, rhsPriority)));
+                java.lang.Boolean priorityShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPriority(), rightObject.isSetPriority());
+                if (priorityShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsPriority;
+                    lhsPriority = leftObject.getPriority();
+                    String rhsPriority;
+                    rhsPriority = rightObject.getPriority();
+                    String mergedPriority = ((String) strategy.merge(LocatorUtils.property(leftLocator, "priority", lhsPriority), LocatorUtils.property(rightLocator, "priority", rhsPriority), lhsPriority, rhsPriority, leftObject.isSetPriority(), rightObject.isSetPriority()));
+                    target.setPriority(mergedPriority);
+                } else {
+                    if (priorityShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.priority = null;
+                    }
+                }
             }
         }
-    }
-
-    public PriorityLocationPropertyType withPriority(String value) {
-        setPriority(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withAbstractGeometry(JAXBElement<? extends AbstractGeometryType> value) {
-        setAbstractGeometry(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withLocationKeyWord(CodeType value) {
-        setLocationKeyWord(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withLocationString(StringOrRefType value) {
-        setLocationString(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withNull(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getNull().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withNull(Collection<String> values) {
-        if (values!= null) {
-            getNull().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withNilReason(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getNilReason().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withNilReason(Collection<String> values) {
-        if (values!= null) {
-            getNilReason().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withRemoteSchema(String value) {
-        setRemoteSchema(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withHref(String value) {
-        setHref(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withRole(String value) {
-        setRole(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withArcrole(String value) {
-        setArcrole(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withTitle(String value) {
-        setTitle(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withShow(String value) {
-        setShow(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withActuate(String value) {
-        setActuate(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withNull(List<String> value) {
-        setNull(value);
-        return this;
-    }
-
-    @Override
-    public PriorityLocationPropertyType withNilReason(List<String> value) {
-        setNilReason(value);
-        return this;
     }
 
 }

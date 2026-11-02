@@ -34,58 +34,56 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AbstractTopoPrimitiveType complex type.
+ * <p>Classe Java per AbstractTopoPrimitiveType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractTopoPrimitiveType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTopologyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}isolated" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}container" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractTopoPrimitiveType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTopologyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}isolated" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}container" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -95,44 +93,57 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "container"
 })
 @XmlSeeAlso({
-    EdgeType.class,
     NodeType.class,
-    TopoSolidType.class,
-    FaceType.class
+    EdgeType.class,
+    FaceType.class,
+    TopoSolidType.class
 })
 public abstract class AbstractTopoPrimitiveType
     extends AbstractTopologyType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The gml:isolated property element implements the role of the same name of the ISO 19107 “Isolated In” association (see ISO 19107:2003, 7.3.10.4).
+     * 
+     */
     protected List<IsolatedPropertyType> isolated;
+    /**
+     * The gml:container property element implements the role of the same name of the ISO 19107 “Isolated In” association (see ISO 19107:2003, 7.3.10.4).
+     * 
+     */
     protected ContainerPropertyType container;
 
     /**
+     * The gml:isolated property element implements the role of the same name of the ISO 19107 “Isolated In” association (see ISO 19107:2003, 7.3.10.4).
+     * 
      * Gets the value of the isolated property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the isolated property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the isolated property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getIsolated().add(newItem);
+     * getIsolated().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link IsolatedPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the isolated property.
      */
     public List<IsolatedPropertyType> getIsolated() {
         if (isolated == null) {
-            isolated = new ArrayList<IsolatedPropertyType>();
+            isolated = new ArrayList<>();
         }
         return this.isolated;
     }
@@ -146,7 +157,7 @@ public abstract class AbstractTopoPrimitiveType
     }
 
     /**
-     * Recupera il valore della proprietà container.
+     * The gml:container property element implements the role of the same name of the ISO 19107 “Isolated In” association (see ISO 19107:2003, 7.3.10.4).
      * 
      * @return
      *     possible object is
@@ -164,6 +175,7 @@ public abstract class AbstractTopoPrimitiveType
      *     allowed object is
      *     {@link ContainerPropertyType }
      *     
+     * @see #getContainer()
      */
     public void setContainer(ContainerPropertyType value) {
         this.container = value;
@@ -173,13 +185,15 @@ public abstract class AbstractTopoPrimitiveType
         return (this.container!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -187,23 +201,33 @@ public abstract class AbstractTopoPrimitiveType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<IsolatedPropertyType> theIsolated;
-            theIsolated = this.getIsolated();
-            strategy.appendField(locator, this, "isolated", buffer, theIsolated);
+            theIsolated = (this.isSetIsolated()?this.getIsolated():null);
+            strategy.appendField(locator, this, "isolated", buffer, theIsolated, this.isSetIsolated());
         }
         {
             ContainerPropertyType theContainer;
             theContainer = this.getContainer();
-            strategy.appendField(locator, this, "container", buffer, theContainer);
+            strategy.appendField(locator, this, "container", buffer, theContainer, this.isSetContainer());
         }
         return buffer;
     }
 
+    public void setIsolated(List<IsolatedPropertyType> value) {
+        this.isolated = null;
+        if (value!= null) {
+            List<IsolatedPropertyType> draftl = this.getIsolated();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractTopoPrimitiveType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -215,10 +239,10 @@ public abstract class AbstractTopoPrimitiveType
         final AbstractTopoPrimitiveType that = ((AbstractTopoPrimitiveType) object);
         {
             List<IsolatedPropertyType> lhsIsolated;
-            lhsIsolated = this.getIsolated();
+            lhsIsolated = (this.isSetIsolated()?this.getIsolated():null);
             List<IsolatedPropertyType> rhsIsolated;
-            rhsIsolated = that.getIsolated();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "isolated", lhsIsolated), LocatorUtils.property(thatLocator, "isolated", rhsIsolated), lhsIsolated, rhsIsolated)) {
+            rhsIsolated = (that.isSetIsolated()?that.getIsolated():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "isolated", lhsIsolated), LocatorUtils.property(thatLocator, "isolated", rhsIsolated), lhsIsolated, rhsIsolated, this.isSetIsolated(), that.isSetIsolated())) {
                 return false;
             }
         }
@@ -227,47 +251,53 @@ public abstract class AbstractTopoPrimitiveType
             lhsContainer = this.getContainer();
             ContainerPropertyType rhsContainer;
             rhsContainer = that.getContainer();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "container", lhsContainer), LocatorUtils.property(thatLocator, "container", rhsContainer), lhsContainer, rhsContainer)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "container", lhsContainer), LocatorUtils.property(thatLocator, "container", rhsContainer), lhsContainer, rhsContainer, this.isSetContainer(), that.isSetContainer())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<IsolatedPropertyType> theIsolated;
-            theIsolated = this.getIsolated();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "isolated", theIsolated), currentHashCode, theIsolated);
+            theIsolated = (this.isSetIsolated()?this.getIsolated():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "isolated", theIsolated), currentHashCode, theIsolated, this.isSetIsolated());
         }
         {
             ContainerPropertyType theContainer;
             theContainer = this.getContainer();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "container", theContainer), currentHashCode, theContainer);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "container", theContainer), currentHashCode, theContainer, this.isSetContainer());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -275,34 +305,44 @@ public abstract class AbstractTopoPrimitiveType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractTopoPrimitiveType) {
             final AbstractTopoPrimitiveType copy = ((AbstractTopoPrimitiveType) target);
-            if (this.isSetIsolated()) {
-                List<IsolatedPropertyType> sourceIsolated;
-                sourceIsolated = this.getIsolated();
-                @SuppressWarnings("unchecked")
-                List<IsolatedPropertyType> copyIsolated = ((List<IsolatedPropertyType> ) strategy.copy(LocatorUtils.property(locator, "isolated", sourceIsolated), sourceIsolated));
-                copy.unsetIsolated();
-                List<IsolatedPropertyType> uniqueIsolatedl = copy.getIsolated();
-                uniqueIsolatedl.addAll(copyIsolated);
-            } else {
-                copy.unsetIsolated();
+            {
+                java.lang.Boolean isolatedShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetIsolated());
+                if (isolatedShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<IsolatedPropertyType> sourceIsolated;
+                    sourceIsolated = (this.isSetIsolated()?this.getIsolated():null);
+                    @SuppressWarnings("unchecked")
+                    List<IsolatedPropertyType> copyIsolated = ((List<IsolatedPropertyType> ) strategy.copy(LocatorUtils.property(locator, "isolated", sourceIsolated), sourceIsolated, this.isSetIsolated()));
+                    copy.setIsolated(copyIsolated);
+                } else {
+                    if (isolatedShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetIsolated();
+                    }
+                }
             }
-            if (this.isSetContainer()) {
-                ContainerPropertyType sourceContainer;
-                sourceContainer = this.getContainer();
-                ContainerPropertyType copyContainer = ((ContainerPropertyType) strategy.copy(LocatorUtils.property(locator, "container", sourceContainer), sourceContainer));
-                copy.setContainer(copyContainer);
-            } else {
-                copy.container = null;
+            {
+                java.lang.Boolean containerShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetContainer());
+                if (containerShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ContainerPropertyType sourceContainer;
+                    sourceContainer = this.getContainer();
+                    ContainerPropertyType copyContainer = ((ContainerPropertyType) strategy.copy(LocatorUtils.property(locator, "container", sourceContainer), sourceContainer, this.isSetContainer()));
+                    copy.setContainer(copyContainer);
+                } else {
+                    if (containerShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.container = null;
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractTopoPrimitiveType) {
@@ -310,125 +350,36 @@ public abstract class AbstractTopoPrimitiveType
             final AbstractTopoPrimitiveType leftObject = ((AbstractTopoPrimitiveType) left);
             final AbstractTopoPrimitiveType rightObject = ((AbstractTopoPrimitiveType) right);
             {
-                List<IsolatedPropertyType> lhsIsolated;
-                lhsIsolated = leftObject.getIsolated();
-                List<IsolatedPropertyType> rhsIsolated;
-                rhsIsolated = rightObject.getIsolated();
-                target.unsetIsolated();
-                List<IsolatedPropertyType> uniqueIsolatedl = target.getIsolated();
-                uniqueIsolatedl.addAll(((List<IsolatedPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "isolated", lhsIsolated), LocatorUtils.property(rightLocator, "isolated", rhsIsolated), lhsIsolated, rhsIsolated)));
+                java.lang.Boolean isolatedShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetIsolated(), rightObject.isSetIsolated());
+                if (isolatedShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<IsolatedPropertyType> lhsIsolated;
+                    lhsIsolated = (leftObject.isSetIsolated()?leftObject.getIsolated():null);
+                    List<IsolatedPropertyType> rhsIsolated;
+                    rhsIsolated = (rightObject.isSetIsolated()?rightObject.getIsolated():null);
+                    List<IsolatedPropertyType> mergedIsolated = ((List<IsolatedPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "isolated", lhsIsolated), LocatorUtils.property(rightLocator, "isolated", rhsIsolated), lhsIsolated, rhsIsolated, leftObject.isSetIsolated(), rightObject.isSetIsolated()));
+                    target.setIsolated(mergedIsolated);
+                } else {
+                    if (isolatedShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetIsolated();
+                    }
+                }
             }
             {
-                ContainerPropertyType lhsContainer;
-                lhsContainer = leftObject.getContainer();
-                ContainerPropertyType rhsContainer;
-                rhsContainer = rightObject.getContainer();
-                target.setContainer(((ContainerPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "container", lhsContainer), LocatorUtils.property(rightLocator, "container", rhsContainer), lhsContainer, rhsContainer)));
+                java.lang.Boolean containerShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetContainer(), rightObject.isSetContainer());
+                if (containerShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ContainerPropertyType lhsContainer;
+                    lhsContainer = leftObject.getContainer();
+                    ContainerPropertyType rhsContainer;
+                    rhsContainer = rightObject.getContainer();
+                    ContainerPropertyType mergedContainer = ((ContainerPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "container", lhsContainer), LocatorUtils.property(rightLocator, "container", rhsContainer), lhsContainer, rhsContainer, leftObject.isSetContainer(), rightObject.isSetContainer()));
+                    target.setContainer(mergedContainer);
+                } else {
+                    if (containerShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.container = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setIsolated(List<IsolatedPropertyType> value) {
-        List<IsolatedPropertyType> draftl = this.getIsolated();
-        draftl.addAll(value);
-    }
-
-    public AbstractTopoPrimitiveType withIsolated(IsolatedPropertyType... values) {
-        if (values!= null) {
-            for (IsolatedPropertyType value: values) {
-                getIsolated().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AbstractTopoPrimitiveType withIsolated(Collection<IsolatedPropertyType> values) {
-        if (values!= null) {
-            getIsolated().addAll(values);
-        }
-        return this;
-    }
-
-    public AbstractTopoPrimitiveType withContainer(ContainerPropertyType value) {
-        setContainer(value);
-        return this;
-    }
-
-    public AbstractTopoPrimitiveType withIsolated(List<IsolatedPropertyType> value) {
-        setIsolated(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTopoPrimitiveType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

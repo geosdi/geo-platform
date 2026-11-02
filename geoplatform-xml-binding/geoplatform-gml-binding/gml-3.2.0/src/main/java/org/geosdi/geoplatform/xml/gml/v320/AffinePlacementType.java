@@ -34,62 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AffinePlacementType complex type.
+ * <p>Classe Java per AffinePlacementType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AffinePlacementType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="location" type="{http://www.opengis.net/gml}DirectPositionType"/>
- *         &lt;element name="refDirection" type="{http://www.opengis.net/gml}VectorType" maxOccurs="unbounded"/>
- *         &lt;element name="inDimension" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
- *         &lt;element name="outDimension" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AffinePlacementType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="location" type="{http://www.opengis.net/gml}DirectPositionType"/>
+ *         <element name="refDirection" type="{http://www.opengis.net/gml}VectorType" maxOccurs="unbounded"/>
+ *         <element name="inDimension" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
+ *         <element name="outDimension" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -145,28 +143,31 @@ public class AffinePlacementType implements Cloneable, CopyTo, Equals, HashCode,
     /**
      * Gets the value of the refDirection property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the refDirection property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the refDirection property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getRefDirection().add(newItem);
+     * getRefDirection().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link VectorType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the refDirection property.
      */
     public List<VectorType> getRefDirection() {
         if (refDirection == null) {
-            refDirection = new ArrayList<VectorType>();
+            refDirection = new ArrayList<>();
         }
         return this.refDirection;
     }
@@ -235,13 +236,15 @@ public class AffinePlacementType implements Cloneable, CopyTo, Equals, HashCode,
         return (this.outDimension!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -249,32 +252,42 @@ public class AffinePlacementType implements Cloneable, CopyTo, Equals, HashCode,
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             DirectPositionType theLocation;
             theLocation = this.getLocation();
-            strategy.appendField(locator, this, "location", buffer, theLocation);
+            strategy.appendField(locator, this, "location", buffer, theLocation, this.isSetLocation());
         }
         {
             List<VectorType> theRefDirection;
-            theRefDirection = this.getRefDirection();
-            strategy.appendField(locator, this, "refDirection", buffer, theRefDirection);
+            theRefDirection = (this.isSetRefDirection()?this.getRefDirection():null);
+            strategy.appendField(locator, this, "refDirection", buffer, theRefDirection, this.isSetRefDirection());
         }
         {
             BigInteger theInDimension;
             theInDimension = this.getInDimension();
-            strategy.appendField(locator, this, "inDimension", buffer, theInDimension);
+            strategy.appendField(locator, this, "inDimension", buffer, theInDimension, this.isSetInDimension());
         }
         {
             BigInteger theOutDimension;
             theOutDimension = this.getOutDimension();
-            strategy.appendField(locator, this, "outDimension", buffer, theOutDimension);
+            strategy.appendField(locator, this, "outDimension", buffer, theOutDimension, this.isSetOutDimension());
         }
         return buffer;
     }
 
+    public void setRefDirection(List<VectorType> value) {
+        this.refDirection = null;
+        if (value!= null) {
+            List<VectorType> draftl = this.getRefDirection();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AffinePlacementType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -286,16 +299,16 @@ public class AffinePlacementType implements Cloneable, CopyTo, Equals, HashCode,
             lhsLocation = this.getLocation();
             DirectPositionType rhsLocation;
             rhsLocation = that.getLocation();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "location", lhsLocation), LocatorUtils.property(thatLocator, "location", rhsLocation), lhsLocation, rhsLocation)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "location", lhsLocation), LocatorUtils.property(thatLocator, "location", rhsLocation), lhsLocation, rhsLocation, this.isSetLocation(), that.isSetLocation())) {
                 return false;
             }
         }
         {
             List<VectorType> lhsRefDirection;
-            lhsRefDirection = this.getRefDirection();
+            lhsRefDirection = (this.isSetRefDirection()?this.getRefDirection():null);
             List<VectorType> rhsRefDirection;
-            rhsRefDirection = that.getRefDirection();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "refDirection", lhsRefDirection), LocatorUtils.property(thatLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection)) {
+            rhsRefDirection = (that.isSetRefDirection()?that.getRefDirection():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "refDirection", lhsRefDirection), LocatorUtils.property(thatLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection, this.isSetRefDirection(), that.isSetRefDirection())) {
                 return false;
             }
         }
@@ -304,7 +317,7 @@ public class AffinePlacementType implements Cloneable, CopyTo, Equals, HashCode,
             lhsInDimension = this.getInDimension();
             BigInteger rhsInDimension;
             rhsInDimension = that.getInDimension();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "inDimension", lhsInDimension), LocatorUtils.property(thatLocator, "inDimension", rhsInDimension), lhsInDimension, rhsInDimension)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "inDimension", lhsInDimension), LocatorUtils.property(thatLocator, "inDimension", rhsInDimension), lhsInDimension, rhsInDimension, this.isSetInDimension(), that.isSetInDimension())) {
                 return false;
             }
         }
@@ -313,186 +326,202 @@ public class AffinePlacementType implements Cloneable, CopyTo, Equals, HashCode,
             lhsOutDimension = this.getOutDimension();
             BigInteger rhsOutDimension;
             rhsOutDimension = that.getOutDimension();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "outDimension", lhsOutDimension), LocatorUtils.property(thatLocator, "outDimension", rhsOutDimension), lhsOutDimension, rhsOutDimension)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "outDimension", lhsOutDimension), LocatorUtils.property(thatLocator, "outDimension", rhsOutDimension), lhsOutDimension, rhsOutDimension, this.isSetOutDimension(), that.isSetOutDimension())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             DirectPositionType theLocation;
             theLocation = this.getLocation();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "location", theLocation), currentHashCode, theLocation);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "location", theLocation), currentHashCode, theLocation, this.isSetLocation());
         }
         {
             List<VectorType> theRefDirection;
-            theRefDirection = this.getRefDirection();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "refDirection", theRefDirection), currentHashCode, theRefDirection);
+            theRefDirection = (this.isSetRefDirection()?this.getRefDirection():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "refDirection", theRefDirection), currentHashCode, theRefDirection, this.isSetRefDirection());
         }
         {
             BigInteger theInDimension;
             theInDimension = this.getInDimension();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "inDimension", theInDimension), currentHashCode, theInDimension);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "inDimension", theInDimension), currentHashCode, theInDimension, this.isSetInDimension());
         }
         {
             BigInteger theOutDimension;
             theOutDimension = this.getOutDimension();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "outDimension", theOutDimension), currentHashCode, theOutDimension);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "outDimension", theOutDimension), currentHashCode, theOutDimension, this.isSetOutDimension());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof AffinePlacementType) {
             final AffinePlacementType copy = ((AffinePlacementType) draftCopy);
-            if (this.isSetLocation()) {
-                DirectPositionType sourceLocation;
-                sourceLocation = this.getLocation();
-                DirectPositionType copyLocation = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "location", sourceLocation), sourceLocation));
-                copy.setLocation(copyLocation);
-            } else {
-                copy.location = null;
+            {
+                java.lang.Boolean locationShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetLocation());
+                if (locationShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType sourceLocation;
+                    sourceLocation = this.getLocation();
+                    DirectPositionType copyLocation = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "location", sourceLocation), sourceLocation, this.isSetLocation()));
+                    copy.setLocation(copyLocation);
+                } else {
+                    if (locationShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.location = null;
+                    }
+                }
             }
-            if (this.isSetRefDirection()) {
-                List<VectorType> sourceRefDirection;
-                sourceRefDirection = this.getRefDirection();
-                @SuppressWarnings("unchecked")
-                List<VectorType> copyRefDirection = ((List<VectorType> ) strategy.copy(LocatorUtils.property(locator, "refDirection", sourceRefDirection), sourceRefDirection));
-                copy.unsetRefDirection();
-                List<VectorType> uniqueRefDirectionl = copy.getRefDirection();
-                uniqueRefDirectionl.addAll(copyRefDirection);
-            } else {
-                copy.unsetRefDirection();
+            {
+                java.lang.Boolean refDirectionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRefDirection());
+                if (refDirectionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<VectorType> sourceRefDirection;
+                    sourceRefDirection = (this.isSetRefDirection()?this.getRefDirection():null);
+                    @SuppressWarnings("unchecked")
+                    List<VectorType> copyRefDirection = ((List<VectorType> ) strategy.copy(LocatorUtils.property(locator, "refDirection", sourceRefDirection), sourceRefDirection, this.isSetRefDirection()));
+                    copy.setRefDirection(copyRefDirection);
+                } else {
+                    if (refDirectionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetRefDirection();
+                    }
+                }
             }
-            if (this.isSetInDimension()) {
-                BigInteger sourceInDimension;
-                sourceInDimension = this.getInDimension();
-                BigInteger copyInDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "inDimension", sourceInDimension), sourceInDimension));
-                copy.setInDimension(copyInDimension);
-            } else {
-                copy.inDimension = null;
+            {
+                java.lang.Boolean inDimensionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetInDimension());
+                if (inDimensionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceInDimension;
+                    sourceInDimension = this.getInDimension();
+                    BigInteger copyInDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "inDimension", sourceInDimension), sourceInDimension, this.isSetInDimension()));
+                    copy.setInDimension(copyInDimension);
+                } else {
+                    if (inDimensionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.inDimension = null;
+                    }
+                }
             }
-            if (this.isSetOutDimension()) {
-                BigInteger sourceOutDimension;
-                sourceOutDimension = this.getOutDimension();
-                BigInteger copyOutDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "outDimension", sourceOutDimension), sourceOutDimension));
-                copy.setOutDimension(copyOutDimension);
-            } else {
-                copy.outDimension = null;
+            {
+                java.lang.Boolean outDimensionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetOutDimension());
+                if (outDimensionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceOutDimension;
+                    sourceOutDimension = this.getOutDimension();
+                    BigInteger copyOutDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "outDimension", sourceOutDimension), sourceOutDimension, this.isSetOutDimension()));
+                    copy.setOutDimension(copyOutDimension);
+                } else {
+                    if (outDimensionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.outDimension = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new AffinePlacementType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof AffinePlacementType) {
             final AffinePlacementType target = this;
             final AffinePlacementType leftObject = ((AffinePlacementType) left);
             final AffinePlacementType rightObject = ((AffinePlacementType) right);
             {
-                DirectPositionType lhsLocation;
-                lhsLocation = leftObject.getLocation();
-                DirectPositionType rhsLocation;
-                rhsLocation = rightObject.getLocation();
-                target.setLocation(((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "location", lhsLocation), LocatorUtils.property(rightLocator, "location", rhsLocation), lhsLocation, rhsLocation)));
+                java.lang.Boolean locationShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetLocation(), rightObject.isSetLocation());
+                if (locationShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType lhsLocation;
+                    lhsLocation = leftObject.getLocation();
+                    DirectPositionType rhsLocation;
+                    rhsLocation = rightObject.getLocation();
+                    DirectPositionType mergedLocation = ((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "location", lhsLocation), LocatorUtils.property(rightLocator, "location", rhsLocation), lhsLocation, rhsLocation, leftObject.isSetLocation(), rightObject.isSetLocation()));
+                    target.setLocation(mergedLocation);
+                } else {
+                    if (locationShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.location = null;
+                    }
+                }
             }
             {
-                List<VectorType> lhsRefDirection;
-                lhsRefDirection = leftObject.getRefDirection();
-                List<VectorType> rhsRefDirection;
-                rhsRefDirection = rightObject.getRefDirection();
-                target.unsetRefDirection();
-                List<VectorType> uniqueRefDirectionl = target.getRefDirection();
-                uniqueRefDirectionl.addAll(((List<VectorType> ) strategy.merge(LocatorUtils.property(leftLocator, "refDirection", lhsRefDirection), LocatorUtils.property(rightLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection)));
+                java.lang.Boolean refDirectionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRefDirection(), rightObject.isSetRefDirection());
+                if (refDirectionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<VectorType> lhsRefDirection;
+                    lhsRefDirection = (leftObject.isSetRefDirection()?leftObject.getRefDirection():null);
+                    List<VectorType> rhsRefDirection;
+                    rhsRefDirection = (rightObject.isSetRefDirection()?rightObject.getRefDirection():null);
+                    List<VectorType> mergedRefDirection = ((List<VectorType> ) strategy.merge(LocatorUtils.property(leftLocator, "refDirection", lhsRefDirection), LocatorUtils.property(rightLocator, "refDirection", rhsRefDirection), lhsRefDirection, rhsRefDirection, leftObject.isSetRefDirection(), rightObject.isSetRefDirection()));
+                    target.setRefDirection(mergedRefDirection);
+                } else {
+                    if (refDirectionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetRefDirection();
+                    }
+                }
             }
             {
-                BigInteger lhsInDimension;
-                lhsInDimension = leftObject.getInDimension();
-                BigInteger rhsInDimension;
-                rhsInDimension = rightObject.getInDimension();
-                target.setInDimension(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "inDimension", lhsInDimension), LocatorUtils.property(rightLocator, "inDimension", rhsInDimension), lhsInDimension, rhsInDimension)));
+                java.lang.Boolean inDimensionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetInDimension(), rightObject.isSetInDimension());
+                if (inDimensionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsInDimension;
+                    lhsInDimension = leftObject.getInDimension();
+                    BigInteger rhsInDimension;
+                    rhsInDimension = rightObject.getInDimension();
+                    BigInteger mergedInDimension = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "inDimension", lhsInDimension), LocatorUtils.property(rightLocator, "inDimension", rhsInDimension), lhsInDimension, rhsInDimension, leftObject.isSetInDimension(), rightObject.isSetInDimension()));
+                    target.setInDimension(mergedInDimension);
+                } else {
+                    if (inDimensionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.inDimension = null;
+                    }
+                }
             }
             {
-                BigInteger lhsOutDimension;
-                lhsOutDimension = leftObject.getOutDimension();
-                BigInteger rhsOutDimension;
-                rhsOutDimension = rightObject.getOutDimension();
-                target.setOutDimension(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "outDimension", lhsOutDimension), LocatorUtils.property(rightLocator, "outDimension", rhsOutDimension), lhsOutDimension, rhsOutDimension)));
+                java.lang.Boolean outDimensionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetOutDimension(), rightObject.isSetOutDimension());
+                if (outDimensionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsOutDimension;
+                    lhsOutDimension = leftObject.getOutDimension();
+                    BigInteger rhsOutDimension;
+                    rhsOutDimension = rightObject.getOutDimension();
+                    BigInteger mergedOutDimension = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "outDimension", lhsOutDimension), LocatorUtils.property(rightLocator, "outDimension", rhsOutDimension), lhsOutDimension, rhsOutDimension, leftObject.isSetOutDimension(), rightObject.isSetOutDimension()));
+                    target.setOutDimension(mergedOutDimension);
+                } else {
+                    if (outDimensionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.outDimension = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setRefDirection(List<VectorType> value) {
-        List<VectorType> draftl = this.getRefDirection();
-        draftl.addAll(value);
-    }
-
-    public AffinePlacementType withLocation(DirectPositionType value) {
-        setLocation(value);
-        return this;
-    }
-
-    public AffinePlacementType withRefDirection(VectorType... values) {
-        if (values!= null) {
-            for (VectorType value: values) {
-                getRefDirection().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AffinePlacementType withRefDirection(Collection<VectorType> values) {
-        if (values!= null) {
-            getRefDirection().addAll(values);
-        }
-        return this;
-    }
-
-    public AffinePlacementType withInDimension(BigInteger value) {
-        setInDimension(value);
-        return this;
-    }
-
-    public AffinePlacementType withOutDimension(BigInteger value) {
-        setOutDimension(value);
-        return this;
-    }
-
-    public AffinePlacementType withRefDirection(List<VectorType> value) {
-        setRefDirection(value);
-        return this;
     }
 
 }

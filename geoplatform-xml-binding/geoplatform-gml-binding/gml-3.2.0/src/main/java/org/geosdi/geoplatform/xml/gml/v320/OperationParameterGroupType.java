@@ -34,61 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per OperationParameterGroupType complex type.
+ * <p>Classe Java per OperationParameterGroupType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="OperationParameterGroupType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeneralOperationParameterType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}maximumOccurs" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}generalOperationParameter" maxOccurs="unbounded" minOccurs="2"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="OperationParameterGroupType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeneralOperationParameterType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}maximumOccurs" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}generalOperationParameter" maxOccurs="unbounded" minOccurs="2"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -102,13 +100,21 @@ public class OperationParameterGroupType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:maximumOccurs is the maximum number of times that values for this parameter group may be included. If this attribute is omitted, the maximum number shall be one.
+     * 
+     */
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger maximumOccurs;
+    /**
+     * gml:generalOperationParameter is an association to an operation parameter or parameter group.
+     * 
+     */
     @XmlElementRef(name = "generalOperationParameter", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> generalOperationParameter;
 
     /**
-     * Recupera il valore della proprietà maximumOccurs.
+     * gml:maximumOccurs is the maximum number of times that values for this parameter group may be included. If this attribute is omitted, the maximum number shall be one.
      * 
      * @return
      *     possible object is
@@ -126,6 +132,7 @@ public class OperationParameterGroupType
      *     allowed object is
      *     {@link BigInteger }
      *     
+     * @see #getMaximumOccurs()
      */
     public void setMaximumOccurs(BigInteger value) {
         this.maximumOccurs = value;
@@ -136,18 +143,20 @@ public class OperationParameterGroupType
     }
 
     /**
+     * gml:generalOperationParameter is an association to an operation parameter or parameter group.
+     * 
      * Gets the value of the generalOperationParameter property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the generalOperationParameter property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the generalOperationParameter property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getGeneralOperationParameter().add(newItem);
+     * getGeneralOperationParameter().add(newItem);
      * </pre>
      * 
      * 
@@ -155,12 +164,15 @@ public class OperationParameterGroupType
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterPropertyType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the generalOperationParameter property.
      */
     public List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> getGeneralOperationParameter() {
         if (generalOperationParameter == null) {
-            generalOperationParameter = new ArrayList<JAXBElement<AbstractGeneralOperationParameterPropertyType>>();
+            generalOperationParameter = new ArrayList<>();
         }
         return this.generalOperationParameter;
     }
@@ -173,13 +185,15 @@ public class OperationParameterGroupType
         this.generalOperationParameter = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -187,23 +201,33 @@ public class OperationParameterGroupType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             BigInteger theMaximumOccurs;
             theMaximumOccurs = this.getMaximumOccurs();
-            strategy.appendField(locator, this, "maximumOccurs", buffer, theMaximumOccurs);
+            strategy.appendField(locator, this, "maximumOccurs", buffer, theMaximumOccurs, this.isSetMaximumOccurs());
         }
         {
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> theGeneralOperationParameter;
-            theGeneralOperationParameter = this.getGeneralOperationParameter();
-            strategy.appendField(locator, this, "generalOperationParameter", buffer, theGeneralOperationParameter);
+            theGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
+            strategy.appendField(locator, this, "generalOperationParameter", buffer, theGeneralOperationParameter, this.isSetGeneralOperationParameter());
         }
         return buffer;
     }
 
+    public void setGeneralOperationParameter(List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> value) {
+        this.generalOperationParameter = null;
+        if (value!= null) {
+            List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> draftl = this.getGeneralOperationParameter();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof OperationParameterGroupType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -218,93 +242,110 @@ public class OperationParameterGroupType
             lhsMaximumOccurs = this.getMaximumOccurs();
             BigInteger rhsMaximumOccurs;
             rhsMaximumOccurs = that.getMaximumOccurs();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "maximumOccurs", lhsMaximumOccurs), LocatorUtils.property(thatLocator, "maximumOccurs", rhsMaximumOccurs), lhsMaximumOccurs, rhsMaximumOccurs)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "maximumOccurs", lhsMaximumOccurs), LocatorUtils.property(thatLocator, "maximumOccurs", rhsMaximumOccurs), lhsMaximumOccurs, rhsMaximumOccurs, this.isSetMaximumOccurs(), that.isSetMaximumOccurs())) {
                 return false;
             }
         }
         {
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> lhsGeneralOperationParameter;
-            lhsGeneralOperationParameter = this.getGeneralOperationParameter();
+            lhsGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> rhsGeneralOperationParameter;
-            rhsGeneralOperationParameter = that.getGeneralOperationParameter();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(thatLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter)) {
+            rhsGeneralOperationParameter = (that.isSetGeneralOperationParameter()?that.getGeneralOperationParameter():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(thatLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter, this.isSetGeneralOperationParameter(), that.isSetGeneralOperationParameter())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             BigInteger theMaximumOccurs;
             theMaximumOccurs = this.getMaximumOccurs();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "maximumOccurs", theMaximumOccurs), currentHashCode, theMaximumOccurs);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "maximumOccurs", theMaximumOccurs), currentHashCode, theMaximumOccurs, this.isSetMaximumOccurs());
         }
         {
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> theGeneralOperationParameter;
-            theGeneralOperationParameter = this.getGeneralOperationParameter();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "generalOperationParameter", theGeneralOperationParameter), currentHashCode, theGeneralOperationParameter);
+            theGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "generalOperationParameter", theGeneralOperationParameter), currentHashCode, theGeneralOperationParameter, this.isSetGeneralOperationParameter());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof OperationParameterGroupType) {
             final OperationParameterGroupType copy = ((OperationParameterGroupType) draftCopy);
-            if (this.isSetMaximumOccurs()) {
-                BigInteger sourceMaximumOccurs;
-                sourceMaximumOccurs = this.getMaximumOccurs();
-                BigInteger copyMaximumOccurs = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "maximumOccurs", sourceMaximumOccurs), sourceMaximumOccurs));
-                copy.setMaximumOccurs(copyMaximumOccurs);
-            } else {
-                copy.maximumOccurs = null;
+            {
+                java.lang.Boolean maximumOccursShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMaximumOccurs());
+                if (maximumOccursShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceMaximumOccurs;
+                    sourceMaximumOccurs = this.getMaximumOccurs();
+                    BigInteger copyMaximumOccurs = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "maximumOccurs", sourceMaximumOccurs), sourceMaximumOccurs, this.isSetMaximumOccurs()));
+                    copy.setMaximumOccurs(copyMaximumOccurs);
+                } else {
+                    if (maximumOccursShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.maximumOccurs = null;
+                    }
+                }
             }
-            if (this.isSetGeneralOperationParameter()) {
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> sourceGeneralOperationParameter;
-                sourceGeneralOperationParameter = this.getGeneralOperationParameter();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> copyGeneralOperationParameter = ((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "generalOperationParameter", sourceGeneralOperationParameter), sourceGeneralOperationParameter));
-                copy.unsetGeneralOperationParameter();
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> uniqueGeneralOperationParameterl = copy.getGeneralOperationParameter();
-                uniqueGeneralOperationParameterl.addAll(copyGeneralOperationParameter);
-            } else {
-                copy.unsetGeneralOperationParameter();
+            {
+                java.lang.Boolean generalOperationParameterShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGeneralOperationParameter());
+                if (generalOperationParameterShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> sourceGeneralOperationParameter;
+                    sourceGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> copyGeneralOperationParameter = ((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "generalOperationParameter", sourceGeneralOperationParameter), sourceGeneralOperationParameter, this.isSetGeneralOperationParameter()));
+                    copy.setGeneralOperationParameter(copyGeneralOperationParameter);
+                } else {
+                    if (generalOperationParameterShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetGeneralOperationParameter();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new OperationParameterGroupType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof OperationParameterGroupType) {
@@ -312,137 +353,36 @@ public class OperationParameterGroupType
             final OperationParameterGroupType leftObject = ((OperationParameterGroupType) left);
             final OperationParameterGroupType rightObject = ((OperationParameterGroupType) right);
             {
-                BigInteger lhsMaximumOccurs;
-                lhsMaximumOccurs = leftObject.getMaximumOccurs();
-                BigInteger rhsMaximumOccurs;
-                rhsMaximumOccurs = rightObject.getMaximumOccurs();
-                target.setMaximumOccurs(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "maximumOccurs", lhsMaximumOccurs), LocatorUtils.property(rightLocator, "maximumOccurs", rhsMaximumOccurs), lhsMaximumOccurs, rhsMaximumOccurs)));
+                java.lang.Boolean maximumOccursShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMaximumOccurs(), rightObject.isSetMaximumOccurs());
+                if (maximumOccursShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsMaximumOccurs;
+                    lhsMaximumOccurs = leftObject.getMaximumOccurs();
+                    BigInteger rhsMaximumOccurs;
+                    rhsMaximumOccurs = rightObject.getMaximumOccurs();
+                    BigInteger mergedMaximumOccurs = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "maximumOccurs", lhsMaximumOccurs), LocatorUtils.property(rightLocator, "maximumOccurs", rhsMaximumOccurs), lhsMaximumOccurs, rhsMaximumOccurs, leftObject.isSetMaximumOccurs(), rightObject.isSetMaximumOccurs()));
+                    target.setMaximumOccurs(mergedMaximumOccurs);
+                } else {
+                    if (maximumOccursShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.maximumOccurs = null;
+                    }
+                }
             }
             {
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> lhsGeneralOperationParameter;
-                lhsGeneralOperationParameter = leftObject.getGeneralOperationParameter();
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> rhsGeneralOperationParameter;
-                rhsGeneralOperationParameter = rightObject.getGeneralOperationParameter();
-                target.unsetGeneralOperationParameter();
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> uniqueGeneralOperationParameterl = target.getGeneralOperationParameter();
-                uniqueGeneralOperationParameterl.addAll(((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(rightLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter)));
+                java.lang.Boolean generalOperationParameterShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGeneralOperationParameter(), rightObject.isSetGeneralOperationParameter());
+                if (generalOperationParameterShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> lhsGeneralOperationParameter;
+                    lhsGeneralOperationParameter = (leftObject.isSetGeneralOperationParameter()?leftObject.getGeneralOperationParameter():null);
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> rhsGeneralOperationParameter;
+                    rhsGeneralOperationParameter = (rightObject.isSetGeneralOperationParameter()?rightObject.getGeneralOperationParameter():null);
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> mergedGeneralOperationParameter = ((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(rightLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter, leftObject.isSetGeneralOperationParameter(), rightObject.isSetGeneralOperationParameter()));
+                    target.setGeneralOperationParameter(mergedGeneralOperationParameter);
+                } else {
+                    if (generalOperationParameterShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetGeneralOperationParameter();
+                    }
+                }
             }
         }
-    }
-
-    public void setGeneralOperationParameter(List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> value) {
-        List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> draftl = this.getGeneralOperationParameter();
-        draftl.addAll(value);
-    }
-
-    public OperationParameterGroupType withMaximumOccurs(BigInteger value) {
-        setMaximumOccurs(value);
-        return this;
-    }
-
-    public OperationParameterGroupType withGeneralOperationParameter(JAXBElement<AbstractGeneralOperationParameterPropertyType> ... values) {
-        if (values!= null) {
-            for (JAXBElement<AbstractGeneralOperationParameterPropertyType> value: values) {
-                getGeneralOperationParameter().add(value);
-            }
-        }
-        return this;
-    }
-
-    public OperationParameterGroupType withGeneralOperationParameter(Collection<JAXBElement<AbstractGeneralOperationParameterPropertyType>> values) {
-        if (values!= null) {
-            getGeneralOperationParameter().addAll(values);
-        }
-        return this;
-    }
-
-    public OperationParameterGroupType withGeneralOperationParameter(List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> value) {
-        setGeneralOperationParameter(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withMinimumOccurs(BigInteger value) {
-        setMinimumOccurs(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public OperationParameterGroupType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

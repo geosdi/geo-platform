@@ -34,58 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per MultiPointType complex type.
+ * <p>Classe Java per MultiPointType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="MultiPointType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometricAggregateType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}pointMember" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}pointMembers" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="MultiPointType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometricAggregateType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}pointMember" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}pointMembers" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -99,34 +96,47 @@ public class MultiPointType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * This property element either references a Point via the XLink-attributes or contains the Point element.
+     * 
+     */
     protected List<PointPropertyType> pointMember;
+    /**
+     * This property element contains a list of points. The order of the elements is significant and shall be preserved when processing the array.
+     * 
+     */
     protected PointArrayPropertyType pointMembers;
 
     /**
+     * This property element either references a Point via the XLink-attributes or contains the Point element.
+     * 
      * Gets the value of the pointMember property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pointMember property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the pointMember property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getPointMember().add(newItem);
+     * getPointMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link PointPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the pointMember property.
      */
     public List<PointPropertyType> getPointMember() {
         if (pointMember == null) {
-            pointMember = new ArrayList<PointPropertyType>();
+            pointMember = new ArrayList<>();
         }
         return this.pointMember;
     }
@@ -140,7 +150,7 @@ public class MultiPointType
     }
 
     /**
-     * Recupera il valore della proprietà pointMembers.
+     * This property element contains a list of points. The order of the elements is significant and shall be preserved when processing the array.
      * 
      * @return
      *     possible object is
@@ -158,6 +168,7 @@ public class MultiPointType
      *     allowed object is
      *     {@link PointArrayPropertyType }
      *     
+     * @see #getPointMembers()
      */
     public void setPointMembers(PointArrayPropertyType value) {
         this.pointMembers = value;
@@ -167,13 +178,15 @@ public class MultiPointType
         return (this.pointMembers!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -181,23 +194,33 @@ public class MultiPointType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<PointPropertyType> thePointMember;
-            thePointMember = this.getPointMember();
-            strategy.appendField(locator, this, "pointMember", buffer, thePointMember);
+            thePointMember = (this.isSetPointMember()?this.getPointMember():null);
+            strategy.appendField(locator, this, "pointMember", buffer, thePointMember, this.isSetPointMember());
         }
         {
             PointArrayPropertyType thePointMembers;
             thePointMembers = this.getPointMembers();
-            strategy.appendField(locator, this, "pointMembers", buffer, thePointMembers);
+            strategy.appendField(locator, this, "pointMembers", buffer, thePointMembers, this.isSetPointMembers());
         }
         return buffer;
     }
 
+    public void setPointMember(List<PointPropertyType> value) {
+        this.pointMember = null;
+        if (value!= null) {
+            List<PointPropertyType> draftl = this.getPointMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof MultiPointType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -209,10 +232,10 @@ public class MultiPointType
         final MultiPointType that = ((MultiPointType) object);
         {
             List<PointPropertyType> lhsPointMember;
-            lhsPointMember = this.getPointMember();
+            lhsPointMember = (this.isSetPointMember()?this.getPointMember():null);
             List<PointPropertyType> rhsPointMember;
-            rhsPointMember = that.getPointMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointMember", lhsPointMember), LocatorUtils.property(thatLocator, "pointMember", rhsPointMember), lhsPointMember, rhsPointMember)) {
+            rhsPointMember = (that.isSetPointMember()?that.getPointMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointMember", lhsPointMember), LocatorUtils.property(thatLocator, "pointMember", rhsPointMember), lhsPointMember, rhsPointMember, this.isSetPointMember(), that.isSetPointMember())) {
                 return false;
             }
         }
@@ -221,84 +244,101 @@ public class MultiPointType
             lhsPointMembers = this.getPointMembers();
             PointArrayPropertyType rhsPointMembers;
             rhsPointMembers = that.getPointMembers();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointMembers", lhsPointMembers), LocatorUtils.property(thatLocator, "pointMembers", rhsPointMembers), lhsPointMembers, rhsPointMembers)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pointMembers", lhsPointMembers), LocatorUtils.property(thatLocator, "pointMembers", rhsPointMembers), lhsPointMembers, rhsPointMembers, this.isSetPointMembers(), that.isSetPointMembers())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<PointPropertyType> thePointMember;
-            thePointMember = this.getPointMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointMember", thePointMember), currentHashCode, thePointMember);
+            thePointMember = (this.isSetPointMember()?this.getPointMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointMember", thePointMember), currentHashCode, thePointMember, this.isSetPointMember());
         }
         {
             PointArrayPropertyType thePointMembers;
             thePointMembers = this.getPointMembers();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointMembers", thePointMembers), currentHashCode, thePointMembers);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pointMembers", thePointMembers), currentHashCode, thePointMembers, this.isSetPointMembers());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof MultiPointType) {
             final MultiPointType copy = ((MultiPointType) draftCopy);
-            if (this.isSetPointMember()) {
-                List<PointPropertyType> sourcePointMember;
-                sourcePointMember = this.getPointMember();
-                @SuppressWarnings("unchecked")
-                List<PointPropertyType> copyPointMember = ((List<PointPropertyType> ) strategy.copy(LocatorUtils.property(locator, "pointMember", sourcePointMember), sourcePointMember));
-                copy.unsetPointMember();
-                List<PointPropertyType> uniquePointMemberl = copy.getPointMember();
-                uniquePointMemberl.addAll(copyPointMember);
-            } else {
-                copy.unsetPointMember();
+            {
+                java.lang.Boolean pointMemberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPointMember());
+                if (pointMemberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<PointPropertyType> sourcePointMember;
+                    sourcePointMember = (this.isSetPointMember()?this.getPointMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<PointPropertyType> copyPointMember = ((List<PointPropertyType> ) strategy.copy(LocatorUtils.property(locator, "pointMember", sourcePointMember), sourcePointMember, this.isSetPointMember()));
+                    copy.setPointMember(copyPointMember);
+                } else {
+                    if (pointMemberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetPointMember();
+                    }
+                }
             }
-            if (this.isSetPointMembers()) {
-                PointArrayPropertyType sourcePointMembers;
-                sourcePointMembers = this.getPointMembers();
-                PointArrayPropertyType copyPointMembers = ((PointArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "pointMembers", sourcePointMembers), sourcePointMembers));
-                copy.setPointMembers(copyPointMembers);
-            } else {
-                copy.pointMembers = null;
+            {
+                java.lang.Boolean pointMembersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPointMembers());
+                if (pointMembersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    PointArrayPropertyType sourcePointMembers;
+                    sourcePointMembers = this.getPointMembers();
+                    PointArrayPropertyType copyPointMembers = ((PointArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "pointMembers", sourcePointMembers), sourcePointMembers, this.isSetPointMembers()));
+                    copy.setPointMembers(copyPointMembers);
+                } else {
+                    if (pointMembersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.pointMembers = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new MultiPointType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof MultiPointType) {
@@ -306,191 +346,36 @@ public class MultiPointType
             final MultiPointType leftObject = ((MultiPointType) left);
             final MultiPointType rightObject = ((MultiPointType) right);
             {
-                List<PointPropertyType> lhsPointMember;
-                lhsPointMember = leftObject.getPointMember();
-                List<PointPropertyType> rhsPointMember;
-                rhsPointMember = rightObject.getPointMember();
-                target.unsetPointMember();
-                List<PointPropertyType> uniquePointMemberl = target.getPointMember();
-                uniquePointMemberl.addAll(((List<PointPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "pointMember", lhsPointMember), LocatorUtils.property(rightLocator, "pointMember", rhsPointMember), lhsPointMember, rhsPointMember)));
+                java.lang.Boolean pointMemberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPointMember(), rightObject.isSetPointMember());
+                if (pointMemberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<PointPropertyType> lhsPointMember;
+                    lhsPointMember = (leftObject.isSetPointMember()?leftObject.getPointMember():null);
+                    List<PointPropertyType> rhsPointMember;
+                    rhsPointMember = (rightObject.isSetPointMember()?rightObject.getPointMember():null);
+                    List<PointPropertyType> mergedPointMember = ((List<PointPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "pointMember", lhsPointMember), LocatorUtils.property(rightLocator, "pointMember", rhsPointMember), lhsPointMember, rhsPointMember, leftObject.isSetPointMember(), rightObject.isSetPointMember()));
+                    target.setPointMember(mergedPointMember);
+                } else {
+                    if (pointMemberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetPointMember();
+                    }
+                }
             }
             {
-                PointArrayPropertyType lhsPointMembers;
-                lhsPointMembers = leftObject.getPointMembers();
-                PointArrayPropertyType rhsPointMembers;
-                rhsPointMembers = rightObject.getPointMembers();
-                target.setPointMembers(((PointArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "pointMembers", lhsPointMembers), LocatorUtils.property(rightLocator, "pointMembers", rhsPointMembers), lhsPointMembers, rhsPointMembers)));
+                java.lang.Boolean pointMembersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPointMembers(), rightObject.isSetPointMembers());
+                if (pointMembersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    PointArrayPropertyType lhsPointMembers;
+                    lhsPointMembers = leftObject.getPointMembers();
+                    PointArrayPropertyType rhsPointMembers;
+                    rhsPointMembers = rightObject.getPointMembers();
+                    PointArrayPropertyType mergedPointMembers = ((PointArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "pointMembers", lhsPointMembers), LocatorUtils.property(rightLocator, "pointMembers", rhsPointMembers), lhsPointMembers, rhsPointMembers, leftObject.isSetPointMembers(), rightObject.isSetPointMembers()));
+                    target.setPointMembers(mergedPointMembers);
+                } else {
+                    if (pointMembersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.pointMembers = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setPointMember(List<PointPropertyType> value) {
-        List<PointPropertyType> draftl = this.getPointMember();
-        draftl.addAll(value);
-    }
-
-    public MultiPointType withPointMember(PointPropertyType... values) {
-        if (values!= null) {
-            for (PointPropertyType value: values) {
-                getPointMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public MultiPointType withPointMember(Collection<PointPropertyType> values) {
-        if (values!= null) {
-            getPointMember().addAll(values);
-        }
-        return this;
-    }
-
-    public MultiPointType withPointMembers(PointArrayPropertyType value) {
-        setPointMembers(value);
-        return this;
-    }
-
-    public MultiPointType withPointMember(List<PointPropertyType> value) {
-        setPointMember(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiPointType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public MultiPointType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

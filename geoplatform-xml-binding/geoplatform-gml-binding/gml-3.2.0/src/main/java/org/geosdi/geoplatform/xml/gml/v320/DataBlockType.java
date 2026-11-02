@@ -34,62 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per DataBlockType complex type.
+ * <p>Classe Java per DataBlockType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DataBlockType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}rangeParameters"/>
- *         &lt;choice>
- *           &lt;element ref="{http://www.opengis.net/gml}tupleList"/>
- *           &lt;element ref="{http://www.opengis.net/gml}doubleOrNilReasonTupleList"/>
- *         &lt;/choice>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DataBlockType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}rangeParameters"/>
+ *         <choice>
+ *           <element ref="{http://www.opengis.net/gml}tupleList"/>
+ *           <element ref="{http://www.opengis.net/gml}doubleOrNilReasonTupleList"/>
+ *         </choice>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -104,7 +102,16 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
 
     @XmlElement(required = true)
     protected RangeParametersType rangeParameters;
+    /**
+     * gml:CoordinatesType consists of a list of coordinate tuples, with each coordinate tuple separated by the ts or tuple separator (whitespace), and each coordinate in the tuple by the cs or coordinate separator (comma).
+     * The gml:tupleList encoding is effectively “band-interleaved”.
+     * 
+     */
     protected CoordinatesType tupleList;
+    /**
+     * gml:doubleOrNilReasonList consists of a list of gml:doubleOrNilReason values, each separated by a whitespace. The gml:doubleOrNilReason values are grouped into tuples where the dimension of each tuple in the list is equal to the number of range parameters.
+     * 
+     */
     @XmlList
     protected List<String> doubleOrNilReasonTupleList;
 
@@ -137,7 +144,8 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
     }
 
     /**
-     * Recupera il valore della proprietà tupleList.
+     * gml:CoordinatesType consists of a list of coordinate tuples, with each coordinate tuple separated by the ts or tuple separator (whitespace), and each coordinate in the tuple by the cs or coordinate separator (comma).
+     * The gml:tupleList encoding is effectively “band-interleaved”.
      * 
      * @return
      *     possible object is
@@ -155,6 +163,7 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
      *     allowed object is
      *     {@link CoordinatesType }
      *     
+     * @see #getTupleList()
      */
     public void setTupleList(CoordinatesType value) {
         this.tupleList = value;
@@ -165,30 +174,35 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
     }
 
     /**
+     * gml:doubleOrNilReasonList consists of a list of gml:doubleOrNilReason values, each separated by a whitespace. The gml:doubleOrNilReason values are grouped into tuples where the dimension of each tuple in the list is equal to the number of range parameters.
+     * 
      * Gets the value of the doubleOrNilReasonTupleList property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the doubleOrNilReasonTupleList property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the doubleOrNilReasonTupleList property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDoubleOrNilReasonTupleList().add(newItem);
+     * getDoubleOrNilReasonTupleList().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the doubleOrNilReasonTupleList property.
      */
     public List<String> getDoubleOrNilReasonTupleList() {
         if (doubleOrNilReasonTupleList == null) {
-            doubleOrNilReasonTupleList = new ArrayList<String>();
+            doubleOrNilReasonTupleList = new ArrayList<>();
         }
         return this.doubleOrNilReasonTupleList;
     }
@@ -201,13 +215,15 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
         this.doubleOrNilReasonTupleList = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -215,27 +231,37 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             RangeParametersType theRangeParameters;
             theRangeParameters = this.getRangeParameters();
-            strategy.appendField(locator, this, "rangeParameters", buffer, theRangeParameters);
+            strategy.appendField(locator, this, "rangeParameters", buffer, theRangeParameters, this.isSetRangeParameters());
         }
         {
             CoordinatesType theTupleList;
             theTupleList = this.getTupleList();
-            strategy.appendField(locator, this, "tupleList", buffer, theTupleList);
+            strategy.appendField(locator, this, "tupleList", buffer, theTupleList, this.isSetTupleList());
         }
         {
             List<String> theDoubleOrNilReasonTupleList;
-            theDoubleOrNilReasonTupleList = this.getDoubleOrNilReasonTupleList();
-            strategy.appendField(locator, this, "doubleOrNilReasonTupleList", buffer, theDoubleOrNilReasonTupleList);
+            theDoubleOrNilReasonTupleList = (this.isSetDoubleOrNilReasonTupleList()?this.getDoubleOrNilReasonTupleList():null);
+            strategy.appendField(locator, this, "doubleOrNilReasonTupleList", buffer, theDoubleOrNilReasonTupleList, this.isSetDoubleOrNilReasonTupleList());
         }
         return buffer;
     }
 
+    public void setDoubleOrNilReasonTupleList(List<String> value) {
+        this.doubleOrNilReasonTupleList = null;
+        if (value!= null) {
+            List<String> draftl = this.getDoubleOrNilReasonTupleList();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DataBlockType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -247,7 +273,7 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
             lhsRangeParameters = this.getRangeParameters();
             RangeParametersType rhsRangeParameters;
             rhsRangeParameters = that.getRangeParameters();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(thatLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(thatLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters, this.isSetRangeParameters(), that.isSetRangeParameters())) {
                 return false;
             }
         }
@@ -256,170 +282,178 @@ public class DataBlockType implements Cloneable, CopyTo, Equals, HashCode, Merge
             lhsTupleList = this.getTupleList();
             CoordinatesType rhsTupleList;
             rhsTupleList = that.getTupleList();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "tupleList", lhsTupleList), LocatorUtils.property(thatLocator, "tupleList", rhsTupleList), lhsTupleList, rhsTupleList)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "tupleList", lhsTupleList), LocatorUtils.property(thatLocator, "tupleList", rhsTupleList), lhsTupleList, rhsTupleList, this.isSetTupleList(), that.isSetTupleList())) {
                 return false;
             }
         }
         {
             List<String> lhsDoubleOrNilReasonTupleList;
-            lhsDoubleOrNilReasonTupleList = this.getDoubleOrNilReasonTupleList();
+            lhsDoubleOrNilReasonTupleList = (this.isSetDoubleOrNilReasonTupleList()?this.getDoubleOrNilReasonTupleList():null);
             List<String> rhsDoubleOrNilReasonTupleList;
-            rhsDoubleOrNilReasonTupleList = that.getDoubleOrNilReasonTupleList();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "doubleOrNilReasonTupleList", lhsDoubleOrNilReasonTupleList), LocatorUtils.property(thatLocator, "doubleOrNilReasonTupleList", rhsDoubleOrNilReasonTupleList), lhsDoubleOrNilReasonTupleList, rhsDoubleOrNilReasonTupleList)) {
+            rhsDoubleOrNilReasonTupleList = (that.isSetDoubleOrNilReasonTupleList()?that.getDoubleOrNilReasonTupleList():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "doubleOrNilReasonTupleList", lhsDoubleOrNilReasonTupleList), LocatorUtils.property(thatLocator, "doubleOrNilReasonTupleList", rhsDoubleOrNilReasonTupleList), lhsDoubleOrNilReasonTupleList, rhsDoubleOrNilReasonTupleList, this.isSetDoubleOrNilReasonTupleList(), that.isSetDoubleOrNilReasonTupleList())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             RangeParametersType theRangeParameters;
             theRangeParameters = this.getRangeParameters();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeParameters", theRangeParameters), currentHashCode, theRangeParameters);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeParameters", theRangeParameters), currentHashCode, theRangeParameters, this.isSetRangeParameters());
         }
         {
             CoordinatesType theTupleList;
             theTupleList = this.getTupleList();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "tupleList", theTupleList), currentHashCode, theTupleList);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "tupleList", theTupleList), currentHashCode, theTupleList, this.isSetTupleList());
         }
         {
             List<String> theDoubleOrNilReasonTupleList;
-            theDoubleOrNilReasonTupleList = this.getDoubleOrNilReasonTupleList();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "doubleOrNilReasonTupleList", theDoubleOrNilReasonTupleList), currentHashCode, theDoubleOrNilReasonTupleList);
+            theDoubleOrNilReasonTupleList = (this.isSetDoubleOrNilReasonTupleList()?this.getDoubleOrNilReasonTupleList():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "doubleOrNilReasonTupleList", theDoubleOrNilReasonTupleList), currentHashCode, theDoubleOrNilReasonTupleList, this.isSetDoubleOrNilReasonTupleList());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof DataBlockType) {
             final DataBlockType copy = ((DataBlockType) draftCopy);
-            if (this.isSetRangeParameters()) {
-                RangeParametersType sourceRangeParameters;
-                sourceRangeParameters = this.getRangeParameters();
-                RangeParametersType copyRangeParameters = ((RangeParametersType) strategy.copy(LocatorUtils.property(locator, "rangeParameters", sourceRangeParameters), sourceRangeParameters));
-                copy.setRangeParameters(copyRangeParameters);
-            } else {
-                copy.rangeParameters = null;
+            {
+                java.lang.Boolean rangeParametersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRangeParameters());
+                if (rangeParametersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    RangeParametersType sourceRangeParameters;
+                    sourceRangeParameters = this.getRangeParameters();
+                    RangeParametersType copyRangeParameters = ((RangeParametersType) strategy.copy(LocatorUtils.property(locator, "rangeParameters", sourceRangeParameters), sourceRangeParameters, this.isSetRangeParameters()));
+                    copy.setRangeParameters(copyRangeParameters);
+                } else {
+                    if (rangeParametersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.rangeParameters = null;
+                    }
+                }
             }
-            if (this.isSetTupleList()) {
-                CoordinatesType sourceTupleList;
-                sourceTupleList = this.getTupleList();
-                CoordinatesType copyTupleList = ((CoordinatesType) strategy.copy(LocatorUtils.property(locator, "tupleList", sourceTupleList), sourceTupleList));
-                copy.setTupleList(copyTupleList);
-            } else {
-                copy.tupleList = null;
+            {
+                java.lang.Boolean tupleListShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTupleList());
+                if (tupleListShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CoordinatesType sourceTupleList;
+                    sourceTupleList = this.getTupleList();
+                    CoordinatesType copyTupleList = ((CoordinatesType) strategy.copy(LocatorUtils.property(locator, "tupleList", sourceTupleList), sourceTupleList, this.isSetTupleList()));
+                    copy.setTupleList(copyTupleList);
+                } else {
+                    if (tupleListShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.tupleList = null;
+                    }
+                }
             }
-            if (this.isSetDoubleOrNilReasonTupleList()) {
-                List<String> sourceDoubleOrNilReasonTupleList;
-                sourceDoubleOrNilReasonTupleList = this.getDoubleOrNilReasonTupleList();
-                @SuppressWarnings("unchecked")
-                List<String> copyDoubleOrNilReasonTupleList = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "doubleOrNilReasonTupleList", sourceDoubleOrNilReasonTupleList), sourceDoubleOrNilReasonTupleList));
-                copy.unsetDoubleOrNilReasonTupleList();
-                List<String> uniqueDoubleOrNilReasonTupleListl = copy.getDoubleOrNilReasonTupleList();
-                uniqueDoubleOrNilReasonTupleListl.addAll(copyDoubleOrNilReasonTupleList);
-            } else {
-                copy.unsetDoubleOrNilReasonTupleList();
+            {
+                java.lang.Boolean doubleOrNilReasonTupleListShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDoubleOrNilReasonTupleList());
+                if (doubleOrNilReasonTupleListShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceDoubleOrNilReasonTupleList;
+                    sourceDoubleOrNilReasonTupleList = (this.isSetDoubleOrNilReasonTupleList()?this.getDoubleOrNilReasonTupleList():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyDoubleOrNilReasonTupleList = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "doubleOrNilReasonTupleList", sourceDoubleOrNilReasonTupleList), sourceDoubleOrNilReasonTupleList, this.isSetDoubleOrNilReasonTupleList()));
+                    copy.setDoubleOrNilReasonTupleList(copyDoubleOrNilReasonTupleList);
+                } else {
+                    if (doubleOrNilReasonTupleListShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetDoubleOrNilReasonTupleList();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DataBlockType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof DataBlockType) {
             final DataBlockType target = this;
             final DataBlockType leftObject = ((DataBlockType) left);
             final DataBlockType rightObject = ((DataBlockType) right);
             {
-                RangeParametersType lhsRangeParameters;
-                lhsRangeParameters = leftObject.getRangeParameters();
-                RangeParametersType rhsRangeParameters;
-                rhsRangeParameters = rightObject.getRangeParameters();
-                target.setRangeParameters(((RangeParametersType) strategy.merge(LocatorUtils.property(leftLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(rightLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters)));
+                java.lang.Boolean rangeParametersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRangeParameters(), rightObject.isSetRangeParameters());
+                if (rangeParametersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    RangeParametersType lhsRangeParameters;
+                    lhsRangeParameters = leftObject.getRangeParameters();
+                    RangeParametersType rhsRangeParameters;
+                    rhsRangeParameters = rightObject.getRangeParameters();
+                    RangeParametersType mergedRangeParameters = ((RangeParametersType) strategy.merge(LocatorUtils.property(leftLocator, "rangeParameters", lhsRangeParameters), LocatorUtils.property(rightLocator, "rangeParameters", rhsRangeParameters), lhsRangeParameters, rhsRangeParameters, leftObject.isSetRangeParameters(), rightObject.isSetRangeParameters()));
+                    target.setRangeParameters(mergedRangeParameters);
+                } else {
+                    if (rangeParametersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.rangeParameters = null;
+                    }
+                }
             }
             {
-                CoordinatesType lhsTupleList;
-                lhsTupleList = leftObject.getTupleList();
-                CoordinatesType rhsTupleList;
-                rhsTupleList = rightObject.getTupleList();
-                target.setTupleList(((CoordinatesType) strategy.merge(LocatorUtils.property(leftLocator, "tupleList", lhsTupleList), LocatorUtils.property(rightLocator, "tupleList", rhsTupleList), lhsTupleList, rhsTupleList)));
+                java.lang.Boolean tupleListShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTupleList(), rightObject.isSetTupleList());
+                if (tupleListShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CoordinatesType lhsTupleList;
+                    lhsTupleList = leftObject.getTupleList();
+                    CoordinatesType rhsTupleList;
+                    rhsTupleList = rightObject.getTupleList();
+                    CoordinatesType mergedTupleList = ((CoordinatesType) strategy.merge(LocatorUtils.property(leftLocator, "tupleList", lhsTupleList), LocatorUtils.property(rightLocator, "tupleList", rhsTupleList), lhsTupleList, rhsTupleList, leftObject.isSetTupleList(), rightObject.isSetTupleList()));
+                    target.setTupleList(mergedTupleList);
+                } else {
+                    if (tupleListShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.tupleList = null;
+                    }
+                }
             }
             {
-                List<String> lhsDoubleOrNilReasonTupleList;
-                lhsDoubleOrNilReasonTupleList = leftObject.getDoubleOrNilReasonTupleList();
-                List<String> rhsDoubleOrNilReasonTupleList;
-                rhsDoubleOrNilReasonTupleList = rightObject.getDoubleOrNilReasonTupleList();
-                target.unsetDoubleOrNilReasonTupleList();
-                List<String> uniqueDoubleOrNilReasonTupleListl = target.getDoubleOrNilReasonTupleList();
-                uniqueDoubleOrNilReasonTupleListl.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "doubleOrNilReasonTupleList", lhsDoubleOrNilReasonTupleList), LocatorUtils.property(rightLocator, "doubleOrNilReasonTupleList", rhsDoubleOrNilReasonTupleList), lhsDoubleOrNilReasonTupleList, rhsDoubleOrNilReasonTupleList)));
+                java.lang.Boolean doubleOrNilReasonTupleListShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDoubleOrNilReasonTupleList(), rightObject.isSetDoubleOrNilReasonTupleList());
+                if (doubleOrNilReasonTupleListShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsDoubleOrNilReasonTupleList;
+                    lhsDoubleOrNilReasonTupleList = (leftObject.isSetDoubleOrNilReasonTupleList()?leftObject.getDoubleOrNilReasonTupleList():null);
+                    List<String> rhsDoubleOrNilReasonTupleList;
+                    rhsDoubleOrNilReasonTupleList = (rightObject.isSetDoubleOrNilReasonTupleList()?rightObject.getDoubleOrNilReasonTupleList():null);
+                    List<String> mergedDoubleOrNilReasonTupleList = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "doubleOrNilReasonTupleList", lhsDoubleOrNilReasonTupleList), LocatorUtils.property(rightLocator, "doubleOrNilReasonTupleList", rhsDoubleOrNilReasonTupleList), lhsDoubleOrNilReasonTupleList, rhsDoubleOrNilReasonTupleList, leftObject.isSetDoubleOrNilReasonTupleList(), rightObject.isSetDoubleOrNilReasonTupleList()));
+                    target.setDoubleOrNilReasonTupleList(mergedDoubleOrNilReasonTupleList);
+                } else {
+                    if (doubleOrNilReasonTupleListShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetDoubleOrNilReasonTupleList();
+                    }
+                }
             }
         }
-    }
-
-    public void setDoubleOrNilReasonTupleList(List<String> value) {
-        List<String> draftl = this.getDoubleOrNilReasonTupleList();
-        draftl.addAll(value);
-    }
-
-    public DataBlockType withRangeParameters(RangeParametersType value) {
-        setRangeParameters(value);
-        return this;
-    }
-
-    public DataBlockType withTupleList(CoordinatesType value) {
-        setTupleList(value);
-        return this;
-    }
-
-    public DataBlockType withDoubleOrNilReasonTupleList(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getDoubleOrNilReasonTupleList().add(value);
-            }
-        }
-        return this;
-    }
-
-    public DataBlockType withDoubleOrNilReasonTupleList(Collection<String> values) {
-        if (values!= null) {
-            getDoubleOrNilReasonTupleList().addAll(values);
-        }
-        return this;
-    }
-
-    public DataBlockType withDoubleOrNilReasonTupleList(List<String> value) {
-        setDoubleOrNilReasonTupleList(value);
-        return this;
     }
 
 }

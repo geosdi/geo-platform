@@ -34,60 +34,58 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per CompositeValueType complex type.
+ * <p>Classe Java per CompositeValueType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CompositeValueType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGMLType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}valueComponent" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}valueComponents" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CompositeValueType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGMLType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}valueComponent" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}valueComponents" minOccurs="0"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -104,36 +102,49 @@ public class CompositeValueType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * Property that refers to, or contains, a Value.
+     * 
+     */
     protected List<ValuePropertyType> valueComponent;
+    /**
+     * Property that contains Values.
+     * 
+     */
     protected ValueArrayPropertyType valueComponents;
     @XmlAttribute(name = "aggregationType")
     protected AggregationType aggregationType;
 
     /**
+     * Property that refers to, or contains, a Value.
+     * 
      * Gets the value of the valueComponent property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueComponent property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the valueComponent property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getValueComponent().add(newItem);
+     * getValueComponent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ValuePropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the valueComponent property.
      */
     public List<ValuePropertyType> getValueComponent() {
         if (valueComponent == null) {
-            valueComponent = new ArrayList<ValuePropertyType>();
+            valueComponent = new ArrayList<>();
         }
         return this.valueComponent;
     }
@@ -147,7 +158,7 @@ public class CompositeValueType
     }
 
     /**
-     * Recupera il valore della proprietà valueComponents.
+     * Property that contains Values.
      * 
      * @return
      *     possible object is
@@ -165,6 +176,7 @@ public class CompositeValueType
      *     allowed object is
      *     {@link ValueArrayPropertyType }
      *     
+     * @see #getValueComponents()
      */
     public void setValueComponents(ValueArrayPropertyType value) {
         this.valueComponents = value;
@@ -202,13 +214,15 @@ public class CompositeValueType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -216,28 +230,38 @@ public class CompositeValueType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<ValuePropertyType> theValueComponent;
-            theValueComponent = this.getValueComponent();
-            strategy.appendField(locator, this, "valueComponent", buffer, theValueComponent);
+            theValueComponent = (this.isSetValueComponent()?this.getValueComponent():null);
+            strategy.appendField(locator, this, "valueComponent", buffer, theValueComponent, this.isSetValueComponent());
         }
         {
             ValueArrayPropertyType theValueComponents;
             theValueComponents = this.getValueComponents();
-            strategy.appendField(locator, this, "valueComponents", buffer, theValueComponents);
+            strategy.appendField(locator, this, "valueComponents", buffer, theValueComponents, this.isSetValueComponents());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setValueComponent(List<ValuePropertyType> value) {
+        this.valueComponent = null;
+        if (value!= null) {
+            List<ValuePropertyType> draftl = this.getValueComponent();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CompositeValueType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -249,10 +273,10 @@ public class CompositeValueType
         final CompositeValueType that = ((CompositeValueType) object);
         {
             List<ValuePropertyType> lhsValueComponent;
-            lhsValueComponent = this.getValueComponent();
+            lhsValueComponent = (this.isSetValueComponent()?this.getValueComponent():null);
             List<ValuePropertyType> rhsValueComponent;
-            rhsValueComponent = that.getValueComponent();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "valueComponent", lhsValueComponent), LocatorUtils.property(thatLocator, "valueComponent", rhsValueComponent), lhsValueComponent, rhsValueComponent)) {
+            rhsValueComponent = (that.isSetValueComponent()?that.getValueComponent():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "valueComponent", lhsValueComponent), LocatorUtils.property(thatLocator, "valueComponent", rhsValueComponent), lhsValueComponent, rhsValueComponent, this.isSetValueComponent(), that.isSetValueComponent())) {
                 return false;
             }
         }
@@ -261,7 +285,7 @@ public class CompositeValueType
             lhsValueComponents = this.getValueComponents();
             ValueArrayPropertyType rhsValueComponents;
             rhsValueComponents = that.getValueComponents();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "valueComponents", lhsValueComponents), LocatorUtils.property(thatLocator, "valueComponents", rhsValueComponents), lhsValueComponents, rhsValueComponents)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "valueComponents", lhsValueComponents), LocatorUtils.property(thatLocator, "valueComponents", rhsValueComponents), lhsValueComponents, rhsValueComponents, this.isSetValueComponents(), that.isSetValueComponents())) {
                 return false;
             }
         }
@@ -270,97 +294,119 @@ public class CompositeValueType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<ValuePropertyType> theValueComponent;
-            theValueComponent = this.getValueComponent();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "valueComponent", theValueComponent), currentHashCode, theValueComponent);
+            theValueComponent = (this.isSetValueComponent()?this.getValueComponent():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "valueComponent", theValueComponent), currentHashCode, theValueComponent, this.isSetValueComponent());
         }
         {
             ValueArrayPropertyType theValueComponents;
             theValueComponents = this.getValueComponents();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "valueComponents", theValueComponents), currentHashCode, theValueComponents);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "valueComponents", theValueComponents), currentHashCode, theValueComponents, this.isSetValueComponents());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof CompositeValueType) {
             final CompositeValueType copy = ((CompositeValueType) draftCopy);
-            if (this.isSetValueComponent()) {
-                List<ValuePropertyType> sourceValueComponent;
-                sourceValueComponent = this.getValueComponent();
-                @SuppressWarnings("unchecked")
-                List<ValuePropertyType> copyValueComponent = ((List<ValuePropertyType> ) strategy.copy(LocatorUtils.property(locator, "valueComponent", sourceValueComponent), sourceValueComponent));
-                copy.unsetValueComponent();
-                List<ValuePropertyType> uniqueValueComponentl = copy.getValueComponent();
-                uniqueValueComponentl.addAll(copyValueComponent);
-            } else {
-                copy.unsetValueComponent();
+            {
+                java.lang.Boolean valueComponentShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValueComponent());
+                if (valueComponentShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<ValuePropertyType> sourceValueComponent;
+                    sourceValueComponent = (this.isSetValueComponent()?this.getValueComponent():null);
+                    @SuppressWarnings("unchecked")
+                    List<ValuePropertyType> copyValueComponent = ((List<ValuePropertyType> ) strategy.copy(LocatorUtils.property(locator, "valueComponent", sourceValueComponent), sourceValueComponent, this.isSetValueComponent()));
+                    copy.setValueComponent(copyValueComponent);
+                } else {
+                    if (valueComponentShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetValueComponent();
+                    }
+                }
             }
-            if (this.isSetValueComponents()) {
-                ValueArrayPropertyType sourceValueComponents;
-                sourceValueComponents = this.getValueComponents();
-                ValueArrayPropertyType copyValueComponents = ((ValueArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "valueComponents", sourceValueComponents), sourceValueComponents));
-                copy.setValueComponents(copyValueComponents);
-            } else {
-                copy.valueComponents = null;
+            {
+                java.lang.Boolean valueComponentsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValueComponents());
+                if (valueComponentsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ValueArrayPropertyType sourceValueComponents;
+                    sourceValueComponents = this.getValueComponents();
+                    ValueArrayPropertyType copyValueComponents = ((ValueArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "valueComponents", sourceValueComponents), sourceValueComponents, this.isSetValueComponents()));
+                    copy.setValueComponents(copyValueComponents);
+                } else {
+                    if (valueComponentsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.valueComponents = null;
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CompositeValueType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof CompositeValueType) {
@@ -368,137 +414,51 @@ public class CompositeValueType
             final CompositeValueType leftObject = ((CompositeValueType) left);
             final CompositeValueType rightObject = ((CompositeValueType) right);
             {
-                List<ValuePropertyType> lhsValueComponent;
-                lhsValueComponent = leftObject.getValueComponent();
-                List<ValuePropertyType> rhsValueComponent;
-                rhsValueComponent = rightObject.getValueComponent();
-                target.unsetValueComponent();
-                List<ValuePropertyType> uniqueValueComponentl = target.getValueComponent();
-                uniqueValueComponentl.addAll(((List<ValuePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "valueComponent", lhsValueComponent), LocatorUtils.property(rightLocator, "valueComponent", rhsValueComponent), lhsValueComponent, rhsValueComponent)));
+                java.lang.Boolean valueComponentShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValueComponent(), rightObject.isSetValueComponent());
+                if (valueComponentShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<ValuePropertyType> lhsValueComponent;
+                    lhsValueComponent = (leftObject.isSetValueComponent()?leftObject.getValueComponent():null);
+                    List<ValuePropertyType> rhsValueComponent;
+                    rhsValueComponent = (rightObject.isSetValueComponent()?rightObject.getValueComponent():null);
+                    List<ValuePropertyType> mergedValueComponent = ((List<ValuePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "valueComponent", lhsValueComponent), LocatorUtils.property(rightLocator, "valueComponent", rhsValueComponent), lhsValueComponent, rhsValueComponent, leftObject.isSetValueComponent(), rightObject.isSetValueComponent()));
+                    target.setValueComponent(mergedValueComponent);
+                } else {
+                    if (valueComponentShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetValueComponent();
+                    }
+                }
             }
             {
-                ValueArrayPropertyType lhsValueComponents;
-                lhsValueComponents = leftObject.getValueComponents();
-                ValueArrayPropertyType rhsValueComponents;
-                rhsValueComponents = rightObject.getValueComponents();
-                target.setValueComponents(((ValueArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "valueComponents", lhsValueComponents), LocatorUtils.property(rightLocator, "valueComponents", rhsValueComponents), lhsValueComponents, rhsValueComponents)));
+                java.lang.Boolean valueComponentsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValueComponents(), rightObject.isSetValueComponents());
+                if (valueComponentsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ValueArrayPropertyType lhsValueComponents;
+                    lhsValueComponents = leftObject.getValueComponents();
+                    ValueArrayPropertyType rhsValueComponents;
+                    rhsValueComponents = rightObject.getValueComponents();
+                    ValueArrayPropertyType mergedValueComponents = ((ValueArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "valueComponents", lhsValueComponents), LocatorUtils.property(rightLocator, "valueComponents", rhsValueComponents), lhsValueComponents, rhsValueComponents, leftObject.isSetValueComponents(), rightObject.isSetValueComponents()));
+                    target.setValueComponents(mergedValueComponents);
+                } else {
+                    if (valueComponentsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.valueComponents = null;
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setValueComponent(List<ValuePropertyType> value) {
-        List<ValuePropertyType> draftl = this.getValueComponent();
-        draftl.addAll(value);
-    }
-
-    public CompositeValueType withValueComponent(ValuePropertyType... values) {
-        if (values!= null) {
-            for (ValuePropertyType value: values) {
-                getValueComponent().add(value);
-            }
-        }
-        return this;
-    }
-
-    public CompositeValueType withValueComponent(Collection<ValuePropertyType> values) {
-        if (values!= null) {
-            getValueComponent().addAll(values);
-        }
-        return this;
-    }
-
-    public CompositeValueType withValueComponents(ValueArrayPropertyType value) {
-        setValueComponents(value);
-        return this;
-    }
-
-    public CompositeValueType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public CompositeValueType withValueComponent(List<ValuePropertyType> value) {
-        setValueComponent(value);
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public CompositeValueType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

@@ -34,59 +34,57 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per GridFunctionType complex type.
+ * <p>Classe Java per GridFunctionType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="GridFunctionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="sequenceRule" type="{http://www.opengis.net/gml}SequenceRuleType" minOccurs="0"/>
- *         &lt;element name="startPoint" type="{http://www.opengis.net/gml}integerList" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="GridFunctionType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="sequenceRule" type="{http://www.opengis.net/gml}SequenceRuleType" minOccurs="0"/>
+ *         <element name="startPoint" type="{http://www.opengis.net/gml}integerList" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -133,28 +131,31 @@ public class GridFunctionType implements Cloneable, CopyTo, Equals, HashCode, Me
     /**
      * Gets the value of the startPoint property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the startPoint property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the startPoint property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getStartPoint().add(newItem);
+     * getStartPoint().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link BigInteger }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the startPoint property.
      */
     public List<BigInteger> getStartPoint() {
         if (startPoint == null) {
-            startPoint = new ArrayList<BigInteger>();
+            startPoint = new ArrayList<>();
         }
         return this.startPoint;
     }
@@ -167,13 +168,15 @@ public class GridFunctionType implements Cloneable, CopyTo, Equals, HashCode, Me
         this.startPoint = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -181,22 +184,32 @@ public class GridFunctionType implements Cloneable, CopyTo, Equals, HashCode, Me
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             SequenceRuleType theSequenceRule;
             theSequenceRule = this.getSequenceRule();
-            strategy.appendField(locator, this, "sequenceRule", buffer, theSequenceRule);
+            strategy.appendField(locator, this, "sequenceRule", buffer, theSequenceRule, this.isSetSequenceRule());
         }
         {
             List<BigInteger> theStartPoint;
-            theStartPoint = this.getStartPoint();
-            strategy.appendField(locator, this, "startPoint", buffer, theStartPoint);
+            theStartPoint = (this.isSetStartPoint()?this.getStartPoint():null);
+            strategy.appendField(locator, this, "startPoint", buffer, theStartPoint, this.isSetStartPoint());
         }
         return buffer;
     }
 
+    public void setStartPoint(List<BigInteger> value) {
+        this.startPoint = null;
+        if (value!= null) {
+            List<BigInteger> draftl = this.getStartPoint();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof GridFunctionType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -208,145 +221,145 @@ public class GridFunctionType implements Cloneable, CopyTo, Equals, HashCode, Me
             lhsSequenceRule = this.getSequenceRule();
             SequenceRuleType rhsSequenceRule;
             rhsSequenceRule = that.getSequenceRule();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "sequenceRule", lhsSequenceRule), LocatorUtils.property(thatLocator, "sequenceRule", rhsSequenceRule), lhsSequenceRule, rhsSequenceRule)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "sequenceRule", lhsSequenceRule), LocatorUtils.property(thatLocator, "sequenceRule", rhsSequenceRule), lhsSequenceRule, rhsSequenceRule, this.isSetSequenceRule(), that.isSetSequenceRule())) {
                 return false;
             }
         }
         {
             List<BigInteger> lhsStartPoint;
-            lhsStartPoint = this.getStartPoint();
+            lhsStartPoint = (this.isSetStartPoint()?this.getStartPoint():null);
             List<BigInteger> rhsStartPoint;
-            rhsStartPoint = that.getStartPoint();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "startPoint", lhsStartPoint), LocatorUtils.property(thatLocator, "startPoint", rhsStartPoint), lhsStartPoint, rhsStartPoint)) {
+            rhsStartPoint = (that.isSetStartPoint()?that.getStartPoint():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "startPoint", lhsStartPoint), LocatorUtils.property(thatLocator, "startPoint", rhsStartPoint), lhsStartPoint, rhsStartPoint, this.isSetStartPoint(), that.isSetStartPoint())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             SequenceRuleType theSequenceRule;
             theSequenceRule = this.getSequenceRule();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "sequenceRule", theSequenceRule), currentHashCode, theSequenceRule);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "sequenceRule", theSequenceRule), currentHashCode, theSequenceRule, this.isSetSequenceRule());
         }
         {
             List<BigInteger> theStartPoint;
-            theStartPoint = this.getStartPoint();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "startPoint", theStartPoint), currentHashCode, theStartPoint);
+            theStartPoint = (this.isSetStartPoint()?this.getStartPoint():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "startPoint", theStartPoint), currentHashCode, theStartPoint, this.isSetStartPoint());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof GridFunctionType) {
             final GridFunctionType copy = ((GridFunctionType) draftCopy);
-            if (this.isSetSequenceRule()) {
-                SequenceRuleType sourceSequenceRule;
-                sourceSequenceRule = this.getSequenceRule();
-                SequenceRuleType copySequenceRule = ((SequenceRuleType) strategy.copy(LocatorUtils.property(locator, "sequenceRule", sourceSequenceRule), sourceSequenceRule));
-                copy.setSequenceRule(copySequenceRule);
-            } else {
-                copy.sequenceRule = null;
+            {
+                java.lang.Boolean sequenceRuleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSequenceRule());
+                if (sequenceRuleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    SequenceRuleType sourceSequenceRule;
+                    sourceSequenceRule = this.getSequenceRule();
+                    SequenceRuleType copySequenceRule = ((SequenceRuleType) strategy.copy(LocatorUtils.property(locator, "sequenceRule", sourceSequenceRule), sourceSequenceRule, this.isSetSequenceRule()));
+                    copy.setSequenceRule(copySequenceRule);
+                } else {
+                    if (sequenceRuleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.sequenceRule = null;
+                    }
+                }
             }
-            if (this.isSetStartPoint()) {
-                List<BigInteger> sourceStartPoint;
-                sourceStartPoint = this.getStartPoint();
-                @SuppressWarnings("unchecked")
-                List<BigInteger> copyStartPoint = ((List<BigInteger> ) strategy.copy(LocatorUtils.property(locator, "startPoint", sourceStartPoint), sourceStartPoint));
-                copy.unsetStartPoint();
-                List<BigInteger> uniqueStartPointl = copy.getStartPoint();
-                uniqueStartPointl.addAll(copyStartPoint);
-            } else {
-                copy.unsetStartPoint();
+            {
+                java.lang.Boolean startPointShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetStartPoint());
+                if (startPointShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<BigInteger> sourceStartPoint;
+                    sourceStartPoint = (this.isSetStartPoint()?this.getStartPoint():null);
+                    @SuppressWarnings("unchecked")
+                    List<BigInteger> copyStartPoint = ((List<BigInteger> ) strategy.copy(LocatorUtils.property(locator, "startPoint", sourceStartPoint), sourceStartPoint, this.isSetStartPoint()));
+                    copy.setStartPoint(copyStartPoint);
+                } else {
+                    if (startPointShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetStartPoint();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new GridFunctionType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof GridFunctionType) {
             final GridFunctionType target = this;
             final GridFunctionType leftObject = ((GridFunctionType) left);
             final GridFunctionType rightObject = ((GridFunctionType) right);
             {
-                SequenceRuleType lhsSequenceRule;
-                lhsSequenceRule = leftObject.getSequenceRule();
-                SequenceRuleType rhsSequenceRule;
-                rhsSequenceRule = rightObject.getSequenceRule();
-                target.setSequenceRule(((SequenceRuleType) strategy.merge(LocatorUtils.property(leftLocator, "sequenceRule", lhsSequenceRule), LocatorUtils.property(rightLocator, "sequenceRule", rhsSequenceRule), lhsSequenceRule, rhsSequenceRule)));
+                java.lang.Boolean sequenceRuleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSequenceRule(), rightObject.isSetSequenceRule());
+                if (sequenceRuleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    SequenceRuleType lhsSequenceRule;
+                    lhsSequenceRule = leftObject.getSequenceRule();
+                    SequenceRuleType rhsSequenceRule;
+                    rhsSequenceRule = rightObject.getSequenceRule();
+                    SequenceRuleType mergedSequenceRule = ((SequenceRuleType) strategy.merge(LocatorUtils.property(leftLocator, "sequenceRule", lhsSequenceRule), LocatorUtils.property(rightLocator, "sequenceRule", rhsSequenceRule), lhsSequenceRule, rhsSequenceRule, leftObject.isSetSequenceRule(), rightObject.isSetSequenceRule()));
+                    target.setSequenceRule(mergedSequenceRule);
+                } else {
+                    if (sequenceRuleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.sequenceRule = null;
+                    }
+                }
             }
             {
-                List<BigInteger> lhsStartPoint;
-                lhsStartPoint = leftObject.getStartPoint();
-                List<BigInteger> rhsStartPoint;
-                rhsStartPoint = rightObject.getStartPoint();
-                target.unsetStartPoint();
-                List<BigInteger> uniqueStartPointl = target.getStartPoint();
-                uniqueStartPointl.addAll(((List<BigInteger> ) strategy.merge(LocatorUtils.property(leftLocator, "startPoint", lhsStartPoint), LocatorUtils.property(rightLocator, "startPoint", rhsStartPoint), lhsStartPoint, rhsStartPoint)));
+                java.lang.Boolean startPointShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetStartPoint(), rightObject.isSetStartPoint());
+                if (startPointShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<BigInteger> lhsStartPoint;
+                    lhsStartPoint = (leftObject.isSetStartPoint()?leftObject.getStartPoint():null);
+                    List<BigInteger> rhsStartPoint;
+                    rhsStartPoint = (rightObject.isSetStartPoint()?rightObject.getStartPoint():null);
+                    List<BigInteger> mergedStartPoint = ((List<BigInteger> ) strategy.merge(LocatorUtils.property(leftLocator, "startPoint", lhsStartPoint), LocatorUtils.property(rightLocator, "startPoint", rhsStartPoint), lhsStartPoint, rhsStartPoint, leftObject.isSetStartPoint(), rightObject.isSetStartPoint()));
+                    target.setStartPoint(mergedStartPoint);
+                } else {
+                    if (startPointShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetStartPoint();
+                    }
+                }
             }
         }
-    }
-
-    public void setStartPoint(List<BigInteger> value) {
-        List<BigInteger> draftl = this.getStartPoint();
-        draftl.addAll(value);
-    }
-
-    public GridFunctionType withSequenceRule(SequenceRuleType value) {
-        setSequenceRule(value);
-        return this;
-    }
-
-    public GridFunctionType withStartPoint(BigInteger... values) {
-        if (values!= null) {
-            for (BigInteger value: values) {
-                getStartPoint().add(value);
-            }
-        }
-        return this;
-    }
-
-    public GridFunctionType withStartPoint(Collection<BigInteger> values) {
-        if (values!= null) {
-            getStartPoint().addAll(values);
-        }
-        return this;
-    }
-
-    public GridFunctionType withStartPoint(List<BigInteger> value) {
-        setStartPoint(value);
-        return this;
     }
 
 }

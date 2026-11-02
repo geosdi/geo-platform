@@ -34,63 +34,61 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AbstractGriddedSurfaceType complex type.
+ * <p>Classe Java per AbstractGriddedSurfaceType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractGriddedSurfaceType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractParametricCurveSurfaceType">
- *       &lt;sequence>
- *         &lt;group ref="{http://www.opengis.net/gml}PointGrid"/>
- *       &lt;/sequence>
- *       &lt;attribute name="rows" type="{http://www.w3.org/2001/XMLSchema}integer" />
- *       &lt;attribute name="columns" type="{http://www.w3.org/2001/XMLSchema}integer" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractGriddedSurfaceType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractParametricCurveSurfaceType">
+ *       <sequence>
+ *         <group ref="{http://www.opengis.net/gml}PointGrid"/>
+ *       </sequence>
+ *       <attribute name="rows" type="{http://www.w3.org/2001/XMLSchema}integer" />
+ *       <attribute name="columns" type="{http://www.w3.org/2001/XMLSchema}integer" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -99,8 +97,8 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "arows"
 })
 @XmlSeeAlso({
-    CylinderType.class,
     ConeType.class,
+    CylinderType.class,
     SphereType.class
 })
 public abstract class AbstractGriddedSurfaceType
@@ -199,13 +197,15 @@ public abstract class AbstractGriddedSurfaceType
         return (this.columns!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -213,28 +213,30 @@ public abstract class AbstractGriddedSurfaceType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             AbstractGriddedSurfaceType.Rows theArows;
             theArows = this.getArows();
-            strategy.appendField(locator, this, "arows", buffer, theArows);
+            strategy.appendField(locator, this, "arows", buffer, theArows, this.isSetArows());
         }
         {
             BigInteger theRows;
             theRows = this.getRows();
-            strategy.appendField(locator, this, "rows", buffer, theRows);
+            strategy.appendField(locator, this, "rows", buffer, theRows, this.isSetRows());
         }
         {
             BigInteger theColumns;
             theColumns = this.getColumns();
-            strategy.appendField(locator, this, "columns", buffer, theColumns);
+            strategy.appendField(locator, this, "columns", buffer, theColumns, this.isSetColumns());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractGriddedSurfaceType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -249,7 +251,7 @@ public abstract class AbstractGriddedSurfaceType
             lhsArows = this.getArows();
             AbstractGriddedSurfaceType.Rows rhsArows;
             rhsArows = that.getArows();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "arows", lhsArows), LocatorUtils.property(thatLocator, "arows", rhsArows), lhsArows, rhsArows)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "arows", lhsArows), LocatorUtils.property(thatLocator, "arows", rhsArows), lhsArows, rhsArows, this.isSetArows(), that.isSetArows())) {
                 return false;
             }
         }
@@ -258,7 +260,7 @@ public abstract class AbstractGriddedSurfaceType
             lhsRows = this.getRows();
             BigInteger rhsRows;
             rhsRows = that.getRows();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "rows", lhsRows), LocatorUtils.property(thatLocator, "rows", rhsRows), lhsRows, rhsRows)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "rows", lhsRows), LocatorUtils.property(thatLocator, "rows", rhsRows), lhsRows, rhsRows, this.isSetRows(), that.isSetRows())) {
                 return false;
             }
         }
@@ -267,52 +269,58 @@ public abstract class AbstractGriddedSurfaceType
             lhsColumns = this.getColumns();
             BigInteger rhsColumns;
             rhsColumns = that.getColumns();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "columns", lhsColumns), LocatorUtils.property(thatLocator, "columns", rhsColumns), lhsColumns, rhsColumns)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "columns", lhsColumns), LocatorUtils.property(thatLocator, "columns", rhsColumns), lhsColumns, rhsColumns, this.isSetColumns(), that.isSetColumns())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             AbstractGriddedSurfaceType.Rows theArows;
             theArows = this.getArows();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "arows", theArows), currentHashCode, theArows);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "arows", theArows), currentHashCode, theArows, this.isSetArows());
         }
         {
             BigInteger theRows;
             theRows = this.getRows();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rows", theRows), currentHashCode, theRows);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rows", theRows), currentHashCode, theRows, this.isSetRows());
         }
         {
             BigInteger theColumns;
             theColumns = this.getColumns();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "columns", theColumns), currentHashCode, theColumns);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "columns", theColumns), currentHashCode, theColumns, this.isSetColumns());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -320,39 +328,56 @@ public abstract class AbstractGriddedSurfaceType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractGriddedSurfaceType) {
             final AbstractGriddedSurfaceType copy = ((AbstractGriddedSurfaceType) target);
-            if (this.isSetArows()) {
-                AbstractGriddedSurfaceType.Rows sourceArows;
-                sourceArows = this.getArows();
-                AbstractGriddedSurfaceType.Rows copyArows = ((AbstractGriddedSurfaceType.Rows) strategy.copy(LocatorUtils.property(locator, "arows", sourceArows), sourceArows));
-                copy.setArows(copyArows);
-            } else {
-                copy.arows = null;
+            {
+                java.lang.Boolean arowsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetArows());
+                if (arowsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AbstractGriddedSurfaceType.Rows sourceArows;
+                    sourceArows = this.getArows();
+                    AbstractGriddedSurfaceType.Rows copyArows = ((AbstractGriddedSurfaceType.Rows) strategy.copy(LocatorUtils.property(locator, "arows", sourceArows), sourceArows, this.isSetArows()));
+                    copy.setArows(copyArows);
+                } else {
+                    if (arowsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.arows = null;
+                    }
+                }
             }
-            if (this.isSetRows()) {
-                BigInteger sourceRows;
-                sourceRows = this.getRows();
-                BigInteger copyRows = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "rows", sourceRows), sourceRows));
-                copy.setRows(copyRows);
-            } else {
-                copy.rows = null;
+            {
+                java.lang.Boolean rowsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRows());
+                if (rowsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceRows;
+                    sourceRows = this.getRows();
+                    BigInteger copyRows = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "rows", sourceRows), sourceRows, this.isSetRows()));
+                    copy.setRows(copyRows);
+                } else {
+                    if (rowsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.rows = null;
+                    }
+                }
             }
-            if (this.isSetColumns()) {
-                BigInteger sourceColumns;
-                sourceColumns = this.getColumns();
-                BigInteger copyColumns = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "columns", sourceColumns), sourceColumns));
-                copy.setColumns(copyColumns);
-            } else {
-                copy.columns = null;
+            {
+                java.lang.Boolean columnsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetColumns());
+                if (columnsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceColumns;
+                    sourceColumns = this.getColumns();
+                    BigInteger copyColumns = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "columns", sourceColumns), sourceColumns, this.isSetColumns()));
+                    copy.setColumns(copyColumns);
+                } else {
+                    if (columnsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.columns = null;
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractGriddedSurfaceType) {
@@ -360,75 +385,78 @@ public abstract class AbstractGriddedSurfaceType
             final AbstractGriddedSurfaceType leftObject = ((AbstractGriddedSurfaceType) left);
             final AbstractGriddedSurfaceType rightObject = ((AbstractGriddedSurfaceType) right);
             {
-                AbstractGriddedSurfaceType.Rows lhsArows;
-                lhsArows = leftObject.getArows();
-                AbstractGriddedSurfaceType.Rows rhsArows;
-                rhsArows = rightObject.getArows();
-                target.setArows(((AbstractGriddedSurfaceType.Rows) strategy.merge(LocatorUtils.property(leftLocator, "arows", lhsArows), LocatorUtils.property(rightLocator, "arows", rhsArows), lhsArows, rhsArows)));
+                java.lang.Boolean arowsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetArows(), rightObject.isSetArows());
+                if (arowsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AbstractGriddedSurfaceType.Rows lhsArows;
+                    lhsArows = leftObject.getArows();
+                    AbstractGriddedSurfaceType.Rows rhsArows;
+                    rhsArows = rightObject.getArows();
+                    AbstractGriddedSurfaceType.Rows mergedArows = ((AbstractGriddedSurfaceType.Rows) strategy.merge(LocatorUtils.property(leftLocator, "arows", lhsArows), LocatorUtils.property(rightLocator, "arows", rhsArows), lhsArows, rhsArows, leftObject.isSetArows(), rightObject.isSetArows()));
+                    target.setArows(mergedArows);
+                } else {
+                    if (arowsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.arows = null;
+                    }
+                }
             }
             {
-                BigInteger lhsRows;
-                lhsRows = leftObject.getRows();
-                BigInteger rhsRows;
-                rhsRows = rightObject.getRows();
-                target.setRows(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "rows", lhsRows), LocatorUtils.property(rightLocator, "rows", rhsRows), lhsRows, rhsRows)));
+                java.lang.Boolean rowsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRows(), rightObject.isSetRows());
+                if (rowsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsRows;
+                    lhsRows = leftObject.getRows();
+                    BigInteger rhsRows;
+                    rhsRows = rightObject.getRows();
+                    BigInteger mergedRows = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "rows", lhsRows), LocatorUtils.property(rightLocator, "rows", rhsRows), lhsRows, rhsRows, leftObject.isSetRows(), rightObject.isSetRows()));
+                    target.setRows(mergedRows);
+                } else {
+                    if (rowsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.rows = null;
+                    }
+                }
             }
             {
-                BigInteger lhsColumns;
-                lhsColumns = leftObject.getColumns();
-                BigInteger rhsColumns;
-                rhsColumns = rightObject.getColumns();
-                target.setColumns(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "columns", lhsColumns), LocatorUtils.property(rightLocator, "columns", rhsColumns), lhsColumns, rhsColumns)));
+                java.lang.Boolean columnsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetColumns(), rightObject.isSetColumns());
+                if (columnsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsColumns;
+                    lhsColumns = leftObject.getColumns();
+                    BigInteger rhsColumns;
+                    rhsColumns = rightObject.getColumns();
+                    BigInteger mergedColumns = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "columns", lhsColumns), LocatorUtils.property(rightLocator, "columns", rhsColumns), lhsColumns, rhsColumns, leftObject.isSetColumns(), rightObject.isSetColumns()));
+                    target.setColumns(mergedColumns);
+                } else {
+                    if (columnsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.columns = null;
+                    }
+                }
             }
         }
     }
 
-    public AbstractGriddedSurfaceType withArows(AbstractGriddedSurfaceType.Rows value) {
-        setArows(value);
-        return this;
-    }
-
-    public AbstractGriddedSurfaceType withRows(BigInteger value) {
-        setRows(value);
-        return this;
-    }
-
-    public AbstractGriddedSurfaceType withColumns(BigInteger value) {
-        setColumns(value);
-        return this;
-    }
-
-    @Override
-    public AbstractGriddedSurfaceType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
 
     /**
-     * <p>Classe Java per anonymous complex type.
+     * <p>Classe Java per anonymous complex type.</p>
      * 
-     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+     * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
      * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="Row" maxOccurs="unbounded">
-     *           &lt;complexType>
-     *             &lt;complexContent>
-     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                 &lt;group ref="{http://www.opengis.net/gml}geometricPositionListGroup"/>
-     *               &lt;/restriction>
-     *             &lt;/complexContent>
-     *           &lt;/complexType>
-     *         &lt;/element>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
+     * <pre>{@code
+     * <complexType>
+     *   <complexContent>
+     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       <sequence>
+     *         <element name="Row" maxOccurs="unbounded">
+     *           <complexType>
+     *             <complexContent>
+     *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *                 <group ref="{http://www.opengis.net/gml}geometricPositionListGroup"/>
+     *               </restriction>
+     *             </complexContent>
+     *           </complexType>
+     *         </element>
+     *       </sequence>
+     *     </restriction>
+     *   </complexContent>
+     * </complexType>
+     * }</pre>
      * 
      * 
      */
@@ -436,8 +464,7 @@ public abstract class AbstractGriddedSurfaceType
     @XmlType(name = "", propOrder = {
         "row"
     })
-    public static class Rows
-        implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+    public static class Rows implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
     {
 
         @XmlElement(name = "Row", required = true)
@@ -446,28 +473,31 @@ public abstract class AbstractGriddedSurfaceType
         /**
          * Gets the value of the row property.
          * 
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the row property.
+         * <p>This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore, any modification you make to the
+         * returned list will be present inside the Jakarta XML Binding object.
+         * This is why there is not a {@code set} method for the row property.</p>
          * 
          * <p>
          * For example, to add a new item, do as follows:
+         * </p>
          * <pre>
-         *    getRow().add(newItem);
+         * getRow().add(newItem);
          * </pre>
          * 
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link AbstractGriddedSurfaceType.Rows.Row }
+         * </p>
          * 
          * 
+         * @return
+         *     The value of the row property.
          */
         public List<AbstractGriddedSurfaceType.Rows.Row> getRow() {
             if (row == null) {
-                row = new ArrayList<AbstractGriddedSurfaceType.Rows.Row>();
+                row = new ArrayList<>();
             }
             return this.row;
         }
@@ -480,13 +510,15 @@ public abstract class AbstractGriddedSurfaceType
             this.row = null;
         }
 
+        @Override
         public String toString() {
-            final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+            final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
             final StringBuilder buffer = new StringBuilder();
             append(null, buffer, strategy);
             return buffer.toString();
         }
 
+        @Override
         public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             strategy.appendStart(locator, this, buffer);
             appendFields(locator, buffer, strategy);
@@ -494,17 +526,27 @@ public abstract class AbstractGriddedSurfaceType
             return buffer;
         }
 
+        @Override
         public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
             {
                 List<AbstractGriddedSurfaceType.Rows.Row> theRow;
-                theRow = this.getRow();
-                strategy.appendField(locator, this, "row", buffer, theRow);
+                theRow = (this.isSetRow()?this.getRow():null);
+                strategy.appendField(locator, this, "row", buffer, theRow, this.isSetRow());
             }
             return buffer;
         }
 
+        public void setRow(List<AbstractGriddedSurfaceType.Rows.Row> value) {
+            this.row = null;
+            if (value!= null) {
+                List<AbstractGriddedSurfaceType.Rows.Row> draftl = this.getRow();
+                draftl.addAll(value);
+            }
+        }
+
+        @Override
         public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-            if (!(object instanceof AbstractGriddedSurfaceType.Rows)) {
+            if ((object == null)||(this.getClass()!= object.getClass())) {
                 return false;
             }
             if (this == object) {
@@ -513,131 +555,123 @@ public abstract class AbstractGriddedSurfaceType
             final AbstractGriddedSurfaceType.Rows that = ((AbstractGriddedSurfaceType.Rows) object);
             {
                 List<AbstractGriddedSurfaceType.Rows.Row> lhsRow;
-                lhsRow = this.getRow();
+                lhsRow = (this.isSetRow()?this.getRow():null);
                 List<AbstractGriddedSurfaceType.Rows.Row> rhsRow;
-                rhsRow = that.getRow();
-                if (!strategy.equals(LocatorUtils.property(thisLocator, "row", lhsRow), LocatorUtils.property(thatLocator, "row", rhsRow), lhsRow, rhsRow)) {
+                rhsRow = (that.isSetRow()?that.getRow():null);
+                if (!strategy.equals(LocatorUtils.property(thisLocator, "row", lhsRow), LocatorUtils.property(thatLocator, "row", rhsRow), lhsRow, rhsRow, this.isSetRow(), that.isSetRow())) {
                     return false;
                 }
             }
             return true;
         }
 
+        @Override
         public boolean equals(Object object) {
-            final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+            final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
             return equals(null, null, object, strategy);
         }
 
+        @Override
         public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
             int currentHashCode = 1;
             {
                 List<AbstractGriddedSurfaceType.Rows.Row> theRow;
-                theRow = this.getRow();
-                currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "row", theRow), currentHashCode, theRow);
+                theRow = (this.isSetRow()?this.getRow():null);
+                currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "row", theRow), currentHashCode, theRow, this.isSetRow());
             }
             return currentHashCode;
         }
 
+        @Override
         public int hashCode() {
-            final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+            final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
             return this.hashCode(null, strategy);
         }
 
+        @Override
         public Object clone() {
             return copyTo(createNewInstance());
         }
 
+        @Override
         public Object copyTo(Object target) {
-            final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+            final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
             return copyTo(null, target, strategy);
         }
 
+        @Override
         public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
             final Object draftCopy = ((target == null)?createNewInstance():target);
             if (draftCopy instanceof AbstractGriddedSurfaceType.Rows) {
                 final AbstractGriddedSurfaceType.Rows copy = ((AbstractGriddedSurfaceType.Rows) draftCopy);
-                if (this.isSetRow()) {
-                    List<AbstractGriddedSurfaceType.Rows.Row> sourceRow;
-                    sourceRow = this.getRow();
-                    @SuppressWarnings("unchecked")
-                    List<AbstractGriddedSurfaceType.Rows.Row> copyRow = ((List<AbstractGriddedSurfaceType.Rows.Row> ) strategy.copy(LocatorUtils.property(locator, "row", sourceRow), sourceRow));
-                    copy.unsetRow();
-                    List<AbstractGriddedSurfaceType.Rows.Row> uniqueRowl = copy.getRow();
-                    uniqueRowl.addAll(copyRow);
-                } else {
-                    copy.unsetRow();
+                {
+                    java.lang.Boolean rowShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRow());
+                    if (rowShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                        List<AbstractGriddedSurfaceType.Rows.Row> sourceRow;
+                        sourceRow = (this.isSetRow()?this.getRow():null);
+                        @SuppressWarnings("unchecked")
+                        List<AbstractGriddedSurfaceType.Rows.Row> copyRow = ((List<AbstractGriddedSurfaceType.Rows.Row> ) strategy.copy(LocatorUtils.property(locator, "row", sourceRow), sourceRow, this.isSetRow()));
+                        copy.setRow(copyRow);
+                    } else {
+                        if (rowShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                            copy.unsetRow();
+                        }
+                    }
                 }
             }
             return draftCopy;
         }
 
+        @Override
         public Object createNewInstance() {
             return new AbstractGriddedSurfaceType.Rows();
         }
 
+        @Override
         public void mergeFrom(Object left, Object right) {
-            final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+            final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
             mergeFrom(null, null, left, right, strategy);
         }
 
+        @Override
         public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
             if (right instanceof AbstractGriddedSurfaceType.Rows) {
                 final AbstractGriddedSurfaceType.Rows target = this;
                 final AbstractGriddedSurfaceType.Rows leftObject = ((AbstractGriddedSurfaceType.Rows) left);
                 final AbstractGriddedSurfaceType.Rows rightObject = ((AbstractGriddedSurfaceType.Rows) right);
                 {
-                    List<AbstractGriddedSurfaceType.Rows.Row> lhsRow;
-                    lhsRow = leftObject.getRow();
-                    List<AbstractGriddedSurfaceType.Rows.Row> rhsRow;
-                    rhsRow = rightObject.getRow();
-                    target.unsetRow();
-                    List<AbstractGriddedSurfaceType.Rows.Row> uniqueRowl = target.getRow();
-                    uniqueRowl.addAll(((List<AbstractGriddedSurfaceType.Rows.Row> ) strategy.merge(LocatorUtils.property(leftLocator, "row", lhsRow), LocatorUtils.property(rightLocator, "row", rhsRow), lhsRow, rhsRow)));
+                    java.lang.Boolean rowShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRow(), rightObject.isSetRow());
+                    if (rowShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                        List<AbstractGriddedSurfaceType.Rows.Row> lhsRow;
+                        lhsRow = (leftObject.isSetRow()?leftObject.getRow():null);
+                        List<AbstractGriddedSurfaceType.Rows.Row> rhsRow;
+                        rhsRow = (rightObject.isSetRow()?rightObject.getRow():null);
+                        List<AbstractGriddedSurfaceType.Rows.Row> mergedRow = ((List<AbstractGriddedSurfaceType.Rows.Row> ) strategy.merge(LocatorUtils.property(leftLocator, "row", lhsRow), LocatorUtils.property(rightLocator, "row", rhsRow), lhsRow, rhsRow, leftObject.isSetRow(), rightObject.isSetRow()));
+                        target.setRow(mergedRow);
+                    } else {
+                        if (rowShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                            target.unsetRow();
+                        }
+                    }
                 }
             }
-        }
-
-        public void setRow(List<AbstractGriddedSurfaceType.Rows.Row> value) {
-            List<AbstractGriddedSurfaceType.Rows.Row> draftl = this.getRow();
-            draftl.addAll(value);
-        }
-
-        public AbstractGriddedSurfaceType.Rows withRow(AbstractGriddedSurfaceType.Rows.Row... values) {
-            if (values!= null) {
-                for (AbstractGriddedSurfaceType.Rows.Row value: values) {
-                    getRow().add(value);
-                }
-            }
-            return this;
-        }
-
-        public AbstractGriddedSurfaceType.Rows withRow(Collection<AbstractGriddedSurfaceType.Rows.Row> values) {
-            if (values!= null) {
-                getRow().addAll(values);
-            }
-            return this;
-        }
-
-        public AbstractGriddedSurfaceType.Rows withRow(List<AbstractGriddedSurfaceType.Rows.Row> value) {
-            setRow(value);
-            return this;
         }
 
 
         /**
-         * <p>Classe Java per anonymous complex type.
+         * <p>Classe Java per anonymous complex type.</p>
          * 
-         * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+         * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
          * 
-         * <pre>
-         * &lt;complexType>
-         *   &lt;complexContent>
-         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *       &lt;group ref="{http://www.opengis.net/gml}geometricPositionListGroup"/>
-         *     &lt;/restriction>
-         *   &lt;/complexContent>
-         * &lt;/complexType>
-         * </pre>
+         * <pre>{@code
+         * <complexType>
+         *   <complexContent>
+         *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+         *       <group ref="{http://www.opengis.net/gml}geometricPositionListGroup"/>
+         *     </restriction>
+         *   </complexContent>
+         * </complexType>
+         * }</pre>
          * 
          * 
          */
@@ -646,11 +680,16 @@ public abstract class AbstractGriddedSurfaceType
             "posList",
             "geometricPositionGroup"
         })
-        public static class Row
-            implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+        public static class Row implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
         {
 
             protected DirectPositionListType posList;
+            /**
+             * GML supports two different ways to specify a geometric position: either by a direct position (a data type) or a point (a geometric object).
+             * pos elements are positions that are “owned” by the geometric primitive encapsulating this geometric position.
+             * pointProperty elements contain a point that may be referenced from other geometry elements or reference another point defined elsewhere (reuse of existing points).
+             * 
+             */
             @XmlElements({
                 @XmlElement(name = "pos", type = DirectPositionType.class),
                 @XmlElement(name = "pointProperty", type = PointPropertyType.class)
@@ -686,18 +725,22 @@ public abstract class AbstractGriddedSurfaceType
             }
 
             /**
+             * GML supports two different ways to specify a geometric position: either by a direct position (a data type) or a point (a geometric object).
+             * pos elements are positions that are “owned” by the geometric primitive encapsulating this geometric position.
+             * pointProperty elements contain a point that may be referenced from other geometry elements or reference another point defined elsewhere (reuse of existing points).
+             * 
              * Gets the value of the geometricPositionGroup property.
              * 
-             * <p>
-             * This accessor method returns a reference to the live list,
-             * not a snapshot. Therefore any modification you make to the
-             * returned list will be present inside the JAXB object.
-             * This is why there is not a <CODE>set</CODE> method for the geometricPositionGroup property.
+             * <p>This accessor method returns a reference to the live list,
+             * not a snapshot. Therefore, any modification you make to the
+             * returned list will be present inside the Jakarta XML Binding object.
+             * This is why there is not a {@code set} method for the geometricPositionGroup property.</p>
              * 
              * <p>
              * For example, to add a new item, do as follows:
+             * </p>
              * <pre>
-             *    getGeometricPositionGroup().add(newItem);
+             * getGeometricPositionGroup().add(newItem);
              * </pre>
              * 
              * 
@@ -705,12 +748,15 @@ public abstract class AbstractGriddedSurfaceType
              * Objects of the following type(s) are allowed in the list
              * {@link DirectPositionType }
              * {@link PointPropertyType }
+             * </p>
              * 
              * 
+             * @return
+             *     The value of the geometricPositionGroup property.
              */
             public List<Object> getGeometricPositionGroup() {
                 if (geometricPositionGroup == null) {
-                    geometricPositionGroup = new ArrayList<Object>();
+                    geometricPositionGroup = new ArrayList<>();
                 }
                 return this.geometricPositionGroup;
             }
@@ -723,13 +769,15 @@ public abstract class AbstractGriddedSurfaceType
                 this.geometricPositionGroup = null;
             }
 
+            @Override
             public String toString() {
-                final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+                final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
                 final StringBuilder buffer = new StringBuilder();
                 append(null, buffer, strategy);
                 return buffer.toString();
             }
 
+            @Override
             public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
                 strategy.appendStart(locator, this, buffer);
                 appendFields(locator, buffer, strategy);
@@ -737,22 +785,32 @@ public abstract class AbstractGriddedSurfaceType
                 return buffer;
             }
 
+            @Override
             public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
                 {
                     DirectPositionListType thePosList;
                     thePosList = this.getPosList();
-                    strategy.appendField(locator, this, "posList", buffer, thePosList);
+                    strategy.appendField(locator, this, "posList", buffer, thePosList, this.isSetPosList());
                 }
                 {
                     List<Object> theGeometricPositionGroup;
-                    theGeometricPositionGroup = this.getGeometricPositionGroup();
-                    strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup);
+                    theGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
+                    strategy.appendField(locator, this, "geometricPositionGroup", buffer, theGeometricPositionGroup, this.isSetGeometricPositionGroup());
                 }
                 return buffer;
             }
 
+            public void setGeometricPositionGroup(List<Object> value) {
+                this.geometricPositionGroup = null;
+                if (value!= null) {
+                    List<Object> draftl = this.getGeometricPositionGroup();
+                    draftl.addAll(value);
+                }
+            }
+
+            @Override
             public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-                if (!(object instanceof AbstractGriddedSurfaceType.Rows.Row)) {
+                if ((object == null)||(this.getClass()!= object.getClass())) {
                     return false;
                 }
                 if (this == object) {
@@ -764,145 +822,145 @@ public abstract class AbstractGriddedSurfaceType
                     lhsPosList = this.getPosList();
                     DirectPositionListType rhsPosList;
                     rhsPosList = that.getPosList();
-                    if (!strategy.equals(LocatorUtils.property(thisLocator, "posList", lhsPosList), LocatorUtils.property(thatLocator, "posList", rhsPosList), lhsPosList, rhsPosList)) {
+                    if (!strategy.equals(LocatorUtils.property(thisLocator, "posList", lhsPosList), LocatorUtils.property(thatLocator, "posList", rhsPosList), lhsPosList, rhsPosList, this.isSetPosList(), that.isSetPosList())) {
                         return false;
                     }
                 }
                 {
                     List<Object> lhsGeometricPositionGroup;
-                    lhsGeometricPositionGroup = this.getGeometricPositionGroup();
+                    lhsGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
                     List<Object> rhsGeometricPositionGroup;
-                    rhsGeometricPositionGroup = that.getGeometricPositionGroup();
-                    if (!strategy.equals(LocatorUtils.property(thisLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(thatLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup)) {
+                    rhsGeometricPositionGroup = (that.isSetGeometricPositionGroup()?that.getGeometricPositionGroup():null);
+                    if (!strategy.equals(LocatorUtils.property(thisLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(thatLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup, this.isSetGeometricPositionGroup(), that.isSetGeometricPositionGroup())) {
                         return false;
                     }
                 }
                 return true;
             }
 
+            @Override
             public boolean equals(Object object) {
-                final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+                final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
                 return equals(null, null, object, strategy);
             }
 
+            @Override
             public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
                 int currentHashCode = 1;
                 {
                     DirectPositionListType thePosList;
                     thePosList = this.getPosList();
-                    currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "posList", thePosList), currentHashCode, thePosList);
+                    currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "posList", thePosList), currentHashCode, thePosList, this.isSetPosList());
                 }
                 {
                     List<Object> theGeometricPositionGroup;
-                    theGeometricPositionGroup = this.getGeometricPositionGroup();
-                    currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometricPositionGroup", theGeometricPositionGroup), currentHashCode, theGeometricPositionGroup);
+                    theGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
+                    currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometricPositionGroup", theGeometricPositionGroup), currentHashCode, theGeometricPositionGroup, this.isSetGeometricPositionGroup());
                 }
                 return currentHashCode;
             }
 
+            @Override
             public int hashCode() {
-                final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+                final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
                 return this.hashCode(null, strategy);
             }
 
+            @Override
             public Object clone() {
                 return copyTo(createNewInstance());
             }
 
+            @Override
             public Object copyTo(Object target) {
-                final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+                final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
                 return copyTo(null, target, strategy);
             }
 
+            @Override
             public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
                 final Object draftCopy = ((target == null)?createNewInstance():target);
                 if (draftCopy instanceof AbstractGriddedSurfaceType.Rows.Row) {
                     final AbstractGriddedSurfaceType.Rows.Row copy = ((AbstractGriddedSurfaceType.Rows.Row) draftCopy);
-                    if (this.isSetPosList()) {
-                        DirectPositionListType sourcePosList;
-                        sourcePosList = this.getPosList();
-                        DirectPositionListType copyPosList = ((DirectPositionListType) strategy.copy(LocatorUtils.property(locator, "posList", sourcePosList), sourcePosList));
-                        copy.setPosList(copyPosList);
-                    } else {
-                        copy.posList = null;
+                    {
+                        java.lang.Boolean posListShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPosList());
+                        if (posListShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                            DirectPositionListType sourcePosList;
+                            sourcePosList = this.getPosList();
+                            DirectPositionListType copyPosList = ((DirectPositionListType) strategy.copy(LocatorUtils.property(locator, "posList", sourcePosList), sourcePosList, this.isSetPosList()));
+                            copy.setPosList(copyPosList);
+                        } else {
+                            if (posListShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                                copy.posList = null;
+                            }
+                        }
                     }
-                    if (this.isSetGeometricPositionGroup()) {
-                        List<Object> sourceGeometricPositionGroup;
-                        sourceGeometricPositionGroup = this.getGeometricPositionGroup();
-                        @SuppressWarnings("unchecked")
-                        List<Object> copyGeometricPositionGroup = ((List<Object> ) strategy.copy(LocatorUtils.property(locator, "geometricPositionGroup", sourceGeometricPositionGroup), sourceGeometricPositionGroup));
-                        copy.unsetGeometricPositionGroup();
-                        List<Object> uniqueGeometricPositionGroupl = copy.getGeometricPositionGroup();
-                        uniqueGeometricPositionGroupl.addAll(copyGeometricPositionGroup);
-                    } else {
-                        copy.unsetGeometricPositionGroup();
+                    {
+                        java.lang.Boolean geometricPositionGroupShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGeometricPositionGroup());
+                        if (geometricPositionGroupShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                            List<Object> sourceGeometricPositionGroup;
+                            sourceGeometricPositionGroup = (this.isSetGeometricPositionGroup()?this.getGeometricPositionGroup():null);
+                            @SuppressWarnings("unchecked")
+                            List<Object> copyGeometricPositionGroup = ((List<Object> ) strategy.copy(LocatorUtils.property(locator, "geometricPositionGroup", sourceGeometricPositionGroup), sourceGeometricPositionGroup, this.isSetGeometricPositionGroup()));
+                            copy.setGeometricPositionGroup(copyGeometricPositionGroup);
+                        } else {
+                            if (geometricPositionGroupShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                                copy.unsetGeometricPositionGroup();
+                            }
+                        }
                     }
                 }
                 return draftCopy;
             }
 
+            @Override
             public Object createNewInstance() {
                 return new AbstractGriddedSurfaceType.Rows.Row();
             }
 
+            @Override
             public void mergeFrom(Object left, Object right) {
-                final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+                final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
                 mergeFrom(null, null, left, right, strategy);
             }
 
+            @Override
             public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
                 if (right instanceof AbstractGriddedSurfaceType.Rows.Row) {
                     final AbstractGriddedSurfaceType.Rows.Row target = this;
                     final AbstractGriddedSurfaceType.Rows.Row leftObject = ((AbstractGriddedSurfaceType.Rows.Row) left);
                     final AbstractGriddedSurfaceType.Rows.Row rightObject = ((AbstractGriddedSurfaceType.Rows.Row) right);
                     {
-                        DirectPositionListType lhsPosList;
-                        lhsPosList = leftObject.getPosList();
-                        DirectPositionListType rhsPosList;
-                        rhsPosList = rightObject.getPosList();
-                        target.setPosList(((DirectPositionListType) strategy.merge(LocatorUtils.property(leftLocator, "posList", lhsPosList), LocatorUtils.property(rightLocator, "posList", rhsPosList), lhsPosList, rhsPosList)));
+                        java.lang.Boolean posListShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPosList(), rightObject.isSetPosList());
+                        if (posListShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                            DirectPositionListType lhsPosList;
+                            lhsPosList = leftObject.getPosList();
+                            DirectPositionListType rhsPosList;
+                            rhsPosList = rightObject.getPosList();
+                            DirectPositionListType mergedPosList = ((DirectPositionListType) strategy.merge(LocatorUtils.property(leftLocator, "posList", lhsPosList), LocatorUtils.property(rightLocator, "posList", rhsPosList), lhsPosList, rhsPosList, leftObject.isSetPosList(), rightObject.isSetPosList()));
+                            target.setPosList(mergedPosList);
+                        } else {
+                            if (posListShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                                target.posList = null;
+                            }
+                        }
                     }
                     {
-                        List<Object> lhsGeometricPositionGroup;
-                        lhsGeometricPositionGroup = leftObject.getGeometricPositionGroup();
-                        List<Object> rhsGeometricPositionGroup;
-                        rhsGeometricPositionGroup = rightObject.getGeometricPositionGroup();
-                        target.unsetGeometricPositionGroup();
-                        List<Object> uniqueGeometricPositionGroupl = target.getGeometricPositionGroup();
-                        uniqueGeometricPositionGroupl.addAll(((List<Object> ) strategy.merge(LocatorUtils.property(leftLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(rightLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup)));
+                        java.lang.Boolean geometricPositionGroupShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGeometricPositionGroup(), rightObject.isSetGeometricPositionGroup());
+                        if (geometricPositionGroupShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                            List<Object> lhsGeometricPositionGroup;
+                            lhsGeometricPositionGroup = (leftObject.isSetGeometricPositionGroup()?leftObject.getGeometricPositionGroup():null);
+                            List<Object> rhsGeometricPositionGroup;
+                            rhsGeometricPositionGroup = (rightObject.isSetGeometricPositionGroup()?rightObject.getGeometricPositionGroup():null);
+                            List<Object> mergedGeometricPositionGroup = ((List<Object> ) strategy.merge(LocatorUtils.property(leftLocator, "geometricPositionGroup", lhsGeometricPositionGroup), LocatorUtils.property(rightLocator, "geometricPositionGroup", rhsGeometricPositionGroup), lhsGeometricPositionGroup, rhsGeometricPositionGroup, leftObject.isSetGeometricPositionGroup(), rightObject.isSetGeometricPositionGroup()));
+                            target.setGeometricPositionGroup(mergedGeometricPositionGroup);
+                        } else {
+                            if (geometricPositionGroupShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                                target.unsetGeometricPositionGroup();
+                            }
+                        }
                     }
                 }
-            }
-
-            public void setGeometricPositionGroup(List<Object> value) {
-                List<Object> draftl = this.getGeometricPositionGroup();
-                draftl.addAll(value);
-            }
-
-            public AbstractGriddedSurfaceType.Rows.Row withPosList(DirectPositionListType value) {
-                setPosList(value);
-                return this;
-            }
-
-            public AbstractGriddedSurfaceType.Rows.Row withGeometricPositionGroup(Object... values) {
-                if (values!= null) {
-                    for (Object value: values) {
-                        getGeometricPositionGroup().add(value);
-                    }
-                }
-                return this;
-            }
-
-            public AbstractGriddedSurfaceType.Rows.Row withGeometricPositionGroup(Collection<Object> values) {
-                if (values!= null) {
-                    getGeometricPositionGroup().addAll(values);
-                }
-                return this;
-            }
-
-            public AbstractGriddedSurfaceType.Rows.Row withGeometricPositionGroup(List<Object> value) {
-                setGeometricPositionGroup(value);
-                return this;
             }
 
         }

@@ -34,62 +34,61 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per anonymous complex type.
+ * <p>Classe Java per anonymous complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element name="inverseFlattening" type="{http://www.opengis.net/gml}MeasureType"/>
- *         &lt;element name="semiMinorAxis" type="{http://www.opengis.net/gml}LengthType"/>
- *         &lt;element name="isSphere">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;enumeration value="sphere"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <element name="inverseFlattening" type="{http://www.opengis.net/gml}MeasureType"/>
+ *         <element name="semiMinorAxis" type="{http://www.opengis.net/gml}LengthType"/>
+ *         <element name="isSphere">
+ *           <simpleType>
+ *             <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               <enumeration value="sphere"/>
+ *             </restriction>
+ *           </simpleType>
+ *         </element>
+ *       </choice>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -100,8 +99,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "isSphere"
 })
 @XmlRootElement(name = "SecondDefiningParameter")
-public class SecondDefiningParameterElement
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class SecondDefiningParameterElement implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     protected MeasureType inverseFlattening;
@@ -192,13 +190,15 @@ public class SecondDefiningParameterElement
         return (this.isSphere!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -206,27 +206,29 @@ public class SecondDefiningParameterElement
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             MeasureType theInverseFlattening;
             theInverseFlattening = this.getInverseFlattening();
-            strategy.appendField(locator, this, "inverseFlattening", buffer, theInverseFlattening);
+            strategy.appendField(locator, this, "inverseFlattening", buffer, theInverseFlattening, this.isSetInverseFlattening());
         }
         {
             LengthType theSemiMinorAxis;
             theSemiMinorAxis = this.getSemiMinorAxis();
-            strategy.appendField(locator, this, "semiMinorAxis", buffer, theSemiMinorAxis);
+            strategy.appendField(locator, this, "semiMinorAxis", buffer, theSemiMinorAxis, this.isSetSemiMinorAxis());
         }
         {
             String theIsSphere;
             theIsSphere = this.getIsSphere();
-            strategy.appendField(locator, this, "isSphere", buffer, theIsSphere);
+            strategy.appendField(locator, this, "isSphere", buffer, theIsSphere, this.isSetIsSphere());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof SecondDefiningParameterElement)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -238,7 +240,7 @@ public class SecondDefiningParameterElement
             lhsInverseFlattening = this.getInverseFlattening();
             MeasureType rhsInverseFlattening;
             rhsInverseFlattening = that.getInverseFlattening();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "inverseFlattening", lhsInverseFlattening), LocatorUtils.property(thatLocator, "inverseFlattening", rhsInverseFlattening), lhsInverseFlattening, rhsInverseFlattening)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "inverseFlattening", lhsInverseFlattening), LocatorUtils.property(thatLocator, "inverseFlattening", rhsInverseFlattening), lhsInverseFlattening, rhsInverseFlattening, this.isSetInverseFlattening(), that.isSetInverseFlattening())) {
                 return false;
             }
         }
@@ -247,7 +249,7 @@ public class SecondDefiningParameterElement
             lhsSemiMinorAxis = this.getSemiMinorAxis();
             LengthType rhsSemiMinorAxis;
             rhsSemiMinorAxis = that.getSemiMinorAxis();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "semiMinorAxis", lhsSemiMinorAxis), LocatorUtils.property(thatLocator, "semiMinorAxis", rhsSemiMinorAxis), lhsSemiMinorAxis, rhsSemiMinorAxis)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "semiMinorAxis", lhsSemiMinorAxis), LocatorUtils.property(thatLocator, "semiMinorAxis", rhsSemiMinorAxis), lhsSemiMinorAxis, rhsSemiMinorAxis, this.isSetSemiMinorAxis(), that.isSetSemiMinorAxis())) {
                 return false;
             }
         }
@@ -256,135 +258,168 @@ public class SecondDefiningParameterElement
             lhsIsSphere = this.getIsSphere();
             String rhsIsSphere;
             rhsIsSphere = that.getIsSphere();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "isSphere", lhsIsSphere), LocatorUtils.property(thatLocator, "isSphere", rhsIsSphere), lhsIsSphere, rhsIsSphere)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "isSphere", lhsIsSphere), LocatorUtils.property(thatLocator, "isSphere", rhsIsSphere), lhsIsSphere, rhsIsSphere, this.isSetIsSphere(), that.isSetIsSphere())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             MeasureType theInverseFlattening;
             theInverseFlattening = this.getInverseFlattening();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "inverseFlattening", theInverseFlattening), currentHashCode, theInverseFlattening);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "inverseFlattening", theInverseFlattening), currentHashCode, theInverseFlattening, this.isSetInverseFlattening());
         }
         {
             LengthType theSemiMinorAxis;
             theSemiMinorAxis = this.getSemiMinorAxis();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "semiMinorAxis", theSemiMinorAxis), currentHashCode, theSemiMinorAxis);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "semiMinorAxis", theSemiMinorAxis), currentHashCode, theSemiMinorAxis, this.isSetSemiMinorAxis());
         }
         {
             String theIsSphere;
             theIsSphere = this.getIsSphere();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "isSphere", theIsSphere), currentHashCode, theIsSphere);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "isSphere", theIsSphere), currentHashCode, theIsSphere, this.isSetIsSphere());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof SecondDefiningParameterElement) {
             final SecondDefiningParameterElement copy = ((SecondDefiningParameterElement) draftCopy);
-            if (this.isSetInverseFlattening()) {
-                MeasureType sourceInverseFlattening;
-                sourceInverseFlattening = this.getInverseFlattening();
-                MeasureType copyInverseFlattening = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "inverseFlattening", sourceInverseFlattening), sourceInverseFlattening));
-                copy.setInverseFlattening(copyInverseFlattening);
-            } else {
-                copy.inverseFlattening = null;
+            {
+                java.lang.Boolean inverseFlatteningShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetInverseFlattening());
+                if (inverseFlatteningShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType sourceInverseFlattening;
+                    sourceInverseFlattening = this.getInverseFlattening();
+                    MeasureType copyInverseFlattening = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "inverseFlattening", sourceInverseFlattening), sourceInverseFlattening, this.isSetInverseFlattening()));
+                    copy.setInverseFlattening(copyInverseFlattening);
+                } else {
+                    if (inverseFlatteningShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.inverseFlattening = null;
+                    }
+                }
             }
-            if (this.isSetSemiMinorAxis()) {
-                LengthType sourceSemiMinorAxis;
-                sourceSemiMinorAxis = this.getSemiMinorAxis();
-                LengthType copySemiMinorAxis = ((LengthType) strategy.copy(LocatorUtils.property(locator, "semiMinorAxis", sourceSemiMinorAxis), sourceSemiMinorAxis));
-                copy.setSemiMinorAxis(copySemiMinorAxis);
-            } else {
-                copy.semiMinorAxis = null;
+            {
+                java.lang.Boolean semiMinorAxisShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSemiMinorAxis());
+                if (semiMinorAxisShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    LengthType sourceSemiMinorAxis;
+                    sourceSemiMinorAxis = this.getSemiMinorAxis();
+                    LengthType copySemiMinorAxis = ((LengthType) strategy.copy(LocatorUtils.property(locator, "semiMinorAxis", sourceSemiMinorAxis), sourceSemiMinorAxis, this.isSetSemiMinorAxis()));
+                    copy.setSemiMinorAxis(copySemiMinorAxis);
+                } else {
+                    if (semiMinorAxisShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.semiMinorAxis = null;
+                    }
+                }
             }
-            if (this.isSetIsSphere()) {
-                String sourceIsSphere;
-                sourceIsSphere = this.getIsSphere();
-                String copyIsSphere = ((String) strategy.copy(LocatorUtils.property(locator, "isSphere", sourceIsSphere), sourceIsSphere));
-                copy.setIsSphere(copyIsSphere);
-            } else {
-                copy.isSphere = null;
+            {
+                java.lang.Boolean isSphereShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetIsSphere());
+                if (isSphereShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceIsSphere;
+                    sourceIsSphere = this.getIsSphere();
+                    String copyIsSphere = ((String) strategy.copy(LocatorUtils.property(locator, "isSphere", sourceIsSphere), sourceIsSphere, this.isSetIsSphere()));
+                    copy.setIsSphere(copyIsSphere);
+                } else {
+                    if (isSphereShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.isSphere = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new SecondDefiningParameterElement();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof SecondDefiningParameterElement) {
             final SecondDefiningParameterElement target = this;
             final SecondDefiningParameterElement leftObject = ((SecondDefiningParameterElement) left);
             final SecondDefiningParameterElement rightObject = ((SecondDefiningParameterElement) right);
             {
-                MeasureType lhsInverseFlattening;
-                lhsInverseFlattening = leftObject.getInverseFlattening();
-                MeasureType rhsInverseFlattening;
-                rhsInverseFlattening = rightObject.getInverseFlattening();
-                target.setInverseFlattening(((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "inverseFlattening", lhsInverseFlattening), LocatorUtils.property(rightLocator, "inverseFlattening", rhsInverseFlattening), lhsInverseFlattening, rhsInverseFlattening)));
+                java.lang.Boolean inverseFlatteningShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetInverseFlattening(), rightObject.isSetInverseFlattening());
+                if (inverseFlatteningShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType lhsInverseFlattening;
+                    lhsInverseFlattening = leftObject.getInverseFlattening();
+                    MeasureType rhsInverseFlattening;
+                    rhsInverseFlattening = rightObject.getInverseFlattening();
+                    MeasureType mergedInverseFlattening = ((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "inverseFlattening", lhsInverseFlattening), LocatorUtils.property(rightLocator, "inverseFlattening", rhsInverseFlattening), lhsInverseFlattening, rhsInverseFlattening, leftObject.isSetInverseFlattening(), rightObject.isSetInverseFlattening()));
+                    target.setInverseFlattening(mergedInverseFlattening);
+                } else {
+                    if (inverseFlatteningShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.inverseFlattening = null;
+                    }
+                }
             }
             {
-                LengthType lhsSemiMinorAxis;
-                lhsSemiMinorAxis = leftObject.getSemiMinorAxis();
-                LengthType rhsSemiMinorAxis;
-                rhsSemiMinorAxis = rightObject.getSemiMinorAxis();
-                target.setSemiMinorAxis(((LengthType) strategy.merge(LocatorUtils.property(leftLocator, "semiMinorAxis", lhsSemiMinorAxis), LocatorUtils.property(rightLocator, "semiMinorAxis", rhsSemiMinorAxis), lhsSemiMinorAxis, rhsSemiMinorAxis)));
+                java.lang.Boolean semiMinorAxisShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSemiMinorAxis(), rightObject.isSetSemiMinorAxis());
+                if (semiMinorAxisShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    LengthType lhsSemiMinorAxis;
+                    lhsSemiMinorAxis = leftObject.getSemiMinorAxis();
+                    LengthType rhsSemiMinorAxis;
+                    rhsSemiMinorAxis = rightObject.getSemiMinorAxis();
+                    LengthType mergedSemiMinorAxis = ((LengthType) strategy.merge(LocatorUtils.property(leftLocator, "semiMinorAxis", lhsSemiMinorAxis), LocatorUtils.property(rightLocator, "semiMinorAxis", rhsSemiMinorAxis), lhsSemiMinorAxis, rhsSemiMinorAxis, leftObject.isSetSemiMinorAxis(), rightObject.isSetSemiMinorAxis()));
+                    target.setSemiMinorAxis(mergedSemiMinorAxis);
+                } else {
+                    if (semiMinorAxisShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.semiMinorAxis = null;
+                    }
+                }
             }
             {
-                String lhsIsSphere;
-                lhsIsSphere = leftObject.getIsSphere();
-                String rhsIsSphere;
-                rhsIsSphere = rightObject.getIsSphere();
-                target.setIsSphere(((String) strategy.merge(LocatorUtils.property(leftLocator, "isSphere", lhsIsSphere), LocatorUtils.property(rightLocator, "isSphere", rhsIsSphere), lhsIsSphere, rhsIsSphere)));
+                java.lang.Boolean isSphereShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetIsSphere(), rightObject.isSetIsSphere());
+                if (isSphereShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsIsSphere;
+                    lhsIsSphere = leftObject.getIsSphere();
+                    String rhsIsSphere;
+                    rhsIsSphere = rightObject.getIsSphere();
+                    String mergedIsSphere = ((String) strategy.merge(LocatorUtils.property(leftLocator, "isSphere", lhsIsSphere), LocatorUtils.property(rightLocator, "isSphere", rhsIsSphere), lhsIsSphere, rhsIsSphere, leftObject.isSetIsSphere(), rightObject.isSetIsSphere()));
+                    target.setIsSphere(mergedIsSphere);
+                } else {
+                    if (isSphereShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.isSphere = null;
+                    }
+                }
             }
         }
-    }
-
-    public SecondDefiningParameterElement withInverseFlattening(MeasureType value) {
-        setInverseFlattening(value);
-        return this;
-    }
-
-    public SecondDefiningParameterElement withSemiMinorAxis(LengthType value) {
-        setSemiMinorAxis(value);
-        return this;
-    }
-
-    public SecondDefiningParameterElement withIsSphere(String value) {
-        setIsSphere(value);
-        return this;
     }
 
 }

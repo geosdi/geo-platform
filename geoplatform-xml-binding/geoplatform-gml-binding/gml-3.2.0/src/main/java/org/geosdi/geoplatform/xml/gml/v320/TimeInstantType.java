@@ -34,56 +34,53 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimeInstantType complex type.
+ * <p>Classe Java per TimeInstantType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimeInstantType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTimeGeometricPrimitiveType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}timePosition"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimeInstantType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTimeGeometricPrimitiveType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}timePosition"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -96,11 +93,15 @@ public class TimeInstantType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * This element is used directly as a property of gml:TimeInstant (see 15.2.2.3), and may also be used in application schemas.
+     * 
+     */
     @XmlElement(required = true)
     protected TimePositionType timePosition;
 
     /**
-     * Recupera il valore della proprietà timePosition.
+     * This element is used directly as a property of gml:TimeInstant (see 15.2.2.3), and may also be used in application schemas.
      * 
      * @return
      *     possible object is
@@ -118,6 +119,7 @@ public class TimeInstantType
      *     allowed object is
      *     {@link TimePositionType }
      *     
+     * @see #getTimePosition()
      */
     public void setTimePosition(TimePositionType value) {
         this.timePosition = value;
@@ -127,13 +129,15 @@ public class TimeInstantType
         return (this.timePosition!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -141,18 +145,20 @@ public class TimeInstantType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             TimePositionType theTimePosition;
             theTimePosition = this.getTimePosition();
-            strategy.appendField(locator, this, "timePosition", buffer, theTimePosition);
+            strategy.appendField(locator, this, "timePosition", buffer, theTimePosition, this.isSetTimePosition());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimeInstantType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -167,68 +173,82 @@ public class TimeInstantType
             lhsTimePosition = this.getTimePosition();
             TimePositionType rhsTimePosition;
             rhsTimePosition = that.getTimePosition();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "timePosition", lhsTimePosition), LocatorUtils.property(thatLocator, "timePosition", rhsTimePosition), lhsTimePosition, rhsTimePosition)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "timePosition", lhsTimePosition), LocatorUtils.property(thatLocator, "timePosition", rhsTimePosition), lhsTimePosition, rhsTimePosition, this.isSetTimePosition(), that.isSetTimePosition())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             TimePositionType theTimePosition;
             theTimePosition = this.getTimePosition();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "timePosition", theTimePosition), currentHashCode, theTimePosition);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "timePosition", theTimePosition), currentHashCode, theTimePosition, this.isSetTimePosition());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TimeInstantType) {
             final TimeInstantType copy = ((TimeInstantType) draftCopy);
-            if (this.isSetTimePosition()) {
-                TimePositionType sourceTimePosition;
-                sourceTimePosition = this.getTimePosition();
-                TimePositionType copyTimePosition = ((TimePositionType) strategy.copy(LocatorUtils.property(locator, "timePosition", sourceTimePosition), sourceTimePosition));
-                copy.setTimePosition(copyTimePosition);
-            } else {
-                copy.timePosition = null;
+            {
+                java.lang.Boolean timePositionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTimePosition());
+                if (timePositionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimePositionType sourceTimePosition;
+                    sourceTimePosition = this.getTimePosition();
+                    TimePositionType copyTimePosition = ((TimePositionType) strategy.copy(LocatorUtils.property(locator, "timePosition", sourceTimePosition), sourceTimePosition, this.isSetTimePosition()));
+                    copy.setTimePosition(copyTimePosition);
+                } else {
+                    if (timePositionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.timePosition = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TimeInstantType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TimeInstantType) {
@@ -236,120 +256,21 @@ public class TimeInstantType
             final TimeInstantType leftObject = ((TimeInstantType) left);
             final TimeInstantType rightObject = ((TimeInstantType) right);
             {
-                TimePositionType lhsTimePosition;
-                lhsTimePosition = leftObject.getTimePosition();
-                TimePositionType rhsTimePosition;
-                rhsTimePosition = rightObject.getTimePosition();
-                target.setTimePosition(((TimePositionType) strategy.merge(LocatorUtils.property(leftLocator, "timePosition", lhsTimePosition), LocatorUtils.property(rightLocator, "timePosition", rhsTimePosition), lhsTimePosition, rhsTimePosition)));
+                java.lang.Boolean timePositionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTimePosition(), rightObject.isSetTimePosition());
+                if (timePositionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimePositionType lhsTimePosition;
+                    lhsTimePosition = leftObject.getTimePosition();
+                    TimePositionType rhsTimePosition;
+                    rhsTimePosition = rightObject.getTimePosition();
+                    TimePositionType mergedTimePosition = ((TimePositionType) strategy.merge(LocatorUtils.property(leftLocator, "timePosition", lhsTimePosition), LocatorUtils.property(rightLocator, "timePosition", rhsTimePosition), lhsTimePosition, rhsTimePosition, leftObject.isSetTimePosition(), rightObject.isSetTimePosition()));
+                    target.setTimePosition(mergedTimePosition);
+                } else {
+                    if (timePositionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.timePosition = null;
+                    }
+                }
             }
         }
-    }
-
-    public TimeInstantType withTimePosition(TimePositionType value) {
-        setTimePosition(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withFrame(String value) {
-        setFrame(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withRelatedTime(RelatedTimeType... values) {
-        if (values!= null) {
-            for (RelatedTimeType value: values) {
-                getRelatedTime().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withRelatedTime(Collection<RelatedTimeType> values) {
-        if (values!= null) {
-            getRelatedTime().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withRelatedTime(List<RelatedTimeType> value) {
-        setRelatedTime(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TimeInstantType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

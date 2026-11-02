@@ -34,57 +34,53 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per DirectedObservationAtDistanceType complex type.
+ * <p>Classe Java per DirectedObservationAtDistanceType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DirectedObservationAtDistanceType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}DirectedObservationType">
- *       &lt;sequence>
- *         &lt;element name="distance" type="{http://www.opengis.net/gml}MeasureType"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DirectedObservationAtDistanceType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}DirectedObservationType">
+ *       <sequence>
+ *         <element name="distance" type="{http://www.opengis.net/gml}MeasureType"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -128,13 +124,15 @@ public class DirectedObservationAtDistanceType
         return (this.distance!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -142,18 +140,20 @@ public class DirectedObservationAtDistanceType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             MeasureType theDistance;
             theDistance = this.getDistance();
-            strategy.appendField(locator, this, "distance", buffer, theDistance);
+            strategy.appendField(locator, this, "distance", buffer, theDistance, this.isSetDistance());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DirectedObservationAtDistanceType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -168,68 +168,82 @@ public class DirectedObservationAtDistanceType
             lhsDistance = this.getDistance();
             MeasureType rhsDistance;
             rhsDistance = that.getDistance();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "distance", lhsDistance), LocatorUtils.property(thatLocator, "distance", rhsDistance), lhsDistance, rhsDistance)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "distance", lhsDistance), LocatorUtils.property(thatLocator, "distance", rhsDistance), lhsDistance, rhsDistance, this.isSetDistance(), that.isSetDistance())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             MeasureType theDistance;
             theDistance = this.getDistance();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "distance", theDistance), currentHashCode, theDistance);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "distance", theDistance), currentHashCode, theDistance, this.isSetDistance());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof DirectedObservationAtDistanceType) {
             final DirectedObservationAtDistanceType copy = ((DirectedObservationAtDistanceType) draftCopy);
-            if (this.isSetDistance()) {
-                MeasureType sourceDistance;
-                sourceDistance = this.getDistance();
-                MeasureType copyDistance = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "distance", sourceDistance), sourceDistance));
-                copy.setDistance(copyDistance);
-            } else {
-                copy.distance = null;
+            {
+                java.lang.Boolean distanceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDistance());
+                if (distanceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType sourceDistance;
+                    sourceDistance = this.getDistance();
+                    MeasureType copyDistance = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "distance", sourceDistance), sourceDistance, this.isSetDistance()));
+                    copy.setDistance(copyDistance);
+                } else {
+                    if (distanceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.distance = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DirectedObservationAtDistanceType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof DirectedObservationAtDistanceType) {
@@ -237,132 +251,21 @@ public class DirectedObservationAtDistanceType
             final DirectedObservationAtDistanceType leftObject = ((DirectedObservationAtDistanceType) left);
             final DirectedObservationAtDistanceType rightObject = ((DirectedObservationAtDistanceType) right);
             {
-                MeasureType lhsDistance;
-                lhsDistance = leftObject.getDistance();
-                MeasureType rhsDistance;
-                rhsDistance = rightObject.getDistance();
-                target.setDistance(((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "distance", lhsDistance), LocatorUtils.property(rightLocator, "distance", rhsDistance), lhsDistance, rhsDistance)));
+                java.lang.Boolean distanceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDistance(), rightObject.isSetDistance());
+                if (distanceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType lhsDistance;
+                    lhsDistance = leftObject.getDistance();
+                    MeasureType rhsDistance;
+                    rhsDistance = rightObject.getDistance();
+                    MeasureType mergedDistance = ((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "distance", lhsDistance), LocatorUtils.property(rightLocator, "distance", rhsDistance), lhsDistance, rhsDistance, leftObject.isSetDistance(), rightObject.isSetDistance()));
+                    target.setDistance(mergedDistance);
+                } else {
+                    if (distanceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.distance = null;
+                    }
+                }
             }
         }
-    }
-
-    public DirectedObservationAtDistanceType withDistance(MeasureType value) {
-        setDistance(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withDirection(DirectionPropertyType value) {
-        setDirection(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withValidTime(TimePrimitivePropertyType value) {
-        setValidTime(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withUsing(ProcedurePropertyType value) {
-        setUsing(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withTarget(JAXBElement<TargetPropertyType> value) {
-        setTarget(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withResultOf(ResultType value) {
-        setResultOf(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withBoundedBy(BoundingShapeType value) {
-        setBoundedBy(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withLocation(JAXBElement<? extends LocationPropertyType> value) {
-        setLocation(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public DirectedObservationAtDistanceType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

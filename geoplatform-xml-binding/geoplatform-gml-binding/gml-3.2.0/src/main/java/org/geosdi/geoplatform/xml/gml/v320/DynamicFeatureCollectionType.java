@@ -34,57 +34,53 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per DynamicFeatureCollectionType complex type.
+ * <p>Classe Java per DynamicFeatureCollectionType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DynamicFeatureCollectionType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}DynamicFeatureType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}dynamicMembers"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DynamicFeatureCollectionType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}DynamicFeatureType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}dynamicMembers"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -128,13 +124,15 @@ public class DynamicFeatureCollectionType
         return (this.dynamicMembers!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -142,18 +140,20 @@ public class DynamicFeatureCollectionType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             DynamicFeatureMemberType theDynamicMembers;
             theDynamicMembers = this.getDynamicMembers();
-            strategy.appendField(locator, this, "dynamicMembers", buffer, theDynamicMembers);
+            strategy.appendField(locator, this, "dynamicMembers", buffer, theDynamicMembers, this.isSetDynamicMembers());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DynamicFeatureCollectionType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -168,68 +168,82 @@ public class DynamicFeatureCollectionType
             lhsDynamicMembers = this.getDynamicMembers();
             DynamicFeatureMemberType rhsDynamicMembers;
             rhsDynamicMembers = that.getDynamicMembers();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "dynamicMembers", lhsDynamicMembers), LocatorUtils.property(thatLocator, "dynamicMembers", rhsDynamicMembers), lhsDynamicMembers, rhsDynamicMembers)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "dynamicMembers", lhsDynamicMembers), LocatorUtils.property(thatLocator, "dynamicMembers", rhsDynamicMembers), lhsDynamicMembers, rhsDynamicMembers, this.isSetDynamicMembers(), that.isSetDynamicMembers())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             DynamicFeatureMemberType theDynamicMembers;
             theDynamicMembers = this.getDynamicMembers();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dynamicMembers", theDynamicMembers), currentHashCode, theDynamicMembers);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dynamicMembers", theDynamicMembers), currentHashCode, theDynamicMembers, this.isSetDynamicMembers());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof DynamicFeatureCollectionType) {
             final DynamicFeatureCollectionType copy = ((DynamicFeatureCollectionType) draftCopy);
-            if (this.isSetDynamicMembers()) {
-                DynamicFeatureMemberType sourceDynamicMembers;
-                sourceDynamicMembers = this.getDynamicMembers();
-                DynamicFeatureMemberType copyDynamicMembers = ((DynamicFeatureMemberType) strategy.copy(LocatorUtils.property(locator, "dynamicMembers", sourceDynamicMembers), sourceDynamicMembers));
-                copy.setDynamicMembers(copyDynamicMembers);
-            } else {
-                copy.dynamicMembers = null;
+            {
+                java.lang.Boolean dynamicMembersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDynamicMembers());
+                if (dynamicMembersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DynamicFeatureMemberType sourceDynamicMembers;
+                    sourceDynamicMembers = this.getDynamicMembers();
+                    DynamicFeatureMemberType copyDynamicMembers = ((DynamicFeatureMemberType) strategy.copy(LocatorUtils.property(locator, "dynamicMembers", sourceDynamicMembers), sourceDynamicMembers, this.isSetDynamicMembers()));
+                    copy.setDynamicMembers(copyDynamicMembers);
+                } else {
+                    if (dynamicMembersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.dynamicMembers = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DynamicFeatureCollectionType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof DynamicFeatureCollectionType) {
@@ -237,126 +251,21 @@ public class DynamicFeatureCollectionType
             final DynamicFeatureCollectionType leftObject = ((DynamicFeatureCollectionType) left);
             final DynamicFeatureCollectionType rightObject = ((DynamicFeatureCollectionType) right);
             {
-                DynamicFeatureMemberType lhsDynamicMembers;
-                lhsDynamicMembers = leftObject.getDynamicMembers();
-                DynamicFeatureMemberType rhsDynamicMembers;
-                rhsDynamicMembers = rightObject.getDynamicMembers();
-                target.setDynamicMembers(((DynamicFeatureMemberType) strategy.merge(LocatorUtils.property(leftLocator, "dynamicMembers", lhsDynamicMembers), LocatorUtils.property(rightLocator, "dynamicMembers", rhsDynamicMembers), lhsDynamicMembers, rhsDynamicMembers)));
+                java.lang.Boolean dynamicMembersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDynamicMembers(), rightObject.isSetDynamicMembers());
+                if (dynamicMembersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DynamicFeatureMemberType lhsDynamicMembers;
+                    lhsDynamicMembers = leftObject.getDynamicMembers();
+                    DynamicFeatureMemberType rhsDynamicMembers;
+                    rhsDynamicMembers = rightObject.getDynamicMembers();
+                    DynamicFeatureMemberType mergedDynamicMembers = ((DynamicFeatureMemberType) strategy.merge(LocatorUtils.property(leftLocator, "dynamicMembers", lhsDynamicMembers), LocatorUtils.property(rightLocator, "dynamicMembers", rhsDynamicMembers), lhsDynamicMembers, rhsDynamicMembers, leftObject.isSetDynamicMembers(), rightObject.isSetDynamicMembers()));
+                    target.setDynamicMembers(mergedDynamicMembers);
+                } else {
+                    if (dynamicMembersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.dynamicMembers = null;
+                    }
+                }
             }
         }
-    }
-
-    public DynamicFeatureCollectionType withDynamicMembers(DynamicFeatureMemberType value) {
-        setDynamicMembers(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withValidTime(TimePrimitivePropertyType value) {
-        setValidTime(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withHistory(JAXBElement<HistoryPropertyType> value) {
-        setHistory(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withDataSource(StringOrRefType value) {
-        setDataSource(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withDataSourceReference(ReferenceType value) {
-        setDataSourceReference(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withBoundedBy(BoundingShapeType value) {
-        setBoundedBy(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withLocation(JAXBElement<? extends LocationPropertyType> value) {
-        setLocation(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public DynamicFeatureCollectionType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

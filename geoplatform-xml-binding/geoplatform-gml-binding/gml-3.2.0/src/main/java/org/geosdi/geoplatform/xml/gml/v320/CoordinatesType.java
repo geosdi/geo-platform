@@ -34,37 +34,36 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
@@ -76,21 +75,21 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  * ts        	symbol used to separate tuples or coordinate strings (default=” “ a space)
  * Since it is based on the XML Schema string type, CoordinatesType may be used in the construction of tables of tuples or arrays of tuples, including ones that contain mixed text and numeric values.
  * 
- * <p>Classe Java per CoordinatesType complex type.
+ * <p>Classe Java per CoordinatesType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CoordinatesType">
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="decimal" type="{http://www.w3.org/2001/XMLSchema}string" default="." />
- *       &lt;attribute name="cs" type="{http://www.w3.org/2001/XMLSchema}string" default="," />
- *       &lt;attribute name="ts" type="{http://www.w3.org/2001/XMLSchema}string" default=" " />
- *     &lt;/extension>
- *   &lt;/simpleContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CoordinatesType">
+ *   <simpleContent>
+ *     <extension base="<http://www.w3.org/2001/XMLSchema>string">
+ *       <attribute name="decimal" type="{http://www.w3.org/2001/XMLSchema}string" default="." />
+ *       <attribute name="cs" type="{http://www.w3.org/2001/XMLSchema}string" default="," />
+ *       <attribute name="ts" type="{http://www.w3.org/2001/XMLSchema}string" default=" " />
+ *     </extension>
+ *   </simpleContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -98,8 +97,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "CoordinatesType", propOrder = {
     "value"
 })
-public class CoordinatesType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class CoordinatesType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     @XmlValue
@@ -235,13 +233,15 @@ public class CoordinatesType
         return (this.ts!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -249,32 +249,34 @@ public class CoordinatesType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             String theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, this.isSetValue());
         }
         {
             String theDecimal;
             theDecimal = this.getDecimal();
-            strategy.appendField(locator, this, "decimal", buffer, theDecimal);
+            strategy.appendField(locator, this, "decimal", buffer, theDecimal, this.isSetDecimal());
         }
         {
             String theCs;
             theCs = this.getCs();
-            strategy.appendField(locator, this, "cs", buffer, theCs);
+            strategy.appendField(locator, this, "cs", buffer, theCs, this.isSetCs());
         }
         {
             String theTs;
             theTs = this.getTs();
-            strategy.appendField(locator, this, "ts", buffer, theTs);
+            strategy.appendField(locator, this, "ts", buffer, theTs, this.isSetTs());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CoordinatesType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -286,7 +288,7 @@ public class CoordinatesType
             lhsValue = this.getValue();
             String rhsValue;
             rhsValue = that.getValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue, this.isSetValue(), that.isSetValue())) {
                 return false;
             }
         }
@@ -295,7 +297,7 @@ public class CoordinatesType
             lhsDecimal = this.getDecimal();
             String rhsDecimal;
             rhsDecimal = that.getDecimal();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "decimal", lhsDecimal), LocatorUtils.property(thatLocator, "decimal", rhsDecimal), lhsDecimal, rhsDecimal)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "decimal", lhsDecimal), LocatorUtils.property(thatLocator, "decimal", rhsDecimal), lhsDecimal, rhsDecimal, this.isSetDecimal(), that.isSetDecimal())) {
                 return false;
             }
         }
@@ -304,7 +306,7 @@ public class CoordinatesType
             lhsCs = this.getCs();
             String rhsCs;
             rhsCs = that.getCs();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "cs", lhsCs), LocatorUtils.property(thatLocator, "cs", rhsCs), lhsCs, rhsCs)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "cs", lhsCs), LocatorUtils.property(thatLocator, "cs", rhsCs), lhsCs, rhsCs, this.isSetCs(), that.isSetCs())) {
                 return false;
             }
         }
@@ -313,160 +315,201 @@ public class CoordinatesType
             lhsTs = this.getTs();
             String rhsTs;
             rhsTs = that.getTs();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "ts", lhsTs), LocatorUtils.property(thatLocator, "ts", rhsTs), lhsTs, rhsTs)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "ts", lhsTs), LocatorUtils.property(thatLocator, "ts", rhsTs), lhsTs, rhsTs, this.isSetTs(), that.isSetTs())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             String theValue;
             theValue = this.getValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue, this.isSetValue());
         }
         {
             String theDecimal;
             theDecimal = this.getDecimal();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "decimal", theDecimal), currentHashCode, theDecimal);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "decimal", theDecimal), currentHashCode, theDecimal, this.isSetDecimal());
         }
         {
             String theCs;
             theCs = this.getCs();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "cs", theCs), currentHashCode, theCs);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "cs", theCs), currentHashCode, theCs, this.isSetCs());
         }
         {
             String theTs;
             theTs = this.getTs();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "ts", theTs), currentHashCode, theTs);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "ts", theTs), currentHashCode, theTs, this.isSetTs());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof CoordinatesType) {
             final CoordinatesType copy = ((CoordinatesType) draftCopy);
-            if (this.isSetValue()) {
-                String sourceValue;
-                sourceValue = this.getValue();
-                String copyValue = ((String) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue));
-                copy.setValue(copyValue);
-            } else {
-                copy.value = null;
+            {
+                java.lang.Boolean valueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValue());
+                if (valueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceValue;
+                    sourceValue = this.getValue();
+                    String copyValue = ((String) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue, this.isSetValue()));
+                    copy.setValue(copyValue);
+                } else {
+                    if (valueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.value = null;
+                    }
+                }
             }
-            if (this.isSetDecimal()) {
-                String sourceDecimal;
-                sourceDecimal = this.getDecimal();
-                String copyDecimal = ((String) strategy.copy(LocatorUtils.property(locator, "decimal", sourceDecimal), sourceDecimal));
-                copy.setDecimal(copyDecimal);
-            } else {
-                copy.decimal = null;
+            {
+                java.lang.Boolean decimalShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDecimal());
+                if (decimalShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceDecimal;
+                    sourceDecimal = this.getDecimal();
+                    String copyDecimal = ((String) strategy.copy(LocatorUtils.property(locator, "decimal", sourceDecimal), sourceDecimal, this.isSetDecimal()));
+                    copy.setDecimal(copyDecimal);
+                } else {
+                    if (decimalShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.decimal = null;
+                    }
+                }
             }
-            if (this.isSetCs()) {
-                String sourceCs;
-                sourceCs = this.getCs();
-                String copyCs = ((String) strategy.copy(LocatorUtils.property(locator, "cs", sourceCs), sourceCs));
-                copy.setCs(copyCs);
-            } else {
-                copy.cs = null;
+            {
+                java.lang.Boolean csShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCs());
+                if (csShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceCs;
+                    sourceCs = this.getCs();
+                    String copyCs = ((String) strategy.copy(LocatorUtils.property(locator, "cs", sourceCs), sourceCs, this.isSetCs()));
+                    copy.setCs(copyCs);
+                } else {
+                    if (csShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.cs = null;
+                    }
+                }
             }
-            if (this.isSetTs()) {
-                String sourceTs;
-                sourceTs = this.getTs();
-                String copyTs = ((String) strategy.copy(LocatorUtils.property(locator, "ts", sourceTs), sourceTs));
-                copy.setTs(copyTs);
-            } else {
-                copy.ts = null;
+            {
+                java.lang.Boolean tsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTs());
+                if (tsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceTs;
+                    sourceTs = this.getTs();
+                    String copyTs = ((String) strategy.copy(LocatorUtils.property(locator, "ts", sourceTs), sourceTs, this.isSetTs()));
+                    copy.setTs(copyTs);
+                } else {
+                    if (tsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.ts = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CoordinatesType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof CoordinatesType) {
             final CoordinatesType target = this;
             final CoordinatesType leftObject = ((CoordinatesType) left);
             final CoordinatesType rightObject = ((CoordinatesType) right);
             {
-                String lhsValue;
-                lhsValue = leftObject.getValue();
-                String rhsValue;
-                rhsValue = rightObject.getValue();
-                target.setValue(((String) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue)));
+                java.lang.Boolean valueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValue(), rightObject.isSetValue());
+                if (valueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsValue;
+                    lhsValue = leftObject.getValue();
+                    String rhsValue;
+                    rhsValue = rightObject.getValue();
+                    String mergedValue = ((String) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue, leftObject.isSetValue(), rightObject.isSetValue()));
+                    target.setValue(mergedValue);
+                } else {
+                    if (valueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.value = null;
+                    }
+                }
             }
             {
-                String lhsDecimal;
-                lhsDecimal = leftObject.getDecimal();
-                String rhsDecimal;
-                rhsDecimal = rightObject.getDecimal();
-                target.setDecimal(((String) strategy.merge(LocatorUtils.property(leftLocator, "decimal", lhsDecimal), LocatorUtils.property(rightLocator, "decimal", rhsDecimal), lhsDecimal, rhsDecimal)));
+                java.lang.Boolean decimalShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDecimal(), rightObject.isSetDecimal());
+                if (decimalShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsDecimal;
+                    lhsDecimal = leftObject.getDecimal();
+                    String rhsDecimal;
+                    rhsDecimal = rightObject.getDecimal();
+                    String mergedDecimal = ((String) strategy.merge(LocatorUtils.property(leftLocator, "decimal", lhsDecimal), LocatorUtils.property(rightLocator, "decimal", rhsDecimal), lhsDecimal, rhsDecimal, leftObject.isSetDecimal(), rightObject.isSetDecimal()));
+                    target.setDecimal(mergedDecimal);
+                } else {
+                    if (decimalShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.decimal = null;
+                    }
+                }
             }
             {
-                String lhsCs;
-                lhsCs = leftObject.getCs();
-                String rhsCs;
-                rhsCs = rightObject.getCs();
-                target.setCs(((String) strategy.merge(LocatorUtils.property(leftLocator, "cs", lhsCs), LocatorUtils.property(rightLocator, "cs", rhsCs), lhsCs, rhsCs)));
+                java.lang.Boolean csShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCs(), rightObject.isSetCs());
+                if (csShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsCs;
+                    lhsCs = leftObject.getCs();
+                    String rhsCs;
+                    rhsCs = rightObject.getCs();
+                    String mergedCs = ((String) strategy.merge(LocatorUtils.property(leftLocator, "cs", lhsCs), LocatorUtils.property(rightLocator, "cs", rhsCs), lhsCs, rhsCs, leftObject.isSetCs(), rightObject.isSetCs()));
+                    target.setCs(mergedCs);
+                } else {
+                    if (csShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.cs = null;
+                    }
+                }
             }
             {
-                String lhsTs;
-                lhsTs = leftObject.getTs();
-                String rhsTs;
-                rhsTs = rightObject.getTs();
-                target.setTs(((String) strategy.merge(LocatorUtils.property(leftLocator, "ts", lhsTs), LocatorUtils.property(rightLocator, "ts", rhsTs), lhsTs, rhsTs)));
+                java.lang.Boolean tsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTs(), rightObject.isSetTs());
+                if (tsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsTs;
+                    lhsTs = leftObject.getTs();
+                    String rhsTs;
+                    rhsTs = rightObject.getTs();
+                    String mergedTs = ((String) strategy.merge(LocatorUtils.property(leftLocator, "ts", lhsTs), LocatorUtils.property(rightLocator, "ts", rhsTs), lhsTs, rhsTs, leftObject.isSetTs(), rightObject.isSetTs()));
+                    target.setTs(mergedTs);
+                } else {
+                    if (tsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.ts = null;
+                    }
+                }
             }
         }
-    }
-
-    public CoordinatesType withValue(String value) {
-        setValue(value);
-        return this;
-    }
-
-    public CoordinatesType withDecimal(String value) {
-        setDecimal(value);
-        return this;
-    }
-
-    public CoordinatesType withCs(String value) {
-        setCs(value);
-        return this;
-    }
-
-    public CoordinatesType withTs(String value) {
-        setTs(value);
-        return this;
     }
 
 }

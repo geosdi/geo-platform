@@ -34,58 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimeEdgeType complex type.
+ * <p>Classe Java per TimeEdgeType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimeEdgeType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTimeTopologyPrimitiveType">
- *       &lt;sequence>
- *         &lt;element name="start" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
- *         &lt;element name="end" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
- *         &lt;element name="extent" type="{http://www.opengis.net/gml}TimePeriodPropertyType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimeEdgeType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTimeTopologyPrimitiveType">
+ *       <sequence>
+ *         <element name="start" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
+ *         <element name="end" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
+ *         <element name="extent" type="{http://www.opengis.net/gml}TimePeriodPropertyType" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -190,13 +187,15 @@ public class TimeEdgeType
         return (this.extent!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -204,28 +203,30 @@ public class TimeEdgeType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             TimeNodePropertyType theStart;
             theStart = this.getStart();
-            strategy.appendField(locator, this, "start", buffer, theStart);
+            strategy.appendField(locator, this, "start", buffer, theStart, this.isSetStart());
         }
         {
             TimeNodePropertyType theEnd;
             theEnd = this.getEnd();
-            strategy.appendField(locator, this, "end", buffer, theEnd);
+            strategy.appendField(locator, this, "end", buffer, theEnd, this.isSetEnd());
         }
         {
             TimePeriodPropertyType theExtent;
             theExtent = this.getExtent();
-            strategy.appendField(locator, this, "extent", buffer, theExtent);
+            strategy.appendField(locator, this, "extent", buffer, theExtent, this.isSetExtent());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimeEdgeType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -240,7 +241,7 @@ public class TimeEdgeType
             lhsStart = this.getStart();
             TimeNodePropertyType rhsStart;
             rhsStart = that.getStart();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "start", lhsStart), LocatorUtils.property(thatLocator, "start", rhsStart), lhsStart, rhsStart)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "start", lhsStart), LocatorUtils.property(thatLocator, "start", rhsStart), lhsStart, rhsStart, this.isSetStart(), that.isSetStart())) {
                 return false;
             }
         }
@@ -249,7 +250,7 @@ public class TimeEdgeType
             lhsEnd = this.getEnd();
             TimeNodePropertyType rhsEnd;
             rhsEnd = that.getEnd();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "end", lhsEnd), LocatorUtils.property(thatLocator, "end", rhsEnd), lhsEnd, rhsEnd)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "end", lhsEnd), LocatorUtils.property(thatLocator, "end", rhsEnd), lhsEnd, rhsEnd, this.isSetEnd(), that.isSetEnd())) {
                 return false;
             }
         }
@@ -258,94 +259,118 @@ public class TimeEdgeType
             lhsExtent = this.getExtent();
             TimePeriodPropertyType rhsExtent;
             rhsExtent = that.getExtent();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "extent", lhsExtent), LocatorUtils.property(thatLocator, "extent", rhsExtent), lhsExtent, rhsExtent)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "extent", lhsExtent), LocatorUtils.property(thatLocator, "extent", rhsExtent), lhsExtent, rhsExtent, this.isSetExtent(), that.isSetExtent())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             TimeNodePropertyType theStart;
             theStart = this.getStart();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "start", theStart), currentHashCode, theStart);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "start", theStart), currentHashCode, theStart, this.isSetStart());
         }
         {
             TimeNodePropertyType theEnd;
             theEnd = this.getEnd();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "end", theEnd), currentHashCode, theEnd);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "end", theEnd), currentHashCode, theEnd, this.isSetEnd());
         }
         {
             TimePeriodPropertyType theExtent;
             theExtent = this.getExtent();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "extent", theExtent), currentHashCode, theExtent);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "extent", theExtent), currentHashCode, theExtent, this.isSetExtent());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TimeEdgeType) {
             final TimeEdgeType copy = ((TimeEdgeType) draftCopy);
-            if (this.isSetStart()) {
-                TimeNodePropertyType sourceStart;
-                sourceStart = this.getStart();
-                TimeNodePropertyType copyStart = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "start", sourceStart), sourceStart));
-                copy.setStart(copyStart);
-            } else {
-                copy.start = null;
+            {
+                java.lang.Boolean startShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetStart());
+                if (startShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType sourceStart;
+                    sourceStart = this.getStart();
+                    TimeNodePropertyType copyStart = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "start", sourceStart), sourceStart, this.isSetStart()));
+                    copy.setStart(copyStart);
+                } else {
+                    if (startShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.start = null;
+                    }
+                }
             }
-            if (this.isSetEnd()) {
-                TimeNodePropertyType sourceEnd;
-                sourceEnd = this.getEnd();
-                TimeNodePropertyType copyEnd = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "end", sourceEnd), sourceEnd));
-                copy.setEnd(copyEnd);
-            } else {
-                copy.end = null;
+            {
+                java.lang.Boolean endShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetEnd());
+                if (endShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType sourceEnd;
+                    sourceEnd = this.getEnd();
+                    TimeNodePropertyType copyEnd = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "end", sourceEnd), sourceEnd, this.isSetEnd()));
+                    copy.setEnd(copyEnd);
+                } else {
+                    if (endShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.end = null;
+                    }
+                }
             }
-            if (this.isSetExtent()) {
-                TimePeriodPropertyType sourceExtent;
-                sourceExtent = this.getExtent();
-                TimePeriodPropertyType copyExtent = ((TimePeriodPropertyType) strategy.copy(LocatorUtils.property(locator, "extent", sourceExtent), sourceExtent));
-                copy.setExtent(copyExtent);
-            } else {
-                copy.extent = null;
+            {
+                java.lang.Boolean extentShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetExtent());
+                if (extentShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimePeriodPropertyType sourceExtent;
+                    sourceExtent = this.getExtent();
+                    TimePeriodPropertyType copyExtent = ((TimePeriodPropertyType) strategy.copy(LocatorUtils.property(locator, "extent", sourceExtent), sourceExtent, this.isSetExtent()));
+                    copy.setExtent(copyExtent);
+                } else {
+                    if (extentShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.extent = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TimeEdgeType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TimeEdgeType) {
@@ -353,144 +378,51 @@ public class TimeEdgeType
             final TimeEdgeType leftObject = ((TimeEdgeType) left);
             final TimeEdgeType rightObject = ((TimeEdgeType) right);
             {
-                TimeNodePropertyType lhsStart;
-                lhsStart = leftObject.getStart();
-                TimeNodePropertyType rhsStart;
-                rhsStart = rightObject.getStart();
-                target.setStart(((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "start", lhsStart), LocatorUtils.property(rightLocator, "start", rhsStart), lhsStart, rhsStart)));
+                java.lang.Boolean startShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetStart(), rightObject.isSetStart());
+                if (startShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType lhsStart;
+                    lhsStart = leftObject.getStart();
+                    TimeNodePropertyType rhsStart;
+                    rhsStart = rightObject.getStart();
+                    TimeNodePropertyType mergedStart = ((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "start", lhsStart), LocatorUtils.property(rightLocator, "start", rhsStart), lhsStart, rhsStart, leftObject.isSetStart(), rightObject.isSetStart()));
+                    target.setStart(mergedStart);
+                } else {
+                    if (startShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.start = null;
+                    }
+                }
             }
             {
-                TimeNodePropertyType lhsEnd;
-                lhsEnd = leftObject.getEnd();
-                TimeNodePropertyType rhsEnd;
-                rhsEnd = rightObject.getEnd();
-                target.setEnd(((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "end", lhsEnd), LocatorUtils.property(rightLocator, "end", rhsEnd), lhsEnd, rhsEnd)));
+                java.lang.Boolean endShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetEnd(), rightObject.isSetEnd());
+                if (endShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType lhsEnd;
+                    lhsEnd = leftObject.getEnd();
+                    TimeNodePropertyType rhsEnd;
+                    rhsEnd = rightObject.getEnd();
+                    TimeNodePropertyType mergedEnd = ((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "end", lhsEnd), LocatorUtils.property(rightLocator, "end", rhsEnd), lhsEnd, rhsEnd, leftObject.isSetEnd(), rightObject.isSetEnd()));
+                    target.setEnd(mergedEnd);
+                } else {
+                    if (endShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.end = null;
+                    }
+                }
             }
             {
-                TimePeriodPropertyType lhsExtent;
-                lhsExtent = leftObject.getExtent();
-                TimePeriodPropertyType rhsExtent;
-                rhsExtent = rightObject.getExtent();
-                target.setExtent(((TimePeriodPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "extent", lhsExtent), LocatorUtils.property(rightLocator, "extent", rhsExtent), lhsExtent, rhsExtent)));
+                java.lang.Boolean extentShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetExtent(), rightObject.isSetExtent());
+                if (extentShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimePeriodPropertyType lhsExtent;
+                    lhsExtent = leftObject.getExtent();
+                    TimePeriodPropertyType rhsExtent;
+                    rhsExtent = rightObject.getExtent();
+                    TimePeriodPropertyType mergedExtent = ((TimePeriodPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "extent", lhsExtent), LocatorUtils.property(rightLocator, "extent", rhsExtent), lhsExtent, rhsExtent, leftObject.isSetExtent(), rightObject.isSetExtent()));
+                    target.setExtent(mergedExtent);
+                } else {
+                    if (extentShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.extent = null;
+                    }
+                }
             }
         }
-    }
-
-    public TimeEdgeType withStart(TimeNodePropertyType value) {
-        setStart(value);
-        return this;
-    }
-
-    public TimeEdgeType withEnd(TimeNodePropertyType value) {
-        setEnd(value);
-        return this;
-    }
-
-    public TimeEdgeType withExtent(TimePeriodPropertyType value) {
-        setExtent(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withComplex(ReferenceType value) {
-        setComplex(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withRelatedTime(RelatedTimeType... values) {
-        if (values!= null) {
-            for (RelatedTimeType value: values) {
-                getRelatedTime().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withRelatedTime(Collection<RelatedTimeType> values) {
-        if (values!= null) {
-            getRelatedTime().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withRelatedTime(List<RelatedTimeType> value) {
-        setRelatedTime(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TimeEdgeType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

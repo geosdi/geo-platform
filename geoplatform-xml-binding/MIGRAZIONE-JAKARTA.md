@@ -15,11 +15,16 @@ Maven tra i moduli.
 |---|---|---|
 | 1 | `wms-1.1.1` | fatto |
 | 3 | `xlink-1.0.0`, `gml-2.1.2`, `filter-1.0.0`, `sld-1.0.0`, `wmc-1.1.0`, `ows-1.1.0`, `wps-1.0.0`, `wms-1.3.0` | fatto |
-| 2 | `gml-3.2.0`, `iso19139-v20060504` | da fare |
+| 2 | `gml-3.2.0`, `iso19139-v20060504` | fatto |
 | 4 | `gml-api`, `gml-3.1.1`, `gml-3.2.1`, `filter-1.1.0`, `ows-1.0.0`, `w3c-xsd`, `wfs-1.1.0`, `csw`, `ebrim`, `feature-catalogue`, `iso19139-v20070417` | da fare |
 
 Con il gruppo 3 sono passati a jakarta anche il connettore GeoServer (il suo modello contiene i tipi SLD),
 `wps-connector`, `wmc-jaxb-support` e la parte WMS 1.3.0 di `wms-connector`.
+
+Il gruppo 2 non è usato da altri moduli di geo-platform. `gml-3.2.0` era generato anche con `equals`, `hashCode`,
+`copyTo` e `mergeFrom` (`-Xequals`, `-XhashCode`, `-Xcopyable`, `-Xmergeable`): la configurazione jakarta li mantiene, per
+chi usa questi binding fuori da geo-platform. Il modulo non ha test: la verifica è la creazione del `JAXBContext` sui suoi
+package e su quelli di `iso19139-v20060504`.
 
 `geoplatform-xml-context-provider` non dipende da JAXB e non va migrato.
 

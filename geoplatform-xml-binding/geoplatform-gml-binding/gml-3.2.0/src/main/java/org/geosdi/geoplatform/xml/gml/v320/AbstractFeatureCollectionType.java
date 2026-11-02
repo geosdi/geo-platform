@@ -34,59 +34,56 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AbstractFeatureCollectionType complex type.
+ * <p>Classe Java per AbstractFeatureCollectionType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractFeatureCollectionType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractFeatureType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}featureMember" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}featureMembers" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractFeatureCollectionType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractFeatureType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}featureMember" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}featureMembers" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -109,28 +106,31 @@ public abstract class AbstractFeatureCollectionType
     /**
      * Gets the value of the featureMember property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the featureMember property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the featureMember property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getFeatureMember().add(newItem);
+     * getFeatureMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link FeaturePropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the featureMember property.
      */
     public List<FeaturePropertyType> getFeatureMember() {
         if (featureMember == null) {
-            featureMember = new ArrayList<FeaturePropertyType>();
+            featureMember = new ArrayList<>();
         }
         return this.featureMember;
     }
@@ -171,13 +171,15 @@ public abstract class AbstractFeatureCollectionType
         return (this.featureMembers!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -185,23 +187,33 @@ public abstract class AbstractFeatureCollectionType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<FeaturePropertyType> theFeatureMember;
-            theFeatureMember = this.getFeatureMember();
-            strategy.appendField(locator, this, "featureMember", buffer, theFeatureMember);
+            theFeatureMember = (this.isSetFeatureMember()?this.getFeatureMember():null);
+            strategy.appendField(locator, this, "featureMember", buffer, theFeatureMember, this.isSetFeatureMember());
         }
         {
             FeatureArrayPropertyType theFeatureMembers;
             theFeatureMembers = this.getFeatureMembers();
-            strategy.appendField(locator, this, "featureMembers", buffer, theFeatureMembers);
+            strategy.appendField(locator, this, "featureMembers", buffer, theFeatureMembers, this.isSetFeatureMembers());
         }
         return buffer;
     }
 
+    public void setFeatureMember(List<FeaturePropertyType> value) {
+        this.featureMember = null;
+        if (value!= null) {
+            List<FeaturePropertyType> draftl = this.getFeatureMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractFeatureCollectionType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -213,10 +225,10 @@ public abstract class AbstractFeatureCollectionType
         final AbstractFeatureCollectionType that = ((AbstractFeatureCollectionType) object);
         {
             List<FeaturePropertyType> lhsFeatureMember;
-            lhsFeatureMember = this.getFeatureMember();
+            lhsFeatureMember = (this.isSetFeatureMember()?this.getFeatureMember():null);
             List<FeaturePropertyType> rhsFeatureMember;
-            rhsFeatureMember = that.getFeatureMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "featureMember", lhsFeatureMember), LocatorUtils.property(thatLocator, "featureMember", rhsFeatureMember), lhsFeatureMember, rhsFeatureMember)) {
+            rhsFeatureMember = (that.isSetFeatureMember()?that.getFeatureMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "featureMember", lhsFeatureMember), LocatorUtils.property(thatLocator, "featureMember", rhsFeatureMember), lhsFeatureMember, rhsFeatureMember, this.isSetFeatureMember(), that.isSetFeatureMember())) {
                 return false;
             }
         }
@@ -225,47 +237,53 @@ public abstract class AbstractFeatureCollectionType
             lhsFeatureMembers = this.getFeatureMembers();
             FeatureArrayPropertyType rhsFeatureMembers;
             rhsFeatureMembers = that.getFeatureMembers();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "featureMembers", lhsFeatureMembers), LocatorUtils.property(thatLocator, "featureMembers", rhsFeatureMembers), lhsFeatureMembers, rhsFeatureMembers)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "featureMembers", lhsFeatureMembers), LocatorUtils.property(thatLocator, "featureMembers", rhsFeatureMembers), lhsFeatureMembers, rhsFeatureMembers, this.isSetFeatureMembers(), that.isSetFeatureMembers())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<FeaturePropertyType> theFeatureMember;
-            theFeatureMember = this.getFeatureMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "featureMember", theFeatureMember), currentHashCode, theFeatureMember);
+            theFeatureMember = (this.isSetFeatureMember()?this.getFeatureMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "featureMember", theFeatureMember), currentHashCode, theFeatureMember, this.isSetFeatureMember());
         }
         {
             FeatureArrayPropertyType theFeatureMembers;
             theFeatureMembers = this.getFeatureMembers();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "featureMembers", theFeatureMembers), currentHashCode, theFeatureMembers);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "featureMembers", theFeatureMembers), currentHashCode, theFeatureMembers, this.isSetFeatureMembers());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -273,34 +291,44 @@ public abstract class AbstractFeatureCollectionType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractFeatureCollectionType) {
             final AbstractFeatureCollectionType copy = ((AbstractFeatureCollectionType) target);
-            if (this.isSetFeatureMember()) {
-                List<FeaturePropertyType> sourceFeatureMember;
-                sourceFeatureMember = this.getFeatureMember();
-                @SuppressWarnings("unchecked")
-                List<FeaturePropertyType> copyFeatureMember = ((List<FeaturePropertyType> ) strategy.copy(LocatorUtils.property(locator, "featureMember", sourceFeatureMember), sourceFeatureMember));
-                copy.unsetFeatureMember();
-                List<FeaturePropertyType> uniqueFeatureMemberl = copy.getFeatureMember();
-                uniqueFeatureMemberl.addAll(copyFeatureMember);
-            } else {
-                copy.unsetFeatureMember();
+            {
+                java.lang.Boolean featureMemberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFeatureMember());
+                if (featureMemberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<FeaturePropertyType> sourceFeatureMember;
+                    sourceFeatureMember = (this.isSetFeatureMember()?this.getFeatureMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<FeaturePropertyType> copyFeatureMember = ((List<FeaturePropertyType> ) strategy.copy(LocatorUtils.property(locator, "featureMember", sourceFeatureMember), sourceFeatureMember, this.isSetFeatureMember()));
+                    copy.setFeatureMember(copyFeatureMember);
+                } else {
+                    if (featureMemberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetFeatureMember();
+                    }
+                }
             }
-            if (this.isSetFeatureMembers()) {
-                FeatureArrayPropertyType sourceFeatureMembers;
-                sourceFeatureMembers = this.getFeatureMembers();
-                FeatureArrayPropertyType copyFeatureMembers = ((FeatureArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "featureMembers", sourceFeatureMembers), sourceFeatureMembers));
-                copy.setFeatureMembers(copyFeatureMembers);
-            } else {
-                copy.featureMembers = null;
+            {
+                java.lang.Boolean featureMembersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFeatureMembers());
+                if (featureMembersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    FeatureArrayPropertyType sourceFeatureMembers;
+                    sourceFeatureMembers = this.getFeatureMembers();
+                    FeatureArrayPropertyType copyFeatureMembers = ((FeatureArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "featureMembers", sourceFeatureMembers), sourceFeatureMembers, this.isSetFeatureMembers()));
+                    copy.setFeatureMembers(copyFeatureMembers);
+                } else {
+                    if (featureMembersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.featureMembers = null;
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractFeatureCollectionType) {
@@ -308,137 +336,36 @@ public abstract class AbstractFeatureCollectionType
             final AbstractFeatureCollectionType leftObject = ((AbstractFeatureCollectionType) left);
             final AbstractFeatureCollectionType rightObject = ((AbstractFeatureCollectionType) right);
             {
-                List<FeaturePropertyType> lhsFeatureMember;
-                lhsFeatureMember = leftObject.getFeatureMember();
-                List<FeaturePropertyType> rhsFeatureMember;
-                rhsFeatureMember = rightObject.getFeatureMember();
-                target.unsetFeatureMember();
-                List<FeaturePropertyType> uniqueFeatureMemberl = target.getFeatureMember();
-                uniqueFeatureMemberl.addAll(((List<FeaturePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "featureMember", lhsFeatureMember), LocatorUtils.property(rightLocator, "featureMember", rhsFeatureMember), lhsFeatureMember, rhsFeatureMember)));
+                java.lang.Boolean featureMemberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFeatureMember(), rightObject.isSetFeatureMember());
+                if (featureMemberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<FeaturePropertyType> lhsFeatureMember;
+                    lhsFeatureMember = (leftObject.isSetFeatureMember()?leftObject.getFeatureMember():null);
+                    List<FeaturePropertyType> rhsFeatureMember;
+                    rhsFeatureMember = (rightObject.isSetFeatureMember()?rightObject.getFeatureMember():null);
+                    List<FeaturePropertyType> mergedFeatureMember = ((List<FeaturePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "featureMember", lhsFeatureMember), LocatorUtils.property(rightLocator, "featureMember", rhsFeatureMember), lhsFeatureMember, rhsFeatureMember, leftObject.isSetFeatureMember(), rightObject.isSetFeatureMember()));
+                    target.setFeatureMember(mergedFeatureMember);
+                } else {
+                    if (featureMemberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetFeatureMember();
+                    }
+                }
             }
             {
-                FeatureArrayPropertyType lhsFeatureMembers;
-                lhsFeatureMembers = leftObject.getFeatureMembers();
-                FeatureArrayPropertyType rhsFeatureMembers;
-                rhsFeatureMembers = rightObject.getFeatureMembers();
-                target.setFeatureMembers(((FeatureArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "featureMembers", lhsFeatureMembers), LocatorUtils.property(rightLocator, "featureMembers", rhsFeatureMembers), lhsFeatureMembers, rhsFeatureMembers)));
+                java.lang.Boolean featureMembersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFeatureMembers(), rightObject.isSetFeatureMembers());
+                if (featureMembersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    FeatureArrayPropertyType lhsFeatureMembers;
+                    lhsFeatureMembers = leftObject.getFeatureMembers();
+                    FeatureArrayPropertyType rhsFeatureMembers;
+                    rhsFeatureMembers = rightObject.getFeatureMembers();
+                    FeatureArrayPropertyType mergedFeatureMembers = ((FeatureArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "featureMembers", lhsFeatureMembers), LocatorUtils.property(rightLocator, "featureMembers", rhsFeatureMembers), lhsFeatureMembers, rhsFeatureMembers, leftObject.isSetFeatureMembers(), rightObject.isSetFeatureMembers()));
+                    target.setFeatureMembers(mergedFeatureMembers);
+                } else {
+                    if (featureMembersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.featureMembers = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setFeatureMember(List<FeaturePropertyType> value) {
-        List<FeaturePropertyType> draftl = this.getFeatureMember();
-        draftl.addAll(value);
-    }
-
-    public AbstractFeatureCollectionType withFeatureMember(FeaturePropertyType... values) {
-        if (values!= null) {
-            for (FeaturePropertyType value: values) {
-                getFeatureMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AbstractFeatureCollectionType withFeatureMember(Collection<FeaturePropertyType> values) {
-        if (values!= null) {
-            getFeatureMember().addAll(values);
-        }
-        return this;
-    }
-
-    public AbstractFeatureCollectionType withFeatureMembers(FeatureArrayPropertyType value) {
-        setFeatureMembers(value);
-        return this;
-    }
-
-    public AbstractFeatureCollectionType withFeatureMember(List<FeaturePropertyType> value) {
-        setFeatureMember(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withBoundedBy(BoundingShapeType value) {
-        setBoundedBy(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withLocation(JAXBElement<? extends LocationPropertyType> value) {
-        setLocation(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public AbstractFeatureCollectionType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

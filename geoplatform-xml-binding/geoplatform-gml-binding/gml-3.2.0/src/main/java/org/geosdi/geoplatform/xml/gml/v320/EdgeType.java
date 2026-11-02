@@ -34,61 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per EdgeType complex type.
+ * <p>Classe Java per EdgeType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="EdgeType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTopoPrimitiveType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}directedNode" maxOccurs="2" minOccurs="2"/>
- *         &lt;element ref="{http://www.opengis.net/gml}directedFace" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}curveProperty" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="EdgeType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTopoPrimitiveType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}directedNode" maxOccurs="2" minOccurs="2"/>
+ *         <element ref="{http://www.opengis.net/gml}directedFace" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}curveProperty" minOccurs="0"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -103,38 +101,55 @@ public class EdgeType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * A gml:directedNode property element describes the boundary of topology edges and is used in the support of topological point features via the gml:TopoPoint expression, see below. The orientation attribute of type gml:SignType expresses the sense in which the included node is used: start (“-“) or end (“+”) node.
+     * 
+     */
     @XmlElement(required = true)
     protected List<DirectedNodePropertyType> directedNode;
+    /**
+     * The gml:directedFace property element describes the boundary of topology solids, in the coBoundary of topology edges and is used in the support of surface features via the gml:TopoSurface expression, see below. The orientation attribute of type gml:SignType expresses the sense in which the included face is used i.e. inward or outward with respect to the surface normal in any geometric realisation.
+     * 
+     */
     protected List<DirectedFacePropertyType> directedFace;
+    /**
+     * This property element either references a curve via the XLink-attributes or contains the curve element. curveProperty is the predefined property which may be used by GML Application Schemas whenever a GML feature has a property with a value that is substitutable for AbstractCurve.
+     * 
+     */
     protected CurvePropertyType curveProperty;
     @XmlAttribute(name = "aggregationType")
     protected AggregationType aggregationType;
 
     /**
+     * A gml:directedNode property element describes the boundary of topology edges and is used in the support of topological point features via the gml:TopoPoint expression, see below. The orientation attribute of type gml:SignType expresses the sense in which the included node is used: start (“-“) or end (“+”) node.
+     * 
      * Gets the value of the directedNode property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the directedNode property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the directedNode property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDirectedNode().add(newItem);
+     * getDirectedNode().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DirectedNodePropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the directedNode property.
      */
     public List<DirectedNodePropertyType> getDirectedNode() {
         if (directedNode == null) {
-            directedNode = new ArrayList<DirectedNodePropertyType>();
+            directedNode = new ArrayList<>();
         }
         return this.directedNode;
     }
@@ -148,30 +163,35 @@ public class EdgeType
     }
 
     /**
+     * The gml:directedFace property element describes the boundary of topology solids, in the coBoundary of topology edges and is used in the support of surface features via the gml:TopoSurface expression, see below. The orientation attribute of type gml:SignType expresses the sense in which the included face is used i.e. inward or outward with respect to the surface normal in any geometric realisation.
+     * 
      * Gets the value of the directedFace property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the directedFace property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the directedFace property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDirectedFace().add(newItem);
+     * getDirectedFace().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DirectedFacePropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the directedFace property.
      */
     public List<DirectedFacePropertyType> getDirectedFace() {
         if (directedFace == null) {
-            directedFace = new ArrayList<DirectedFacePropertyType>();
+            directedFace = new ArrayList<>();
         }
         return this.directedFace;
     }
@@ -185,7 +205,7 @@ public class EdgeType
     }
 
     /**
-     * Recupera il valore della proprietà curveProperty.
+     * This property element either references a curve via the XLink-attributes or contains the curve element. curveProperty is the predefined property which may be used by GML Application Schemas whenever a GML feature has a property with a value that is substitutable for AbstractCurve.
      * 
      * @return
      *     possible object is
@@ -203,6 +223,7 @@ public class EdgeType
      *     allowed object is
      *     {@link CurvePropertyType }
      *     
+     * @see #getCurveProperty()
      */
     public void setCurveProperty(CurvePropertyType value) {
         this.curveProperty = value;
@@ -240,13 +261,15 @@ public class EdgeType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -254,33 +277,51 @@ public class EdgeType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<DirectedNodePropertyType> theDirectedNode;
-            theDirectedNode = this.getDirectedNode();
-            strategy.appendField(locator, this, "directedNode", buffer, theDirectedNode);
+            theDirectedNode = (this.isSetDirectedNode()?this.getDirectedNode():null);
+            strategy.appendField(locator, this, "directedNode", buffer, theDirectedNode, this.isSetDirectedNode());
         }
         {
             List<DirectedFacePropertyType> theDirectedFace;
-            theDirectedFace = this.getDirectedFace();
-            strategy.appendField(locator, this, "directedFace", buffer, theDirectedFace);
+            theDirectedFace = (this.isSetDirectedFace()?this.getDirectedFace():null);
+            strategy.appendField(locator, this, "directedFace", buffer, theDirectedFace, this.isSetDirectedFace());
         }
         {
             CurvePropertyType theCurveProperty;
             theCurveProperty = this.getCurveProperty();
-            strategy.appendField(locator, this, "curveProperty", buffer, theCurveProperty);
+            strategy.appendField(locator, this, "curveProperty", buffer, theCurveProperty, this.isSetCurveProperty());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setDirectedNode(List<DirectedNodePropertyType> value) {
+        this.directedNode = null;
+        if (value!= null) {
+            List<DirectedNodePropertyType> draftl = this.getDirectedNode();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setDirectedFace(List<DirectedFacePropertyType> value) {
+        this.directedFace = null;
+        if (value!= null) {
+            List<DirectedFacePropertyType> draftl = this.getDirectedFace();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof EdgeType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -292,19 +333,19 @@ public class EdgeType
         final EdgeType that = ((EdgeType) object);
         {
             List<DirectedNodePropertyType> lhsDirectedNode;
-            lhsDirectedNode = this.getDirectedNode();
+            lhsDirectedNode = (this.isSetDirectedNode()?this.getDirectedNode():null);
             List<DirectedNodePropertyType> rhsDirectedNode;
-            rhsDirectedNode = that.getDirectedNode();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "directedNode", lhsDirectedNode), LocatorUtils.property(thatLocator, "directedNode", rhsDirectedNode), lhsDirectedNode, rhsDirectedNode)) {
+            rhsDirectedNode = (that.isSetDirectedNode()?that.getDirectedNode():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "directedNode", lhsDirectedNode), LocatorUtils.property(thatLocator, "directedNode", rhsDirectedNode), lhsDirectedNode, rhsDirectedNode, this.isSetDirectedNode(), that.isSetDirectedNode())) {
                 return false;
             }
         }
         {
             List<DirectedFacePropertyType> lhsDirectedFace;
-            lhsDirectedFace = this.getDirectedFace();
+            lhsDirectedFace = (this.isSetDirectedFace()?this.getDirectedFace():null);
             List<DirectedFacePropertyType> rhsDirectedFace;
-            rhsDirectedFace = that.getDirectedFace();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "directedFace", lhsDirectedFace), LocatorUtils.property(thatLocator, "directedFace", rhsDirectedFace), lhsDirectedFace, rhsDirectedFace)) {
+            rhsDirectedFace = (that.isSetDirectedFace()?that.getDirectedFace():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "directedFace", lhsDirectedFace), LocatorUtils.property(thatLocator, "directedFace", rhsDirectedFace), lhsDirectedFace, rhsDirectedFace, this.isSetDirectedFace(), that.isSetDirectedFace())) {
                 return false;
             }
         }
@@ -313,7 +354,7 @@ public class EdgeType
             lhsCurveProperty = this.getCurveProperty();
             CurvePropertyType rhsCurveProperty;
             rhsCurveProperty = that.getCurveProperty();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "curveProperty", lhsCurveProperty), LocatorUtils.property(thatLocator, "curveProperty", rhsCurveProperty), lhsCurveProperty, rhsCurveProperty)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "curveProperty", lhsCurveProperty), LocatorUtils.property(thatLocator, "curveProperty", rhsCurveProperty), lhsCurveProperty, rhsCurveProperty, this.isSetCurveProperty(), that.isSetCurveProperty())) {
                 return false;
             }
         }
@@ -322,113 +363,138 @@ public class EdgeType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<DirectedNodePropertyType> theDirectedNode;
-            theDirectedNode = this.getDirectedNode();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "directedNode", theDirectedNode), currentHashCode, theDirectedNode);
+            theDirectedNode = (this.isSetDirectedNode()?this.getDirectedNode():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "directedNode", theDirectedNode), currentHashCode, theDirectedNode, this.isSetDirectedNode());
         }
         {
             List<DirectedFacePropertyType> theDirectedFace;
-            theDirectedFace = this.getDirectedFace();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "directedFace", theDirectedFace), currentHashCode, theDirectedFace);
+            theDirectedFace = (this.isSetDirectedFace()?this.getDirectedFace():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "directedFace", theDirectedFace), currentHashCode, theDirectedFace, this.isSetDirectedFace());
         }
         {
             CurvePropertyType theCurveProperty;
             theCurveProperty = this.getCurveProperty();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "curveProperty", theCurveProperty), currentHashCode, theCurveProperty);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "curveProperty", theCurveProperty), currentHashCode, theCurveProperty, this.isSetCurveProperty());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof EdgeType) {
             final EdgeType copy = ((EdgeType) draftCopy);
-            if (this.isSetDirectedNode()) {
-                List<DirectedNodePropertyType> sourceDirectedNode;
-                sourceDirectedNode = this.getDirectedNode();
-                @SuppressWarnings("unchecked")
-                List<DirectedNodePropertyType> copyDirectedNode = ((List<DirectedNodePropertyType> ) strategy.copy(LocatorUtils.property(locator, "directedNode", sourceDirectedNode), sourceDirectedNode));
-                copy.unsetDirectedNode();
-                List<DirectedNodePropertyType> uniqueDirectedNodel = copy.getDirectedNode();
-                uniqueDirectedNodel.addAll(copyDirectedNode);
-            } else {
-                copy.unsetDirectedNode();
+            {
+                java.lang.Boolean directedNodeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDirectedNode());
+                if (directedNodeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<DirectedNodePropertyType> sourceDirectedNode;
+                    sourceDirectedNode = (this.isSetDirectedNode()?this.getDirectedNode():null);
+                    @SuppressWarnings("unchecked")
+                    List<DirectedNodePropertyType> copyDirectedNode = ((List<DirectedNodePropertyType> ) strategy.copy(LocatorUtils.property(locator, "directedNode", sourceDirectedNode), sourceDirectedNode, this.isSetDirectedNode()));
+                    copy.setDirectedNode(copyDirectedNode);
+                } else {
+                    if (directedNodeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetDirectedNode();
+                    }
+                }
             }
-            if (this.isSetDirectedFace()) {
-                List<DirectedFacePropertyType> sourceDirectedFace;
-                sourceDirectedFace = this.getDirectedFace();
-                @SuppressWarnings("unchecked")
-                List<DirectedFacePropertyType> copyDirectedFace = ((List<DirectedFacePropertyType> ) strategy.copy(LocatorUtils.property(locator, "directedFace", sourceDirectedFace), sourceDirectedFace));
-                copy.unsetDirectedFace();
-                List<DirectedFacePropertyType> uniqueDirectedFacel = copy.getDirectedFace();
-                uniqueDirectedFacel.addAll(copyDirectedFace);
-            } else {
-                copy.unsetDirectedFace();
+            {
+                java.lang.Boolean directedFaceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDirectedFace());
+                if (directedFaceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<DirectedFacePropertyType> sourceDirectedFace;
+                    sourceDirectedFace = (this.isSetDirectedFace()?this.getDirectedFace():null);
+                    @SuppressWarnings("unchecked")
+                    List<DirectedFacePropertyType> copyDirectedFace = ((List<DirectedFacePropertyType> ) strategy.copy(LocatorUtils.property(locator, "directedFace", sourceDirectedFace), sourceDirectedFace, this.isSetDirectedFace()));
+                    copy.setDirectedFace(copyDirectedFace);
+                } else {
+                    if (directedFaceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetDirectedFace();
+                    }
+                }
             }
-            if (this.isSetCurveProperty()) {
-                CurvePropertyType sourceCurveProperty;
-                sourceCurveProperty = this.getCurveProperty();
-                CurvePropertyType copyCurveProperty = ((CurvePropertyType) strategy.copy(LocatorUtils.property(locator, "curveProperty", sourceCurveProperty), sourceCurveProperty));
-                copy.setCurveProperty(copyCurveProperty);
-            } else {
-                copy.curveProperty = null;
+            {
+                java.lang.Boolean curvePropertyShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCurveProperty());
+                if (curvePropertyShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CurvePropertyType sourceCurveProperty;
+                    sourceCurveProperty = this.getCurveProperty();
+                    CurvePropertyType copyCurveProperty = ((CurvePropertyType) strategy.copy(LocatorUtils.property(locator, "curveProperty", sourceCurveProperty), sourceCurveProperty, this.isSetCurveProperty()));
+                    copy.setCurveProperty(copyCurveProperty);
+                } else {
+                    if (curvePropertyShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.curveProperty = null;
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new EdgeType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof EdgeType) {
@@ -436,202 +502,66 @@ public class EdgeType
             final EdgeType leftObject = ((EdgeType) left);
             final EdgeType rightObject = ((EdgeType) right);
             {
-                List<DirectedNodePropertyType> lhsDirectedNode;
-                lhsDirectedNode = leftObject.getDirectedNode();
-                List<DirectedNodePropertyType> rhsDirectedNode;
-                rhsDirectedNode = rightObject.getDirectedNode();
-                target.unsetDirectedNode();
-                List<DirectedNodePropertyType> uniqueDirectedNodel = target.getDirectedNode();
-                uniqueDirectedNodel.addAll(((List<DirectedNodePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "directedNode", lhsDirectedNode), LocatorUtils.property(rightLocator, "directedNode", rhsDirectedNode), lhsDirectedNode, rhsDirectedNode)));
+                java.lang.Boolean directedNodeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDirectedNode(), rightObject.isSetDirectedNode());
+                if (directedNodeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<DirectedNodePropertyType> lhsDirectedNode;
+                    lhsDirectedNode = (leftObject.isSetDirectedNode()?leftObject.getDirectedNode():null);
+                    List<DirectedNodePropertyType> rhsDirectedNode;
+                    rhsDirectedNode = (rightObject.isSetDirectedNode()?rightObject.getDirectedNode():null);
+                    List<DirectedNodePropertyType> mergedDirectedNode = ((List<DirectedNodePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "directedNode", lhsDirectedNode), LocatorUtils.property(rightLocator, "directedNode", rhsDirectedNode), lhsDirectedNode, rhsDirectedNode, leftObject.isSetDirectedNode(), rightObject.isSetDirectedNode()));
+                    target.setDirectedNode(mergedDirectedNode);
+                } else {
+                    if (directedNodeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetDirectedNode();
+                    }
+                }
             }
             {
-                List<DirectedFacePropertyType> lhsDirectedFace;
-                lhsDirectedFace = leftObject.getDirectedFace();
-                List<DirectedFacePropertyType> rhsDirectedFace;
-                rhsDirectedFace = rightObject.getDirectedFace();
-                target.unsetDirectedFace();
-                List<DirectedFacePropertyType> uniqueDirectedFacel = target.getDirectedFace();
-                uniqueDirectedFacel.addAll(((List<DirectedFacePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "directedFace", lhsDirectedFace), LocatorUtils.property(rightLocator, "directedFace", rhsDirectedFace), lhsDirectedFace, rhsDirectedFace)));
+                java.lang.Boolean directedFaceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDirectedFace(), rightObject.isSetDirectedFace());
+                if (directedFaceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<DirectedFacePropertyType> lhsDirectedFace;
+                    lhsDirectedFace = (leftObject.isSetDirectedFace()?leftObject.getDirectedFace():null);
+                    List<DirectedFacePropertyType> rhsDirectedFace;
+                    rhsDirectedFace = (rightObject.isSetDirectedFace()?rightObject.getDirectedFace():null);
+                    List<DirectedFacePropertyType> mergedDirectedFace = ((List<DirectedFacePropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "directedFace", lhsDirectedFace), LocatorUtils.property(rightLocator, "directedFace", rhsDirectedFace), lhsDirectedFace, rhsDirectedFace, leftObject.isSetDirectedFace(), rightObject.isSetDirectedFace()));
+                    target.setDirectedFace(mergedDirectedFace);
+                } else {
+                    if (directedFaceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetDirectedFace();
+                    }
+                }
             }
             {
-                CurvePropertyType lhsCurveProperty;
-                lhsCurveProperty = leftObject.getCurveProperty();
-                CurvePropertyType rhsCurveProperty;
-                rhsCurveProperty = rightObject.getCurveProperty();
-                target.setCurveProperty(((CurvePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "curveProperty", lhsCurveProperty), LocatorUtils.property(rightLocator, "curveProperty", rhsCurveProperty), lhsCurveProperty, rhsCurveProperty)));
+                java.lang.Boolean curvePropertyShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCurveProperty(), rightObject.isSetCurveProperty());
+                if (curvePropertyShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CurvePropertyType lhsCurveProperty;
+                    lhsCurveProperty = leftObject.getCurveProperty();
+                    CurvePropertyType rhsCurveProperty;
+                    rhsCurveProperty = rightObject.getCurveProperty();
+                    CurvePropertyType mergedCurveProperty = ((CurvePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "curveProperty", lhsCurveProperty), LocatorUtils.property(rightLocator, "curveProperty", rhsCurveProperty), lhsCurveProperty, rhsCurveProperty, leftObject.isSetCurveProperty(), rightObject.isSetCurveProperty()));
+                    target.setCurveProperty(mergedCurveProperty);
+                } else {
+                    if (curvePropertyShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.curveProperty = null;
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setDirectedNode(List<DirectedNodePropertyType> value) {
-        List<DirectedNodePropertyType> draftl = this.getDirectedNode();
-        draftl.addAll(value);
-    }
-
-    public void setDirectedFace(List<DirectedFacePropertyType> value) {
-        List<DirectedFacePropertyType> draftl = this.getDirectedFace();
-        draftl.addAll(value);
-    }
-
-    public EdgeType withDirectedNode(DirectedNodePropertyType... values) {
-        if (values!= null) {
-            for (DirectedNodePropertyType value: values) {
-                getDirectedNode().add(value);
-            }
-        }
-        return this;
-    }
-
-    public EdgeType withDirectedNode(Collection<DirectedNodePropertyType> values) {
-        if (values!= null) {
-            getDirectedNode().addAll(values);
-        }
-        return this;
-    }
-
-    public EdgeType withDirectedFace(DirectedFacePropertyType... values) {
-        if (values!= null) {
-            for (DirectedFacePropertyType value: values) {
-                getDirectedFace().add(value);
-            }
-        }
-        return this;
-    }
-
-    public EdgeType withDirectedFace(Collection<DirectedFacePropertyType> values) {
-        if (values!= null) {
-            getDirectedFace().addAll(values);
-        }
-        return this;
-    }
-
-    public EdgeType withCurveProperty(CurvePropertyType value) {
-        setCurveProperty(value);
-        return this;
-    }
-
-    public EdgeType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public EdgeType withDirectedNode(List<DirectedNodePropertyType> value) {
-        setDirectedNode(value);
-        return this;
-    }
-
-    public EdgeType withDirectedFace(List<DirectedFacePropertyType> value) {
-        setDirectedFace(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withIsolated(IsolatedPropertyType... values) {
-        if (values!= null) {
-            for (IsolatedPropertyType value: values) {
-                getIsolated().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EdgeType withIsolated(Collection<IsolatedPropertyType> values) {
-        if (values!= null) {
-            getIsolated().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EdgeType withContainer(ContainerPropertyType value) {
-        setContainer(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withIsolated(List<IsolatedPropertyType> value) {
-        setIsolated(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EdgeType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EdgeType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EdgeType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EdgeType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public EdgeType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

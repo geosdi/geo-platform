@@ -34,60 +34,58 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * gml:CurveSegmentArrayPropertyType is a container for an array of curve segments.
  * 
- * <p>Classe Java per CurveSegmentArrayPropertyType complex type.
+ * <p>Classe Java per CurveSegmentArrayPropertyType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CurveSegmentArrayPropertyType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence maxOccurs="unbounded" minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}AbstractCurveSegment"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CurveSegmentArrayPropertyType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence maxOccurs="unbounded" minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}AbstractCurveSegment"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -95,8 +93,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "CurveSegmentArrayPropertyType", propOrder = {
     "abstractCurveSegment"
 })
-public class CurveSegmentArrayPropertyType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class CurveSegmentArrayPropertyType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     @XmlElementRef(name = "AbstractCurveSegment", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
@@ -105,43 +102,46 @@ public class CurveSegmentArrayPropertyType
     /**
      * Gets the value of the abstractCurveSegment property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the abstractCurveSegment property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the abstractCurveSegment property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAbstractCurveSegment().add(newItem);
+     * getAbstractCurveSegment().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ClothoidType }{@code >}
-     * {@link JAXBElement }{@code <}{@link BezierType }{@code >}
-     * {@link JAXBElement }{@code <}{@link OffsetCurveType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CircleType }{@code >}
-     * {@link JAXBElement }{@code <}{@link BSplineType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArcStringByBulgeType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ArcType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CubicSplineType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeodesicStringType }{@code >}
-     * {@link JAXBElement }{@code <}{@link LineStringSegmentType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractCurveSegmentType }{@code >}
-     * {@link JAXBElement }{@code <}{@link CircleByCenterPointType }{@code >}
      * {@link JAXBElement }{@code <}{@link ArcByBulgeType }{@code >}
      * {@link JAXBElement }{@code <}{@link ArcByCenterPointType }{@code >}
-     * {@link JAXBElement }{@code <}{@link GeodesicType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArcStringByBulgeType }{@code >}
      * {@link JAXBElement }{@code <}{@link ArcStringType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ArcType }{@code >}
+     * {@link JAXBElement }{@code <}{@link BSplineType }{@code >}
+     * {@link JAXBElement }{@code <}{@link BezierType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CircleByCenterPointType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CircleType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ClothoidType }{@code >}
+     * {@link JAXBElement }{@code <}{@link CubicSplineType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeodesicStringType }{@code >}
+     * {@link JAXBElement }{@code <}{@link GeodesicType }{@code >}
+     * {@link JAXBElement }{@code <}{@link LineStringSegmentType }{@code >}
+     * {@link JAXBElement }{@code <}{@link OffsetCurveType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the abstractCurveSegment property.
      */
     public List<JAXBElement<? extends AbstractCurveSegmentType>> getAbstractCurveSegment() {
         if (abstractCurveSegment == null) {
-            abstractCurveSegment = new ArrayList<JAXBElement<? extends AbstractCurveSegmentType>>();
+            abstractCurveSegment = new ArrayList<>();
         }
         return this.abstractCurveSegment;
     }
@@ -154,13 +154,15 @@ public class CurveSegmentArrayPropertyType
         this.abstractCurveSegment = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -168,17 +170,27 @@ public class CurveSegmentArrayPropertyType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<JAXBElement<? extends AbstractCurveSegmentType>> theAbstractCurveSegment;
-            theAbstractCurveSegment = this.getAbstractCurveSegment();
-            strategy.appendField(locator, this, "abstractCurveSegment", buffer, theAbstractCurveSegment);
+            theAbstractCurveSegment = (this.isSetAbstractCurveSegment()?this.getAbstractCurveSegment():null);
+            strategy.appendField(locator, this, "abstractCurveSegment", buffer, theAbstractCurveSegment, this.isSetAbstractCurveSegment());
         }
         return buffer;
     }
 
+    public void setAbstractCurveSegment(List<JAXBElement<? extends AbstractCurveSegmentType>> value) {
+        this.abstractCurveSegment = null;
+        if (value!= null) {
+            List<JAXBElement<? extends AbstractCurveSegmentType>> draftl = this.getAbstractCurveSegment();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CurveSegmentArrayPropertyType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -187,114 +199,106 @@ public class CurveSegmentArrayPropertyType
         final CurveSegmentArrayPropertyType that = ((CurveSegmentArrayPropertyType) object);
         {
             List<JAXBElement<? extends AbstractCurveSegmentType>> lhsAbstractCurveSegment;
-            lhsAbstractCurveSegment = this.getAbstractCurveSegment();
+            lhsAbstractCurveSegment = (this.isSetAbstractCurveSegment()?this.getAbstractCurveSegment():null);
             List<JAXBElement<? extends AbstractCurveSegmentType>> rhsAbstractCurveSegment;
-            rhsAbstractCurveSegment = that.getAbstractCurveSegment();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractCurveSegment", lhsAbstractCurveSegment), LocatorUtils.property(thatLocator, "abstractCurveSegment", rhsAbstractCurveSegment), lhsAbstractCurveSegment, rhsAbstractCurveSegment)) {
+            rhsAbstractCurveSegment = (that.isSetAbstractCurveSegment()?that.getAbstractCurveSegment():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractCurveSegment", lhsAbstractCurveSegment), LocatorUtils.property(thatLocator, "abstractCurveSegment", rhsAbstractCurveSegment), lhsAbstractCurveSegment, rhsAbstractCurveSegment, this.isSetAbstractCurveSegment(), that.isSetAbstractCurveSegment())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             List<JAXBElement<? extends AbstractCurveSegmentType>> theAbstractCurveSegment;
-            theAbstractCurveSegment = this.getAbstractCurveSegment();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractCurveSegment", theAbstractCurveSegment), currentHashCode, theAbstractCurveSegment);
+            theAbstractCurveSegment = (this.isSetAbstractCurveSegment()?this.getAbstractCurveSegment():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractCurveSegment", theAbstractCurveSegment), currentHashCode, theAbstractCurveSegment, this.isSetAbstractCurveSegment());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof CurveSegmentArrayPropertyType) {
             final CurveSegmentArrayPropertyType copy = ((CurveSegmentArrayPropertyType) draftCopy);
-            if (this.isSetAbstractCurveSegment()) {
-                List<JAXBElement<? extends AbstractCurveSegmentType>> sourceAbstractCurveSegment;
-                sourceAbstractCurveSegment = this.getAbstractCurveSegment();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<? extends AbstractCurveSegmentType>> copyAbstractCurveSegment = ((List<JAXBElement<? extends AbstractCurveSegmentType>> ) strategy.copy(LocatorUtils.property(locator, "abstractCurveSegment", sourceAbstractCurveSegment), sourceAbstractCurveSegment));
-                copy.unsetAbstractCurveSegment();
-                List<JAXBElement<? extends AbstractCurveSegmentType>> uniqueAbstractCurveSegmentl = copy.getAbstractCurveSegment();
-                uniqueAbstractCurveSegmentl.addAll(copyAbstractCurveSegment);
-            } else {
-                copy.unsetAbstractCurveSegment();
+            {
+                java.lang.Boolean abstractCurveSegmentShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAbstractCurveSegment());
+                if (abstractCurveSegmentShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<? extends AbstractCurveSegmentType>> sourceAbstractCurveSegment;
+                    sourceAbstractCurveSegment = (this.isSetAbstractCurveSegment()?this.getAbstractCurveSegment():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<? extends AbstractCurveSegmentType>> copyAbstractCurveSegment = ((List<JAXBElement<? extends AbstractCurveSegmentType>> ) strategy.copy(LocatorUtils.property(locator, "abstractCurveSegment", sourceAbstractCurveSegment), sourceAbstractCurveSegment, this.isSetAbstractCurveSegment()));
+                    copy.setAbstractCurveSegment(copyAbstractCurveSegment);
+                } else {
+                    if (abstractCurveSegmentShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetAbstractCurveSegment();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CurveSegmentArrayPropertyType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof CurveSegmentArrayPropertyType) {
             final CurveSegmentArrayPropertyType target = this;
             final CurveSegmentArrayPropertyType leftObject = ((CurveSegmentArrayPropertyType) left);
             final CurveSegmentArrayPropertyType rightObject = ((CurveSegmentArrayPropertyType) right);
             {
-                List<JAXBElement<? extends AbstractCurveSegmentType>> lhsAbstractCurveSegment;
-                lhsAbstractCurveSegment = leftObject.getAbstractCurveSegment();
-                List<JAXBElement<? extends AbstractCurveSegmentType>> rhsAbstractCurveSegment;
-                rhsAbstractCurveSegment = rightObject.getAbstractCurveSegment();
-                target.unsetAbstractCurveSegment();
-                List<JAXBElement<? extends AbstractCurveSegmentType>> uniqueAbstractCurveSegmentl = target.getAbstractCurveSegment();
-                uniqueAbstractCurveSegmentl.addAll(((List<JAXBElement<? extends AbstractCurveSegmentType>> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractCurveSegment", lhsAbstractCurveSegment), LocatorUtils.property(rightLocator, "abstractCurveSegment", rhsAbstractCurveSegment), lhsAbstractCurveSegment, rhsAbstractCurveSegment)));
+                java.lang.Boolean abstractCurveSegmentShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAbstractCurveSegment(), rightObject.isSetAbstractCurveSegment());
+                if (abstractCurveSegmentShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<? extends AbstractCurveSegmentType>> lhsAbstractCurveSegment;
+                    lhsAbstractCurveSegment = (leftObject.isSetAbstractCurveSegment()?leftObject.getAbstractCurveSegment():null);
+                    List<JAXBElement<? extends AbstractCurveSegmentType>> rhsAbstractCurveSegment;
+                    rhsAbstractCurveSegment = (rightObject.isSetAbstractCurveSegment()?rightObject.getAbstractCurveSegment():null);
+                    List<JAXBElement<? extends AbstractCurveSegmentType>> mergedAbstractCurveSegment = ((List<JAXBElement<? extends AbstractCurveSegmentType>> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractCurveSegment", lhsAbstractCurveSegment), LocatorUtils.property(rightLocator, "abstractCurveSegment", rhsAbstractCurveSegment), lhsAbstractCurveSegment, rhsAbstractCurveSegment, leftObject.isSetAbstractCurveSegment(), rightObject.isSetAbstractCurveSegment()));
+                    target.setAbstractCurveSegment(mergedAbstractCurveSegment);
+                } else {
+                    if (abstractCurveSegmentShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetAbstractCurveSegment();
+                    }
+                }
             }
         }
-    }
-
-    public void setAbstractCurveSegment(List<JAXBElement<? extends AbstractCurveSegmentType>> value) {
-        List<JAXBElement<? extends AbstractCurveSegmentType>> draftl = this.getAbstractCurveSegment();
-        draftl.addAll(value);
-    }
-
-    public CurveSegmentArrayPropertyType withAbstractCurveSegment(JAXBElement<? extends AbstractCurveSegmentType> ... values) {
-        if (values!= null) {
-            for (JAXBElement<? extends AbstractCurveSegmentType> value: values) {
-                getAbstractCurveSegment().add(value);
-            }
-        }
-        return this;
-    }
-
-    public CurveSegmentArrayPropertyType withAbstractCurveSegment(Collection<JAXBElement<? extends AbstractCurveSegmentType>> values) {
-        if (values!= null) {
-            getAbstractCurveSegment().addAll(values);
-        }
-        return this;
-    }
-
-    public CurveSegmentArrayPropertyType withAbstractCurveSegment(List<JAXBElement<? extends AbstractCurveSegmentType>> value) {
-        setAbstractCurveSegment(value);
-        return this;
     }
 
 }

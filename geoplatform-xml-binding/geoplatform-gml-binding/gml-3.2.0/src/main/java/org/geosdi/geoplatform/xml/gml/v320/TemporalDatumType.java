@@ -34,59 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TemporalDatumType complex type.
+ * <p>Classe Java per TemporalDatumType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TemporalDatumType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}TemporalDatumBaseType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}origin"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TemporalDatumType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}TemporalDatumBaseType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}origin"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -99,12 +95,16 @@ public class TemporalDatumType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:origin is the date and time origin of this temporal datum.
+     * 
+     */
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar origin;
 
     /**
-     * Recupera il valore della proprietà origin.
+     * gml:origin is the date and time origin of this temporal datum.
      * 
      * @return
      *     possible object is
@@ -122,6 +122,7 @@ public class TemporalDatumType
      *     allowed object is
      *     {@link XMLGregorianCalendar }
      *     
+     * @see #getOrigin()
      */
     public void setOrigin(XMLGregorianCalendar value) {
         this.origin = value;
@@ -131,13 +132,15 @@ public class TemporalDatumType
         return (this.origin!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -145,18 +148,20 @@ public class TemporalDatumType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             XMLGregorianCalendar theOrigin;
             theOrigin = this.getOrigin();
-            strategy.appendField(locator, this, "origin", buffer, theOrigin);
+            strategy.appendField(locator, this, "origin", buffer, theOrigin, this.isSetOrigin());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TemporalDatumType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -171,68 +176,82 @@ public class TemporalDatumType
             lhsOrigin = this.getOrigin();
             XMLGregorianCalendar rhsOrigin;
             rhsOrigin = that.getOrigin();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "origin", lhsOrigin), LocatorUtils.property(thatLocator, "origin", rhsOrigin), lhsOrigin, rhsOrigin)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "origin", lhsOrigin), LocatorUtils.property(thatLocator, "origin", rhsOrigin), lhsOrigin, rhsOrigin, this.isSetOrigin(), that.isSetOrigin())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             XMLGregorianCalendar theOrigin;
             theOrigin = this.getOrigin();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "origin", theOrigin), currentHashCode, theOrigin);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "origin", theOrigin), currentHashCode, theOrigin, this.isSetOrigin());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TemporalDatumType) {
             final TemporalDatumType copy = ((TemporalDatumType) draftCopy);
-            if (this.isSetOrigin()) {
-                XMLGregorianCalendar sourceOrigin;
-                sourceOrigin = this.getOrigin();
-                XMLGregorianCalendar copyOrigin = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "origin", sourceOrigin), sourceOrigin));
-                copy.setOrigin(copyOrigin);
-            } else {
-                copy.origin = null;
+            {
+                java.lang.Boolean originShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetOrigin());
+                if (originShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar sourceOrigin;
+                    sourceOrigin = this.getOrigin();
+                    XMLGregorianCalendar copyOrigin = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "origin", sourceOrigin), sourceOrigin, this.isSetOrigin()));
+                    copy.setOrigin(copyOrigin);
+                } else {
+                    if (originShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.origin = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TemporalDatumType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TemporalDatumType) {
@@ -240,138 +259,21 @@ public class TemporalDatumType
             final TemporalDatumType leftObject = ((TemporalDatumType) left);
             final TemporalDatumType rightObject = ((TemporalDatumType) right);
             {
-                XMLGregorianCalendar lhsOrigin;
-                lhsOrigin = leftObject.getOrigin();
-                XMLGregorianCalendar rhsOrigin;
-                rhsOrigin = rightObject.getOrigin();
-                target.setOrigin(((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "origin", lhsOrigin), LocatorUtils.property(rightLocator, "origin", rhsOrigin), lhsOrigin, rhsOrigin)));
+                java.lang.Boolean originShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetOrigin(), rightObject.isSetOrigin());
+                if (originShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar lhsOrigin;
+                    lhsOrigin = leftObject.getOrigin();
+                    XMLGregorianCalendar rhsOrigin;
+                    rhsOrigin = rightObject.getOrigin();
+                    XMLGregorianCalendar mergedOrigin = ((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "origin", lhsOrigin), LocatorUtils.property(rightLocator, "origin", rhsOrigin), lhsOrigin, rhsOrigin, leftObject.isSetOrigin(), rightObject.isSetOrigin()));
+                    target.setOrigin(mergedOrigin);
+                } else {
+                    if (originShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.origin = null;
+                    }
+                }
             }
         }
-    }
-
-    public TemporalDatumType withOrigin(XMLGregorianCalendar value) {
-        setOrigin(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withDomainOfValidity(DomainOfValidityElement value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withScope(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getScope().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withScope(Collection<String> values) {
-        if (values!= null) {
-            getScope().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withAnchorDefinition(JAXBElement<CodeType> value) {
-        setAnchorDefinition(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withRealizationEpoch(XMLGregorianCalendar value) {
-        setRealizationEpoch(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withScope(List<String> value) {
-        setScope(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TemporalDatumType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

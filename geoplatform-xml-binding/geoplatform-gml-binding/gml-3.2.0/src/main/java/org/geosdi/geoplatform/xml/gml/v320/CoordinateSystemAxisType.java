@@ -34,63 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per CoordinateSystemAxisType complex type.
+ * <p>Classe Java per CoordinateSystemAxisType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="CoordinateSystemAxisType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}axisAbbrev"/>
- *         &lt;element ref="{http://www.opengis.net/gml}axisDirection"/>
- *         &lt;element ref="{http://www.opengis.net/gml}minimumValue" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}maximumValue" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}rangeMeaning" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute ref="{http://www.opengis.net/gml}uom use="required""/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="CoordinateSystemAxisType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}axisAbbrev"/>
+ *         <element ref="{http://www.opengis.net/gml}axisDirection"/>
+ *         <element ref="{http://www.opengis.net/gml}minimumValue" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}maximumValue" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}rangeMeaning" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute ref="{http://www.opengis.net/gml}uom use="required""/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -107,19 +104,45 @@ public class CoordinateSystemAxisType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:axisAbbrev is the abbreviation used for this coordinate system axis; this abbreviation is also used to identify the coordinates in the coordinate tuple. The codeSpace attribute may reference a source of more information on a set of standardized abbreviations, or on this abbreviation.
+     * 
+     */
     @XmlElement(required = true)
     protected CodeType axisAbbrev;
+    /**
+     * gml:axisDirection is the direction of this coordinate system axis (or in the case of Cartesian projected coordinates, the direction of this coordinate system axis at the origin).
+     * Within any set of coordinate system axes, only one of each pair of terms may be used. For earth-fixed CRSs, this direction is often approximate and intended to provide a human interpretable meaning to the axis. When a geodetic datum is used, the precise directions of the axes may therefore vary slightly from this approximate direction.
+     * The codeSpace attribute shall reference a source of information specifying the values and meanings of all the allowed string values for this property.
+     * 
+     */
     @XmlElement(required = true)
     protected CodeWithAuthorityType axisDirection;
+    /**
+     * The gml:minimumValue and gml:maximumValue properties allow the specification of minimum and maximum value normally allowed for this axis, in the unit of measure for the axis. For a continuous angular axis such as longitude, the values wrap-around at this value. Also, values beyond this minimum/maximum can be used for specified purposes, such as in a bounding box. A value of minus infinity shall be allowed for the gml:minimumValue element, a value of plus infiniy for the gml:maximumValue element. If these elements are omitted, the value is unspecified.
+     * 
+     */
     protected Double minimumValue;
+    /**
+     * The gml:minimumValue and gml:maximumValue properties allow the specification of minimum and maximum value normally allowed for this axis, in the unit of measure for the axis. For a continuous angular axis such as longitude, the values wrap-around at this value. Also, values beyond this minimum/maximum can be used for specified purposes, such as in a bounding box. A value of minus infinity shall be allowed for the gml:minimumValue element, a value of plus infiniy for the gml:maximumValue element. If these elements are omitted, the value is unspecified.
+     * 
+     */
     protected Double maximumValue;
+    /**
+     * gml:rangeMeaning describes the meaning of axis value range specified by gml:minimumValue and gml:maximumValue. This element shall be omitted when both gml:minimumValue and gml:maximumValue are omitted. This element should be included when gml:minimumValue and/or gml:maximumValue are included. If this element is omitted when the gml:minimumValue and/or gml:maximumValue are included, the meaning is unspecified. The codeSpace attribute shall reference a source of information specifying the values and meanings of all the allowed string values for this property.
+     * 
+     */
     protected CodeWithAuthorityType rangeMeaning;
+    /**
+     * The uom attribute provides an identifier of the unit of measure used for this coordinate system axis. The value of this coordinate in a coordinate tuple shall be recorded using this unit of measure, whenever those coordinates use a coordinate reference system that uses a coordinate system that uses this axis.
+     * 
+     */
     @XmlAttribute(name = "uom", namespace = "http://www.opengis.net/gml", required = true)
     @XmlSchemaType(name = "anyURI")
     protected String uom;
 
     /**
-     * Recupera il valore della proprietà axisAbbrev.
+     * gml:axisAbbrev is the abbreviation used for this coordinate system axis; this abbreviation is also used to identify the coordinates in the coordinate tuple. The codeSpace attribute may reference a source of more information on a set of standardized abbreviations, or on this abbreviation.
      * 
      * @return
      *     possible object is
@@ -137,6 +160,7 @@ public class CoordinateSystemAxisType
      *     allowed object is
      *     {@link CodeType }
      *     
+     * @see #getAxisAbbrev()
      */
     public void setAxisAbbrev(CodeType value) {
         this.axisAbbrev = value;
@@ -147,7 +171,9 @@ public class CoordinateSystemAxisType
     }
 
     /**
-     * Recupera il valore della proprietà axisDirection.
+     * gml:axisDirection is the direction of this coordinate system axis (or in the case of Cartesian projected coordinates, the direction of this coordinate system axis at the origin).
+     * Within any set of coordinate system axes, only one of each pair of terms may be used. For earth-fixed CRSs, this direction is often approximate and intended to provide a human interpretable meaning to the axis. When a geodetic datum is used, the precise directions of the axes may therefore vary slightly from this approximate direction.
+     * The codeSpace attribute shall reference a source of information specifying the values and meanings of all the allowed string values for this property.
      * 
      * @return
      *     possible object is
@@ -165,6 +191,7 @@ public class CoordinateSystemAxisType
      *     allowed object is
      *     {@link CodeWithAuthorityType }
      *     
+     * @see #getAxisDirection()
      */
     public void setAxisDirection(CodeWithAuthorityType value) {
         this.axisDirection = value;
@@ -175,7 +202,7 @@ public class CoordinateSystemAxisType
     }
 
     /**
-     * Recupera il valore della proprietà minimumValue.
+     * The gml:minimumValue and gml:maximumValue properties allow the specification of minimum and maximum value normally allowed for this axis, in the unit of measure for the axis. For a continuous angular axis such as longitude, the values wrap-around at this value. Also, values beyond this minimum/maximum can be used for specified purposes, such as in a bounding box. A value of minus infinity shall be allowed for the gml:minimumValue element, a value of plus infiniy for the gml:maximumValue element. If these elements are omitted, the value is unspecified.
      * 
      * @return
      *     possible object is
@@ -193,6 +220,7 @@ public class CoordinateSystemAxisType
      *     allowed object is
      *     {@link Double }
      *     
+     * @see #getMinimumValue()
      */
     public void setMinimumValue(Double value) {
         this.minimumValue = value;
@@ -203,7 +231,7 @@ public class CoordinateSystemAxisType
     }
 
     /**
-     * Recupera il valore della proprietà maximumValue.
+     * The gml:minimumValue and gml:maximumValue properties allow the specification of minimum and maximum value normally allowed for this axis, in the unit of measure for the axis. For a continuous angular axis such as longitude, the values wrap-around at this value. Also, values beyond this minimum/maximum can be used for specified purposes, such as in a bounding box. A value of minus infinity shall be allowed for the gml:minimumValue element, a value of plus infiniy for the gml:maximumValue element. If these elements are omitted, the value is unspecified.
      * 
      * @return
      *     possible object is
@@ -221,6 +249,7 @@ public class CoordinateSystemAxisType
      *     allowed object is
      *     {@link Double }
      *     
+     * @see #getMaximumValue()
      */
     public void setMaximumValue(Double value) {
         this.maximumValue = value;
@@ -231,7 +260,7 @@ public class CoordinateSystemAxisType
     }
 
     /**
-     * Recupera il valore della proprietà rangeMeaning.
+     * gml:rangeMeaning describes the meaning of axis value range specified by gml:minimumValue and gml:maximumValue. This element shall be omitted when both gml:minimumValue and gml:maximumValue are omitted. This element should be included when gml:minimumValue and/or gml:maximumValue are included. If this element is omitted when the gml:minimumValue and/or gml:maximumValue are included, the meaning is unspecified. The codeSpace attribute shall reference a source of information specifying the values and meanings of all the allowed string values for this property.
      * 
      * @return
      *     possible object is
@@ -249,6 +278,7 @@ public class CoordinateSystemAxisType
      *     allowed object is
      *     {@link CodeWithAuthorityType }
      *     
+     * @see #getRangeMeaning()
      */
     public void setRangeMeaning(CodeWithAuthorityType value) {
         this.rangeMeaning = value;
@@ -259,7 +289,7 @@ public class CoordinateSystemAxisType
     }
 
     /**
-     * Recupera il valore della proprietà uom.
+     * The uom attribute provides an identifier of the unit of measure used for this coordinate system axis. The value of this coordinate in a coordinate tuple shall be recorded using this unit of measure, whenever those coordinates use a coordinate reference system that uses a coordinate system that uses this axis.
      * 
      * @return
      *     possible object is
@@ -277,6 +307,7 @@ public class CoordinateSystemAxisType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getUom()
      */
     public void setUom(String value) {
         this.uom = value;
@@ -286,13 +317,15 @@ public class CoordinateSystemAxisType
         return (this.uom!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -300,43 +333,45 @@ public class CoordinateSystemAxisType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             CodeType theAxisAbbrev;
             theAxisAbbrev = this.getAxisAbbrev();
-            strategy.appendField(locator, this, "axisAbbrev", buffer, theAxisAbbrev);
+            strategy.appendField(locator, this, "axisAbbrev", buffer, theAxisAbbrev, this.isSetAxisAbbrev());
         }
         {
             CodeWithAuthorityType theAxisDirection;
             theAxisDirection = this.getAxisDirection();
-            strategy.appendField(locator, this, "axisDirection", buffer, theAxisDirection);
+            strategy.appendField(locator, this, "axisDirection", buffer, theAxisDirection, this.isSetAxisDirection());
         }
         {
             Double theMinimumValue;
             theMinimumValue = this.getMinimumValue();
-            strategy.appendField(locator, this, "minimumValue", buffer, theMinimumValue);
+            strategy.appendField(locator, this, "minimumValue", buffer, theMinimumValue, this.isSetMinimumValue());
         }
         {
             Double theMaximumValue;
             theMaximumValue = this.getMaximumValue();
-            strategy.appendField(locator, this, "maximumValue", buffer, theMaximumValue);
+            strategy.appendField(locator, this, "maximumValue", buffer, theMaximumValue, this.isSetMaximumValue());
         }
         {
             CodeWithAuthorityType theRangeMeaning;
             theRangeMeaning = this.getRangeMeaning();
-            strategy.appendField(locator, this, "rangeMeaning", buffer, theRangeMeaning);
+            strategy.appendField(locator, this, "rangeMeaning", buffer, theRangeMeaning, this.isSetRangeMeaning());
         }
         {
             String theUom;
             theUom = this.getUom();
-            strategy.appendField(locator, this, "uom", buffer, theUom);
+            strategy.appendField(locator, this, "uom", buffer, theUom, this.isSetUom());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof CoordinateSystemAxisType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -351,7 +386,7 @@ public class CoordinateSystemAxisType
             lhsAxisAbbrev = this.getAxisAbbrev();
             CodeType rhsAxisAbbrev;
             rhsAxisAbbrev = that.getAxisAbbrev();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "axisAbbrev", lhsAxisAbbrev), LocatorUtils.property(thatLocator, "axisAbbrev", rhsAxisAbbrev), lhsAxisAbbrev, rhsAxisAbbrev)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "axisAbbrev", lhsAxisAbbrev), LocatorUtils.property(thatLocator, "axisAbbrev", rhsAxisAbbrev), lhsAxisAbbrev, rhsAxisAbbrev, this.isSetAxisAbbrev(), that.isSetAxisAbbrev())) {
                 return false;
             }
         }
@@ -360,7 +395,7 @@ public class CoordinateSystemAxisType
             lhsAxisDirection = this.getAxisDirection();
             CodeWithAuthorityType rhsAxisDirection;
             rhsAxisDirection = that.getAxisDirection();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "axisDirection", lhsAxisDirection), LocatorUtils.property(thatLocator, "axisDirection", rhsAxisDirection), lhsAxisDirection, rhsAxisDirection)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "axisDirection", lhsAxisDirection), LocatorUtils.property(thatLocator, "axisDirection", rhsAxisDirection), lhsAxisDirection, rhsAxisDirection, this.isSetAxisDirection(), that.isSetAxisDirection())) {
                 return false;
             }
         }
@@ -369,7 +404,7 @@ public class CoordinateSystemAxisType
             lhsMinimumValue = this.getMinimumValue();
             Double rhsMinimumValue;
             rhsMinimumValue = that.getMinimumValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "minimumValue", lhsMinimumValue), LocatorUtils.property(thatLocator, "minimumValue", rhsMinimumValue), lhsMinimumValue, rhsMinimumValue)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "minimumValue", lhsMinimumValue), LocatorUtils.property(thatLocator, "minimumValue", rhsMinimumValue), lhsMinimumValue, rhsMinimumValue, this.isSetMinimumValue(), that.isSetMinimumValue())) {
                 return false;
             }
         }
@@ -378,7 +413,7 @@ public class CoordinateSystemAxisType
             lhsMaximumValue = this.getMaximumValue();
             Double rhsMaximumValue;
             rhsMaximumValue = that.getMaximumValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "maximumValue", lhsMaximumValue), LocatorUtils.property(thatLocator, "maximumValue", rhsMaximumValue), lhsMaximumValue, rhsMaximumValue)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "maximumValue", lhsMaximumValue), LocatorUtils.property(thatLocator, "maximumValue", rhsMaximumValue), lhsMaximumValue, rhsMaximumValue, this.isSetMaximumValue(), that.isSetMaximumValue())) {
                 return false;
             }
         }
@@ -387,7 +422,7 @@ public class CoordinateSystemAxisType
             lhsRangeMeaning = this.getRangeMeaning();
             CodeWithAuthorityType rhsRangeMeaning;
             rhsRangeMeaning = that.getRangeMeaning();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeMeaning", lhsRangeMeaning), LocatorUtils.property(thatLocator, "rangeMeaning", rhsRangeMeaning), lhsRangeMeaning, rhsRangeMeaning)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeMeaning", lhsRangeMeaning), LocatorUtils.property(thatLocator, "rangeMeaning", rhsRangeMeaning), lhsRangeMeaning, rhsRangeMeaning, this.isSetRangeMeaning(), that.isSetRangeMeaning())) {
                 return false;
             }
         }
@@ -396,133 +431,172 @@ public class CoordinateSystemAxisType
             lhsUom = this.getUom();
             String rhsUom;
             rhsUom = that.getUom();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "uom", lhsUom), LocatorUtils.property(thatLocator, "uom", rhsUom), lhsUom, rhsUom)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "uom", lhsUom), LocatorUtils.property(thatLocator, "uom", rhsUom), lhsUom, rhsUom, this.isSetUom(), that.isSetUom())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             CodeType theAxisAbbrev;
             theAxisAbbrev = this.getAxisAbbrev();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axisAbbrev", theAxisAbbrev), currentHashCode, theAxisAbbrev);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axisAbbrev", theAxisAbbrev), currentHashCode, theAxisAbbrev, this.isSetAxisAbbrev());
         }
         {
             CodeWithAuthorityType theAxisDirection;
             theAxisDirection = this.getAxisDirection();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axisDirection", theAxisDirection), currentHashCode, theAxisDirection);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axisDirection", theAxisDirection), currentHashCode, theAxisDirection, this.isSetAxisDirection());
         }
         {
             Double theMinimumValue;
             theMinimumValue = this.getMinimumValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "minimumValue", theMinimumValue), currentHashCode, theMinimumValue);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "minimumValue", theMinimumValue), currentHashCode, theMinimumValue, this.isSetMinimumValue());
         }
         {
             Double theMaximumValue;
             theMaximumValue = this.getMaximumValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "maximumValue", theMaximumValue), currentHashCode, theMaximumValue);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "maximumValue", theMaximumValue), currentHashCode, theMaximumValue, this.isSetMaximumValue());
         }
         {
             CodeWithAuthorityType theRangeMeaning;
             theRangeMeaning = this.getRangeMeaning();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeMeaning", theRangeMeaning), currentHashCode, theRangeMeaning);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeMeaning", theRangeMeaning), currentHashCode, theRangeMeaning, this.isSetRangeMeaning());
         }
         {
             String theUom;
             theUom = this.getUom();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "uom", theUom), currentHashCode, theUom);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "uom", theUom), currentHashCode, theUom, this.isSetUom());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof CoordinateSystemAxisType) {
             final CoordinateSystemAxisType copy = ((CoordinateSystemAxisType) draftCopy);
-            if (this.isSetAxisAbbrev()) {
-                CodeType sourceAxisAbbrev;
-                sourceAxisAbbrev = this.getAxisAbbrev();
-                CodeType copyAxisAbbrev = ((CodeType) strategy.copy(LocatorUtils.property(locator, "axisAbbrev", sourceAxisAbbrev), sourceAxisAbbrev));
-                copy.setAxisAbbrev(copyAxisAbbrev);
-            } else {
-                copy.axisAbbrev = null;
+            {
+                java.lang.Boolean axisAbbrevShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAxisAbbrev());
+                if (axisAbbrevShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CodeType sourceAxisAbbrev;
+                    sourceAxisAbbrev = this.getAxisAbbrev();
+                    CodeType copyAxisAbbrev = ((CodeType) strategy.copy(LocatorUtils.property(locator, "axisAbbrev", sourceAxisAbbrev), sourceAxisAbbrev, this.isSetAxisAbbrev()));
+                    copy.setAxisAbbrev(copyAxisAbbrev);
+                } else {
+                    if (axisAbbrevShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.axisAbbrev = null;
+                    }
+                }
             }
-            if (this.isSetAxisDirection()) {
-                CodeWithAuthorityType sourceAxisDirection;
-                sourceAxisDirection = this.getAxisDirection();
-                CodeWithAuthorityType copyAxisDirection = ((CodeWithAuthorityType) strategy.copy(LocatorUtils.property(locator, "axisDirection", sourceAxisDirection), sourceAxisDirection));
-                copy.setAxisDirection(copyAxisDirection);
-            } else {
-                copy.axisDirection = null;
+            {
+                java.lang.Boolean axisDirectionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAxisDirection());
+                if (axisDirectionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CodeWithAuthorityType sourceAxisDirection;
+                    sourceAxisDirection = this.getAxisDirection();
+                    CodeWithAuthorityType copyAxisDirection = ((CodeWithAuthorityType) strategy.copy(LocatorUtils.property(locator, "axisDirection", sourceAxisDirection), sourceAxisDirection, this.isSetAxisDirection()));
+                    copy.setAxisDirection(copyAxisDirection);
+                } else {
+                    if (axisDirectionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.axisDirection = null;
+                    }
+                }
             }
-            if (this.isSetMinimumValue()) {
-                Double sourceMinimumValue;
-                sourceMinimumValue = this.getMinimumValue();
-                Double copyMinimumValue = ((Double) strategy.copy(LocatorUtils.property(locator, "minimumValue", sourceMinimumValue), sourceMinimumValue));
-                copy.setMinimumValue(copyMinimumValue);
-            } else {
-                copy.minimumValue = null;
+            {
+                java.lang.Boolean minimumValueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMinimumValue());
+                if (minimumValueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    Double sourceMinimumValue;
+                    sourceMinimumValue = this.getMinimumValue();
+                    Double copyMinimumValue = ((Double) strategy.copy(LocatorUtils.property(locator, "minimumValue", sourceMinimumValue), sourceMinimumValue, this.isSetMinimumValue()));
+                    copy.setMinimumValue(copyMinimumValue);
+                } else {
+                    if (minimumValueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.minimumValue = null;
+                    }
+                }
             }
-            if (this.isSetMaximumValue()) {
-                Double sourceMaximumValue;
-                sourceMaximumValue = this.getMaximumValue();
-                Double copyMaximumValue = ((Double) strategy.copy(LocatorUtils.property(locator, "maximumValue", sourceMaximumValue), sourceMaximumValue));
-                copy.setMaximumValue(copyMaximumValue);
-            } else {
-                copy.maximumValue = null;
+            {
+                java.lang.Boolean maximumValueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMaximumValue());
+                if (maximumValueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    Double sourceMaximumValue;
+                    sourceMaximumValue = this.getMaximumValue();
+                    Double copyMaximumValue = ((Double) strategy.copy(LocatorUtils.property(locator, "maximumValue", sourceMaximumValue), sourceMaximumValue, this.isSetMaximumValue()));
+                    copy.setMaximumValue(copyMaximumValue);
+                } else {
+                    if (maximumValueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.maximumValue = null;
+                    }
+                }
             }
-            if (this.isSetRangeMeaning()) {
-                CodeWithAuthorityType sourceRangeMeaning;
-                sourceRangeMeaning = this.getRangeMeaning();
-                CodeWithAuthorityType copyRangeMeaning = ((CodeWithAuthorityType) strategy.copy(LocatorUtils.property(locator, "rangeMeaning", sourceRangeMeaning), sourceRangeMeaning));
-                copy.setRangeMeaning(copyRangeMeaning);
-            } else {
-                copy.rangeMeaning = null;
+            {
+                java.lang.Boolean rangeMeaningShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRangeMeaning());
+                if (rangeMeaningShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CodeWithAuthorityType sourceRangeMeaning;
+                    sourceRangeMeaning = this.getRangeMeaning();
+                    CodeWithAuthorityType copyRangeMeaning = ((CodeWithAuthorityType) strategy.copy(LocatorUtils.property(locator, "rangeMeaning", sourceRangeMeaning), sourceRangeMeaning, this.isSetRangeMeaning()));
+                    copy.setRangeMeaning(copyRangeMeaning);
+                } else {
+                    if (rangeMeaningShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.rangeMeaning = null;
+                    }
+                }
             }
-            if (this.isSetUom()) {
-                String sourceUom;
-                sourceUom = this.getUom();
-                String copyUom = ((String) strategy.copy(LocatorUtils.property(locator, "uom", sourceUom), sourceUom));
-                copy.setUom(copyUom);
-            } else {
-                copy.uom = null;
+            {
+                java.lang.Boolean uomShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUom());
+                if (uomShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceUom;
+                    sourceUom = this.getUom();
+                    String copyUom = ((String) strategy.copy(LocatorUtils.property(locator, "uom", sourceUom), sourceUom, this.isSetUom()));
+                    copy.setUom(copyUom);
+                } else {
+                    if (uomShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.uom = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new CoordinateSystemAxisType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof CoordinateSystemAxisType) {
@@ -530,156 +604,96 @@ public class CoordinateSystemAxisType
             final CoordinateSystemAxisType leftObject = ((CoordinateSystemAxisType) left);
             final CoordinateSystemAxisType rightObject = ((CoordinateSystemAxisType) right);
             {
-                CodeType lhsAxisAbbrev;
-                lhsAxisAbbrev = leftObject.getAxisAbbrev();
-                CodeType rhsAxisAbbrev;
-                rhsAxisAbbrev = rightObject.getAxisAbbrev();
-                target.setAxisAbbrev(((CodeType) strategy.merge(LocatorUtils.property(leftLocator, "axisAbbrev", lhsAxisAbbrev), LocatorUtils.property(rightLocator, "axisAbbrev", rhsAxisAbbrev), lhsAxisAbbrev, rhsAxisAbbrev)));
+                java.lang.Boolean axisAbbrevShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAxisAbbrev(), rightObject.isSetAxisAbbrev());
+                if (axisAbbrevShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CodeType lhsAxisAbbrev;
+                    lhsAxisAbbrev = leftObject.getAxisAbbrev();
+                    CodeType rhsAxisAbbrev;
+                    rhsAxisAbbrev = rightObject.getAxisAbbrev();
+                    CodeType mergedAxisAbbrev = ((CodeType) strategy.merge(LocatorUtils.property(leftLocator, "axisAbbrev", lhsAxisAbbrev), LocatorUtils.property(rightLocator, "axisAbbrev", rhsAxisAbbrev), lhsAxisAbbrev, rhsAxisAbbrev, leftObject.isSetAxisAbbrev(), rightObject.isSetAxisAbbrev()));
+                    target.setAxisAbbrev(mergedAxisAbbrev);
+                } else {
+                    if (axisAbbrevShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.axisAbbrev = null;
+                    }
+                }
             }
             {
-                CodeWithAuthorityType lhsAxisDirection;
-                lhsAxisDirection = leftObject.getAxisDirection();
-                CodeWithAuthorityType rhsAxisDirection;
-                rhsAxisDirection = rightObject.getAxisDirection();
-                target.setAxisDirection(((CodeWithAuthorityType) strategy.merge(LocatorUtils.property(leftLocator, "axisDirection", lhsAxisDirection), LocatorUtils.property(rightLocator, "axisDirection", rhsAxisDirection), lhsAxisDirection, rhsAxisDirection)));
+                java.lang.Boolean axisDirectionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAxisDirection(), rightObject.isSetAxisDirection());
+                if (axisDirectionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CodeWithAuthorityType lhsAxisDirection;
+                    lhsAxisDirection = leftObject.getAxisDirection();
+                    CodeWithAuthorityType rhsAxisDirection;
+                    rhsAxisDirection = rightObject.getAxisDirection();
+                    CodeWithAuthorityType mergedAxisDirection = ((CodeWithAuthorityType) strategy.merge(LocatorUtils.property(leftLocator, "axisDirection", lhsAxisDirection), LocatorUtils.property(rightLocator, "axisDirection", rhsAxisDirection), lhsAxisDirection, rhsAxisDirection, leftObject.isSetAxisDirection(), rightObject.isSetAxisDirection()));
+                    target.setAxisDirection(mergedAxisDirection);
+                } else {
+                    if (axisDirectionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.axisDirection = null;
+                    }
+                }
             }
             {
-                Double lhsMinimumValue;
-                lhsMinimumValue = leftObject.getMinimumValue();
-                Double rhsMinimumValue;
-                rhsMinimumValue = rightObject.getMinimumValue();
-                target.setMinimumValue(((Double) strategy.merge(LocatorUtils.property(leftLocator, "minimumValue", lhsMinimumValue), LocatorUtils.property(rightLocator, "minimumValue", rhsMinimumValue), lhsMinimumValue, rhsMinimumValue)));
+                java.lang.Boolean minimumValueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMinimumValue(), rightObject.isSetMinimumValue());
+                if (minimumValueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    Double lhsMinimumValue;
+                    lhsMinimumValue = leftObject.getMinimumValue();
+                    Double rhsMinimumValue;
+                    rhsMinimumValue = rightObject.getMinimumValue();
+                    Double mergedMinimumValue = ((Double) strategy.merge(LocatorUtils.property(leftLocator, "minimumValue", lhsMinimumValue), LocatorUtils.property(rightLocator, "minimumValue", rhsMinimumValue), lhsMinimumValue, rhsMinimumValue, leftObject.isSetMinimumValue(), rightObject.isSetMinimumValue()));
+                    target.setMinimumValue(mergedMinimumValue);
+                } else {
+                    if (minimumValueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.minimumValue = null;
+                    }
+                }
             }
             {
-                Double lhsMaximumValue;
-                lhsMaximumValue = leftObject.getMaximumValue();
-                Double rhsMaximumValue;
-                rhsMaximumValue = rightObject.getMaximumValue();
-                target.setMaximumValue(((Double) strategy.merge(LocatorUtils.property(leftLocator, "maximumValue", lhsMaximumValue), LocatorUtils.property(rightLocator, "maximumValue", rhsMaximumValue), lhsMaximumValue, rhsMaximumValue)));
+                java.lang.Boolean maximumValueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMaximumValue(), rightObject.isSetMaximumValue());
+                if (maximumValueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    Double lhsMaximumValue;
+                    lhsMaximumValue = leftObject.getMaximumValue();
+                    Double rhsMaximumValue;
+                    rhsMaximumValue = rightObject.getMaximumValue();
+                    Double mergedMaximumValue = ((Double) strategy.merge(LocatorUtils.property(leftLocator, "maximumValue", lhsMaximumValue), LocatorUtils.property(rightLocator, "maximumValue", rhsMaximumValue), lhsMaximumValue, rhsMaximumValue, leftObject.isSetMaximumValue(), rightObject.isSetMaximumValue()));
+                    target.setMaximumValue(mergedMaximumValue);
+                } else {
+                    if (maximumValueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.maximumValue = null;
+                    }
+                }
             }
             {
-                CodeWithAuthorityType lhsRangeMeaning;
-                lhsRangeMeaning = leftObject.getRangeMeaning();
-                CodeWithAuthorityType rhsRangeMeaning;
-                rhsRangeMeaning = rightObject.getRangeMeaning();
-                target.setRangeMeaning(((CodeWithAuthorityType) strategy.merge(LocatorUtils.property(leftLocator, "rangeMeaning", lhsRangeMeaning), LocatorUtils.property(rightLocator, "rangeMeaning", rhsRangeMeaning), lhsRangeMeaning, rhsRangeMeaning)));
+                java.lang.Boolean rangeMeaningShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRangeMeaning(), rightObject.isSetRangeMeaning());
+                if (rangeMeaningShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CodeWithAuthorityType lhsRangeMeaning;
+                    lhsRangeMeaning = leftObject.getRangeMeaning();
+                    CodeWithAuthorityType rhsRangeMeaning;
+                    rhsRangeMeaning = rightObject.getRangeMeaning();
+                    CodeWithAuthorityType mergedRangeMeaning = ((CodeWithAuthorityType) strategy.merge(LocatorUtils.property(leftLocator, "rangeMeaning", lhsRangeMeaning), LocatorUtils.property(rightLocator, "rangeMeaning", rhsRangeMeaning), lhsRangeMeaning, rhsRangeMeaning, leftObject.isSetRangeMeaning(), rightObject.isSetRangeMeaning()));
+                    target.setRangeMeaning(mergedRangeMeaning);
+                } else {
+                    if (rangeMeaningShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.rangeMeaning = null;
+                    }
+                }
             }
             {
-                String lhsUom;
-                lhsUom = leftObject.getUom();
-                String rhsUom;
-                rhsUom = rightObject.getUom();
-                target.setUom(((String) strategy.merge(LocatorUtils.property(leftLocator, "uom", lhsUom), LocatorUtils.property(rightLocator, "uom", rhsUom), lhsUom, rhsUom)));
+                java.lang.Boolean uomShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUom(), rightObject.isSetUom());
+                if (uomShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsUom;
+                    lhsUom = leftObject.getUom();
+                    String rhsUom;
+                    rhsUom = rightObject.getUom();
+                    String mergedUom = ((String) strategy.merge(LocatorUtils.property(leftLocator, "uom", lhsUom), LocatorUtils.property(rightLocator, "uom", rhsUom), lhsUom, rhsUom, leftObject.isSetUom(), rightObject.isSetUom()));
+                    target.setUom(mergedUom);
+                } else {
+                    if (uomShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.uom = null;
+                    }
+                }
             }
         }
-    }
-
-    public CoordinateSystemAxisType withAxisAbbrev(CodeType value) {
-        setAxisAbbrev(value);
-        return this;
-    }
-
-    public CoordinateSystemAxisType withAxisDirection(CodeWithAuthorityType value) {
-        setAxisDirection(value);
-        return this;
-    }
-
-    public CoordinateSystemAxisType withMinimumValue(Double value) {
-        setMinimumValue(value);
-        return this;
-    }
-
-    public CoordinateSystemAxisType withMaximumValue(Double value) {
-        setMaximumValue(value);
-        return this;
-    }
-
-    public CoordinateSystemAxisType withRangeMeaning(CodeWithAuthorityType value) {
-        setRangeMeaning(value);
-        return this;
-    }
-
-    public CoordinateSystemAxisType withUom(String value) {
-        setUom(value);
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public CoordinateSystemAxisType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

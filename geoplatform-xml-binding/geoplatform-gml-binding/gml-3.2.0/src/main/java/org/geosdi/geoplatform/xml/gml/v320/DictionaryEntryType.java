@@ -34,61 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per DictionaryEntryType complex type.
+ * <p>Classe Java per DictionaryEntryType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="DictionaryEntryType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractMemberType">
- *       &lt;sequence minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}Definition"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AssociationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="DictionaryEntryType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractMemberType">
+ *       <sequence minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}Definition"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AssociationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -101,6 +99,15 @@ public class DictionaryEntryType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The basic gml:Definition element specifies a definition, which can be included in or referenced by a dictionary. 
+     * The content model for a generic definition is a derivation from gml:AbstractGMLType.  
+     * The gml:description property element shall hold the definition if this can be captured in a simple text string, or the gml:descriptionReference property element may carry a link to a description elsewhere.
+     * The gml:identifier element shall provide one identifier identifying this definition. The identifier shall be unique within the dictionaries using this definition. 
+     * The gml:name elements shall provide zero or more terms and synonyms for which this is the definition.
+     * The gml:remarks element shall be used to hold additional textual information that is not conceptually part of the definition but is useful in understanding the definition.
+     * 
+     */
     @XmlElementRef(name = "Definition", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected JAXBElement<? extends DefinitionType> definition;
     @XmlAttribute(name = "nilReason")
@@ -108,12 +115,8 @@ public class DictionaryEntryType
     @XmlAttribute(name = "remoteSchema", namespace = "http://www.opengis.net/gml")
     @XmlSchemaType(name = "anyURI")
     protected String remoteSchema;
-    /**
-     * 
-     * 
-     */
     @XmlAttribute(name = "type", namespace = "http://www.w3.org/1999/xlink")
-    public final static String TYPE = "simple";
+    public static final String TYPE = "simple";
     @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink")
     @XmlSchemaType(name = "anyURI")
     protected String href;
@@ -125,77 +128,111 @@ public class DictionaryEntryType
     protected String arcrole;
     @XmlAttribute(name = "title", namespace = "http://www.w3.org/1999/xlink")
     protected String title;
+    /**
+     * The 'show' attribute is used to communicate the desired presentation 
+     *         of the ending resource on traversal from the starting resource; it's 
+     *         value should be treated as follows: 
+     *         new - load ending resource in a new window, frame, pane, or other 
+     *               presentation context
+     *         replace - load the resource in the same window, frame, pane, or 
+     *                   other presentation context
+     *         embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *         other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *         none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "show", namespace = "http://www.w3.org/1999/xlink")
     protected String show;
+    /**
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *         of traversal from the starting resource to the ending resource; 
+     *         it's value should be treated as follows:
+     *         onLoad - traverse to the ending resource immediately on loading 
+     *                  the starting resource 
+     *         onRequest - traverse from the starting resource to the ending 
+     *                     resource only on a post-loading event triggered for 
+     *                     this purpose 
+     *         other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *         none - behavior is unconstrained
+     * 
+     */
     @XmlAttribute(name = "actuate", namespace = "http://www.w3.org/1999/xlink")
     protected String actuate;
 
     /**
-     * Recupera il valore della proprietà definition.
+     * The basic gml:Definition element specifies a definition, which can be included in or referenced by a dictionary. 
+     * The content model for a generic definition is a derivation from gml:AbstractGMLType.  
+     * The gml:description property element shall hold the definition if this can be captured in a simple text string, or the gml:descriptionReference property element may carry a link to a description elsewhere.
+     * The gml:identifier element shall provide one identifier identifying this definition. The identifier shall be unique within the dictionaries using this definition. 
+     * The gml:name elements shall provide zero or more terms and synonyms for which this is the definition.
+     * The gml:remarks element shall be used to hold additional textual information that is not conceptually part of the definition but is useful in understanding the definition.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link OperationParameterType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractCoordinateSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractGeneralTransformationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeOrdinalReferenceSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link BaseUnitType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DefinitionProxyType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link OperationMethodType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeodeticDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PrimeMeridianType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EngineeringDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link OperationParameterGroupType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ConventionalUnitType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractGeneralConversionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeCalendarType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link UnitDefinitionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeCoordinateSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EllipsoidType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeReferenceSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DefinitionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link CartesianCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DerivedUnitType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link UserDefinedCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TransformationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ObliqueCartesianCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PolarCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link SphericalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PassThroughOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LinearCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ImageDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link CylindricalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ConversionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeClockType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ConcatenatedOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EllipsoidalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link CoordinateSystemAxisType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AffineCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractGeneralConversionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractGeneralTransformationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AffineCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link BaseUnitType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link CartesianCSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link CompoundCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ConcatenatedOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ConventionalUnitType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ConversionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link CoordinateSystemAxisType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link CylindricalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DefinitionProxyType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DefinitionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DerivedUnitType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EllipsoidType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EllipsoidalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EngineeringDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeodeticDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ImageDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LinearCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ObliqueCartesianCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link OperationMethodType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link OperationParameterGroupType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link OperationParameterType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PassThroughOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PolarCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PrimeMeridianType }{@code >}
      *     {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link SphericalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeCalendarType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeClockType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeCoordinateSystemType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeOrdinalReferenceSystemType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeReferenceSystemType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TransformationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UnitDefinitionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UserDefinedCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalDatumType }{@code >}
      *     
      */
     public JAXBElement<? extends DefinitionType> getDefinition() {
@@ -207,68 +244,69 @@ public class DictionaryEntryType
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link OperationParameterType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractCoordinateSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractGeneralTransformationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeOrdinalReferenceSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link BaseUnitType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DefinitionProxyType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link OperationMethodType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeodeticDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PrimeMeridianType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EngineeringDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link OperationParameterGroupType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ConventionalUnitType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractGeneralConversionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeCalendarType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TemporalDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link UnitDefinitionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeCoordinateSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EllipsoidType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeReferenceSystemType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DefinitionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link CartesianCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DerivedUnitType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link UserDefinedCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TransformationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ObliqueCartesianCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PolarCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link SphericalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link PassThroughOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link LinearCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ImageDatumType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link CylindricalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ConversionType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link TimeClockType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ConcatenatedOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link EllipsoidalCSType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractCoordinateOperationType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link CoordinateSystemAxisType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AffineCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractGeneralConversionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractGeneralDerivedCRSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AbstractGeneralTransformationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link AffineCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link BaseUnitType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link CartesianCSType }{@code >}
      *     {@link JAXBElement }{@code <}{@link CompoundCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ConcatenatedOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ConventionalUnitType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ConversionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link CoordinateSystemAxisType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link CylindricalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DefinitionProxyType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DefinitionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DerivedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DerivedUnitType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DictionaryType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EllipsoidType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EllipsoidalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EngineeringCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link EngineeringDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeocentricCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeodeticCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeodeticDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GeographicCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ImageCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ImageDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link LinearCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ObliqueCartesianCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link OperationMethodType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link OperationParameterGroupType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link OperationParameterType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PassThroughOperationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PolarCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PrimeMeridianType }{@code >}
      *     {@link JAXBElement }{@code <}{@link ProjectedCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link SphericalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TemporalDatumType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeCalendarType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeClockType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeCoordinateSystemType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeOrdinalReferenceSystemType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TimeReferenceSystemType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TransformationType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UnitDefinitionType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UserDefinedCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalCRSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalCSType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link VerticalDatumType }{@code >}
      *     
+     * @see #getDefinition()
      */
     public void setDefinition(JAXBElement<? extends DefinitionType> value) {
         this.definition = value;
@@ -281,28 +319,31 @@ public class DictionaryEntryType
     /**
      * Gets the value of the nilReason property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the nilReason property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the nilReason property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getNilReason().add(newItem);
+     * getNilReason().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the nilReason property.
      */
     public List<String> getNilReason() {
         if (nilReason == null) {
-            nilReason = new ArrayList<String>();
+            nilReason = new ArrayList<>();
         }
         return this.nilReason;
     }
@@ -456,7 +497,18 @@ public class DictionaryEntryType
     }
 
     /**
-     * Recupera il valore della proprietà show.
+     * The 'show' attribute is used to communicate the desired presentation 
+     *         of the ending resource on traversal from the starting resource; it's 
+     *         value should be treated as follows: 
+     *         new - load ending resource in a new window, frame, pane, or other 
+     *               presentation context
+     *         replace - load the resource in the same window, frame, pane, or 
+     *                   other presentation context
+     *         embed - load ending resource in place of the presentation of the 
+     *                 starting resource
+     *         other - behavior is unconstrained; examine other markup in the 
+     *                 link for hints 
+     *         none - behavior is unconstrained
      * 
      * @return
      *     possible object is
@@ -474,6 +526,7 @@ public class DictionaryEntryType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getShow()
      */
     public void setShow(String value) {
         this.show = value;
@@ -484,7 +537,17 @@ public class DictionaryEntryType
     }
 
     /**
-     * Recupera il valore della proprietà actuate.
+     * The 'actuate' attribute is used to communicate the desired timing 
+     *         of traversal from the starting resource to the ending resource; 
+     *         it's value should be treated as follows:
+     *         onLoad - traverse to the ending resource immediately on loading 
+     *                  the starting resource 
+     *         onRequest - traverse from the starting resource to the ending 
+     *                     resource only on a post-loading event triggered for 
+     *                     this purpose 
+     *         other - behavior is unconstrained; examine other markup in link 
+     *                 for hints 
+     *         none - behavior is unconstrained
      * 
      * @return
      *     possible object is
@@ -502,6 +565,7 @@ public class DictionaryEntryType
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getActuate()
      */
     public void setActuate(String value) {
         this.actuate = value;
@@ -511,13 +575,15 @@ public class DictionaryEntryType
         return (this.actuate!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -525,63 +591,73 @@ public class DictionaryEntryType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             JAXBElement<? extends DefinitionType> theDefinition;
             theDefinition = this.getDefinition();
-            strategy.appendField(locator, this, "definition", buffer, theDefinition);
+            strategy.appendField(locator, this, "definition", buffer, theDefinition, this.isSetDefinition());
         }
         {
             List<String> theNilReason;
-            theNilReason = this.getNilReason();
-            strategy.appendField(locator, this, "nilReason", buffer, theNilReason);
+            theNilReason = (this.isSetNilReason()?this.getNilReason():null);
+            strategy.appendField(locator, this, "nilReason", buffer, theNilReason, this.isSetNilReason());
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema, this.isSetRemoteSchema());
         }
         {
             String theTYPE;
             theTYPE = DictionaryEntryType.TYPE;
-            strategy.appendField(locator, this, "type", buffer, theTYPE);
+            strategy.appendField(locator, this, "type", buffer, theTYPE, true);
         }
         {
             String theHref;
             theHref = this.getHref();
-            strategy.appendField(locator, this, "href", buffer, theHref);
+            strategy.appendField(locator, this, "href", buffer, theHref, this.isSetHref());
         }
         {
             String theRole;
             theRole = this.getRole();
-            strategy.appendField(locator, this, "role", buffer, theRole);
+            strategy.appendField(locator, this, "role", buffer, theRole, this.isSetRole());
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            strategy.appendField(locator, this, "arcrole", buffer, theArcrole);
+            strategy.appendField(locator, this, "arcrole", buffer, theArcrole, this.isSetArcrole());
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            strategy.appendField(locator, this, "title", buffer, theTitle);
+            strategy.appendField(locator, this, "title", buffer, theTitle, this.isSetTitle());
         }
         {
             String theShow;
             theShow = this.getShow();
-            strategy.appendField(locator, this, "show", buffer, theShow);
+            strategy.appendField(locator, this, "show", buffer, theShow, this.isSetShow());
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            strategy.appendField(locator, this, "actuate", buffer, theActuate);
+            strategy.appendField(locator, this, "actuate", buffer, theActuate, this.isSetActuate());
         }
         return buffer;
     }
 
+    public void setNilReason(List<String> value) {
+        this.nilReason = null;
+        if (value!= null) {
+            List<String> draftl = this.getNilReason();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof DictionaryEntryType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -596,16 +672,16 @@ public class DictionaryEntryType
             lhsDefinition = this.getDefinition();
             JAXBElement<? extends DefinitionType> rhsDefinition;
             rhsDefinition = that.getDefinition();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "definition", lhsDefinition), LocatorUtils.property(thatLocator, "definition", rhsDefinition), lhsDefinition, rhsDefinition)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "definition", lhsDefinition), LocatorUtils.property(thatLocator, "definition", rhsDefinition), lhsDefinition, rhsDefinition, this.isSetDefinition(), that.isSetDefinition())) {
                 return false;
             }
         }
         {
             List<String> lhsNilReason;
-            lhsNilReason = this.getNilReason();
+            lhsNilReason = (this.isSetNilReason()?this.getNilReason():null);
             List<String> rhsNilReason;
-            rhsNilReason = that.getNilReason();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "nilReason", lhsNilReason), LocatorUtils.property(thatLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason)) {
+            rhsNilReason = (that.isSetNilReason()?that.getNilReason():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "nilReason", lhsNilReason), LocatorUtils.property(thatLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason, this.isSetNilReason(), that.isSetNilReason())) {
                 return false;
             }
         }
@@ -614,7 +690,7 @@ public class DictionaryEntryType
             lhsRemoteSchema = this.getRemoteSchema();
             String rhsRemoteSchema;
             rhsRemoteSchema = that.getRemoteSchema();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(thatLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(thatLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema, this.isSetRemoteSchema(), that.isSetRemoteSchema())) {
                 return false;
             }
         }
@@ -623,7 +699,7 @@ public class DictionaryEntryType
             lhsHref = this.getHref();
             String rhsHref;
             rhsHref = that.getHref();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "href", lhsHref), LocatorUtils.property(thatLocator, "href", rhsHref), lhsHref, rhsHref)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "href", lhsHref), LocatorUtils.property(thatLocator, "href", rhsHref), lhsHref, rhsHref, this.isSetHref(), that.isSetHref())) {
                 return false;
             }
         }
@@ -632,7 +708,7 @@ public class DictionaryEntryType
             lhsRole = this.getRole();
             String rhsRole;
             rhsRole = that.getRole();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "role", lhsRole), LocatorUtils.property(thatLocator, "role", rhsRole), lhsRole, rhsRole)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "role", lhsRole), LocatorUtils.property(thatLocator, "role", rhsRole), lhsRole, rhsRole, this.isSetRole(), that.isSetRole())) {
                 return false;
             }
         }
@@ -641,7 +717,7 @@ public class DictionaryEntryType
             lhsArcrole = this.getArcrole();
             String rhsArcrole;
             rhsArcrole = that.getArcrole();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "arcrole", lhsArcrole), LocatorUtils.property(thatLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "arcrole", lhsArcrole), LocatorUtils.property(thatLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole, this.isSetArcrole(), that.isSetArcrole())) {
                 return false;
             }
         }
@@ -650,7 +726,7 @@ public class DictionaryEntryType
             lhsTitle = this.getTitle();
             String rhsTitle;
             rhsTitle = that.getTitle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "title", lhsTitle), LocatorUtils.property(thatLocator, "title", rhsTitle), lhsTitle, rhsTitle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "title", lhsTitle), LocatorUtils.property(thatLocator, "title", rhsTitle), lhsTitle, rhsTitle, this.isSetTitle(), that.isSetTitle())) {
                 return false;
             }
         }
@@ -659,7 +735,7 @@ public class DictionaryEntryType
             lhsShow = this.getShow();
             String rhsShow;
             rhsShow = that.getShow();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "show", lhsShow), LocatorUtils.property(thatLocator, "show", rhsShow), lhsShow, rhsShow)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "show", lhsShow), LocatorUtils.property(thatLocator, "show", rhsShow), lhsShow, rhsShow, this.isSetShow(), that.isSetShow())) {
                 return false;
             }
         }
@@ -668,176 +744,228 @@ public class DictionaryEntryType
             lhsActuate = this.getActuate();
             String rhsActuate;
             rhsActuate = that.getActuate();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "actuate", lhsActuate), LocatorUtils.property(thatLocator, "actuate", rhsActuate), lhsActuate, rhsActuate)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "actuate", lhsActuate), LocatorUtils.property(thatLocator, "actuate", rhsActuate), lhsActuate, rhsActuate, this.isSetActuate(), that.isSetActuate())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             JAXBElement<? extends DefinitionType> theDefinition;
             theDefinition = this.getDefinition();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "definition", theDefinition), currentHashCode, theDefinition);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "definition", theDefinition), currentHashCode, theDefinition, this.isSetDefinition());
         }
         {
             List<String> theNilReason;
-            theNilReason = this.getNilReason();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "nilReason", theNilReason), currentHashCode, theNilReason);
+            theNilReason = (this.isSetNilReason()?this.getNilReason():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "nilReason", theNilReason), currentHashCode, theNilReason, this.isSetNilReason());
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "remoteSchema", theRemoteSchema), currentHashCode, theRemoteSchema);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "remoteSchema", theRemoteSchema), currentHashCode, theRemoteSchema, this.isSetRemoteSchema());
         }
         {
             String theHref;
             theHref = this.getHref();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "href", theHref), currentHashCode, theHref);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "href", theHref), currentHashCode, theHref, this.isSetHref());
         }
         {
             String theRole;
             theRole = this.getRole();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "role", theRole), currentHashCode, theRole);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "role", theRole), currentHashCode, theRole, this.isSetRole());
         }
         {
             String theArcrole;
             theArcrole = this.getArcrole();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "arcrole", theArcrole), currentHashCode, theArcrole);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "arcrole", theArcrole), currentHashCode, theArcrole, this.isSetArcrole());
         }
         {
             String theTitle;
             theTitle = this.getTitle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "title", theTitle), currentHashCode, theTitle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "title", theTitle), currentHashCode, theTitle, this.isSetTitle());
         }
         {
             String theShow;
             theShow = this.getShow();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "show", theShow), currentHashCode, theShow);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "show", theShow), currentHashCode, theShow, this.isSetShow());
         }
         {
             String theActuate;
             theActuate = this.getActuate();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "actuate", theActuate), currentHashCode, theActuate);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "actuate", theActuate), currentHashCode, theActuate, this.isSetActuate());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof DictionaryEntryType) {
             final DictionaryEntryType copy = ((DictionaryEntryType) draftCopy);
-            if (this.isSetDefinition()) {
-                JAXBElement<? extends DefinitionType> sourceDefinition;
-                sourceDefinition = this.getDefinition();
-                @SuppressWarnings("unchecked")
-                JAXBElement<? extends DefinitionType> copyDefinition = ((JAXBElement<? extends DefinitionType> ) strategy.copy(LocatorUtils.property(locator, "definition", sourceDefinition), sourceDefinition));
-                copy.setDefinition(copyDefinition);
-            } else {
-                copy.definition = null;
+            {
+                java.lang.Boolean definitionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDefinition());
+                if (definitionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends DefinitionType> sourceDefinition;
+                    sourceDefinition = this.getDefinition();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<? extends DefinitionType> copyDefinition = ((JAXBElement<? extends DefinitionType> ) strategy.copy(LocatorUtils.property(locator, "definition", sourceDefinition), sourceDefinition, this.isSetDefinition()));
+                    copy.setDefinition(copyDefinition);
+                } else {
+                    if (definitionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.definition = null;
+                    }
+                }
             }
-            if (this.isSetNilReason()) {
-                List<String> sourceNilReason;
-                sourceNilReason = this.getNilReason();
-                @SuppressWarnings("unchecked")
-                List<String> copyNilReason = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "nilReason", sourceNilReason), sourceNilReason));
-                copy.unsetNilReason();
-                List<String> uniqueNilReasonl = copy.getNilReason();
-                uniqueNilReasonl.addAll(copyNilReason);
-            } else {
-                copy.unsetNilReason();
+            {
+                java.lang.Boolean nilReasonShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetNilReason());
+                if (nilReasonShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceNilReason;
+                    sourceNilReason = (this.isSetNilReason()?this.getNilReason():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyNilReason = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "nilReason", sourceNilReason), sourceNilReason, this.isSetNilReason()));
+                    copy.setNilReason(copyNilReason);
+                } else {
+                    if (nilReasonShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetNilReason();
+                    }
+                }
             }
-            if (this.isSetRemoteSchema()) {
-                String sourceRemoteSchema;
-                sourceRemoteSchema = this.getRemoteSchema();
-                String copyRemoteSchema = ((String) strategy.copy(LocatorUtils.property(locator, "remoteSchema", sourceRemoteSchema), sourceRemoteSchema));
-                copy.setRemoteSchema(copyRemoteSchema);
-            } else {
-                copy.remoteSchema = null;
+            {
+                java.lang.Boolean remoteSchemaShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRemoteSchema());
+                if (remoteSchemaShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceRemoteSchema;
+                    sourceRemoteSchema = this.getRemoteSchema();
+                    String copyRemoteSchema = ((String) strategy.copy(LocatorUtils.property(locator, "remoteSchema", sourceRemoteSchema), sourceRemoteSchema, this.isSetRemoteSchema()));
+                    copy.setRemoteSchema(copyRemoteSchema);
+                } else {
+                    if (remoteSchemaShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.remoteSchema = null;
+                    }
+                }
             }
-            if (this.isSetHref()) {
-                String sourceHref;
-                sourceHref = this.getHref();
-                String copyHref = ((String) strategy.copy(LocatorUtils.property(locator, "href", sourceHref), sourceHref));
-                copy.setHref(copyHref);
-            } else {
-                copy.href = null;
+            {
+                java.lang.Boolean hrefShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetHref());
+                if (hrefShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceHref;
+                    sourceHref = this.getHref();
+                    String copyHref = ((String) strategy.copy(LocatorUtils.property(locator, "href", sourceHref), sourceHref, this.isSetHref()));
+                    copy.setHref(copyHref);
+                } else {
+                    if (hrefShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.href = null;
+                    }
+                }
             }
-            if (this.isSetRole()) {
-                String sourceRole;
-                sourceRole = this.getRole();
-                String copyRole = ((String) strategy.copy(LocatorUtils.property(locator, "role", sourceRole), sourceRole));
-                copy.setRole(copyRole);
-            } else {
-                copy.role = null;
+            {
+                java.lang.Boolean roleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRole());
+                if (roleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceRole;
+                    sourceRole = this.getRole();
+                    String copyRole = ((String) strategy.copy(LocatorUtils.property(locator, "role", sourceRole), sourceRole, this.isSetRole()));
+                    copy.setRole(copyRole);
+                } else {
+                    if (roleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.role = null;
+                    }
+                }
             }
-            if (this.isSetArcrole()) {
-                String sourceArcrole;
-                sourceArcrole = this.getArcrole();
-                String copyArcrole = ((String) strategy.copy(LocatorUtils.property(locator, "arcrole", sourceArcrole), sourceArcrole));
-                copy.setArcrole(copyArcrole);
-            } else {
-                copy.arcrole = null;
+            {
+                java.lang.Boolean arcroleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetArcrole());
+                if (arcroleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceArcrole;
+                    sourceArcrole = this.getArcrole();
+                    String copyArcrole = ((String) strategy.copy(LocatorUtils.property(locator, "arcrole", sourceArcrole), sourceArcrole, this.isSetArcrole()));
+                    copy.setArcrole(copyArcrole);
+                } else {
+                    if (arcroleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.arcrole = null;
+                    }
+                }
             }
-            if (this.isSetTitle()) {
-                String sourceTitle;
-                sourceTitle = this.getTitle();
-                String copyTitle = ((String) strategy.copy(LocatorUtils.property(locator, "title", sourceTitle), sourceTitle));
-                copy.setTitle(copyTitle);
-            } else {
-                copy.title = null;
+            {
+                java.lang.Boolean titleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTitle());
+                if (titleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceTitle;
+                    sourceTitle = this.getTitle();
+                    String copyTitle = ((String) strategy.copy(LocatorUtils.property(locator, "title", sourceTitle), sourceTitle, this.isSetTitle()));
+                    copy.setTitle(copyTitle);
+                } else {
+                    if (titleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.title = null;
+                    }
+                }
             }
-            if (this.isSetShow()) {
-                String sourceShow;
-                sourceShow = this.getShow();
-                String copyShow = ((String) strategy.copy(LocatorUtils.property(locator, "show", sourceShow), sourceShow));
-                copy.setShow(copyShow);
-            } else {
-                copy.show = null;
+            {
+                java.lang.Boolean showShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetShow());
+                if (showShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceShow;
+                    sourceShow = this.getShow();
+                    String copyShow = ((String) strategy.copy(LocatorUtils.property(locator, "show", sourceShow), sourceShow, this.isSetShow()));
+                    copy.setShow(copyShow);
+                } else {
+                    if (showShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.show = null;
+                    }
+                }
             }
-            if (this.isSetActuate()) {
-                String sourceActuate;
-                sourceActuate = this.getActuate();
-                String copyActuate = ((String) strategy.copy(LocatorUtils.property(locator, "actuate", sourceActuate), sourceActuate));
-                copy.setActuate(copyActuate);
-            } else {
-                copy.actuate = null;
+            {
+                java.lang.Boolean actuateShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetActuate());
+                if (actuateShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceActuate;
+                    sourceActuate = this.getActuate();
+                    String copyActuate = ((String) strategy.copy(LocatorUtils.property(locator, "actuate", sourceActuate), sourceActuate, this.isSetActuate()));
+                    copy.setActuate(copyActuate);
+                } else {
+                    if (actuateShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.actuate = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new DictionaryEntryType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof DictionaryEntryType) {
@@ -845,143 +973,141 @@ public class DictionaryEntryType
             final DictionaryEntryType leftObject = ((DictionaryEntryType) left);
             final DictionaryEntryType rightObject = ((DictionaryEntryType) right);
             {
-                JAXBElement<? extends DefinitionType> lhsDefinition;
-                lhsDefinition = leftObject.getDefinition();
-                JAXBElement<? extends DefinitionType> rhsDefinition;
-                rhsDefinition = rightObject.getDefinition();
-                target.setDefinition(((JAXBElement<? extends DefinitionType> ) strategy.merge(LocatorUtils.property(leftLocator, "definition", lhsDefinition), LocatorUtils.property(rightLocator, "definition", rhsDefinition), lhsDefinition, rhsDefinition)));
+                java.lang.Boolean definitionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDefinition(), rightObject.isSetDefinition());
+                if (definitionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends DefinitionType> lhsDefinition;
+                    lhsDefinition = leftObject.getDefinition();
+                    JAXBElement<? extends DefinitionType> rhsDefinition;
+                    rhsDefinition = rightObject.getDefinition();
+                    JAXBElement<? extends DefinitionType> mergedDefinition = ((JAXBElement<? extends DefinitionType> ) strategy.merge(LocatorUtils.property(leftLocator, "definition", lhsDefinition), LocatorUtils.property(rightLocator, "definition", rhsDefinition), lhsDefinition, rhsDefinition, leftObject.isSetDefinition(), rightObject.isSetDefinition()));
+                    target.setDefinition(mergedDefinition);
+                } else {
+                    if (definitionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.definition = null;
+                    }
+                }
             }
             {
-                List<String> lhsNilReason;
-                lhsNilReason = leftObject.getNilReason();
-                List<String> rhsNilReason;
-                rhsNilReason = rightObject.getNilReason();
-                target.unsetNilReason();
-                List<String> uniqueNilReasonl = target.getNilReason();
-                uniqueNilReasonl.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "nilReason", lhsNilReason), LocatorUtils.property(rightLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason)));
+                java.lang.Boolean nilReasonShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetNilReason(), rightObject.isSetNilReason());
+                if (nilReasonShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsNilReason;
+                    lhsNilReason = (leftObject.isSetNilReason()?leftObject.getNilReason():null);
+                    List<String> rhsNilReason;
+                    rhsNilReason = (rightObject.isSetNilReason()?rightObject.getNilReason():null);
+                    List<String> mergedNilReason = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "nilReason", lhsNilReason), LocatorUtils.property(rightLocator, "nilReason", rhsNilReason), lhsNilReason, rhsNilReason, leftObject.isSetNilReason(), rightObject.isSetNilReason()));
+                    target.setNilReason(mergedNilReason);
+                } else {
+                    if (nilReasonShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetNilReason();
+                    }
+                }
             }
             {
-                String lhsRemoteSchema;
-                lhsRemoteSchema = leftObject.getRemoteSchema();
-                String rhsRemoteSchema;
-                rhsRemoteSchema = rightObject.getRemoteSchema();
-                target.setRemoteSchema(((String) strategy.merge(LocatorUtils.property(leftLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(rightLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema)));
+                java.lang.Boolean remoteSchemaShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRemoteSchema(), rightObject.isSetRemoteSchema());
+                if (remoteSchemaShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsRemoteSchema;
+                    lhsRemoteSchema = leftObject.getRemoteSchema();
+                    String rhsRemoteSchema;
+                    rhsRemoteSchema = rightObject.getRemoteSchema();
+                    String mergedRemoteSchema = ((String) strategy.merge(LocatorUtils.property(leftLocator, "remoteSchema", lhsRemoteSchema), LocatorUtils.property(rightLocator, "remoteSchema", rhsRemoteSchema), lhsRemoteSchema, rhsRemoteSchema, leftObject.isSetRemoteSchema(), rightObject.isSetRemoteSchema()));
+                    target.setRemoteSchema(mergedRemoteSchema);
+                } else {
+                    if (remoteSchemaShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.remoteSchema = null;
+                    }
+                }
             }
             {
-                String lhsHref;
-                lhsHref = leftObject.getHref();
-                String rhsHref;
-                rhsHref = rightObject.getHref();
-                target.setHref(((String) strategy.merge(LocatorUtils.property(leftLocator, "href", lhsHref), LocatorUtils.property(rightLocator, "href", rhsHref), lhsHref, rhsHref)));
+                java.lang.Boolean hrefShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetHref(), rightObject.isSetHref());
+                if (hrefShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsHref;
+                    lhsHref = leftObject.getHref();
+                    String rhsHref;
+                    rhsHref = rightObject.getHref();
+                    String mergedHref = ((String) strategy.merge(LocatorUtils.property(leftLocator, "href", lhsHref), LocatorUtils.property(rightLocator, "href", rhsHref), lhsHref, rhsHref, leftObject.isSetHref(), rightObject.isSetHref()));
+                    target.setHref(mergedHref);
+                } else {
+                    if (hrefShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.href = null;
+                    }
+                }
             }
             {
-                String lhsRole;
-                lhsRole = leftObject.getRole();
-                String rhsRole;
-                rhsRole = rightObject.getRole();
-                target.setRole(((String) strategy.merge(LocatorUtils.property(leftLocator, "role", lhsRole), LocatorUtils.property(rightLocator, "role", rhsRole), lhsRole, rhsRole)));
+                java.lang.Boolean roleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRole(), rightObject.isSetRole());
+                if (roleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsRole;
+                    lhsRole = leftObject.getRole();
+                    String rhsRole;
+                    rhsRole = rightObject.getRole();
+                    String mergedRole = ((String) strategy.merge(LocatorUtils.property(leftLocator, "role", lhsRole), LocatorUtils.property(rightLocator, "role", rhsRole), lhsRole, rhsRole, leftObject.isSetRole(), rightObject.isSetRole()));
+                    target.setRole(mergedRole);
+                } else {
+                    if (roleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.role = null;
+                    }
+                }
             }
             {
-                String lhsArcrole;
-                lhsArcrole = leftObject.getArcrole();
-                String rhsArcrole;
-                rhsArcrole = rightObject.getArcrole();
-                target.setArcrole(((String) strategy.merge(LocatorUtils.property(leftLocator, "arcrole", lhsArcrole), LocatorUtils.property(rightLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole)));
+                java.lang.Boolean arcroleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetArcrole(), rightObject.isSetArcrole());
+                if (arcroleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsArcrole;
+                    lhsArcrole = leftObject.getArcrole();
+                    String rhsArcrole;
+                    rhsArcrole = rightObject.getArcrole();
+                    String mergedArcrole = ((String) strategy.merge(LocatorUtils.property(leftLocator, "arcrole", lhsArcrole), LocatorUtils.property(rightLocator, "arcrole", rhsArcrole), lhsArcrole, rhsArcrole, leftObject.isSetArcrole(), rightObject.isSetArcrole()));
+                    target.setArcrole(mergedArcrole);
+                } else {
+                    if (arcroleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.arcrole = null;
+                    }
+                }
             }
             {
-                String lhsTitle;
-                lhsTitle = leftObject.getTitle();
-                String rhsTitle;
-                rhsTitle = rightObject.getTitle();
-                target.setTitle(((String) strategy.merge(LocatorUtils.property(leftLocator, "title", lhsTitle), LocatorUtils.property(rightLocator, "title", rhsTitle), lhsTitle, rhsTitle)));
+                java.lang.Boolean titleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTitle(), rightObject.isSetTitle());
+                if (titleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsTitle;
+                    lhsTitle = leftObject.getTitle();
+                    String rhsTitle;
+                    rhsTitle = rightObject.getTitle();
+                    String mergedTitle = ((String) strategy.merge(LocatorUtils.property(leftLocator, "title", lhsTitle), LocatorUtils.property(rightLocator, "title", rhsTitle), lhsTitle, rhsTitle, leftObject.isSetTitle(), rightObject.isSetTitle()));
+                    target.setTitle(mergedTitle);
+                } else {
+                    if (titleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.title = null;
+                    }
+                }
             }
             {
-                String lhsShow;
-                lhsShow = leftObject.getShow();
-                String rhsShow;
-                rhsShow = rightObject.getShow();
-                target.setShow(((String) strategy.merge(LocatorUtils.property(leftLocator, "show", lhsShow), LocatorUtils.property(rightLocator, "show", rhsShow), lhsShow, rhsShow)));
+                java.lang.Boolean showShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetShow(), rightObject.isSetShow());
+                if (showShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsShow;
+                    lhsShow = leftObject.getShow();
+                    String rhsShow;
+                    rhsShow = rightObject.getShow();
+                    String mergedShow = ((String) strategy.merge(LocatorUtils.property(leftLocator, "show", lhsShow), LocatorUtils.property(rightLocator, "show", rhsShow), lhsShow, rhsShow, leftObject.isSetShow(), rightObject.isSetShow()));
+                    target.setShow(mergedShow);
+                } else {
+                    if (showShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.show = null;
+                    }
+                }
             }
             {
-                String lhsActuate;
-                lhsActuate = leftObject.getActuate();
-                String rhsActuate;
-                rhsActuate = rightObject.getActuate();
-                target.setActuate(((String) strategy.merge(LocatorUtils.property(leftLocator, "actuate", lhsActuate), LocatorUtils.property(rightLocator, "actuate", rhsActuate), lhsActuate, rhsActuate)));
+                java.lang.Boolean actuateShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetActuate(), rightObject.isSetActuate());
+                if (actuateShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsActuate;
+                    lhsActuate = leftObject.getActuate();
+                    String rhsActuate;
+                    rhsActuate = rightObject.getActuate();
+                    String mergedActuate = ((String) strategy.merge(LocatorUtils.property(leftLocator, "actuate", lhsActuate), LocatorUtils.property(rightLocator, "actuate", rhsActuate), lhsActuate, rhsActuate, leftObject.isSetActuate(), rightObject.isSetActuate()));
+                    target.setActuate(mergedActuate);
+                } else {
+                    if (actuateShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.actuate = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setNilReason(List<String> value) {
-        List<String> draftl = this.getNilReason();
-        draftl.addAll(value);
-    }
-
-    public DictionaryEntryType withDefinition(JAXBElement<? extends DefinitionType> value) {
-        setDefinition(value);
-        return this;
-    }
-
-    public DictionaryEntryType withNilReason(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getNilReason().add(value);
-            }
-        }
-        return this;
-    }
-
-    public DictionaryEntryType withNilReason(Collection<String> values) {
-        if (values!= null) {
-            getNilReason().addAll(values);
-        }
-        return this;
-    }
-
-    public DictionaryEntryType withRemoteSchema(String value) {
-        setRemoteSchema(value);
-        return this;
-    }
-
-    public DictionaryEntryType withHref(String value) {
-        setHref(value);
-        return this;
-    }
-
-    public DictionaryEntryType withRole(String value) {
-        setRole(value);
-        return this;
-    }
-
-    public DictionaryEntryType withArcrole(String value) {
-        setArcrole(value);
-        return this;
-    }
-
-    public DictionaryEntryType withTitle(String value) {
-        setTitle(value);
-        return this;
-    }
-
-    public DictionaryEntryType withShow(String value) {
-        setShow(value);
-        return this;
-    }
-
-    public DictionaryEntryType withActuate(String value) {
-        setActuate(value);
-        return this;
-    }
-
-    public DictionaryEntryType withNilReason(List<String> value) {
-        setNilReason(value);
-        return this;
-    }
-
-    @Override
-    public DictionaryEntryType withOwns(boolean value) {
-        setOwns(value);
-        return this;
     }
 
 }

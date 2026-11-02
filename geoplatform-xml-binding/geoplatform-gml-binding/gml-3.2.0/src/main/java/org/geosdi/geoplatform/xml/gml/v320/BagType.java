@@ -34,57 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per BagType complex type.
+ * <p>Classe Java per BagType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="BagType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGMLType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}member" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}members" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="BagType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGMLType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}member" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}members" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -104,28 +102,31 @@ public class BagType
     /**
      * Gets the value of the member property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the member property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the member property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getMember().add(newItem);
+     * getMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link AssociationRoleType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the member property.
      */
     public List<AssociationRoleType> getMember() {
         if (member == null) {
-            member = new ArrayList<AssociationRoleType>();
+            member = new ArrayList<>();
         }
         return this.member;
     }
@@ -166,13 +167,15 @@ public class BagType
         return (this.members!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -180,23 +183,33 @@ public class BagType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<AssociationRoleType> theMember;
-            theMember = this.getMember();
-            strategy.appendField(locator, this, "member", buffer, theMember);
+            theMember = (this.isSetMember()?this.getMember():null);
+            strategy.appendField(locator, this, "member", buffer, theMember, this.isSetMember());
         }
         {
             ArrayAssociationType theMembers;
             theMembers = this.getMembers();
-            strategy.appendField(locator, this, "members", buffer, theMembers);
+            strategy.appendField(locator, this, "members", buffer, theMembers, this.isSetMembers());
         }
         return buffer;
     }
 
+    public void setMember(List<AssociationRoleType> value) {
+        this.member = null;
+        if (value!= null) {
+            List<AssociationRoleType> draftl = this.getMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof BagType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -208,10 +221,10 @@ public class BagType
         final BagType that = ((BagType) object);
         {
             List<AssociationRoleType> lhsMember;
-            lhsMember = this.getMember();
+            lhsMember = (this.isSetMember()?this.getMember():null);
             List<AssociationRoleType> rhsMember;
-            rhsMember = that.getMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "member", lhsMember), LocatorUtils.property(thatLocator, "member", rhsMember), lhsMember, rhsMember)) {
+            rhsMember = (that.isSetMember()?that.getMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "member", lhsMember), LocatorUtils.property(thatLocator, "member", rhsMember), lhsMember, rhsMember, this.isSetMember(), that.isSetMember())) {
                 return false;
             }
         }
@@ -220,84 +233,101 @@ public class BagType
             lhsMembers = this.getMembers();
             ArrayAssociationType rhsMembers;
             rhsMembers = that.getMembers();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "members", lhsMembers), LocatorUtils.property(thatLocator, "members", rhsMembers), lhsMembers, rhsMembers)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "members", lhsMembers), LocatorUtils.property(thatLocator, "members", rhsMembers), lhsMembers, rhsMembers, this.isSetMembers(), that.isSetMembers())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<AssociationRoleType> theMember;
-            theMember = this.getMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "member", theMember), currentHashCode, theMember);
+            theMember = (this.isSetMember()?this.getMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "member", theMember), currentHashCode, theMember, this.isSetMember());
         }
         {
             ArrayAssociationType theMembers;
             theMembers = this.getMembers();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "members", theMembers), currentHashCode, theMembers);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "members", theMembers), currentHashCode, theMembers, this.isSetMembers());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof BagType) {
             final BagType copy = ((BagType) draftCopy);
-            if (this.isSetMember()) {
-                List<AssociationRoleType> sourceMember;
-                sourceMember = this.getMember();
-                @SuppressWarnings("unchecked")
-                List<AssociationRoleType> copyMember = ((List<AssociationRoleType> ) strategy.copy(LocatorUtils.property(locator, "member", sourceMember), sourceMember));
-                copy.unsetMember();
-                List<AssociationRoleType> uniqueMemberl = copy.getMember();
-                uniqueMemberl.addAll(copyMember);
-            } else {
-                copy.unsetMember();
+            {
+                java.lang.Boolean memberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMember());
+                if (memberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<AssociationRoleType> sourceMember;
+                    sourceMember = (this.isSetMember()?this.getMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<AssociationRoleType> copyMember = ((List<AssociationRoleType> ) strategy.copy(LocatorUtils.property(locator, "member", sourceMember), sourceMember, this.isSetMember()));
+                    copy.setMember(copyMember);
+                } else {
+                    if (memberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetMember();
+                    }
+                }
             }
-            if (this.isSetMembers()) {
-                ArrayAssociationType sourceMembers;
-                sourceMembers = this.getMembers();
-                ArrayAssociationType copyMembers = ((ArrayAssociationType) strategy.copy(LocatorUtils.property(locator, "members", sourceMembers), sourceMembers));
-                copy.setMembers(copyMembers);
-            } else {
-                copy.members = null;
+            {
+                java.lang.Boolean membersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMembers());
+                if (membersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ArrayAssociationType sourceMembers;
+                    sourceMembers = this.getMembers();
+                    ArrayAssociationType copyMembers = ((ArrayAssociationType) strategy.copy(LocatorUtils.property(locator, "members", sourceMembers), sourceMembers, this.isSetMembers()));
+                    copy.setMembers(copyMembers);
+                } else {
+                    if (membersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.members = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new BagType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof BagType) {
@@ -305,125 +335,36 @@ public class BagType
             final BagType leftObject = ((BagType) left);
             final BagType rightObject = ((BagType) right);
             {
-                List<AssociationRoleType> lhsMember;
-                lhsMember = leftObject.getMember();
-                List<AssociationRoleType> rhsMember;
-                rhsMember = rightObject.getMember();
-                target.unsetMember();
-                List<AssociationRoleType> uniqueMemberl = target.getMember();
-                uniqueMemberl.addAll(((List<AssociationRoleType> ) strategy.merge(LocatorUtils.property(leftLocator, "member", lhsMember), LocatorUtils.property(rightLocator, "member", rhsMember), lhsMember, rhsMember)));
+                java.lang.Boolean memberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMember(), rightObject.isSetMember());
+                if (memberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<AssociationRoleType> lhsMember;
+                    lhsMember = (leftObject.isSetMember()?leftObject.getMember():null);
+                    List<AssociationRoleType> rhsMember;
+                    rhsMember = (rightObject.isSetMember()?rightObject.getMember():null);
+                    List<AssociationRoleType> mergedMember = ((List<AssociationRoleType> ) strategy.merge(LocatorUtils.property(leftLocator, "member", lhsMember), LocatorUtils.property(rightLocator, "member", rhsMember), lhsMember, rhsMember, leftObject.isSetMember(), rightObject.isSetMember()));
+                    target.setMember(mergedMember);
+                } else {
+                    if (memberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetMember();
+                    }
+                }
             }
             {
-                ArrayAssociationType lhsMembers;
-                lhsMembers = leftObject.getMembers();
-                ArrayAssociationType rhsMembers;
-                rhsMembers = rightObject.getMembers();
-                target.setMembers(((ArrayAssociationType) strategy.merge(LocatorUtils.property(leftLocator, "members", lhsMembers), LocatorUtils.property(rightLocator, "members", rhsMembers), lhsMembers, rhsMembers)));
+                java.lang.Boolean membersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMembers(), rightObject.isSetMembers());
+                if (membersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ArrayAssociationType lhsMembers;
+                    lhsMembers = leftObject.getMembers();
+                    ArrayAssociationType rhsMembers;
+                    rhsMembers = rightObject.getMembers();
+                    ArrayAssociationType mergedMembers = ((ArrayAssociationType) strategy.merge(LocatorUtils.property(leftLocator, "members", lhsMembers), LocatorUtils.property(rightLocator, "members", rhsMembers), lhsMembers, rhsMembers, leftObject.isSetMembers(), rightObject.isSetMembers()));
+                    target.setMembers(mergedMembers);
+                } else {
+                    if (membersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.members = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setMember(List<AssociationRoleType> value) {
-        List<AssociationRoleType> draftl = this.getMember();
-        draftl.addAll(value);
-    }
-
-    public BagType withMember(AssociationRoleType... values) {
-        if (values!= null) {
-            for (AssociationRoleType value: values) {
-                getMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public BagType withMember(Collection<AssociationRoleType> values) {
-        if (values!= null) {
-            getMember().addAll(values);
-        }
-        return this;
-    }
-
-    public BagType withMembers(ArrayAssociationType value) {
-        setMembers(value);
-        return this;
-    }
-
-    public BagType withMember(List<AssociationRoleType> value) {
-        setMember(value);
-        return this;
-    }
-
-    @Override
-    public BagType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public BagType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public BagType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public BagType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public BagType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public BagType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public BagType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public BagType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public BagType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public BagType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

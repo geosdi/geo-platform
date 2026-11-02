@@ -34,68 +34,66 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per GridType complex type.
+ * <p>Classe Java per GridType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="GridType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometryType">
- *       &lt;sequence>
- *         &lt;element name="limits" type="{http://www.opengis.net/gml}GridLimitsType"/>
- *         &lt;choice>
- *           &lt;element name="axisLabels" type="{http://www.opengis.net/gml}NCNameList"/>
- *           &lt;element name="axisName" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
- *         &lt;/choice>
- *       &lt;/sequence>
- *       &lt;attribute name="dimension" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="GridType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometryType">
+ *       <sequence>
+ *         <element name="limits" type="{http://www.opengis.net/gml}GridLimitsType"/>
+ *         <choice>
+ *           <element name="axisLabels" type="{http://www.opengis.net/gml}NCNameList"/>
+ *           <element name="axisName" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
+ *         </choice>
+ *       </sequence>
+ *       <attribute name="dimension" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -111,10 +109,23 @@ public class GridType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * Recupera il resto del modello di contenuto. 
+     * 
+     * &lt;p&gt;
+     * Questa proprietà "catch-all" viene recuperata per il seguente motivo: 
+     * Il nome di campo "AxisLabels" è usato da due diverse parti di uno schema. Vedere: 
+     * riga 23 di file:/Users/glascaleia/codice/geo-platform/geoplatform-xml-binding/geoplatform-gml-binding/gml-3.2.0/src/main/resources/gml/3.2.0/grids.xsd
+     * riga 41 di file:/Users/glascaleia/codice/geo-platform/geoplatform-xml-binding/geoplatform-gml-binding/gml-3.2.0/src/main/resources/gml/3.2.0/geometryBasic0d1d.xsd
+     * &lt;p&gt;
+     * Per eliminare questa proprietà, applicare una personalizzazione della proprietà a una 
+     * delle seguenti due dichiarazioni per modificarne il nome:
+     * 
+     */
     @XmlElementRefs({
         @XmlElementRef(name = "limits", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "axisName", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "axisLabels", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "axisLabels", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "axisName", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     })
     protected List<JAXBElement<?>> rest;
     @XmlAttribute(name = "dimension", required = true)
@@ -124,40 +135,44 @@ public class GridType
     /**
      * Recupera il resto del modello di contenuto. 
      * 
-     * <p>
+     * &lt;p&gt;
      * Questa proprietà "catch-all" viene recuperata per il seguente motivo: 
      * Il nome di campo "AxisLabels" è usato da due diverse parti di uno schema. Vedere: 
-     * riga 23 di file:/Users/glascaleia/codice/eclipse/OGC-SCHEMA/gml/3.2.0/schema/src/main/resources/gml/3.2.0/grids.xsd
-     * riga 41 di file:/Users/glascaleia/codice/eclipse/OGC-SCHEMA/gml/3.2.0/schema/src/main/resources/gml/3.2.0/geometryBasic0d1d.xsd
-     * <p>
+     * riga 23 di file:/Users/glascaleia/codice/geo-platform/geoplatform-xml-binding/geoplatform-gml-binding/gml-3.2.0/src/main/resources/gml/3.2.0/grids.xsd
+     * riga 41 di file:/Users/glascaleia/codice/geo-platform/geoplatform-xml-binding/geoplatform-gml-binding/gml-3.2.0/src/main/resources/gml/3.2.0/geometryBasic0d1d.xsd
+     * &lt;p&gt;
      * Per eliminare questa proprietà, applicare una personalizzazione della proprietà a una 
-     * delle seguenti due dichiarazioni per modificarne il nome: 
+     * delle seguenti due dichiarazioni per modificarne il nome:
+     * 
      * Gets the value of the rest property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the rest property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the rest property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getRest().add(newItem);
+     * getRest().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link List }{@code <}{@link String }{@code >}{@code >}
      * {@link JAXBElement }{@code <}{@link GridLimitsType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the rest property.
      */
     public List<JAXBElement<?>> getRest() {
         if (rest == null) {
-            rest = new ArrayList<JAXBElement<?>>();
+            rest = new ArrayList<>();
         }
         return this.rest;
     }
@@ -190,13 +205,15 @@ public class GridType
         return (this.dimension!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -204,23 +221,33 @@ public class GridType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<JAXBElement<?>> theRest;
-            theRest = this.getRest();
-            strategy.appendField(locator, this, "rest", buffer, theRest);
+            theRest = (((this.rest!= null)&&(!this.rest.isEmpty()))?this.getRest():null);
+            strategy.appendField(locator, this, "rest", buffer, theRest, ((this.rest!= null)&&(!this.rest.isEmpty())));
         }
         {
             BigInteger theDimension;
             theDimension = this.getDimension();
-            strategy.appendField(locator, this, "dimension", buffer, theDimension);
+            strategy.appendField(locator, this, "dimension", buffer, theDimension, this.isSetDimension());
         }
         return buffer;
     }
 
+    public void setRest(List<JAXBElement<?>> value) {
+        this.rest = null;
+        if (value!= null) {
+            List<JAXBElement<?>> draftl = this.getRest();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof GridType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -232,10 +259,10 @@ public class GridType
         final GridType that = ((GridType) object);
         {
             List<JAXBElement<?>> lhsRest;
-            lhsRest = this.getRest();
+            lhsRest = (((this.rest!= null)&&(!this.rest.isEmpty()))?this.getRest():null);
             List<JAXBElement<?>> rhsRest;
-            rhsRest = that.getRest();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "rest", lhsRest), LocatorUtils.property(thatLocator, "rest", rhsRest), lhsRest, rhsRest)) {
+            rhsRest = (((that.rest!= null)&&(!that.rest.isEmpty()))?that.getRest():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "rest", lhsRest), LocatorUtils.property(thatLocator, "rest", rhsRest), lhsRest, rhsRest, ((this.rest!= null)&&(!this.rest.isEmpty())), ((that.rest!= null)&&(!that.rest.isEmpty())))) {
                 return false;
             }
         }
@@ -244,84 +271,101 @@ public class GridType
             lhsDimension = this.getDimension();
             BigInteger rhsDimension;
             rhsDimension = that.getDimension();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "dimension", lhsDimension), LocatorUtils.property(thatLocator, "dimension", rhsDimension), lhsDimension, rhsDimension)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "dimension", lhsDimension), LocatorUtils.property(thatLocator, "dimension", rhsDimension), lhsDimension, rhsDimension, this.isSetDimension(), that.isSetDimension())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<JAXBElement<?>> theRest;
-            theRest = this.getRest();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rest", theRest), currentHashCode, theRest);
+            theRest = (((this.rest!= null)&&(!this.rest.isEmpty()))?this.getRest():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rest", theRest), currentHashCode, theRest, ((this.rest!= null)&&(!this.rest.isEmpty())));
         }
         {
             BigInteger theDimension;
             theDimension = this.getDimension();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dimension", theDimension), currentHashCode, theDimension);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dimension", theDimension), currentHashCode, theDimension, this.isSetDimension());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof GridType) {
             final GridType copy = ((GridType) draftCopy);
-            if ((this.rest!= null)&&(!this.rest.isEmpty())) {
-                List<JAXBElement<?>> sourceRest;
-                sourceRest = this.getRest();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<?>> copyRest = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "rest", sourceRest), sourceRest));
-                copy.rest = null;
-                List<JAXBElement<?>> uniqueRestl = copy.getRest();
-                uniqueRestl.addAll(copyRest);
-            } else {
-                copy.rest = null;
+            {
+                java.lang.Boolean restShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, ((this.rest!= null)&&(!this.rest.isEmpty())));
+                if (restShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> sourceRest;
+                    sourceRest = (((this.rest!= null)&&(!this.rest.isEmpty()))?this.getRest():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<?>> copyRest = ((List<JAXBElement<?>> ) strategy.copy(LocatorUtils.property(locator, "rest", sourceRest), sourceRest, ((this.rest!= null)&&(!this.rest.isEmpty()))));
+                    copy.setRest(copyRest);
+                } else {
+                    if (restShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.rest = null;
+                    }
+                }
             }
-            if (this.isSetDimension()) {
-                BigInteger sourceDimension;
-                sourceDimension = this.getDimension();
-                BigInteger copyDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "dimension", sourceDimension), sourceDimension));
-                copy.setDimension(copyDimension);
-            } else {
-                copy.dimension = null;
+            {
+                java.lang.Boolean dimensionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDimension());
+                if (dimensionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceDimension;
+                    sourceDimension = this.getDimension();
+                    BigInteger copyDimension = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "dimension", sourceDimension), sourceDimension, this.isSetDimension()));
+                    copy.setDimension(copyDimension);
+                } else {
+                    if (dimensionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.dimension = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new GridType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof GridType) {
@@ -329,185 +373,36 @@ public class GridType
             final GridType leftObject = ((GridType) left);
             final GridType rightObject = ((GridType) right);
             {
-                List<JAXBElement<?>> lhsRest;
-                lhsRest = leftObject.getRest();
-                List<JAXBElement<?>> rhsRest;
-                rhsRest = rightObject.getRest();
-                target.rest = null;
-                List<JAXBElement<?>> uniqueRestl = target.getRest();
-                uniqueRestl.addAll(((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "rest", lhsRest), LocatorUtils.property(rightLocator, "rest", rhsRest), lhsRest, rhsRest)));
+                java.lang.Boolean restShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, ((leftObject.rest!= null)&&(!leftObject.rest.isEmpty())), ((rightObject.rest!= null)&&(!rightObject.rest.isEmpty())));
+                if (restShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<?>> lhsRest;
+                    lhsRest = (((leftObject.rest!= null)&&(!leftObject.rest.isEmpty()))?leftObject.getRest():null);
+                    List<JAXBElement<?>> rhsRest;
+                    rhsRest = (((rightObject.rest!= null)&&(!rightObject.rest.isEmpty()))?rightObject.getRest():null);
+                    List<JAXBElement<?>> mergedRest = ((List<JAXBElement<?>> ) strategy.merge(LocatorUtils.property(leftLocator, "rest", lhsRest), LocatorUtils.property(rightLocator, "rest", rhsRest), lhsRest, rhsRest, ((leftObject.rest!= null)&&(!leftObject.rest.isEmpty())), ((rightObject.rest!= null)&&(!rightObject.rest.isEmpty()))));
+                    target.setRest(mergedRest);
+                } else {
+                    if (restShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.rest = null;
+                    }
+                }
             }
             {
-                BigInteger lhsDimension;
-                lhsDimension = leftObject.getDimension();
-                BigInteger rhsDimension;
-                rhsDimension = rightObject.getDimension();
-                target.setDimension(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "dimension", lhsDimension), LocatorUtils.property(rightLocator, "dimension", rhsDimension), lhsDimension, rhsDimension)));
+                java.lang.Boolean dimensionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDimension(), rightObject.isSetDimension());
+                if (dimensionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsDimension;
+                    lhsDimension = leftObject.getDimension();
+                    BigInteger rhsDimension;
+                    rhsDimension = rightObject.getDimension();
+                    BigInteger mergedDimension = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "dimension", lhsDimension), LocatorUtils.property(rightLocator, "dimension", rhsDimension), lhsDimension, rhsDimension, leftObject.isSetDimension(), rightObject.isSetDimension()));
+                    target.setDimension(mergedDimension);
+                } else {
+                    if (dimensionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.dimension = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setRest(List<JAXBElement<?>> value) {
-        List<JAXBElement<?>> draftl = this.getRest();
-        draftl.addAll(value);
-    }
-
-    public GridType withRest(JAXBElement<?> ... values) {
-        if (values!= null) {
-            for (JAXBElement<?> value: values) {
-                getRest().add(value);
-            }
-        }
-        return this;
-    }
-
-    public GridType withRest(Collection<JAXBElement<?>> values) {
-        if (values!= null) {
-            getRest().addAll(values);
-        }
-        return this;
-    }
-
-    public GridType withDimension(BigInteger value) {
-        setDimension(value);
-        return this;
-    }
-
-    public GridType withRest(List<JAXBElement<?>> value) {
-        setRest(value);
-        return this;
-    }
-
-    @Override
-    public GridType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    @Override
-    public GridType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    @Override
-    public GridType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    @Override
-    public GridType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
-    }
-
-    @Override
-    public GridType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public GridType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public GridType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public GridType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public GridType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public GridType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public GridType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

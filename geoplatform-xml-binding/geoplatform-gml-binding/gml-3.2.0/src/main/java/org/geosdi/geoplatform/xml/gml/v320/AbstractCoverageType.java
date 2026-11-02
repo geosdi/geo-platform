@@ -34,62 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * The base type for coverages is gml:AbstractCoverageType. The basic elements of a coverage can be seen in this content model: the coverage contains gml:domainSet and gml:rangeSet properties. The gml:domainSet property describes the domain of the coverage and the gml:rangeSet property describes the range of the coverage.
  * 
- * <p>Classe Java per AbstractCoverageType complex type.
+ * <p>Classe Java per AbstractCoverageType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractCoverageType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractFeatureType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}domainSet"/>
- *         &lt;element ref="{http://www.opengis.net/gml}rangeSet"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractCoverageType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractFeatureType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}domainSet"/>
+ *         <element ref="{http://www.opengis.net/gml}rangeSet"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -107,23 +104,37 @@ public abstract class AbstractCoverageType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The gml:domainSet property element describes the spatio-temporal region of interest, within which the coverage is defined. Its content model is given by gml:DomainSetType.
+     * The value of the domain is thus a choice between a gml:AbstractGeometry and a gml:AbstractTimeObject.  In the instance these abstract elements will normally be substituted by a geometry complex or temporal complex, to represent spatial coverages and time-series, respectively.  
+     * The presence of the gml:AssociationAttributeGroup means that domainSet follows the usual GML property model and may use the xlink:href attribute to point to the domain, as an alternative to describing the domain inline. Ownership semantics may be provided using the gml:OwnershipAttributeGroup.
+     * 
+     */
     @XmlElementRef(name = "domainSet", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected JAXBElement<? extends DomainSetType> domainSet;
+    /**
+     * The gml:rangeSet property element contains the values of the coverage (sometimes called the attribute values).  Its content model is given by gml:RangeSetType.
+     * This content model supports a structural description of the range.  The semantic information describing the range set is embedded using a uniform method, as part of the explicit values, or as a template value accompanying the representation using gml:DataBlock and gml:File.
+     * The values from each component (or “band”) in the range may be encoded within a gml:ValueArray element or a concrete member of the gml:AbstractScalarValueList substitution group . Use of these elements satisfies the value-type homogeneity requirement.
+     * 
+     */
     @XmlElement(required = true)
     protected RangeSetType rangeSet;
 
     /**
-     * Recupera il valore della proprietà domainSet.
+     * The gml:domainSet property element describes the spatio-temporal region of interest, within which the coverage is defined. Its content model is given by gml:DomainSetType.
+     * The value of the domain is thus a choice between a gml:AbstractGeometry and a gml:AbstractTimeObject.  In the instance these abstract elements will normally be substituted by a geometry complex or temporal complex, to represent spatial coverages and time-series, respectively.  
+     * The presence of the gml:AssociationAttributeGroup means that domainSet follows the usual GML property model and may use the xlink:href attribute to point to the domain, as an alternative to describing the domain inline. Ownership semantics may be provided using the gml:OwnershipAttributeGroup.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link MultiSolidDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GridDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link RectifiedGridDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiSurfaceDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiCurveDomainType }{@code >}
      *     {@link JAXBElement }{@code <}{@link DomainSetType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GridDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiCurveDomainType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiPointDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiSolidDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiSurfaceDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RectifiedGridDomainType }{@code >}
      *     
      */
     public JAXBElement<? extends DomainSetType> getDomainSet() {
@@ -135,14 +146,15 @@ public abstract class AbstractCoverageType
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link MultiSolidDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link GridDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link RectifiedGridDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiSurfaceDomainType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MultiCurveDomainType }{@code >}
      *     {@link JAXBElement }{@code <}{@link DomainSetType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link GridDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiCurveDomainType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiPointDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiSolidDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MultiSurfaceDomainType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RectifiedGridDomainType }{@code >}
      *     
+     * @see #getDomainSet()
      */
     public void setDomainSet(JAXBElement<? extends DomainSetType> value) {
         this.domainSet = value;
@@ -153,7 +165,9 @@ public abstract class AbstractCoverageType
     }
 
     /**
-     * Recupera il valore della proprietà rangeSet.
+     * The gml:rangeSet property element contains the values of the coverage (sometimes called the attribute values).  Its content model is given by gml:RangeSetType.
+     * This content model supports a structural description of the range.  The semantic information describing the range set is embedded using a uniform method, as part of the explicit values, or as a template value accompanying the representation using gml:DataBlock and gml:File.
+     * The values from each component (or “band”) in the range may be encoded within a gml:ValueArray element or a concrete member of the gml:AbstractScalarValueList substitution group . Use of these elements satisfies the value-type homogeneity requirement.
      * 
      * @return
      *     possible object is
@@ -171,6 +185,7 @@ public abstract class AbstractCoverageType
      *     allowed object is
      *     {@link RangeSetType }
      *     
+     * @see #getRangeSet()
      */
     public void setRangeSet(RangeSetType value) {
         this.rangeSet = value;
@@ -180,13 +195,15 @@ public abstract class AbstractCoverageType
         return (this.rangeSet!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -194,23 +211,25 @@ public abstract class AbstractCoverageType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             JAXBElement<? extends DomainSetType> theDomainSet;
             theDomainSet = this.getDomainSet();
-            strategy.appendField(locator, this, "domainSet", buffer, theDomainSet);
+            strategy.appendField(locator, this, "domainSet", buffer, theDomainSet, this.isSetDomainSet());
         }
         {
             RangeSetType theRangeSet;
             theRangeSet = this.getRangeSet();
-            strategy.appendField(locator, this, "rangeSet", buffer, theRangeSet);
+            strategy.appendField(locator, this, "rangeSet", buffer, theRangeSet, this.isSetRangeSet());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractCoverageType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -225,7 +244,7 @@ public abstract class AbstractCoverageType
             lhsDomainSet = this.getDomainSet();
             JAXBElement<? extends DomainSetType> rhsDomainSet;
             rhsDomainSet = that.getDomainSet();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainSet", lhsDomainSet), LocatorUtils.property(thatLocator, "domainSet", rhsDomainSet), lhsDomainSet, rhsDomainSet)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainSet", lhsDomainSet), LocatorUtils.property(thatLocator, "domainSet", rhsDomainSet), lhsDomainSet, rhsDomainSet, this.isSetDomainSet(), that.isSetDomainSet())) {
                 return false;
             }
         }
@@ -234,47 +253,53 @@ public abstract class AbstractCoverageType
             lhsRangeSet = this.getRangeSet();
             RangeSetType rhsRangeSet;
             rhsRangeSet = that.getRangeSet();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeSet", lhsRangeSet), LocatorUtils.property(thatLocator, "rangeSet", rhsRangeSet), lhsRangeSet, rhsRangeSet)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "rangeSet", lhsRangeSet), LocatorUtils.property(thatLocator, "rangeSet", rhsRangeSet), lhsRangeSet, rhsRangeSet, this.isSetRangeSet(), that.isSetRangeSet())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             JAXBElement<? extends DomainSetType> theDomainSet;
             theDomainSet = this.getDomainSet();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainSet", theDomainSet), currentHashCode, theDomainSet);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainSet", theDomainSet), currentHashCode, theDomainSet, this.isSetDomainSet());
         }
         {
             RangeSetType theRangeSet;
             theRangeSet = this.getRangeSet();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeSet", theRangeSet), currentHashCode, theRangeSet);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "rangeSet", theRangeSet), currentHashCode, theRangeSet, this.isSetRangeSet());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -282,32 +307,44 @@ public abstract class AbstractCoverageType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractCoverageType) {
             final AbstractCoverageType copy = ((AbstractCoverageType) target);
-            if (this.isSetDomainSet()) {
-                JAXBElement<? extends DomainSetType> sourceDomainSet;
-                sourceDomainSet = this.getDomainSet();
-                @SuppressWarnings("unchecked")
-                JAXBElement<? extends DomainSetType> copyDomainSet = ((JAXBElement<? extends DomainSetType> ) strategy.copy(LocatorUtils.property(locator, "domainSet", sourceDomainSet), sourceDomainSet));
-                copy.setDomainSet(copyDomainSet);
-            } else {
-                copy.domainSet = null;
+            {
+                java.lang.Boolean domainSetShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDomainSet());
+                if (domainSetShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends DomainSetType> sourceDomainSet;
+                    sourceDomainSet = this.getDomainSet();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<? extends DomainSetType> copyDomainSet = ((JAXBElement<? extends DomainSetType> ) strategy.copy(LocatorUtils.property(locator, "domainSet", sourceDomainSet), sourceDomainSet, this.isSetDomainSet()));
+                    copy.setDomainSet(copyDomainSet);
+                } else {
+                    if (domainSetShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.domainSet = null;
+                    }
+                }
             }
-            if (this.isSetRangeSet()) {
-                RangeSetType sourceRangeSet;
-                sourceRangeSet = this.getRangeSet();
-                RangeSetType copyRangeSet = ((RangeSetType) strategy.copy(LocatorUtils.property(locator, "rangeSet", sourceRangeSet), sourceRangeSet));
-                copy.setRangeSet(copyRangeSet);
-            } else {
-                copy.rangeSet = null;
+            {
+                java.lang.Boolean rangeSetShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRangeSet());
+                if (rangeSetShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    RangeSetType sourceRangeSet;
+                    sourceRangeSet = this.getRangeSet();
+                    RangeSetType copyRangeSet = ((RangeSetType) strategy.copy(LocatorUtils.property(locator, "rangeSet", sourceRangeSet), sourceRangeSet, this.isSetRangeSet()));
+                    copy.setRangeSet(copyRangeSet);
+                } else {
+                    if (rangeSetShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.rangeSet = null;
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractCoverageType) {
@@ -315,114 +352,36 @@ public abstract class AbstractCoverageType
             final AbstractCoverageType leftObject = ((AbstractCoverageType) left);
             final AbstractCoverageType rightObject = ((AbstractCoverageType) right);
             {
-                JAXBElement<? extends DomainSetType> lhsDomainSet;
-                lhsDomainSet = leftObject.getDomainSet();
-                JAXBElement<? extends DomainSetType> rhsDomainSet;
-                rhsDomainSet = rightObject.getDomainSet();
-                target.setDomainSet(((JAXBElement<? extends DomainSetType> ) strategy.merge(LocatorUtils.property(leftLocator, "domainSet", lhsDomainSet), LocatorUtils.property(rightLocator, "domainSet", rhsDomainSet), lhsDomainSet, rhsDomainSet)));
+                java.lang.Boolean domainSetShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDomainSet(), rightObject.isSetDomainSet());
+                if (domainSetShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends DomainSetType> lhsDomainSet;
+                    lhsDomainSet = leftObject.getDomainSet();
+                    JAXBElement<? extends DomainSetType> rhsDomainSet;
+                    rhsDomainSet = rightObject.getDomainSet();
+                    JAXBElement<? extends DomainSetType> mergedDomainSet = ((JAXBElement<? extends DomainSetType> ) strategy.merge(LocatorUtils.property(leftLocator, "domainSet", lhsDomainSet), LocatorUtils.property(rightLocator, "domainSet", rhsDomainSet), lhsDomainSet, rhsDomainSet, leftObject.isSetDomainSet(), rightObject.isSetDomainSet()));
+                    target.setDomainSet(mergedDomainSet);
+                } else {
+                    if (domainSetShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.domainSet = null;
+                    }
+                }
             }
             {
-                RangeSetType lhsRangeSet;
-                lhsRangeSet = leftObject.getRangeSet();
-                RangeSetType rhsRangeSet;
-                rhsRangeSet = rightObject.getRangeSet();
-                target.setRangeSet(((RangeSetType) strategy.merge(LocatorUtils.property(leftLocator, "rangeSet", lhsRangeSet), LocatorUtils.property(rightLocator, "rangeSet", rhsRangeSet), lhsRangeSet, rhsRangeSet)));
+                java.lang.Boolean rangeSetShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRangeSet(), rightObject.isSetRangeSet());
+                if (rangeSetShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    RangeSetType lhsRangeSet;
+                    lhsRangeSet = leftObject.getRangeSet();
+                    RangeSetType rhsRangeSet;
+                    rhsRangeSet = rightObject.getRangeSet();
+                    RangeSetType mergedRangeSet = ((RangeSetType) strategy.merge(LocatorUtils.property(leftLocator, "rangeSet", lhsRangeSet), LocatorUtils.property(rightLocator, "rangeSet", rhsRangeSet), lhsRangeSet, rhsRangeSet, leftObject.isSetRangeSet(), rightObject.isSetRangeSet()));
+                    target.setRangeSet(mergedRangeSet);
+                } else {
+                    if (rangeSetShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.rangeSet = null;
+                    }
+                }
             }
         }
-    }
-
-    public AbstractCoverageType withDomainSet(JAXBElement<? extends DomainSetType> value) {
-        setDomainSet(value);
-        return this;
-    }
-
-    public AbstractCoverageType withRangeSet(RangeSetType value) {
-        setRangeSet(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withBoundedBy(BoundingShapeType value) {
-        setBoundedBy(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withLocation(JAXBElement<? extends LocationPropertyType> value) {
-        setLocation(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoverageType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

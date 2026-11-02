@@ -34,58 +34,56 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * gml:MeasureListType provides for a list of quantities.
  * 
- * <p>Classe Java per MeasureListType complex type.
+ * <p>Classe Java per MeasureListType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="MeasureListType">
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.opengis.net/gml>doubleList">
- *       &lt;attribute name="uom" use="required" type="{http://www.opengis.net/gml}UomIdentifier" />
- *     &lt;/extension>
- *   &lt;/simpleContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="MeasureListType">
+ *   <simpleContent>
+ *     <extension base="<http://www.opengis.net/gml>doubleList">
+ *       <attribute name="uom" use="required" type="{http://www.opengis.net/gml}UomIdentifier" />
+ *     </extension>
+ *   </simpleContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -93,40 +91,48 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "MeasureListType", propOrder = {
     "value"
 })
-public class MeasureListType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class MeasureListType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * A type for a list of values of the respective simple type.
+     * 
+     */
     @XmlValue
     protected List<Double> value;
     @XmlAttribute(name = "uom", required = true)
     protected String uom;
 
     /**
-     * A type for a list of values of the respective simple type.Gets the value of the value property.
+     * A type for a list of values of the respective simple type.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * Gets the value of the value property.
+     * 
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the value property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getValue().add(newItem);
+     * getValue().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Double }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the value property.
      */
     public List<Double> getValue() {
         if (value == null) {
-            value = new ArrayList<Double>();
+            value = new ArrayList<>();
         }
         return this.value;
     }
@@ -167,13 +173,15 @@ public class MeasureListType
         return (this.uom!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -181,22 +189,32 @@ public class MeasureListType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<Double> theValue;
-            theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            theValue = (this.isSetValue()?this.getValue():null);
+            strategy.appendField(locator, this, "value", buffer, theValue, this.isSetValue());
         }
         {
             String theUom;
             theUom = this.getUom();
-            strategy.appendField(locator, this, "uom", buffer, theUom);
+            strategy.appendField(locator, this, "uom", buffer, theUom, this.isSetUom());
         }
         return buffer;
     }
 
+    public void setValue(List<Double> value) {
+        this.value = null;
+        if (value!= null) {
+            List<Double> draftl = this.getValue();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof MeasureListType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -205,10 +223,10 @@ public class MeasureListType
         final MeasureListType that = ((MeasureListType) object);
         {
             List<Double> lhsValue;
-            lhsValue = this.getValue();
+            lhsValue = (this.isSetValue()?this.getValue():null);
             List<Double> rhsValue;
-            rhsValue = that.getValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue)) {
+            rhsValue = (that.isSetValue()?that.getValue():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue, this.isSetValue(), that.isSetValue())) {
                 return false;
             }
         }
@@ -217,136 +235,136 @@ public class MeasureListType
             lhsUom = this.getUom();
             String rhsUom;
             rhsUom = that.getUom();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "uom", lhsUom), LocatorUtils.property(thatLocator, "uom", rhsUom), lhsUom, rhsUom)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "uom", lhsUom), LocatorUtils.property(thatLocator, "uom", rhsUom), lhsUom, rhsUom, this.isSetUom(), that.isSetUom())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             List<Double> theValue;
-            theValue = this.getValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue);
+            theValue = (this.isSetValue()?this.getValue():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue, this.isSetValue());
         }
         {
             String theUom;
             theUom = this.getUom();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "uom", theUom), currentHashCode, theUom);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "uom", theUom), currentHashCode, theUom, this.isSetUom());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof MeasureListType) {
             final MeasureListType copy = ((MeasureListType) draftCopy);
-            if (this.isSetValue()) {
-                List<Double> sourceValue;
-                sourceValue = this.getValue();
-                @SuppressWarnings("unchecked")
-                List<Double> copyValue = ((List<Double> ) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue));
-                copy.unsetValue();
-                List<Double> uniqueValuel = copy.getValue();
-                uniqueValuel.addAll(copyValue);
-            } else {
-                copy.unsetValue();
+            {
+                java.lang.Boolean valueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetValue());
+                if (valueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<Double> sourceValue;
+                    sourceValue = (this.isSetValue()?this.getValue():null);
+                    @SuppressWarnings("unchecked")
+                    List<Double> copyValue = ((List<Double> ) strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue, this.isSetValue()));
+                    copy.setValue(copyValue);
+                } else {
+                    if (valueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetValue();
+                    }
+                }
             }
-            if (this.isSetUom()) {
-                String sourceUom;
-                sourceUom = this.getUom();
-                String copyUom = ((String) strategy.copy(LocatorUtils.property(locator, "uom", sourceUom), sourceUom));
-                copy.setUom(copyUom);
-            } else {
-                copy.uom = null;
+            {
+                java.lang.Boolean uomShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUom());
+                if (uomShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    String sourceUom;
+                    sourceUom = this.getUom();
+                    String copyUom = ((String) strategy.copy(LocatorUtils.property(locator, "uom", sourceUom), sourceUom, this.isSetUom()));
+                    copy.setUom(copyUom);
+                } else {
+                    if (uomShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.uom = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new MeasureListType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof MeasureListType) {
             final MeasureListType target = this;
             final MeasureListType leftObject = ((MeasureListType) left);
             final MeasureListType rightObject = ((MeasureListType) right);
             {
-                List<Double> lhsValue;
-                lhsValue = leftObject.getValue();
-                List<Double> rhsValue;
-                rhsValue = rightObject.getValue();
-                target.unsetValue();
-                List<Double> uniqueValuel = target.getValue();
-                uniqueValuel.addAll(((List<Double> ) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue)));
+                java.lang.Boolean valueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetValue(), rightObject.isSetValue());
+                if (valueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<Double> lhsValue;
+                    lhsValue = (leftObject.isSetValue()?leftObject.getValue():null);
+                    List<Double> rhsValue;
+                    rhsValue = (rightObject.isSetValue()?rightObject.getValue():null);
+                    List<Double> mergedValue = ((List<Double> ) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue, leftObject.isSetValue(), rightObject.isSetValue()));
+                    target.setValue(mergedValue);
+                } else {
+                    if (valueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetValue();
+                    }
+                }
             }
             {
-                String lhsUom;
-                lhsUom = leftObject.getUom();
-                String rhsUom;
-                rhsUom = rightObject.getUom();
-                target.setUom(((String) strategy.merge(LocatorUtils.property(leftLocator, "uom", lhsUom), LocatorUtils.property(rightLocator, "uom", rhsUom), lhsUom, rhsUom)));
+                java.lang.Boolean uomShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUom(), rightObject.isSetUom());
+                if (uomShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    String lhsUom;
+                    lhsUom = leftObject.getUom();
+                    String rhsUom;
+                    rhsUom = rightObject.getUom();
+                    String mergedUom = ((String) strategy.merge(LocatorUtils.property(leftLocator, "uom", lhsUom), LocatorUtils.property(rightLocator, "uom", rhsUom), lhsUom, rhsUom, leftObject.isSetUom(), rightObject.isSetUom()));
+                    target.setUom(mergedUom);
+                } else {
+                    if (uomShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.uom = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setValue(List<Double> value) {
-        List<Double> draftl = this.getValue();
-        draftl.addAll(value);
-    }
-
-    public MeasureListType withValue(Double... values) {
-        if (values!= null) {
-            for (Double value: values) {
-                getValue().add(value);
-            }
-        }
-        return this;
-    }
-
-    public MeasureListType withValue(Collection<Double> values) {
-        if (values!= null) {
-            getValue().addAll(values);
-        }
-        return this;
-    }
-
-    public MeasureListType withUom(String value) {
-        setUom(value);
-        return this;
-    }
-
-    public MeasureListType withValue(List<Double> value) {
-        setValue(value);
-        return this;
     }
 
 }

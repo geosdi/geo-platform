@@ -34,63 +34,61 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per OperationMethodType complex type.
+ * <p>Classe Java per OperationMethodType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="OperationMethodType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}formula"/>
- *         &lt;element ref="{http://www.opengis.net/gml}sourceDimensions" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}targetDimensions" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}generalOperationParameter" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="OperationMethodType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}formula"/>
+ *         <element ref="{http://www.opengis.net/gml}sourceDimensions" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}targetDimensions" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}generalOperationParameter" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -106,17 +104,33 @@ public class OperationMethodType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:formula specifies a formula or procedure used by this operation method. The value may be a reference to a publication. Note that the operation method may not be analytic, in which case this element references or contains the procedure, not an analytic formula.
+     * 
+     */
     @XmlElementRef(name = "formula", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected JAXBElement<CodeType> formula;
+    /**
+     * gml:sourceDimensions is the number of dimensions in the source CRS of this operation method.
+     * 
+     */
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger sourceDimensions;
+    /**
+     * gml:targetDimensions is the number of dimensions in the target CRS of this operation method.
+     * 
+     */
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger targetDimensions;
+    /**
+     * gml:generalOperationParameter is an association to an operation parameter or parameter group.
+     * 
+     */
     @XmlElementRef(name = "generalOperationParameter", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> generalOperationParameter;
 
     /**
-     * Recupera il valore della proprietà formula.
+     * gml:formula specifies a formula or procedure used by this operation method. The value may be a reference to a publication. Note that the operation method may not be analytic, in which case this element references or contains the procedure, not an analytic formula.
      * 
      * @return
      *     possible object is
@@ -136,6 +150,7 @@ public class OperationMethodType
      *     {@link JAXBElement }{@code <}{@link CodeType }{@code >}
      *     {@link JAXBElement }{@code <}{@link CodeType }{@code >}
      *     
+     * @see #getFormula()
      */
     public void setFormula(JAXBElement<CodeType> value) {
         this.formula = value;
@@ -146,7 +161,7 @@ public class OperationMethodType
     }
 
     /**
-     * Recupera il valore della proprietà sourceDimensions.
+     * gml:sourceDimensions is the number of dimensions in the source CRS of this operation method.
      * 
      * @return
      *     possible object is
@@ -164,6 +179,7 @@ public class OperationMethodType
      *     allowed object is
      *     {@link BigInteger }
      *     
+     * @see #getSourceDimensions()
      */
     public void setSourceDimensions(BigInteger value) {
         this.sourceDimensions = value;
@@ -174,7 +190,7 @@ public class OperationMethodType
     }
 
     /**
-     * Recupera il valore della proprietà targetDimensions.
+     * gml:targetDimensions is the number of dimensions in the target CRS of this operation method.
      * 
      * @return
      *     possible object is
@@ -192,6 +208,7 @@ public class OperationMethodType
      *     allowed object is
      *     {@link BigInteger }
      *     
+     * @see #getTargetDimensions()
      */
     public void setTargetDimensions(BigInteger value) {
         this.targetDimensions = value;
@@ -202,18 +219,20 @@ public class OperationMethodType
     }
 
     /**
+     * gml:generalOperationParameter is an association to an operation parameter or parameter group.
+     * 
      * Gets the value of the generalOperationParameter property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the generalOperationParameter property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the generalOperationParameter property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getGeneralOperationParameter().add(newItem);
+     * getGeneralOperationParameter().add(newItem);
      * </pre>
      * 
      * 
@@ -221,12 +240,15 @@ public class OperationMethodType
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractGeneralOperationParameterPropertyType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the generalOperationParameter property.
      */
     public List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> getGeneralOperationParameter() {
         if (generalOperationParameter == null) {
-            generalOperationParameter = new ArrayList<JAXBElement<AbstractGeneralOperationParameterPropertyType>>();
+            generalOperationParameter = new ArrayList<>();
         }
         return this.generalOperationParameter;
     }
@@ -239,13 +261,15 @@ public class OperationMethodType
         this.generalOperationParameter = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -253,33 +277,43 @@ public class OperationMethodType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             JAXBElement<CodeType> theFormula;
             theFormula = this.getFormula();
-            strategy.appendField(locator, this, "formula", buffer, theFormula);
+            strategy.appendField(locator, this, "formula", buffer, theFormula, this.isSetFormula());
         }
         {
             BigInteger theSourceDimensions;
             theSourceDimensions = this.getSourceDimensions();
-            strategy.appendField(locator, this, "sourceDimensions", buffer, theSourceDimensions);
+            strategy.appendField(locator, this, "sourceDimensions", buffer, theSourceDimensions, this.isSetSourceDimensions());
         }
         {
             BigInteger theTargetDimensions;
             theTargetDimensions = this.getTargetDimensions();
-            strategy.appendField(locator, this, "targetDimensions", buffer, theTargetDimensions);
+            strategy.appendField(locator, this, "targetDimensions", buffer, theTargetDimensions, this.isSetTargetDimensions());
         }
         {
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> theGeneralOperationParameter;
-            theGeneralOperationParameter = this.getGeneralOperationParameter();
-            strategy.appendField(locator, this, "generalOperationParameter", buffer, theGeneralOperationParameter);
+            theGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
+            strategy.appendField(locator, this, "generalOperationParameter", buffer, theGeneralOperationParameter, this.isSetGeneralOperationParameter());
         }
         return buffer;
     }
 
+    public void setGeneralOperationParameter(List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> value) {
+        this.generalOperationParameter = null;
+        if (value!= null) {
+            List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> draftl = this.getGeneralOperationParameter();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof OperationMethodType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -294,7 +328,7 @@ public class OperationMethodType
             lhsFormula = this.getFormula();
             JAXBElement<CodeType> rhsFormula;
             rhsFormula = that.getFormula();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "formula", lhsFormula), LocatorUtils.property(thatLocator, "formula", rhsFormula), lhsFormula, rhsFormula)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "formula", lhsFormula), LocatorUtils.property(thatLocator, "formula", rhsFormula), lhsFormula, rhsFormula, this.isSetFormula(), that.isSetFormula())) {
                 return false;
             }
         }
@@ -303,7 +337,7 @@ public class OperationMethodType
             lhsSourceDimensions = this.getSourceDimensions();
             BigInteger rhsSourceDimensions;
             rhsSourceDimensions = that.getSourceDimensions();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "sourceDimensions", lhsSourceDimensions), LocatorUtils.property(thatLocator, "sourceDimensions", rhsSourceDimensions), lhsSourceDimensions, rhsSourceDimensions)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "sourceDimensions", lhsSourceDimensions), LocatorUtils.property(thatLocator, "sourceDimensions", rhsSourceDimensions), lhsSourceDimensions, rhsSourceDimensions, this.isSetSourceDimensions(), that.isSetSourceDimensions())) {
                 return false;
             }
         }
@@ -312,120 +346,147 @@ public class OperationMethodType
             lhsTargetDimensions = this.getTargetDimensions();
             BigInteger rhsTargetDimensions;
             rhsTargetDimensions = that.getTargetDimensions();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "targetDimensions", lhsTargetDimensions), LocatorUtils.property(thatLocator, "targetDimensions", rhsTargetDimensions), lhsTargetDimensions, rhsTargetDimensions)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "targetDimensions", lhsTargetDimensions), LocatorUtils.property(thatLocator, "targetDimensions", rhsTargetDimensions), lhsTargetDimensions, rhsTargetDimensions, this.isSetTargetDimensions(), that.isSetTargetDimensions())) {
                 return false;
             }
         }
         {
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> lhsGeneralOperationParameter;
-            lhsGeneralOperationParameter = this.getGeneralOperationParameter();
+            lhsGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> rhsGeneralOperationParameter;
-            rhsGeneralOperationParameter = that.getGeneralOperationParameter();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(thatLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter)) {
+            rhsGeneralOperationParameter = (that.isSetGeneralOperationParameter()?that.getGeneralOperationParameter():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(thatLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter, this.isSetGeneralOperationParameter(), that.isSetGeneralOperationParameter())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             JAXBElement<CodeType> theFormula;
             theFormula = this.getFormula();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "formula", theFormula), currentHashCode, theFormula);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "formula", theFormula), currentHashCode, theFormula, this.isSetFormula());
         }
         {
             BigInteger theSourceDimensions;
             theSourceDimensions = this.getSourceDimensions();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "sourceDimensions", theSourceDimensions), currentHashCode, theSourceDimensions);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "sourceDimensions", theSourceDimensions), currentHashCode, theSourceDimensions, this.isSetSourceDimensions());
         }
         {
             BigInteger theTargetDimensions;
             theTargetDimensions = this.getTargetDimensions();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "targetDimensions", theTargetDimensions), currentHashCode, theTargetDimensions);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "targetDimensions", theTargetDimensions), currentHashCode, theTargetDimensions, this.isSetTargetDimensions());
         }
         {
             List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> theGeneralOperationParameter;
-            theGeneralOperationParameter = this.getGeneralOperationParameter();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "generalOperationParameter", theGeneralOperationParameter), currentHashCode, theGeneralOperationParameter);
+            theGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "generalOperationParameter", theGeneralOperationParameter), currentHashCode, theGeneralOperationParameter, this.isSetGeneralOperationParameter());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof OperationMethodType) {
             final OperationMethodType copy = ((OperationMethodType) draftCopy);
-            if (this.isSetFormula()) {
-                JAXBElement<CodeType> sourceFormula;
-                sourceFormula = this.getFormula();
-                @SuppressWarnings("unchecked")
-                JAXBElement<CodeType> copyFormula = ((JAXBElement<CodeType> ) strategy.copy(LocatorUtils.property(locator, "formula", sourceFormula), sourceFormula));
-                copy.setFormula(copyFormula);
-            } else {
-                copy.formula = null;
+            {
+                java.lang.Boolean formulaShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFormula());
+                if (formulaShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<CodeType> sourceFormula;
+                    sourceFormula = this.getFormula();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<CodeType> copyFormula = ((JAXBElement<CodeType> ) strategy.copy(LocatorUtils.property(locator, "formula", sourceFormula), sourceFormula, this.isSetFormula()));
+                    copy.setFormula(copyFormula);
+                } else {
+                    if (formulaShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.formula = null;
+                    }
+                }
             }
-            if (this.isSetSourceDimensions()) {
-                BigInteger sourceSourceDimensions;
-                sourceSourceDimensions = this.getSourceDimensions();
-                BigInteger copySourceDimensions = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "sourceDimensions", sourceSourceDimensions), sourceSourceDimensions));
-                copy.setSourceDimensions(copySourceDimensions);
-            } else {
-                copy.sourceDimensions = null;
+            {
+                java.lang.Boolean sourceDimensionsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSourceDimensions());
+                if (sourceDimensionsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceSourceDimensions;
+                    sourceSourceDimensions = this.getSourceDimensions();
+                    BigInteger copySourceDimensions = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "sourceDimensions", sourceSourceDimensions), sourceSourceDimensions, this.isSetSourceDimensions()));
+                    copy.setSourceDimensions(copySourceDimensions);
+                } else {
+                    if (sourceDimensionsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.sourceDimensions = null;
+                    }
+                }
             }
-            if (this.isSetTargetDimensions()) {
-                BigInteger sourceTargetDimensions;
-                sourceTargetDimensions = this.getTargetDimensions();
-                BigInteger copyTargetDimensions = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "targetDimensions", sourceTargetDimensions), sourceTargetDimensions));
-                copy.setTargetDimensions(copyTargetDimensions);
-            } else {
-                copy.targetDimensions = null;
+            {
+                java.lang.Boolean targetDimensionsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTargetDimensions());
+                if (targetDimensionsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceTargetDimensions;
+                    sourceTargetDimensions = this.getTargetDimensions();
+                    BigInteger copyTargetDimensions = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "targetDimensions", sourceTargetDimensions), sourceTargetDimensions, this.isSetTargetDimensions()));
+                    copy.setTargetDimensions(copyTargetDimensions);
+                } else {
+                    if (targetDimensionsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.targetDimensions = null;
+                    }
+                }
             }
-            if (this.isSetGeneralOperationParameter()) {
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> sourceGeneralOperationParameter;
-                sourceGeneralOperationParameter = this.getGeneralOperationParameter();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> copyGeneralOperationParameter = ((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "generalOperationParameter", sourceGeneralOperationParameter), sourceGeneralOperationParameter));
-                copy.unsetGeneralOperationParameter();
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> uniqueGeneralOperationParameterl = copy.getGeneralOperationParameter();
-                uniqueGeneralOperationParameterl.addAll(copyGeneralOperationParameter);
-            } else {
-                copy.unsetGeneralOperationParameter();
+            {
+                java.lang.Boolean generalOperationParameterShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGeneralOperationParameter());
+                if (generalOperationParameterShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> sourceGeneralOperationParameter;
+                    sourceGeneralOperationParameter = (this.isSetGeneralOperationParameter()?this.getGeneralOperationParameter():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> copyGeneralOperationParameter = ((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "generalOperationParameter", sourceGeneralOperationParameter), sourceGeneralOperationParameter, this.isSetGeneralOperationParameter()));
+                    copy.setGeneralOperationParameter(copyGeneralOperationParameter);
+                } else {
+                    if (generalOperationParameterShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetGeneralOperationParameter();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new OperationMethodType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof OperationMethodType) {
@@ -433,155 +494,66 @@ public class OperationMethodType
             final OperationMethodType leftObject = ((OperationMethodType) left);
             final OperationMethodType rightObject = ((OperationMethodType) right);
             {
-                JAXBElement<CodeType> lhsFormula;
-                lhsFormula = leftObject.getFormula();
-                JAXBElement<CodeType> rhsFormula;
-                rhsFormula = rightObject.getFormula();
-                target.setFormula(((JAXBElement<CodeType> ) strategy.merge(LocatorUtils.property(leftLocator, "formula", lhsFormula), LocatorUtils.property(rightLocator, "formula", rhsFormula), lhsFormula, rhsFormula)));
+                java.lang.Boolean formulaShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFormula(), rightObject.isSetFormula());
+                if (formulaShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<CodeType> lhsFormula;
+                    lhsFormula = leftObject.getFormula();
+                    JAXBElement<CodeType> rhsFormula;
+                    rhsFormula = rightObject.getFormula();
+                    JAXBElement<CodeType> mergedFormula = ((JAXBElement<CodeType> ) strategy.merge(LocatorUtils.property(leftLocator, "formula", lhsFormula), LocatorUtils.property(rightLocator, "formula", rhsFormula), lhsFormula, rhsFormula, leftObject.isSetFormula(), rightObject.isSetFormula()));
+                    target.setFormula(mergedFormula);
+                } else {
+                    if (formulaShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.formula = null;
+                    }
+                }
             }
             {
-                BigInteger lhsSourceDimensions;
-                lhsSourceDimensions = leftObject.getSourceDimensions();
-                BigInteger rhsSourceDimensions;
-                rhsSourceDimensions = rightObject.getSourceDimensions();
-                target.setSourceDimensions(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "sourceDimensions", lhsSourceDimensions), LocatorUtils.property(rightLocator, "sourceDimensions", rhsSourceDimensions), lhsSourceDimensions, rhsSourceDimensions)));
+                java.lang.Boolean sourceDimensionsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSourceDimensions(), rightObject.isSetSourceDimensions());
+                if (sourceDimensionsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsSourceDimensions;
+                    lhsSourceDimensions = leftObject.getSourceDimensions();
+                    BigInteger rhsSourceDimensions;
+                    rhsSourceDimensions = rightObject.getSourceDimensions();
+                    BigInteger mergedSourceDimensions = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "sourceDimensions", lhsSourceDimensions), LocatorUtils.property(rightLocator, "sourceDimensions", rhsSourceDimensions), lhsSourceDimensions, rhsSourceDimensions, leftObject.isSetSourceDimensions(), rightObject.isSetSourceDimensions()));
+                    target.setSourceDimensions(mergedSourceDimensions);
+                } else {
+                    if (sourceDimensionsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.sourceDimensions = null;
+                    }
+                }
             }
             {
-                BigInteger lhsTargetDimensions;
-                lhsTargetDimensions = leftObject.getTargetDimensions();
-                BigInteger rhsTargetDimensions;
-                rhsTargetDimensions = rightObject.getTargetDimensions();
-                target.setTargetDimensions(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "targetDimensions", lhsTargetDimensions), LocatorUtils.property(rightLocator, "targetDimensions", rhsTargetDimensions), lhsTargetDimensions, rhsTargetDimensions)));
+                java.lang.Boolean targetDimensionsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTargetDimensions(), rightObject.isSetTargetDimensions());
+                if (targetDimensionsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsTargetDimensions;
+                    lhsTargetDimensions = leftObject.getTargetDimensions();
+                    BigInteger rhsTargetDimensions;
+                    rhsTargetDimensions = rightObject.getTargetDimensions();
+                    BigInteger mergedTargetDimensions = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "targetDimensions", lhsTargetDimensions), LocatorUtils.property(rightLocator, "targetDimensions", rhsTargetDimensions), lhsTargetDimensions, rhsTargetDimensions, leftObject.isSetTargetDimensions(), rightObject.isSetTargetDimensions()));
+                    target.setTargetDimensions(mergedTargetDimensions);
+                } else {
+                    if (targetDimensionsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.targetDimensions = null;
+                    }
+                }
             }
             {
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> lhsGeneralOperationParameter;
-                lhsGeneralOperationParameter = leftObject.getGeneralOperationParameter();
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> rhsGeneralOperationParameter;
-                rhsGeneralOperationParameter = rightObject.getGeneralOperationParameter();
-                target.unsetGeneralOperationParameter();
-                List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> uniqueGeneralOperationParameterl = target.getGeneralOperationParameter();
-                uniqueGeneralOperationParameterl.addAll(((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(rightLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter)));
+                java.lang.Boolean generalOperationParameterShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGeneralOperationParameter(), rightObject.isSetGeneralOperationParameter());
+                if (generalOperationParameterShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> lhsGeneralOperationParameter;
+                    lhsGeneralOperationParameter = (leftObject.isSetGeneralOperationParameter()?leftObject.getGeneralOperationParameter():null);
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> rhsGeneralOperationParameter;
+                    rhsGeneralOperationParameter = (rightObject.isSetGeneralOperationParameter()?rightObject.getGeneralOperationParameter():null);
+                    List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> mergedGeneralOperationParameter = ((List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "generalOperationParameter", lhsGeneralOperationParameter), LocatorUtils.property(rightLocator, "generalOperationParameter", rhsGeneralOperationParameter), lhsGeneralOperationParameter, rhsGeneralOperationParameter, leftObject.isSetGeneralOperationParameter(), rightObject.isSetGeneralOperationParameter()));
+                    target.setGeneralOperationParameter(mergedGeneralOperationParameter);
+                } else {
+                    if (generalOperationParameterShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetGeneralOperationParameter();
+                    }
+                }
             }
         }
-    }
-
-    public void setGeneralOperationParameter(List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> value) {
-        List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> draftl = this.getGeneralOperationParameter();
-        draftl.addAll(value);
-    }
-
-    public OperationMethodType withFormula(JAXBElement<CodeType> value) {
-        setFormula(value);
-        return this;
-    }
-
-    public OperationMethodType withSourceDimensions(BigInteger value) {
-        setSourceDimensions(value);
-        return this;
-    }
-
-    public OperationMethodType withTargetDimensions(BigInteger value) {
-        setTargetDimensions(value);
-        return this;
-    }
-
-    public OperationMethodType withGeneralOperationParameter(JAXBElement<AbstractGeneralOperationParameterPropertyType> ... values) {
-        if (values!= null) {
-            for (JAXBElement<AbstractGeneralOperationParameterPropertyType> value: values) {
-                getGeneralOperationParameter().add(value);
-            }
-        }
-        return this;
-    }
-
-    public OperationMethodType withGeneralOperationParameter(Collection<JAXBElement<AbstractGeneralOperationParameterPropertyType>> values) {
-        if (values!= null) {
-            getGeneralOperationParameter().addAll(values);
-        }
-        return this;
-    }
-
-    public OperationMethodType withGeneralOperationParameter(List<JAXBElement<AbstractGeneralOperationParameterPropertyType>> value) {
-        setGeneralOperationParameter(value);
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public OperationMethodType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

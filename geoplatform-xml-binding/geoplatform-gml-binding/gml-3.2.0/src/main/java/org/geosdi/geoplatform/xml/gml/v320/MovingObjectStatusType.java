@@ -34,69 +34,66 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per MovingObjectStatusType complex type.
+ * <p>Classe Java per MovingObjectStatusType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="MovingObjectStatusType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTimeSliceType">
- *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element name="position" type="{http://www.opengis.net/gml}GeometryPropertyType"/>
- *           &lt;element ref="{http://www.opengis.net/gml}pos"/>
- *           &lt;element ref="{http://www.opengis.net/gml}locationName"/>
- *           &lt;element ref="{http://www.opengis.net/gml}locationReference"/>
- *           &lt;element ref="{http://www.opengis.net/gml}location"/>
- *         &lt;/choice>
- *         &lt;element name="speed" type="{http://www.opengis.net/gml}MeasureType" minOccurs="0"/>
- *         &lt;element name="bearing" type="{http://www.opengis.net/gml}DirectionPropertyType" minOccurs="0"/>
- *         &lt;element name="acceleration" type="{http://www.opengis.net/gml}MeasureType" minOccurs="0"/>
- *         &lt;element name="elevation" type="{http://www.opengis.net/gml}MeasureType" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}status" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}statusReference" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="MovingObjectStatusType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTimeSliceType">
+ *       <sequence>
+ *         <choice>
+ *           <element name="position" type="{http://www.opengis.net/gml}GeometryPropertyType"/>
+ *           <element ref="{http://www.opengis.net/gml}pos"/>
+ *           <element ref="{http://www.opengis.net/gml}locationName"/>
+ *           <element ref="{http://www.opengis.net/gml}locationReference"/>
+ *           <element ref="{http://www.opengis.net/gml}location"/>
+ *         </choice>
+ *         <element name="speed" type="{http://www.opengis.net/gml}MeasureType" minOccurs="0"/>
+ *         <element name="bearing" type="{http://www.opengis.net/gml}DirectionPropertyType" minOccurs="0"/>
+ *         <element name="acceleration" type="{http://www.opengis.net/gml}MeasureType" minOccurs="0"/>
+ *         <element name="elevation" type="{http://www.opengis.net/gml}MeasureType" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}status" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}statusReference" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -121,7 +118,15 @@ public class MovingObjectStatusType
 
     protected GeometryPropertyType position;
     protected DirectPositionType pos;
+    /**
+     * The gml:locationName property element is a convenience property where the text value describes the location of the feature. If the location names are selected from a controlled list, then the list shall be identified in the codeSpace attribute.
+     * 
+     */
     protected CodeType locationName;
+    /**
+     * The gml:locationReference property element is a convenience property where the text value referenced by the xlink:href attribute describes the location of the feature.
+     * 
+     */
     protected ReferenceType locationReference;
     @XmlElementRef(name = "location", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected JAXBElement<? extends LocationPropertyType> location;
@@ -129,6 +134,10 @@ public class MovingObjectStatusType
     protected DirectionPropertyType bearing;
     protected MeasureType acceleration;
     protected MeasureType elevation;
+    /**
+     * The remote link attributes of the gml:status element have been deprecated along with its current type.
+     * 
+     */
     protected StringOrRefType status;
     protected ReferenceType statusReference;
 
@@ -189,7 +198,7 @@ public class MovingObjectStatusType
     }
 
     /**
-     * Recupera il valore della proprietà locationName.
+     * The gml:locationName property element is a convenience property where the text value describes the location of the feature. If the location names are selected from a controlled list, then the list shall be identified in the codeSpace attribute.
      * 
      * @return
      *     possible object is
@@ -207,6 +216,7 @@ public class MovingObjectStatusType
      *     allowed object is
      *     {@link CodeType }
      *     
+     * @see #getLocationName()
      */
     public void setLocationName(CodeType value) {
         this.locationName = value;
@@ -217,7 +227,7 @@ public class MovingObjectStatusType
     }
 
     /**
-     * Recupera il valore della proprietà locationReference.
+     * The gml:locationReference property element is a convenience property where the text value referenced by the xlink:href attribute describes the location of the feature.
      * 
      * @return
      *     possible object is
@@ -235,6 +245,7 @@ public class MovingObjectStatusType
      *     allowed object is
      *     {@link ReferenceType }
      *     
+     * @see #getLocationReference()
      */
     public void setLocationReference(ReferenceType value) {
         this.locationReference = value;
@@ -387,7 +398,7 @@ public class MovingObjectStatusType
     }
 
     /**
-     * Recupera il valore della proprietà status.
+     * The remote link attributes of the gml:status element have been deprecated along with its current type.
      * 
      * @return
      *     possible object is
@@ -405,6 +416,7 @@ public class MovingObjectStatusType
      *     allowed object is
      *     {@link StringOrRefType }
      *     
+     * @see #getStatus()
      */
     public void setStatus(StringOrRefType value) {
         this.status = value;
@@ -442,13 +454,15 @@ public class MovingObjectStatusType
         return (this.statusReference!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -456,68 +470,70 @@ public class MovingObjectStatusType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             GeometryPropertyType thePosition;
             thePosition = this.getPosition();
-            strategy.appendField(locator, this, "position", buffer, thePosition);
+            strategy.appendField(locator, this, "position", buffer, thePosition, this.isSetPosition());
         }
         {
             DirectPositionType thePos;
             thePos = this.getPos();
-            strategy.appendField(locator, this, "pos", buffer, thePos);
+            strategy.appendField(locator, this, "pos", buffer, thePos, this.isSetPos());
         }
         {
             CodeType theLocationName;
             theLocationName = this.getLocationName();
-            strategy.appendField(locator, this, "locationName", buffer, theLocationName);
+            strategy.appendField(locator, this, "locationName", buffer, theLocationName, this.isSetLocationName());
         }
         {
             ReferenceType theLocationReference;
             theLocationReference = this.getLocationReference();
-            strategy.appendField(locator, this, "locationReference", buffer, theLocationReference);
+            strategy.appendField(locator, this, "locationReference", buffer, theLocationReference, this.isSetLocationReference());
         }
         {
             JAXBElement<? extends LocationPropertyType> theLocation;
             theLocation = this.getLocation();
-            strategy.appendField(locator, this, "location", buffer, theLocation);
+            strategy.appendField(locator, this, "location", buffer, theLocation, this.isSetLocation());
         }
         {
             MeasureType theSpeed;
             theSpeed = this.getSpeed();
-            strategy.appendField(locator, this, "speed", buffer, theSpeed);
+            strategy.appendField(locator, this, "speed", buffer, theSpeed, this.isSetSpeed());
         }
         {
             DirectionPropertyType theBearing;
             theBearing = this.getBearing();
-            strategy.appendField(locator, this, "bearing", buffer, theBearing);
+            strategy.appendField(locator, this, "bearing", buffer, theBearing, this.isSetBearing());
         }
         {
             MeasureType theAcceleration;
             theAcceleration = this.getAcceleration();
-            strategy.appendField(locator, this, "acceleration", buffer, theAcceleration);
+            strategy.appendField(locator, this, "acceleration", buffer, theAcceleration, this.isSetAcceleration());
         }
         {
             MeasureType theElevation;
             theElevation = this.getElevation();
-            strategy.appendField(locator, this, "elevation", buffer, theElevation);
+            strategy.appendField(locator, this, "elevation", buffer, theElevation, this.isSetElevation());
         }
         {
             StringOrRefType theStatus;
             theStatus = this.getStatus();
-            strategy.appendField(locator, this, "status", buffer, theStatus);
+            strategy.appendField(locator, this, "status", buffer, theStatus, this.isSetStatus());
         }
         {
             ReferenceType theStatusReference;
             theStatusReference = this.getStatusReference();
-            strategy.appendField(locator, this, "statusReference", buffer, theStatusReference);
+            strategy.appendField(locator, this, "statusReference", buffer, theStatusReference, this.isSetStatusReference());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof MovingObjectStatusType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -532,7 +548,7 @@ public class MovingObjectStatusType
             lhsPosition = this.getPosition();
             GeometryPropertyType rhsPosition;
             rhsPosition = that.getPosition();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "position", lhsPosition), LocatorUtils.property(thatLocator, "position", rhsPosition), lhsPosition, rhsPosition)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "position", lhsPosition), LocatorUtils.property(thatLocator, "position", rhsPosition), lhsPosition, rhsPosition, this.isSetPosition(), that.isSetPosition())) {
                 return false;
             }
         }
@@ -541,7 +557,7 @@ public class MovingObjectStatusType
             lhsPos = this.getPos();
             DirectPositionType rhsPos;
             rhsPos = that.getPos();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "pos", lhsPos), LocatorUtils.property(thatLocator, "pos", rhsPos), lhsPos, rhsPos)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pos", lhsPos), LocatorUtils.property(thatLocator, "pos", rhsPos), lhsPos, rhsPos, this.isSetPos(), that.isSetPos())) {
                 return false;
             }
         }
@@ -550,7 +566,7 @@ public class MovingObjectStatusType
             lhsLocationName = this.getLocationName();
             CodeType rhsLocationName;
             rhsLocationName = that.getLocationName();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "locationName", lhsLocationName), LocatorUtils.property(thatLocator, "locationName", rhsLocationName), lhsLocationName, rhsLocationName)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "locationName", lhsLocationName), LocatorUtils.property(thatLocator, "locationName", rhsLocationName), lhsLocationName, rhsLocationName, this.isSetLocationName(), that.isSetLocationName())) {
                 return false;
             }
         }
@@ -559,7 +575,7 @@ public class MovingObjectStatusType
             lhsLocationReference = this.getLocationReference();
             ReferenceType rhsLocationReference;
             rhsLocationReference = that.getLocationReference();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "locationReference", lhsLocationReference), LocatorUtils.property(thatLocator, "locationReference", rhsLocationReference), lhsLocationReference, rhsLocationReference)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "locationReference", lhsLocationReference), LocatorUtils.property(thatLocator, "locationReference", rhsLocationReference), lhsLocationReference, rhsLocationReference, this.isSetLocationReference(), that.isSetLocationReference())) {
                 return false;
             }
         }
@@ -568,7 +584,7 @@ public class MovingObjectStatusType
             lhsLocation = this.getLocation();
             JAXBElement<? extends LocationPropertyType> rhsLocation;
             rhsLocation = that.getLocation();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "location", lhsLocation), LocatorUtils.property(thatLocator, "location", rhsLocation), lhsLocation, rhsLocation)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "location", lhsLocation), LocatorUtils.property(thatLocator, "location", rhsLocation), lhsLocation, rhsLocation, this.isSetLocation(), that.isSetLocation())) {
                 return false;
             }
         }
@@ -577,7 +593,7 @@ public class MovingObjectStatusType
             lhsSpeed = this.getSpeed();
             MeasureType rhsSpeed;
             rhsSpeed = that.getSpeed();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "speed", lhsSpeed), LocatorUtils.property(thatLocator, "speed", rhsSpeed), lhsSpeed, rhsSpeed)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "speed", lhsSpeed), LocatorUtils.property(thatLocator, "speed", rhsSpeed), lhsSpeed, rhsSpeed, this.isSetSpeed(), that.isSetSpeed())) {
                 return false;
             }
         }
@@ -586,7 +602,7 @@ public class MovingObjectStatusType
             lhsBearing = this.getBearing();
             DirectionPropertyType rhsBearing;
             rhsBearing = that.getBearing();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "bearing", lhsBearing), LocatorUtils.property(thatLocator, "bearing", rhsBearing), lhsBearing, rhsBearing)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "bearing", lhsBearing), LocatorUtils.property(thatLocator, "bearing", rhsBearing), lhsBearing, rhsBearing, this.isSetBearing(), that.isSetBearing())) {
                 return false;
             }
         }
@@ -595,7 +611,7 @@ public class MovingObjectStatusType
             lhsAcceleration = this.getAcceleration();
             MeasureType rhsAcceleration;
             rhsAcceleration = that.getAcceleration();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "acceleration", lhsAcceleration), LocatorUtils.property(thatLocator, "acceleration", rhsAcceleration), lhsAcceleration, rhsAcceleration)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "acceleration", lhsAcceleration), LocatorUtils.property(thatLocator, "acceleration", rhsAcceleration), lhsAcceleration, rhsAcceleration, this.isSetAcceleration(), that.isSetAcceleration())) {
                 return false;
             }
         }
@@ -604,7 +620,7 @@ public class MovingObjectStatusType
             lhsElevation = this.getElevation();
             MeasureType rhsElevation;
             rhsElevation = that.getElevation();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "elevation", lhsElevation), LocatorUtils.property(thatLocator, "elevation", rhsElevation), lhsElevation, rhsElevation)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "elevation", lhsElevation), LocatorUtils.property(thatLocator, "elevation", rhsElevation), lhsElevation, rhsElevation, this.isSetElevation(), that.isSetElevation())) {
                 return false;
             }
         }
@@ -613,7 +629,7 @@ public class MovingObjectStatusType
             lhsStatus = this.getStatus();
             StringOrRefType rhsStatus;
             rhsStatus = that.getStatus();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "status", lhsStatus), LocatorUtils.property(thatLocator, "status", rhsStatus), lhsStatus, rhsStatus)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "status", lhsStatus), LocatorUtils.property(thatLocator, "status", rhsStatus), lhsStatus, rhsStatus, this.isSetStatus(), that.isSetStatus())) {
                 return false;
             }
         }
@@ -622,199 +638,263 @@ public class MovingObjectStatusType
             lhsStatusReference = this.getStatusReference();
             ReferenceType rhsStatusReference;
             rhsStatusReference = that.getStatusReference();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "statusReference", lhsStatusReference), LocatorUtils.property(thatLocator, "statusReference", rhsStatusReference), lhsStatusReference, rhsStatusReference)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "statusReference", lhsStatusReference), LocatorUtils.property(thatLocator, "statusReference", rhsStatusReference), lhsStatusReference, rhsStatusReference, this.isSetStatusReference(), that.isSetStatusReference())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             GeometryPropertyType thePosition;
             thePosition = this.getPosition();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "position", thePosition), currentHashCode, thePosition);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "position", thePosition), currentHashCode, thePosition, this.isSetPosition());
         }
         {
             DirectPositionType thePos;
             thePos = this.getPos();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pos", thePos), currentHashCode, thePos);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pos", thePos), currentHashCode, thePos, this.isSetPos());
         }
         {
             CodeType theLocationName;
             theLocationName = this.getLocationName();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "locationName", theLocationName), currentHashCode, theLocationName);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "locationName", theLocationName), currentHashCode, theLocationName, this.isSetLocationName());
         }
         {
             ReferenceType theLocationReference;
             theLocationReference = this.getLocationReference();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "locationReference", theLocationReference), currentHashCode, theLocationReference);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "locationReference", theLocationReference), currentHashCode, theLocationReference, this.isSetLocationReference());
         }
         {
             JAXBElement<? extends LocationPropertyType> theLocation;
             theLocation = this.getLocation();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "location", theLocation), currentHashCode, theLocation);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "location", theLocation), currentHashCode, theLocation, this.isSetLocation());
         }
         {
             MeasureType theSpeed;
             theSpeed = this.getSpeed();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "speed", theSpeed), currentHashCode, theSpeed);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "speed", theSpeed), currentHashCode, theSpeed, this.isSetSpeed());
         }
         {
             DirectionPropertyType theBearing;
             theBearing = this.getBearing();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "bearing", theBearing), currentHashCode, theBearing);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "bearing", theBearing), currentHashCode, theBearing, this.isSetBearing());
         }
         {
             MeasureType theAcceleration;
             theAcceleration = this.getAcceleration();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "acceleration", theAcceleration), currentHashCode, theAcceleration);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "acceleration", theAcceleration), currentHashCode, theAcceleration, this.isSetAcceleration());
         }
         {
             MeasureType theElevation;
             theElevation = this.getElevation();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "elevation", theElevation), currentHashCode, theElevation);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "elevation", theElevation), currentHashCode, theElevation, this.isSetElevation());
         }
         {
             StringOrRefType theStatus;
             theStatus = this.getStatus();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "status", theStatus), currentHashCode, theStatus);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "status", theStatus), currentHashCode, theStatus, this.isSetStatus());
         }
         {
             ReferenceType theStatusReference;
             theStatusReference = this.getStatusReference();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "statusReference", theStatusReference), currentHashCode, theStatusReference);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "statusReference", theStatusReference), currentHashCode, theStatusReference, this.isSetStatusReference());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof MovingObjectStatusType) {
             final MovingObjectStatusType copy = ((MovingObjectStatusType) draftCopy);
-            if (this.isSetPosition()) {
-                GeometryPropertyType sourcePosition;
-                sourcePosition = this.getPosition();
-                GeometryPropertyType copyPosition = ((GeometryPropertyType) strategy.copy(LocatorUtils.property(locator, "position", sourcePosition), sourcePosition));
-                copy.setPosition(copyPosition);
-            } else {
-                copy.position = null;
+            {
+                java.lang.Boolean positionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPosition());
+                if (positionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    GeometryPropertyType sourcePosition;
+                    sourcePosition = this.getPosition();
+                    GeometryPropertyType copyPosition = ((GeometryPropertyType) strategy.copy(LocatorUtils.property(locator, "position", sourcePosition), sourcePosition, this.isSetPosition()));
+                    copy.setPosition(copyPosition);
+                } else {
+                    if (positionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.position = null;
+                    }
+                }
             }
-            if (this.isSetPos()) {
-                DirectPositionType sourcePos;
-                sourcePos = this.getPos();
-                DirectPositionType copyPos = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "pos", sourcePos), sourcePos));
-                copy.setPos(copyPos);
-            } else {
-                copy.pos = null;
+            {
+                java.lang.Boolean posShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPos());
+                if (posShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType sourcePos;
+                    sourcePos = this.getPos();
+                    DirectPositionType copyPos = ((DirectPositionType) strategy.copy(LocatorUtils.property(locator, "pos", sourcePos), sourcePos, this.isSetPos()));
+                    copy.setPos(copyPos);
+                } else {
+                    if (posShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.pos = null;
+                    }
+                }
             }
-            if (this.isSetLocationName()) {
-                CodeType sourceLocationName;
-                sourceLocationName = this.getLocationName();
-                CodeType copyLocationName = ((CodeType) strategy.copy(LocatorUtils.property(locator, "locationName", sourceLocationName), sourceLocationName));
-                copy.setLocationName(copyLocationName);
-            } else {
-                copy.locationName = null;
+            {
+                java.lang.Boolean locationNameShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetLocationName());
+                if (locationNameShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    CodeType sourceLocationName;
+                    sourceLocationName = this.getLocationName();
+                    CodeType copyLocationName = ((CodeType) strategy.copy(LocatorUtils.property(locator, "locationName", sourceLocationName), sourceLocationName, this.isSetLocationName()));
+                    copy.setLocationName(copyLocationName);
+                } else {
+                    if (locationNameShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.locationName = null;
+                    }
+                }
             }
-            if (this.isSetLocationReference()) {
-                ReferenceType sourceLocationReference;
-                sourceLocationReference = this.getLocationReference();
-                ReferenceType copyLocationReference = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "locationReference", sourceLocationReference), sourceLocationReference));
-                copy.setLocationReference(copyLocationReference);
-            } else {
-                copy.locationReference = null;
+            {
+                java.lang.Boolean locationReferenceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetLocationReference());
+                if (locationReferenceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType sourceLocationReference;
+                    sourceLocationReference = this.getLocationReference();
+                    ReferenceType copyLocationReference = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "locationReference", sourceLocationReference), sourceLocationReference, this.isSetLocationReference()));
+                    copy.setLocationReference(copyLocationReference);
+                } else {
+                    if (locationReferenceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.locationReference = null;
+                    }
+                }
             }
-            if (this.isSetLocation()) {
-                JAXBElement<? extends LocationPropertyType> sourceLocation;
-                sourceLocation = this.getLocation();
-                @SuppressWarnings("unchecked")
-                JAXBElement<? extends LocationPropertyType> copyLocation = ((JAXBElement<? extends LocationPropertyType> ) strategy.copy(LocatorUtils.property(locator, "location", sourceLocation), sourceLocation));
-                copy.setLocation(copyLocation);
-            } else {
-                copy.location = null;
+            {
+                java.lang.Boolean locationShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetLocation());
+                if (locationShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends LocationPropertyType> sourceLocation;
+                    sourceLocation = this.getLocation();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<? extends LocationPropertyType> copyLocation = ((JAXBElement<? extends LocationPropertyType> ) strategy.copy(LocatorUtils.property(locator, "location", sourceLocation), sourceLocation, this.isSetLocation()));
+                    copy.setLocation(copyLocation);
+                } else {
+                    if (locationShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.location = null;
+                    }
+                }
             }
-            if (this.isSetSpeed()) {
-                MeasureType sourceSpeed;
-                sourceSpeed = this.getSpeed();
-                MeasureType copySpeed = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "speed", sourceSpeed), sourceSpeed));
-                copy.setSpeed(copySpeed);
-            } else {
-                copy.speed = null;
+            {
+                java.lang.Boolean speedShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSpeed());
+                if (speedShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType sourceSpeed;
+                    sourceSpeed = this.getSpeed();
+                    MeasureType copySpeed = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "speed", sourceSpeed), sourceSpeed, this.isSetSpeed()));
+                    copy.setSpeed(copySpeed);
+                } else {
+                    if (speedShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.speed = null;
+                    }
+                }
             }
-            if (this.isSetBearing()) {
-                DirectionPropertyType sourceBearing;
-                sourceBearing = this.getBearing();
-                DirectionPropertyType copyBearing = ((DirectionPropertyType) strategy.copy(LocatorUtils.property(locator, "bearing", sourceBearing), sourceBearing));
-                copy.setBearing(copyBearing);
-            } else {
-                copy.bearing = null;
+            {
+                java.lang.Boolean bearingShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetBearing());
+                if (bearingShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DirectionPropertyType sourceBearing;
+                    sourceBearing = this.getBearing();
+                    DirectionPropertyType copyBearing = ((DirectionPropertyType) strategy.copy(LocatorUtils.property(locator, "bearing", sourceBearing), sourceBearing, this.isSetBearing()));
+                    copy.setBearing(copyBearing);
+                } else {
+                    if (bearingShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.bearing = null;
+                    }
+                }
             }
-            if (this.isSetAcceleration()) {
-                MeasureType sourceAcceleration;
-                sourceAcceleration = this.getAcceleration();
-                MeasureType copyAcceleration = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "acceleration", sourceAcceleration), sourceAcceleration));
-                copy.setAcceleration(copyAcceleration);
-            } else {
-                copy.acceleration = null;
+            {
+                java.lang.Boolean accelerationShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAcceleration());
+                if (accelerationShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType sourceAcceleration;
+                    sourceAcceleration = this.getAcceleration();
+                    MeasureType copyAcceleration = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "acceleration", sourceAcceleration), sourceAcceleration, this.isSetAcceleration()));
+                    copy.setAcceleration(copyAcceleration);
+                } else {
+                    if (accelerationShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.acceleration = null;
+                    }
+                }
             }
-            if (this.isSetElevation()) {
-                MeasureType sourceElevation;
-                sourceElevation = this.getElevation();
-                MeasureType copyElevation = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "elevation", sourceElevation), sourceElevation));
-                copy.setElevation(copyElevation);
-            } else {
-                copy.elevation = null;
+            {
+                java.lang.Boolean elevationShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetElevation());
+                if (elevationShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType sourceElevation;
+                    sourceElevation = this.getElevation();
+                    MeasureType copyElevation = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "elevation", sourceElevation), sourceElevation, this.isSetElevation()));
+                    copy.setElevation(copyElevation);
+                } else {
+                    if (elevationShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.elevation = null;
+                    }
+                }
             }
-            if (this.isSetStatus()) {
-                StringOrRefType sourceStatus;
-                sourceStatus = this.getStatus();
-                StringOrRefType copyStatus = ((StringOrRefType) strategy.copy(LocatorUtils.property(locator, "status", sourceStatus), sourceStatus));
-                copy.setStatus(copyStatus);
-            } else {
-                copy.status = null;
+            {
+                java.lang.Boolean statusShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetStatus());
+                if (statusShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    StringOrRefType sourceStatus;
+                    sourceStatus = this.getStatus();
+                    StringOrRefType copyStatus = ((StringOrRefType) strategy.copy(LocatorUtils.property(locator, "status", sourceStatus), sourceStatus, this.isSetStatus()));
+                    copy.setStatus(copyStatus);
+                } else {
+                    if (statusShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.status = null;
+                    }
+                }
             }
-            if (this.isSetStatusReference()) {
-                ReferenceType sourceStatusReference;
-                sourceStatusReference = this.getStatusReference();
-                ReferenceType copyStatusReference = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "statusReference", sourceStatusReference), sourceStatusReference));
-                copy.setStatusReference(copyStatusReference);
-            } else {
-                copy.statusReference = null;
+            {
+                java.lang.Boolean statusReferenceShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetStatusReference());
+                if (statusReferenceShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType sourceStatusReference;
+                    sourceStatusReference = this.getStatusReference();
+                    ReferenceType copyStatusReference = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "statusReference", sourceStatusReference), sourceStatusReference, this.isSetStatusReference()));
+                    copy.setStatusReference(copyStatusReference);
+                } else {
+                    if (statusReferenceShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.statusReference = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new MovingObjectStatusType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof MovingObjectStatusType) {
@@ -822,222 +902,171 @@ public class MovingObjectStatusType
             final MovingObjectStatusType leftObject = ((MovingObjectStatusType) left);
             final MovingObjectStatusType rightObject = ((MovingObjectStatusType) right);
             {
-                GeometryPropertyType lhsPosition;
-                lhsPosition = leftObject.getPosition();
-                GeometryPropertyType rhsPosition;
-                rhsPosition = rightObject.getPosition();
-                target.setPosition(((GeometryPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "position", lhsPosition), LocatorUtils.property(rightLocator, "position", rhsPosition), lhsPosition, rhsPosition)));
+                java.lang.Boolean positionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPosition(), rightObject.isSetPosition());
+                if (positionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    GeometryPropertyType lhsPosition;
+                    lhsPosition = leftObject.getPosition();
+                    GeometryPropertyType rhsPosition;
+                    rhsPosition = rightObject.getPosition();
+                    GeometryPropertyType mergedPosition = ((GeometryPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "position", lhsPosition), LocatorUtils.property(rightLocator, "position", rhsPosition), lhsPosition, rhsPosition, leftObject.isSetPosition(), rightObject.isSetPosition()));
+                    target.setPosition(mergedPosition);
+                } else {
+                    if (positionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.position = null;
+                    }
+                }
             }
             {
-                DirectPositionType lhsPos;
-                lhsPos = leftObject.getPos();
-                DirectPositionType rhsPos;
-                rhsPos = rightObject.getPos();
-                target.setPos(((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "pos", lhsPos), LocatorUtils.property(rightLocator, "pos", rhsPos), lhsPos, rhsPos)));
+                java.lang.Boolean posShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPos(), rightObject.isSetPos());
+                if (posShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectPositionType lhsPos;
+                    lhsPos = leftObject.getPos();
+                    DirectPositionType rhsPos;
+                    rhsPos = rightObject.getPos();
+                    DirectPositionType mergedPos = ((DirectPositionType) strategy.merge(LocatorUtils.property(leftLocator, "pos", lhsPos), LocatorUtils.property(rightLocator, "pos", rhsPos), lhsPos, rhsPos, leftObject.isSetPos(), rightObject.isSetPos()));
+                    target.setPos(mergedPos);
+                } else {
+                    if (posShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.pos = null;
+                    }
+                }
             }
             {
-                CodeType lhsLocationName;
-                lhsLocationName = leftObject.getLocationName();
-                CodeType rhsLocationName;
-                rhsLocationName = rightObject.getLocationName();
-                target.setLocationName(((CodeType) strategy.merge(LocatorUtils.property(leftLocator, "locationName", lhsLocationName), LocatorUtils.property(rightLocator, "locationName", rhsLocationName), lhsLocationName, rhsLocationName)));
+                java.lang.Boolean locationNameShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetLocationName(), rightObject.isSetLocationName());
+                if (locationNameShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    CodeType lhsLocationName;
+                    lhsLocationName = leftObject.getLocationName();
+                    CodeType rhsLocationName;
+                    rhsLocationName = rightObject.getLocationName();
+                    CodeType mergedLocationName = ((CodeType) strategy.merge(LocatorUtils.property(leftLocator, "locationName", lhsLocationName), LocatorUtils.property(rightLocator, "locationName", rhsLocationName), lhsLocationName, rhsLocationName, leftObject.isSetLocationName(), rightObject.isSetLocationName()));
+                    target.setLocationName(mergedLocationName);
+                } else {
+                    if (locationNameShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.locationName = null;
+                    }
+                }
             }
             {
-                ReferenceType lhsLocationReference;
-                lhsLocationReference = leftObject.getLocationReference();
-                ReferenceType rhsLocationReference;
-                rhsLocationReference = rightObject.getLocationReference();
-                target.setLocationReference(((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "locationReference", lhsLocationReference), LocatorUtils.property(rightLocator, "locationReference", rhsLocationReference), lhsLocationReference, rhsLocationReference)));
+                java.lang.Boolean locationReferenceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetLocationReference(), rightObject.isSetLocationReference());
+                if (locationReferenceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType lhsLocationReference;
+                    lhsLocationReference = leftObject.getLocationReference();
+                    ReferenceType rhsLocationReference;
+                    rhsLocationReference = rightObject.getLocationReference();
+                    ReferenceType mergedLocationReference = ((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "locationReference", lhsLocationReference), LocatorUtils.property(rightLocator, "locationReference", rhsLocationReference), lhsLocationReference, rhsLocationReference, leftObject.isSetLocationReference(), rightObject.isSetLocationReference()));
+                    target.setLocationReference(mergedLocationReference);
+                } else {
+                    if (locationReferenceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.locationReference = null;
+                    }
+                }
             }
             {
-                JAXBElement<? extends LocationPropertyType> lhsLocation;
-                lhsLocation = leftObject.getLocation();
-                JAXBElement<? extends LocationPropertyType> rhsLocation;
-                rhsLocation = rightObject.getLocation();
-                target.setLocation(((JAXBElement<? extends LocationPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "location", lhsLocation), LocatorUtils.property(rightLocator, "location", rhsLocation), lhsLocation, rhsLocation)));
+                java.lang.Boolean locationShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetLocation(), rightObject.isSetLocation());
+                if (locationShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends LocationPropertyType> lhsLocation;
+                    lhsLocation = leftObject.getLocation();
+                    JAXBElement<? extends LocationPropertyType> rhsLocation;
+                    rhsLocation = rightObject.getLocation();
+                    JAXBElement<? extends LocationPropertyType> mergedLocation = ((JAXBElement<? extends LocationPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "location", lhsLocation), LocatorUtils.property(rightLocator, "location", rhsLocation), lhsLocation, rhsLocation, leftObject.isSetLocation(), rightObject.isSetLocation()));
+                    target.setLocation(mergedLocation);
+                } else {
+                    if (locationShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.location = null;
+                    }
+                }
             }
             {
-                MeasureType lhsSpeed;
-                lhsSpeed = leftObject.getSpeed();
-                MeasureType rhsSpeed;
-                rhsSpeed = rightObject.getSpeed();
-                target.setSpeed(((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "speed", lhsSpeed), LocatorUtils.property(rightLocator, "speed", rhsSpeed), lhsSpeed, rhsSpeed)));
+                java.lang.Boolean speedShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSpeed(), rightObject.isSetSpeed());
+                if (speedShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType lhsSpeed;
+                    lhsSpeed = leftObject.getSpeed();
+                    MeasureType rhsSpeed;
+                    rhsSpeed = rightObject.getSpeed();
+                    MeasureType mergedSpeed = ((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "speed", lhsSpeed), LocatorUtils.property(rightLocator, "speed", rhsSpeed), lhsSpeed, rhsSpeed, leftObject.isSetSpeed(), rightObject.isSetSpeed()));
+                    target.setSpeed(mergedSpeed);
+                } else {
+                    if (speedShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.speed = null;
+                    }
+                }
             }
             {
-                DirectionPropertyType lhsBearing;
-                lhsBearing = leftObject.getBearing();
-                DirectionPropertyType rhsBearing;
-                rhsBearing = rightObject.getBearing();
-                target.setBearing(((DirectionPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "bearing", lhsBearing), LocatorUtils.property(rightLocator, "bearing", rhsBearing), lhsBearing, rhsBearing)));
+                java.lang.Boolean bearingShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetBearing(), rightObject.isSetBearing());
+                if (bearingShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DirectionPropertyType lhsBearing;
+                    lhsBearing = leftObject.getBearing();
+                    DirectionPropertyType rhsBearing;
+                    rhsBearing = rightObject.getBearing();
+                    DirectionPropertyType mergedBearing = ((DirectionPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "bearing", lhsBearing), LocatorUtils.property(rightLocator, "bearing", rhsBearing), lhsBearing, rhsBearing, leftObject.isSetBearing(), rightObject.isSetBearing()));
+                    target.setBearing(mergedBearing);
+                } else {
+                    if (bearingShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.bearing = null;
+                    }
+                }
             }
             {
-                MeasureType lhsAcceleration;
-                lhsAcceleration = leftObject.getAcceleration();
-                MeasureType rhsAcceleration;
-                rhsAcceleration = rightObject.getAcceleration();
-                target.setAcceleration(((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "acceleration", lhsAcceleration), LocatorUtils.property(rightLocator, "acceleration", rhsAcceleration), lhsAcceleration, rhsAcceleration)));
+                java.lang.Boolean accelerationShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAcceleration(), rightObject.isSetAcceleration());
+                if (accelerationShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType lhsAcceleration;
+                    lhsAcceleration = leftObject.getAcceleration();
+                    MeasureType rhsAcceleration;
+                    rhsAcceleration = rightObject.getAcceleration();
+                    MeasureType mergedAcceleration = ((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "acceleration", lhsAcceleration), LocatorUtils.property(rightLocator, "acceleration", rhsAcceleration), lhsAcceleration, rhsAcceleration, leftObject.isSetAcceleration(), rightObject.isSetAcceleration()));
+                    target.setAcceleration(mergedAcceleration);
+                } else {
+                    if (accelerationShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.acceleration = null;
+                    }
+                }
             }
             {
-                MeasureType lhsElevation;
-                lhsElevation = leftObject.getElevation();
-                MeasureType rhsElevation;
-                rhsElevation = rightObject.getElevation();
-                target.setElevation(((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "elevation", lhsElevation), LocatorUtils.property(rightLocator, "elevation", rhsElevation), lhsElevation, rhsElevation)));
+                java.lang.Boolean elevationShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetElevation(), rightObject.isSetElevation());
+                if (elevationShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType lhsElevation;
+                    lhsElevation = leftObject.getElevation();
+                    MeasureType rhsElevation;
+                    rhsElevation = rightObject.getElevation();
+                    MeasureType mergedElevation = ((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "elevation", lhsElevation), LocatorUtils.property(rightLocator, "elevation", rhsElevation), lhsElevation, rhsElevation, leftObject.isSetElevation(), rightObject.isSetElevation()));
+                    target.setElevation(mergedElevation);
+                } else {
+                    if (elevationShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.elevation = null;
+                    }
+                }
             }
             {
-                StringOrRefType lhsStatus;
-                lhsStatus = leftObject.getStatus();
-                StringOrRefType rhsStatus;
-                rhsStatus = rightObject.getStatus();
-                target.setStatus(((StringOrRefType) strategy.merge(LocatorUtils.property(leftLocator, "status", lhsStatus), LocatorUtils.property(rightLocator, "status", rhsStatus), lhsStatus, rhsStatus)));
+                java.lang.Boolean statusShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetStatus(), rightObject.isSetStatus());
+                if (statusShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    StringOrRefType lhsStatus;
+                    lhsStatus = leftObject.getStatus();
+                    StringOrRefType rhsStatus;
+                    rhsStatus = rightObject.getStatus();
+                    StringOrRefType mergedStatus = ((StringOrRefType) strategy.merge(LocatorUtils.property(leftLocator, "status", lhsStatus), LocatorUtils.property(rightLocator, "status", rhsStatus), lhsStatus, rhsStatus, leftObject.isSetStatus(), rightObject.isSetStatus()));
+                    target.setStatus(mergedStatus);
+                } else {
+                    if (statusShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.status = null;
+                    }
+                }
             }
             {
-                ReferenceType lhsStatusReference;
-                lhsStatusReference = leftObject.getStatusReference();
-                ReferenceType rhsStatusReference;
-                rhsStatusReference = rightObject.getStatusReference();
-                target.setStatusReference(((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "statusReference", lhsStatusReference), LocatorUtils.property(rightLocator, "statusReference", rhsStatusReference), lhsStatusReference, rhsStatusReference)));
+                java.lang.Boolean statusReferenceShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetStatusReference(), rightObject.isSetStatusReference());
+                if (statusReferenceShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType lhsStatusReference;
+                    lhsStatusReference = leftObject.getStatusReference();
+                    ReferenceType rhsStatusReference;
+                    rhsStatusReference = rightObject.getStatusReference();
+                    ReferenceType mergedStatusReference = ((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "statusReference", lhsStatusReference), LocatorUtils.property(rightLocator, "statusReference", rhsStatusReference), lhsStatusReference, rhsStatusReference, leftObject.isSetStatusReference(), rightObject.isSetStatusReference()));
+                    target.setStatusReference(mergedStatusReference);
+                } else {
+                    if (statusReferenceShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.statusReference = null;
+                    }
+                }
             }
         }
-    }
-
-    public MovingObjectStatusType withPosition(GeometryPropertyType value) {
-        setPosition(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withPos(DirectPositionType value) {
-        setPos(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withLocationName(CodeType value) {
-        setLocationName(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withLocationReference(ReferenceType value) {
-        setLocationReference(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withLocation(JAXBElement<? extends LocationPropertyType> value) {
-        setLocation(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withSpeed(MeasureType value) {
-        setSpeed(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withBearing(DirectionPropertyType value) {
-        setBearing(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withAcceleration(MeasureType value) {
-        setAcceleration(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withElevation(MeasureType value) {
-        setElevation(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withStatus(StringOrRefType value) {
-        setStatus(value);
-        return this;
-    }
-
-    public MovingObjectStatusType withStatusReference(ReferenceType value) {
-        setStatusReference(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withValidTime(TimePrimitivePropertyType value) {
-        setValidTime(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withDataSource(StringOrRefType value) {
-        setDataSource(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public MovingObjectStatusType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

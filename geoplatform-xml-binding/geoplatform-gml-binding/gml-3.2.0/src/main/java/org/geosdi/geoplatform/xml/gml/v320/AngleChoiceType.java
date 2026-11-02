@@ -34,54 +34,53 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AngleChoiceType complex type.
+ * <p>Classe Java per AngleChoiceType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AngleChoiceType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element ref="{http://www.opengis.net/gml}angle"/>
- *         &lt;element ref="{http://www.opengis.net/gml}dmsAngle"/>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AngleChoiceType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice>
+ *         <element ref="{http://www.opengis.net/gml}angle"/>
+ *         <element ref="{http://www.opengis.net/gml}dmsAngle"/>
+ *       </choice>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -90,15 +89,18 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "angle",
     "dmsAngle"
 })
-public class AngleChoiceType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class AngleChoiceType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The gml:angle property element is used to record the value of an angle quantity as a single number, with its units.
+     * 
+     */
     protected AngleType angle;
     protected DMSAngleType dmsAngle;
 
     /**
-     * Recupera il valore della proprietà angle.
+     * The gml:angle property element is used to record the value of an angle quantity as a single number, with its units.
      * 
      * @return
      *     possible object is
@@ -116,6 +118,7 @@ public class AngleChoiceType
      *     allowed object is
      *     {@link AngleType }
      *     
+     * @see #getAngle()
      */
     public void setAngle(AngleType value) {
         this.angle = value;
@@ -153,13 +156,15 @@ public class AngleChoiceType
         return (this.dmsAngle!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -167,22 +172,24 @@ public class AngleChoiceType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             AngleType theAngle;
             theAngle = this.getAngle();
-            strategy.appendField(locator, this, "angle", buffer, theAngle);
+            strategy.appendField(locator, this, "angle", buffer, theAngle, this.isSetAngle());
         }
         {
             DMSAngleType theDmsAngle;
             theDmsAngle = this.getDmsAngle();
-            strategy.appendField(locator, this, "dmsAngle", buffer, theDmsAngle);
+            strategy.appendField(locator, this, "dmsAngle", buffer, theDmsAngle, this.isSetDmsAngle());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AngleChoiceType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -194,7 +201,7 @@ public class AngleChoiceType
             lhsAngle = this.getAngle();
             AngleType rhsAngle;
             rhsAngle = that.getAngle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "angle", lhsAngle), LocatorUtils.property(thatLocator, "angle", rhsAngle), lhsAngle, rhsAngle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "angle", lhsAngle), LocatorUtils.property(thatLocator, "angle", rhsAngle), lhsAngle, rhsAngle, this.isSetAngle(), that.isSetAngle())) {
                 return false;
             }
         }
@@ -203,110 +210,135 @@ public class AngleChoiceType
             lhsDmsAngle = this.getDmsAngle();
             DMSAngleType rhsDmsAngle;
             rhsDmsAngle = that.getDmsAngle();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "dmsAngle", lhsDmsAngle), LocatorUtils.property(thatLocator, "dmsAngle", rhsDmsAngle), lhsDmsAngle, rhsDmsAngle)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "dmsAngle", lhsDmsAngle), LocatorUtils.property(thatLocator, "dmsAngle", rhsDmsAngle), lhsDmsAngle, rhsDmsAngle, this.isSetDmsAngle(), that.isSetDmsAngle())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             AngleType theAngle;
             theAngle = this.getAngle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "angle", theAngle), currentHashCode, theAngle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "angle", theAngle), currentHashCode, theAngle, this.isSetAngle());
         }
         {
             DMSAngleType theDmsAngle;
             theDmsAngle = this.getDmsAngle();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dmsAngle", theDmsAngle), currentHashCode, theDmsAngle);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "dmsAngle", theDmsAngle), currentHashCode, theDmsAngle, this.isSetDmsAngle());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof AngleChoiceType) {
             final AngleChoiceType copy = ((AngleChoiceType) draftCopy);
-            if (this.isSetAngle()) {
-                AngleType sourceAngle;
-                sourceAngle = this.getAngle();
-                AngleType copyAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "angle", sourceAngle), sourceAngle));
-                copy.setAngle(copyAngle);
-            } else {
-                copy.angle = null;
+            {
+                java.lang.Boolean angleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAngle());
+                if (angleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType sourceAngle;
+                    sourceAngle = this.getAngle();
+                    AngleType copyAngle = ((AngleType) strategy.copy(LocatorUtils.property(locator, "angle", sourceAngle), sourceAngle, this.isSetAngle()));
+                    copy.setAngle(copyAngle);
+                } else {
+                    if (angleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.angle = null;
+                    }
+                }
             }
-            if (this.isSetDmsAngle()) {
-                DMSAngleType sourceDmsAngle;
-                sourceDmsAngle = this.getDmsAngle();
-                DMSAngleType copyDmsAngle = ((DMSAngleType) strategy.copy(LocatorUtils.property(locator, "dmsAngle", sourceDmsAngle), sourceDmsAngle));
-                copy.setDmsAngle(copyDmsAngle);
-            } else {
-                copy.dmsAngle = null;
+            {
+                java.lang.Boolean dmsAngleShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDmsAngle());
+                if (dmsAngleShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DMSAngleType sourceDmsAngle;
+                    sourceDmsAngle = this.getDmsAngle();
+                    DMSAngleType copyDmsAngle = ((DMSAngleType) strategy.copy(LocatorUtils.property(locator, "dmsAngle", sourceDmsAngle), sourceDmsAngle, this.isSetDmsAngle()));
+                    copy.setDmsAngle(copyDmsAngle);
+                } else {
+                    if (dmsAngleShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.dmsAngle = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new AngleChoiceType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof AngleChoiceType) {
             final AngleChoiceType target = this;
             final AngleChoiceType leftObject = ((AngleChoiceType) left);
             final AngleChoiceType rightObject = ((AngleChoiceType) right);
             {
-                AngleType lhsAngle;
-                lhsAngle = leftObject.getAngle();
-                AngleType rhsAngle;
-                rhsAngle = rightObject.getAngle();
-                target.setAngle(((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "angle", lhsAngle), LocatorUtils.property(rightLocator, "angle", rhsAngle), lhsAngle, rhsAngle)));
+                java.lang.Boolean angleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAngle(), rightObject.isSetAngle());
+                if (angleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AngleType lhsAngle;
+                    lhsAngle = leftObject.getAngle();
+                    AngleType rhsAngle;
+                    rhsAngle = rightObject.getAngle();
+                    AngleType mergedAngle = ((AngleType) strategy.merge(LocatorUtils.property(leftLocator, "angle", lhsAngle), LocatorUtils.property(rightLocator, "angle", rhsAngle), lhsAngle, rhsAngle, leftObject.isSetAngle(), rightObject.isSetAngle()));
+                    target.setAngle(mergedAngle);
+                } else {
+                    if (angleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.angle = null;
+                    }
+                }
             }
             {
-                DMSAngleType lhsDmsAngle;
-                lhsDmsAngle = leftObject.getDmsAngle();
-                DMSAngleType rhsDmsAngle;
-                rhsDmsAngle = rightObject.getDmsAngle();
-                target.setDmsAngle(((DMSAngleType) strategy.merge(LocatorUtils.property(leftLocator, "dmsAngle", lhsDmsAngle), LocatorUtils.property(rightLocator, "dmsAngle", rhsDmsAngle), lhsDmsAngle, rhsDmsAngle)));
+                java.lang.Boolean dmsAngleShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDmsAngle(), rightObject.isSetDmsAngle());
+                if (dmsAngleShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DMSAngleType lhsDmsAngle;
+                    lhsDmsAngle = leftObject.getDmsAngle();
+                    DMSAngleType rhsDmsAngle;
+                    rhsDmsAngle = rightObject.getDmsAngle();
+                    DMSAngleType mergedDmsAngle = ((DMSAngleType) strategy.merge(LocatorUtils.property(leftLocator, "dmsAngle", lhsDmsAngle), LocatorUtils.property(rightLocator, "dmsAngle", rhsDmsAngle), lhsDmsAngle, rhsDmsAngle, leftObject.isSetDmsAngle(), rightObject.isSetDmsAngle()));
+                    target.setDmsAngle(mergedDmsAngle);
+                } else {
+                    if (dmsAngleShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.dmsAngle = null;
+                    }
+                }
             }
         }
-    }
-
-    public AngleChoiceType withAngle(AngleType value) {
-        setAngle(value);
-        return this;
-    }
-
-    public AngleChoiceType withDmsAngle(DMSAngleType value) {
-        setDmsAngle(value);
-        return this;
     }
 
 }

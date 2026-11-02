@@ -34,57 +34,56 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * gml:AbstractGeneralParameterValuePropertyType is a  property type for inline association roles to a parameter value or group of parameter values, always containing the values.
  * 
- * <p>Classe Java per AbstractGeneralParameterValuePropertyType complex type.
+ * <p>Classe Java per AbstractGeneralParameterValuePropertyType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractGeneralParameterValuePropertyType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}AbstractGeneralParameterValue"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractGeneralParameterValuePropertyType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}AbstractGeneralParameterValue"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -92,21 +91,26 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "AbstractGeneralParameterValuePropertyType", propOrder = {
     "abstractGeneralParameterValue"
 })
-public class AbstractGeneralParameterValuePropertyType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class AbstractGeneralParameterValuePropertyType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:AbstractGeneralParameterValue is an abstract parameter value or group of parameter values.
+     * This abstract complexType is expected to be extended and restricted for well-known operation methods with many instances, in Application Schemas that define operation-method-specialized element names and contents. Specific parameter value elements are directly contained in concrete subtypes, not in this abstract type. All concrete types derived from this type shall extend this type to include one "...Value" element with an appropriate type, which should be one of the element types allowed in the ParameterValueType. In addition, all derived concrete types shall extend this type to include a "operationParameter" property element that references one element substitutable for the "OperationParameter" object element.
+     * 
+     */
     @XmlElementRef(name = "AbstractGeneralParameterValue", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected JAXBElement<? extends AbstractGeneralParameterValueType> abstractGeneralParameterValue;
 
     /**
-     * Recupera il valore della proprietà abstractGeneralParameterValue.
+     * gml:AbstractGeneralParameterValue is an abstract parameter value or group of parameter values.
+     * This abstract complexType is expected to be extended and restricted for well-known operation methods with many instances, in Application Schemas that define operation-method-specialized element names and contents. Specific parameter value elements are directly contained in concrete subtypes, not in this abstract type. All concrete types derived from this type shall extend this type to include one "...Value" element with an appropriate type, which should be one of the element types allowed in the ParameterValueType. In addition, all derived concrete types shall extend this type to include a "operationParameter" property element that references one element substitutable for the "OperationParameter" object element.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ParameterValueGroupType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeneralParameterValueType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ParameterValueGroupType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
      *     
      */
     public JAXBElement<? extends AbstractGeneralParameterValueType> getAbstractGeneralParameterValue() {
@@ -118,10 +122,11 @@ public class AbstractGeneralParameterValuePropertyType
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link ParameterValueGroupType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractGeneralParameterValueType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ParameterValueGroupType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
      *     
+     * @see #getAbstractGeneralParameterValue()
      */
     public void setAbstractGeneralParameterValue(JAXBElement<? extends AbstractGeneralParameterValueType> value) {
         this.abstractGeneralParameterValue = value;
@@ -131,13 +136,15 @@ public class AbstractGeneralParameterValuePropertyType
         return (this.abstractGeneralParameterValue!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -145,17 +152,19 @@ public class AbstractGeneralParameterValuePropertyType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             JAXBElement<? extends AbstractGeneralParameterValueType> theAbstractGeneralParameterValue;
             theAbstractGeneralParameterValue = this.getAbstractGeneralParameterValue();
-            strategy.appendField(locator, this, "abstractGeneralParameterValue", buffer, theAbstractGeneralParameterValue);
+            strategy.appendField(locator, this, "abstractGeneralParameterValue", buffer, theAbstractGeneralParameterValue, this.isSetAbstractGeneralParameterValue());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractGeneralParameterValuePropertyType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -167,86 +176,103 @@ public class AbstractGeneralParameterValuePropertyType
             lhsAbstractGeneralParameterValue = this.getAbstractGeneralParameterValue();
             JAXBElement<? extends AbstractGeneralParameterValueType> rhsAbstractGeneralParameterValue;
             rhsAbstractGeneralParameterValue = that.getAbstractGeneralParameterValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractGeneralParameterValue", lhsAbstractGeneralParameterValue), LocatorUtils.property(thatLocator, "abstractGeneralParameterValue", rhsAbstractGeneralParameterValue), lhsAbstractGeneralParameterValue, rhsAbstractGeneralParameterValue)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "abstractGeneralParameterValue", lhsAbstractGeneralParameterValue), LocatorUtils.property(thatLocator, "abstractGeneralParameterValue", rhsAbstractGeneralParameterValue), lhsAbstractGeneralParameterValue, rhsAbstractGeneralParameterValue, this.isSetAbstractGeneralParameterValue(), that.isSetAbstractGeneralParameterValue())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             JAXBElement<? extends AbstractGeneralParameterValueType> theAbstractGeneralParameterValue;
             theAbstractGeneralParameterValue = this.getAbstractGeneralParameterValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractGeneralParameterValue", theAbstractGeneralParameterValue), currentHashCode, theAbstractGeneralParameterValue);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abstractGeneralParameterValue", theAbstractGeneralParameterValue), currentHashCode, theAbstractGeneralParameterValue, this.isSetAbstractGeneralParameterValue());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof AbstractGeneralParameterValuePropertyType) {
             final AbstractGeneralParameterValuePropertyType copy = ((AbstractGeneralParameterValuePropertyType) draftCopy);
-            if (this.isSetAbstractGeneralParameterValue()) {
-                JAXBElement<? extends AbstractGeneralParameterValueType> sourceAbstractGeneralParameterValue;
-                sourceAbstractGeneralParameterValue = this.getAbstractGeneralParameterValue();
-                @SuppressWarnings("unchecked")
-                JAXBElement<? extends AbstractGeneralParameterValueType> copyAbstractGeneralParameterValue = ((JAXBElement<? extends AbstractGeneralParameterValueType> ) strategy.copy(LocatorUtils.property(locator, "abstractGeneralParameterValue", sourceAbstractGeneralParameterValue), sourceAbstractGeneralParameterValue));
-                copy.setAbstractGeneralParameterValue(copyAbstractGeneralParameterValue);
-            } else {
-                copy.abstractGeneralParameterValue = null;
+            {
+                java.lang.Boolean abstractGeneralParameterValueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAbstractGeneralParameterValue());
+                if (abstractGeneralParameterValueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends AbstractGeneralParameterValueType> sourceAbstractGeneralParameterValue;
+                    sourceAbstractGeneralParameterValue = this.getAbstractGeneralParameterValue();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<? extends AbstractGeneralParameterValueType> copyAbstractGeneralParameterValue = ((JAXBElement<? extends AbstractGeneralParameterValueType> ) strategy.copy(LocatorUtils.property(locator, "abstractGeneralParameterValue", sourceAbstractGeneralParameterValue), sourceAbstractGeneralParameterValue, this.isSetAbstractGeneralParameterValue()));
+                    copy.setAbstractGeneralParameterValue(copyAbstractGeneralParameterValue);
+                } else {
+                    if (abstractGeneralParameterValueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.abstractGeneralParameterValue = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new AbstractGeneralParameterValuePropertyType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof AbstractGeneralParameterValuePropertyType) {
             final AbstractGeneralParameterValuePropertyType target = this;
             final AbstractGeneralParameterValuePropertyType leftObject = ((AbstractGeneralParameterValuePropertyType) left);
             final AbstractGeneralParameterValuePropertyType rightObject = ((AbstractGeneralParameterValuePropertyType) right);
             {
-                JAXBElement<? extends AbstractGeneralParameterValueType> lhsAbstractGeneralParameterValue;
-                lhsAbstractGeneralParameterValue = leftObject.getAbstractGeneralParameterValue();
-                JAXBElement<? extends AbstractGeneralParameterValueType> rhsAbstractGeneralParameterValue;
-                rhsAbstractGeneralParameterValue = rightObject.getAbstractGeneralParameterValue();
-                target.setAbstractGeneralParameterValue(((JAXBElement<? extends AbstractGeneralParameterValueType> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractGeneralParameterValue", lhsAbstractGeneralParameterValue), LocatorUtils.property(rightLocator, "abstractGeneralParameterValue", rhsAbstractGeneralParameterValue), lhsAbstractGeneralParameterValue, rhsAbstractGeneralParameterValue)));
+                java.lang.Boolean abstractGeneralParameterValueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAbstractGeneralParameterValue(), rightObject.isSetAbstractGeneralParameterValue());
+                if (abstractGeneralParameterValueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<? extends AbstractGeneralParameterValueType> lhsAbstractGeneralParameterValue;
+                    lhsAbstractGeneralParameterValue = leftObject.getAbstractGeneralParameterValue();
+                    JAXBElement<? extends AbstractGeneralParameterValueType> rhsAbstractGeneralParameterValue;
+                    rhsAbstractGeneralParameterValue = rightObject.getAbstractGeneralParameterValue();
+                    JAXBElement<? extends AbstractGeneralParameterValueType> mergedAbstractGeneralParameterValue = ((JAXBElement<? extends AbstractGeneralParameterValueType> ) strategy.merge(LocatorUtils.property(leftLocator, "abstractGeneralParameterValue", lhsAbstractGeneralParameterValue), LocatorUtils.property(rightLocator, "abstractGeneralParameterValue", rhsAbstractGeneralParameterValue), lhsAbstractGeneralParameterValue, rhsAbstractGeneralParameterValue, leftObject.isSetAbstractGeneralParameterValue(), rightObject.isSetAbstractGeneralParameterValue()));
+                    target.setAbstractGeneralParameterValue(mergedAbstractGeneralParameterValue);
+                } else {
+                    if (abstractGeneralParameterValueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.abstractGeneralParameterValue = null;
+                    }
+                }
             }
         }
-    }
-
-    public AbstractGeneralParameterValuePropertyType withAbstractGeneralParameterValue(JAXBElement<? extends AbstractGeneralParameterValueType> value) {
-        setAbstractGeneralParameterValue(value);
-        return this;
     }
 
 }

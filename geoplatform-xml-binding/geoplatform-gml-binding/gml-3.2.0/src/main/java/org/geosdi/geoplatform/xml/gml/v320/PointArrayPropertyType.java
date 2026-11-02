@@ -34,61 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
  * gml:PointArrayPropertyType is a container for an array of points. The elements are always contained inline in the array property, referencing geometry elements or arrays of geometry elements via XLinks is not supported.
  * 
- * <p>Classe Java per PointArrayPropertyType complex type.
+ * <p>Classe Java per PointArrayPropertyType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="PointArrayPropertyType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence maxOccurs="unbounded" minOccurs="0">
- *         &lt;element ref="{http://www.opengis.net/gml}Point"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}OwnershipAttributeGroup"/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="PointArrayPropertyType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence maxOccurs="unbounded" minOccurs="0">
+ *         <element ref="{http://www.opengis.net/gml}Point"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}OwnershipAttributeGroup"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -96,8 +94,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlType(name = "PointArrayPropertyType", propOrder = {
     "point"
 })
-public class PointArrayPropertyType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class PointArrayPropertyType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     @XmlElement(name = "Point")
@@ -108,28 +105,31 @@ public class PointArrayPropertyType
     /**
      * Gets the value of the point property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the point property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the point property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getPoint().add(newItem);
+     * getPoint().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link PointType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the point property.
      */
     public List<PointType> getPoint() {
         if (point == null) {
-            point = new ArrayList<PointType>();
+            point = new ArrayList<>();
         }
         return this.point;
     }
@@ -178,13 +178,15 @@ public class PointArrayPropertyType
         this.owns = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -192,22 +194,32 @@ public class PointArrayPropertyType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<PointType> thePoint;
-            thePoint = this.getPoint();
-            strategy.appendField(locator, this, "point", buffer, thePoint);
+            thePoint = (this.isSetPoint()?this.getPoint():null);
+            strategy.appendField(locator, this, "point", buffer, thePoint, this.isSetPoint());
         }
         {
             boolean theOwns;
-            theOwns = this.isOwns();
-            strategy.appendField(locator, this, "owns", buffer, theOwns);
+            theOwns = (this.isSetOwns()?this.isOwns():false);
+            strategy.appendField(locator, this, "owns", buffer, theOwns, this.isSetOwns());
         }
         return buffer;
     }
 
+    public void setPoint(List<PointType> value) {
+        this.point = null;
+        if (value!= null) {
+            List<PointType> draftl = this.getPoint();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof PointArrayPropertyType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -216,148 +228,148 @@ public class PointArrayPropertyType
         final PointArrayPropertyType that = ((PointArrayPropertyType) object);
         {
             List<PointType> lhsPoint;
-            lhsPoint = this.getPoint();
+            lhsPoint = (this.isSetPoint()?this.getPoint():null);
             List<PointType> rhsPoint;
-            rhsPoint = that.getPoint();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "point", lhsPoint), LocatorUtils.property(thatLocator, "point", rhsPoint), lhsPoint, rhsPoint)) {
+            rhsPoint = (that.isSetPoint()?that.getPoint():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "point", lhsPoint), LocatorUtils.property(thatLocator, "point", rhsPoint), lhsPoint, rhsPoint, this.isSetPoint(), that.isSetPoint())) {
                 return false;
             }
         }
         {
             boolean lhsOwns;
-            lhsOwns = this.isOwns();
+            lhsOwns = (this.isSetOwns()?this.isOwns():false);
             boolean rhsOwns;
-            rhsOwns = that.isOwns();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "owns", lhsOwns), LocatorUtils.property(thatLocator, "owns", rhsOwns), lhsOwns, rhsOwns)) {
+            rhsOwns = (that.isSetOwns()?that.isOwns():false);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "owns", lhsOwns), LocatorUtils.property(thatLocator, "owns", rhsOwns), lhsOwns, rhsOwns, this.isSetOwns(), that.isSetOwns())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             List<PointType> thePoint;
-            thePoint = this.getPoint();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "point", thePoint), currentHashCode, thePoint);
+            thePoint = (this.isSetPoint()?this.getPoint():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "point", thePoint), currentHashCode, thePoint, this.isSetPoint());
         }
         {
             boolean theOwns;
-            theOwns = this.isOwns();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "owns", theOwns), currentHashCode, theOwns);
+            theOwns = (this.isSetOwns()?this.isOwns():false);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "owns", theOwns), currentHashCode, theOwns, this.isSetOwns());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof PointArrayPropertyType) {
             final PointArrayPropertyType copy = ((PointArrayPropertyType) draftCopy);
-            if (this.isSetPoint()) {
-                List<PointType> sourcePoint;
-                sourcePoint = this.getPoint();
-                @SuppressWarnings("unchecked")
-                List<PointType> copyPoint = ((List<PointType> ) strategy.copy(LocatorUtils.property(locator, "point", sourcePoint), sourcePoint));
-                copy.unsetPoint();
-                List<PointType> uniquePointl = copy.getPoint();
-                uniquePointl.addAll(copyPoint);
-            } else {
-                copy.unsetPoint();
+            {
+                java.lang.Boolean pointShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetPoint());
+                if (pointShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<PointType> sourcePoint;
+                    sourcePoint = (this.isSetPoint()?this.getPoint():null);
+                    @SuppressWarnings("unchecked")
+                    List<PointType> copyPoint = ((List<PointType> ) strategy.copy(LocatorUtils.property(locator, "point", sourcePoint), sourcePoint, this.isSetPoint()));
+                    copy.setPoint(copyPoint);
+                } else {
+                    if (pointShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetPoint();
+                    }
+                }
             }
-            if (this.isSetOwns()) {
-                boolean sourceOwns;
-                sourceOwns = this.isOwns();
-                boolean copyOwns = strategy.copy(LocatorUtils.property(locator, "owns", sourceOwns), sourceOwns);
-                copy.setOwns(copyOwns);
-            } else {
-                copy.unsetOwns();
+            {
+                java.lang.Boolean ownsShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetOwns());
+                if (ownsShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    boolean sourceOwns;
+                    sourceOwns = (this.isSetOwns()?this.isOwns():false);
+                    boolean copyOwns = strategy.copy(LocatorUtils.property(locator, "owns", sourceOwns), sourceOwns, this.isSetOwns());
+                    copy.setOwns(copyOwns);
+                } else {
+                    if (ownsShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetOwns();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new PointArrayPropertyType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof PointArrayPropertyType) {
             final PointArrayPropertyType target = this;
             final PointArrayPropertyType leftObject = ((PointArrayPropertyType) left);
             final PointArrayPropertyType rightObject = ((PointArrayPropertyType) right);
             {
-                List<PointType> lhsPoint;
-                lhsPoint = leftObject.getPoint();
-                List<PointType> rhsPoint;
-                rhsPoint = rightObject.getPoint();
-                target.unsetPoint();
-                List<PointType> uniquePointl = target.getPoint();
-                uniquePointl.addAll(((List<PointType> ) strategy.merge(LocatorUtils.property(leftLocator, "point", lhsPoint), LocatorUtils.property(rightLocator, "point", rhsPoint), lhsPoint, rhsPoint)));
+                java.lang.Boolean pointShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetPoint(), rightObject.isSetPoint());
+                if (pointShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<PointType> lhsPoint;
+                    lhsPoint = (leftObject.isSetPoint()?leftObject.getPoint():null);
+                    List<PointType> rhsPoint;
+                    rhsPoint = (rightObject.isSetPoint()?rightObject.getPoint():null);
+                    List<PointType> mergedPoint = ((List<PointType> ) strategy.merge(LocatorUtils.property(leftLocator, "point", lhsPoint), LocatorUtils.property(rightLocator, "point", rhsPoint), lhsPoint, rhsPoint, leftObject.isSetPoint(), rightObject.isSetPoint()));
+                    target.setPoint(mergedPoint);
+                } else {
+                    if (pointShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetPoint();
+                    }
+                }
             }
             {
-                boolean lhsOwns;
-                lhsOwns = leftObject.isOwns();
-                boolean rhsOwns;
-                rhsOwns = rightObject.isOwns();
-                target.setOwns(((boolean) strategy.merge(LocatorUtils.property(leftLocator, "owns", lhsOwns), LocatorUtils.property(rightLocator, "owns", rhsOwns), lhsOwns, rhsOwns)));
+                java.lang.Boolean ownsShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetOwns(), rightObject.isSetOwns());
+                if (ownsShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    boolean lhsOwns;
+                    lhsOwns = (leftObject.isSetOwns()?leftObject.isOwns():false);
+                    boolean rhsOwns;
+                    rhsOwns = (rightObject.isSetOwns()?rightObject.isOwns():false);
+                    boolean mergedOwns = ((boolean) strategy.merge(LocatorUtils.property(leftLocator, "owns", lhsOwns), LocatorUtils.property(rightLocator, "owns", rhsOwns), lhsOwns, rhsOwns, leftObject.isSetOwns(), rightObject.isSetOwns()));
+                    target.setOwns(mergedOwns);
+                } else {
+                    if (ownsShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetOwns();
+                    }
+                }
             }
         }
-    }
-
-    public void setPoint(List<PointType> value) {
-        List<PointType> draftl = this.getPoint();
-        draftl.addAll(value);
-    }
-
-    public PointArrayPropertyType withPoint(PointType... values) {
-        if (values!= null) {
-            for (PointType value: values) {
-                getPoint().add(value);
-            }
-        }
-        return this;
-    }
-
-    public PointArrayPropertyType withPoint(Collection<PointType> values) {
-        if (values!= null) {
-            getPoint().addAll(values);
-        }
-        return this;
-    }
-
-    public PointArrayPropertyType withOwns(boolean value) {
-        setOwns(value);
-        return this;
-    }
-
-    public PointArrayPropertyType withPoint(List<PointType> value) {
-        setPoint(value);
-        return this;
     }
 
 }

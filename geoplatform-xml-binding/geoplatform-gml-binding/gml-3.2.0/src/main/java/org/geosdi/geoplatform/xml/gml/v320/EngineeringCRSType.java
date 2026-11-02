@@ -34,58 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per EngineeringCRSType complex type.
+ * <p>Classe Java per EngineeringCRSType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="EngineeringCRSType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractCRSType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}coordinateSystem"/>
- *         &lt;element ref="{http://www.opengis.net/gml}engineeringDatum"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="EngineeringCRSType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractCRSType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}coordinateSystem"/>
+ *         <element ref="{http://www.opengis.net/gml}engineeringDatum"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -99,13 +96,21 @@ public class EngineeringCRSType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * An association role to the coordinate system used by this CRS.
+     * 
+     */
     @XmlElementRef(name = "coordinateSystem", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected JAXBElement<CoordinateSystemPropertyType> coordinateSystem;
+    /**
+     * gml:engineeringDatum is an association role to the engineering datum used by this CRS.
+     * 
+     */
     @XmlElementRef(name = "engineeringDatum", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected JAXBElement<EngineeringDatumPropertyType> engineeringDatum;
 
     /**
-     * Recupera il valore della proprietà coordinateSystem.
+     * An association role to the coordinate system used by this CRS.
      * 
      * @return
      *     possible object is
@@ -125,6 +130,7 @@ public class EngineeringCRSType
      *     {@link JAXBElement }{@code <}{@link CoordinateSystemPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link CoordinateSystemPropertyType }{@code >}
      *     
+     * @see #getCoordinateSystem()
      */
     public void setCoordinateSystem(JAXBElement<CoordinateSystemPropertyType> value) {
         this.coordinateSystem = value;
@@ -135,7 +141,7 @@ public class EngineeringCRSType
     }
 
     /**
-     * Recupera il valore della proprietà engineeringDatum.
+     * gml:engineeringDatum is an association role to the engineering datum used by this CRS.
      * 
      * @return
      *     possible object is
@@ -155,6 +161,7 @@ public class EngineeringCRSType
      *     {@link JAXBElement }{@code <}{@link EngineeringDatumPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link EngineeringDatumPropertyType }{@code >}
      *     
+     * @see #getEngineeringDatum()
      */
     public void setEngineeringDatum(JAXBElement<EngineeringDatumPropertyType> value) {
         this.engineeringDatum = value;
@@ -164,13 +171,15 @@ public class EngineeringCRSType
         return (this.engineeringDatum!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -178,23 +187,25 @@ public class EngineeringCRSType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             JAXBElement<CoordinateSystemPropertyType> theCoordinateSystem;
             theCoordinateSystem = this.getCoordinateSystem();
-            strategy.appendField(locator, this, "coordinateSystem", buffer, theCoordinateSystem);
+            strategy.appendField(locator, this, "coordinateSystem", buffer, theCoordinateSystem, this.isSetCoordinateSystem());
         }
         {
             JAXBElement<EngineeringDatumPropertyType> theEngineeringDatum;
             theEngineeringDatum = this.getEngineeringDatum();
-            strategy.appendField(locator, this, "engineeringDatum", buffer, theEngineeringDatum);
+            strategy.appendField(locator, this, "engineeringDatum", buffer, theEngineeringDatum, this.isSetEngineeringDatum());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof EngineeringCRSType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -209,7 +220,7 @@ public class EngineeringCRSType
             lhsCoordinateSystem = this.getCoordinateSystem();
             JAXBElement<CoordinateSystemPropertyType> rhsCoordinateSystem;
             rhsCoordinateSystem = that.getCoordinateSystem();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinateSystem", lhsCoordinateSystem), LocatorUtils.property(thatLocator, "coordinateSystem", rhsCoordinateSystem), lhsCoordinateSystem, rhsCoordinateSystem)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "coordinateSystem", lhsCoordinateSystem), LocatorUtils.property(thatLocator, "coordinateSystem", rhsCoordinateSystem), lhsCoordinateSystem, rhsCoordinateSystem, this.isSetCoordinateSystem(), that.isSetCoordinateSystem())) {
                 return false;
             }
         }
@@ -218,83 +229,102 @@ public class EngineeringCRSType
             lhsEngineeringDatum = this.getEngineeringDatum();
             JAXBElement<EngineeringDatumPropertyType> rhsEngineeringDatum;
             rhsEngineeringDatum = that.getEngineeringDatum();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "engineeringDatum", lhsEngineeringDatum), LocatorUtils.property(thatLocator, "engineeringDatum", rhsEngineeringDatum), lhsEngineeringDatum, rhsEngineeringDatum)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "engineeringDatum", lhsEngineeringDatum), LocatorUtils.property(thatLocator, "engineeringDatum", rhsEngineeringDatum), lhsEngineeringDatum, rhsEngineeringDatum, this.isSetEngineeringDatum(), that.isSetEngineeringDatum())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             JAXBElement<CoordinateSystemPropertyType> theCoordinateSystem;
             theCoordinateSystem = this.getCoordinateSystem();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinateSystem", theCoordinateSystem), currentHashCode, theCoordinateSystem);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "coordinateSystem", theCoordinateSystem), currentHashCode, theCoordinateSystem, this.isSetCoordinateSystem());
         }
         {
             JAXBElement<EngineeringDatumPropertyType> theEngineeringDatum;
             theEngineeringDatum = this.getEngineeringDatum();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "engineeringDatum", theEngineeringDatum), currentHashCode, theEngineeringDatum);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "engineeringDatum", theEngineeringDatum), currentHashCode, theEngineeringDatum, this.isSetEngineeringDatum());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof EngineeringCRSType) {
             final EngineeringCRSType copy = ((EngineeringCRSType) draftCopy);
-            if (this.isSetCoordinateSystem()) {
-                JAXBElement<CoordinateSystemPropertyType> sourceCoordinateSystem;
-                sourceCoordinateSystem = this.getCoordinateSystem();
-                @SuppressWarnings("unchecked")
-                JAXBElement<CoordinateSystemPropertyType> copyCoordinateSystem = ((JAXBElement<CoordinateSystemPropertyType> ) strategy.copy(LocatorUtils.property(locator, "coordinateSystem", sourceCoordinateSystem), sourceCoordinateSystem));
-                copy.setCoordinateSystem(copyCoordinateSystem);
-            } else {
-                copy.coordinateSystem = null;
+            {
+                java.lang.Boolean coordinateSystemShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetCoordinateSystem());
+                if (coordinateSystemShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<CoordinateSystemPropertyType> sourceCoordinateSystem;
+                    sourceCoordinateSystem = this.getCoordinateSystem();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<CoordinateSystemPropertyType> copyCoordinateSystem = ((JAXBElement<CoordinateSystemPropertyType> ) strategy.copy(LocatorUtils.property(locator, "coordinateSystem", sourceCoordinateSystem), sourceCoordinateSystem, this.isSetCoordinateSystem()));
+                    copy.setCoordinateSystem(copyCoordinateSystem);
+                } else {
+                    if (coordinateSystemShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.coordinateSystem = null;
+                    }
+                }
             }
-            if (this.isSetEngineeringDatum()) {
-                JAXBElement<EngineeringDatumPropertyType> sourceEngineeringDatum;
-                sourceEngineeringDatum = this.getEngineeringDatum();
-                @SuppressWarnings("unchecked")
-                JAXBElement<EngineeringDatumPropertyType> copyEngineeringDatum = ((JAXBElement<EngineeringDatumPropertyType> ) strategy.copy(LocatorUtils.property(locator, "engineeringDatum", sourceEngineeringDatum), sourceEngineeringDatum));
-                copy.setEngineeringDatum(copyEngineeringDatum);
-            } else {
-                copy.engineeringDatum = null;
+            {
+                java.lang.Boolean engineeringDatumShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetEngineeringDatum());
+                if (engineeringDatumShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<EngineeringDatumPropertyType> sourceEngineeringDatum;
+                    sourceEngineeringDatum = this.getEngineeringDatum();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<EngineeringDatumPropertyType> copyEngineeringDatum = ((JAXBElement<EngineeringDatumPropertyType> ) strategy.copy(LocatorUtils.property(locator, "engineeringDatum", sourceEngineeringDatum), sourceEngineeringDatum, this.isSetEngineeringDatum()));
+                    copy.setEngineeringDatum(copyEngineeringDatum);
+                } else {
+                    if (engineeringDatumShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.engineeringDatum = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new EngineeringCRSType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof EngineeringCRSType) {
@@ -302,156 +332,36 @@ public class EngineeringCRSType
             final EngineeringCRSType leftObject = ((EngineeringCRSType) left);
             final EngineeringCRSType rightObject = ((EngineeringCRSType) right);
             {
-                JAXBElement<CoordinateSystemPropertyType> lhsCoordinateSystem;
-                lhsCoordinateSystem = leftObject.getCoordinateSystem();
-                JAXBElement<CoordinateSystemPropertyType> rhsCoordinateSystem;
-                rhsCoordinateSystem = rightObject.getCoordinateSystem();
-                target.setCoordinateSystem(((JAXBElement<CoordinateSystemPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "coordinateSystem", lhsCoordinateSystem), LocatorUtils.property(rightLocator, "coordinateSystem", rhsCoordinateSystem), lhsCoordinateSystem, rhsCoordinateSystem)));
+                java.lang.Boolean coordinateSystemShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetCoordinateSystem(), rightObject.isSetCoordinateSystem());
+                if (coordinateSystemShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<CoordinateSystemPropertyType> lhsCoordinateSystem;
+                    lhsCoordinateSystem = leftObject.getCoordinateSystem();
+                    JAXBElement<CoordinateSystemPropertyType> rhsCoordinateSystem;
+                    rhsCoordinateSystem = rightObject.getCoordinateSystem();
+                    JAXBElement<CoordinateSystemPropertyType> mergedCoordinateSystem = ((JAXBElement<CoordinateSystemPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "coordinateSystem", lhsCoordinateSystem), LocatorUtils.property(rightLocator, "coordinateSystem", rhsCoordinateSystem), lhsCoordinateSystem, rhsCoordinateSystem, leftObject.isSetCoordinateSystem(), rightObject.isSetCoordinateSystem()));
+                    target.setCoordinateSystem(mergedCoordinateSystem);
+                } else {
+                    if (coordinateSystemShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.coordinateSystem = null;
+                    }
+                }
             }
             {
-                JAXBElement<EngineeringDatumPropertyType> lhsEngineeringDatum;
-                lhsEngineeringDatum = leftObject.getEngineeringDatum();
-                JAXBElement<EngineeringDatumPropertyType> rhsEngineeringDatum;
-                rhsEngineeringDatum = rightObject.getEngineeringDatum();
-                target.setEngineeringDatum(((JAXBElement<EngineeringDatumPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "engineeringDatum", lhsEngineeringDatum), LocatorUtils.property(rightLocator, "engineeringDatum", rhsEngineeringDatum), lhsEngineeringDatum, rhsEngineeringDatum)));
+                java.lang.Boolean engineeringDatumShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetEngineeringDatum(), rightObject.isSetEngineeringDatum());
+                if (engineeringDatumShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<EngineeringDatumPropertyType> lhsEngineeringDatum;
+                    lhsEngineeringDatum = leftObject.getEngineeringDatum();
+                    JAXBElement<EngineeringDatumPropertyType> rhsEngineeringDatum;
+                    rhsEngineeringDatum = rightObject.getEngineeringDatum();
+                    JAXBElement<EngineeringDatumPropertyType> mergedEngineeringDatum = ((JAXBElement<EngineeringDatumPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "engineeringDatum", lhsEngineeringDatum), LocatorUtils.property(rightLocator, "engineeringDatum", rhsEngineeringDatum), lhsEngineeringDatum, rhsEngineeringDatum, leftObject.isSetEngineeringDatum(), rightObject.isSetEngineeringDatum()));
+                    target.setEngineeringDatum(mergedEngineeringDatum);
+                } else {
+                    if (engineeringDatumShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.engineeringDatum = null;
+                    }
+                }
             }
         }
-    }
-
-    public EngineeringCRSType withCoordinateSystem(JAXBElement<CoordinateSystemPropertyType> value) {
-        setCoordinateSystem(value);
-        return this;
-    }
-
-    public EngineeringCRSType withEngineeringDatum(JAXBElement<EngineeringDatumPropertyType> value) {
-        setEngineeringDatum(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withDomainOfValidity(DomainOfValidityElement... values) {
-        if (values!= null) {
-            for (DomainOfValidityElement value: values) {
-                getDomainOfValidity().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withDomainOfValidity(Collection<DomainOfValidityElement> values) {
-        if (values!= null) {
-            getDomainOfValidity().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withScope(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getScope().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withScope(Collection<String> values) {
-        if (values!= null) {
-            getScope().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withDomainOfValidity(List<DomainOfValidityElement> value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withScope(List<String> value) {
-        setScope(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public EngineeringCRSType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

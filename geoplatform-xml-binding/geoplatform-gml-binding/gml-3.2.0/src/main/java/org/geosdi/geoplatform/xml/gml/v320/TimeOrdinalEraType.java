@@ -34,62 +34,60 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimeOrdinalEraType complex type.
+ * <p>Classe Java per TimeOrdinalEraType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimeOrdinalEraType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}DefinitionType">
- *       &lt;sequence>
- *         &lt;element name="relatedTime" type="{http://www.opengis.net/gml}RelatedTimeType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="start" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
- *         &lt;element name="end" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
- *         &lt;element name="extent" type="{http://www.opengis.net/gml}TimePeriodPropertyType" minOccurs="0"/>
- *         &lt;element name="member" type="{http://www.opengis.net/gml}TimeOrdinalEraPropertyType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="group" type="{http://www.opengis.net/gml}ReferenceType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimeOrdinalEraType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}DefinitionType">
+ *       <sequence>
+ *         <element name="relatedTime" type="{http://www.opengis.net/gml}RelatedTimeType" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="start" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
+ *         <element name="end" type="{http://www.opengis.net/gml}TimeNodePropertyType"/>
+ *         <element name="extent" type="{http://www.opengis.net/gml}TimePeriodPropertyType" minOccurs="0"/>
+ *         <element name="member" type="{http://www.opengis.net/gml}TimeOrdinalEraPropertyType" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="group" type="{http://www.opengis.net/gml}ReferenceType" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -119,28 +117,31 @@ public class TimeOrdinalEraType
     /**
      * Gets the value of the relatedTime property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the relatedTime property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the relatedTime property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getRelatedTime().add(newItem);
+     * getRelatedTime().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link RelatedTimeType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the relatedTime property.
      */
     public List<RelatedTimeType> getRelatedTime() {
         if (relatedTime == null) {
-            relatedTime = new ArrayList<RelatedTimeType>();
+            relatedTime = new ArrayList<>();
         }
         return this.relatedTime;
     }
@@ -240,28 +241,31 @@ public class TimeOrdinalEraType
     /**
      * Gets the value of the member property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the member property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the member property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getMember().add(newItem);
+     * getMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TimeOrdinalEraPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the member property.
      */
     public List<TimeOrdinalEraPropertyType> getMember() {
         if (member == null) {
-            member = new ArrayList<TimeOrdinalEraPropertyType>();
+            member = new ArrayList<>();
         }
         return this.member;
     }
@@ -302,13 +306,15 @@ public class TimeOrdinalEraType
         return (this.group!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -316,43 +322,61 @@ public class TimeOrdinalEraType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<RelatedTimeType> theRelatedTime;
-            theRelatedTime = this.getRelatedTime();
-            strategy.appendField(locator, this, "relatedTime", buffer, theRelatedTime);
+            theRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
+            strategy.appendField(locator, this, "relatedTime", buffer, theRelatedTime, this.isSetRelatedTime());
         }
         {
             TimeNodePropertyType theStart;
             theStart = this.getStart();
-            strategy.appendField(locator, this, "start", buffer, theStart);
+            strategy.appendField(locator, this, "start", buffer, theStart, this.isSetStart());
         }
         {
             TimeNodePropertyType theEnd;
             theEnd = this.getEnd();
-            strategy.appendField(locator, this, "end", buffer, theEnd);
+            strategy.appendField(locator, this, "end", buffer, theEnd, this.isSetEnd());
         }
         {
             TimePeriodPropertyType theExtent;
             theExtent = this.getExtent();
-            strategy.appendField(locator, this, "extent", buffer, theExtent);
+            strategy.appendField(locator, this, "extent", buffer, theExtent, this.isSetExtent());
         }
         {
             List<TimeOrdinalEraPropertyType> theMember;
-            theMember = this.getMember();
-            strategy.appendField(locator, this, "member", buffer, theMember);
+            theMember = (this.isSetMember()?this.getMember():null);
+            strategy.appendField(locator, this, "member", buffer, theMember, this.isSetMember());
         }
         {
             ReferenceType theGroup;
             theGroup = this.getGroup();
-            strategy.appendField(locator, this, "group", buffer, theGroup);
+            strategy.appendField(locator, this, "group", buffer, theGroup, this.isSetGroup());
         }
         return buffer;
     }
 
+    public void setRelatedTime(List<RelatedTimeType> value) {
+        this.relatedTime = null;
+        if (value!= null) {
+            List<RelatedTimeType> draftl = this.getRelatedTime();
+            draftl.addAll(value);
+        }
+    }
+
+    public void setMember(List<TimeOrdinalEraPropertyType> value) {
+        this.member = null;
+        if (value!= null) {
+            List<TimeOrdinalEraPropertyType> draftl = this.getMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimeOrdinalEraType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -364,10 +388,10 @@ public class TimeOrdinalEraType
         final TimeOrdinalEraType that = ((TimeOrdinalEraType) object);
         {
             List<RelatedTimeType> lhsRelatedTime;
-            lhsRelatedTime = this.getRelatedTime();
+            lhsRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
             List<RelatedTimeType> rhsRelatedTime;
-            rhsRelatedTime = that.getRelatedTime();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(thatLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime)) {
+            rhsRelatedTime = (that.isSetRelatedTime()?that.getRelatedTime():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(thatLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime, this.isSetRelatedTime(), that.isSetRelatedTime())) {
                 return false;
             }
         }
@@ -376,7 +400,7 @@ public class TimeOrdinalEraType
             lhsStart = this.getStart();
             TimeNodePropertyType rhsStart;
             rhsStart = that.getStart();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "start", lhsStart), LocatorUtils.property(thatLocator, "start", rhsStart), lhsStart, rhsStart)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "start", lhsStart), LocatorUtils.property(thatLocator, "start", rhsStart), lhsStart, rhsStart, this.isSetStart(), that.isSetStart())) {
                 return false;
             }
         }
@@ -385,7 +409,7 @@ public class TimeOrdinalEraType
             lhsEnd = this.getEnd();
             TimeNodePropertyType rhsEnd;
             rhsEnd = that.getEnd();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "end", lhsEnd), LocatorUtils.property(thatLocator, "end", rhsEnd), lhsEnd, rhsEnd)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "end", lhsEnd), LocatorUtils.property(thatLocator, "end", rhsEnd), lhsEnd, rhsEnd, this.isSetEnd(), that.isSetEnd())) {
                 return false;
             }
         }
@@ -394,16 +418,16 @@ public class TimeOrdinalEraType
             lhsExtent = this.getExtent();
             TimePeriodPropertyType rhsExtent;
             rhsExtent = that.getExtent();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "extent", lhsExtent), LocatorUtils.property(thatLocator, "extent", rhsExtent), lhsExtent, rhsExtent)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "extent", lhsExtent), LocatorUtils.property(thatLocator, "extent", rhsExtent), lhsExtent, rhsExtent, this.isSetExtent(), that.isSetExtent())) {
                 return false;
             }
         }
         {
             List<TimeOrdinalEraPropertyType> lhsMember;
-            lhsMember = this.getMember();
+            lhsMember = (this.isSetMember()?this.getMember():null);
             List<TimeOrdinalEraPropertyType> rhsMember;
-            rhsMember = that.getMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "member", lhsMember), LocatorUtils.property(thatLocator, "member", rhsMember), lhsMember, rhsMember)) {
+            rhsMember = (that.isSetMember()?that.getMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "member", lhsMember), LocatorUtils.property(thatLocator, "member", rhsMember), lhsMember, rhsMember, this.isSetMember(), that.isSetMember())) {
                 return false;
             }
         }
@@ -412,139 +436,174 @@ public class TimeOrdinalEraType
             lhsGroup = this.getGroup();
             ReferenceType rhsGroup;
             rhsGroup = that.getGroup();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "group", lhsGroup), LocatorUtils.property(thatLocator, "group", rhsGroup), lhsGroup, rhsGroup)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "group", lhsGroup), LocatorUtils.property(thatLocator, "group", rhsGroup), lhsGroup, rhsGroup, this.isSetGroup(), that.isSetGroup())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<RelatedTimeType> theRelatedTime;
-            theRelatedTime = this.getRelatedTime();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "relatedTime", theRelatedTime), currentHashCode, theRelatedTime);
+            theRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "relatedTime", theRelatedTime), currentHashCode, theRelatedTime, this.isSetRelatedTime());
         }
         {
             TimeNodePropertyType theStart;
             theStart = this.getStart();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "start", theStart), currentHashCode, theStart);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "start", theStart), currentHashCode, theStart, this.isSetStart());
         }
         {
             TimeNodePropertyType theEnd;
             theEnd = this.getEnd();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "end", theEnd), currentHashCode, theEnd);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "end", theEnd), currentHashCode, theEnd, this.isSetEnd());
         }
         {
             TimePeriodPropertyType theExtent;
             theExtent = this.getExtent();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "extent", theExtent), currentHashCode, theExtent);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "extent", theExtent), currentHashCode, theExtent, this.isSetExtent());
         }
         {
             List<TimeOrdinalEraPropertyType> theMember;
-            theMember = this.getMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "member", theMember), currentHashCode, theMember);
+            theMember = (this.isSetMember()?this.getMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "member", theMember), currentHashCode, theMember, this.isSetMember());
         }
         {
             ReferenceType theGroup;
             theGroup = this.getGroup();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "group", theGroup), currentHashCode, theGroup);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "group", theGroup), currentHashCode, theGroup, this.isSetGroup());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TimeOrdinalEraType) {
             final TimeOrdinalEraType copy = ((TimeOrdinalEraType) draftCopy);
-            if (this.isSetRelatedTime()) {
-                List<RelatedTimeType> sourceRelatedTime;
-                sourceRelatedTime = this.getRelatedTime();
-                @SuppressWarnings("unchecked")
-                List<RelatedTimeType> copyRelatedTime = ((List<RelatedTimeType> ) strategy.copy(LocatorUtils.property(locator, "relatedTime", sourceRelatedTime), sourceRelatedTime));
-                copy.unsetRelatedTime();
-                List<RelatedTimeType> uniqueRelatedTimel = copy.getRelatedTime();
-                uniqueRelatedTimel.addAll(copyRelatedTime);
-            } else {
-                copy.unsetRelatedTime();
+            {
+                java.lang.Boolean relatedTimeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRelatedTime());
+                if (relatedTimeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<RelatedTimeType> sourceRelatedTime;
+                    sourceRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
+                    @SuppressWarnings("unchecked")
+                    List<RelatedTimeType> copyRelatedTime = ((List<RelatedTimeType> ) strategy.copy(LocatorUtils.property(locator, "relatedTime", sourceRelatedTime), sourceRelatedTime, this.isSetRelatedTime()));
+                    copy.setRelatedTime(copyRelatedTime);
+                } else {
+                    if (relatedTimeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetRelatedTime();
+                    }
+                }
             }
-            if (this.isSetStart()) {
-                TimeNodePropertyType sourceStart;
-                sourceStart = this.getStart();
-                TimeNodePropertyType copyStart = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "start", sourceStart), sourceStart));
-                copy.setStart(copyStart);
-            } else {
-                copy.start = null;
+            {
+                java.lang.Boolean startShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetStart());
+                if (startShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType sourceStart;
+                    sourceStart = this.getStart();
+                    TimeNodePropertyType copyStart = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "start", sourceStart), sourceStart, this.isSetStart()));
+                    copy.setStart(copyStart);
+                } else {
+                    if (startShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.start = null;
+                    }
+                }
             }
-            if (this.isSetEnd()) {
-                TimeNodePropertyType sourceEnd;
-                sourceEnd = this.getEnd();
-                TimeNodePropertyType copyEnd = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "end", sourceEnd), sourceEnd));
-                copy.setEnd(copyEnd);
-            } else {
-                copy.end = null;
+            {
+                java.lang.Boolean endShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetEnd());
+                if (endShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType sourceEnd;
+                    sourceEnd = this.getEnd();
+                    TimeNodePropertyType copyEnd = ((TimeNodePropertyType) strategy.copy(LocatorUtils.property(locator, "end", sourceEnd), sourceEnd, this.isSetEnd()));
+                    copy.setEnd(copyEnd);
+                } else {
+                    if (endShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.end = null;
+                    }
+                }
             }
-            if (this.isSetExtent()) {
-                TimePeriodPropertyType sourceExtent;
-                sourceExtent = this.getExtent();
-                TimePeriodPropertyType copyExtent = ((TimePeriodPropertyType) strategy.copy(LocatorUtils.property(locator, "extent", sourceExtent), sourceExtent));
-                copy.setExtent(copyExtent);
-            } else {
-                copy.extent = null;
+            {
+                java.lang.Boolean extentShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetExtent());
+                if (extentShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimePeriodPropertyType sourceExtent;
+                    sourceExtent = this.getExtent();
+                    TimePeriodPropertyType copyExtent = ((TimePeriodPropertyType) strategy.copy(LocatorUtils.property(locator, "extent", sourceExtent), sourceExtent, this.isSetExtent()));
+                    copy.setExtent(copyExtent);
+                } else {
+                    if (extentShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.extent = null;
+                    }
+                }
             }
-            if (this.isSetMember()) {
-                List<TimeOrdinalEraPropertyType> sourceMember;
-                sourceMember = this.getMember();
-                @SuppressWarnings("unchecked")
-                List<TimeOrdinalEraPropertyType> copyMember = ((List<TimeOrdinalEraPropertyType> ) strategy.copy(LocatorUtils.property(locator, "member", sourceMember), sourceMember));
-                copy.unsetMember();
-                List<TimeOrdinalEraPropertyType> uniqueMemberl = copy.getMember();
-                uniqueMemberl.addAll(copyMember);
-            } else {
-                copy.unsetMember();
+            {
+                java.lang.Boolean memberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMember());
+                if (memberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<TimeOrdinalEraPropertyType> sourceMember;
+                    sourceMember = (this.isSetMember()?this.getMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<TimeOrdinalEraPropertyType> copyMember = ((List<TimeOrdinalEraPropertyType> ) strategy.copy(LocatorUtils.property(locator, "member", sourceMember), sourceMember, this.isSetMember()));
+                    copy.setMember(copyMember);
+                } else {
+                    if (memberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetMember();
+                    }
+                }
             }
-            if (this.isSetGroup()) {
-                ReferenceType sourceGroup;
-                sourceGroup = this.getGroup();
-                ReferenceType copyGroup = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "group", sourceGroup), sourceGroup));
-                copy.setGroup(copyGroup);
-            } else {
-                copy.group = null;
+            {
+                java.lang.Boolean groupShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGroup());
+                if (groupShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType sourceGroup;
+                    sourceGroup = this.getGroup();
+                    ReferenceType copyGroup = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "group", sourceGroup), sourceGroup, this.isSetGroup()));
+                    copy.setGroup(copyGroup);
+                } else {
+                    if (groupShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.group = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TimeOrdinalEraType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TimeOrdinalEraType) {
@@ -552,202 +611,96 @@ public class TimeOrdinalEraType
             final TimeOrdinalEraType leftObject = ((TimeOrdinalEraType) left);
             final TimeOrdinalEraType rightObject = ((TimeOrdinalEraType) right);
             {
-                List<RelatedTimeType> lhsRelatedTime;
-                lhsRelatedTime = leftObject.getRelatedTime();
-                List<RelatedTimeType> rhsRelatedTime;
-                rhsRelatedTime = rightObject.getRelatedTime();
-                target.unsetRelatedTime();
-                List<RelatedTimeType> uniqueRelatedTimel = target.getRelatedTime();
-                uniqueRelatedTimel.addAll(((List<RelatedTimeType> ) strategy.merge(LocatorUtils.property(leftLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(rightLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime)));
+                java.lang.Boolean relatedTimeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRelatedTime(), rightObject.isSetRelatedTime());
+                if (relatedTimeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<RelatedTimeType> lhsRelatedTime;
+                    lhsRelatedTime = (leftObject.isSetRelatedTime()?leftObject.getRelatedTime():null);
+                    List<RelatedTimeType> rhsRelatedTime;
+                    rhsRelatedTime = (rightObject.isSetRelatedTime()?rightObject.getRelatedTime():null);
+                    List<RelatedTimeType> mergedRelatedTime = ((List<RelatedTimeType> ) strategy.merge(LocatorUtils.property(leftLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(rightLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime, leftObject.isSetRelatedTime(), rightObject.isSetRelatedTime()));
+                    target.setRelatedTime(mergedRelatedTime);
+                } else {
+                    if (relatedTimeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetRelatedTime();
+                    }
+                }
             }
             {
-                TimeNodePropertyType lhsStart;
-                lhsStart = leftObject.getStart();
-                TimeNodePropertyType rhsStart;
-                rhsStart = rightObject.getStart();
-                target.setStart(((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "start", lhsStart), LocatorUtils.property(rightLocator, "start", rhsStart), lhsStart, rhsStart)));
+                java.lang.Boolean startShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetStart(), rightObject.isSetStart());
+                if (startShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType lhsStart;
+                    lhsStart = leftObject.getStart();
+                    TimeNodePropertyType rhsStart;
+                    rhsStart = rightObject.getStart();
+                    TimeNodePropertyType mergedStart = ((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "start", lhsStart), LocatorUtils.property(rightLocator, "start", rhsStart), lhsStart, rhsStart, leftObject.isSetStart(), rightObject.isSetStart()));
+                    target.setStart(mergedStart);
+                } else {
+                    if (startShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.start = null;
+                    }
+                }
             }
             {
-                TimeNodePropertyType lhsEnd;
-                lhsEnd = leftObject.getEnd();
-                TimeNodePropertyType rhsEnd;
-                rhsEnd = rightObject.getEnd();
-                target.setEnd(((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "end", lhsEnd), LocatorUtils.property(rightLocator, "end", rhsEnd), lhsEnd, rhsEnd)));
+                java.lang.Boolean endShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetEnd(), rightObject.isSetEnd());
+                if (endShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimeNodePropertyType lhsEnd;
+                    lhsEnd = leftObject.getEnd();
+                    TimeNodePropertyType rhsEnd;
+                    rhsEnd = rightObject.getEnd();
+                    TimeNodePropertyType mergedEnd = ((TimeNodePropertyType) strategy.merge(LocatorUtils.property(leftLocator, "end", lhsEnd), LocatorUtils.property(rightLocator, "end", rhsEnd), lhsEnd, rhsEnd, leftObject.isSetEnd(), rightObject.isSetEnd()));
+                    target.setEnd(mergedEnd);
+                } else {
+                    if (endShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.end = null;
+                    }
+                }
             }
             {
-                TimePeriodPropertyType lhsExtent;
-                lhsExtent = leftObject.getExtent();
-                TimePeriodPropertyType rhsExtent;
-                rhsExtent = rightObject.getExtent();
-                target.setExtent(((TimePeriodPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "extent", lhsExtent), LocatorUtils.property(rightLocator, "extent", rhsExtent), lhsExtent, rhsExtent)));
+                java.lang.Boolean extentShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetExtent(), rightObject.isSetExtent());
+                if (extentShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimePeriodPropertyType lhsExtent;
+                    lhsExtent = leftObject.getExtent();
+                    TimePeriodPropertyType rhsExtent;
+                    rhsExtent = rightObject.getExtent();
+                    TimePeriodPropertyType mergedExtent = ((TimePeriodPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "extent", lhsExtent), LocatorUtils.property(rightLocator, "extent", rhsExtent), lhsExtent, rhsExtent, leftObject.isSetExtent(), rightObject.isSetExtent()));
+                    target.setExtent(mergedExtent);
+                } else {
+                    if (extentShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.extent = null;
+                    }
+                }
             }
             {
-                List<TimeOrdinalEraPropertyType> lhsMember;
-                lhsMember = leftObject.getMember();
-                List<TimeOrdinalEraPropertyType> rhsMember;
-                rhsMember = rightObject.getMember();
-                target.unsetMember();
-                List<TimeOrdinalEraPropertyType> uniqueMemberl = target.getMember();
-                uniqueMemberl.addAll(((List<TimeOrdinalEraPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "member", lhsMember), LocatorUtils.property(rightLocator, "member", rhsMember), lhsMember, rhsMember)));
+                java.lang.Boolean memberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMember(), rightObject.isSetMember());
+                if (memberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<TimeOrdinalEraPropertyType> lhsMember;
+                    lhsMember = (leftObject.isSetMember()?leftObject.getMember():null);
+                    List<TimeOrdinalEraPropertyType> rhsMember;
+                    rhsMember = (rightObject.isSetMember()?rightObject.getMember():null);
+                    List<TimeOrdinalEraPropertyType> mergedMember = ((List<TimeOrdinalEraPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "member", lhsMember), LocatorUtils.property(rightLocator, "member", rhsMember), lhsMember, rhsMember, leftObject.isSetMember(), rightObject.isSetMember()));
+                    target.setMember(mergedMember);
+                } else {
+                    if (memberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetMember();
+                    }
+                }
             }
             {
-                ReferenceType lhsGroup;
-                lhsGroup = leftObject.getGroup();
-                ReferenceType rhsGroup;
-                rhsGroup = rightObject.getGroup();
-                target.setGroup(((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "group", lhsGroup), LocatorUtils.property(rightLocator, "group", rhsGroup), lhsGroup, rhsGroup)));
+                java.lang.Boolean groupShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGroup(), rightObject.isSetGroup());
+                if (groupShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType lhsGroup;
+                    lhsGroup = leftObject.getGroup();
+                    ReferenceType rhsGroup;
+                    rhsGroup = rightObject.getGroup();
+                    ReferenceType mergedGroup = ((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "group", lhsGroup), LocatorUtils.property(rightLocator, "group", rhsGroup), lhsGroup, rhsGroup, leftObject.isSetGroup(), rightObject.isSetGroup()));
+                    target.setGroup(mergedGroup);
+                } else {
+                    if (groupShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.group = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setRelatedTime(List<RelatedTimeType> value) {
-        List<RelatedTimeType> draftl = this.getRelatedTime();
-        draftl.addAll(value);
-    }
-
-    public void setMember(List<TimeOrdinalEraPropertyType> value) {
-        List<TimeOrdinalEraPropertyType> draftl = this.getMember();
-        draftl.addAll(value);
-    }
-
-    public TimeOrdinalEraType withRelatedTime(RelatedTimeType... values) {
-        if (values!= null) {
-            for (RelatedTimeType value: values) {
-                getRelatedTime().add(value);
-            }
-        }
-        return this;
-    }
-
-    public TimeOrdinalEraType withRelatedTime(Collection<RelatedTimeType> values) {
-        if (values!= null) {
-            getRelatedTime().addAll(values);
-        }
-        return this;
-    }
-
-    public TimeOrdinalEraType withStart(TimeNodePropertyType value) {
-        setStart(value);
-        return this;
-    }
-
-    public TimeOrdinalEraType withEnd(TimeNodePropertyType value) {
-        setEnd(value);
-        return this;
-    }
-
-    public TimeOrdinalEraType withExtent(TimePeriodPropertyType value) {
-        setExtent(value);
-        return this;
-    }
-
-    public TimeOrdinalEraType withMember(TimeOrdinalEraPropertyType... values) {
-        if (values!= null) {
-            for (TimeOrdinalEraPropertyType value: values) {
-                getMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public TimeOrdinalEraType withMember(Collection<TimeOrdinalEraPropertyType> values) {
-        if (values!= null) {
-            getMember().addAll(values);
-        }
-        return this;
-    }
-
-    public TimeOrdinalEraType withGroup(ReferenceType value) {
-        setGroup(value);
-        return this;
-    }
-
-    public TimeOrdinalEraType withRelatedTime(List<RelatedTimeType> value) {
-        setRelatedTime(value);
-        return this;
-    }
-
-    public TimeOrdinalEraType withMember(List<TimeOrdinalEraPropertyType> value) {
-        setMember(value);
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TimeOrdinalEraType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

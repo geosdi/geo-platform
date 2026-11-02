@@ -34,64 +34,61 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.Duration;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per TimePeriodType complex type.
+ * <p>Classe Java per TimePeriodType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="TimePeriodType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTimeGeometricPrimitiveType">
- *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element name="beginPosition" type="{http://www.opengis.net/gml}TimePositionType"/>
- *           &lt;element name="begin" type="{http://www.opengis.net/gml}TimeInstantPropertyType"/>
- *         &lt;/choice>
- *         &lt;choice>
- *           &lt;element name="endPosition" type="{http://www.opengis.net/gml}TimePositionType"/>
- *           &lt;element name="end" type="{http://www.opengis.net/gml}TimeInstantPropertyType"/>
- *         &lt;/choice>
- *         &lt;group ref="{http://www.opengis.net/gml}timeLength" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="TimePeriodType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTimeGeometricPrimitiveType">
+ *       <sequence>
+ *         <choice>
+ *           <element name="beginPosition" type="{http://www.opengis.net/gml}TimePositionType"/>
+ *           <element name="begin" type="{http://www.opengis.net/gml}TimeInstantPropertyType"/>
+ *         </choice>
+ *         <choice>
+ *           <element name="endPosition" type="{http://www.opengis.net/gml}TimePositionType"/>
+ *           <element name="end" type="{http://www.opengis.net/gml}TimeInstantPropertyType"/>
+ *         </choice>
+ *         <group ref="{http://www.opengis.net/gml}timeLength" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -113,7 +110,17 @@ public class TimePeriodType
     protected TimeInstantPropertyType begin;
     protected TimePositionType endPosition;
     protected TimeInstantPropertyType end;
+    /**
+     * gml:duration conforms to the ISO 8601 syntax for temporal length as implemented by the XML Schema duration type.
+     * 
+     */
     protected Duration duration;
+    /**
+     * gml:timeInterval conforms to ISO 11404 which is based on floating point values for temporal length.
+     * ISO 11404 syntax specifies the use of a positiveInteger together with appropriate values for radix and factor. The resolution of the time interval is to one radix ^(-factor) of the specified time unit.
+     * The value of the unit is either selected from the units for time intervals from ISO 31-1:1992, or is another suitable unit.  The encoding is defined for GML in gml:TimeUnitType. The second component of this union type provides a method for indicating time units other than the six standard units given in the enumeration.
+     * 
+     */
     protected TimeIntervalLengthType timeInterval;
 
     /**
@@ -229,7 +236,7 @@ public class TimePeriodType
     }
 
     /**
-     * Recupera il valore della proprietà duration.
+     * gml:duration conforms to the ISO 8601 syntax for temporal length as implemented by the XML Schema duration type.
      * 
      * @return
      *     possible object is
@@ -247,6 +254,7 @@ public class TimePeriodType
      *     allowed object is
      *     {@link Duration }
      *     
+     * @see #getDuration()
      */
     public void setDuration(Duration value) {
         this.duration = value;
@@ -257,7 +265,9 @@ public class TimePeriodType
     }
 
     /**
-     * Recupera il valore della proprietà timeInterval.
+     * gml:timeInterval conforms to ISO 11404 which is based on floating point values for temporal length.
+     * ISO 11404 syntax specifies the use of a positiveInteger together with appropriate values for radix and factor. The resolution of the time interval is to one radix ^(-factor) of the specified time unit.
+     * The value of the unit is either selected from the units for time intervals from ISO 31-1:1992, or is another suitable unit.  The encoding is defined for GML in gml:TimeUnitType. The second component of this union type provides a method for indicating time units other than the six standard units given in the enumeration.
      * 
      * @return
      *     possible object is
@@ -275,6 +285,7 @@ public class TimePeriodType
      *     allowed object is
      *     {@link TimeIntervalLengthType }
      *     
+     * @see #getTimeInterval()
      */
     public void setTimeInterval(TimeIntervalLengthType value) {
         this.timeInterval = value;
@@ -284,13 +295,15 @@ public class TimePeriodType
         return (this.timeInterval!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -298,43 +311,45 @@ public class TimePeriodType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             TimePositionType theBeginPosition;
             theBeginPosition = this.getBeginPosition();
-            strategy.appendField(locator, this, "beginPosition", buffer, theBeginPosition);
+            strategy.appendField(locator, this, "beginPosition", buffer, theBeginPosition, this.isSetBeginPosition());
         }
         {
             TimeInstantPropertyType theBegin;
             theBegin = this.getBegin();
-            strategy.appendField(locator, this, "begin", buffer, theBegin);
+            strategy.appendField(locator, this, "begin", buffer, theBegin, this.isSetBegin());
         }
         {
             TimePositionType theEndPosition;
             theEndPosition = this.getEndPosition();
-            strategy.appendField(locator, this, "endPosition", buffer, theEndPosition);
+            strategy.appendField(locator, this, "endPosition", buffer, theEndPosition, this.isSetEndPosition());
         }
         {
             TimeInstantPropertyType theEnd;
             theEnd = this.getEnd();
-            strategy.appendField(locator, this, "end", buffer, theEnd);
+            strategy.appendField(locator, this, "end", buffer, theEnd, this.isSetEnd());
         }
         {
             Duration theDuration;
             theDuration = this.getDuration();
-            strategy.appendField(locator, this, "duration", buffer, theDuration);
+            strategy.appendField(locator, this, "duration", buffer, theDuration, this.isSetDuration());
         }
         {
             TimeIntervalLengthType theTimeInterval;
             theTimeInterval = this.getTimeInterval();
-            strategy.appendField(locator, this, "timeInterval", buffer, theTimeInterval);
+            strategy.appendField(locator, this, "timeInterval", buffer, theTimeInterval, this.isSetTimeInterval());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof TimePeriodType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -349,7 +364,7 @@ public class TimePeriodType
             lhsBeginPosition = this.getBeginPosition();
             TimePositionType rhsBeginPosition;
             rhsBeginPosition = that.getBeginPosition();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "beginPosition", lhsBeginPosition), LocatorUtils.property(thatLocator, "beginPosition", rhsBeginPosition), lhsBeginPosition, rhsBeginPosition)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "beginPosition", lhsBeginPosition), LocatorUtils.property(thatLocator, "beginPosition", rhsBeginPosition), lhsBeginPosition, rhsBeginPosition, this.isSetBeginPosition(), that.isSetBeginPosition())) {
                 return false;
             }
         }
@@ -358,7 +373,7 @@ public class TimePeriodType
             lhsBegin = this.getBegin();
             TimeInstantPropertyType rhsBegin;
             rhsBegin = that.getBegin();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "begin", lhsBegin), LocatorUtils.property(thatLocator, "begin", rhsBegin), lhsBegin, rhsBegin)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "begin", lhsBegin), LocatorUtils.property(thatLocator, "begin", rhsBegin), lhsBegin, rhsBegin, this.isSetBegin(), that.isSetBegin())) {
                 return false;
             }
         }
@@ -367,7 +382,7 @@ public class TimePeriodType
             lhsEndPosition = this.getEndPosition();
             TimePositionType rhsEndPosition;
             rhsEndPosition = that.getEndPosition();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "endPosition", lhsEndPosition), LocatorUtils.property(thatLocator, "endPosition", rhsEndPosition), lhsEndPosition, rhsEndPosition)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "endPosition", lhsEndPosition), LocatorUtils.property(thatLocator, "endPosition", rhsEndPosition), lhsEndPosition, rhsEndPosition, this.isSetEndPosition(), that.isSetEndPosition())) {
                 return false;
             }
         }
@@ -376,7 +391,7 @@ public class TimePeriodType
             lhsEnd = this.getEnd();
             TimeInstantPropertyType rhsEnd;
             rhsEnd = that.getEnd();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "end", lhsEnd), LocatorUtils.property(thatLocator, "end", rhsEnd), lhsEnd, rhsEnd)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "end", lhsEnd), LocatorUtils.property(thatLocator, "end", rhsEnd), lhsEnd, rhsEnd, this.isSetEnd(), that.isSetEnd())) {
                 return false;
             }
         }
@@ -385,7 +400,7 @@ public class TimePeriodType
             lhsDuration = this.getDuration();
             Duration rhsDuration;
             rhsDuration = that.getDuration();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "duration", lhsDuration), LocatorUtils.property(thatLocator, "duration", rhsDuration), lhsDuration, rhsDuration)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "duration", lhsDuration), LocatorUtils.property(thatLocator, "duration", rhsDuration), lhsDuration, rhsDuration, this.isSetDuration(), that.isSetDuration())) {
                 return false;
             }
         }
@@ -394,133 +409,172 @@ public class TimePeriodType
             lhsTimeInterval = this.getTimeInterval();
             TimeIntervalLengthType rhsTimeInterval;
             rhsTimeInterval = that.getTimeInterval();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "timeInterval", lhsTimeInterval), LocatorUtils.property(thatLocator, "timeInterval", rhsTimeInterval), lhsTimeInterval, rhsTimeInterval)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "timeInterval", lhsTimeInterval), LocatorUtils.property(thatLocator, "timeInterval", rhsTimeInterval), lhsTimeInterval, rhsTimeInterval, this.isSetTimeInterval(), that.isSetTimeInterval())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             TimePositionType theBeginPosition;
             theBeginPosition = this.getBeginPosition();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "beginPosition", theBeginPosition), currentHashCode, theBeginPosition);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "beginPosition", theBeginPosition), currentHashCode, theBeginPosition, this.isSetBeginPosition());
         }
         {
             TimeInstantPropertyType theBegin;
             theBegin = this.getBegin();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "begin", theBegin), currentHashCode, theBegin);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "begin", theBegin), currentHashCode, theBegin, this.isSetBegin());
         }
         {
             TimePositionType theEndPosition;
             theEndPosition = this.getEndPosition();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "endPosition", theEndPosition), currentHashCode, theEndPosition);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "endPosition", theEndPosition), currentHashCode, theEndPosition, this.isSetEndPosition());
         }
         {
             TimeInstantPropertyType theEnd;
             theEnd = this.getEnd();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "end", theEnd), currentHashCode, theEnd);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "end", theEnd), currentHashCode, theEnd, this.isSetEnd());
         }
         {
             Duration theDuration;
             theDuration = this.getDuration();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "duration", theDuration), currentHashCode, theDuration);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "duration", theDuration), currentHashCode, theDuration, this.isSetDuration());
         }
         {
             TimeIntervalLengthType theTimeInterval;
             theTimeInterval = this.getTimeInterval();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "timeInterval", theTimeInterval), currentHashCode, theTimeInterval);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "timeInterval", theTimeInterval), currentHashCode, theTimeInterval, this.isSetTimeInterval());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof TimePeriodType) {
             final TimePeriodType copy = ((TimePeriodType) draftCopy);
-            if (this.isSetBeginPosition()) {
-                TimePositionType sourceBeginPosition;
-                sourceBeginPosition = this.getBeginPosition();
-                TimePositionType copyBeginPosition = ((TimePositionType) strategy.copy(LocatorUtils.property(locator, "beginPosition", sourceBeginPosition), sourceBeginPosition));
-                copy.setBeginPosition(copyBeginPosition);
-            } else {
-                copy.beginPosition = null;
+            {
+                java.lang.Boolean beginPositionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetBeginPosition());
+                if (beginPositionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimePositionType sourceBeginPosition;
+                    sourceBeginPosition = this.getBeginPosition();
+                    TimePositionType copyBeginPosition = ((TimePositionType) strategy.copy(LocatorUtils.property(locator, "beginPosition", sourceBeginPosition), sourceBeginPosition, this.isSetBeginPosition()));
+                    copy.setBeginPosition(copyBeginPosition);
+                } else {
+                    if (beginPositionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.beginPosition = null;
+                    }
+                }
             }
-            if (this.isSetBegin()) {
-                TimeInstantPropertyType sourceBegin;
-                sourceBegin = this.getBegin();
-                TimeInstantPropertyType copyBegin = ((TimeInstantPropertyType) strategy.copy(LocatorUtils.property(locator, "begin", sourceBegin), sourceBegin));
-                copy.setBegin(copyBegin);
-            } else {
-                copy.begin = null;
+            {
+                java.lang.Boolean beginShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetBegin());
+                if (beginShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimeInstantPropertyType sourceBegin;
+                    sourceBegin = this.getBegin();
+                    TimeInstantPropertyType copyBegin = ((TimeInstantPropertyType) strategy.copy(LocatorUtils.property(locator, "begin", sourceBegin), sourceBegin, this.isSetBegin()));
+                    copy.setBegin(copyBegin);
+                } else {
+                    if (beginShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.begin = null;
+                    }
+                }
             }
-            if (this.isSetEndPosition()) {
-                TimePositionType sourceEndPosition;
-                sourceEndPosition = this.getEndPosition();
-                TimePositionType copyEndPosition = ((TimePositionType) strategy.copy(LocatorUtils.property(locator, "endPosition", sourceEndPosition), sourceEndPosition));
-                copy.setEndPosition(copyEndPosition);
-            } else {
-                copy.endPosition = null;
+            {
+                java.lang.Boolean endPositionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetEndPosition());
+                if (endPositionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimePositionType sourceEndPosition;
+                    sourceEndPosition = this.getEndPosition();
+                    TimePositionType copyEndPosition = ((TimePositionType) strategy.copy(LocatorUtils.property(locator, "endPosition", sourceEndPosition), sourceEndPosition, this.isSetEndPosition()));
+                    copy.setEndPosition(copyEndPosition);
+                } else {
+                    if (endPositionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.endPosition = null;
+                    }
+                }
             }
-            if (this.isSetEnd()) {
-                TimeInstantPropertyType sourceEnd;
-                sourceEnd = this.getEnd();
-                TimeInstantPropertyType copyEnd = ((TimeInstantPropertyType) strategy.copy(LocatorUtils.property(locator, "end", sourceEnd), sourceEnd));
-                copy.setEnd(copyEnd);
-            } else {
-                copy.end = null;
+            {
+                java.lang.Boolean endShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetEnd());
+                if (endShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimeInstantPropertyType sourceEnd;
+                    sourceEnd = this.getEnd();
+                    TimeInstantPropertyType copyEnd = ((TimeInstantPropertyType) strategy.copy(LocatorUtils.property(locator, "end", sourceEnd), sourceEnd, this.isSetEnd()));
+                    copy.setEnd(copyEnd);
+                } else {
+                    if (endShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.end = null;
+                    }
+                }
             }
-            if (this.isSetDuration()) {
-                Duration sourceDuration;
-                sourceDuration = this.getDuration();
-                Duration copyDuration = ((Duration) strategy.copy(LocatorUtils.property(locator, "duration", sourceDuration), sourceDuration));
-                copy.setDuration(copyDuration);
-            } else {
-                copy.duration = null;
+            {
+                java.lang.Boolean durationShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDuration());
+                if (durationShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    Duration sourceDuration;
+                    sourceDuration = this.getDuration();
+                    Duration copyDuration = ((Duration) strategy.copy(LocatorUtils.property(locator, "duration", sourceDuration), sourceDuration, this.isSetDuration()));
+                    copy.setDuration(copyDuration);
+                } else {
+                    if (durationShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.duration = null;
+                    }
+                }
             }
-            if (this.isSetTimeInterval()) {
-                TimeIntervalLengthType sourceTimeInterval;
-                sourceTimeInterval = this.getTimeInterval();
-                TimeIntervalLengthType copyTimeInterval = ((TimeIntervalLengthType) strategy.copy(LocatorUtils.property(locator, "timeInterval", sourceTimeInterval), sourceTimeInterval));
-                copy.setTimeInterval(copyTimeInterval);
-            } else {
-                copy.timeInterval = null;
+            {
+                java.lang.Boolean timeIntervalShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetTimeInterval());
+                if (timeIntervalShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    TimeIntervalLengthType sourceTimeInterval;
+                    sourceTimeInterval = this.getTimeInterval();
+                    TimeIntervalLengthType copyTimeInterval = ((TimeIntervalLengthType) strategy.copy(LocatorUtils.property(locator, "timeInterval", sourceTimeInterval), sourceTimeInterval, this.isSetTimeInterval()));
+                    copy.setTimeInterval(copyTimeInterval);
+                } else {
+                    if (timeIntervalShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.timeInterval = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new TimePeriodType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof TimePeriodType) {
@@ -528,180 +582,96 @@ public class TimePeriodType
             final TimePeriodType leftObject = ((TimePeriodType) left);
             final TimePeriodType rightObject = ((TimePeriodType) right);
             {
-                TimePositionType lhsBeginPosition;
-                lhsBeginPosition = leftObject.getBeginPosition();
-                TimePositionType rhsBeginPosition;
-                rhsBeginPosition = rightObject.getBeginPosition();
-                target.setBeginPosition(((TimePositionType) strategy.merge(LocatorUtils.property(leftLocator, "beginPosition", lhsBeginPosition), LocatorUtils.property(rightLocator, "beginPosition", rhsBeginPosition), lhsBeginPosition, rhsBeginPosition)));
+                java.lang.Boolean beginPositionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetBeginPosition(), rightObject.isSetBeginPosition());
+                if (beginPositionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimePositionType lhsBeginPosition;
+                    lhsBeginPosition = leftObject.getBeginPosition();
+                    TimePositionType rhsBeginPosition;
+                    rhsBeginPosition = rightObject.getBeginPosition();
+                    TimePositionType mergedBeginPosition = ((TimePositionType) strategy.merge(LocatorUtils.property(leftLocator, "beginPosition", lhsBeginPosition), LocatorUtils.property(rightLocator, "beginPosition", rhsBeginPosition), lhsBeginPosition, rhsBeginPosition, leftObject.isSetBeginPosition(), rightObject.isSetBeginPosition()));
+                    target.setBeginPosition(mergedBeginPosition);
+                } else {
+                    if (beginPositionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.beginPosition = null;
+                    }
+                }
             }
             {
-                TimeInstantPropertyType lhsBegin;
-                lhsBegin = leftObject.getBegin();
-                TimeInstantPropertyType rhsBegin;
-                rhsBegin = rightObject.getBegin();
-                target.setBegin(((TimeInstantPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "begin", lhsBegin), LocatorUtils.property(rightLocator, "begin", rhsBegin), lhsBegin, rhsBegin)));
+                java.lang.Boolean beginShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetBegin(), rightObject.isSetBegin());
+                if (beginShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimeInstantPropertyType lhsBegin;
+                    lhsBegin = leftObject.getBegin();
+                    TimeInstantPropertyType rhsBegin;
+                    rhsBegin = rightObject.getBegin();
+                    TimeInstantPropertyType mergedBegin = ((TimeInstantPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "begin", lhsBegin), LocatorUtils.property(rightLocator, "begin", rhsBegin), lhsBegin, rhsBegin, leftObject.isSetBegin(), rightObject.isSetBegin()));
+                    target.setBegin(mergedBegin);
+                } else {
+                    if (beginShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.begin = null;
+                    }
+                }
             }
             {
-                TimePositionType lhsEndPosition;
-                lhsEndPosition = leftObject.getEndPosition();
-                TimePositionType rhsEndPosition;
-                rhsEndPosition = rightObject.getEndPosition();
-                target.setEndPosition(((TimePositionType) strategy.merge(LocatorUtils.property(leftLocator, "endPosition", lhsEndPosition), LocatorUtils.property(rightLocator, "endPosition", rhsEndPosition), lhsEndPosition, rhsEndPosition)));
+                java.lang.Boolean endPositionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetEndPosition(), rightObject.isSetEndPosition());
+                if (endPositionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimePositionType lhsEndPosition;
+                    lhsEndPosition = leftObject.getEndPosition();
+                    TimePositionType rhsEndPosition;
+                    rhsEndPosition = rightObject.getEndPosition();
+                    TimePositionType mergedEndPosition = ((TimePositionType) strategy.merge(LocatorUtils.property(leftLocator, "endPosition", lhsEndPosition), LocatorUtils.property(rightLocator, "endPosition", rhsEndPosition), lhsEndPosition, rhsEndPosition, leftObject.isSetEndPosition(), rightObject.isSetEndPosition()));
+                    target.setEndPosition(mergedEndPosition);
+                } else {
+                    if (endPositionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.endPosition = null;
+                    }
+                }
             }
             {
-                TimeInstantPropertyType lhsEnd;
-                lhsEnd = leftObject.getEnd();
-                TimeInstantPropertyType rhsEnd;
-                rhsEnd = rightObject.getEnd();
-                target.setEnd(((TimeInstantPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "end", lhsEnd), LocatorUtils.property(rightLocator, "end", rhsEnd), lhsEnd, rhsEnd)));
+                java.lang.Boolean endShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetEnd(), rightObject.isSetEnd());
+                if (endShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimeInstantPropertyType lhsEnd;
+                    lhsEnd = leftObject.getEnd();
+                    TimeInstantPropertyType rhsEnd;
+                    rhsEnd = rightObject.getEnd();
+                    TimeInstantPropertyType mergedEnd = ((TimeInstantPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "end", lhsEnd), LocatorUtils.property(rightLocator, "end", rhsEnd), lhsEnd, rhsEnd, leftObject.isSetEnd(), rightObject.isSetEnd()));
+                    target.setEnd(mergedEnd);
+                } else {
+                    if (endShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.end = null;
+                    }
+                }
             }
             {
-                Duration lhsDuration;
-                lhsDuration = leftObject.getDuration();
-                Duration rhsDuration;
-                rhsDuration = rightObject.getDuration();
-                target.setDuration(((Duration) strategy.merge(LocatorUtils.property(leftLocator, "duration", lhsDuration), LocatorUtils.property(rightLocator, "duration", rhsDuration), lhsDuration, rhsDuration)));
+                java.lang.Boolean durationShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDuration(), rightObject.isSetDuration());
+                if (durationShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    Duration lhsDuration;
+                    lhsDuration = leftObject.getDuration();
+                    Duration rhsDuration;
+                    rhsDuration = rightObject.getDuration();
+                    Duration mergedDuration = ((Duration) strategy.merge(LocatorUtils.property(leftLocator, "duration", lhsDuration), LocatorUtils.property(rightLocator, "duration", rhsDuration), lhsDuration, rhsDuration, leftObject.isSetDuration(), rightObject.isSetDuration()));
+                    target.setDuration(mergedDuration);
+                } else {
+                    if (durationShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.duration = null;
+                    }
+                }
             }
             {
-                TimeIntervalLengthType lhsTimeInterval;
-                lhsTimeInterval = leftObject.getTimeInterval();
-                TimeIntervalLengthType rhsTimeInterval;
-                rhsTimeInterval = rightObject.getTimeInterval();
-                target.setTimeInterval(((TimeIntervalLengthType) strategy.merge(LocatorUtils.property(leftLocator, "timeInterval", lhsTimeInterval), LocatorUtils.property(rightLocator, "timeInterval", rhsTimeInterval), lhsTimeInterval, rhsTimeInterval)));
+                java.lang.Boolean timeIntervalShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetTimeInterval(), rightObject.isSetTimeInterval());
+                if (timeIntervalShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    TimeIntervalLengthType lhsTimeInterval;
+                    lhsTimeInterval = leftObject.getTimeInterval();
+                    TimeIntervalLengthType rhsTimeInterval;
+                    rhsTimeInterval = rightObject.getTimeInterval();
+                    TimeIntervalLengthType mergedTimeInterval = ((TimeIntervalLengthType) strategy.merge(LocatorUtils.property(leftLocator, "timeInterval", lhsTimeInterval), LocatorUtils.property(rightLocator, "timeInterval", rhsTimeInterval), lhsTimeInterval, rhsTimeInterval, leftObject.isSetTimeInterval(), rightObject.isSetTimeInterval()));
+                    target.setTimeInterval(mergedTimeInterval);
+                } else {
+                    if (timeIntervalShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.timeInterval = null;
+                    }
+                }
             }
         }
-    }
-
-    public TimePeriodType withBeginPosition(TimePositionType value) {
-        setBeginPosition(value);
-        return this;
-    }
-
-    public TimePeriodType withBegin(TimeInstantPropertyType value) {
-        setBegin(value);
-        return this;
-    }
-
-    public TimePeriodType withEndPosition(TimePositionType value) {
-        setEndPosition(value);
-        return this;
-    }
-
-    public TimePeriodType withEnd(TimeInstantPropertyType value) {
-        setEnd(value);
-        return this;
-    }
-
-    public TimePeriodType withDuration(Duration value) {
-        setDuration(value);
-        return this;
-    }
-
-    public TimePeriodType withTimeInterval(TimeIntervalLengthType value) {
-        setTimeInterval(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withFrame(String value) {
-        setFrame(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withRelatedTime(RelatedTimeType... values) {
-        if (values!= null) {
-            for (RelatedTimeType value: values) {
-                getRelatedTime().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withRelatedTime(Collection<RelatedTimeType> values) {
-        if (values!= null) {
-            getRelatedTime().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withRelatedTime(List<RelatedTimeType> value) {
-        setRelatedTime(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public TimePeriodType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

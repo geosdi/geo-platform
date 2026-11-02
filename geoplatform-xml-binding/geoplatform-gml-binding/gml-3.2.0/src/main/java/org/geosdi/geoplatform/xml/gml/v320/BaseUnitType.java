@@ -34,56 +34,53 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per BaseUnitType complex type.
+ * <p>Classe Java per BaseUnitType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="BaseUnitType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}UnitDefinitionType">
- *       &lt;sequence>
- *         &lt;element name="unitsSystem" type="{http://www.opengis.net/gml}ReferenceType"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="BaseUnitType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}UnitDefinitionType">
+ *       <sequence>
+ *         <element name="unitsSystem" type="{http://www.opengis.net/gml}ReferenceType"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -127,13 +124,15 @@ public class BaseUnitType
         return (this.unitsSystem!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -141,18 +140,20 @@ public class BaseUnitType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             ReferenceType theUnitsSystem;
             theUnitsSystem = this.getUnitsSystem();
-            strategy.appendField(locator, this, "unitsSystem", buffer, theUnitsSystem);
+            strategy.appendField(locator, this, "unitsSystem", buffer, theUnitsSystem, this.isSetUnitsSystem());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof BaseUnitType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -167,68 +168,82 @@ public class BaseUnitType
             lhsUnitsSystem = this.getUnitsSystem();
             ReferenceType rhsUnitsSystem;
             rhsUnitsSystem = that.getUnitsSystem();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "unitsSystem", lhsUnitsSystem), LocatorUtils.property(thatLocator, "unitsSystem", rhsUnitsSystem), lhsUnitsSystem, rhsUnitsSystem)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "unitsSystem", lhsUnitsSystem), LocatorUtils.property(thatLocator, "unitsSystem", rhsUnitsSystem), lhsUnitsSystem, rhsUnitsSystem, this.isSetUnitsSystem(), that.isSetUnitsSystem())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             ReferenceType theUnitsSystem;
             theUnitsSystem = this.getUnitsSystem();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "unitsSystem", theUnitsSystem), currentHashCode, theUnitsSystem);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "unitsSystem", theUnitsSystem), currentHashCode, theUnitsSystem, this.isSetUnitsSystem());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof BaseUnitType) {
             final BaseUnitType copy = ((BaseUnitType) draftCopy);
-            if (this.isSetUnitsSystem()) {
-                ReferenceType sourceUnitsSystem;
-                sourceUnitsSystem = this.getUnitsSystem();
-                ReferenceType copyUnitsSystem = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "unitsSystem", sourceUnitsSystem), sourceUnitsSystem));
-                copy.setUnitsSystem(copyUnitsSystem);
-            } else {
-                copy.unitsSystem = null;
+            {
+                java.lang.Boolean unitsSystemShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetUnitsSystem());
+                if (unitsSystemShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType sourceUnitsSystem;
+                    sourceUnitsSystem = this.getUnitsSystem();
+                    ReferenceType copyUnitsSystem = ((ReferenceType) strategy.copy(LocatorUtils.property(locator, "unitsSystem", sourceUnitsSystem), sourceUnitsSystem, this.isSetUnitsSystem()));
+                    copy.setUnitsSystem(copyUnitsSystem);
+                } else {
+                    if (unitsSystemShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unitsSystem = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new BaseUnitType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof BaseUnitType) {
@@ -236,114 +251,21 @@ public class BaseUnitType
             final BaseUnitType leftObject = ((BaseUnitType) left);
             final BaseUnitType rightObject = ((BaseUnitType) right);
             {
-                ReferenceType lhsUnitsSystem;
-                lhsUnitsSystem = leftObject.getUnitsSystem();
-                ReferenceType rhsUnitsSystem;
-                rhsUnitsSystem = rightObject.getUnitsSystem();
-                target.setUnitsSystem(((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "unitsSystem", lhsUnitsSystem), LocatorUtils.property(rightLocator, "unitsSystem", rhsUnitsSystem), lhsUnitsSystem, rhsUnitsSystem)));
+                java.lang.Boolean unitsSystemShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetUnitsSystem(), rightObject.isSetUnitsSystem());
+                if (unitsSystemShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ReferenceType lhsUnitsSystem;
+                    lhsUnitsSystem = leftObject.getUnitsSystem();
+                    ReferenceType rhsUnitsSystem;
+                    rhsUnitsSystem = rightObject.getUnitsSystem();
+                    ReferenceType mergedUnitsSystem = ((ReferenceType) strategy.merge(LocatorUtils.property(leftLocator, "unitsSystem", lhsUnitsSystem), LocatorUtils.property(rightLocator, "unitsSystem", rhsUnitsSystem), lhsUnitsSystem, rhsUnitsSystem, leftObject.isSetUnitsSystem(), rightObject.isSetUnitsSystem()));
+                    target.setUnitsSystem(mergedUnitsSystem);
+                } else {
+                    if (unitsSystemShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unitsSystem = null;
+                    }
+                }
             }
         }
-    }
-
-    public BaseUnitType withUnitsSystem(ReferenceType value) {
-        setUnitsSystem(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withQuantityType(StringOrRefType value) {
-        setQuantityType(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withQuantityTypeReference(ReferenceType value) {
-        setQuantityTypeReference(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withCatalogSymbol(CodeType value) {
-        setCatalogSymbol(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public BaseUnitType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

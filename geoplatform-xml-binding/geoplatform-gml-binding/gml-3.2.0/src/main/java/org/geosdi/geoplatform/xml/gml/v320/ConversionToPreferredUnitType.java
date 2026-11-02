@@ -34,35 +34,34 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
@@ -72,22 +71,22 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  * by which a value using the conventional unit of measure can be converted to obtain the corresponding value using the preferred unit of measure.  
  * The formula defines the parameters of a simple formula by which a value using the conventional unit of measure can be converted to the corresponding value using the preferred unit of measure. The formula element contains elements a, b, c and d, whose values use the XML Schema type double. These values are used in the formula y = (a + bx) / (c + dx), where x is a value using this unit, and y is the corresponding value using the base unit. The elements a and d are optional, and if values are not provided, those parameters are considered to be zero. If values are not provided for both a and d, the formula is equivalent to a fraction with numerator and denominator parameters.
  * 
- * <p>Classe Java per ConversionToPreferredUnitType complex type.
+ * <p>Classe Java per ConversionToPreferredUnitType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ConversionToPreferredUnitType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}UnitOfMeasureType">
- *       &lt;choice>
- *         &lt;element name="factor" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="formula" type="{http://www.opengis.net/gml}FormulaType"/>
- *       &lt;/choice>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="ConversionToPreferredUnitType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}UnitOfMeasureType">
+ *       <choice>
+ *         <element name="factor" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         <element name="formula" type="{http://www.opengis.net/gml}FormulaType"/>
+ *       </choice>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -160,13 +159,15 @@ public class ConversionToPreferredUnitType
         return (this.formula!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -174,23 +175,25 @@ public class ConversionToPreferredUnitType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             Double theFactor;
             theFactor = this.getFactor();
-            strategy.appendField(locator, this, "factor", buffer, theFactor);
+            strategy.appendField(locator, this, "factor", buffer, theFactor, this.isSetFactor());
         }
         {
             FormulaType theFormula;
             theFormula = this.getFormula();
-            strategy.appendField(locator, this, "formula", buffer, theFormula);
+            strategy.appendField(locator, this, "formula", buffer, theFormula, this.isSetFormula());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof ConversionToPreferredUnitType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -205,7 +208,7 @@ public class ConversionToPreferredUnitType
             lhsFactor = this.getFactor();
             Double rhsFactor;
             rhsFactor = that.getFactor();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "factor", lhsFactor), LocatorUtils.property(thatLocator, "factor", rhsFactor), lhsFactor, rhsFactor)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "factor", lhsFactor), LocatorUtils.property(thatLocator, "factor", rhsFactor), lhsFactor, rhsFactor, this.isSetFactor(), that.isSetFactor())) {
                 return false;
             }
         }
@@ -214,81 +217,100 @@ public class ConversionToPreferredUnitType
             lhsFormula = this.getFormula();
             FormulaType rhsFormula;
             rhsFormula = that.getFormula();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "formula", lhsFormula), LocatorUtils.property(thatLocator, "formula", rhsFormula), lhsFormula, rhsFormula)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "formula", lhsFormula), LocatorUtils.property(thatLocator, "formula", rhsFormula), lhsFormula, rhsFormula, this.isSetFormula(), that.isSetFormula())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             Double theFactor;
             theFactor = this.getFactor();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "factor", theFactor), currentHashCode, theFactor);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "factor", theFactor), currentHashCode, theFactor, this.isSetFactor());
         }
         {
             FormulaType theFormula;
             theFormula = this.getFormula();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "formula", theFormula), currentHashCode, theFormula);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "formula", theFormula), currentHashCode, theFormula, this.isSetFormula());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof ConversionToPreferredUnitType) {
             final ConversionToPreferredUnitType copy = ((ConversionToPreferredUnitType) draftCopy);
-            if (this.isSetFactor()) {
-                Double sourceFactor;
-                sourceFactor = this.getFactor();
-                Double copyFactor = ((Double) strategy.copy(LocatorUtils.property(locator, "factor", sourceFactor), sourceFactor));
-                copy.setFactor(copyFactor);
-            } else {
-                copy.factor = null;
+            {
+                java.lang.Boolean factorShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFactor());
+                if (factorShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    Double sourceFactor;
+                    sourceFactor = this.getFactor();
+                    Double copyFactor = ((Double) strategy.copy(LocatorUtils.property(locator, "factor", sourceFactor), sourceFactor, this.isSetFactor()));
+                    copy.setFactor(copyFactor);
+                } else {
+                    if (factorShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.factor = null;
+                    }
+                }
             }
-            if (this.isSetFormula()) {
-                FormulaType sourceFormula;
-                sourceFormula = this.getFormula();
-                FormulaType copyFormula = ((FormulaType) strategy.copy(LocatorUtils.property(locator, "formula", sourceFormula), sourceFormula));
-                copy.setFormula(copyFormula);
-            } else {
-                copy.formula = null;
+            {
+                java.lang.Boolean formulaShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetFormula());
+                if (formulaShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    FormulaType sourceFormula;
+                    sourceFormula = this.getFormula();
+                    FormulaType copyFormula = ((FormulaType) strategy.copy(LocatorUtils.property(locator, "formula", sourceFormula), sourceFormula, this.isSetFormula()));
+                    copy.setFormula(copyFormula);
+                } else {
+                    if (formulaShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.formula = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new ConversionToPreferredUnitType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof ConversionToPreferredUnitType) {
@@ -296,36 +318,36 @@ public class ConversionToPreferredUnitType
             final ConversionToPreferredUnitType leftObject = ((ConversionToPreferredUnitType) left);
             final ConversionToPreferredUnitType rightObject = ((ConversionToPreferredUnitType) right);
             {
-                Double lhsFactor;
-                lhsFactor = leftObject.getFactor();
-                Double rhsFactor;
-                rhsFactor = rightObject.getFactor();
-                target.setFactor(((Double) strategy.merge(LocatorUtils.property(leftLocator, "factor", lhsFactor), LocatorUtils.property(rightLocator, "factor", rhsFactor), lhsFactor, rhsFactor)));
+                java.lang.Boolean factorShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFactor(), rightObject.isSetFactor());
+                if (factorShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    Double lhsFactor;
+                    lhsFactor = leftObject.getFactor();
+                    Double rhsFactor;
+                    rhsFactor = rightObject.getFactor();
+                    Double mergedFactor = ((Double) strategy.merge(LocatorUtils.property(leftLocator, "factor", lhsFactor), LocatorUtils.property(rightLocator, "factor", rhsFactor), lhsFactor, rhsFactor, leftObject.isSetFactor(), rightObject.isSetFactor()));
+                    target.setFactor(mergedFactor);
+                } else {
+                    if (factorShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.factor = null;
+                    }
+                }
             }
             {
-                FormulaType lhsFormula;
-                lhsFormula = leftObject.getFormula();
-                FormulaType rhsFormula;
-                rhsFormula = rightObject.getFormula();
-                target.setFormula(((FormulaType) strategy.merge(LocatorUtils.property(leftLocator, "formula", lhsFormula), LocatorUtils.property(rightLocator, "formula", rhsFormula), lhsFormula, rhsFormula)));
+                java.lang.Boolean formulaShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetFormula(), rightObject.isSetFormula());
+                if (formulaShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    FormulaType lhsFormula;
+                    lhsFormula = leftObject.getFormula();
+                    FormulaType rhsFormula;
+                    rhsFormula = rightObject.getFormula();
+                    FormulaType mergedFormula = ((FormulaType) strategy.merge(LocatorUtils.property(leftLocator, "formula", lhsFormula), LocatorUtils.property(rightLocator, "formula", rhsFormula), lhsFormula, rhsFormula, leftObject.isSetFormula(), rightObject.isSetFormula()));
+                    target.setFormula(mergedFormula);
+                } else {
+                    if (formulaShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.formula = null;
+                    }
+                }
             }
         }
-    }
-
-    public ConversionToPreferredUnitType withFactor(Double value) {
-        setFactor(value);
-        return this;
-    }
-
-    public ConversionToPreferredUnitType withFormula(FormulaType value) {
-        setFormula(value);
-        return this;
-    }
-
-    @Override
-    public ConversionToPreferredUnitType withUom(String value) {
-        setUom(value);
-        return this;
     }
 
 }

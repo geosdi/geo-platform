@@ -34,58 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per MultiGeometryType complex type.
+ * <p>Classe Java per MultiGeometryType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="MultiGeometryType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractGeometricAggregateType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}geometryMember" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}geometryMembers" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="MultiGeometryType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractGeometricAggregateType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}geometryMember" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}geometryMembers" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -99,34 +96,47 @@ public class MultiGeometryType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * This property element either references a geometry element via the XLink-attributes or contains the geometry element.
+     * 
+     */
     protected List<GeometryPropertyType> geometryMember;
+    /**
+     * This property element contains a list of geometry elements. The order of the elements is significant and shall be preserved when processing the array.
+     * 
+     */
     protected GeometryArrayPropertyType geometryMembers;
 
     /**
+     * This property element either references a geometry element via the XLink-attributes or contains the geometry element.
+     * 
      * Gets the value of the geometryMember property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the geometryMember property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the geometryMember property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getGeometryMember().add(newItem);
+     * getGeometryMember().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GeometryPropertyType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the geometryMember property.
      */
     public List<GeometryPropertyType> getGeometryMember() {
         if (geometryMember == null) {
-            geometryMember = new ArrayList<GeometryPropertyType>();
+            geometryMember = new ArrayList<>();
         }
         return this.geometryMember;
     }
@@ -140,7 +150,7 @@ public class MultiGeometryType
     }
 
     /**
-     * Recupera il valore della proprietà geometryMembers.
+     * This property element contains a list of geometry elements. The order of the elements is significant and shall be preserved when processing the array.
      * 
      * @return
      *     possible object is
@@ -158,6 +168,7 @@ public class MultiGeometryType
      *     allowed object is
      *     {@link GeometryArrayPropertyType }
      *     
+     * @see #getGeometryMembers()
      */
     public void setGeometryMembers(GeometryArrayPropertyType value) {
         this.geometryMembers = value;
@@ -167,13 +178,15 @@ public class MultiGeometryType
         return (this.geometryMembers!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -181,23 +194,33 @@ public class MultiGeometryType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<GeometryPropertyType> theGeometryMember;
-            theGeometryMember = this.getGeometryMember();
-            strategy.appendField(locator, this, "geometryMember", buffer, theGeometryMember);
+            theGeometryMember = (this.isSetGeometryMember()?this.getGeometryMember():null);
+            strategy.appendField(locator, this, "geometryMember", buffer, theGeometryMember, this.isSetGeometryMember());
         }
         {
             GeometryArrayPropertyType theGeometryMembers;
             theGeometryMembers = this.getGeometryMembers();
-            strategy.appendField(locator, this, "geometryMembers", buffer, theGeometryMembers);
+            strategy.appendField(locator, this, "geometryMembers", buffer, theGeometryMembers, this.isSetGeometryMembers());
         }
         return buffer;
     }
 
+    public void setGeometryMember(List<GeometryPropertyType> value) {
+        this.geometryMember = null;
+        if (value!= null) {
+            List<GeometryPropertyType> draftl = this.getGeometryMember();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof MultiGeometryType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -209,10 +232,10 @@ public class MultiGeometryType
         final MultiGeometryType that = ((MultiGeometryType) object);
         {
             List<GeometryPropertyType> lhsGeometryMember;
-            lhsGeometryMember = this.getGeometryMember();
+            lhsGeometryMember = (this.isSetGeometryMember()?this.getGeometryMember():null);
             List<GeometryPropertyType> rhsGeometryMember;
-            rhsGeometryMember = that.getGeometryMember();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "geometryMember", lhsGeometryMember), LocatorUtils.property(thatLocator, "geometryMember", rhsGeometryMember), lhsGeometryMember, rhsGeometryMember)) {
+            rhsGeometryMember = (that.isSetGeometryMember()?that.getGeometryMember():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "geometryMember", lhsGeometryMember), LocatorUtils.property(thatLocator, "geometryMember", rhsGeometryMember), lhsGeometryMember, rhsGeometryMember, this.isSetGeometryMember(), that.isSetGeometryMember())) {
                 return false;
             }
         }
@@ -221,84 +244,101 @@ public class MultiGeometryType
             lhsGeometryMembers = this.getGeometryMembers();
             GeometryArrayPropertyType rhsGeometryMembers;
             rhsGeometryMembers = that.getGeometryMembers();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "geometryMembers", lhsGeometryMembers), LocatorUtils.property(thatLocator, "geometryMembers", rhsGeometryMembers), lhsGeometryMembers, rhsGeometryMembers)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "geometryMembers", lhsGeometryMembers), LocatorUtils.property(thatLocator, "geometryMembers", rhsGeometryMembers), lhsGeometryMembers, rhsGeometryMembers, this.isSetGeometryMembers(), that.isSetGeometryMembers())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<GeometryPropertyType> theGeometryMember;
-            theGeometryMember = this.getGeometryMember();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometryMember", theGeometryMember), currentHashCode, theGeometryMember);
+            theGeometryMember = (this.isSetGeometryMember()?this.getGeometryMember():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometryMember", theGeometryMember), currentHashCode, theGeometryMember, this.isSetGeometryMember());
         }
         {
             GeometryArrayPropertyType theGeometryMembers;
             theGeometryMembers = this.getGeometryMembers();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometryMembers", theGeometryMembers), currentHashCode, theGeometryMembers);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "geometryMembers", theGeometryMembers), currentHashCode, theGeometryMembers, this.isSetGeometryMembers());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof MultiGeometryType) {
             final MultiGeometryType copy = ((MultiGeometryType) draftCopy);
-            if (this.isSetGeometryMember()) {
-                List<GeometryPropertyType> sourceGeometryMember;
-                sourceGeometryMember = this.getGeometryMember();
-                @SuppressWarnings("unchecked")
-                List<GeometryPropertyType> copyGeometryMember = ((List<GeometryPropertyType> ) strategy.copy(LocatorUtils.property(locator, "geometryMember", sourceGeometryMember), sourceGeometryMember));
-                copy.unsetGeometryMember();
-                List<GeometryPropertyType> uniqueGeometryMemberl = copy.getGeometryMember();
-                uniqueGeometryMemberl.addAll(copyGeometryMember);
-            } else {
-                copy.unsetGeometryMember();
+            {
+                java.lang.Boolean geometryMemberShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGeometryMember());
+                if (geometryMemberShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<GeometryPropertyType> sourceGeometryMember;
+                    sourceGeometryMember = (this.isSetGeometryMember()?this.getGeometryMember():null);
+                    @SuppressWarnings("unchecked")
+                    List<GeometryPropertyType> copyGeometryMember = ((List<GeometryPropertyType> ) strategy.copy(LocatorUtils.property(locator, "geometryMember", sourceGeometryMember), sourceGeometryMember, this.isSetGeometryMember()));
+                    copy.setGeometryMember(copyGeometryMember);
+                } else {
+                    if (geometryMemberShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetGeometryMember();
+                    }
+                }
             }
-            if (this.isSetGeometryMembers()) {
-                GeometryArrayPropertyType sourceGeometryMembers;
-                sourceGeometryMembers = this.getGeometryMembers();
-                GeometryArrayPropertyType copyGeometryMembers = ((GeometryArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "geometryMembers", sourceGeometryMembers), sourceGeometryMembers));
-                copy.setGeometryMembers(copyGeometryMembers);
-            } else {
-                copy.geometryMembers = null;
+            {
+                java.lang.Boolean geometryMembersShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetGeometryMembers());
+                if (geometryMembersShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    GeometryArrayPropertyType sourceGeometryMembers;
+                    sourceGeometryMembers = this.getGeometryMembers();
+                    GeometryArrayPropertyType copyGeometryMembers = ((GeometryArrayPropertyType) strategy.copy(LocatorUtils.property(locator, "geometryMembers", sourceGeometryMembers), sourceGeometryMembers, this.isSetGeometryMembers()));
+                    copy.setGeometryMembers(copyGeometryMembers);
+                } else {
+                    if (geometryMembersShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.geometryMembers = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new MultiGeometryType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof MultiGeometryType) {
@@ -306,191 +346,36 @@ public class MultiGeometryType
             final MultiGeometryType leftObject = ((MultiGeometryType) left);
             final MultiGeometryType rightObject = ((MultiGeometryType) right);
             {
-                List<GeometryPropertyType> lhsGeometryMember;
-                lhsGeometryMember = leftObject.getGeometryMember();
-                List<GeometryPropertyType> rhsGeometryMember;
-                rhsGeometryMember = rightObject.getGeometryMember();
-                target.unsetGeometryMember();
-                List<GeometryPropertyType> uniqueGeometryMemberl = target.getGeometryMember();
-                uniqueGeometryMemberl.addAll(((List<GeometryPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "geometryMember", lhsGeometryMember), LocatorUtils.property(rightLocator, "geometryMember", rhsGeometryMember), lhsGeometryMember, rhsGeometryMember)));
+                java.lang.Boolean geometryMemberShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGeometryMember(), rightObject.isSetGeometryMember());
+                if (geometryMemberShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<GeometryPropertyType> lhsGeometryMember;
+                    lhsGeometryMember = (leftObject.isSetGeometryMember()?leftObject.getGeometryMember():null);
+                    List<GeometryPropertyType> rhsGeometryMember;
+                    rhsGeometryMember = (rightObject.isSetGeometryMember()?rightObject.getGeometryMember():null);
+                    List<GeometryPropertyType> mergedGeometryMember = ((List<GeometryPropertyType> ) strategy.merge(LocatorUtils.property(leftLocator, "geometryMember", lhsGeometryMember), LocatorUtils.property(rightLocator, "geometryMember", rhsGeometryMember), lhsGeometryMember, rhsGeometryMember, leftObject.isSetGeometryMember(), rightObject.isSetGeometryMember()));
+                    target.setGeometryMember(mergedGeometryMember);
+                } else {
+                    if (geometryMemberShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetGeometryMember();
+                    }
+                }
             }
             {
-                GeometryArrayPropertyType lhsGeometryMembers;
-                lhsGeometryMembers = leftObject.getGeometryMembers();
-                GeometryArrayPropertyType rhsGeometryMembers;
-                rhsGeometryMembers = rightObject.getGeometryMembers();
-                target.setGeometryMembers(((GeometryArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "geometryMembers", lhsGeometryMembers), LocatorUtils.property(rightLocator, "geometryMembers", rhsGeometryMembers), lhsGeometryMembers, rhsGeometryMembers)));
+                java.lang.Boolean geometryMembersShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetGeometryMembers(), rightObject.isSetGeometryMembers());
+                if (geometryMembersShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    GeometryArrayPropertyType lhsGeometryMembers;
+                    lhsGeometryMembers = leftObject.getGeometryMembers();
+                    GeometryArrayPropertyType rhsGeometryMembers;
+                    rhsGeometryMembers = rightObject.getGeometryMembers();
+                    GeometryArrayPropertyType mergedGeometryMembers = ((GeometryArrayPropertyType) strategy.merge(LocatorUtils.property(leftLocator, "geometryMembers", lhsGeometryMembers), LocatorUtils.property(rightLocator, "geometryMembers", rhsGeometryMembers), lhsGeometryMembers, rhsGeometryMembers, leftObject.isSetGeometryMembers(), rightObject.isSetGeometryMembers()));
+                    target.setGeometryMembers(mergedGeometryMembers);
+                } else {
+                    if (geometryMembersShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.geometryMembers = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setGeometryMember(List<GeometryPropertyType> value) {
-        List<GeometryPropertyType> draftl = this.getGeometryMember();
-        draftl.addAll(value);
-    }
-
-    public MultiGeometryType withGeometryMember(GeometryPropertyType... values) {
-        if (values!= null) {
-            for (GeometryPropertyType value: values) {
-                getGeometryMember().add(value);
-            }
-        }
-        return this;
-    }
-
-    public MultiGeometryType withGeometryMember(Collection<GeometryPropertyType> values) {
-        if (values!= null) {
-            getGeometryMember().addAll(values);
-        }
-        return this;
-    }
-
-    public MultiGeometryType withGeometryMembers(GeometryArrayPropertyType value) {
-        setGeometryMembers(value);
-        return this;
-    }
-
-    public MultiGeometryType withGeometryMember(List<GeometryPropertyType> value) {
-        setGeometryMember(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withSrsName(String value) {
-        setSrsName(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withSrsDimension(BigInteger value) {
-        setSrsDimension(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withAxisLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getAxisLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withAxisLabels(Collection<String> values) {
-        if (values!= null) {
-            getAxisLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withUomLabels(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getUomLabels().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withUomLabels(Collection<String> values) {
-        if (values!= null) {
-            getUomLabels().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withAxisLabels(List<String> value) {
-        setAxisLabels(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withUomLabels(List<String> value) {
-        setUomLabels(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public MultiGeometryType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

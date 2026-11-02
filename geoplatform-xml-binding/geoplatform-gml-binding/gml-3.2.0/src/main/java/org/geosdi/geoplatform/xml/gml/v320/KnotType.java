@@ -34,58 +34,57 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per KnotType complex type.
+ * <p>Classe Java per KnotType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="KnotType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="multiplicity" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger"/>
- *         &lt;element name="weight" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="KnotType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="value" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         <element name="multiplicity" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger"/>
+ *         <element name="weight" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -95,8 +94,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "multiplicity",
     "weight"
 })
-public class KnotType
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class KnotType implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     protected double value;
@@ -173,13 +171,15 @@ public class KnotType
         return true;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -187,27 +187,29 @@ public class KnotType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             double theValue;
             theValue = this.getValue();
-            strategy.appendField(locator, this, "value", buffer, theValue);
+            strategy.appendField(locator, this, "value", buffer, theValue, true);
         }
         {
             BigInteger theMultiplicity;
             theMultiplicity = this.getMultiplicity();
-            strategy.appendField(locator, this, "multiplicity", buffer, theMultiplicity);
+            strategy.appendField(locator, this, "multiplicity", buffer, theMultiplicity, this.isSetMultiplicity());
         }
         {
             double theWeight;
             theWeight = this.getWeight();
-            strategy.appendField(locator, this, "weight", buffer, theWeight);
+            strategy.appendField(locator, this, "weight", buffer, theWeight, true);
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof KnotType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -219,7 +221,7 @@ public class KnotType
             lhsValue = this.getValue();
             double rhsValue;
             rhsValue = that.getValue();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "value", lhsValue), LocatorUtils.property(thatLocator, "value", rhsValue), lhsValue, rhsValue, true, true)) {
                 return false;
             }
         }
@@ -228,7 +230,7 @@ public class KnotType
             lhsMultiplicity = this.getMultiplicity();
             BigInteger rhsMultiplicity;
             rhsMultiplicity = that.getMultiplicity();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "multiplicity", lhsMultiplicity), LocatorUtils.property(thatLocator, "multiplicity", rhsMultiplicity), lhsMultiplicity, rhsMultiplicity)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "multiplicity", lhsMultiplicity), LocatorUtils.property(thatLocator, "multiplicity", rhsMultiplicity), lhsMultiplicity, rhsMultiplicity, this.isSetMultiplicity(), that.isSetMultiplicity())) {
                 return false;
             }
         }
@@ -237,133 +239,164 @@ public class KnotType
             lhsWeight = this.getWeight();
             double rhsWeight;
             rhsWeight = that.getWeight();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "weight", lhsWeight), LocatorUtils.property(thatLocator, "weight", rhsWeight), lhsWeight, rhsWeight)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "weight", lhsWeight), LocatorUtils.property(thatLocator, "weight", rhsWeight), lhsWeight, rhsWeight, true, true)) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             double theValue;
             theValue = this.getValue();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "value", theValue), currentHashCode, theValue, true);
         }
         {
             BigInteger theMultiplicity;
             theMultiplicity = this.getMultiplicity();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "multiplicity", theMultiplicity), currentHashCode, theMultiplicity);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "multiplicity", theMultiplicity), currentHashCode, theMultiplicity, this.isSetMultiplicity());
         }
         {
             double theWeight;
             theWeight = this.getWeight();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "weight", theWeight), currentHashCode, theWeight);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "weight", theWeight), currentHashCode, theWeight, true);
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof KnotType) {
             final KnotType copy = ((KnotType) draftCopy);
-            if (this.isSetValue()) {
-                double sourceValue;
-                sourceValue = this.getValue();
-                double copyValue = strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue);
-                copy.setValue(copyValue);
-            } else {
+            {
+                java.lang.Boolean valueShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, true);
+                if (valueShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    double sourceValue;
+                    sourceValue = this.getValue();
+                    double copyValue = strategy.copy(LocatorUtils.property(locator, "value", sourceValue), sourceValue, true);
+                    copy.setValue(copyValue);
+                } else {
+                    if (valueShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
-            if (this.isSetMultiplicity()) {
-                BigInteger sourceMultiplicity;
-                sourceMultiplicity = this.getMultiplicity();
-                BigInteger copyMultiplicity = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "multiplicity", sourceMultiplicity), sourceMultiplicity));
-                copy.setMultiplicity(copyMultiplicity);
-            } else {
-                copy.multiplicity = null;
+            {
+                java.lang.Boolean multiplicityShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetMultiplicity());
+                if (multiplicityShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger sourceMultiplicity;
+                    sourceMultiplicity = this.getMultiplicity();
+                    BigInteger copyMultiplicity = ((BigInteger) strategy.copy(LocatorUtils.property(locator, "multiplicity", sourceMultiplicity), sourceMultiplicity, this.isSetMultiplicity()));
+                    copy.setMultiplicity(copyMultiplicity);
+                } else {
+                    if (multiplicityShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.multiplicity = null;
+                    }
+                }
             }
-            if (this.isSetWeight()) {
-                double sourceWeight;
-                sourceWeight = this.getWeight();
-                double copyWeight = strategy.copy(LocatorUtils.property(locator, "weight", sourceWeight), sourceWeight);
-                copy.setWeight(copyWeight);
-            } else {
+            {
+                java.lang.Boolean weightShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, true);
+                if (weightShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    double sourceWeight;
+                    sourceWeight = this.getWeight();
+                    double copyWeight = strategy.copy(LocatorUtils.property(locator, "weight", sourceWeight), sourceWeight, true);
+                    copy.setWeight(copyWeight);
+                } else {
+                    if (weightShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new KnotType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof KnotType) {
             final KnotType target = this;
             final KnotType leftObject = ((KnotType) left);
             final KnotType rightObject = ((KnotType) right);
             {
-                double lhsValue;
-                lhsValue = leftObject.getValue();
-                double rhsValue;
-                rhsValue = rightObject.getValue();
-                target.setValue(((double) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue)));
+                java.lang.Boolean valueShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, true, true);
+                if (valueShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    double lhsValue;
+                    lhsValue = leftObject.getValue();
+                    double rhsValue;
+                    rhsValue = rightObject.getValue();
+                    double mergedValue = ((double) strategy.merge(LocatorUtils.property(leftLocator, "value", lhsValue), LocatorUtils.property(rightLocator, "value", rhsValue), lhsValue, rhsValue, true, true));
+                    target.setValue(mergedValue);
+                } else {
+                    if (valueShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
             {
-                BigInteger lhsMultiplicity;
-                lhsMultiplicity = leftObject.getMultiplicity();
-                BigInteger rhsMultiplicity;
-                rhsMultiplicity = rightObject.getMultiplicity();
-                target.setMultiplicity(((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "multiplicity", lhsMultiplicity), LocatorUtils.property(rightLocator, "multiplicity", rhsMultiplicity), lhsMultiplicity, rhsMultiplicity)));
+                java.lang.Boolean multiplicityShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetMultiplicity(), rightObject.isSetMultiplicity());
+                if (multiplicityShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    BigInteger lhsMultiplicity;
+                    lhsMultiplicity = leftObject.getMultiplicity();
+                    BigInteger rhsMultiplicity;
+                    rhsMultiplicity = rightObject.getMultiplicity();
+                    BigInteger mergedMultiplicity = ((BigInteger) strategy.merge(LocatorUtils.property(leftLocator, "multiplicity", lhsMultiplicity), LocatorUtils.property(rightLocator, "multiplicity", rhsMultiplicity), lhsMultiplicity, rhsMultiplicity, leftObject.isSetMultiplicity(), rightObject.isSetMultiplicity()));
+                    target.setMultiplicity(mergedMultiplicity);
+                } else {
+                    if (multiplicityShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.multiplicity = null;
+                    }
+                }
             }
             {
-                double lhsWeight;
-                lhsWeight = leftObject.getWeight();
-                double rhsWeight;
-                rhsWeight = rightObject.getWeight();
-                target.setWeight(((double) strategy.merge(LocatorUtils.property(leftLocator, "weight", lhsWeight), LocatorUtils.property(rightLocator, "weight", rhsWeight), lhsWeight, rhsWeight)));
+                java.lang.Boolean weightShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, true, true);
+                if (weightShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    double lhsWeight;
+                    lhsWeight = leftObject.getWeight();
+                    double rhsWeight;
+                    rhsWeight = rightObject.getWeight();
+                    double mergedWeight = ((double) strategy.merge(LocatorUtils.property(leftLocator, "weight", lhsWeight), LocatorUtils.property(rightLocator, "weight", rhsWeight), lhsWeight, rhsWeight, true, true));
+                    target.setWeight(mergedWeight);
+                } else {
+                    if (weightShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                    }
+                }
             }
         }
-    }
-
-    public KnotType withValue(double value) {
-        setValue(value);
-        return this;
-    }
-
-    public KnotType withMultiplicity(BigInteger value) {
-        setMultiplicity(value);
-        return this;
-    }
-
-    public KnotType withWeight(double value) {
-        setWeight(value);
-        return this;
     }
 
 }

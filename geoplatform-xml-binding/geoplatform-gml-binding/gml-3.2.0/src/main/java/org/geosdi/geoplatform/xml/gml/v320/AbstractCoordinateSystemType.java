@@ -34,61 +34,59 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AbstractCoordinateSystemType complex type.
+ * <p>Classe Java per AbstractCoordinateSystemType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractCoordinateSystemType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}axis" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractCoordinateSystemType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}axis" maxOccurs="unbounded"/>
+ *       </sequence>
+ *       <attGroup ref="{http://www.opengis.net/gml}AggregationAttributeGroup"/>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -97,42 +95,48 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "axis"
 })
 @XmlSeeAlso({
-    TimeCSType.class,
-    ObliqueCartesianCSType.class,
-    VerticalCSType.class,
-    LinearCSType.class,
-    SphericalCSType.class,
     EllipsoidalCSType.class,
     CartesianCSType.class,
+    VerticalCSType.class,
+    TimeCSType.class,
+    TemporalCSType.class,
+    LinearCSType.class,
+    UserDefinedCSType.class,
+    SphericalCSType.class,
+    PolarCSType.class,
     CylindricalCSType.class,
     AffineCSType.class,
-    TemporalCSType.class,
-    UserDefinedCSType.class,
-    PolarCSType.class
+    ObliqueCartesianCSType.class
 })
 public abstract class AbstractCoordinateSystemType
     extends IdentifiedObjectType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The gml:axis property is an association role (ordered sequence) to the coordinate system axes included in this coordinate system. The coordinate values in a coordinate tuple shall be recorded in the order in which the coordinate system axes associations are recorded, whenever those coordinates use a coordinate reference system that uses this coordinate system. The gml:AggregationAttributeGroup should be used to specify that the axis objects are ordered.
+     * 
+     */
     @XmlElementRef(name = "axis", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
     protected List<JAXBElement<CoordinateSystemAxisPropertyType>> axis;
     @XmlAttribute(name = "aggregationType")
     protected AggregationType aggregationType;
 
     /**
+     * The gml:axis property is an association role (ordered sequence) to the coordinate system axes included in this coordinate system. The coordinate values in a coordinate tuple shall be recorded in the order in which the coordinate system axes associations are recorded, whenever those coordinates use a coordinate reference system that uses this coordinate system. The gml:AggregationAttributeGroup should be used to specify that the axis objects are ordered.
+     * 
      * Gets the value of the axis property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the axis property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the axis property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getAxis().add(newItem);
+     * getAxis().add(newItem);
      * </pre>
      * 
      * 
@@ -140,12 +144,15 @@ public abstract class AbstractCoordinateSystemType
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link CoordinateSystemAxisPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link CoordinateSystemAxisPropertyType }{@code >}
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the axis property.
      */
     public List<JAXBElement<CoordinateSystemAxisPropertyType>> getAxis() {
         if (axis == null) {
-            axis = new ArrayList<JAXBElement<CoordinateSystemAxisPropertyType>>();
+            axis = new ArrayList<>();
         }
         return this.axis;
     }
@@ -186,13 +193,15 @@ public abstract class AbstractCoordinateSystemType
         return (this.aggregationType!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -200,23 +209,33 @@ public abstract class AbstractCoordinateSystemType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<JAXBElement<CoordinateSystemAxisPropertyType>> theAxis;
-            theAxis = this.getAxis();
-            strategy.appendField(locator, this, "axis", buffer, theAxis);
+            theAxis = (this.isSetAxis()?this.getAxis():null);
+            strategy.appendField(locator, this, "axis", buffer, theAxis, this.isSetAxis());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType);
+            strategy.appendField(locator, this, "aggregationType", buffer, theAggregationType, this.isSetAggregationType());
         }
         return buffer;
     }
 
+    public void setAxis(List<JAXBElement<CoordinateSystemAxisPropertyType>> value) {
+        this.axis = null;
+        if (value!= null) {
+            List<JAXBElement<CoordinateSystemAxisPropertyType>> draftl = this.getAxis();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractCoordinateSystemType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -228,10 +247,10 @@ public abstract class AbstractCoordinateSystemType
         final AbstractCoordinateSystemType that = ((AbstractCoordinateSystemType) object);
         {
             List<JAXBElement<CoordinateSystemAxisPropertyType>> lhsAxis;
-            lhsAxis = this.getAxis();
+            lhsAxis = (this.isSetAxis()?this.getAxis():null);
             List<JAXBElement<CoordinateSystemAxisPropertyType>> rhsAxis;
-            rhsAxis = that.getAxis();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "axis", lhsAxis), LocatorUtils.property(thatLocator, "axis", rhsAxis), lhsAxis, rhsAxis)) {
+            rhsAxis = (that.isSetAxis()?that.getAxis():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "axis", lhsAxis), LocatorUtils.property(thatLocator, "axis", rhsAxis), lhsAxis, rhsAxis, this.isSetAxis(), that.isSetAxis())) {
                 return false;
             }
         }
@@ -240,47 +259,53 @@ public abstract class AbstractCoordinateSystemType
             lhsAggregationType = this.getAggregationType();
             AggregationType rhsAggregationType;
             rhsAggregationType = that.getAggregationType();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(thatLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, this.isSetAggregationType(), that.isSetAggregationType())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<JAXBElement<CoordinateSystemAxisPropertyType>> theAxis;
-            theAxis = this.getAxis();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axis", theAxis), currentHashCode, theAxis);
+            theAxis = (this.isSetAxis()?this.getAxis():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "axis", theAxis), currentHashCode, theAxis, this.isSetAxis());
         }
         {
             AggregationType theAggregationType;
             theAggregationType = this.getAggregationType();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "aggregationType", theAggregationType), currentHashCode, theAggregationType, this.isSetAggregationType());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -288,34 +313,44 @@ public abstract class AbstractCoordinateSystemType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractCoordinateSystemType) {
             final AbstractCoordinateSystemType copy = ((AbstractCoordinateSystemType) target);
-            if (this.isSetAxis()) {
-                List<JAXBElement<CoordinateSystemAxisPropertyType>> sourceAxis;
-                sourceAxis = this.getAxis();
-                @SuppressWarnings("unchecked")
-                List<JAXBElement<CoordinateSystemAxisPropertyType>> copyAxis = ((List<JAXBElement<CoordinateSystemAxisPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "axis", sourceAxis), sourceAxis));
-                copy.unsetAxis();
-                List<JAXBElement<CoordinateSystemAxisPropertyType>> uniqueAxisl = copy.getAxis();
-                uniqueAxisl.addAll(copyAxis);
-            } else {
-                copy.unsetAxis();
+            {
+                java.lang.Boolean axisShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAxis());
+                if (axisShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<CoordinateSystemAxisPropertyType>> sourceAxis;
+                    sourceAxis = (this.isSetAxis()?this.getAxis():null);
+                    @SuppressWarnings("unchecked")
+                    List<JAXBElement<CoordinateSystemAxisPropertyType>> copyAxis = ((List<JAXBElement<CoordinateSystemAxisPropertyType>> ) strategy.copy(LocatorUtils.property(locator, "axis", sourceAxis), sourceAxis, this.isSetAxis()));
+                    copy.setAxis(copyAxis);
+                } else {
+                    if (axisShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetAxis();
+                    }
+                }
             }
-            if (this.isSetAggregationType()) {
-                AggregationType sourceAggregationType;
-                sourceAggregationType = this.getAggregationType();
-                AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType));
-                copy.setAggregationType(copyAggregationType);
-            } else {
-                copy.aggregationType = null;
+            {
+                java.lang.Boolean aggregationTypeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAggregationType());
+                if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType sourceAggregationType;
+                    sourceAggregationType = this.getAggregationType();
+                    AggregationType copyAggregationType = ((AggregationType) strategy.copy(LocatorUtils.property(locator, "aggregationType", sourceAggregationType), sourceAggregationType, this.isSetAggregationType()));
+                    copy.setAggregationType(copyAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.aggregationType = null;
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractCoordinateSystemType) {
@@ -323,131 +358,36 @@ public abstract class AbstractCoordinateSystemType
             final AbstractCoordinateSystemType leftObject = ((AbstractCoordinateSystemType) left);
             final AbstractCoordinateSystemType rightObject = ((AbstractCoordinateSystemType) right);
             {
-                List<JAXBElement<CoordinateSystemAxisPropertyType>> lhsAxis;
-                lhsAxis = leftObject.getAxis();
-                List<JAXBElement<CoordinateSystemAxisPropertyType>> rhsAxis;
-                rhsAxis = rightObject.getAxis();
-                target.unsetAxis();
-                List<JAXBElement<CoordinateSystemAxisPropertyType>> uniqueAxisl = target.getAxis();
-                uniqueAxisl.addAll(((List<JAXBElement<CoordinateSystemAxisPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "axis", lhsAxis), LocatorUtils.property(rightLocator, "axis", rhsAxis), lhsAxis, rhsAxis)));
+                java.lang.Boolean axisShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAxis(), rightObject.isSetAxis());
+                if (axisShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<JAXBElement<CoordinateSystemAxisPropertyType>> lhsAxis;
+                    lhsAxis = (leftObject.isSetAxis()?leftObject.getAxis():null);
+                    List<JAXBElement<CoordinateSystemAxisPropertyType>> rhsAxis;
+                    rhsAxis = (rightObject.isSetAxis()?rightObject.getAxis():null);
+                    List<JAXBElement<CoordinateSystemAxisPropertyType>> mergedAxis = ((List<JAXBElement<CoordinateSystemAxisPropertyType>> ) strategy.merge(LocatorUtils.property(leftLocator, "axis", lhsAxis), LocatorUtils.property(rightLocator, "axis", rhsAxis), lhsAxis, rhsAxis, leftObject.isSetAxis(), rightObject.isSetAxis()));
+                    target.setAxis(mergedAxis);
+                } else {
+                    if (axisShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetAxis();
+                    }
+                }
             }
             {
-                AggregationType lhsAggregationType;
-                lhsAggregationType = leftObject.getAggregationType();
-                AggregationType rhsAggregationType;
-                rhsAggregationType = rightObject.getAggregationType();
-                target.setAggregationType(((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType)));
+                java.lang.Boolean aggregationTypeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAggregationType(), rightObject.isSetAggregationType());
+                if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    AggregationType lhsAggregationType;
+                    lhsAggregationType = leftObject.getAggregationType();
+                    AggregationType rhsAggregationType;
+                    rhsAggregationType = rightObject.getAggregationType();
+                    AggregationType mergedAggregationType = ((AggregationType) strategy.merge(LocatorUtils.property(leftLocator, "aggregationType", lhsAggregationType), LocatorUtils.property(rightLocator, "aggregationType", rhsAggregationType), lhsAggregationType, rhsAggregationType, leftObject.isSetAggregationType(), rightObject.isSetAggregationType()));
+                    target.setAggregationType(mergedAggregationType);
+                } else {
+                    if (aggregationTypeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.aggregationType = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setAxis(List<JAXBElement<CoordinateSystemAxisPropertyType>> value) {
-        List<JAXBElement<CoordinateSystemAxisPropertyType>> draftl = this.getAxis();
-        draftl.addAll(value);
-    }
-
-    public AbstractCoordinateSystemType withAxis(JAXBElement<CoordinateSystemAxisPropertyType> ... values) {
-        if (values!= null) {
-            for (JAXBElement<CoordinateSystemAxisPropertyType> value: values) {
-                getAxis().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AbstractCoordinateSystemType withAxis(Collection<JAXBElement<CoordinateSystemAxisPropertyType>> values) {
-        if (values!= null) {
-            getAxis().addAll(values);
-        }
-        return this;
-    }
-
-    public AbstractCoordinateSystemType withAggregationType(AggregationType value) {
-        setAggregationType(value);
-        return this;
-    }
-
-    public AbstractCoordinateSystemType withAxis(List<JAXBElement<CoordinateSystemAxisPropertyType>> value) {
-        setAxis(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public AbstractCoordinateSystemType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

@@ -34,37 +34,36 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
@@ -72,23 +71,23 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  * The inverseFlattening element contains the inverse flattening value of the ellipsoid. This value is a scale factor (or ratio). It uses gml:LengthType with the restriction that the unit of measure referenced by the uom attribute must be suitable for a scale factor, such as percent, permil, or parts-per-million.
  * The semiMinorAxis element contains the length of the semi-minor axis of the ellipsoid. When the isSphere element is included, the ellipsoid is degenerate and is actually a sphere. The sphere is completely defined by the semi-major axis, which is the radius of the sphere.
  * 
- * <p>Classe Java per secondDefiningParameter element declaration.
+ * <p>Classe Java per secondDefiningParameter element declaration.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;element name="secondDefiningParameter">
- *   &lt;complexType>
- *     &lt;complexContent>
- *       &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *         &lt;sequence>
- *           &lt;element ref="{http://www.opengis.net/gml}SecondDefiningParameter"/>
- *         &lt;/sequence>
- *       &lt;/restriction>
- *     &lt;/complexContent>
- *   &lt;/complexType>
- * &lt;/element>
- * </pre>
+ * <pre>{@code
+ * <element name="secondDefiningParameter">
+ *   <complexType>
+ *     <complexContent>
+ *       <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *         <sequence>
+ *           <element ref="{http://www.opengis.net/gml}SecondDefiningParameter"/>
+ *         </sequence>
+ *       </restriction>
+ *     </complexContent>
+ *   </complexType>
+ * </element>
+ * }</pre>
  * 
  * 
  */
@@ -97,8 +96,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "secondDefiningParameter"
 })
 @XmlRootElement(name = "secondDefiningParameter")
-public class SecondDefiningParameterPropertyElement
-    implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
+public class SecondDefiningParameterPropertyElement implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
     @XmlElement(name = "SecondDefiningParameter", required = true)
@@ -132,13 +130,15 @@ public class SecondDefiningParameterPropertyElement
         return (this.secondDefiningParameter!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -146,17 +146,19 @@ public class SecondDefiningParameterPropertyElement
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             SecondDefiningParameterElement theSecondDefiningParameter;
             theSecondDefiningParameter = this.getSecondDefiningParameter();
-            strategy.appendField(locator, this, "secondDefiningParameter", buffer, theSecondDefiningParameter);
+            strategy.appendField(locator, this, "secondDefiningParameter", buffer, theSecondDefiningParameter, this.isSetSecondDefiningParameter());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof SecondDefiningParameterPropertyElement)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -168,85 +170,102 @@ public class SecondDefiningParameterPropertyElement
             lhsSecondDefiningParameter = this.getSecondDefiningParameter();
             SecondDefiningParameterElement rhsSecondDefiningParameter;
             rhsSecondDefiningParameter = that.getSecondDefiningParameter();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(thatLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(thatLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter, this.isSetSecondDefiningParameter(), that.isSetSecondDefiningParameter())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = 1;
         {
             SecondDefiningParameterElement theSecondDefiningParameter;
             theSecondDefiningParameter = this.getSecondDefiningParameter();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "secondDefiningParameter", theSecondDefiningParameter), currentHashCode, theSecondDefiningParameter);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "secondDefiningParameter", theSecondDefiningParameter), currentHashCode, theSecondDefiningParameter, this.isSetSecondDefiningParameter());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         if (draftCopy instanceof SecondDefiningParameterPropertyElement) {
             final SecondDefiningParameterPropertyElement copy = ((SecondDefiningParameterPropertyElement) draftCopy);
-            if (this.isSetSecondDefiningParameter()) {
-                SecondDefiningParameterElement sourceSecondDefiningParameter;
-                sourceSecondDefiningParameter = this.getSecondDefiningParameter();
-                SecondDefiningParameterElement copySecondDefiningParameter = ((SecondDefiningParameterElement) strategy.copy(LocatorUtils.property(locator, "secondDefiningParameter", sourceSecondDefiningParameter), sourceSecondDefiningParameter));
-                copy.setSecondDefiningParameter(copySecondDefiningParameter);
-            } else {
-                copy.secondDefiningParameter = null;
+            {
+                java.lang.Boolean secondDefiningParameterShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSecondDefiningParameter());
+                if (secondDefiningParameterShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    SecondDefiningParameterElement sourceSecondDefiningParameter;
+                    sourceSecondDefiningParameter = this.getSecondDefiningParameter();
+                    SecondDefiningParameterElement copySecondDefiningParameter = ((SecondDefiningParameterElement) strategy.copy(LocatorUtils.property(locator, "secondDefiningParameter", sourceSecondDefiningParameter), sourceSecondDefiningParameter, this.isSetSecondDefiningParameter()));
+                    copy.setSecondDefiningParameter(copySecondDefiningParameter);
+                } else {
+                    if (secondDefiningParameterShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.secondDefiningParameter = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new SecondDefiningParameterPropertyElement();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         if (right instanceof SecondDefiningParameterPropertyElement) {
             final SecondDefiningParameterPropertyElement target = this;
             final SecondDefiningParameterPropertyElement leftObject = ((SecondDefiningParameterPropertyElement) left);
             final SecondDefiningParameterPropertyElement rightObject = ((SecondDefiningParameterPropertyElement) right);
             {
-                SecondDefiningParameterElement lhsSecondDefiningParameter;
-                lhsSecondDefiningParameter = leftObject.getSecondDefiningParameter();
-                SecondDefiningParameterElement rhsSecondDefiningParameter;
-                rhsSecondDefiningParameter = rightObject.getSecondDefiningParameter();
-                target.setSecondDefiningParameter(((SecondDefiningParameterElement) strategy.merge(LocatorUtils.property(leftLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(rightLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter)));
+                java.lang.Boolean secondDefiningParameterShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSecondDefiningParameter(), rightObject.isSetSecondDefiningParameter());
+                if (secondDefiningParameterShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    SecondDefiningParameterElement lhsSecondDefiningParameter;
+                    lhsSecondDefiningParameter = leftObject.getSecondDefiningParameter();
+                    SecondDefiningParameterElement rhsSecondDefiningParameter;
+                    rhsSecondDefiningParameter = rightObject.getSecondDefiningParameter();
+                    SecondDefiningParameterElement mergedSecondDefiningParameter = ((SecondDefiningParameterElement) strategy.merge(LocatorUtils.property(leftLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(rightLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter, leftObject.isSetSecondDefiningParameter(), rightObject.isSetSecondDefiningParameter()));
+                    target.setSecondDefiningParameter(mergedSecondDefiningParameter);
+                } else {
+                    if (secondDefiningParameterShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.secondDefiningParameter = null;
+                    }
+                }
             }
         }
-    }
-
-    public SecondDefiningParameterPropertyElement withSecondDefiningParameter(SecondDefiningParameterElement value) {
-        setSecondDefiningParameter(value);
-        return this;
     }
 
 }

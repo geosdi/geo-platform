@@ -34,60 +34,58 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per ConventionalUnitType complex type.
+ * <p>Classe Java per ConventionalUnitType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="ConventionalUnitType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}UnitDefinitionType">
- *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.opengis.net/gml}conversionToPreferredUnit"/>
- *           &lt;element ref="{http://www.opengis.net/gml}roughConversionToPreferredUnit"/>
- *         &lt;/choice>
- *         &lt;element ref="{http://www.opengis.net/gml}derivationUnitTerm" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="ConventionalUnitType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}UnitDefinitionType">
+ *       <sequence>
+ *         <choice>
+ *           <element ref="{http://www.opengis.net/gml}conversionToPreferredUnit"/>
+ *           <element ref="{http://www.opengis.net/gml}roughConversionToPreferredUnit"/>
+ *         </choice>
+ *         <element ref="{http://www.opengis.net/gml}derivationUnitTerm" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -102,12 +100,25 @@ public class ConventionalUnitType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The elements gml:conversionToPreferredUnit and gml:roughConversionToPreferredUnit represent parameters used to convert conventional units to preferred units for this physical quantity type.  A preferred unit is either a Base Unit or a Derived Unit that is selected for all values of one physical quantity type.
+     * 
+     */
     protected ConversionToPreferredUnitType conversionToPreferredUnit;
+    /**
+     * The elements gml:conversionToPreferredUnit and gml:roughConversionToPreferredUnit represent parameters used to convert conventional units to preferred units for this physical quantity type.  A preferred unit is either a Base Unit or a Derived Unit that is selected for all values of one physical quantity type.
+     * 
+     */
     protected ConversionToPreferredUnitType roughConversionToPreferredUnit;
+    /**
+     * A set of gml:derivationUnitTerm elements describes a derived unit of measure.  Each element carries an integer exponent.  The terms are combined by raising each referenced unit to the power of its exponent and forming the product.
+     * This unit term references another unit of measure (uom) and provides an integer exponent applied to that unit in defining the compound unit. The exponent may be positive or negative, but not zero.
+     * 
+     */
     protected List<DerivationUnitTermType> derivationUnitTerm;
 
     /**
-     * Recupera il valore della proprietà conversionToPreferredUnit.
+     * The elements gml:conversionToPreferredUnit and gml:roughConversionToPreferredUnit represent parameters used to convert conventional units to preferred units for this physical quantity type.  A preferred unit is either a Base Unit or a Derived Unit that is selected for all values of one physical quantity type.
      * 
      * @return
      *     possible object is
@@ -125,6 +136,7 @@ public class ConventionalUnitType
      *     allowed object is
      *     {@link ConversionToPreferredUnitType }
      *     
+     * @see #getConversionToPreferredUnit()
      */
     public void setConversionToPreferredUnit(ConversionToPreferredUnitType value) {
         this.conversionToPreferredUnit = value;
@@ -135,7 +147,7 @@ public class ConventionalUnitType
     }
 
     /**
-     * Recupera il valore della proprietà roughConversionToPreferredUnit.
+     * The elements gml:conversionToPreferredUnit and gml:roughConversionToPreferredUnit represent parameters used to convert conventional units to preferred units for this physical quantity type.  A preferred unit is either a Base Unit or a Derived Unit that is selected for all values of one physical quantity type.
      * 
      * @return
      *     possible object is
@@ -153,6 +165,7 @@ public class ConventionalUnitType
      *     allowed object is
      *     {@link ConversionToPreferredUnitType }
      *     
+     * @see #getRoughConversionToPreferredUnit()
      */
     public void setRoughConversionToPreferredUnit(ConversionToPreferredUnitType value) {
         this.roughConversionToPreferredUnit = value;
@@ -163,30 +176,36 @@ public class ConventionalUnitType
     }
 
     /**
+     * A set of gml:derivationUnitTerm elements describes a derived unit of measure.  Each element carries an integer exponent.  The terms are combined by raising each referenced unit to the power of its exponent and forming the product.
+     * This unit term references another unit of measure (uom) and provides an integer exponent applied to that unit in defining the compound unit. The exponent may be positive or negative, but not zero.
+     * 
      * Gets the value of the derivationUnitTerm property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the derivationUnitTerm property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the derivationUnitTerm property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDerivationUnitTerm().add(newItem);
+     * getDerivationUnitTerm().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DerivationUnitTermType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the derivationUnitTerm property.
      */
     public List<DerivationUnitTermType> getDerivationUnitTerm() {
         if (derivationUnitTerm == null) {
-            derivationUnitTerm = new ArrayList<DerivationUnitTermType>();
+            derivationUnitTerm = new ArrayList<>();
         }
         return this.derivationUnitTerm;
     }
@@ -199,13 +218,15 @@ public class ConventionalUnitType
         this.derivationUnitTerm = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -213,28 +234,38 @@ public class ConventionalUnitType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             ConversionToPreferredUnitType theConversionToPreferredUnit;
             theConversionToPreferredUnit = this.getConversionToPreferredUnit();
-            strategy.appendField(locator, this, "conversionToPreferredUnit", buffer, theConversionToPreferredUnit);
+            strategy.appendField(locator, this, "conversionToPreferredUnit", buffer, theConversionToPreferredUnit, this.isSetConversionToPreferredUnit());
         }
         {
             ConversionToPreferredUnitType theRoughConversionToPreferredUnit;
             theRoughConversionToPreferredUnit = this.getRoughConversionToPreferredUnit();
-            strategy.appendField(locator, this, "roughConversionToPreferredUnit", buffer, theRoughConversionToPreferredUnit);
+            strategy.appendField(locator, this, "roughConversionToPreferredUnit", buffer, theRoughConversionToPreferredUnit, this.isSetRoughConversionToPreferredUnit());
         }
         {
             List<DerivationUnitTermType> theDerivationUnitTerm;
-            theDerivationUnitTerm = this.getDerivationUnitTerm();
-            strategy.appendField(locator, this, "derivationUnitTerm", buffer, theDerivationUnitTerm);
+            theDerivationUnitTerm = (this.isSetDerivationUnitTerm()?this.getDerivationUnitTerm():null);
+            strategy.appendField(locator, this, "derivationUnitTerm", buffer, theDerivationUnitTerm, this.isSetDerivationUnitTerm());
         }
         return buffer;
     }
 
+    public void setDerivationUnitTerm(List<DerivationUnitTermType> value) {
+        this.derivationUnitTerm = null;
+        if (value!= null) {
+            List<DerivationUnitTermType> draftl = this.getDerivationUnitTerm();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof ConventionalUnitType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -249,7 +280,7 @@ public class ConventionalUnitType
             lhsConversionToPreferredUnit = this.getConversionToPreferredUnit();
             ConversionToPreferredUnitType rhsConversionToPreferredUnit;
             rhsConversionToPreferredUnit = that.getConversionToPreferredUnit();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "conversionToPreferredUnit", lhsConversionToPreferredUnit), LocatorUtils.property(thatLocator, "conversionToPreferredUnit", rhsConversionToPreferredUnit), lhsConversionToPreferredUnit, rhsConversionToPreferredUnit)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "conversionToPreferredUnit", lhsConversionToPreferredUnit), LocatorUtils.property(thatLocator, "conversionToPreferredUnit", rhsConversionToPreferredUnit), lhsConversionToPreferredUnit, rhsConversionToPreferredUnit, this.isSetConversionToPreferredUnit(), that.isSetConversionToPreferredUnit())) {
                 return false;
             }
         }
@@ -258,106 +289,128 @@ public class ConventionalUnitType
             lhsRoughConversionToPreferredUnit = this.getRoughConversionToPreferredUnit();
             ConversionToPreferredUnitType rhsRoughConversionToPreferredUnit;
             rhsRoughConversionToPreferredUnit = that.getRoughConversionToPreferredUnit();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "roughConversionToPreferredUnit", lhsRoughConversionToPreferredUnit), LocatorUtils.property(thatLocator, "roughConversionToPreferredUnit", rhsRoughConversionToPreferredUnit), lhsRoughConversionToPreferredUnit, rhsRoughConversionToPreferredUnit)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "roughConversionToPreferredUnit", lhsRoughConversionToPreferredUnit), LocatorUtils.property(thatLocator, "roughConversionToPreferredUnit", rhsRoughConversionToPreferredUnit), lhsRoughConversionToPreferredUnit, rhsRoughConversionToPreferredUnit, this.isSetRoughConversionToPreferredUnit(), that.isSetRoughConversionToPreferredUnit())) {
                 return false;
             }
         }
         {
             List<DerivationUnitTermType> lhsDerivationUnitTerm;
-            lhsDerivationUnitTerm = this.getDerivationUnitTerm();
+            lhsDerivationUnitTerm = (this.isSetDerivationUnitTerm()?this.getDerivationUnitTerm():null);
             List<DerivationUnitTermType> rhsDerivationUnitTerm;
-            rhsDerivationUnitTerm = that.getDerivationUnitTerm();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "derivationUnitTerm", lhsDerivationUnitTerm), LocatorUtils.property(thatLocator, "derivationUnitTerm", rhsDerivationUnitTerm), lhsDerivationUnitTerm, rhsDerivationUnitTerm)) {
+            rhsDerivationUnitTerm = (that.isSetDerivationUnitTerm()?that.getDerivationUnitTerm():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "derivationUnitTerm", lhsDerivationUnitTerm), LocatorUtils.property(thatLocator, "derivationUnitTerm", rhsDerivationUnitTerm), lhsDerivationUnitTerm, rhsDerivationUnitTerm, this.isSetDerivationUnitTerm(), that.isSetDerivationUnitTerm())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             ConversionToPreferredUnitType theConversionToPreferredUnit;
             theConversionToPreferredUnit = this.getConversionToPreferredUnit();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "conversionToPreferredUnit", theConversionToPreferredUnit), currentHashCode, theConversionToPreferredUnit);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "conversionToPreferredUnit", theConversionToPreferredUnit), currentHashCode, theConversionToPreferredUnit, this.isSetConversionToPreferredUnit());
         }
         {
             ConversionToPreferredUnitType theRoughConversionToPreferredUnit;
             theRoughConversionToPreferredUnit = this.getRoughConversionToPreferredUnit();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "roughConversionToPreferredUnit", theRoughConversionToPreferredUnit), currentHashCode, theRoughConversionToPreferredUnit);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "roughConversionToPreferredUnit", theRoughConversionToPreferredUnit), currentHashCode, theRoughConversionToPreferredUnit, this.isSetRoughConversionToPreferredUnit());
         }
         {
             List<DerivationUnitTermType> theDerivationUnitTerm;
-            theDerivationUnitTerm = this.getDerivationUnitTerm();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "derivationUnitTerm", theDerivationUnitTerm), currentHashCode, theDerivationUnitTerm);
+            theDerivationUnitTerm = (this.isSetDerivationUnitTerm()?this.getDerivationUnitTerm():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "derivationUnitTerm", theDerivationUnitTerm), currentHashCode, theDerivationUnitTerm, this.isSetDerivationUnitTerm());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof ConventionalUnitType) {
             final ConventionalUnitType copy = ((ConventionalUnitType) draftCopy);
-            if (this.isSetConversionToPreferredUnit()) {
-                ConversionToPreferredUnitType sourceConversionToPreferredUnit;
-                sourceConversionToPreferredUnit = this.getConversionToPreferredUnit();
-                ConversionToPreferredUnitType copyConversionToPreferredUnit = ((ConversionToPreferredUnitType) strategy.copy(LocatorUtils.property(locator, "conversionToPreferredUnit", sourceConversionToPreferredUnit), sourceConversionToPreferredUnit));
-                copy.setConversionToPreferredUnit(copyConversionToPreferredUnit);
-            } else {
-                copy.conversionToPreferredUnit = null;
+            {
+                java.lang.Boolean conversionToPreferredUnitShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetConversionToPreferredUnit());
+                if (conversionToPreferredUnitShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ConversionToPreferredUnitType sourceConversionToPreferredUnit;
+                    sourceConversionToPreferredUnit = this.getConversionToPreferredUnit();
+                    ConversionToPreferredUnitType copyConversionToPreferredUnit = ((ConversionToPreferredUnitType) strategy.copy(LocatorUtils.property(locator, "conversionToPreferredUnit", sourceConversionToPreferredUnit), sourceConversionToPreferredUnit, this.isSetConversionToPreferredUnit()));
+                    copy.setConversionToPreferredUnit(copyConversionToPreferredUnit);
+                } else {
+                    if (conversionToPreferredUnitShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.conversionToPreferredUnit = null;
+                    }
+                }
             }
-            if (this.isSetRoughConversionToPreferredUnit()) {
-                ConversionToPreferredUnitType sourceRoughConversionToPreferredUnit;
-                sourceRoughConversionToPreferredUnit = this.getRoughConversionToPreferredUnit();
-                ConversionToPreferredUnitType copyRoughConversionToPreferredUnit = ((ConversionToPreferredUnitType) strategy.copy(LocatorUtils.property(locator, "roughConversionToPreferredUnit", sourceRoughConversionToPreferredUnit), sourceRoughConversionToPreferredUnit));
-                copy.setRoughConversionToPreferredUnit(copyRoughConversionToPreferredUnit);
-            } else {
-                copy.roughConversionToPreferredUnit = null;
+            {
+                java.lang.Boolean roughConversionToPreferredUnitShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRoughConversionToPreferredUnit());
+                if (roughConversionToPreferredUnitShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    ConversionToPreferredUnitType sourceRoughConversionToPreferredUnit;
+                    sourceRoughConversionToPreferredUnit = this.getRoughConversionToPreferredUnit();
+                    ConversionToPreferredUnitType copyRoughConversionToPreferredUnit = ((ConversionToPreferredUnitType) strategy.copy(LocatorUtils.property(locator, "roughConversionToPreferredUnit", sourceRoughConversionToPreferredUnit), sourceRoughConversionToPreferredUnit, this.isSetRoughConversionToPreferredUnit()));
+                    copy.setRoughConversionToPreferredUnit(copyRoughConversionToPreferredUnit);
+                } else {
+                    if (roughConversionToPreferredUnitShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.roughConversionToPreferredUnit = null;
+                    }
+                }
             }
-            if (this.isSetDerivationUnitTerm()) {
-                List<DerivationUnitTermType> sourceDerivationUnitTerm;
-                sourceDerivationUnitTerm = this.getDerivationUnitTerm();
-                @SuppressWarnings("unchecked")
-                List<DerivationUnitTermType> copyDerivationUnitTerm = ((List<DerivationUnitTermType> ) strategy.copy(LocatorUtils.property(locator, "derivationUnitTerm", sourceDerivationUnitTerm), sourceDerivationUnitTerm));
-                copy.unsetDerivationUnitTerm();
-                List<DerivationUnitTermType> uniqueDerivationUnitTerml = copy.getDerivationUnitTerm();
-                uniqueDerivationUnitTerml.addAll(copyDerivationUnitTerm);
-            } else {
-                copy.unsetDerivationUnitTerm();
+            {
+                java.lang.Boolean derivationUnitTermShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDerivationUnitTerm());
+                if (derivationUnitTermShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<DerivationUnitTermType> sourceDerivationUnitTerm;
+                    sourceDerivationUnitTerm = (this.isSetDerivationUnitTerm()?this.getDerivationUnitTerm():null);
+                    @SuppressWarnings("unchecked")
+                    List<DerivationUnitTermType> copyDerivationUnitTerm = ((List<DerivationUnitTermType> ) strategy.copy(LocatorUtils.property(locator, "derivationUnitTerm", sourceDerivationUnitTerm), sourceDerivationUnitTerm, this.isSetDerivationUnitTerm()));
+                    copy.setDerivationUnitTerm(copyDerivationUnitTerm);
+                } else {
+                    if (derivationUnitTermShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetDerivationUnitTerm();
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new ConventionalUnitType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof ConventionalUnitType) {
@@ -365,161 +418,51 @@ public class ConventionalUnitType
             final ConventionalUnitType leftObject = ((ConventionalUnitType) left);
             final ConventionalUnitType rightObject = ((ConventionalUnitType) right);
             {
-                ConversionToPreferredUnitType lhsConversionToPreferredUnit;
-                lhsConversionToPreferredUnit = leftObject.getConversionToPreferredUnit();
-                ConversionToPreferredUnitType rhsConversionToPreferredUnit;
-                rhsConversionToPreferredUnit = rightObject.getConversionToPreferredUnit();
-                target.setConversionToPreferredUnit(((ConversionToPreferredUnitType) strategy.merge(LocatorUtils.property(leftLocator, "conversionToPreferredUnit", lhsConversionToPreferredUnit), LocatorUtils.property(rightLocator, "conversionToPreferredUnit", rhsConversionToPreferredUnit), lhsConversionToPreferredUnit, rhsConversionToPreferredUnit)));
+                java.lang.Boolean conversionToPreferredUnitShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetConversionToPreferredUnit(), rightObject.isSetConversionToPreferredUnit());
+                if (conversionToPreferredUnitShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ConversionToPreferredUnitType lhsConversionToPreferredUnit;
+                    lhsConversionToPreferredUnit = leftObject.getConversionToPreferredUnit();
+                    ConversionToPreferredUnitType rhsConversionToPreferredUnit;
+                    rhsConversionToPreferredUnit = rightObject.getConversionToPreferredUnit();
+                    ConversionToPreferredUnitType mergedConversionToPreferredUnit = ((ConversionToPreferredUnitType) strategy.merge(LocatorUtils.property(leftLocator, "conversionToPreferredUnit", lhsConversionToPreferredUnit), LocatorUtils.property(rightLocator, "conversionToPreferredUnit", rhsConversionToPreferredUnit), lhsConversionToPreferredUnit, rhsConversionToPreferredUnit, leftObject.isSetConversionToPreferredUnit(), rightObject.isSetConversionToPreferredUnit()));
+                    target.setConversionToPreferredUnit(mergedConversionToPreferredUnit);
+                } else {
+                    if (conversionToPreferredUnitShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.conversionToPreferredUnit = null;
+                    }
+                }
             }
             {
-                ConversionToPreferredUnitType lhsRoughConversionToPreferredUnit;
-                lhsRoughConversionToPreferredUnit = leftObject.getRoughConversionToPreferredUnit();
-                ConversionToPreferredUnitType rhsRoughConversionToPreferredUnit;
-                rhsRoughConversionToPreferredUnit = rightObject.getRoughConversionToPreferredUnit();
-                target.setRoughConversionToPreferredUnit(((ConversionToPreferredUnitType) strategy.merge(LocatorUtils.property(leftLocator, "roughConversionToPreferredUnit", lhsRoughConversionToPreferredUnit), LocatorUtils.property(rightLocator, "roughConversionToPreferredUnit", rhsRoughConversionToPreferredUnit), lhsRoughConversionToPreferredUnit, rhsRoughConversionToPreferredUnit)));
+                java.lang.Boolean roughConversionToPreferredUnitShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRoughConversionToPreferredUnit(), rightObject.isSetRoughConversionToPreferredUnit());
+                if (roughConversionToPreferredUnitShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    ConversionToPreferredUnitType lhsRoughConversionToPreferredUnit;
+                    lhsRoughConversionToPreferredUnit = leftObject.getRoughConversionToPreferredUnit();
+                    ConversionToPreferredUnitType rhsRoughConversionToPreferredUnit;
+                    rhsRoughConversionToPreferredUnit = rightObject.getRoughConversionToPreferredUnit();
+                    ConversionToPreferredUnitType mergedRoughConversionToPreferredUnit = ((ConversionToPreferredUnitType) strategy.merge(LocatorUtils.property(leftLocator, "roughConversionToPreferredUnit", lhsRoughConversionToPreferredUnit), LocatorUtils.property(rightLocator, "roughConversionToPreferredUnit", rhsRoughConversionToPreferredUnit), lhsRoughConversionToPreferredUnit, rhsRoughConversionToPreferredUnit, leftObject.isSetRoughConversionToPreferredUnit(), rightObject.isSetRoughConversionToPreferredUnit()));
+                    target.setRoughConversionToPreferredUnit(mergedRoughConversionToPreferredUnit);
+                } else {
+                    if (roughConversionToPreferredUnitShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.roughConversionToPreferredUnit = null;
+                    }
+                }
             }
             {
-                List<DerivationUnitTermType> lhsDerivationUnitTerm;
-                lhsDerivationUnitTerm = leftObject.getDerivationUnitTerm();
-                List<DerivationUnitTermType> rhsDerivationUnitTerm;
-                rhsDerivationUnitTerm = rightObject.getDerivationUnitTerm();
-                target.unsetDerivationUnitTerm();
-                List<DerivationUnitTermType> uniqueDerivationUnitTerml = target.getDerivationUnitTerm();
-                uniqueDerivationUnitTerml.addAll(((List<DerivationUnitTermType> ) strategy.merge(LocatorUtils.property(leftLocator, "derivationUnitTerm", lhsDerivationUnitTerm), LocatorUtils.property(rightLocator, "derivationUnitTerm", rhsDerivationUnitTerm), lhsDerivationUnitTerm, rhsDerivationUnitTerm)));
+                java.lang.Boolean derivationUnitTermShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDerivationUnitTerm(), rightObject.isSetDerivationUnitTerm());
+                if (derivationUnitTermShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<DerivationUnitTermType> lhsDerivationUnitTerm;
+                    lhsDerivationUnitTerm = (leftObject.isSetDerivationUnitTerm()?leftObject.getDerivationUnitTerm():null);
+                    List<DerivationUnitTermType> rhsDerivationUnitTerm;
+                    rhsDerivationUnitTerm = (rightObject.isSetDerivationUnitTerm()?rightObject.getDerivationUnitTerm():null);
+                    List<DerivationUnitTermType> mergedDerivationUnitTerm = ((List<DerivationUnitTermType> ) strategy.merge(LocatorUtils.property(leftLocator, "derivationUnitTerm", lhsDerivationUnitTerm), LocatorUtils.property(rightLocator, "derivationUnitTerm", rhsDerivationUnitTerm), lhsDerivationUnitTerm, rhsDerivationUnitTerm, leftObject.isSetDerivationUnitTerm(), rightObject.isSetDerivationUnitTerm()));
+                    target.setDerivationUnitTerm(mergedDerivationUnitTerm);
+                } else {
+                    if (derivationUnitTermShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetDerivationUnitTerm();
+                    }
+                }
             }
         }
-    }
-
-    public void setDerivationUnitTerm(List<DerivationUnitTermType> value) {
-        List<DerivationUnitTermType> draftl = this.getDerivationUnitTerm();
-        draftl.addAll(value);
-    }
-
-    public ConventionalUnitType withConversionToPreferredUnit(ConversionToPreferredUnitType value) {
-        setConversionToPreferredUnit(value);
-        return this;
-    }
-
-    public ConventionalUnitType withRoughConversionToPreferredUnit(ConversionToPreferredUnitType value) {
-        setRoughConversionToPreferredUnit(value);
-        return this;
-    }
-
-    public ConventionalUnitType withDerivationUnitTerm(DerivationUnitTermType... values) {
-        if (values!= null) {
-            for (DerivationUnitTermType value: values) {
-                getDerivationUnitTerm().add(value);
-            }
-        }
-        return this;
-    }
-
-    public ConventionalUnitType withDerivationUnitTerm(Collection<DerivationUnitTermType> values) {
-        if (values!= null) {
-            getDerivationUnitTerm().addAll(values);
-        }
-        return this;
-    }
-
-    public ConventionalUnitType withDerivationUnitTerm(List<DerivationUnitTermType> value) {
-        setDerivationUnitTerm(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withQuantityType(StringOrRefType value) {
-        setQuantityType(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withQuantityTypeReference(ReferenceType value) {
-        setQuantityTypeReference(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withCatalogSymbol(CodeType value) {
-        setCatalogSymbol(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public ConventionalUnitType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

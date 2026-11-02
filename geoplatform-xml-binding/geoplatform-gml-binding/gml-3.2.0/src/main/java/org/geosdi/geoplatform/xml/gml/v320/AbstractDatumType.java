@@ -34,65 +34,63 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AbstractDatumType complex type.
+ * <p>Classe Java per AbstractDatumType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractDatumType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}domainOfValidity" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}scope" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.opengis.net/gml}anchorDefinition" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/gml}realizationEpoch" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractDatumType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}domainOfValidity" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}scope" maxOccurs="unbounded"/>
+ *         <element ref="{http://www.opengis.net/gml}anchorDefinition" minOccurs="0"/>
+ *         <element ref="{http://www.opengis.net/gml}realizationEpoch" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -104,10 +102,10 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "realizationEpoch"
 })
 @XmlSeeAlso({
-    VerticalDatumType.class,
+    GeodeticDatumType.class,
     EngineeringDatumType.class,
     ImageDatumType.class,
-    GeodeticDatumType.class,
+    VerticalDatumType.class,
     TemporalDatumBaseType.class
 })
 public abstract class AbstractDatumType
@@ -115,16 +113,36 @@ public abstract class AbstractDatumType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * The gml:domainOfValidity property implements an association role to an EX_Extent object as encoded in ISO/TS 19139, either referencing or containing the definition of that extent.
+     * 
+     */
     protected DomainOfValidityElement domainOfValidity;
+    /**
+     * The gml:scope property provides a description of the usage, or limitations of usage, for which this CRS-related object is valid. If unknown, enter "not known".
+     * 
+     */
     @XmlElement(required = true)
     protected List<String> scope;
+    /**
+     * gml:anchorDefinition is a description, possibly including coordinates, of the definition used to anchor the datum to the Earth. Also known as the "origin", especially for engineering and image datums. The codeSpace attribute may be used to reference a source of more detailed on this point or surface, or on a set of such descriptions.
+     * -	For a geodetic datum, this point is also known as the fundamental point, which is traditionally the point where the relationship between geoid and ellipsoid is defined. In some cases, the "fundamental point" may consist of a number of points. In those cases, the parameters defining the geoid/ellipsoid relationship have been averaged for these points, and the averages adopted as the datum definition.
+     * -	For an engineering datum, the anchor definition may be a physical point, or it may be a point with defined coordinates in another CRS.may
+     * -	For an image datum, the anchor definition is usually either the centre of the image or the corner of the image.
+     * -	For a temporal datum, this attribute is not defined. Instead of the anchor definition, a temporal datum carries a separate time origin of type DateTime.
+     * 
+     */
     @XmlElementRef(name = "anchorDefinition", namespace = "http://www.opengis.net/gml", type = JAXBElement.class, required = false)
     protected JAXBElement<CodeType> anchorDefinition;
+    /**
+     * gml:realizationEpoch is the time after which this datum definition is valid. See ISO 19111 Table 32 for details.
+     * 
+     */
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar realizationEpoch;
 
     /**
-     * Recupera il valore della proprietà domainOfValidity.
+     * The gml:domainOfValidity property implements an association role to an EX_Extent object as encoded in ISO/TS 19139, either referencing or containing the definition of that extent.
      * 
      * @return
      *     possible object is
@@ -142,6 +160,7 @@ public abstract class AbstractDatumType
      *     allowed object is
      *     {@link DomainOfValidityElement }
      *     
+     * @see #getDomainOfValidity()
      */
     public void setDomainOfValidity(DomainOfValidityElement value) {
         this.domainOfValidity = value;
@@ -152,30 +171,35 @@ public abstract class AbstractDatumType
     }
 
     /**
+     * The gml:scope property provides a description of the usage, or limitations of usage, for which this CRS-related object is valid. If unknown, enter "not known".
+     * 
      * Gets the value of the scope property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scope property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the scope property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getScope().add(newItem);
+     * getScope().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the scope property.
      */
     public List<String> getScope() {
         if (scope == null) {
-            scope = new ArrayList<String>();
+            scope = new ArrayList<>();
         }
         return this.scope;
     }
@@ -189,7 +213,11 @@ public abstract class AbstractDatumType
     }
 
     /**
-     * Recupera il valore della proprietà anchorDefinition.
+     * gml:anchorDefinition is a description, possibly including coordinates, of the definition used to anchor the datum to the Earth. Also known as the "origin", especially for engineering and image datums. The codeSpace attribute may be used to reference a source of more detailed on this point or surface, or on a set of such descriptions.
+     * -	For a geodetic datum, this point is also known as the fundamental point, which is traditionally the point where the relationship between geoid and ellipsoid is defined. In some cases, the "fundamental point" may consist of a number of points. In those cases, the parameters defining the geoid/ellipsoid relationship have been averaged for these points, and the averages adopted as the datum definition.
+     * -	For an engineering datum, the anchor definition may be a physical point, or it may be a point with defined coordinates in another CRS.may
+     * -	For an image datum, the anchor definition is usually either the centre of the image or the corner of the image.
+     * -	For a temporal datum, this attribute is not defined. Instead of the anchor definition, a temporal datum carries a separate time origin of type DateTime.
      * 
      * @return
      *     possible object is
@@ -209,6 +237,7 @@ public abstract class AbstractDatumType
      *     {@link JAXBElement }{@code <}{@link CodeType }{@code >}
      *     {@link JAXBElement }{@code <}{@link CodeType }{@code >}
      *     
+     * @see #getAnchorDefinition()
      */
     public void setAnchorDefinition(JAXBElement<CodeType> value) {
         this.anchorDefinition = value;
@@ -219,7 +248,7 @@ public abstract class AbstractDatumType
     }
 
     /**
-     * Recupera il valore della proprietà realizationEpoch.
+     * gml:realizationEpoch is the time after which this datum definition is valid. See ISO 19111 Table 32 for details.
      * 
      * @return
      *     possible object is
@@ -237,6 +266,7 @@ public abstract class AbstractDatumType
      *     allowed object is
      *     {@link XMLGregorianCalendar }
      *     
+     * @see #getRealizationEpoch()
      */
     public void setRealizationEpoch(XMLGregorianCalendar value) {
         this.realizationEpoch = value;
@@ -246,13 +276,15 @@ public abstract class AbstractDatumType
         return (this.realizationEpoch!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -260,33 +292,43 @@ public abstract class AbstractDatumType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             DomainOfValidityElement theDomainOfValidity;
             theDomainOfValidity = this.getDomainOfValidity();
-            strategy.appendField(locator, this, "domainOfValidity", buffer, theDomainOfValidity);
+            strategy.appendField(locator, this, "domainOfValidity", buffer, theDomainOfValidity, this.isSetDomainOfValidity());
         }
         {
             List<String> theScope;
-            theScope = this.getScope();
-            strategy.appendField(locator, this, "scope", buffer, theScope);
+            theScope = (this.isSetScope()?this.getScope():null);
+            strategy.appendField(locator, this, "scope", buffer, theScope, this.isSetScope());
         }
         {
             JAXBElement<CodeType> theAnchorDefinition;
             theAnchorDefinition = this.getAnchorDefinition();
-            strategy.appendField(locator, this, "anchorDefinition", buffer, theAnchorDefinition);
+            strategy.appendField(locator, this, "anchorDefinition", buffer, theAnchorDefinition, this.isSetAnchorDefinition());
         }
         {
             XMLGregorianCalendar theRealizationEpoch;
             theRealizationEpoch = this.getRealizationEpoch();
-            strategy.appendField(locator, this, "realizationEpoch", buffer, theRealizationEpoch);
+            strategy.appendField(locator, this, "realizationEpoch", buffer, theRealizationEpoch, this.isSetRealizationEpoch());
         }
         return buffer;
     }
 
+    public void setScope(List<String> value) {
+        this.scope = null;
+        if (value!= null) {
+            List<String> draftl = this.getScope();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractDatumType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -301,16 +343,16 @@ public abstract class AbstractDatumType
             lhsDomainOfValidity = this.getDomainOfValidity();
             DomainOfValidityElement rhsDomainOfValidity;
             rhsDomainOfValidity = that.getDomainOfValidity();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(thatLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(thatLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity, this.isSetDomainOfValidity(), that.isSetDomainOfValidity())) {
                 return false;
             }
         }
         {
             List<String> lhsScope;
-            lhsScope = this.getScope();
+            lhsScope = (this.isSetScope()?this.getScope():null);
             List<String> rhsScope;
-            rhsScope = that.getScope();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "scope", lhsScope), LocatorUtils.property(thatLocator, "scope", rhsScope), lhsScope, rhsScope)) {
+            rhsScope = (that.isSetScope()?that.getScope():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "scope", lhsScope), LocatorUtils.property(thatLocator, "scope", rhsScope), lhsScope, rhsScope, this.isSetScope(), that.isSetScope())) {
                 return false;
             }
         }
@@ -319,7 +361,7 @@ public abstract class AbstractDatumType
             lhsAnchorDefinition = this.getAnchorDefinition();
             JAXBElement<CodeType> rhsAnchorDefinition;
             rhsAnchorDefinition = that.getAnchorDefinition();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "anchorDefinition", lhsAnchorDefinition), LocatorUtils.property(thatLocator, "anchorDefinition", rhsAnchorDefinition), lhsAnchorDefinition, rhsAnchorDefinition)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "anchorDefinition", lhsAnchorDefinition), LocatorUtils.property(thatLocator, "anchorDefinition", rhsAnchorDefinition), lhsAnchorDefinition, rhsAnchorDefinition, this.isSetAnchorDefinition(), that.isSetAnchorDefinition())) {
                 return false;
             }
         }
@@ -328,57 +370,63 @@ public abstract class AbstractDatumType
             lhsRealizationEpoch = this.getRealizationEpoch();
             XMLGregorianCalendar rhsRealizationEpoch;
             rhsRealizationEpoch = that.getRealizationEpoch();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "realizationEpoch", lhsRealizationEpoch), LocatorUtils.property(thatLocator, "realizationEpoch", rhsRealizationEpoch), lhsRealizationEpoch, rhsRealizationEpoch)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "realizationEpoch", lhsRealizationEpoch), LocatorUtils.property(thatLocator, "realizationEpoch", rhsRealizationEpoch), lhsRealizationEpoch, rhsRealizationEpoch, this.isSetRealizationEpoch(), that.isSetRealizationEpoch())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             DomainOfValidityElement theDomainOfValidity;
             theDomainOfValidity = this.getDomainOfValidity();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainOfValidity", theDomainOfValidity), currentHashCode, theDomainOfValidity);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "domainOfValidity", theDomainOfValidity), currentHashCode, theDomainOfValidity, this.isSetDomainOfValidity());
         }
         {
             List<String> theScope;
-            theScope = this.getScope();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "scope", theScope), currentHashCode, theScope);
+            theScope = (this.isSetScope()?this.getScope():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "scope", theScope), currentHashCode, theScope, this.isSetScope());
         }
         {
             JAXBElement<CodeType> theAnchorDefinition;
             theAnchorDefinition = this.getAnchorDefinition();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "anchorDefinition", theAnchorDefinition), currentHashCode, theAnchorDefinition);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "anchorDefinition", theAnchorDefinition), currentHashCode, theAnchorDefinition, this.isSetAnchorDefinition());
         }
         {
             XMLGregorianCalendar theRealizationEpoch;
             theRealizationEpoch = this.getRealizationEpoch();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "realizationEpoch", theRealizationEpoch), currentHashCode, theRealizationEpoch);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "realizationEpoch", theRealizationEpoch), currentHashCode, theRealizationEpoch, this.isSetRealizationEpoch());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -386,51 +434,71 @@ public abstract class AbstractDatumType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractDatumType) {
             final AbstractDatumType copy = ((AbstractDatumType) target);
-            if (this.isSetDomainOfValidity()) {
-                DomainOfValidityElement sourceDomainOfValidity;
-                sourceDomainOfValidity = this.getDomainOfValidity();
-                DomainOfValidityElement copyDomainOfValidity = ((DomainOfValidityElement) strategy.copy(LocatorUtils.property(locator, "domainOfValidity", sourceDomainOfValidity), sourceDomainOfValidity));
-                copy.setDomainOfValidity(copyDomainOfValidity);
-            } else {
-                copy.domainOfValidity = null;
+            {
+                java.lang.Boolean domainOfValidityShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetDomainOfValidity());
+                if (domainOfValidityShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    DomainOfValidityElement sourceDomainOfValidity;
+                    sourceDomainOfValidity = this.getDomainOfValidity();
+                    DomainOfValidityElement copyDomainOfValidity = ((DomainOfValidityElement) strategy.copy(LocatorUtils.property(locator, "domainOfValidity", sourceDomainOfValidity), sourceDomainOfValidity, this.isSetDomainOfValidity()));
+                    copy.setDomainOfValidity(copyDomainOfValidity);
+                } else {
+                    if (domainOfValidityShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.domainOfValidity = null;
+                    }
+                }
             }
-            if (this.isSetScope()) {
-                List<String> sourceScope;
-                sourceScope = this.getScope();
-                @SuppressWarnings("unchecked")
-                List<String> copyScope = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "scope", sourceScope), sourceScope));
-                copy.unsetScope();
-                List<String> uniqueScopel = copy.getScope();
-                uniqueScopel.addAll(copyScope);
-            } else {
-                copy.unsetScope();
+            {
+                java.lang.Boolean scopeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetScope());
+                if (scopeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> sourceScope;
+                    sourceScope = (this.isSetScope()?this.getScope():null);
+                    @SuppressWarnings("unchecked")
+                    List<String> copyScope = ((List<String> ) strategy.copy(LocatorUtils.property(locator, "scope", sourceScope), sourceScope, this.isSetScope()));
+                    copy.setScope(copyScope);
+                } else {
+                    if (scopeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetScope();
+                    }
+                }
             }
-            if (this.isSetAnchorDefinition()) {
-                JAXBElement<CodeType> sourceAnchorDefinition;
-                sourceAnchorDefinition = this.getAnchorDefinition();
-                @SuppressWarnings("unchecked")
-                JAXBElement<CodeType> copyAnchorDefinition = ((JAXBElement<CodeType> ) strategy.copy(LocatorUtils.property(locator, "anchorDefinition", sourceAnchorDefinition), sourceAnchorDefinition));
-                copy.setAnchorDefinition(copyAnchorDefinition);
-            } else {
-                copy.anchorDefinition = null;
+            {
+                java.lang.Boolean anchorDefinitionShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetAnchorDefinition());
+                if (anchorDefinitionShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<CodeType> sourceAnchorDefinition;
+                    sourceAnchorDefinition = this.getAnchorDefinition();
+                    @SuppressWarnings("unchecked")
+                    JAXBElement<CodeType> copyAnchorDefinition = ((JAXBElement<CodeType> ) strategy.copy(LocatorUtils.property(locator, "anchorDefinition", sourceAnchorDefinition), sourceAnchorDefinition, this.isSetAnchorDefinition()));
+                    copy.setAnchorDefinition(copyAnchorDefinition);
+                } else {
+                    if (anchorDefinitionShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.anchorDefinition = null;
+                    }
+                }
             }
-            if (this.isSetRealizationEpoch()) {
-                XMLGregorianCalendar sourceRealizationEpoch;
-                sourceRealizationEpoch = this.getRealizationEpoch();
-                XMLGregorianCalendar copyRealizationEpoch = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "realizationEpoch", sourceRealizationEpoch), sourceRealizationEpoch));
-                copy.setRealizationEpoch(copyRealizationEpoch);
-            } else {
-                copy.realizationEpoch = null;
+            {
+                java.lang.Boolean realizationEpochShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRealizationEpoch());
+                if (realizationEpochShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar sourceRealizationEpoch;
+                    sourceRealizationEpoch = this.getRealizationEpoch();
+                    XMLGregorianCalendar copyRealizationEpoch = ((XMLGregorianCalendar) strategy.copy(LocatorUtils.property(locator, "realizationEpoch", sourceRealizationEpoch), sourceRealizationEpoch, this.isSetRealizationEpoch()));
+                    copy.setRealizationEpoch(copyRealizationEpoch);
+                } else {
+                    if (realizationEpochShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.realizationEpoch = null;
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractDatumType) {
@@ -438,155 +506,66 @@ public abstract class AbstractDatumType
             final AbstractDatumType leftObject = ((AbstractDatumType) left);
             final AbstractDatumType rightObject = ((AbstractDatumType) right);
             {
-                DomainOfValidityElement lhsDomainOfValidity;
-                lhsDomainOfValidity = leftObject.getDomainOfValidity();
-                DomainOfValidityElement rhsDomainOfValidity;
-                rhsDomainOfValidity = rightObject.getDomainOfValidity();
-                target.setDomainOfValidity(((DomainOfValidityElement) strategy.merge(LocatorUtils.property(leftLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(rightLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity)));
+                java.lang.Boolean domainOfValidityShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetDomainOfValidity(), rightObject.isSetDomainOfValidity());
+                if (domainOfValidityShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    DomainOfValidityElement lhsDomainOfValidity;
+                    lhsDomainOfValidity = leftObject.getDomainOfValidity();
+                    DomainOfValidityElement rhsDomainOfValidity;
+                    rhsDomainOfValidity = rightObject.getDomainOfValidity();
+                    DomainOfValidityElement mergedDomainOfValidity = ((DomainOfValidityElement) strategy.merge(LocatorUtils.property(leftLocator, "domainOfValidity", lhsDomainOfValidity), LocatorUtils.property(rightLocator, "domainOfValidity", rhsDomainOfValidity), lhsDomainOfValidity, rhsDomainOfValidity, leftObject.isSetDomainOfValidity(), rightObject.isSetDomainOfValidity()));
+                    target.setDomainOfValidity(mergedDomainOfValidity);
+                } else {
+                    if (domainOfValidityShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.domainOfValidity = null;
+                    }
+                }
             }
             {
-                List<String> lhsScope;
-                lhsScope = leftObject.getScope();
-                List<String> rhsScope;
-                rhsScope = rightObject.getScope();
-                target.unsetScope();
-                List<String> uniqueScopel = target.getScope();
-                uniqueScopel.addAll(((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "scope", lhsScope), LocatorUtils.property(rightLocator, "scope", rhsScope), lhsScope, rhsScope)));
+                java.lang.Boolean scopeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetScope(), rightObject.isSetScope());
+                if (scopeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<String> lhsScope;
+                    lhsScope = (leftObject.isSetScope()?leftObject.getScope():null);
+                    List<String> rhsScope;
+                    rhsScope = (rightObject.isSetScope()?rightObject.getScope():null);
+                    List<String> mergedScope = ((List<String> ) strategy.merge(LocatorUtils.property(leftLocator, "scope", lhsScope), LocatorUtils.property(rightLocator, "scope", rhsScope), lhsScope, rhsScope, leftObject.isSetScope(), rightObject.isSetScope()));
+                    target.setScope(mergedScope);
+                } else {
+                    if (scopeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetScope();
+                    }
+                }
             }
             {
-                JAXBElement<CodeType> lhsAnchorDefinition;
-                lhsAnchorDefinition = leftObject.getAnchorDefinition();
-                JAXBElement<CodeType> rhsAnchorDefinition;
-                rhsAnchorDefinition = rightObject.getAnchorDefinition();
-                target.setAnchorDefinition(((JAXBElement<CodeType> ) strategy.merge(LocatorUtils.property(leftLocator, "anchorDefinition", lhsAnchorDefinition), LocatorUtils.property(rightLocator, "anchorDefinition", rhsAnchorDefinition), lhsAnchorDefinition, rhsAnchorDefinition)));
+                java.lang.Boolean anchorDefinitionShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetAnchorDefinition(), rightObject.isSetAnchorDefinition());
+                if (anchorDefinitionShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    JAXBElement<CodeType> lhsAnchorDefinition;
+                    lhsAnchorDefinition = leftObject.getAnchorDefinition();
+                    JAXBElement<CodeType> rhsAnchorDefinition;
+                    rhsAnchorDefinition = rightObject.getAnchorDefinition();
+                    JAXBElement<CodeType> mergedAnchorDefinition = ((JAXBElement<CodeType> ) strategy.merge(LocatorUtils.property(leftLocator, "anchorDefinition", lhsAnchorDefinition), LocatorUtils.property(rightLocator, "anchorDefinition", rhsAnchorDefinition), lhsAnchorDefinition, rhsAnchorDefinition, leftObject.isSetAnchorDefinition(), rightObject.isSetAnchorDefinition()));
+                    target.setAnchorDefinition(mergedAnchorDefinition);
+                } else {
+                    if (anchorDefinitionShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.anchorDefinition = null;
+                    }
+                }
             }
             {
-                XMLGregorianCalendar lhsRealizationEpoch;
-                lhsRealizationEpoch = leftObject.getRealizationEpoch();
-                XMLGregorianCalendar rhsRealizationEpoch;
-                rhsRealizationEpoch = rightObject.getRealizationEpoch();
-                target.setRealizationEpoch(((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "realizationEpoch", lhsRealizationEpoch), LocatorUtils.property(rightLocator, "realizationEpoch", rhsRealizationEpoch), lhsRealizationEpoch, rhsRealizationEpoch)));
+                java.lang.Boolean realizationEpochShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRealizationEpoch(), rightObject.isSetRealizationEpoch());
+                if (realizationEpochShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    XMLGregorianCalendar lhsRealizationEpoch;
+                    lhsRealizationEpoch = leftObject.getRealizationEpoch();
+                    XMLGregorianCalendar rhsRealizationEpoch;
+                    rhsRealizationEpoch = rightObject.getRealizationEpoch();
+                    XMLGregorianCalendar mergedRealizationEpoch = ((XMLGregorianCalendar) strategy.merge(LocatorUtils.property(leftLocator, "realizationEpoch", lhsRealizationEpoch), LocatorUtils.property(rightLocator, "realizationEpoch", rhsRealizationEpoch), lhsRealizationEpoch, rhsRealizationEpoch, leftObject.isSetRealizationEpoch(), rightObject.isSetRealizationEpoch()));
+                    target.setRealizationEpoch(mergedRealizationEpoch);
+                } else {
+                    if (realizationEpochShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.realizationEpoch = null;
+                    }
+                }
             }
         }
-    }
-
-    public void setScope(List<String> value) {
-        List<String> draftl = this.getScope();
-        draftl.addAll(value);
-    }
-
-    public AbstractDatumType withDomainOfValidity(DomainOfValidityElement value) {
-        setDomainOfValidity(value);
-        return this;
-    }
-
-    public AbstractDatumType withScope(String... values) {
-        if (values!= null) {
-            for (String value: values) {
-                getScope().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AbstractDatumType withScope(Collection<String> values) {
-        if (values!= null) {
-            getScope().addAll(values);
-        }
-        return this;
-    }
-
-    public AbstractDatumType withAnchorDefinition(JAXBElement<CodeType> value) {
-        setAnchorDefinition(value);
-        return this;
-    }
-
-    public AbstractDatumType withRealizationEpoch(XMLGregorianCalendar value) {
-        setRealizationEpoch(value);
-        return this;
-    }
-
-    public AbstractDatumType withScope(List<String> value) {
-        setScope(value);
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public AbstractDatumType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

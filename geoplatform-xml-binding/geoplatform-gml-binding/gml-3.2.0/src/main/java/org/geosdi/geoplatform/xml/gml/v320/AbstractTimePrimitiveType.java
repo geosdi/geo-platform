@@ -34,57 +34,55 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per AbstractTimePrimitiveType complex type.
+ * <p>Classe Java per AbstractTimePrimitiveType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="AbstractTimePrimitiveType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}AbstractTimeObjectType">
- *       &lt;sequence>
- *         &lt;element name="relatedTime" type="{http://www.opengis.net/gml}RelatedTimeType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="AbstractTimePrimitiveType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}AbstractTimeObjectType">
+ *       <sequence>
+ *         <element name="relatedTime" type="{http://www.opengis.net/gml}RelatedTimeType" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -106,28 +104,31 @@ public abstract class AbstractTimePrimitiveType
     /**
      * Gets the value of the relatedTime property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the relatedTime property.
+     * <p>This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore, any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the relatedTime property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getRelatedTime().add(newItem);
+     * getRelatedTime().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link RelatedTimeType }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the relatedTime property.
      */
     public List<RelatedTimeType> getRelatedTime() {
         if (relatedTime == null) {
-            relatedTime = new ArrayList<RelatedTimeType>();
+            relatedTime = new ArrayList<>();
         }
         return this.relatedTime;
     }
@@ -140,13 +141,15 @@ public abstract class AbstractTimePrimitiveType
         this.relatedTime = null;
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -154,18 +157,28 @@ public abstract class AbstractTimePrimitiveType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<RelatedTimeType> theRelatedTime;
-            theRelatedTime = this.getRelatedTime();
-            strategy.appendField(locator, this, "relatedTime", buffer, theRelatedTime);
+            theRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
+            strategy.appendField(locator, this, "relatedTime", buffer, theRelatedTime, this.isSetRelatedTime());
         }
         return buffer;
     }
 
+    public void setRelatedTime(List<RelatedTimeType> value) {
+        this.relatedTime = null;
+        if (value!= null) {
+            List<RelatedTimeType> draftl = this.getRelatedTime();
+            draftl.addAll(value);
+        }
+    }
+
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof AbstractTimePrimitiveType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -177,45 +190,51 @@ public abstract class AbstractTimePrimitiveType
         final AbstractTimePrimitiveType that = ((AbstractTimePrimitiveType) object);
         {
             List<RelatedTimeType> lhsRelatedTime;
-            lhsRelatedTime = this.getRelatedTime();
+            lhsRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
             List<RelatedTimeType> rhsRelatedTime;
-            rhsRelatedTime = that.getRelatedTime();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(thatLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime)) {
+            rhsRelatedTime = (that.isSetRelatedTime()?that.getRelatedTime():null);
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(thatLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime, this.isSetRelatedTime(), that.isSetRelatedTime())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             List<RelatedTimeType> theRelatedTime;
-            theRelatedTime = this.getRelatedTime();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "relatedTime", theRelatedTime), currentHashCode, theRelatedTime);
+            theRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "relatedTime", theRelatedTime), currentHashCode, theRelatedTime, this.isSetRelatedTime());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         if (null == target) {
             throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
@@ -223,26 +242,31 @@ public abstract class AbstractTimePrimitiveType
         super.copyTo(locator, target, strategy);
         if (target instanceof AbstractTimePrimitiveType) {
             final AbstractTimePrimitiveType copy = ((AbstractTimePrimitiveType) target);
-            if (this.isSetRelatedTime()) {
-                List<RelatedTimeType> sourceRelatedTime;
-                sourceRelatedTime = this.getRelatedTime();
-                @SuppressWarnings("unchecked")
-                List<RelatedTimeType> copyRelatedTime = ((List<RelatedTimeType> ) strategy.copy(LocatorUtils.property(locator, "relatedTime", sourceRelatedTime), sourceRelatedTime));
-                copy.unsetRelatedTime();
-                List<RelatedTimeType> uniqueRelatedTimel = copy.getRelatedTime();
-                uniqueRelatedTimel.addAll(copyRelatedTime);
-            } else {
-                copy.unsetRelatedTime();
+            {
+                java.lang.Boolean relatedTimeShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetRelatedTime());
+                if (relatedTimeShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    List<RelatedTimeType> sourceRelatedTime;
+                    sourceRelatedTime = (this.isSetRelatedTime()?this.getRelatedTime():null);
+                    @SuppressWarnings("unchecked")
+                    List<RelatedTimeType> copyRelatedTime = ((List<RelatedTimeType> ) strategy.copy(LocatorUtils.property(locator, "relatedTime", sourceRelatedTime), sourceRelatedTime, this.isSetRelatedTime()));
+                    copy.setRelatedTime(copyRelatedTime);
+                } else {
+                    if (relatedTimeShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.unsetRelatedTime();
+                    }
+                }
             }
         }
         return target;
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof AbstractTimePrimitiveType) {
@@ -250,113 +274,21 @@ public abstract class AbstractTimePrimitiveType
             final AbstractTimePrimitiveType leftObject = ((AbstractTimePrimitiveType) left);
             final AbstractTimePrimitiveType rightObject = ((AbstractTimePrimitiveType) right);
             {
-                List<RelatedTimeType> lhsRelatedTime;
-                lhsRelatedTime = leftObject.getRelatedTime();
-                List<RelatedTimeType> rhsRelatedTime;
-                rhsRelatedTime = rightObject.getRelatedTime();
-                target.unsetRelatedTime();
-                List<RelatedTimeType> uniqueRelatedTimel = target.getRelatedTime();
-                uniqueRelatedTimel.addAll(((List<RelatedTimeType> ) strategy.merge(LocatorUtils.property(leftLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(rightLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime)));
+                java.lang.Boolean relatedTimeShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetRelatedTime(), rightObject.isSetRelatedTime());
+                if (relatedTimeShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    List<RelatedTimeType> lhsRelatedTime;
+                    lhsRelatedTime = (leftObject.isSetRelatedTime()?leftObject.getRelatedTime():null);
+                    List<RelatedTimeType> rhsRelatedTime;
+                    rhsRelatedTime = (rightObject.isSetRelatedTime()?rightObject.getRelatedTime():null);
+                    List<RelatedTimeType> mergedRelatedTime = ((List<RelatedTimeType> ) strategy.merge(LocatorUtils.property(leftLocator, "relatedTime", lhsRelatedTime), LocatorUtils.property(rightLocator, "relatedTime", rhsRelatedTime), lhsRelatedTime, rhsRelatedTime, leftObject.isSetRelatedTime(), rightObject.isSetRelatedTime()));
+                    target.setRelatedTime(mergedRelatedTime);
+                } else {
+                    if (relatedTimeShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.unsetRelatedTime();
+                    }
+                }
             }
         }
-    }
-
-    public void setRelatedTime(List<RelatedTimeType> value) {
-        List<RelatedTimeType> draftl = this.getRelatedTime();
-        draftl.addAll(value);
-    }
-
-    public AbstractTimePrimitiveType withRelatedTime(RelatedTimeType... values) {
-        if (values!= null) {
-            for (RelatedTimeType value: values) {
-                getRelatedTime().add(value);
-            }
-        }
-        return this;
-    }
-
-    public AbstractTimePrimitiveType withRelatedTime(Collection<RelatedTimeType> values) {
-        if (values!= null) {
-            getRelatedTime().addAll(values);
-        }
-        return this;
-    }
-
-    public AbstractTimePrimitiveType withRelatedTime(List<RelatedTimeType> value) {
-        setRelatedTime(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public AbstractTimePrimitiveType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

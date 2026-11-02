@@ -34,57 +34,54 @@
  *   wish to do so, delete this exception statement from your version.
  */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.06.18 alle 12:52:42 AM CEST 
+// Questo file è stato generato dall'Eclipse Implementation of JAXB, v4.0.9 
+// Vedere https://eclipse-ee4j.github.io/jaxb-ri 
+// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine.
+// Generato il: 2026.11.02 alle 03:38:19 PM CET
 //
-
 
 package org.geosdi.geoplatform.xml.gml.v320;
 
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import org.jvnet.jaxb2_commons.lang.CopyStrategy;
-import org.jvnet.jaxb2_commons.lang.CopyTo;
-import org.jvnet.jaxb2_commons.lang.Equals;
-import org.jvnet.jaxb2_commons.lang.EqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.HashCode;
-import org.jvnet.jaxb2_commons.lang.HashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBCopyStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBEqualsStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBHashCodeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBMergeStrategy;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.MergeFrom;
-import org.jvnet.jaxb2_commons.lang.MergeStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb.lang.CopyStrategy;
+import org.jvnet.jaxb.lang.CopyTo;
+import org.jvnet.jaxb.lang.Equals;
+import org.jvnet.jaxb.lang.EqualsStrategy;
+import org.jvnet.jaxb.lang.HashCode;
+import org.jvnet.jaxb.lang.HashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBCopyStrategy;
+import org.jvnet.jaxb.lang.JAXBEqualsStrategy;
+import org.jvnet.jaxb.lang.JAXBHashCodeStrategy;
+import org.jvnet.jaxb.lang.JAXBMergeStrategy;
+import org.jvnet.jaxb.lang.JAXBToStringStrategy;
+import org.jvnet.jaxb.lang.MergeFrom;
+import org.jvnet.jaxb.lang.MergeStrategy;
+import org.jvnet.jaxb.lang.ToString;
+import org.jvnet.jaxb.lang.ToStringStrategy;
+import org.jvnet.jaxb.locator.ObjectLocator;
+import org.jvnet.jaxb.locator.util.LocatorUtils;
 
 
 /**
- * <p>Classe Java per EllipsoidType complex type.
+ * <p>Classe Java per EllipsoidType complex type.</p>
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.</p>
  * 
- * <pre>
- * &lt;complexType name="EllipsoidType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/gml}semiMajorAxis"/>
- *         &lt;element ref="{http://www.opengis.net/gml}secondDefiningParameter"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="EllipsoidType">
+ *   <complexContent>
+ *     <extension base="{http://www.opengis.net/gml}IdentifiedObjectType">
+ *       <sequence>
+ *         <element ref="{http://www.opengis.net/gml}semiMajorAxis"/>
+ *         <element ref="{http://www.opengis.net/gml}secondDefiningParameter"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -98,13 +95,23 @@ public class EllipsoidType
     implements Cloneable, CopyTo, Equals, HashCode, MergeFrom, ToString
 {
 
+    /**
+     * gml:semiMajorAxis specifies the length of the semi-major axis of the ellipsoid, with its units. Uses the MeasureType with the restriction that the unit of measure referenced by uom must be suitable for a length, such as metres or feet.
+     * 
+     */
     @XmlElement(required = true)
     protected MeasureType semiMajorAxis;
+    /**
+     * gml:secondDefiningParameter is a property containing the definition of the second parameter that defines the shape of an ellipsoid. An ellipsoid requires two defining parameters: semi-major axis and inverse flattening or semi-major axis and semi-minor axis. When the reference body is a sphere rather than an ellipsoid, only a single defining parameter is required, namely the radius of the sphere; in that case, the semi-major axis "degenerates" into the radius of the sphere.
+     * The inverseFlattening element contains the inverse flattening value of the ellipsoid. This value is a scale factor (or ratio). It uses gml:LengthType with the restriction that the unit of measure referenced by the uom attribute must be suitable for a scale factor, such as percent, permil, or parts-per-million.
+     * The semiMinorAxis element contains the length of the semi-minor axis of the ellipsoid. When the isSphere element is included, the ellipsoid is degenerate and is actually a sphere. The sphere is completely defined by the semi-major axis, which is the radius of the sphere.
+     * 
+     */
     @XmlElement(required = true)
     protected SecondDefiningParameterPropertyElement secondDefiningParameter;
 
     /**
-     * Recupera il valore della proprietà semiMajorAxis.
+     * gml:semiMajorAxis specifies the length of the semi-major axis of the ellipsoid, with its units. Uses the MeasureType with the restriction that the unit of measure referenced by uom must be suitable for a length, such as metres or feet.
      * 
      * @return
      *     possible object is
@@ -122,6 +129,7 @@ public class EllipsoidType
      *     allowed object is
      *     {@link MeasureType }
      *     
+     * @see #getSemiMajorAxis()
      */
     public void setSemiMajorAxis(MeasureType value) {
         this.semiMajorAxis = value;
@@ -132,7 +140,9 @@ public class EllipsoidType
     }
 
     /**
-     * Recupera il valore della proprietà secondDefiningParameter.
+     * gml:secondDefiningParameter is a property containing the definition of the second parameter that defines the shape of an ellipsoid. An ellipsoid requires two defining parameters: semi-major axis and inverse flattening or semi-major axis and semi-minor axis. When the reference body is a sphere rather than an ellipsoid, only a single defining parameter is required, namely the radius of the sphere; in that case, the semi-major axis "degenerates" into the radius of the sphere.
+     * The inverseFlattening element contains the inverse flattening value of the ellipsoid. This value is a scale factor (or ratio). It uses gml:LengthType with the restriction that the unit of measure referenced by the uom attribute must be suitable for a scale factor, such as percent, permil, or parts-per-million.
+     * The semiMinorAxis element contains the length of the semi-minor axis of the ellipsoid. When the isSphere element is included, the ellipsoid is degenerate and is actually a sphere. The sphere is completely defined by the semi-major axis, which is the radius of the sphere.
      * 
      * @return
      *     possible object is
@@ -150,6 +160,7 @@ public class EllipsoidType
      *     allowed object is
      *     {@link SecondDefiningParameterPropertyElement }
      *     
+     * @see #getSecondDefiningParameter()
      */
     public void setSecondDefiningParameter(SecondDefiningParameterPropertyElement value) {
         this.secondDefiningParameter = value;
@@ -159,13 +170,15 @@ public class EllipsoidType
         return (this.secondDefiningParameter!= null);
     }
 
+    @Override
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy strategy = JAXBToStringStrategy.getInstance();
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -173,23 +186,25 @@ public class EllipsoidType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             MeasureType theSemiMajorAxis;
             theSemiMajorAxis = this.getSemiMajorAxis();
-            strategy.appendField(locator, this, "semiMajorAxis", buffer, theSemiMajorAxis);
+            strategy.appendField(locator, this, "semiMajorAxis", buffer, theSemiMajorAxis, this.isSetSemiMajorAxis());
         }
         {
             SecondDefiningParameterPropertyElement theSecondDefiningParameter;
             theSecondDefiningParameter = this.getSecondDefiningParameter();
-            strategy.appendField(locator, this, "secondDefiningParameter", buffer, theSecondDefiningParameter);
+            strategy.appendField(locator, this, "secondDefiningParameter", buffer, theSecondDefiningParameter, this.isSetSecondDefiningParameter());
         }
         return buffer;
     }
 
+    @Override
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
-        if (!(object instanceof EllipsoidType)) {
+        if ((object == null)||(this.getClass()!= object.getClass())) {
             return false;
         }
         if (this == object) {
@@ -204,7 +219,7 @@ public class EllipsoidType
             lhsSemiMajorAxis = this.getSemiMajorAxis();
             MeasureType rhsSemiMajorAxis;
             rhsSemiMajorAxis = that.getSemiMajorAxis();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "semiMajorAxis", lhsSemiMajorAxis), LocatorUtils.property(thatLocator, "semiMajorAxis", rhsSemiMajorAxis), lhsSemiMajorAxis, rhsSemiMajorAxis)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "semiMajorAxis", lhsSemiMajorAxis), LocatorUtils.property(thatLocator, "semiMajorAxis", rhsSemiMajorAxis), lhsSemiMajorAxis, rhsSemiMajorAxis, this.isSetSemiMajorAxis(), that.isSetSemiMajorAxis())) {
                 return false;
             }
         }
@@ -213,81 +228,100 @@ public class EllipsoidType
             lhsSecondDefiningParameter = this.getSecondDefiningParameter();
             SecondDefiningParameterPropertyElement rhsSecondDefiningParameter;
             rhsSecondDefiningParameter = that.getSecondDefiningParameter();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(thatLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter)) {
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(thatLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter, this.isSetSecondDefiningParameter(), that.isSetSecondDefiningParameter())) {
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean equals(Object object) {
-        final EqualsStrategy strategy = JAXBEqualsStrategy.INSTANCE;
+        final EqualsStrategy strategy = JAXBEqualsStrategy.getInstance();
         return equals(null, null, object, strategy);
     }
 
+    @Override
     public int hashCode(ObjectLocator locator, HashCodeStrategy strategy) {
         int currentHashCode = super.hashCode(locator, strategy);
         {
             MeasureType theSemiMajorAxis;
             theSemiMajorAxis = this.getSemiMajorAxis();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "semiMajorAxis", theSemiMajorAxis), currentHashCode, theSemiMajorAxis);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "semiMajorAxis", theSemiMajorAxis), currentHashCode, theSemiMajorAxis, this.isSetSemiMajorAxis());
         }
         {
             SecondDefiningParameterPropertyElement theSecondDefiningParameter;
             theSecondDefiningParameter = this.getSecondDefiningParameter();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "secondDefiningParameter", theSecondDefiningParameter), currentHashCode, theSecondDefiningParameter);
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "secondDefiningParameter", theSecondDefiningParameter), currentHashCode, theSecondDefiningParameter, this.isSetSecondDefiningParameter());
         }
         return currentHashCode;
     }
 
+    @Override
     public int hashCode() {
-        final HashCodeStrategy strategy = JAXBHashCodeStrategy.INSTANCE;
+        final HashCodeStrategy strategy = JAXBHashCodeStrategy.getInstance();
         return this.hashCode(null, strategy);
     }
 
+    @Override
     public Object clone() {
         return copyTo(createNewInstance());
     }
 
+    @Override
     public Object copyTo(Object target) {
-        final CopyStrategy strategy = JAXBCopyStrategy.INSTANCE;
+        final CopyStrategy strategy = JAXBCopyStrategy.getInstance();
         return copyTo(null, target, strategy);
     }
 
+    @Override
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {
         final Object draftCopy = ((target == null)?createNewInstance():target);
         super.copyTo(locator, draftCopy, strategy);
         if (draftCopy instanceof EllipsoidType) {
             final EllipsoidType copy = ((EllipsoidType) draftCopy);
-            if (this.isSetSemiMajorAxis()) {
-                MeasureType sourceSemiMajorAxis;
-                sourceSemiMajorAxis = this.getSemiMajorAxis();
-                MeasureType copySemiMajorAxis = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "semiMajorAxis", sourceSemiMajorAxis), sourceSemiMajorAxis));
-                copy.setSemiMajorAxis(copySemiMajorAxis);
-            } else {
-                copy.semiMajorAxis = null;
+            {
+                java.lang.Boolean semiMajorAxisShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSemiMajorAxis());
+                if (semiMajorAxisShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType sourceSemiMajorAxis;
+                    sourceSemiMajorAxis = this.getSemiMajorAxis();
+                    MeasureType copySemiMajorAxis = ((MeasureType) strategy.copy(LocatorUtils.property(locator, "semiMajorAxis", sourceSemiMajorAxis), sourceSemiMajorAxis, this.isSetSemiMajorAxis()));
+                    copy.setSemiMajorAxis(copySemiMajorAxis);
+                } else {
+                    if (semiMajorAxisShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.semiMajorAxis = null;
+                    }
+                }
             }
-            if (this.isSetSecondDefiningParameter()) {
-                SecondDefiningParameterPropertyElement sourceSecondDefiningParameter;
-                sourceSecondDefiningParameter = this.getSecondDefiningParameter();
-                SecondDefiningParameterPropertyElement copySecondDefiningParameter = ((SecondDefiningParameterPropertyElement) strategy.copy(LocatorUtils.property(locator, "secondDefiningParameter", sourceSecondDefiningParameter), sourceSecondDefiningParameter));
-                copy.setSecondDefiningParameter(copySecondDefiningParameter);
-            } else {
-                copy.secondDefiningParameter = null;
+            {
+                java.lang.Boolean secondDefiningParameterShouldBeCopiedAndSet = strategy.shouldBeCopiedAndSet(locator, this.isSetSecondDefiningParameter());
+                if (secondDefiningParameterShouldBeCopiedAndSet == java.lang.Boolean.TRUE) {
+                    SecondDefiningParameterPropertyElement sourceSecondDefiningParameter;
+                    sourceSecondDefiningParameter = this.getSecondDefiningParameter();
+                    SecondDefiningParameterPropertyElement copySecondDefiningParameter = ((SecondDefiningParameterPropertyElement) strategy.copy(LocatorUtils.property(locator, "secondDefiningParameter", sourceSecondDefiningParameter), sourceSecondDefiningParameter, this.isSetSecondDefiningParameter()));
+                    copy.setSecondDefiningParameter(copySecondDefiningParameter);
+                } else {
+                    if (secondDefiningParameterShouldBeCopiedAndSet == java.lang.Boolean.FALSE) {
+                        copy.secondDefiningParameter = null;
+                    }
+                }
             }
         }
         return draftCopy;
     }
 
+    @Override
     public Object createNewInstance() {
         return new EllipsoidType();
     }
 
+    @Override
     public void mergeFrom(Object left, Object right) {
-        final MergeStrategy strategy = JAXBMergeStrategy.INSTANCE;
+        final MergeStrategy strategy = JAXBMergeStrategy.getInstance();
         mergeFrom(null, null, left, right, strategy);
     }
 
+    @Override
     public void mergeFrom(ObjectLocator leftLocator, ObjectLocator rightLocator, Object left, Object right, MergeStrategy strategy) {
         super.mergeFrom(leftLocator, rightLocator, left, right, strategy);
         if (right instanceof EllipsoidType) {
@@ -295,108 +329,36 @@ public class EllipsoidType
             final EllipsoidType leftObject = ((EllipsoidType) left);
             final EllipsoidType rightObject = ((EllipsoidType) right);
             {
-                MeasureType lhsSemiMajorAxis;
-                lhsSemiMajorAxis = leftObject.getSemiMajorAxis();
-                MeasureType rhsSemiMajorAxis;
-                rhsSemiMajorAxis = rightObject.getSemiMajorAxis();
-                target.setSemiMajorAxis(((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "semiMajorAxis", lhsSemiMajorAxis), LocatorUtils.property(rightLocator, "semiMajorAxis", rhsSemiMajorAxis), lhsSemiMajorAxis, rhsSemiMajorAxis)));
+                java.lang.Boolean semiMajorAxisShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSemiMajorAxis(), rightObject.isSetSemiMajorAxis());
+                if (semiMajorAxisShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    MeasureType lhsSemiMajorAxis;
+                    lhsSemiMajorAxis = leftObject.getSemiMajorAxis();
+                    MeasureType rhsSemiMajorAxis;
+                    rhsSemiMajorAxis = rightObject.getSemiMajorAxis();
+                    MeasureType mergedSemiMajorAxis = ((MeasureType) strategy.merge(LocatorUtils.property(leftLocator, "semiMajorAxis", lhsSemiMajorAxis), LocatorUtils.property(rightLocator, "semiMajorAxis", rhsSemiMajorAxis), lhsSemiMajorAxis, rhsSemiMajorAxis, leftObject.isSetSemiMajorAxis(), rightObject.isSetSemiMajorAxis()));
+                    target.setSemiMajorAxis(mergedSemiMajorAxis);
+                } else {
+                    if (semiMajorAxisShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.semiMajorAxis = null;
+                    }
+                }
             }
             {
-                SecondDefiningParameterPropertyElement lhsSecondDefiningParameter;
-                lhsSecondDefiningParameter = leftObject.getSecondDefiningParameter();
-                SecondDefiningParameterPropertyElement rhsSecondDefiningParameter;
-                rhsSecondDefiningParameter = rightObject.getSecondDefiningParameter();
-                target.setSecondDefiningParameter(((SecondDefiningParameterPropertyElement) strategy.merge(LocatorUtils.property(leftLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(rightLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter)));
+                java.lang.Boolean secondDefiningParameterShouldBeMergedAndSet = strategy.shouldBeMergedAndSet(leftLocator, rightLocator, leftObject.isSetSecondDefiningParameter(), rightObject.isSetSecondDefiningParameter());
+                if (secondDefiningParameterShouldBeMergedAndSet == java.lang.Boolean.TRUE) {
+                    SecondDefiningParameterPropertyElement lhsSecondDefiningParameter;
+                    lhsSecondDefiningParameter = leftObject.getSecondDefiningParameter();
+                    SecondDefiningParameterPropertyElement rhsSecondDefiningParameter;
+                    rhsSecondDefiningParameter = rightObject.getSecondDefiningParameter();
+                    SecondDefiningParameterPropertyElement mergedSecondDefiningParameter = ((SecondDefiningParameterPropertyElement) strategy.merge(LocatorUtils.property(leftLocator, "secondDefiningParameter", lhsSecondDefiningParameter), LocatorUtils.property(rightLocator, "secondDefiningParameter", rhsSecondDefiningParameter), lhsSecondDefiningParameter, rhsSecondDefiningParameter, leftObject.isSetSecondDefiningParameter(), rightObject.isSetSecondDefiningParameter()));
+                    target.setSecondDefiningParameter(mergedSecondDefiningParameter);
+                } else {
+                    if (secondDefiningParameterShouldBeMergedAndSet == java.lang.Boolean.FALSE) {
+                        target.secondDefiningParameter = null;
+                    }
+                }
             }
         }
-    }
-
-    public EllipsoidType withSemiMajorAxis(MeasureType value) {
-        setSemiMajorAxis(value);
-        return this;
-    }
-
-    public EllipsoidType withSecondDefiningParameter(SecondDefiningParameterPropertyElement value) {
-        setSecondDefiningParameter(value);
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withRemarks(String value) {
-        setRemarks(value);
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withMetaDataProperty(MetaDataPropertyType... values) {
-        if (values!= null) {
-            for (MetaDataPropertyType value: values) {
-                getMetaDataProperty().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withMetaDataProperty(Collection<MetaDataPropertyType> values) {
-        if (values!= null) {
-            getMetaDataProperty().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withDescription(StringOrRefType value) {
-        setDescription(value);
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withDescriptionReference(ReferenceType value) {
-        setDescriptionReference(value);
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withIdentifier(CodeWithAuthorityType value) {
-        setIdentifier(value);
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withName(CodeType... values) {
-        if (values!= null) {
-            for (CodeType value: values) {
-                getName().add(value);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withName(Collection<CodeType> values) {
-        if (values!= null) {
-            getName().addAll(values);
-        }
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withId(String value) {
-        setId(value);
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withMetaDataProperty(List<MetaDataPropertyType> value) {
-        setMetaDataProperty(value);
-        return this;
-    }
-
-    @Override
-    public EllipsoidType withName(List<CodeType> value) {
-        setName(value);
-        return this;
     }
 
 }

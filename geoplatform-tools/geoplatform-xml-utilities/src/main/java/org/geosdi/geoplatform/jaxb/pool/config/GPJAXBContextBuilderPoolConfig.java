@@ -44,9 +44,18 @@ import static java.time.Duration.of;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 /**
+ * Configurazione del pool di {@link javax.xml.bind.JAXBContext} usato da
+ * {@link org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool}.
+ *
+ * @deprecated per {@code javax.xml.bind}. Nel codice nuovo usare
+ *             {@link org.geosdi.geoplatform.jaxb.jakarta.pool.config.GPJAXBJakartaContextBuilderPoolConfig},
+ *             che lavora con {@code jakarta.xml.bind}. Resta finché i binding di
+ *             {@code geoplatform-xml-binding} non saranno rigenerati per jakarta: fino ad allora
+ *             serve a chi legge e scrive quelle classi.
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Deprecated
 public class GPJAXBContextBuilderPoolConfig extends GenericKeyedObjectPoolConfig<JAXBContext> {
 
     {

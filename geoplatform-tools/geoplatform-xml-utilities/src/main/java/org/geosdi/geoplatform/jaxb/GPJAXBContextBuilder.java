@@ -45,9 +45,15 @@ import java.lang.ref.WeakReference;
  * If you want use a pool class see {@link org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool}
  * </p>
  *
+ * @deprecated per {@code javax.xml.bind}. Nel codice nuovo usare
+ *             {@link org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder},
+ *             che lavora con {@code jakarta.xml.bind}. Resta finché i binding di
+ *             {@code geoplatform-xml-binding} non saranno rigenerati per jakarta: fino ad allora
+ *             serve a chi legge e scrive quelle classi.
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Deprecated
 public final class GPJAXBContextBuilder extends AbstractJAXBContextBuilder {
 
     private volatile WeakReference<GPJAXBContextCache> cache;

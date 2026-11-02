@@ -47,9 +47,15 @@ import javax.xml.bind.JAXBException;
 /**
  * <p>Pooled class for {@link org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder}</p>
  *
+ * @deprecated per {@code javax.xml.bind}. Nel codice nuovo usare
+ *             {@link org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool},
+ *             che lavora con {@code jakarta.xml.bind}. Resta finché i binding di
+ *             {@code geoplatform-xml-binding} non saranno rigenerati per jakarta: fino ad allora
+ *             serve a chi legge e scrive quelle classi.
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Deprecated
 public final class GPJAXBContextBuilderPool extends AbstractJAXBContextBuilder {
 
     static {

@@ -92,7 +92,7 @@ public class GPMailAsyncTest {
         Future<Boolean> result = this.gpMailAsyncSender.send(mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
             message.setSubject("Notification");
-            message.setTo("core@geosdi.org");
+            message.setTo("glascaleia@gmail.com");
             String text = "Test";
             message.setText(text);
             message.setFrom(gpMailSpringDetail.getFrom(),

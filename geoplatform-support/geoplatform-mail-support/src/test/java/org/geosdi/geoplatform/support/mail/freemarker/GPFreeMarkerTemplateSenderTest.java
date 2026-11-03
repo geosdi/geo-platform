@@ -111,7 +111,7 @@ public class GPFreeMarkerTemplateSenderTest {
         this.gpMailSpringSender.send(mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
             message.setSubject("geoSDI Notification FreeMarker Support");
-            message.setTo(new String[]{"vito.salvia@gmail.com", "glascaleia@gmail.com"});
+            message.setTo("glascaleia@gmail.com");
             String text = FreeMarkerTemplateUtils.processTemplateIntoString(freeMarkerConfiguration
                     .getTemplate("geoPlatformMailSupport.fm"), null);
             message.setText(text, TRUE);

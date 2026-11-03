@@ -57,10 +57,7 @@ In ordine di priorità (deciso il 2026-11-03):
    sia `javax` sia `jakarta`; poi si portano a `jakarta.ws.rs` le interfacce client RestyGWT di `gp_advanced_extensions`
    (`LayerBuilderService`, `CSVImporterService`, `FileImporterService`), che fino ad allora restano `javax.ws.rs`. Da
    decidere: dove ospitarlo, groupId, versione nel BOM `geoplatform-gwt-dependency`.
-4. Duplicato `com.sun.activation:jakarta.activation` / `jakarta.activation-api` nei 9 moduli della posta
-   (`mail-support`, `async-mail-support`, `scheduler-delegate` e chi ne dipende): resta finché `jakarta.mail` 2.0.2 non
-   passa ad `angus-mail` con `angus-activation`.
-5. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
+4. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
    per il WFS va capito cosa restituisce oggi.
-6. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo
+5. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo
    status HTTP.

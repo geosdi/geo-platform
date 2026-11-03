@@ -49,6 +49,8 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.util.concurrent.Future;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -88,6 +90,7 @@ public class GPMailAsyncTest {
     }
 
     @Test
+    @Ignore(value = "Too Mails from Hudson / Jenkins")
     public void sendAsyncMail() throws Exception {
         Future<Boolean> result = this.gpMailAsyncSender.send(mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
@@ -100,7 +103,7 @@ public class GPMailAsyncTest {
             message.setReplyTo(gpMailSpringDetail.getReplayTo(),
                     gpMailSpringDetail.getReplayToName());
         });
-
+        Assert.assertTrue(result.get(60, SECONDS));
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@Async Mail Sended.");
     }
 

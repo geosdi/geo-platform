@@ -12,6 +12,8 @@ Framework webgis multi-modulo Maven (Java 21). Le versioni delle dipendenze stan
 
 - Nei messaggi di commit e nelle descrizioni delle PR non citare mai Claude: niente riga
   `Co-Authored-By: Claude ...` né "Generated with Claude Code".
+- Promemoria e lavori da riprendere si scrivono in questo file, nei "Lavori aperti", e poi si fanno commit e push: la
+  memoria di Claude Code resta sul singolo Mac e su un altro non c'è.
 
 ## Build e test
 
@@ -40,17 +42,25 @@ Framework webgis multi-modulo Maven (Java 21). Le versioni delle dipendenze stan
 
 ## Lavori aperti
 
-- Duplicato `com.sun.activation:jakarta.activation` / `jakarta.activation-api` nei 9 moduli della posta
-  (`mail-support`, `async-mail-support`, `scheduler-delegate` e chi ne dipende): resta finché `jakarta.mail` 2.0.2 non
-  passa ad `angus-mail` con `angus-activation`.
-- Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
-  per il WFS va capito cosa restituisce oggi.
-- Fork di RestyGWT. La 2.2.7 (maggio 2020) è l'ultima pubblicata e il suo generatore (`rebind`:
-  `RestServiceClassCreator`, `JsonEncoderDecoderClassCreator`, `AnnotationCopyUtil`) legge solo `javax.ws.rs` e
-  `javax.xml.bind.annotation.XmlTransient`; il codice `client` non usa `javax`. Nel fork il generatore va fatto leggere
-  sia `javax` sia `jakarta`; poi si portano a `jakarta.ws.rs` le interfacce client RestyGWT di `gp_advanced_extensions`
-  (`LayerBuilderService`, `CSVImporterService`, `FileImporterService`), che fino ad allora restano `javax.ws.rs`. Da
-  decidere: dove ospitarlo, groupId, versione nel BOM `geoplatform-gwt-dependency`.
-- Verificare dal client, con l'applicazione avviata, una chiamata del layer builder e un import CSV: dopo il passaggio
-  a jakarta Jackson sul server legge `@XmlAccessorType(FIELD)` e il JSON di alcuni DTO è cambiato (vedi i commit
-  "Migrate layer-builder/csv-importer to jakarta.xml.bind" di `gp_advanced_extensions`).
+In ordine di priorità (deciso il 2026-11-03):
+
+1. Dockerizzare il frontend (`geoplatform-base-app`) e il backend (lo stack dei servizi di `geoplatform-services`), per
+   avviare davvero l'applicazione: dettagli e decisioni nel `CLAUDE.md` di `../gp_advanced_extensions` ("Stato del
+   lavoro" e "`mvn gwt:run` della base app").
+2. Con l'applicazione avviata, verificare dal client una chiamata del layer builder. Il client RestyGWT
+   (`LayerBuilderService`) manda DTO passati a jakarta (per esempio `CountLayerFeaturesRequest` con
+   `JDBCTableNameQueryParam`) e il loro JSON lo scrive RestyGWT, non Jackson; sul server Jackson ora legge
+   `@XmlAccessorType(FIELD)` (vedi il commit "Migrate layer-builder to jakarta.xml.bind" di `gp_advanced_extensions`).
+3. Fork di RestyGWT. La 2.2.7 (maggio 2020) è l'ultima pubblicata e il suo generatore (`rebind`:
+   `RestServiceClassCreator`, `JsonEncoderDecoderClassCreator`, `AnnotationCopyUtil`) legge solo `javax.ws.rs` e
+   `javax.xml.bind.annotation.XmlTransient`; il codice `client` non usa `javax`. Nel fork il generatore va fatto leggere
+   sia `javax` sia `jakarta`; poi si portano a `jakarta.ws.rs` le interfacce client RestyGWT di `gp_advanced_extensions`
+   (`LayerBuilderService`, `CSVImporterService`, `FileImporterService`), che fino ad allora restano `javax.ws.rs`. Da
+   decidere: dove ospitarlo, groupId, versione nel BOM `geoplatform-gwt-dependency`.
+4. Duplicato `com.sun.activation:jakarta.activation` / `jakarta.activation-api` nei 9 moduli della posta
+   (`mail-support`, `async-mail-support`, `scheduler-delegate` e chi ne dipende): resta finché `jakarta.mail` 2.0.2 non
+   passa ad `angus-mail` con `angus-activation`.
+5. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
+   per il WFS va capito cosa restituisce oggi.
+6. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo
+   status HTTP.

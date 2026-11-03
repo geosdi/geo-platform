@@ -40,14 +40,14 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.scheduling.annotation.AsyncResult;
 
 import javax.annotation.Nonnull;
 import java.io.InputStream;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.TRUE;
+import static java.util.concurrent.CompletableFuture.completedFuture;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -68,74 +68,74 @@ public final class BaseMailAsyncSender implements GPMailAsyncSender {
 
     /**
      * @param mm
-     * @return {@link Future<Boolean>}
+     * @return {@link CompletableFuture<Boolean>}
      * @throws MailException
      */
     @Override
-    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessage mm) throws MailException {
+    public CompletableFuture<Boolean> send(@Nonnull(when = NEVER) MimeMessage mm) throws MailException {
         checkNotNull(mm != null, "The Parameter MimeMessage must not be null");
         this.mailSender.send(mm);
-        return new AsyncResult(TRUE);
+        return completedFuture(TRUE);
     }
 
     /**
      * @param mms
-     * @return {@link Future<Boolean>}
+     * @return {@link CompletableFuture<Boolean>}
      * @throws MailException
      */
     @Override
-    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessage[] mms) throws MailException {
+    public CompletableFuture<Boolean> send(@Nonnull(when = NEVER) MimeMessage[] mms) throws MailException {
         checkNotNull(mms != null, "The Parameter MimeMessage[] must not be null");
         this.mailSender.send(mms);
-        return new AsyncResult(TRUE);
+        return completedFuture(TRUE);
     }
 
     /**
      * @param mmp
-     * @return {@link Future<Boolean>}
+     * @return {@link CompletableFuture<Boolean>}
      * @throws MailException
      */
     @Override
-    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator mmp) throws MailException {
+    public CompletableFuture<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator mmp) throws MailException {
         checkNotNull(mmp != null, "The Parameter MimeMessagePreparator must not be null");
         this.mailSender.send(mmp);
-        return new AsyncResult(TRUE);
+        return completedFuture(TRUE);
     }
 
     /**
      * @param mmps
-     * @return {@link Future<Boolean>}
+     * @return {@link CompletableFuture<Boolean>}
      * @throws MailException
      */
     @Override
-    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator[] mmps) throws MailException {
+    public CompletableFuture<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator[] mmps) throws MailException {
         checkNotNull(mmps != null, "The Parameter MimeMessagePreparator[] must not be null");
         this.mailSender.send(mmps);
-        return new AsyncResult(TRUE);
+        return completedFuture(TRUE);
     }
 
     /**
      * @param smm
-     * @return {@link Future<Boolean>}
+     * @return {@link CompletableFuture<Boolean>}
      * @throws MailException
      */
     @Override
-    public Future<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage smm) throws MailException {
+    public CompletableFuture<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage smm) throws MailException {
         checkNotNull(smm != null, "The Parameter SimpleMailMessage must not be null");
         this.mailSender.send(smm);
-        return new AsyncResult(TRUE);
+        return completedFuture(TRUE);
     }
 
     /**
      * @param smms
-     * @return {@link Future<Boolean>}
+     * @return {@link CompletableFuture<Boolean>}
      * @throws MailException
      */
     @Override
-    public Future<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage[] smms) throws MailException {
+    public CompletableFuture<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage[] smms) throws MailException {
         checkNotNull(smms != null, "The Parameter SimpleMailMessage[] must not be null");
         this.mailSender.send(smms);
-        return new AsyncResult(TRUE);
+        return completedFuture(TRUE);
     }
 
     @Override

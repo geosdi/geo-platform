@@ -44,14 +44,35 @@ Framework webgis multi-modulo Maven (Java 21). Le versioni delle dipendenze stan
 
 In ordine di priorità (deciso il 2026-11-03):
 
-1. Dockerizzare il frontend (`geoplatform-base-app`) e il backend (lo stack dei servizi di `geoplatform-services`), per
-   avviare davvero l'applicazione: dettagli e decisioni nel `CLAUDE.md` di `../gp_advanced_extensions` ("Stato del
-   lavoro" e "`mvn gwt:run` della base app").
-2. Con l'applicazione avviata, verificare dal client una chiamata del layer builder. Il client RestyGWT
-   (`LayerBuilderService`) manda DTO passati a jakarta (per esempio `CountLayerFeaturesRequest` con
-   `JDBCTableNameQueryParam`) e il loro JSON lo scrive RestyGWT, non Jackson; sul server Jackson ora legge
-   `@XmlAccessorType(FIELD)` (vedi il commit "Migrate layer-builder to jakarta.xml.bind" di `gp_advanced_extensions`).
-3. Sostituire RestyGWT con Domino REST (`org.dominokit:domino-rest-client` 2.0.2, JSON con `domino-jackson` 1.0.6),
+1. **Da fare il 2026-11-04.** Correggere domino-jackson perché trovi `@JsonTypeInfo`/`@JsonSubTypes` anche sui
+   supertipi (classi e interfacce), come fa Jackson, e proporlo a DominoKit:
+   - domino-jackson è un repository a sé, non un sottomodulo di domino-rest:
+     [DominoKit/domino-jackson](https://github.com/DominoKit/domino-jackson), moduli `domino-jackson` e
+     `domino-jackson-processor`. Fork su GitHub sotto `glascaleia`, clone in `../domino-jackson` con `origin` (fork) e
+     `upstream` (DominoKit).
+   - Le PR vanno su `development` (le ultime unite, #96 e #98 del 2026-11-02, hanno titolo "Fixes #N"): prima
+     un'issue che descrive il problema, poi la PR che la cita. Nessuna issue esistente lo copre: la #19 è la richiesta
+     originale del supporto, la #86 un altro bug di generazione dei sottotipi.
+   - La modifica è in `Type.getSubTypes` di `domino-jackson-processor`: oggi legge
+     `beanElement.getAnnotation(JsonTypeInfo.class)` e `JsonSubTypes` solo sulla classe dichiarata della proprietà;
+     deve risalire superclassi e interfacce e usare la prima che le dichiara. Aggiungere i test nel modulo del
+     processor, con il caso di `JDBCTableNameQueryParam`: classe concreta, `@JsonTypeInfo(use = NAME, property =
+     "type")` e `@JsonSubTypes` su un'interfaccia antenata (`GPJDBCTemplateAddQueryParam`); atteso
+     `{"type":"JDBCTableNameQueryParam",...}`.
+   - Verifica con il progetto della prova, che era in uno scratchpad temporaneo e va ricreato (progetto Maven con parent
+     `geo-platform`): interfaccia `jakarta.ws.rs` con `@RequestFactory` per `countLayerFeatures`, mapper `@JSONMapper`
+     di `CountLayerFeaturesRequest`, codec RestyGWT (`JsonEncoderDecoder`) per il confronto; test GWT con
+     `net.ltgt.gwt.maven:gwt-maven-plugin` 1.3.0 goal `test` e `testArgs` `-prod` (in `-prod` `System.out` non arriva a
+     Maven: i JSON si leggono dal messaggio di un `fail`); test JVM che legge i JSON con il Jackson del server
+     (`JACKSON_JODA_TIME_WITHOUT_ROOT` di `GPRestProviderFactory`, anche con `FAIL_ON_UNKNOWN_PROPERTIES`). Servono:
+     `<proc>full</proc>` nel compiler (JDK 23+), sorgenti dei DTO (`sources` di `layer-builder-service-api`,
+     `layer-builder-jdbc-template-api`, `geoplatform-hibernate-validator-support`), `guava-gwt` con `org.jspecify`
+     come in `geoplatform-api`, `javax.xml.bind:jaxb-api` 2.3.1 `provided` solo per il generatore di RestyGWT,
+     elemental2 a 1.3.2, `DominoRestConfig.initDefaults()` in `gwtSetUp`. Usare il processor costruito dal fork,
+     senza `@JsonTypeInfo` aggiunto a `JDBCTableNameQueryParam` (`setFid()` invece serve).
+   - Finché la PR non è rilasciata, decidere se usare la versione del fork (dove pubblicarla, groupId, versione nel
+     BOM `geoplatform-gwt-dependency`).
+2. Sostituire RestyGWT con Domino REST (`org.dominokit:domino-rest-client` 2.0.2, JSON con `domino-jackson` 1.0.6),
    invece del fork di RestyGWT: RestyGWT 2.2.7 (maggio 2020) è l'ultima versione e il suo generatore legge solo
    `javax.ws.rs` e `javax.xml.bind`; Domino REST è mantenuto, usa `jakarta.ws.rs` e funziona con GWT 2. RestyGWT è
    usato in 15 file: `layer-builder-gwt`, `csv-importer-gwt`, `file-importer-gwt` di `gp_advanced_extensions` e
@@ -62,14 +83,22 @@ In ordine di priorità (deciso il 2026-11-03):
    - domino-jackson legge `@JsonTypeInfo`/`@JsonSubTypes` solo sulla classe dichiarata della proprietà, non sulle
      interfacce (`Type.getSubTypes` del processor); il server invece vuole il `"type"` dichiarato sulle interfacce
      (per esempio `GPJDBCTemplateAddQueryParam`) e senza risponde `InvalidTypeIdException`. 8 file con `@JsonTypeInfo`
-     e 25 sottotipi, quasi tutti nel layer builder. Meglio correggere `getSubTypes` perché risalga ai supertipi, come
-     Jackson, e proporlo a DominoKit, invece di annotare i sottotipi uno per uno.
+     e 25 sottotipi, quasi tutti nel layer builder. Si risolve con la correzione di domino-jackson del punto 1, non
+     annotando i sottotipi uno per uno.
    - fissare `com.google.elemental2` (`core`, `dom`, `promise`) a una sola versione (1.3.2) nel BOM
      `geoplatform-gwt-dependency`: oggi Maven mescola 1.1.0 e 1.3.2 e non compila.
-   Da verificare subito: il generatore di RestyGWT carica `javax.xml.bind.annotation.XmlTransient` e senza
-   `javax.xml.bind:jaxb-api` sul classpath la compilazione GWT si ferma; `layer-builder-gwt` non lo ha più, quindi la
-   compilazione GWT della base app è probabilmente rotta dal commit "Remove the javax JAXB code and libraries".
-4. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
+3. Controllare la compilazione GWT della base app, poi dockerizzare. Il generatore di RestyGWT carica
+   `javax.xml.bind.annotation.XmlTransient` e senza `javax.xml.bind:jaxb-api` sul classpath la compilazione GWT si
+   ferma; `layer-builder-gwt` non lo ha più, quindi la compilazione GWT della base app è probabilmente rotta dal commit
+   "Remove the javax JAXB code and libraries" (`geoplatform-base-app` non è clonata su tutti i Mac). Poi
+   dockerizzare il frontend (`geoplatform-base-app`) e il backend (lo stack dei servizi di `geoplatform-services`), per
+   avviare davvero l'applicazione: dettagli e decisioni nel `CLAUDE.md` di `../gp_advanced_extensions` ("Stato del
+   lavoro" e "`mvn gwt:run` della base app").
+4. Con l'applicazione avviata, verificare dal client una chiamata del layer builder. Il client RestyGWT
+   (`LayerBuilderService`) manda DTO passati a jakarta (per esempio `CountLayerFeaturesRequest` con
+   `JDBCTableNameQueryParam`) e il loro JSON lo scrive RestyGWT, non Jackson; sul server Jackson ora legge
+   `@XmlAccessorType(FIELD)` (vedi il commit "Migrate layer-builder to jakarta.xml.bind" di `gp_advanced_extensions`).
+5. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
    per il WFS va capito cosa restituisce oggi.
-5. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo
+6. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo
    status HTTP.

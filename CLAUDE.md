@@ -52,17 +52,17 @@ In ordine di priorità (deciso il 2026-11-03):
      `upstream` (DominoKit). Si compila con il JDK 21 (CI di DominoKit su 11, 17, 21 e 23); con il JDK 27 lo spotless
      del progetto non gira.
    - Fatto: commit `58d497d` "Inherit @JsonTypeInfo and @JsonSubTypes from supertypes, as Jackson does" sul ramo
-     `fix/subtypes-from-supertypes` (da `upstream/development`), pushato sul fork. `Type.getSubTypes` cerca le annotazioni sul tipo e poi sui supertipi (interfacce prima della
-     superclasse, come Jackson) e, se `@JsonSubTypes` viene da un supertipo, tiene solo i sottotipi assegnabili. Test
-     nuovi nel package `supertype` del processor (stesso schema di `JDBCTableNameQueryParam`, confronto con Jackson);
-     build verde con JDK 11, 17 e 21.
+     `fix/subtypes-from-supertypes` (da `upstream/development`), pushato sul fork. `Type.getSubTypes` cerca le
+     annotazioni sul tipo e poi sui supertipi (interfacce prima della superclasse, come Jackson) e, se `@JsonSubTypes`
+     viene da un supertipo, tiene solo i sottotipi assegnabili. Test nuovi nel package `supertype` del processor
+     (stesso schema di `JDBCTableNameQueryParam`, confronto con Jackson); build verde con JDK 11, 17 e 21.
    - Cambia un comportamento, da scrivere nell'issue e nella PR: `InheritanceWithJsonTypeInfoTest` si aspettava
      `genericField` (dichiarato `DataInput`, sottoclasse di `Data` annotata) senza `"@type"`; Jackson lo scrive e
      rifiuta il JSON senza (`InvalidTypeIdException`). Il test ora si aspetta il `"@type"` e confronta con Jackson.
-   - Da fare: issue su DominoKit (testo pronto in inglese: problema, esempio minimo, confronto con Jackson, il cambiamento sopra),
-     poi PR su `development` dal ramo del fork con titolo "Fixes #N" (come le ultime unite, #96 e #98 del
-     2026-11-02). Nessuna issue esistente lo copre: la #19 è la richiesta originale del supporto, la #86 un altro bug
-     di generazione dei sottotipi.
+   - Da fare: issue su DominoKit (testo in inglese preparato il 2026-11-04: problema, esempio minimo, confronto con
+     Jackson, il cambiamento sopra), poi PR su `development` dal ramo del fork con titolo "Fixes #N" (come le ultime
+     unite, #96 e #98 del 2026-11-02). Nessuna issue esistente lo copre: la #19 è la richiesta originale del supporto,
+     la #86 un altro bug di generazione dei sottotipi.
    - Prova riuscita il 2026-11-04, salvata nel ramo `domino-rest` di `gp_advanced_extensions` (pushato su `origin`),
      cartella `prove/domino-rest-count-layer-features`, con README su prerequisiti ed esecuzione. Con il processor del
      fork e senza annotazioni aggiunte ai DTO: domino-jackson, in GWT `-prod` e sulla JVM, scrive

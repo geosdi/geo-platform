@@ -113,9 +113,9 @@ In ordine di priorità (deciso il 2026-11-03):
      (README con prerequisiti) copre tutti i metodi dei quattro servizi, richieste lette dal mapper del server e
      risposte scritte dal server lette da domino-jackson, sulla JVM e in GWT `-prod` (14 + 11 test verdi); la
      compilazione GWT completa della base app (`mvn clean compile gwt:compile`, il goal `compile` nel pom è commentato)
-     riesce. Ignora 18 file già rotti e non usati: 15 di un vecchio `gwt-user-2.0.3.jar` che arriva nel classpath della
-     base app (da capire da dove), `java.sql.Timestamp` di GWT, `GPLayerBuilderFeatureStore` e
-     `GPLayerBuilderFeatureAttributeStore` di `layer-builder-service-api`.
+     riesce. Ignorava 18 file già rotti e non usati; 15 erano di un vecchio `com.google.gwt:gwt-user` 2.0.3, portato da
+     `gwt-ajaxloader` (via `gwt-maps-api` di `streetview`), finito anche nel `WEB-INF/lib` del war: escluso nel pom di
+     `streetview` (ramo `domino-rest` di `gp_advanced_extensions`), ora le unità ignorate sono 2.
    - Finché domino-jackson non rilascia la correzione del punto 1, `countLayerFeatures` e `loadLayerSchema` mandano
      `JDBCTableNameQueryParam` senza `"type"` e il server risponde `InvalidTypeIdException`. `-Ddomino-jackson.version`
      da riga di comando non cambia la versione del BOM importato: per provare il fork in un modulo del progetto va
@@ -137,8 +137,12 @@ In ordine di priorità (deciso il 2026-11-03):
    (Nominatim vero), CORS, `loadWorkspaces`, `createWorkspace`, `countLayerFeatures` e `loadLayerSchema` (con
    `"type"`). Al primo avvio sono saltati fuori tre errori, corretti nei rami `domino-rest`: ehcache 3.4.0 javax di
    `gt-geotiff` nel war, FreeMarker 2.3.34 di `hibernate-reveng` (versione ora nel BOM `geoplatform-spring-dependency`),
-   NPE di `loadWorkspaces` con GeoServer senza workspace. Da fare: il frontend (`baseapp.war` con nginx davanti, stessa
-   origine dei servizi); il datastore JNDI del layer builder si crea solo alla creazione del layer, da provare dalla UI;
+   NPE di `loadWorkspaces` con GeoServer senza workspace. **Frontend fatto il 2026-11-04**: container `baseapp`
+   (`baseapp.war` nella radice di Tomcat 11, http://localhost:9393/BaseApp.html, account `admin`/`admin`), costruito da
+   `build-frontend.sh`, configurazione in `frontend/conf/gp-ws.properties`; in `web.xml` la configurazione della stampa
+   ora è relativa (`WEB-INF/config.yaml`) invece del percorso assoluto di un Mac. Il browser chiama i servizi Domino su
+   `localhost:8080` (CORS). Da fare: la service root in una configurazione e nginx davanti (stessa origine); gli
+   indirizzi di GeoServer (`http://geoserver:8080` dentro compose, che il browser non risolve); il datastore JNDI del layer builder si crea solo alla creazione del layer, da provare dalla UI;
    un `logback.xml` meno verboso per il container (oggi alcuni logger scrivono chiavi e password). Dettagli e decisioni
    sulla modalità sviluppo nel `CLAUDE.md` di `../gp_advanced_extensions` ("`mvn gwt:run` della base app").
 4. Con l'applicazione avviata, verificare dal client le chiamate REST migrate a Domino (layer builder, workspace del

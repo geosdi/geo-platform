@@ -73,33 +73,55 @@ In ordine di priorità (deciso il 2026-11-03):
      verifiche.
    - Finché la PR non è rilasciata, decidere se usare la versione del fork (dove pubblicarla, groupId, versione nel
      BOM `geoplatform-gwt-dependency`).
-2. Sostituire RestyGWT con Domino REST (`org.dominokit:domino-rest-client` 2.0.2, JSON con `domino-jackson` 1.0.6),
-   invece del fork di RestyGWT: RestyGWT 2.2.7 (maggio 2020) è l'ultima versione e il suo generatore legge solo
-   `javax.ws.rs` e `javax.xml.bind`; Domino REST è mantenuto, usa `jakarta.ws.rs` e funziona con GWT 2. RestyGWT è
-   usato in 15 file: `layer-builder-gwt`, `csv-importer-gwt`, `file-importer-gwt` di `gp_advanced_extensions` e
-   `gp-wfst-widget` di geo-platform. Prova del 2026-11-03 su `countLayerFeatures` (`CountLayerFeaturesRequest`): il
-   client Domino si genera da un'interfaccia `jakarta.ws.rs` e il server legge il suo JSON, dopo questi adattamenti:
-   - domino-jackson non usa i campi privati senza setter (genera un'assegnazione diretta che non compila): a
-     `JDBCTableNameQueryParam` serve `setFid()` (aggiunto nel ramo `domino-rest` di `gp_advanced_extensions`), e così
-     agli altri DTO nella stessa situazione.
-   - domino-jackson legge `@JsonTypeInfo`/`@JsonSubTypes` solo sulla classe dichiarata della proprietà, non sulle
-     interfacce (`Type.getSubTypes` del processor); il server invece vuole il `"type"` dichiarato sulle interfacce
-     (per esempio `GPJDBCTemplateAddQueryParam`) e senza risponde `InvalidTypeIdException`. 8 file con `@JsonTypeInfo`
-     e 25 sottotipi, quasi tutti nel layer builder. Si risolve con la correzione di domino-jackson del punto 1 (provata
-     il 2026-11-04), non annotando i sottotipi uno per uno.
-   - fissare `com.google.elemental2` (`core`, `dom`, `promise`) a una sola versione (1.3.2) nel BOM
-     `geoplatform-gwt-dependency`: oggi Maven mescola 1.1.0 e 1.3.2 e non compila.
-3. Controllare la compilazione GWT della base app, poi dockerizzare. Il generatore di RestyGWT carica
-   `javax.xml.bind.annotation.XmlTransient` e senza `javax.xml.bind:jaxb-api` sul classpath la compilazione GWT si
-   ferma; `layer-builder-gwt` non lo ha più, quindi la compilazione GWT della base app è probabilmente rotta dal commit
-   "Remove the javax JAXB code and libraries" (`geoplatform-base-app` non è clonata su tutti i Mac). Poi
-   dockerizzare il frontend (`geoplatform-base-app`) e il backend (lo stack dei servizi di `geoplatform-services`), per
+2. Sostituire RestyGWT con Domino REST. **Migrazione fatta il 2026-11-04 sui rami `domino-rest`** di
+   `geoplatform-dependencies`, geo-platform e `gp_advanced_extensions` (pubblicati su `origin`, non ancora uniti a
+   `spring-upgrade`): Domino REST è mantenuto, usa `jakarta.ws.rs` e funziona con GWT 2, mentre RestyGWT 2.2.7 (maggio
+   2020) legge solo `javax.ws.rs` e `javax.xml.bind`.
+   - BOM `geoplatform-gwt-dependency` (pom e `build.gradle`): `domino-rest-client`/`domino-rest-processor` 2.0.2,
+     `domino-jackson`/`domino-jackson-processor` 1.0.6, `elemental2` (`core`, `dom`, `promise`) 1.3.2. GWT resta
+     2.13.1, che è l'ultima. RestyGWT e gwt-jackson sono ancora nel BOM.
+   - Client migrati: `LayerBuilderService` (`layer-builder-gwt`), `FileImporterService`, `CSVImporterService`,
+     `WFSGeocodingService` (`gp-wfst-widget`): interfacce `jakarta.ws.rs` con `@RequestFactory(serviceRoot =
+     "http://localhost:8080/geoplatform-service")`, stessi URL di prima; i delegate usano la factory generata
+     (`...ServiceFactory.INSTANCE.metodo(...).onSuccess(...).onFailed(...).send()`) e chiamano
+     `DominoRestConfig.initDefaults()` in un blocco statico; dove il chiamante passava un `MethodCallback` ora passa
+     `Success` e `Fail`. I messaggi d'errore (`{"gpRestExceptionMessage":{"message":...}}`) si leggono con
+     `GPRestErrorMessage` di `basic-widget`. Tolti perché senza chiamanti: `createLayer` (il layer si crea con il
+     command dispatcher), `findJobExecution` del CSV importer e il mapper gwt-jackson di `LayerUpdateFeatureRequest`.
+     Il secondo `searchAddress` del layer builder è diventato `searchAddressByLonLat` (Domino genera una classe per
+     nome di metodo). `geofence-gwt` aveva RestyGWT e `GwtJackson` solo nel pom e nel `.gwt.xml`: tolti.
+   - I sorgenti generati dai processor di Domino vanno nel jar, perché il compilatore GWT dell'applicazione legge i
+     sorgenti da lì: `maven-resources-plugin` (`copy-generated-gwt-sources`, fase `process-classes`) li copia in
+     `target/classes`. In `gp_advanced_extensions` l'esecuzione sta nel `pluginManagement` di `gp-advanced-widget`,
+     spenta per default (il plugin gira in tutti i moduli), e i moduli client la accendono con
+     `copy-generated-gwt-sources.skip=false`; in geo-platform sta nel pom di `gp-wfst-widget`.
+   - DTO corretti, errori che c'erano già con RestyGWT: `setFid()` in `JDBCTableNameQueryParam` (domino-jackson non usa i
+     campi privati senza setter); `@JsonProperty("jDBCTemplateQueryUpdateParam")` in `LayerUpdateFeatureRequestGWT` (il
+     server ignorava la proprietà e l'aggiornamento falliva la validazione); `@JsonValue` su `name()` in
+     `JDBCColumnSchemaDataType` (Jackson 3 scrive gli enum con `toString()` per default, domino-jackson li legge per
+     nome); DTO del geocoding tipizzati (`FeatureDTO` con `FeaturePointDTO` e `FeaturePropertiesDTO` al posto di
+     `JSONValue` e `Map<String, Object>`, con `ignoreUnknown`).
+   - Verifiche: la prova `prove/domino-rest-count-layer-features` del ramo `domino-rest` di `gp_advanced_extensions`
+     (README con prerequisiti) copre tutti i metodi dei quattro servizi, richieste lette dal mapper del server e
+     risposte scritte dal server lette da domino-jackson, sulla JVM e in GWT `-prod` (12 + 9 test verdi); la
+     compilazione GWT completa della base app (`mvn clean compile gwt:compile`, il goal `compile` nel pom è commentato)
+     riesce. Ignora 18 file già rotti e non usati: 15 di un vecchio `gwt-user-2.0.3.jar` che arriva nel classpath della
+     base app (da capire da dove), `java.sql.Timestamp` di GWT, `GPLayerBuilderFeatureStore` e
+     `GPLayerBuilderFeatureAttributeStore` di `layer-builder-service-api`.
+   - Finché domino-jackson non rilascia la correzione del punto 1, `countLayerFeatures` e `loadLayerSchema` mandano
+     `JDBCTableNameQueryParam` senza `"type"` e il server risponde `InvalidTypeIdException`. `-Ddomino-jackson.version`
+     da riga di comando non cambia la versione del BOM importato: per provare il fork in un modulo del progetto va
+     cambiata la versione nel BOM.
+   - Da fare: unire i rami `domino-rest` a `spring-upgrade` (chiedere prima a Peppino); togliere RestyGWT dal BOM;
+     passare a domino-jackson i due usi rimasti di gwt-jackson (`FileImporterUploader` e `CSVFileUploader`, che leggono
+     `GPCreateLayerBuilderResponse` con una `Map<String, Object>`) e poi togliere gwt-jackson; spostare la service root
+     `localhost:8080` in una configurazione (serve per Docker, punto 3).
+3. Dockerizzare il frontend (`geoplatform-base-app`) e il backend (lo stack dei servizi di `geoplatform-services`), per
    avviare davvero l'applicazione: dettagli e decisioni nel `CLAUDE.md` di `../gp_advanced_extensions` ("Stato del
-   lavoro" e "`mvn gwt:run` della base app").
-4. Con l'applicazione avviata, verificare dal client una chiamata del layer builder. Il client RestyGWT
-   (`LayerBuilderService`) manda DTO passati a jakarta (per esempio `CountLayerFeaturesRequest` con
-   `JDBCTableNameQueryParam`) e il loro JSON lo scrive RestyGWT, non Jackson; sul server Jackson ora legge
-   `@XmlAccessorType(FIELD)` (vedi il commit "Migrate layer-builder to jakarta.xml.bind" di `gp_advanced_extensions`).
+   lavoro" e "`mvn gwt:run` della base app"). La compilazione GWT della base app riesce di nuovo con i rami
+   `domino-rest` (prima si fermava perché il generatore di RestyGWT cercava `javax.xml.bind`).
+4. Con l'applicazione avviata, verificare dal client le chiamate REST migrate a Domino (layer builder, workspace del
+   file e del CSV importer, geocoding WFS).
 5. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
    per il WFS va capito cosa restituisce oggi.
 6. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo

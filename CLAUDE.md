@@ -59,10 +59,9 @@ In ordine di priorità (deciso il 2026-11-03):
    - Cambia un comportamento, da scrivere nell'issue e nella PR: `InheritanceWithJsonTypeInfoTest` si aspettava
      `genericField` (dichiarato `DataInput`, sottoclasse di `Data` annotata) senza `"@type"`; Jackson lo scrive e
      rifiuta il JSON senza (`InvalidTypeIdException`). Il test ora si aspetta il `"@type"` e confronta con Jackson.
-   - Da fare: issue su DominoKit (testo in inglese preparato il 2026-11-04: problema, esempio minimo, confronto con
-     Jackson, il cambiamento sopra), poi PR su `development` dal ramo del fork con titolo "Fixes #N" (come le ultime
-     unite, #96 e #98 del 2026-11-02). Nessuna issue esistente lo copre: la #19 è la richiesta originale del supporto,
-     la #86 un altro bug di generazione dei sottotipi.
+   - Issue aperta il 2026-11-04: [DominoKit/domino-jackson#101](https://github.com/DominoKit/domino-jackson/issues/101).
+     Da fare: PR su `development` dal ramo del fork, titolo "Fixes #101. Inherit @JsonTypeInfo and @JsonSubTypes from
+     supertypes, as Jackson does." e corpo che comincia con "Fixes #101" (come le ultime unite, #96 e #98).
    - Prova riuscita il 2026-11-04, salvata nel ramo `domino-rest` di `gp_advanced_extensions` (pushato su `origin`),
      cartella `prove/domino-rest-count-layer-features`, con README su prerequisiti ed esecuzione. Con il processor del
      fork e senza annotazioni aggiunte ai DTO: domino-jackson, in GWT `-prod` e sulla JVM, scrive

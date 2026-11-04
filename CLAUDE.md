@@ -44,8 +44,8 @@ Framework webgis multi-modulo Maven (Java 21). Le versioni delle dipendenze stan
 
 In ordine di priorità (deciso il 2026-11-03):
 
-1. Proporre a DominoKit la correzione di domino-jackson che trova `@JsonTypeInfo`/`@JsonSubTypes` anche sui supertipi
-   (classi e interfacce), come fa Jackson. **Correzione e prova fatte il 2026-11-04; restano issue e PR.**
+1. Far unire da DominoKit la correzione di domino-jackson che trova `@JsonTypeInfo`/`@JsonSubTypes` anche sui supertipi
+   (classi e interfacce), come fa Jackson. **Correzione, prova, issue e PR fatte il 2026-11-04; resta la revisione.**
    - domino-jackson è un repository a sé, non un sottomodulo di domino-rest:
      [DominoKit/domino-jackson](https://github.com/DominoKit/domino-jackson), moduli `domino-jackson` e
      `domino-jackson-processor`. Fork su GitHub sotto `glascaleia`, clone in `../domino-jackson` con `origin` (fork) e
@@ -59,9 +59,10 @@ In ordine di priorità (deciso il 2026-11-03):
    - Cambia un comportamento, da scrivere nell'issue e nella PR: `InheritanceWithJsonTypeInfoTest` si aspettava
      `genericField` (dichiarato `DataInput`, sottoclasse di `Data` annotata) senza `"@type"`; Jackson lo scrive e
      rifiuta il JSON senza (`InvalidTypeIdException`). Il test ora si aspetta il `"@type"` e confronta con Jackson.
-   - Issue aperta il 2026-11-04: [DominoKit/domino-jackson#101](https://github.com/DominoKit/domino-jackson/issues/101).
-     Da fare: PR su `development` dal ramo del fork, titolo "Fixes #101. Inherit @JsonTypeInfo and @JsonSubTypes from
-     supertypes, as Jackson does." e corpo che comincia con "Fixes #101" (come le ultime unite, #96 e #98).
+   - Aperte il 2026-11-04 l'issue [#101](https://github.com/DominoKit/domino-jackson/issues/101) e la PR
+     [#102](https://github.com/DominoKit/domino-jackson/pull/102) su `development`. Da fare: seguire la revisione di
+     DominoKit (la CI `deploy.yaml` non era ancora partita, forse in attesa dell'approvazione di un maintainer) e
+     correggere sul ramo del fork quello che chiedono.
    - Prova riuscita il 2026-11-04, salvata nel ramo `domino-rest` di `gp_advanced_extensions` (pushato su `origin`),
      cartella `prove/domino-rest-count-layer-features`, con README su prerequisiti ed esecuzione. Con il processor del
      fork e senza annotazioni aggiunte ai DTO: domino-jackson, in GWT `-prod` e sulla JVM, scrive

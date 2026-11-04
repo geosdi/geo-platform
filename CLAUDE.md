@@ -126,10 +126,21 @@ In ordine di priorità (deciso il 2026-11-03):
    - Da fare: provare dalla UI (punti 3 e 4); unire i rami `domino-rest` a `spring-upgrade` (chiedere prima a
      Peppino) e togliere RestyGWT dal BOM; spostare la service root `localhost:8080` in una configurazione (serve per
      Docker, punto 3).
-3. Dockerizzare il frontend (`geoplatform-base-app`) e il backend (lo stack dei servizi di `geoplatform-services`), per
-   avviare davvero l'applicazione: dettagli e decisioni nel `CLAUDE.md` di `../gp_advanced_extensions` ("Stato del
-   lavoro" e "`mvn gwt:run` della base app"). La compilazione GWT della base app riesce di nuovo con i rami
-   `domino-rest` (prima si fermava perché il generatore di RestyGWT cercava `javax.xml.bind`).
+3. Dockerizzare il frontend (`geoplatform-base-app`) e il backend, per avviare davvero l'applicazione. **Backend fatto
+   il 2026-11-04**: cartella `docker/` del ramo `docker` di `geoplatform-base-app` (pubblicato su `origin`), con
+   README. `geoplatform-service.war` (tutti i profili, `-Dfull`) su Tomcat 11 (Spring 7 vuole Jakarta EE 11), PostGIS
+   (database `gp`, `jdbc_template` con le tabelle di Spring Batch, `preview_gp`), GeoServer 2.28.4 (la `V28x` di
+   `GeoserverVersion`) con l'estensione Importer e la risorsa JNDI `jdbc/postgres_layerbuilder`, Mailpit per le mail.
+   La configurazione sta in `GP_DATA_DIR` (system property, come le altre `GP_*`). I dati del core li carica
+   `BootstrapInitializerTest` di `geoplatform-initializer` (`bootstrap-core.sh`, cancella e ricrea il core):
+   `insert.sql` di `geoplatform-dao` non corrisponde più al modello. Provati da `curl`: servizi CXF, geocoding
+   (Nominatim vero), CORS, `loadWorkspaces`, `createWorkspace`, `countLayerFeatures` e `loadLayerSchema` (con
+   `"type"`). Al primo avvio sono saltati fuori tre errori, corretti nei rami `domino-rest`: ehcache 3.4.0 javax di
+   `gt-geotiff` nel war, FreeMarker 2.3.34 di `hibernate-reveng` (versione ora nel BOM `geoplatform-spring-dependency`),
+   NPE di `loadWorkspaces` con GeoServer senza workspace. Da fare: il frontend (`baseapp.war` con nginx davanti, stessa
+   origine dei servizi); il datastore JNDI del layer builder si crea solo alla creazione del layer, da provare dalla UI;
+   un `logback.xml` meno verboso per il container (oggi alcuni logger scrivono chiavi e password). Dettagli e decisioni
+   sulla modalità sviluppo nel `CLAUDE.md` di `../gp_advanced_extensions` ("`mvn gwt:run` della base app").
 4. Con l'applicazione avviata, verificare dal client le chiamate REST migrate a Domino (layer builder, workspace del
    file e del CSV importer, geocoding WFS).
 5. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,

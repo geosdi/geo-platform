@@ -146,7 +146,9 @@ In ordine di priorità (deciso il 2026-11-03):
    un `logback.xml` meno verboso per il container (oggi alcuni logger scrivono chiavi e password). Dettagli e decisioni
    sulla modalità sviluppo nel `CLAUDE.md` di `../gp_advanced_extensions` ("`mvn gwt:run` della base app").
 4. Con l'applicazione avviata, verificare dal client le chiamate REST migrate a Domino (layer builder, workspace del
-   file e del CSV importer, geocoding WFS).
+   file e del CSV importer, geocoding WFS). **Prova dalla UI iniziata il 2026-11-04**: stato, correzioni fatte e
+   lavori rimasti, in ordine, nei "Lavori aperti" di `../geoplatform-base-app/CLAUDE.md` (ramo `docker`). Quello è il
+   riferimento per i punti 3 e 4.
 5. Gli 8 test di `geoplatform-services-test` sui server esterni: GeoServer va pulito prima di creare stile e namespace,
    per il WFS va capito cosa restituisce oggi.
 6. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo

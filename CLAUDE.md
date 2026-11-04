@@ -79,7 +79,8 @@ In ordine di priorità (deciso il 2026-11-03):
    2020) legge solo `javax.ws.rs` e `javax.xml.bind`.
    - BOM `geoplatform-gwt-dependency` (pom e `build.gradle`): `domino-rest-client`/`domino-rest-processor` 2.0.2,
      `domino-jackson`/`domino-jackson-processor` 1.0.6, `elemental2` (`core`, `dom`, `promise`) 1.3.2. GWT resta
-     2.13.1, che è l'ultima. RestyGWT e gwt-jackson sono ancora nel BOM.
+     2.13.1, che è l'ultima. gwt-jackson tolto; RestyGWT è ancora nel BOM (lo usa la prova
+     per il confronto).
    - Client migrati: `LayerBuilderService` (`layer-builder-gwt`), `FileImporterService`, `CSVImporterService`,
      `WFSGeocodingService` (`gp-wfst-widget`): interfacce `jakarta.ws.rs` con `@RequestFactory(serviceRoot =
      "http://localhost:8080/geoplatform-service")`, stessi URL di prima; i delegate usano la factory generata
@@ -101,9 +102,16 @@ In ordine di priorità (deciso il 2026-11-03):
      `JDBCColumnSchemaDataType` (Jackson 3 scrive gli enum con `toString()` per default, domino-jackson li legge per
      nome); DTO del geocoding tipizzati (`FeatureDTO` con `FeaturePointDTO` e `FeaturePropertiesDTO` al posto di
      `JSONValue` e `Map<String, Object>`, con `ignoreUnknown`).
+   - Le risposte degli upload, che le servlet della base app girano al browser così come le scrive il servizio, si
+     leggono con domino-jackson in DTO del client e poi si convertono nei tipi di prima, perché domino-jackson non
+     legge `Map<String, Object>`, `Object` né campi dichiarati come interfaccia senza `@JsonTypeInfo` (ignora
+     `@JsonDeserialize`): `FileImporterLayerResponse` per il `GPCreateLayerBuilderResponse` del file importer (la mappa
+     `layerProperties` si ricostruisce con `toLayerPropertiesMap()`), `CSVSchemaResponse` per il `GPCSVSchema`
+     dell'upload e della ricarica del CSV importer (`toSchema()`, valori delle celle come stringhe). gwt-jackson non è
+     più usato.
    - Verifiche: la prova `prove/domino-rest-count-layer-features` del ramo `domino-rest` di `gp_advanced_extensions`
      (README con prerequisiti) copre tutti i metodi dei quattro servizi, richieste lette dal mapper del server e
-     risposte scritte dal server lette da domino-jackson, sulla JVM e in GWT `-prod` (12 + 9 test verdi); la
+     risposte scritte dal server lette da domino-jackson, sulla JVM e in GWT `-prod` (14 + 11 test verdi); la
      compilazione GWT completa della base app (`mvn clean compile gwt:compile`, il goal `compile` nel pom è commentato)
      riesce. Ignora 18 file già rotti e non usati: 15 di un vecchio `gwt-user-2.0.3.jar` che arriva nel classpath della
      base app (da capire da dove), `java.sql.Timestamp` di GWT, `GPLayerBuilderFeatureStore` e
@@ -112,10 +120,12 @@ In ordine di priorità (deciso il 2026-11-03):
      `JDBCTableNameQueryParam` senza `"type"` e il server risponde `InvalidTypeIdException`. `-Ddomino-jackson.version`
      da riga di comando non cambia la versione del BOM importato: per provare il fork in un modulo del progetto va
      cambiata la versione nel BOM.
-   - Da fare: unire i rami `domino-rest` a `spring-upgrade` (chiedere prima a Peppino); togliere RestyGWT dal BOM;
-     passare a domino-jackson i due usi rimasti di gwt-jackson (`FileImporterUploader` e `CSVFileUploader`, che leggono
-     `GPCreateLayerBuilderResponse` con una `Map<String, Object>`) e poi togliere gwt-jackson; spostare la service root
-     `localhost:8080` in una configurazione (serve per Docker, punto 3).
+   - Lo stesso DTO ha il suo mapper generato in più moduli (stesso nome e package, per esempio quello di
+     `GPLayerBuilderWorkSpacesResponse`): con la stessa versione di domino-jackson sono identici, ma si potrebbero
+     generare una volta sola nel modulo dei DTO.
+   - Da fare: provare dalla UI (punti 3 e 4); unire i rami `domino-rest` a `spring-upgrade` (chiedere prima a
+     Peppino) e togliere RestyGWT dal BOM; spostare la service root `localhost:8080` in una configurazione (serve per
+     Docker, punto 3).
 3. Dockerizzare il frontend (`geoplatform-base-app`) e il backend (lo stack dei servizi di `geoplatform-services`), per
    avviare davvero l'applicazione: dettagli e decisioni nel `CLAUDE.md` di `../gp_advanced_extensions` ("Stato del
    lavoro" e "`mvn gwt:run` della base app"). La compilazione GWT della base app riesce di nuovo con i rami

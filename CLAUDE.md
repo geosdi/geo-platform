@@ -44,32 +44,34 @@ Framework webgis multi-modulo Maven (Java 21). Le versioni delle dipendenze stan
 
 In ordine di priorità (deciso il 2026-11-03):
 
-1. **Da fare il 2026-11-04.** Correggere domino-jackson perché trovi `@JsonTypeInfo`/`@JsonSubTypes` anche sui
-   supertipi (classi e interfacce), come fa Jackson, e proporlo a DominoKit:
+1. Proporre a DominoKit la correzione di domino-jackson che trova `@JsonTypeInfo`/`@JsonSubTypes` anche sui supertipi
+   (classi e interfacce), come fa Jackson. **Correzione e prova fatte il 2026-11-04; restano issue e PR.**
    - domino-jackson è un repository a sé, non un sottomodulo di domino-rest:
      [DominoKit/domino-jackson](https://github.com/DominoKit/domino-jackson), moduli `domino-jackson` e
      `domino-jackson-processor`. Fork su GitHub sotto `glascaleia`, clone in `../domino-jackson` con `origin` (fork) e
-     `upstream` (DominoKit).
-   - Le PR vanno su `development` (le ultime unite, #96 e #98 del 2026-11-02, hanno titolo "Fixes #N"): prima
-     un'issue che descrive il problema, poi la PR che la cita. Nessuna issue esistente lo copre: la #19 è la richiesta
-     originale del supporto, la #86 un altro bug di generazione dei sottotipi.
-   - La modifica è in `Type.getSubTypes` di `domino-jackson-processor`: oggi legge
-     `beanElement.getAnnotation(JsonTypeInfo.class)` e `JsonSubTypes` solo sulla classe dichiarata della proprietà;
-     deve risalire superclassi e interfacce e usare la prima che le dichiara. Aggiungere i test nel modulo del
-     processor, con il caso di `JDBCTableNameQueryParam`: classe concreta, `@JsonTypeInfo(use = NAME, property =
-     "type")` e `@JsonSubTypes` su un'interfaccia antenata (`GPJDBCTemplateAddQueryParam`); atteso
-     `{"type":"JDBCTableNameQueryParam",...}`.
-   - Verifica con il progetto della prova, che era in uno scratchpad temporaneo e va ricreato (progetto Maven con parent
-     `geo-platform`): interfaccia `jakarta.ws.rs` con `@RequestFactory` per `countLayerFeatures`, mapper `@JSONMapper`
-     di `CountLayerFeaturesRequest`, codec RestyGWT (`JsonEncoderDecoder`) per il confronto; test GWT con
-     `net.ltgt.gwt.maven:gwt-maven-plugin` 1.3.0 goal `test` e `testArgs` `-prod` (in `-prod` `System.out` non arriva a
-     Maven: i JSON si leggono dal messaggio di un `fail`); test JVM che legge i JSON con il Jackson del server
-     (`JACKSON_JODA_TIME_WITHOUT_ROOT` di `GPRestProviderFactory`, anche con `FAIL_ON_UNKNOWN_PROPERTIES`). Servono:
-     `<proc>full</proc>` nel compiler (JDK 23+), sorgenti dei DTO (`sources` di `layer-builder-service-api`,
-     `layer-builder-jdbc-template-api`, `geoplatform-hibernate-validator-support`), `guava-gwt` con `org.jspecify`
-     come in `geoplatform-api`, `javax.xml.bind:jaxb-api` 2.3.1 `provided` solo per il generatore di RestyGWT,
-     elemental2 a 1.3.2, `DominoRestConfig.initDefaults()` in `gwtSetUp`. Usare il processor costruito dal fork,
-     senza `@JsonTypeInfo` aggiunto a `JDBCTableNameQueryParam` (`setFid()` invece serve).
+     `upstream` (DominoKit). Si compila con il JDK 21 (CI di DominoKit su 11, 17, 21 e 23); con il JDK 27 lo spotless
+     del progetto non gira.
+   - Fatto: commit `58d497d` "Inherit @JsonTypeInfo and @JsonSubTypes from supertypes, as Jackson does" sul ramo
+     `fix/subtypes-from-supertypes` (da `upstream/development`), **solo in locale sul Mac del 2026-11-04, non ancora
+     pushato sul fork**. `Type.getSubTypes` cerca le annotazioni sul tipo e poi sui supertipi (interfacce prima della
+     superclasse, come Jackson) e, se `@JsonSubTypes` viene da un supertipo, tiene solo i sottotipi assegnabili. Test
+     nuovi nel package `supertype` del processor (stesso schema di `JDBCTableNameQueryParam`, confronto con Jackson);
+     build verde con JDK 11, 17 e 21.
+   - Cambia un comportamento, da scrivere nell'issue e nella PR: `InheritanceWithJsonTypeInfoTest` si aspettava
+     `genericField` (dichiarato `DataInput`, sottoclasse di `Data` annotata) senza `"@type"`; Jackson lo scrive e
+     rifiuta il JSON senza (`InvalidTypeIdException`). Il test ora si aspetta il `"@type"` e confronta con Jackson.
+   - Da fare: issue su DominoKit (in inglese: problema, esempio minimo, confronto con Jackson, il cambiamento sopra),
+     push del ramo sul fork, PR su `development` con titolo "Fixes #N" (come le ultime unite, #96 e #98 del
+     2026-11-02). Nessuna issue esistente lo copre: la #19 è la richiesta originale del supporto, la #86 un altro bug
+     di generazione dei sottotipi.
+   - Prova riuscita il 2026-11-04, salvata nel ramo `domino-rest` di `gp_advanced_extensions` (pushato su `origin`),
+     cartella `prove/domino-rest-count-layer-features`, con README su prerequisiti ed esecuzione. Con il processor del
+     fork e senza annotazioni aggiunte ai DTO: domino-jackson, in GWT `-prod` e sulla JVM, scrive
+     `{"tableName":{"type":"JDBCTableNameQueryParam",...},"lang":"it"}`, il server lo legge (anche con
+     `FAIL_ON_UNKNOWN_PROPERTIES`) e senza `"type"` risponde `InvalidTypeIdException`; RestyGWT scrive lo stesso JSON.
+   - Il mapper che il server usa davvero è `getConfiguredMapper()` di `CXFJacksonProvider` (introspector Jackson più
+     JAXB); `getDefaultMapper()` ha solo l'introspector JAXB e ignora `@JsonTypeInfo`, quindi non va usato nelle
+     verifiche.
    - Finché la PR non è rilasciata, decidere se usare la versione del fork (dove pubblicarla, groupId, versione nel
      BOM `geoplatform-gwt-dependency`).
 2. Sostituire RestyGWT con Domino REST (`org.dominokit:domino-rest-client` 2.0.2, JSON con `domino-jackson` 1.0.6),
@@ -79,12 +81,13 @@ In ordine di priorità (deciso il 2026-11-03):
    `gp-wfst-widget` di geo-platform. Prova del 2026-11-03 su `countLayerFeatures` (`CountLayerFeaturesRequest`): il
    client Domino si genera da un'interfaccia `jakarta.ws.rs` e il server legge il suo JSON, dopo questi adattamenti:
    - domino-jackson non usa i campi privati senza setter (genera un'assegnazione diretta che non compila): a
-     `JDBCTableNameQueryParam` serve `setFid()`, e così agli altri DTO nella stessa situazione.
+     `JDBCTableNameQueryParam` serve `setFid()` (aggiunto nel ramo `domino-rest` di `gp_advanced_extensions`), e così
+     agli altri DTO nella stessa situazione.
    - domino-jackson legge `@JsonTypeInfo`/`@JsonSubTypes` solo sulla classe dichiarata della proprietà, non sulle
      interfacce (`Type.getSubTypes` del processor); il server invece vuole il `"type"` dichiarato sulle interfacce
      (per esempio `GPJDBCTemplateAddQueryParam`) e senza risponde `InvalidTypeIdException`. 8 file con `@JsonTypeInfo`
-     e 25 sottotipi, quasi tutti nel layer builder. Si risolve con la correzione di domino-jackson del punto 1, non
-     annotando i sottotipi uno per uno.
+     e 25 sottotipi, quasi tutti nel layer builder. Si risolve con la correzione di domino-jackson del punto 1 (provata
+     il 2026-11-04), non annotando i sottotipi uno per uno.
    - fissare `com.google.elemental2` (`core`, `dom`, `promise`) a una sola versione (1.3.2) nel BOM
      `geoplatform-gwt-dependency`: oggi Maven mescola 1.1.0 e 1.3.2 e non compila.
 3. Controllare la compilazione GWT della base app, poi dockerizzare. Il generatore di RestyGWT carica

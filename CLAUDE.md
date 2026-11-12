@@ -169,6 +169,10 @@ In ordine di priorità (deciso il 2026-11-03):
    - Due difetti della 7 corretti solo nella 9: `persist` con un id già usato sovrascriveva il documento e poi falliva
      (ora `op_type=create`); l'id scelto da ElasticSearch finiva in una chiave `"radice.id"` fuori dal documento.
    - Test con Testcontainers (serve Docker) su ElasticSearch 9.5.6, HTTP con password cifrata e HTTPS con la CA: verdi.
-   - Da fare: unire i rami (chiedere a Peppino); portare itineris sulla 9 quando i server passano alla 9
+   - **Prossimo passo** (deciso con Peppino il 2026-11-12): annotazioni nostre sui documenti (tipo del campo,
+     sottocampi, analyzer, geo_point e simili) da cui un pattern Visitor costruisce il mapping corretto (il
+     `TypeMapping` di `preparePutMapping()`), invece di scriverlo a mano in JSON. Prima di scrivere codice proporre
+     a Peppino le annotazioni e la struttura del Visitor; decidere con lui se vale anche per la 7.
+   - Da fare dopo: unire i rami (chiedere a Peppino); portare itineris sulla 9 quando i server passano alla 9
      (prima 8.x, poi 9, reindicizzando gli indici creati con la 7). Itineris oggi non compila su questo Mac per
      `edu.ucar:cdm-core` (certificato del repository di Unidata), non per questo lavoro.

@@ -172,7 +172,9 @@ In ordine di priorità (deciso il 2026-11-03):
    - **Prossimo passo** (deciso con Peppino il 2026-11-12): annotazioni nostre sui documenti (tipo del campo,
      sottocampi, analyzer, geo_point e simili) da cui un pattern Visitor costruisce il mapping corretto (il
      `TypeMapping` di `preparePutMapping()`), invece di scriverlo a mano in JSON. Prima di scrivere codice proporre
-     a Peppino le annotazioni e la struttura del Visitor; decidere con lui se vale anche per la 7.
+     a Peppino le annotazioni e la struttura del Visitor; decidere con lui se vale anche per la 7. Proposta scritta il
+     2026-11-12 in `geoplatform-experimental/geoplatform-elastic-search/docs/proposta-annotazioni-mapping.md`, con i
+     punti da decidere in fondo: aspettare le sue scelte prima del codice.
    - Da fare dopo: unire i rami (chiedere a Peppino); portare itineris sulla 9 quando i server passano alla 9
      (prima 8.x, poi 9, reindicizzando gli indici creati con la 7). Itineris oggi non compila su questo Mac per
      `edu.ucar:cdm-core` (certificato del repository di Unidata), non per questo lavoro.

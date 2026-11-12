@@ -178,3 +178,11 @@ In ordine di priorità (deciso il 2026-11-03):
    - Da fare dopo: unire i rami (chiedere a Peppino); portare itineris sulla 9 quando i server passano alla 9
      (prima 8.x, poi 9, reindicizzando gli indici creati con la 7). Itineris oggi non compila su questo Mac per
      `edu.ucar:cdm-core` (certificato del repository di Unidata), non per questo lavoro.
+8. Docker sul Mac (2026-11-12). In `.claude/settings.json` del progetto ci sono il marketplace `geosdi`
+   (gitlab.geosdi.org) e il plugin `strumenti-locali@geosdi`, con la skill `docker-locale`: Docker resta spento, si
+   accende per una prova (test con Testcontainers, stack della base app) e poi si rispegne con lo script della skill
+   (`docker desktop stop`), mai con `osascript -e 'quit app "Docker"'` o `pkill`, che fanno comparire «the Docker
+   Desktop VM stopped unexpectedly» con il pulsante «Reset to factory defaults» (da non premere, cancella tutto).
+   - Il 2026-11-12, su richiesta di Peppino, Docker è stato svuotato (immagini, cache di build) e spento: alla prossima
+     prova vanno riscaricate le immagini, per esempio `docker.elastic.co/elasticsearch/elasticsearch:9.5.6` per i test
+     della 9, e ricostruite quelle dello stack della base app (punto 3).

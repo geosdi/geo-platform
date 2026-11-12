@@ -1,4 +1,13 @@
 {
+  "extraKnownMarketplaces": {
+    "geosdi": {
+      "source": {
+        "source": "git",
+        "url": "https://gitlab.geosdi.org/geosdi-utils/claude-plugins.git"
+      },
+      "autoUpdate": true
+    }
+  },
   "enabledPlugins": {
     "strumenti-locali@geosdi": true
   }

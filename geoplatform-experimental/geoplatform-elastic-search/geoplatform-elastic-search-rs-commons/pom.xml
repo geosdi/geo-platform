@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-elastic-search</artifactId>
+        <version>2.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-elastic-search-rs-commons</artifactId>
+    <version>2.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Geo-Platform :: == ElasticSearch Rest Commons Module</name>
+    <description>Classi comuni ai connettori REST di ElasticSearch 7 e 9, senza dipendenze da ElasticSearch:
+        impostazioni degli indici, mapper dei documenti, configurazione del pool e dell'SSL, lettura delle
+        proprietà cifrate con jasypt.</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM ELASTIC SEARCH =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-elastic-search-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- =========================== SPRING ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM JASYPT SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-jasypt-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <classifier>sources</classifier>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

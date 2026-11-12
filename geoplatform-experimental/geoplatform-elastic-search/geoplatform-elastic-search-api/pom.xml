@@ -22,6 +22,15 @@
 
     <dependencies>
         <!-- =========================================================== -->
+        <!-- ============= GEOPLATFORM ELASTIC SEARCH COMMONS ========== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-elastic-search-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
         <!-- =========================== SPRING ======================== -->
         <!-- =========================================================== -->
         <dependency>

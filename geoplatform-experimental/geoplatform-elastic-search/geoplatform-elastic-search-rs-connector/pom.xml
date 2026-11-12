@@ -33,6 +33,15 @@
         </dependency>
 
         <!-- =========================================================== -->
+        <!-- =========== GEOPLATFORM ELASTIC SEARCH REST COMMONS ======= -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-elastic-search-rs-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- =========================================================== -->
         <!-- ========================== RX3Java ======================== -->
         <!-- =========================================================== -->
         <dependency>

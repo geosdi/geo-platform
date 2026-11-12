@@ -28,6 +28,8 @@
     </dependencyManagement>
 
     <modules>
+        <module>geoplatform-elastic-search-commons</module>
+        <module>geoplatform-elastic-search-rs-commons</module>
         <module>geoplatform-elastic-search-api</module>
         <module>geoplatform-elastic-search-connector</module>
         <module>gp-elasticsearch-query-builder</module>

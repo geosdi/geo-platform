@@ -153,3 +153,22 @@ In ordine di priorità (deciso il 2026-11-03):
    per il WFS va capito cosa restituisce oggi.
 6. `geoplatform-geoserver-rest`: nelle request PUT/DELETE il successo viene dedotto dal body vuoto; va deciso dallo
    status HTTP.
+7. ElasticSearch 9 accanto alla 7 (deciso con Peppino il 2026-11-12). **Fatto il 2026-11-12 sui rami
+   `elasticsearch-9`** di `geoplatform-dependencies` e geo-platform (da `spring-upgrade`, pubblicati su `origin`), con README in
+   `geoplatform-experimental/geoplatform-elastic-search/geoplatform-elastic-search-9`.
+   - La 7.17 è fuori supporto dal 15 gennaio 2026. La 9 non chiede chiavi: licenza Basic gratuita, codice AGPLv3, SSPL
+     o ELv2, client Java Apache 2.0.
+   - BOM nuovo `geoplatform-elasticsearch9-dependency`: `elasticsearch-java` e `elasticsearch-rest5-client` 9.5.6
+     (senza `jackson-core`/`jackson-databind` 2, il client usa `Jackson3JsonpMapper`), Testcontainers 2.0.5.
+   - Le classi della 7 senza ElasticSearch sono passate, con gli stessi package, in `geoplatform-elastic-search-commons`
+     (dall'api) e `geoplatform-elastic-search-rs-commons` (dal connettore REST): l'api e il connettore della 7 ne
+     dipendono, per chi li usa non cambia niente. `gp-elasticsearch-query-builder` resta solo sulla 7.
+   - Modulo `geoplatform-elastic-search-9` (`-api` e `-rs-connector`, package `el9`): stessi nomi della 7, stesse
+     proprietà (`gp.elastic-search-rest.properties`, jasypt); i documenti passano dal mapper di
+     `geoplatform-jackson-support` del DAO, nome radice compreso. Differenze nel README.
+   - Due difetti della 7 corretti solo nella 9: `persist` con un id già usato sovrascriveva il documento e poi falliva
+     (ora `op_type=create`); l'id scelto da ElasticSearch finiva in una chiave `"radice.id"` fuori dal documento.
+   - Test con Testcontainers (serve Docker) su ElasticSearch 9.5.6, HTTP con password cifrata e HTTPS con la CA: verdi.
+   - Da fare: unire i rami (chiedere a Peppino); portare itineris sulla 9 quando i server passano alla 9
+     (prima 8.x, poi 9, reindicizzando gli indici creati con la 7). Itineris oggi non compila su questo Mac per
+     `edu.ucar:cdm-core` (certificato del repository di Unidata), non per questo lavoro.
